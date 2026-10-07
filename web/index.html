@@ -61,6 +61,7 @@ body {
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tab[aria-selected="true"]::after { background: var(--accent); } }
 .panel { padding-top: 16px; }
 .panel[hidden] { display: none; }
+body[data-tab="ft"] .cs-only { display: none; }
 
 .search { position: relative; }
 .search input {
@@ -163,13 +164,13 @@ button.b:disabled { opacity: .5; }
   </section>
 
   <footer>
-    <div class="stat" id="stat">데이터 없음</div>
+    <div class="stat cs-only" id="stat">데이터 없음</div>
     <div class="btns">
-      <button class="b primary" id="btnUpdate">최신 데이터 받기</button>
+      <button class="b primary cs-only" id="btnUpdate">최신 데이터 받기</button>
       <button class="b" id="btnTheme">주/야간 설정</button>
     </div>
-    <div id="msg"></div>
-    <div class="small">
+    <div id="msg" class="cs-only"></div>
+    <div class="small cs-only">
       노선: VRS standing-data(사용자 제보 기반) · 기종: ADS-B 관측 누적값입니다. 실제 운항 기종·노선은 당일 운항 정보와 다를 수 있으니 참고용으로만 사용하세요.
     </div>
   </footer>
@@ -375,6 +376,7 @@ button.b:disabled { opacity: .5; }
       t.setAttribute("aria-selected", on);
       $("panel-" + t.dataset.tab).hidden = !on;
     });
+    document.body.dataset.tab = name;
     store.set(TABKEY, name);
   }
   document.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => showTab(t.dataset.tab)));
