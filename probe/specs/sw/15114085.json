@@ -1,0 +1,976 @@
+{
+ "swagger": "2.0",
+ "info": {
+  "description": "공항코드값을 검색 조건으로 하여 인천공항 출발/도착 여객기의 항공사 이름, 공항이름, 공항코드, 정기운항편 일정 시작일, 종료일, 편명, 요일정보, 시즌코드값,코드쉐어 구분,마스터편명 등의 정보를 나타내는 여객기 정기운항편 일정 정보 서비스입니다. 개발 계정 일 500 트래픽,운영 계정 신청 시 일 10000 트래픽을 제공합니다. 개방 중인 일일 운항현황 API에서 제공하는 MASTER FLIGHT/SLAVE 편명에 대한 정보와 상이할 수 있습니다. 해당 데이터는 1개 시즌(하계3월말~10월말/동계 10월말에서 익년 3월말)에 대한 데이터입니다.",
+  "version": "1.0.0",
+  "title": "인천국제공항공사_여객기 정기운항편 현황 상세 조회 서비스"
+ },
+ "host": "apis.data.go.kr/B551177/StatusOfPaxFltSched",
+ "basePath": "",
+ "schemes": [
+  "https",
+  "http"
+ ],
+ "paths": {
+  "/getPaxFltSchedArrivalsDeOdp": {
+   "get": {
+    "responses": {
+     "200": {
+      "description": "성공",
+      "schema": {
+       "type": "object",
+       "properties": {
+        "header": {
+         "type": "object",
+         "description": "header",
+         "properties": {
+          "resultCode": {
+           "type": "string",
+           "description": "결과코드",
+           "properties": {}
+          },
+          "resultMsg": {
+           "type": "string",
+           "description": "결과메세지",
+           "properties": {}
+          }
+         }
+        },
+        "body": {
+         "type": "object",
+         "description": "body",
+         "properties": {
+          "pageNo": {
+           "type": "string",
+           "description": "데이터 표출 페이지",
+           "properties": {}
+          },
+          "numOfRows": {
+           "type": "string",
+           "description": "데이터 행",
+           "properties": {}
+          },
+          "items": {
+           "type": "object",
+           "description": "items",
+           "properties": {
+            "item": {
+             "type": "object",
+             "description": "item",
+             "properties": {
+              "airline": {
+               "type": "string",
+               "description": "항공사명",
+               "properties": {}
+              },
+              "airport": {
+               "type": "string",
+               "description": "인천공항에 도착하는 편명의 출발지공항 한글명",
+               "properties": {}
+              },
+              "airportcode": {
+               "type": "string",
+               "description": "인천공항에 도착하는 편명의 출발지공항(IATA) 코드",
+               "properties": {}
+              },
+              "codeshare": {
+               "type": "string",
+               "description": "코드쉐어 여부",
+               "properties": {}
+              },
+              "firstdate": {
+               "type": "string",
+               "description": "정기운항 시작일",
+               "properties": {}
+              },
+              "flightid": {
+               "type": "string",
+               "description": "편명",
+               "properties": {}
+              },
+              "friday": {
+               "type": "string",
+               "description": "금요일 취항여부",
+               "properties": {}
+              },
+              "lastdate": {
+               "type": "string",
+               "description": "정기운항 종료일",
+               "properties": {}
+              },
+              "masterflightid": {
+               "type": "string",
+               "description": "마스터편명",
+               "properties": {}
+              },
+              "monday": {
+               "type": "string",
+               "description": "월요일 취항여부",
+               "properties": {}
+              },
+              "saturday": {
+               "type": "string",
+               "description": "토요일 취항여부",
+               "properties": {}
+              },
+              "season": {
+               "type": "string",
+               "description": "시즌명",
+               "properties": {}
+              },
+              "st": {
+               "type": "string",
+               "description": "정기운항 시작 시간",
+               "properties": {}
+              },
+              "sunday": {
+               "type": "string",
+               "description": "일요일 취항여부",
+               "properties": {}
+              },
+              "thursday": {
+               "type": "string",
+               "description": "목요일 취항여부",
+               "properties": {}
+              },
+              "tuesday": {
+               "type": "string",
+               "description": "화요일 취항여부",
+               "properties": {}
+              },
+              "wednesday": {
+               "type": "string",
+               "description": "수요일 취항여부",
+               "properties": {}
+              }
+             }
+            }
+           }
+          },
+          "totalCount": {
+           "type": "string",
+           "description": "데이터 항목 수",
+           "properties": {}
+          }
+         }
+        }
+       },
+       "xml": {
+        "name": "response"
+       }
+      }
+     }
+    },
+    "tags": [
+     "API 목록"
+    ],
+    "summary": "여객기 정기운항편 상세 현황 정보(도착)",
+    "description": "공항코드값을 검색 조건으로 하여 인천공항 도착 여객기의 항공사 이름,공항이름, 공항코드,정기운항편 일정 시작일,종료일,편명,요일정보,시즌코드값,코드세웨어구분,마스터편명 등의 정보를 다국어(국문,영문,일문,중문)로 나타내는 여객기 정기운항편 일정정보 서비스를 제공",
+    "operationId": "getPaxFltSchedArrivalsDeOdp",
+    "consumes": [
+     "application/json"
+    ],
+    "produces": [
+     "application/json",
+     "application/xml"
+    ]
+   },
+   "parameters": [
+    {
+     "name": "serviceKey",
+     "description": "공공데이터포털에서 받은 인증키",
+     "type": "string",
+     "required": true,
+     "in": "query"
+    },
+    {
+     "name": "pageNo",
+     "description": "페이지번호",
+     "type": "string",
+     "required": true,
+     "in": "query"
+    },
+    {
+     "name": "numOfRows",
+     "description": "한 페이지 결과 수",
+     "type": "string",
+     "required": true,
+     "in": "query"
+    },
+    {
+     "name": "type",
+     "description": "응답유형 [xml, json] default=xml",
+     "type": "string",
+     "required": false,
+     "in": "query"
+    },
+    {
+     "name": "airport",
+     "description": "인천공항에 도착하는 출발지 공항 코드",
+     "type": "string",
+     "required": false,
+     "in": "query"
+    },
+    {
+     "name": "lang",
+     "description": "언어구분 국문=K, 영문=E, 중문=C, 일문=J, default=K",
+     "type": "string",
+     "required": false,
+     "in": "query"
+    }
+   ]
+  },
+  "/getPaxFltSchedDeparturesDeOdp": {
+   "get": {
+    "responses": {
+     "200": {
+      "description": "성공",
+      "schema": {
+       "type": "object",
+       "properties": {
+        "header": {
+         "type": "object",
+         "description": "header",
+         "properties": {
+          "resultCode": {
+           "type": "string",
+           "description": "결과코드",
+           "properties": {}
+          },
+          "resultMsg": {
+           "type": "string",
+           "description": "결과메세지",
+           "properties": {}
+          }
+         }
+        },
+        "body": {
+         "type": "object",
+         "description": "body",
+         "properties": {
+          "items": {
+           "type": "object",
+           "description": "items",
+           "properties": {
+            "item": {
+             "type": "object",
+             "description": "item",
+             "properties": {
+              "sunday": {
+               "type": "string",
+               "description": "일요일 취항여부",
+               "properties": {}
+              },
+              "thursday": {
+               "type": "string",
+               "description": "목요일 취항여부",
+               "properties": {}
+              },
+              "airline": {
+               "type": "string",
+               "description": "항공사명",
+               "properties": {}
+              },
+              "airport": {
+               "type": "string",
+               "description": "인천공항에서 출발하는 편명의 도착지공항 한글명",
+               "properties": {}
+              },
+              "airportcode": {
+               "type": "string",
+               "description": "인천공항에서 출발하는 편명의 도착지공항(IATA) 코드",
+               "properties": {}
+              },
+              "codeshare": {
+               "type": "string",
+               "description": "코드쉐어 여부",
+               "properties": {}
+              },
+              "firstdate": {
+               "type": "string",
+               "description": "정기운항 시작일",
+               "properties": {}
+              },
+              "flightid": {
+               "type": "string",
+               "description": "편명",
+               "properties": {}
+              },
+              "friday": {
+               "type": "string",
+               "description": "금요일 취항여부",
+               "properties": {}
+              },
+              "lastdate": {
+               "type": "string",
+               "description": "정기운항 종료일",
+               "properties": {}
+              },
+              "masterflightid": {
+               "type": "string",
+               "description": "마스터편명",
+               "properties": {}
+              },
+              "monday": {
+               "type": "string",
+               "description": "월요일 취항여부",
+               "properties": {}
+              },
+              "saturday": {
+               "type": "string",
+               "description": "토요일 취항여부",
+               "properties": {}
+              },
+              "season": {
+               "type": "string",
+               "description": "시즌명",
+               "properties": {}
+              },
+              "st": {
+               "type": "string",
+               "description": "정기운항 시작 시간",
+               "properties": {}
+              },
+              "tuesday": {
+               "type": "string",
+               "description": "화요일 취항여부",
+               "properties": {}
+              },
+              "wednesday": {
+               "type": "string",
+               "description": "수요일 취항여부",
+               "properties": {}
+              }
+             }
+            }
+           }
+          },
+          "numOfRows": {
+           "type": "string",
+           "description": "데이터 행",
+           "properties": {}
+          },
+          "pageNo": {
+           "type": "string",
+           "description": "데이터 표출 페이지",
+           "properties": {}
+          },
+          "totalCount": {
+           "type": "string",
+           "description": "데이터 항목 수",
+           "properties": {}
+          }
+         }
+        }
+       },
+       "xml": {
+        "name": "response"
+       }
+      }
+     }
+    },
+    "tags": [
+     "API 목록"
+    ],
+    "summary": "여객기 정기운항편 상세 현황 정보(출발)",
+    "description": "공항코드값을 검색 조건으로 하여 인천공항 출발 여객기의 항공사 이름,공항이름, 공항코드,정기운항편 일정 시작일,종료일,편명,요일정보,시즌코드값,코드세웨어구분,마스터편명 등의 정보를 다국어(국문,영문,일문,중문)로 나타내는 여객기 정기운항편 일정정보 서비스를 제공",
+    "operationId": "getPaxFltSchedDeparturesDeOdp",
+    "consumes": [
+     "application/json"
+    ],
+    "produces": [
+     "application/json",
+     "application/xml"
+    ]
+   },
+   "parameters": [
+    {
+     "name": "serviceKey",
+     "description": "공공데이터포털에서 받은 인증키",
+     "type": "string",
+     "required": true,
+     "in": "query"
+    },
+    {
+     "name": "pageNo",
+     "description": "페이지번호",
+     "type": "string",
+     "required": true,
+     "in": "query"
+    },
+    {
+     "name": "numOfRows",
+     "description": "한 페이지 결과 수",
+     "type": "string",
+     "required": true,
+     "in": "query"
+    },
+    {
+     "name": "type",
+     "description": "응답유형 [xml, json] default=xml",
+     "type": "string",
+     "required": true,
+     "in": "query"
+    },
+    {
+     "name": "airport",
+     "description": "인천공항에서 출발하는 도착지 공항 코드",
+     "type": "string",
+     "required": true,
+     "in": "query"
+    },
+    {
+     "name": "lang",
+     "description": "언어구분 국문=K, 영문=E, 중문=C, 일문=J, default=K",
+     "type": "string",
+     "required": true,
+     "in": "query"
+    }
+   ]
+  }
+ },
+ "definitions": {
+  "getPaxFltSchedDeparturesDeOdp_response": {
+   "type": "object",
+   "properties": {
+    "header": {
+     "type": "object",
+     "description": "header",
+     "properties": {
+      "resultCode": {
+       "type": "string",
+       "description": "결과코드"
+      },
+      "resultMsg": {
+       "type": "string",
+       "description": "결과메세지"
+      }
+     }
+    },
+    "body": {
+     "type": "object",
+     "description": "body",
+     "properties": {
+      "items": {
+       "type": "object",
+       "description": "items",
+       "properties": {
+        "item": {
+         "type": "object",
+         "description": "item",
+         "properties": {
+          "sunday": {
+           "type": "string",
+           "description": "일요일 취항여부"
+          },
+          "thursday": {
+           "type": "string",
+           "description": "목요일 취항여부"
+          },
+          "airline": {
+           "type": "string",
+           "description": "항공사명"
+          },
+          "airport": {
+           "type": "string",
+           "description": "인천공항에서 출발하는 편명의 도착지공항 한글명"
+          },
+          "airportcode": {
+           "type": "string",
+           "description": "인천공항에서 출발하는 편명의 도착지공항(IATA) 코드"
+          },
+          "codeshare": {
+           "type": "string",
+           "description": "코드쉐어 여부"
+          },
+          "firstdate": {
+           "type": "string",
+           "description": "정기운항 시작일"
+          },
+          "flightid": {
+           "type": "string",
+           "description": "편명"
+          },
+          "friday": {
+           "type": "string",
+           "description": "금요일 취항여부"
+          },
+          "lastdate": {
+           "type": "string",
+           "description": "정기운항 종료일"
+          },
+          "masterflightid": {
+           "type": "string",
+           "description": "마스터편명"
+          },
+          "monday": {
+           "type": "string",
+           "description": "월요일 취항여부"
+          },
+          "saturday": {
+           "type": "string",
+           "description": "토요일 취항여부"
+          },
+          "season": {
+           "type": "string",
+           "description": "시즌명"
+          },
+          "st": {
+           "type": "string",
+           "description": "정기운항 시작 시간"
+          },
+          "tuesday": {
+           "type": "string",
+           "description": "화요일 취항여부"
+          },
+          "wednesday": {
+           "type": "string",
+           "description": "수요일 취항여부"
+          }
+         }
+        }
+       }
+      },
+      "numOfRows": {
+       "type": "string",
+       "description": "데이터 행"
+      },
+      "pageNo": {
+       "type": "string",
+       "description": "데이터 표출 페이지"
+      },
+      "totalCount": {
+       "type": "string",
+       "description": "데이터 항목 수"
+      }
+     }
+    }
+   }
+  },
+  "getPaxFltSchedArrivalsDeOdp_response": {
+   "type": "object",
+   "properties": {
+    "header": {
+     "type": "object",
+     "description": "header",
+     "properties": {
+      "resultCode": {
+       "type": "string",
+       "description": "결과코드"
+      },
+      "resultMsg": {
+       "type": "string",
+       "description": "결과메세지"
+      }
+     }
+    },
+    "body": {
+     "type": "object",
+     "description": "body",
+     "properties": {
+      "pageNo": {
+       "type": "string",
+       "description": "데이터 표출 페이지"
+      },
+      "numOfRows": {
+       "type": "string",
+       "description": "데이터 행"
+      },
+      "items": {
+       "type": "object",
+       "description": "items",
+       "properties": {
+        "item": {
+         "type": "object",
+         "description": "item",
+         "properties": {
+          "airline": {
+           "type": "string",
+           "description": "항공사명"
+          },
+          "airport": {
+           "type": "string",
+           "description": "인천공항에 도착하는 편명의 출발지공항 한글명"
+          },
+          "airportcode": {
+           "type": "string",
+           "description": "인천공항에 도착하는 편명의 출발지공항(IATA) 코드"
+          },
+          "codeshare": {
+           "type": "string",
+           "description": "코드쉐어 여부"
+          },
+          "firstdate": {
+           "type": "string",
+           "description": "정기운항 시작일"
+          },
+          "flightid": {
+           "type": "string",
+           "description": "편명"
+          },
+          "friday": {
+           "type": "string",
+           "description": "금요일 취항여부"
+          },
+          "lastdate": {
+           "type": "string",
+           "description": "정기운항 종료일"
+          },
+          "masterflightid": {
+           "type": "string",
+           "description": "마스터편명"
+          },
+          "monday": {
+           "type": "string",
+           "description": "월요일 취항여부"
+          },
+          "saturday": {
+           "type": "string",
+           "description": "토요일 취항여부"
+          },
+          "season": {
+           "type": "string",
+           "description": "시즌명"
+          },
+          "st": {
+           "type": "string",
+           "description": "정기운항 시작 시간"
+          },
+          "sunday": {
+           "type": "string",
+           "description": "일요일 취항여부"
+          },
+          "thursday": {
+           "type": "string",
+           "description": "목요일 취항여부"
+          },
+          "tuesday": {
+           "type": "string",
+           "description": "화요일 취항여부"
+          },
+          "wednesday": {
+           "type": "string",
+           "description": "수요일 취항여부"
+          }
+         }
+        }
+       }
+      },
+      "totalCount": {
+       "type": "string",
+       "description": "데이터 항목 수"
+      }
+     }
+    }
+   }
+  }
+ },
+ "swaggerOprtinVOs": [
+  {
+   "oprtinUrl": "https://odp.airport.kr/openapi/StatusOfPaxFltSched/getPaxFltSchedDeparturesDeOdp",
+   "oprtinNm": "여객기 정기운항편 상세 현황 정보(출발)",
+   "oprtinDc": "공항코드값을 검색 조건으로 하여 인천공항 출발 여객기의 항공사 이름,공항이름, 공항코드,정기운항편 일정 시작일,종료일,편명,요일정보,시즌코드값,코드세웨어구분,마스터편명 등의 정보를 다국어(국문,영문,일문,중문)로 나타내는 여객기 정기운항편 일정정보 서비스를 제공",
+   "gwSvcNm": "getPaxFltSchedDeparturesDeOdp",
+   "operationId": "getPaxFltSchedDeparturesDeOdp",
+   "publicDataTyDetailCode": "PRDE02",
+   "reqList": [
+    {
+     "paramtrNm": "serviceKey",
+     "paramtrBassValue": "-",
+     "paramtrDc": "공공데이터포털에서 받은 인증키",
+     "paramtrTy": "string",
+     "paramtrDivision": "필수",
+     "ck": true
+    },
+    {
+     "paramtrNm": "pageNo",
+     "paramtrBassValue": "1",
+     "paramtrDc": "페이지번호",
+     "paramtrTy": "string",
+     "paramtrDivision": "필수",
+     "ck": true
+    },
+    {
+     "paramtrNm": "numOfRows",
+     "paramtrBassValue": "10",
+     "paramtrDc": "한 페이지 결과 수",
+     "paramtrTy": "string",
+     "paramtrDivision": "필수",
+     "ck": true
+    },
+    {
+     "paramtrNm": "type",
+     "paramtrBassValue": "xml",
+     "paramtrDc": "응답유형 [xml, json] default=xml",
+     "paramtrTy": "string",
+     "paramtrDivision": "필수",
+     "ck": true
+    },
+    {
+     "paramtrNm": "airport",
+     "paramtrBassValue": "MFM",
+     "paramtrDc": "인천공항에서 출발하는 도착지 공항 코드",
+     "paramtrTy": "string",
+     "paramtrDivision": "필수",
+     "ck": true
+    },
+    {
+     "paramtrNm": "lang",
+     "paramtrBassValue": "K",
+     "paramtrDc": "언어구분 국문=K, 영문=E, 중문=C, 일문=J, default=K",
+     "paramtrTy": "string",
+     "paramtrDivision": "필수",
+     "ck": true
+    }
+   ],
+   "resList": [
+    {
+     "paramtrNm": "header",
+     "paramtrDc": "header",
+     "arrayYn": "N",
+     "paramtrDefNm": "#/definitions/header-getPaxFltSchedDeparturesDeOdp",
+     "subDefNm": "header-getPaxFltSchedDeparturesDeOdp",
+     "paramtrTy": "object",
+     "paramtrDivision": "필수",
+     "ck": true,
+     "subParam": [
+      {
+       "paramtrNm": "resultCode",
+       "paramtrDc": "결과코드",
+       "arrayYn": "N",
+       "paramtrDefNm": "",
+       "paramtrTy": "string",
+       "paramtrDivision": "필수",
+       "ck": true
+      },
+      {
+       "paramtrNm": "resultMsg",
+       "paramtrDc": "결과메세지",
+       "arrayYn": "N",
+       "paramtrDefNm": "",
+       "paramtrTy": "string",
+       "paramtrDivision": "필수",
+       "ck": true
+      }
+     ]
+    },
+    {
+     "paramtrNm": "body",
+     "paramtrDc": "body",
+     "arrayYn": "N",
+     "paramtrDefNm": "#/definitions/body-getPaxFltSchedDeparturesDeOdp",
+     "subDefNm": "body-getPaxFltSchedDeparturesDeOdp",
+     "paramtrTy": "object",
+     "paramtrDivision": "필수",
+     "ck": true,
+     "subParam": [
+      {
+       "paramtrNm": "items",
+       "paramtrDc": "items",
+       "arrayYn": "N",
+       "paramtrDefNm": "#/definitions/items-getPaxFltSchedDeparturesDeOdp",
+       "subDefNm": "items-getPaxFltSchedDeparturesDeOdp",
+       "paramtrTy": "object",
+       "paramtrDivision": "필수",
+       "ck": true,
+       "subParam": [
+        {
+         "paramtrNm": "item",
+         "paramtrDc": "item",
+         "arrayYn": "N",
+         "paramtrDefNm": "#/definitions/item-getPaxFltSchedDeparturesDeOdp",
+         "subDefNm": "item-getPaxFltSchedDeparturesDeOdp",
+         "paramtrTy": "object",
+         "paramtrDivision": "필수",
+         "ck": true,
+         "subParam": [
+          {
+           "paramtrNm": "sunday",
+           "paramtrDc": "일요일 취항여부",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "thursday",
+           "paramtrDc": "목요일 취항여부",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "airline",
+           "paramtrDc": "항공사명",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "airport",
+           "paramtrDc": "인천공항에서 출발하는 편명의 도착지공항 한글명",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "airportcode",
+           "paramtrDc": "인천공항에서 출발하는 편명의 도착지공항(IATA) 코드",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "codeshare",
+           "paramtrDc": "코드쉐어 여부",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "firstdate",
+           "paramtrDc": "정기운항 시작일",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "flightid",
+           "paramtrDc": "편명",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "friday",
+           "paramtrDc": "금요일 취항여부",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "lastdate",
+           "paramtrDc": "정기운항 종료일",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "masterflightid",
+           "paramtrDc": "마스터편명",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "monday",
+           "paramtrDc": "월요일 취항여부",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "saturday",
+           "paramtrDc": "토요일 취항여부",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "season",
+           "paramtrDc": "시즌명",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "st",
+           "paramtrDc": "정기운항 시작 시간",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "tuesday",
+           "paramtrDc": "화요일 취항여부",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          },
+          {
+           "paramtrNm": "wednesday",
+           "paramtrDc": "수요일 취항여부",
+           "arrayYn": "N",
+           "paramtrDefNm": "",
+           "paramtrTy": "string",
+           "paramtrDivision": "옵션",
+           "ck": true
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "paramtrNm": "numOfRows",
+       "paramtrDc": "데이터 행",
+       "arrayYn": "N",
+       "paramtrDefNm": "",
+       "paramtrTy": "string",
+       "paramtrDivision": "필수",
+       "ck": true
+      },
+      {
+       "paramtrNm": "pageNo",
+       "paramtrDc": "데이터 표출 페이지",
+       "arrayYn": "N",
+       "paramtrDefNm": "",
+       "paramtrTy": "string",
+       "paramtrDivision": "필수",
+       "ck": true
+      },
+      {
+       "paramtrNm": "totalCount",
+       "paramtrDc": "데이터 항목 수",
+       "arrayYn": "N",
+       "paramtrDefNm": "",
+       "paramtrTy": "string",
+       "paramtrDivision": "필수",
+       "ck": true
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
