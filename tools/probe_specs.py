@@ -15,6 +15,7 @@ import urllib.request
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "probe", "specs")
 UA = "Mozilla/5.0 (callsign-finder probe)"
 KEYWORDS = ["인천국제공항공사 운항", "인천국제공항공사 화물편", "한국공항공사 운항", "한국공항공사 스케줄"]
+DETAIL = ["15095074", "15103969", "15140153", "15095059", "15095051", "15158949", "15114085", "15114086"]
 KNOWN = ["15140153", "15158949", "15158625", "15158950", "15159598", "15160195", "15158628", "15158851",
          "15095066", "15095061", "15156559"]
 
@@ -63,6 +64,24 @@ def main():
         time.sleep(0.5)
     with open(os.path.join(OUT, "_index.json"), "w", encoding="utf-8") as f:
         json.dump(index, f, ensure_ascii=False, indent=1)
+    # 상세 페이지에서 요청주소·오퍼레이션 부분만 추출해 저장
+    detail = {}
+    for did in DETAIL:
+        try:
+            html = get("https://www.data.go.kr/data/%s/openapi.do" % did)
+            urls = sorted(set(re.findall(r'https?://(?:apis\.data\.go\.kr|openapi\.airport\.co\.kr)[^"\'<>\s]*', html)))
+            ops = sorted(set(re.findall(r'\b(get[A-Z][A-Za-z0-9_]+)\b', html)))
+            sw = sorted(set(re.findall(r'(?:swagger|oas)[^"\'<>\s]*', html)))[:20]
+            pk = sorted(set(re.findall(r'(?:publicDataDetailPk|publicDataPk|oprtinSeqNo)["\'=:\s]+["\']?([A-Za-z0-9_\-]+)', html)))[:20]
+            detail[did] = {"urls": urls, "ops": ops, "swagger": sw, "pk": pk}
+            with open(os.path.join(OUT, "detail_%s.html" % did), "w", encoding="utf-8") as f:
+                f.write(html)
+            print("detail", did, urls, ops[:10])
+        except Exception as e:
+            detail[did] = {"error": str(e)[:200]}
+        time.sleep(0.5)
+    with open(os.path.join(OUT, "_detail.json"), "w", encoding="utf-8") as f:
+        json.dump(detail, f, ensure_ascii=False, indent=1)
 
 
 if __name__ == "__main__":
