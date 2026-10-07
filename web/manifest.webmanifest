@@ -1,0 +1,15 @@
+{
+  "name": "Call Sign 조회",
+  "short_name": "CallSign",
+  "description": "항공기 Call Sign으로 출발/도착 공항과 기종을 오프라인에서 조회",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b0f14",
+  "theme_color": "#0b0f14",
+  "icons": [
+    {"src": "icon-180.png", "sizes": "180x180", "type": "image/png"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"},
+    {"src": "icon.svg", "sizes": "any", "type": "image/svg+xml"}
+  ]
+}

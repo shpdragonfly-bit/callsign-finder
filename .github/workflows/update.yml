@@ -1,0 +1,46 @@
+# GitHub에 올려두면 6시간마다 자동으로 데이터를 갱신하고 GitHub Pages(웹앱)로 배포합니다.
+# 설정: 저장소 Settings → Pages → Source 를 "GitHub Actions" 로 선택
+name: update-callsign-data
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"   # 6시간마다 (ADS-B 기종 관측을 여러 시간대에 걸쳐 누적)
+  workflow_dispatch:          # Actions 탭에서 수동 실행 가능
+  push:
+    branches: [main]
+    paths: ["web/**", "config/**", "updater/**"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: callsign-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 데이터 갱신
+        run: python updater/update.py
+      - name: 변경사항 커밋
+        run: |
+          git config user.name "callsign-bot"
+          git config user.email "callsign-bot@users.noreply.github.com"
+          git add data/observations.json web/data.json web/data.js
+          git diff --cached --quiet || git commit -m "data: $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push || true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web
+      - id: deploy
+        uses: actions/deploy-pages@v4
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
