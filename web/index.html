@@ -171,7 +171,23 @@ button.b:disabled { opacity: .5; }
 .utc { font: 700 12px var(--mono); color: var(--text); margin-top: 4px; white-space: nowrap; }
 .utc small { font-weight: 500; color: var(--muted); }
 .tt .b { padding: 6px 10px; font-size: 13px; white-space: nowrap; flex: none; }
-.tt #ftLand { white-space: nowrap; }
+.times { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.tm { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px 10px; box-shadow: var(--shadow); min-width: 0; }
+.tm:focus-within { border-color: var(--accent); }
+.tm label { display: block; font: 700 14px var(--mono); color: var(--accent); }
+.tm label small { font: 500 11px system-ui, sans-serif; color: var(--muted); margin-left: 5px; }
+.tmin { display: flex; align-items: baseline; gap: 2px; margin: 4px 0 6px; }
+.tmin input { width: 4.2ch; min-width: 0; flex: 0 1 auto; border: 0; outline: none; background: none; color: var(--text); font: 700 26px/1.1 var(--mono); padding: 0; }
+.tmin span { color: var(--muted); font: 600 14px var(--mono); }
+.tm .now { width: 100%; border: 1px solid var(--line); background: var(--panel-2); color: var(--muted); border-radius: 8px; font: 600 12px inherit; font-family: inherit; padding: 5px 0; cursor: pointer; }
+.tres { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+.tres > div { background: var(--accent-soft); border-radius: 12px; padding: 10px 14px; }
+.tres span { display: block; font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: .04em; }
+.tres b { display: block; font: 700 28px/1.2 var(--mono); }
+.tres small { font-size: 11px; color: var(--muted); }
+.ft-apply { margin-top: 8px; }
+.ft-apply .b { width: 100%; }
+@media (max-width: 560px) { .times { grid-template-columns: 1fr 1fr; } }
 
 .sg .badge { font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 5px; background: var(--accent-soft); color: var(--accent); margin-left: 6px; }
 .len { display: flex; align-items: center; gap: 4px; }
@@ -188,9 +204,6 @@ button.b:disabled { opacity: .5; }
 .sum .w { font: 700 22px var(--mono); margin: 0 0 2px; }
 .sum .who { margin-bottom: 6px; }
 .sum .r { font-size: 12px; color: var(--muted); }
-.checks { padding: 10px 16px 12px; font-size: 13px; }
-.checks div { margin: 2px 0; }
-.checks .ok { color: var(--ok); } .checks .bad { color: var(--warn); }
 .ft-actions { display: flex; justify-content: flex-end; gap: 8px; padding: 0 16px 14px; }
 .sum .cont { font-size: 11px; color: var(--muted); margin-top: 2px; }
 @media (max-width: 420px) {
@@ -203,7 +216,6 @@ button.b:disabled { opacity: .5; }
   .sg .crew { font-size: 13px; }
   .rp { font-size: 11px; padding: 1px 7px; }
   .utc { font-size: 11px; }
-  .tt #ftLand { font-size: 12px; }
 }</style>
 </head>
 <body>
@@ -250,13 +262,18 @@ button.b:disabled { opacity: .5; }
         <span class="tsum" id="ftSum"></span>
       </div>
       <p class="ft-hint">시간 칸에 <b>12+30</b> 처럼 입력해도 됩니다.</p>
-      <div class="lbl">이륙 시각 (UTC)</div>
-      <div class="tt">
-        <input id="ftUtc" inputmode="tel" autocomplete="off" placeholder="0000" maxlength="5" style="width:3.4em" aria-label="이륙 시각 UTC (예: 1430)"><span>Z</span>
-        <button class="b" id="ftNow" type="button">지금</button>
-        <span class="tsum" id="ftLand"></span>
+      <div class="lbl">운항 시각 (UTC)</div>
+      <div class="times" id="ftTimes">
+        <div class="tm"><label for="tRO">R/O<small>Ramp out</small></label><div class="tmin"><input id="tRO" data-k="ro" inputmode="tel" autocomplete="off" placeholder="0000" maxlength="5"><span>Z</span></div><button type="button" class="now" data-k="ro">지금</button></div>
+        <div class="tm"><label for="tTO">T/O<small>Take off</small></label><div class="tmin"><input id="tTO" data-k="to" inputmode="tel" autocomplete="off" placeholder="0000" maxlength="5"><span>Z</span></div><button type="button" class="now" data-k="to">지금</button></div>
+        <div class="tm"><label for="tLD">L/D<small>Landing</small></label><div class="tmin"><input id="tLD" data-k="ld" inputmode="tel" autocomplete="off" placeholder="0000" maxlength="5"><span>Z</span></div><button type="button" class="now" data-k="ld">지금</button></div>
+        <div class="tm"><label for="tRI">R/I<small>Ramp in</small></label><div class="tmin"><input id="tRI" data-k="ri" inputmode="tel" autocomplete="off" placeholder="0000" maxlength="5"><span>Z</span></div><button type="button" class="now" data-k="ri">지금</button></div>
       </div>
-      <p class="ft-hint">입력하면 구간마다 실제 교대 시각(UTC)이 표시됩니다. 비워두면 경과시간만 표시합니다.</p>
+      <div class="tres">
+        <div><span>FLT Time</span><b id="rFLT">—</b><small>L/D − T/O</small></div>
+        <div><span>Block Time</span><b id="rBLK">—</b><small>R/I − R/O</small></div>
+      </div>
+      <div class="ft-apply" id="ftApplyWrap" hidden><button class="b" id="ftApply" type="button"></button></div>
       <div id="ftOut"></div>
     </div>
     <div id="ft-other" hidden>
@@ -693,7 +710,7 @@ button.b:disabled { opacity: .5; }
     $("ftSub").innerHTML = C.subs.map((x) =>
       `<button data-sub="${x.key}" aria-pressed="${x.key === P.key}">${x.label}<small>${x.note}</small></button>`).join("");
     $("ftSum").textContent = st.T > 0 ? "= " + fmt(st.T) : "";
-    $("ftLand").textContent = st.utc != null && st.T > 0 ? "착륙 " + zt(st.utc + st.T, true) : "";
+    renderTimes();
     const out = $("ftOut");
     if (st.T <= 0) { out.innerHTML = ""; return; }
     const T = st.T, c = cur(), last = P.rest.length - 1;
@@ -732,15 +749,7 @@ button.b:disabled { opacity: .5; }
       <div class="r">근무</div><div class="w">${fmt(work[g.id])}</div><div class="r">휴식 ${fmt(rest[g.id])}</div>
       <div class="cont">최대 연속 ${fmt(cont[g.id])}</div></div>`).join("")}</div>`;
 
-    const ws = Object.values(work), diff = Math.max(...ws) - Math.min(...ws);
-    const ck = (ok, txt) => `<div class="${ok ? "ok" : "bad"}">${ok ? "✓" : "!"} ${txt}</div>`;
-    h += `<div class="checks">
-      ${ck(true, C.cockpitText)}
-      ${ck(c.s[0] > 0 && c.s[last] > 0, "이륙·착륙 " + dutyOf(P.rest[0]).map(pname).join(" · "))}
-      ${ck(c.s[last] >= MIN_LAST, `착륙 전 마지막 교대 ${fmt(c.s[last])} (최소 1+00)`)}
-      ${ck(diff <= 1, diff <= 1 ? `${C.equalText} (각 ${fmt(T - T / C.groups.length)})` : `근무시간 차이 ${fmt(diff)}`)}
-    </div>`;
-    h += `<div class="ft-actions"><button class="b" id="ftReset">기본값으로</button></div></div>`;
+    h += `<div class="ft-actions" style="padding-top:14px"><button class="b" id="ftReset">기본값으로</button></div></div>`;
     out.innerHTML = h;
   }
 
@@ -804,20 +813,52 @@ button.b:disabled { opacity: .5; }
     if (ready) render();
   }
 
-  $("ftUtc").addEventListener("input", () => {
-    const v = $("ftUtc").value;
-    const m = parseUtc(v);
-    if (v.trim() && m == null) return;               // 입력 중이거나 잘못된 값은 무시
-    st.utc = m; st.utcText = v; save(); render();
+  // ----- 운항 시각 (R/O · T/O · L/D · R/I) -----
+  const TK = ["ro", "to", "ld", "ri"];
+  const tval = (k) => parseUtc(st.times[k] || "");
+  const span = (a, b) => (a == null || b == null ? null : (b - a + 1440) % 1440);   // 자정 넘김 처리
+  function renderTimes() {
+    const flt = span(tval("to"), tval("ld")), blk = span(tval("ro"), tval("ri"));
+    $("rFLT").textContent = flt == null ? "—" : fmt(flt);
+    $("rBLK").textContent = blk == null ? "—" : fmt(blk);
+    const can = flt != null && flt > 0 && flt !== st.T;
+    $("ftApplyWrap").hidden = !can;
+    if (can) $("ftApply").textContent = `FLT Time ${fmt(flt)}을 전체 비행시간에 적용`;
+  }
+  function setTime(k, text) {
+    st.times[k] = text;
+    if (k === "to") st.utc = tval("to");             // T/O 시각으로 구간별 교대 시각 표시
+    save(); render(); renderTimes();
+  }
+  $("ftTimes").addEventListener("input", (e) => {
+    const inp = e.target.closest("input[data-k]");
+    if (!inp) return;
+    const v = inp.value;
+    if (v.trim() && parseUtc(v) == null) return;      // 입력 중이거나 잘못된 값은 무시
+    setTime(inp.dataset.k, v);
   });
-  $("ftUtc").addEventListener("keydown", (e) => { if (e.key === "Enter") $("ftUtc").blur(); });
-  $("ftNow").addEventListener("click", () => {
-    const d = new Date(), m = Math.floor((d.getUTCHours() * 60 + d.getUTCMinutes()) / STEP) * STEP;
-    st.utc = m; st.utcText = zt(m).replace("Z", ""); $("ftUtc").value = st.utcText; save(); render();
+  $("ftTimes").addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.matches("input")) e.target.blur(); });
+  $("ftTimes").addEventListener("click", (e) => {
+    const b = e.target.closest("button.now");
+    if (!b) return;
+    const d = new Date(), m = d.getUTCHours() * 60 + d.getUTCMinutes();
+    const txt = zt(m).replace("Z", "");
+    $("t" + b.dataset.k.toUpperCase()).value = txt;
+    setTime(b.dataset.k, txt);
+  });
+  $("ftApply").addEventListener("click", () => {
+    const flt = span(tval("to"), tval("ld"));
+    if (!flt) return;
+    $("ftH").value = Math.floor(flt / 60); $("ftM").value = String(flt % 60).padStart(2, "0");
+    setTotalFromInputs(false);
   });
 
   // ----- 초기 표시 (이전 입력 복원) -----
-  $("ftH").value = st.hText || ""; $("ftM").value = st.mText || ""; $("ftUtc").value = st.utcText || "";
+  $("ftH").value = st.hText || ""; $("ftM").value = st.mText || "";
+  if (!st.times) st.times = { ro: "", to: st.utcText || "", ld: "", ri: "" };   // 이전 버전의 이륙 시각 이어받기
+  for (const k of TK) $("t" + k.toUpperCase()).value = st.times[k] || "";
+  st.utc = tval("to");
+  renderTimes();
   showMode();
 })();
 </script>
