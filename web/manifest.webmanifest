@@ -1,12 +1,12 @@
 {
-  "name": "Call Sign 조회",
-  "short_name": "CallSign",
-  "description": "항공기 Call Sign으로 출발/도착 공항과 기종을 오프라인에서 조회",
+  "name": "운항 도우미",
+  "short_name": "운항도우미",
+  "description": "Call Sign 조회(출발/도착 공항·기종)와 비행시간 계산을 오프라인에서",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#0b0f14",
-  "theme_color": "#0b0f14",
+  "background_color": "#F2F6FA",
+  "theme_color": "#0084CC",
   "icons": [
     {"src": "icon-180.png", "sizes": "180x180", "type": "image/png"},
     {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"},

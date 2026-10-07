@@ -3,60 +3,78 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Call Sign 조회</title>
-<meta name="theme-color" content="#0b0f14">
+<title>운항 도우미</title>
+<meta name="theme-color" content="#0084CC" id="themeColor">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="CallSign">
+<meta name="apple-mobile-web-app-title" content="운항도우미">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-180.png">
 <style>
+/* 컬러: 스카이블루 · 화이트 · 실버그레이 · 네이비 (주간) / 딥네이비 + 스카이블루 (야간) */
 :root {
-  --bg: #0b0f14; --panel: #121922; --panel-2: #18212c; --line: #263241;
-  --text: #e6edf3; --muted: #8b98a8; --accent: #ffb547; --accent-ink: #1a1203;
-  --ok: #4fd18b; --warn: #ff8a65; --mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
+  --bg: #F2F6FA; --panel: #FFFFFF; --panel-2: #EAF1F7; --line: #D3DFEA;
+  --text: #0B2545; --muted: #5D7590; --accent: #0078C2; --accent-soft: #E1F1FB; --accent-ink: #FFFFFF;
+  --bar-1: #00A0E2; --bar-2: #0079C1; --bar-ink: #FFFFFF; --bar-sub: rgba(255,255,255,.72);
+  --ok: #138A4C; --warn: #C2410C;
+  --mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
+  --shadow: 0 1px 2px rgba(11,37,69,.06), 0 4px 14px rgba(11,37,69,.05);
 }
-:root[data-theme="light"] {
-  --bg: #f4f6f8; --panel: #ffffff; --panel-2: #eef1f4; --line: #d6dde5;
-  --text: #0f1720; --muted: #5b6876; --accent: #b86e00; --accent-ink: #ffffff;
-  --ok: #138a4c; --warn: #c2410c;
+:root[data-theme="dark"] {
+  --bg: #06101D; --panel: #0D1B2E; --panel-2: #132640; --line: #1E3555;
+  --text: #E4EEF8; --muted: #8AA2BF; --accent: #4CC2F2; --accent-soft: #0F2C47; --accent-ink: #04121F;
+  --bar-1: #0A1C33; --bar-2: #0A1C33; --bar-ink: #E4EEF8; --bar-sub: #8AA2BF;
+  --ok: #4FD18B; --warn: #FF8A65; --shadow: none;
 }
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg: #f4f6f8; --panel: #ffffff; --panel-2: #eef1f4; --line: #d6dde5;
-    --text: #0f1720; --muted: #5b6876; --accent: #b86e00; --accent-ink: #ffffff;
-    --ok: #138a4c; --warn: #c2410c;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #06101D; --panel: #0D1B2E; --panel-2: #132640; --line: #1E3555;
+    --text: #E4EEF8; --muted: #8AA2BF; --accent: #4CC2F2; --accent-soft: #0F2C47; --accent-ink: #04121F;
+    --bar-1: #0A1C33; --bar-2: #0A1C33; --bar-ink: #E4EEF8; --bar-sub: #8AA2BF;
+    --ok: #4FD18B; --warn: #FF8A65; --shadow: none;
   }
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; background: var(--bg); color: var(--text); }
 body {
   font: 16px/1.45 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
-  padding: env(safe-area-inset-top) 16px calc(24px + env(safe-area-inset-bottom));
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
   -webkit-text-size-adjust: 100%;
 }
-.wrap { max-width: 640px; margin: 0 auto; }
-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 0 10px; }
-header h1 { font-size: 15px; font-weight: 600; letter-spacing: .02em; margin: 0; color: var(--muted); }
-header h1 b { color: var(--text); }
-.pill { font-size: 12px; padding: 3px 9px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
-.pill.off { color: var(--accent); border-color: var(--accent); }
+.wrap { max-width: 640px; margin: 0 auto; padding: 0 16px; }
+
+/* 상단 바 + 탭 */
+.bar { position: sticky; top: 0; z-index: 10; background: linear-gradient(135deg, var(--bar-1), var(--bar-2));
+  color: var(--bar-ink); padding-top: env(safe-area-inset-top); border-bottom: 1px solid var(--line); }
+.bar-top { display: flex; align-items: center; justify-content: space-between; padding: 12px 0 6px; }
+.brand { font-size: 13px; font-weight: 600; letter-spacing: .14em; color: var(--bar-sub); text-transform: uppercase; }
+.pill { font-size: 12px; padding: 3px 10px; border-radius: 99px; border: 1px solid currentColor; color: var(--bar-sub); white-space: nowrap; }
+.pill.off { color: #FFD166; }
+.tabs { display: flex; gap: 4px; }
+.tab { flex: 1; appearance: none; border: 0; background: none; color: var(--bar-sub); font: 600 16px inherit; font-family: inherit;
+  padding: 10px 4px 12px; position: relative; cursor: pointer; }
+.tab[aria-selected="true"] { color: var(--bar-ink); }
+.tab[aria-selected="true"]::after { content: ""; position: absolute; left: 22%; right: 22%; bottom: 0; height: 3px; border-radius: 3px 3px 0 0; background: var(--bar-ink); }
+:root[data-theme="dark"] .tab[aria-selected="true"]::after { background: var(--accent); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tab[aria-selected="true"]::after { background: var(--accent); } }
+.panel { padding-top: 16px; }
+.panel[hidden] { display: none; }
 
 .search { position: relative; }
 .search input {
   width: 100%; font: 600 34px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase;
   background: var(--panel); color: var(--text); border: 2px solid var(--line); border-radius: 14px;
-  padding: 16px 52px 16px 16px; outline: none;
+  padding: 16px 52px 16px 16px; outline: none; box-shadow: var(--shadow);
 }
 .search input:focus { border-color: var(--accent); }
-.search input::placeholder { color: var(--muted); opacity: .55; letter-spacing: .02em; font-size: 26px; }
+.search input::placeholder { color: var(--muted); opacity: .5; letter-spacing: .02em; font-size: 26px; }
 .clear { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 36px; height: 36px;
   border: 0; border-radius: 10px; background: var(--panel-2); color: var(--muted); font-size: 20px; display: none; }
 .hint { color: var(--muted); font-size: 13px; margin: 8px 2px 0; }
 
-.card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; margin-top: 14px; overflow: hidden; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; margin-top: 14px; overflow: hidden; box-shadow: var(--shadow); }
 .card-hd { display: flex; align-items: baseline; justify-content: space-between; padding: 14px 16px 0; gap: 8px; }
 .cs { font: 700 22px var(--mono); letter-spacing: .04em; }
 .cs small { font: 500 13px system-ui, sans-serif; color: var(--muted); margin-left: 8px; letter-spacing: 0; }
@@ -67,16 +85,16 @@ header h1 b { color: var(--text); }
 .ap .name { font-size: 13px; color: var(--text); margin-top: 6px; }
 .ap .city { font-size: 12px; color: var(--muted); }
 .ap.dst { text-align: right; }
-.arrow { color: var(--muted); font-size: 26px; padding-top: 6px; }
+.arrow { color: var(--accent); font-size: 26px; padding-top: 6px; opacity: .7; }
 .via { padding: 0 16px 12px; font-size: 13px; color: var(--muted); }
 .via b { color: var(--text); font-family: var(--mono); }
 
-.type { border-top: 1px solid var(--line); padding: 14px 16px; display: flex; gap: 14px; align-items: center; }
+.type { border-top: 1px solid var(--line); padding: 14px 16px; display: flex; gap: 14px; align-items: center; background: var(--accent-soft); }
 .type .tcode { font: 700 28px var(--mono); min-width: 84px; }
 .type .tname { font-size: 15px; }
 .type .tmeta { font-size: 12px; color: var(--muted); }
-.alts { padding: 0 16px 14px; display: flex; flex-wrap: wrap; gap: 6px; }
-.alts span { font: 12px var(--mono); padding: 3px 8px; border-radius: 8px; background: var(--panel-2); color: var(--muted); }
+.alts { padding: 0 16px 14px; display: flex; flex-wrap: wrap; gap: 6px; background: var(--accent-soft); }
+.alts span { font: 12px var(--mono); padding: 3px 8px; border-radius: 8px; background: var(--panel); color: var(--muted); }
 .memo { border-top: 1px solid var(--line); padding: 10px 16px; font-size: 13px; color: var(--muted); }
 .none { padding: 18px 16px; color: var(--muted); }
 .none b { color: var(--warn); }
@@ -91,8 +109,14 @@ header h1 b { color: var(--text); }
 .row .l { font: 600 16px var(--mono); }
 .row .r { font: 14px var(--mono); color: var(--muted); }
 
+.soon { text-align: center; padding: 40px 20px; }
+.soon .ico { font-size: 34px; color: var(--accent); }
+.soon h2 { font-size: 18px; margin: 10px 0 6px; }
+.soon p { color: var(--muted); font-size: 14px; margin: 0; }
+
 footer { margin-top: 26px; border-top: 1px solid var(--line); padding-top: 14px; font-size: 13px; color: var(--muted); }
 footer .stat { margin-bottom: 10px; }
+footer .stat b { color: var(--text); }
 .btns { display: flex; flex-wrap: wrap; gap: 8px; }
 button.b { font: 600 14px inherit; font-family: inherit; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line);
   background: var(--panel); color: var(--text); cursor: pointer; }
@@ -104,31 +128,46 @@ button.b:disabled { opacity: .5; }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <h1><b>Call Sign</b> 조회</h1>
-    <span id="net" class="pill">확인 중</span>
-  </header>
-
-  <div class="search">
-    <input id="q" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false"
-           placeholder="KAL017 / KE17 / 17" aria-label="Call Sign 입력">
-    <button class="clear" id="clear" aria-label="지우기">×</button>
+<div class="bar">
+  <div class="wrap">
+    <div class="bar-top">
+      <span class="brand">Flight Assist</span>
+      <span id="net" class="pill">확인 중</span>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tab-cs" aria-controls="panel-cs" aria-selected="true" data-tab="cs">Call Sign 조회</button>
+      <button class="tab" role="tab" id="tab-ft" aria-controls="panel-ft" aria-selected="false" data-tab="ft">비행시간계산</button>
+    </div>
   </div>
-  <p class="hint" id="hint">ICAO(KAL017), IATA(KE17), 무선호출부호(KOREANAIR 17), 숫자만 입력해도 됩니다.</p>
+</div>
 
-  <div id="result"></div>
-  <div id="sugg" class="list"></div>
-  <div id="recent" class="list"></div>
+<div class="wrap">
+  <section class="panel" id="panel-cs" role="tabpanel" aria-labelledby="tab-cs">
+    <div class="search">
+      <input id="q" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false"
+             placeholder="KAL017 / KE17 / 17" aria-label="Call Sign 입력">
+      <button class="clear" id="clear" aria-label="지우기">×</button>
+    </div>
+    <p class="hint">ICAO(KAL017), IATA(KE17), 무선호출부호(KOREANAIR 17), 숫자만 입력해도 됩니다.</p>
+    <div id="result"></div>
+    <div id="sugg" class="list"></div>
+    <div id="recent" class="list"></div>
+  </section>
+
+  <section class="panel" id="panel-ft" role="tabpanel" aria-labelledby="tab-ft" hidden>
+    <div class="card soon">
+      <div class="ico">◷</div>
+      <h2>비행시간계산</h2>
+      <p>준비 중입니다.</p>
+    </div>
+  </section>
 
   <footer>
     <div class="stat" id="stat">데이터 없음</div>
     <div class="btns">
       <button class="b primary" id="btnUpdate">최신 데이터 받기</button>
-      <button class="b" id="btnImport">파일에서 가져오기</button>
-      <button class="b" id="btnTheme">화면 모드</button>
+      <button class="b" id="btnTheme">주/야간 설정</button>
     </div>
-    <input type="file" id="file" accept=".json,application/json" hidden>
     <div id="msg"></div>
     <div class="small">
       노선: VRS standing-data(사용자 제보 기반) · 기종: ADS-B 관측 누적값입니다. 실제 운항 기종·노선은 당일 운항 정보와 다를 수 있으니 참고용으로만 사용하세요.
@@ -140,7 +179,7 @@ button.b:disabled { opacity: .5; }
 <script>
 (() => {
   const $ = (id) => document.getElementById(id);
-  const KEY = "csf-data", RKEY = "csf-recent", TKEY = "csf-theme";
+  const KEY = "csf-data", RKEY = "csf-recent", TKEY = "csf-theme", TABKEY = "csf-tab", QKEY = "csf-q";
   let DB = null;
 
   // ---------- 저장소 (localStorage 사용 불가 환경 대비) ----------
@@ -242,7 +281,7 @@ button.b:disabled { opacity: .5; }
     const raw = $("q").value;
     $("clear").style.display = raw ? "block" : "none";
     $("result").innerHTML = ""; $("sugg").innerHTML = "";
-    if (!DB) { $("result").innerHTML = `<div class="card none"><b>데이터가 없습니다.</b> 인터넷 연결 상태에서 "최신 데이터 받기"를 누르거나 데이터 파일을 가져오세요.</div>`; return; }
+    if (!DB) { $("result").innerHTML = `<div class="card none"><b>데이터가 없습니다.</b> 인터넷 연결 상태에서 "최신 데이터 받기"를 누르세요.</div>`; return; }
     if (!raw.trim()) { renderRecent(); return; }
     $("recent").innerHTML = "";
     const cands = candidates(raw);
@@ -311,28 +350,39 @@ button.b:disabled { opacity: .5; }
   }
 
   // ---------- 이벤트 ----------
-  $("q").addEventListener("input", search);
+  $("q").addEventListener("input", () => { search(); store.set(QKEY, $("q").value); });
   $("q").addEventListener("keydown", (e) => { if (e.key === "Enter") $("q").blur(); });
-  $("clear").addEventListener("click", () => { $("q").value = ""; search(); $("q").focus(); });
-  document.addEventListener("click", (e) => { const b = e.target.closest(".row"); if (b) { $("q").value = b.dataset.cs; search(); window.scrollTo(0, 0); } });
+  $("clear").addEventListener("click", () => { $("q").value = ""; store.set(QKEY, ""); search(); $("q").focus(); });
+  document.addEventListener("click", (e) => { const b = e.target.closest(".row"); if (b) { $("q").value = b.dataset.cs; store.set(QKEY, b.dataset.cs); search(); window.scrollTo(0, 0); } });
   $("btnUpdate").addEventListener("click", update);
-  $("btnImport").addEventListener("click", () => $("file").click());
-  $("file").addEventListener("change", async (e) => {
-    const f = e.target.files[0]; if (!f) return;
-    try { useData(JSON.parse(await f.text()), "파일"); } catch (err) { msg("가져오기 실패: " + err.message, "err"); }
-    e.target.value = "";
-  });
-  const applyTheme = (t) => { if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme; };
+  // ---------- 주/야간 ----------
+  const isDark = () => (document.documentElement.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")) === "dark";
+  const applyTheme = (t) => {
+    if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
+    $("themeColor").setAttribute("content", isDark() ? "#0A1C33" : "#0084CC");
+  };
   applyTheme(store.get(TKEY));
   $("btnTheme").addEventListener("click", () => {
-    const cur = document.documentElement.dataset.theme ||
-      (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-    const next = cur === "dark" ? "light" : "dark";
+    const next = isDark() ? "light" : "dark";
     applyTheme(next); store.set(TKEY, next);
   });
   addEventListener("online", renderNet); addEventListener("offline", renderNet);
 
-  loadData(); renderNet(); search();
+  // ---------- 탭 (화면은 숨기기만 하므로 입력·결과가 그대로 유지됨) ----------
+  function showTab(name) {
+    document.querySelectorAll(".tab").forEach((t) => {
+      const on = t.dataset.tab === name;
+      t.setAttribute("aria-selected", on);
+      $("panel-" + t.dataset.tab).hidden = !on;
+    });
+    store.set(TABKEY, name);
+  }
+  document.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => showTab(t.dataset.tab)));
+
+  loadData(); renderNet();
+  $("q").value = store.get(QKEY) || "";   // 앱을 다시 열어도 마지막 입력 복원
+  search();
+  showTab(store.get(TABKEY) === "ft" ? "ft" : "cs");
 
   // 온라인이면 조용히 최신 데이터 확인 (오프라인/파일 모드에서는 생략)
   if (navigator.onLine && location.protocol.startsWith("http")) {
