@@ -88,6 +88,17 @@ body[data-tab="ft"] .cs-only { display: none; }
 .ap.dst { text-align: right; }
 .arrow { color: var(--accent); font-size: 26px; padding-top: 6px; opacity: .7; }
 .via { padding: 0 16px 12px; font-size: 13px; color: var(--muted); }
+.apx { border-top: 1px solid var(--line); padding: 10px 16px 12px; }
+.apx-hd { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
+.apx-day { display: flex; background: var(--panel-2); border-radius: 8px; padding: 2px; }
+.apx-day button { border: 0; background: none; color: var(--muted); font: 600 12px inherit; font-family: inherit; padding: 4px 10px; border-radius: 6px; cursor: pointer; }
+.apx-day button[aria-pressed="true"] { background: var(--panel); color: var(--accent); box-shadow: var(--shadow); }
+.apx-g { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.apx-c > div:not(.apx-k) { display: flex; justify-content: space-between; gap: 6px; font-size: 13px; padding: 2px 0; }
+.apx-c span { color: var(--muted); }
+.apx-c b { font: 700 13px var(--mono); white-space: nowrap; }
+.apx-c b small { font-weight: 500; color: var(--muted); }
+.apx-k { font: 700 14px var(--mono); color: var(--accent); margin-bottom: 2px; }
 .via b { color: var(--text); font-family: var(--mono); }
 
 .type { border-top: 1px solid var(--line); padding: 14px 16px; display: flex; gap: 14px; align-items: center; background: var(--accent-soft); }
@@ -349,7 +360,54 @@ button.b:disabled { opacity: .5; }
   // ---------- 표시 ----------
   const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const fmtDate = (iso) => { const d = new Date(iso); return isNaN(d) ? iso : d.toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" }); };
-  const ap = (code) => { const a = DB.airports[code]; return a ? { iata: a[0], name: a[1], city: a[2], cc: a[3] } : { iata: "", name: "공항 정보 없음", city: "", cc: "" }; };
+  const ap = (code) => { const a = DB.airports[code]; return a ? { iata: a[0], name: a[1], city: a[2], cc: a[3], lat: a[4], lon: a[5], elev: a[6] } : { iata: "", name: "공항 정보 없음", city: "", cc: "" }; };
+
+  // ---------- 일출·일몰 (오프라인 계산, 오차 1~2분) ----------
+  // 공항 현지 날짜 기준으로 계산해 UTC 날짜·시각으로 표시
+  let sunDay = 0;                                   // 0 = 오늘, 1 = 내일 (공항 현지 날짜)
+  function sunTimes(lat, lon, dayOffset) {
+    const rad = Math.PI / 180, deg = 180 / Math.PI;
+    const local = new Date(Date.now() + (lon / 15) * 3600e3 + dayOffset * 86400e3);
+    const y = local.getUTCFullYear(), mo = local.getUTCMonth(), d = local.getUTCDate();
+    const N = Math.round((Date.UTC(y, mo, d) - Date.UTC(y, 0, 0)) / 86400e3);
+    const lngHour = lon / 15, zenith = 90.833;
+    const ev = (rising) => {
+      const t = N + ((rising ? 6 : 18) - lngHour) / 24;
+      const M = 0.9856 * t - 3.289;
+      let L = M + 1.916 * Math.sin(M * rad) + 0.020 * Math.sin(2 * M * rad) + 282.634;
+      L = ((L % 360) + 360) % 360;
+      let RA = deg * Math.atan(0.91764 * Math.tan(L * rad));
+      RA = ((RA % 360) + 360) % 360;
+      RA = (RA + (Math.floor(L / 90) * 90 - Math.floor(RA / 90) * 90)) / 15;
+      const sinDec = 0.39782 * Math.sin(L * rad), cosDec = Math.cos(Math.asin(sinDec));
+      const cosH = (Math.cos(zenith * rad) - sinDec * Math.sin(lat * rad)) / (cosDec * Math.cos(lat * rad));
+      if (cosH > 1) return "polarNight";
+      if (cosH < -1) return "midnightSun";
+      const H = (rising ? 360 - deg * Math.acos(cosH) : deg * Math.acos(cosH)) / 15;
+      let T = H + RA - 0.06571 * t - 6.622;
+      T = ((T % 24) + 24) % 24;                      // 현지 평균태양시
+      return new Date(Date.UTC(y, mo, d) + (T - lngHour) * 3600e3);
+    };
+    return { rise: ev(true), set: ev(false), date: `${mo + 1}/${d}` };
+  }
+  const zDate = (v) => {
+    if (v === "polarNight") return "극야";
+    if (v === "midnightSun") return "백야";
+    const p = (n) => String(n).padStart(2, "0");
+    return `<small>${v.getUTCMonth() + 1}/${v.getUTCDate()}</small> ${p(v.getUTCHours())}${p(v.getUTCMinutes())}Z`;
+  };
+  function apInfo(code, cls) {
+    const a = ap(code);
+    let h = `<div class="apx-c ${cls}"><div class="apx-k">${esc(a.iata || code)}</div>`;
+    h += `<div><span>표고</span><b>${a.elev != null ? Number(a.elev).toLocaleString("en-US") + " ft" : "—"}</b></div>`;
+    if (a.lat != null && a.lon != null) {
+      const s = sunTimes(a.lat, a.lon, sunDay);
+      h += `<div><span>일출</span><b>${zDate(s.rise)}</b></div><div><span>일몰</span><b>${zDate(s.set)}</b></div>`;
+    } else {
+      h += `<div><span>일출·일몰</span><b>—</b></div>`;
+    }
+    return h + `</div>`;
+  }
   const tname = (t) => (DB.type_names || {})[t] || "";
 
   function apBlock(code, cls) {
@@ -367,6 +425,9 @@ button.b:disabled { opacity: .5; }
       if (f.r.length > 2) {
         h += `<div class="via">전체 경로: ${f.r.map((c) => { const a = ap(c); return `<b>${esc(a.iata || c)}</b>`; }).join(" → ")}</div>`;
       }
+      h += `<div class="apx"><div class="apx-hd"><span>표고 · 일출·일몰 (UTC)</span>
+        <span class="apx-day"><button data-sunday="0" aria-pressed="${sunDay === 0}">오늘</button><button data-sunday="1" aria-pressed="${sunDay === 1}">내일</button></span></div>
+        <div class="apx-g">${apInfo(f.r[0], "org")}${apInfo(f.r[f.r.length - 1], "dst")}</div></div>`;
     } else {
       h += `<div class="none"><b>노선 정보 없음</b> — 기종만 관측된 Call Sign입니다.</div>`;
     }
@@ -469,6 +530,7 @@ button.b:disabled { opacity: .5; }
   $("q").addEventListener("input", () => { search(); store.set(QKEY, $("q").value); });
   $("q").addEventListener("keydown", (e) => { if (e.key === "Enter") $("q").blur(); });
   $("clear").addEventListener("click", () => { $("q").value = ""; store.set(QKEY, ""); search(); $("q").focus(); });
+  document.addEventListener("click", (e) => { const d = e.target.closest("[data-sunday]"); if (d) { sunDay = +d.dataset.sunday; search(); } });
   document.addEventListener("click", (e) => { const b = e.target.closest(".row"); if (b) { $("q").value = b.dataset.cs; store.set(QKEY, b.dataset.cs); search(); window.scrollTo(0, 0); } });
   $("btnUpdate").addEventListener("click", update);
   // ---------- 주/야간 ----------

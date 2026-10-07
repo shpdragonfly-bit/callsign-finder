@@ -122,6 +122,14 @@ def load_routes(src, airline):
     return routes
 
 
+def num(v, nd):
+    try:
+        x = round(float(v), nd)
+        return int(x) if nd == 0 else x
+    except (TypeError, ValueError):
+        return None
+
+
 def load_airports(src, codes):
     prefixes = sorted({c[:2] for c in codes if len(c) >= 2})
     airports = {}
@@ -136,6 +144,9 @@ def load_airports(src, codes):
                         row.get("Name") or "",
                         row.get("Location") or "",
                         row.get("CountryISO2") or "",
+                        num(row.get("Latitude"), 4),     # 위도 (일출·일몰 계산용)
+                        num(row.get("Longitude"), 4),    # 경도
+                        num(row.get("AltitudeFeet"), 0), # 표고 ft
                     ]
         if not src.local_dir and i % 20 == 0:
             log(f"  공항 파일 {i}/{len(prefixes)}")
