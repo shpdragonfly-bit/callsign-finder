@@ -1,0 +1,25 @@
+{
+ "name": "인천국제공항공사_여객편 운항현황(다국어)",
+ "description": "인천국제공항에 운항하는 여객기 항공편의 당일 운항 현황에 대한 다국어 데이터로 조회시간, 출발지 공항(IATA ) 편명, 항공사(IATA)를 기준으로 항공기 운항 타입, 항공사 한글명, 편명, 예정시간, 변경시간, 출발지공항, 도착게이트 번호, 수하물수취대 번호, 도시코드, 코드쉐어, 마스터편명, 출구 번호, 현황 코드, 출발공항코드(IATA),터미널,소요시간,경유지 공항코드, 경유지공항이름 등을 제공합니다. 조회 당일에 대한 데이터를 제공합니다. 개발 계정 일 1000 트래픽, 운영 계정 신청 시 일 1000000트래픽을 제공합니다.",
+ "url": "https://www.data.go.kr/data/15095093/openapi.do",
+ "keywords": "인천공항,여객,화물,운항,다국어",
+ "license": "이용허락범위 제한 없음",
+ "dateCreated": "2021-11-24",
+ "dateModified": "2026-08-06",
+ "datePublished": "2021-11-24",
+ "creator": {
+  "name": "인천국제공항공사",
+  "contactPoint": {
+   "contactType": "인프라DX팀",
+   "telephone": "",
+   "@type": "ContactPoint"
+  },
+  "@type": "Organization"
+ },
+ "spatialCoverage": "",
+ "temporalCoverage": "",
+ "additionalType": "교통및물류 - 항공·공항",
+ "encodingFormat": "JSON+XML",
+ "@context": "https://schema.org",
+ "@type": "Dataset"
+}

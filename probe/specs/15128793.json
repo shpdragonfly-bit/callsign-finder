@@ -1,0 +1,25 @@
+{
+ "name": "인천국제공항공사_수하물 적재대 정보",
+ "description": "인천국제공항공사에서 제공하는 인천공항 항공기 수하물 적재대 정보 현황에 대한 데이터를 D~D+1기준으로 제공합니다.항공사명,항공사코드, 공항명, 공항코드, 편명,코드쉐어,마스터편명,주기장 위치, 탑승구 번호,체크인 카운터,REMARK 현황, 항공기 운항 타입, 터미널 구분,예정시간,변경시간,소요시간,적재대명,적재대 상태, 적재대 시작시간/종료시간(적재대1,2),경유지코드,경유지명(첫번째~세번쨰)등의 정보를 포함합니다. 개발 계정 일 1000 트래픽, 운영 계정 신청 시 일 10000 트래픽을 제공합니다.",
+ "url": "https://www.data.go.kr/data/15128793/openapi.do",
+ "keywords": "캐리어,공항,수화물,수하물 적재대,항공기",
+ "license": "이용허락범위 제한 없음",
+ "dateCreated": "2024-06-18",
+ "dateModified": "2026-08-06",
+ "datePublished": "2024-06-18",
+ "creator": {
+  "name": "인천국제공항공사",
+  "contactPoint": {
+   "contactType": "인프라DX팀",
+   "telephone": "",
+   "@type": "ContactPoint"
+  },
+  "@type": "Organization"
+ },
+ "spatialCoverage": "",
+ "temporalCoverage": "",
+ "additionalType": "교통및물류 - 항공·공항",
+ "encodingFormat": "JSON+XML",
+ "@context": "https://schema.org",
+ "@type": "Dataset"
+}

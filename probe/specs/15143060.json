@@ -1,0 +1,25 @@
+{
+ "name": "인천국제공항공사_여객기 정기운항편 조회(관광플랫폼용)",
+ "description": "여행 및 관광 플랫폼 기업을 위한 맞춤형 데이터로,코드쉐어,마스터편명,편명,정기운항 시작시간,시즌명,정기운항 시작일/종료일,요일별 취항여부,출발지 공항명,출발지 공항코드, 항공사명,항공사코드 및 추가현황 1/2의 정보를 제공합니다. 시즌별 데이터를 제공합니다. 개발 계정 일 1000 트래픽, 운영 계정 신청 시 일 10000 트래픽을 제공합니다. 하계시즌은 3월 말경에 동계시즌은 10월 말경에 협의되며 일정은 변경될 수 있습니다. tmp1/tmp2 의 추가현황 데이터는 필수 정보가 아니며 공지 없이 데이터 추가 및 상시 공백일 수 있습니다.",
+ "url": "https://www.data.go.kr/data/15143060/openapi.do",
+ "keywords": "정기,관광,여객,여행,항공사,동계,하계,시즌",
+ "license": "이용허락범위 제한 없음",
+ "dateCreated": "2025-04-21",
+ "dateModified": "2026-08-06",
+ "datePublished": "2025-04-21",
+ "creator": {
+  "name": "인천국제공항공사",
+  "contactPoint": {
+   "contactType": "인프라DX팀",
+   "telephone": "",
+   "@type": "ContactPoint"
+  },
+  "@type": "Organization"
+ },
+ "spatialCoverage": "",
+ "temporalCoverage": "",
+ "additionalType": "교통및물류 - 항공·공항",
+ "encodingFormat": "JSON+XML",
+ "@context": "https://schema.org",
+ "@type": "Dataset"
+}

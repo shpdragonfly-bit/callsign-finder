@@ -1,0 +1,25 @@
+{
+ "name": "인천국제공항공사_제1터미널 화물기 운항 현황 상세 조회",
+ "description": "인천국제공항공사가 제공하는 ‘제1터미널 화물기 운항 현황 상세 조회’ 데이터는 인천공항 T1 터미널을 이용하는 화물 항공기의 출발·도착 상황을 일별로 집계한 자료이며, 조회일 기준 전후 3일·6일(총 10일) 동안의 운항 정보를 제공한다.      데이터에는 편명 UNIQ코드, 항공기 운항 타입, 항공사·편명·코드쉐어 구분, 마스터·연결편 정보, 예정 일시·변경 일시, 주기장 위치·게이트·터미널·출구, 수하물수취대, 현황, 항공기 서브 타입·등록 기호, 연결편 항공사·편명·일자·UNIQ코드 등 30여 개 항목이 포함돼 화물기의 구체적인 스케줄과 지상 작업 현황을 파악할 수 있다.      물류 기업·항공사·연구기관은 본 데이터를 활용해 화물 운송 효율성 분석, 연계 항공편 스케줄링, 지상 운영 최적화 등에 활용할 수 있다. 데이터는 CSV·XLSX 형식으로 일일 업데이트되며, 공공데이터포털에서 자유롭게 다운로드·API 호출이 가능하다.",
+ "url": "https://www.data.go.kr/data/15168220/openapi.do",
+ "keywords": "화물,남측,카고,연결편,연결편 일자,항공기 타입,조업,주기장",
+ "license": "이용허락범위 제한 없음",
+ "dateCreated": "2026-09-28",
+ "dateModified": "2026-09-28",
+ "datePublished": "2026-09-28",
+ "creator": {
+  "name": "인천국제공항공사",
+  "contactPoint": {
+   "contactType": "인프라DX팀",
+   "telephone": "",
+   "@type": "ContactPoint"
+  },
+  "@type": "Organization"
+ },
+ "spatialCoverage": "",
+ "temporalCoverage": "",
+ "additionalType": "교통및물류 - 항공·공항",
+ "encodingFormat": "JSON+XML",
+ "@context": "https://schema.org",
+ "@type": "Dataset"
+}

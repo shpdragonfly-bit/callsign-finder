@@ -1,0 +1,25 @@
+{
+ "name": "인천국제공항공사_제2터미널 여객기 운항 현황 상세 조회",
+ "description": "인천국제공항공사에서 제공하는 ‘제2터미널 여객기 운항 현황 상세 조회’ 데이터셋은 인천공항 제2터미널을 이용하는 국내·국외선 여객기의 실시간 운항 정보를 제공한다. 조회일 기준 전후 9일(‑3일~+6일) 동안의 편명, 항공사, 운항타입 등 상세 항목을 한눈에 확인할 수 있다.    주요 필드에는 UNIQ 편명코드, 마스터·서브 편명, 코드쉐어 구분, 예정일시·변경일시, 주기장·게이트·체크인 카운터·출입구·수하물 수취대 등 터미널 운영에 필요한 모든 정보를 포함한다. 또한 연결편 항공사·편명·일자·UNIQ코드 등 환승·연결편 정보도 제공해 항공편 연계 분석에 활용한다.    데이터는 일일 기준으로 업데이트되며 CSV·JSON 형식으로 다운로드 가능하다. 공공데이터포털의 오픈 라이선스에 따라 자유롭게 활용·재배포할 수 있어 항공·관광 산업 분석, 모바일 앱 서비스, 학술 연구 등에 활용도가 높다.",
+ "url": "https://www.data.go.kr/data/15166252/openapi.do",
+ "keywords": "2터미널,국내선,국외선,여객,관광,환승,연결편,힐링",
+ "license": "이용허락범위 제한 없음",
+ "dateCreated": "2026-09-18",
+ "dateModified": "2026-09-28",
+ "datePublished": "2026-09-18",
+ "creator": {
+  "name": "인천국제공항공사",
+  "contactPoint": {
+   "contactType": "인프라DX팀",
+   "telephone": "",
+   "@type": "ContactPoint"
+  },
+  "@type": "Organization"
+ },
+ "spatialCoverage": "",
+ "temporalCoverage": "",
+ "additionalType": "교통및물류 - 항공·공항",
+ "encodingFormat": "JSON+XML",
+ "@context": "https://schema.org",
+ "@type": "Dataset"
+}

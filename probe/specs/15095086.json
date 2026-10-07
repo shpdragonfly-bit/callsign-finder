@@ -1,0 +1,25 @@
+{
+ "name": "인천국제공항공사_기상 정보",
+ "description": "인천국제공항에서 운항하는 출발/도착 여객 항공편의 상대 공항에 대한 기상 정보와 운항 현황에 대한 데이터입니다. 조회시간, 출발지 공항(IATA)편명, 항공사(IATA)를 기준으로 항공사,편명,예정시간,변경시간,출발지공항,도착게이트,수하물수취대,출구,현황,공항코드,날씨표출 요일, 습도, 날씨, 이미지 경로,풍속,관측 기온, 체감 온도, 터미널 구분(P0: 제 1터미널, P02: 탑승동, P03: 제 2터미널, C01: 화물터미널 남측, C02: 화물터미널 북측, C03: 화물터미널 남측)등을 제공합니다. 조회 당일의 데이터를 제공하며 개발 계정 일 1000 트래픽, 운영 계정 신청 시 일 100000 트래픽을 제공합니다. 데이터 포맷은 XML과 JSON 모두 제공됩니다.",
+ "url": "https://www.data.go.kr/data/15095086/openapi.do",
+ "keywords": "날씨,기상,여객,출발지공항,도착지공항",
+ "license": "이용허락범위 제한 없음",
+ "dateCreated": "2021-11-24",
+ "dateModified": "2026-08-06",
+ "datePublished": "2021-11-24",
+ "creator": {
+  "name": "인천국제공항공사",
+  "contactPoint": {
+   "contactType": "인프라DX팀",
+   "telephone": "",
+   "@type": "ContactPoint"
+  },
+  "@type": "Organization"
+ },
+ "spatialCoverage": "",
+ "temporalCoverage": "",
+ "additionalType": "교통및물류 - 항공·공항",
+ "encodingFormat": "JSON+XML",
+ "@context": "https://schema.org",
+ "@type": "Dataset"
+}
