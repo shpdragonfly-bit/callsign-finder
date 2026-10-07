@@ -26,10 +26,14 @@ import time
 import urllib.error
 import urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import public_schedule  # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = os.path.join(ROOT, "config", "airlines.json")
 OVERRIDES = os.path.join(ROOT, "config", "overrides.csv")
 OBS_FILE = os.path.join(ROOT, "data", "observations.json")
+SCHED_CACHE = os.path.join(ROOT, "data", "public_cache.json")
 WEB_DIR = os.path.join(ROOT, "web")
 
 VRS_RAW = "https://raw.githubusercontent.com/vradarserver/standing-data/main"
@@ -50,6 +54,7 @@ TYPE_NAMES = {
     "B763": "Boeing 767-300", "B772": "Boeing 777-200(ER)", "B77L": "Boeing 777-200LR/777F",
     "B77W": "Boeing 777-300ER", "B788": "Boeing 787-8", "B789": "Boeing 787-9",
     "B78X": "Boeing 787-10", "BCS1": "Airbus A220-100", "BCS3": "Airbus A220-300",
+    "A20N": "Airbus A320neo", "B773": "Boeing 777-300",
 }
 
 
@@ -249,12 +254,12 @@ def main():
     today = dt.datetime.now(dt.timezone.utc).date().isoformat()
     src = VrsSource(args.vrs_dir)
 
-    log("[1/4] 노선 데이터 수집 (VRS standing-data)")
+    log("[1/5] 노선 데이터 수집 (VRS standing-data)")
     routes = {}
     for a in airlines:
         routes.update(load_routes(src, a))
 
-    log("[2/4] 기종 관측 수집 (ADS-B)")
+    log("[2/5] 기종 관측 수집 (ADS-B)")
     obs = load_json(OBS_FILE, {})
     prefixes = tuple(a["icao"] for a in airlines)
     adsb_ok = False
@@ -267,9 +272,15 @@ def main():
     with open(OBS_FILE, "w", encoding="utf-8") as f:
         json.dump(obs, f, ensure_ascii=False, indent=0, sort_keys=True)
 
-    log("[3/4] 병합 및 수동 보정 적용")
+    log("[3/5] 운항 스케줄 수집 (공공데이터포털)")
+    now = dt.datetime.now(dt.timezone.utc)
+    sched = public_schedule.build(public_schedule.collect(airlines, SCHED_CACHE, now), now)
+    sched = {k: v for k, v in sched.items() if k.startswith(prefixes)}
+    log("  스케줄 확보 %d편" % len(sched))
+
+    log("[4/5] 병합 및 수동 보정 적용")
     overrides = load_overrides()
-    callsigns = set(routes) | {c for c in obs if c.startswith(prefixes)} | set(overrides)
+    callsigns = set(routes) | {c for c in obs if c.startswith(prefixes)} | set(overrides) | set(sched)
     flights = {}
     for cs in sorted(callsigns):
         f = {}
@@ -287,11 +298,13 @@ def main():
                           [t for t in f.get("ty", []) if t["t"] != ov["type"]][:3]
             if ov["memo"]:
                 f["memo"] = ov["memo"]
+        if cs in sched:
+            f["sch"] = sched[cs]
         if f:
             flights[cs] = f
 
     codes = {c for f in flights.values() for c in f.get("r", [])}
-    log("[4/4] 공항 정보 수집")
+    log("[5/5] 공항 정보 수집")
     airports = load_airports(src, codes)
 
     with_type = sum(1 for f in flights.values() if f.get("ty"))
@@ -301,8 +314,10 @@ def main():
         "airlines": {a["icao"]: {k: a.get(k, "") for k in ("iata", "name", "name_en", "telephony")}
                      for a in airlines},
         "type_names": TYPE_NAMES,
-        "stats": {"flights": len(flights), "with_type": with_type, "adsb_updated": adsb_ok},
-        "sources": ["VRS standing-data (routes, airports)", "adsb.lol / airplanes.live (aircraft types)"],
+        "stats": {"flights": len(flights), "with_type": with_type, "adsb_updated": adsb_ok,
+                  "with_sched": sum(1 for f in flights.values() if f.get("sch"))},
+        "sources": ["VRS standing-data (routes, airports)", "adsb.lol / airplanes.live (aircraft types)",
+                    "공공데이터포털: 인천국제공항공사·한국공항공사 (schedules)"],
         "airports": airports,
         "flights": flights,
     }

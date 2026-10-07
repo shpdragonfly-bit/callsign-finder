@@ -1,9 +1,0 @@
-[
- {"name": "icn_all_dep_KE017", "url": "https://apis.data.go.kr/B551177/statusOfAllFltDeOdp/getFltDeparturesDeOdp", "params": {"pageNo": 1, "numOfRows": 5, "type": "json", "flightId": "KE017"}},
- {"name": "icn_all_dep_cargo", "url": "https://apis.data.go.kr/B551177/statusOfAllFltDeOdp/getFltDeparturesDeOdp", "params": {"pageNo": 1, "numOfRows": 5, "type": "json", "passengerOrCargo": "C"}},
- {"name": "icn_pax_weekly_dep", "url": "https://apis.data.go.kr/B551177/StatusOfPassengerFlightsDSOdp/getPassengerDeparturesDSOdp", "params": {"pageNo": 1, "numOfRows": 5, "type": "json"}},
- {"name": "icn_cargo_weekly_dep", "url": "https://apis.data.go.kr/B551177/StatusOfCargoFlightsDSOdp/getCargoDeparturesDSOdp", "params": {"pageNo": 1, "numOfRows": 5, "type": "json"}},
- {"name": "icn_pax_sched_dep_LAX", "url": "https://apis.data.go.kr/B551177/StatusOfPaxFltSched/getPaxFltSchedDeparturesDeOdp", "params": {"pageNo": 1, "numOfRows": 5, "type": "json", "airport": "LAX", "lang": "E"}},
- {"name": "kac_int_KE", "url": "https://apis.data.go.kr/B551178/flight-schedule/int", "params": {"pageNo": 1, "numOfRows": 5, "type": "json", "schAirLine": "KE"}},
- {"name": "kac_dom_KE", "url": "https://apis.data.go.kr/B551178/flight-schedule/dom", "params": {"pageNo": 1, "numOfRows": 5, "type": "json", "schAirLine": "KE"}}
-]

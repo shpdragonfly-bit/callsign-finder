@@ -89,6 +89,21 @@ body[data-tab="ft"] .cs-only { display: none; }
 .arrow { color: var(--accent); font-size: 26px; padding-top: 6px; opacity: .7; }
 .via { padding: 0 16px 12px; font-size: 13px; color: var(--muted); }
 .apx { border-top: 1px solid var(--line); padding: 10px 16px 12px; }
+.sch { border-top: 1px solid var(--line); padding: 10px 16px 12px; }
+.sch-src { font-weight: 500; font-size: 11px; }
+.wd { display: flex; align-items: center; gap: 4px; margin-bottom: 8px; }
+.wd span { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 7px; font-size: 12px; font-weight: 700; background: var(--panel-2); color: var(--muted); opacity: .55; }
+.wd span.on { background: var(--accent); color: var(--accent-ink); opacity: 1; }
+.wd b { margin-left: 6px; font-size: 13px; }
+.si { padding: 6px 0; border-top: 1px dashed var(--line); }
+.si-t { font: 600 13px var(--mono); display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 6px; }
+.si-t b { font-size: 15px; }
+.si-t small { font-weight: 500; color: var(--muted); font-size: 11px; }
+.si-m { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.si-m b { color: var(--text); font-family: var(--mono); }
+.si-m.muted { padding-top: 4px; }
+.chg { font: 700 11px system-ui, sans-serif; color: var(--accent); background: var(--accent-soft); padding: 1px 6px; border-radius: 5px; }
+.bad { font: 700 11px system-ui, sans-serif; color: #fff; background: var(--warn); padding: 1px 6px; border-radius: 5px; }
 .apx-hd { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
 .apx-day { display: flex; background: var(--panel-2); border-radius: 8px; padding: 2px; }
 .apx-day button { border: 0; background: none; color: var(--muted); font: 600 12px inherit; font-family: inherit; padding: 4px 10px; border-radius: 6px; cursor: pointer; }
@@ -360,7 +375,76 @@ button.b:disabled { opacity: .5; }
   // ---------- 표시 ----------
   const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const fmtDate = (iso) => { const d = new Date(iso); return isNaN(d) ? iso : d.toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" }); };
-  const ap = (code) => { const a = DB.airports[code]; return a ? { iata: a[0], name: a[1], city: a[2], cc: a[3], lat: a[4], lon: a[5], elev: a[6] } : { iata: "", name: "공항 정보 없음", city: "", cc: "" }; };
+  let iataIdx = null;
+  const ap = (code) => {
+    let a = DB.airports[code];
+    if (!a && code && code.length === 3) {                 // IATA 코드로 들어온 경우 (스케줄 데이터)
+      if (!iataIdx) { iataIdx = {}; for (const [k, v] of Object.entries(DB.airports)) if (v[0]) iataIdx[v[0]] = v; }
+      a = iataIdx[code];
+      if (!a) return { iata: code, name: "공항 정보 없음", city: "", cc: "" };
+    }
+    return a ? { iata: a[0], name: a[1], city: a[2], cc: a[3], lat: a[4], lon: a[5], elev: a[6] } : { iata: "", name: "공항 정보 없음", city: "", cc: "" };
+  };
+
+  // ---------- 운항 스케줄 (공공데이터: 인천공항 D-3~D+6, 한국공항공사 시즌 스케줄) ----------
+  const WD = ["", "월", "화", "수", "목", "금", "토", "일"];
+  const p2 = (n) => String(n).padStart(2, "0");
+  const utcOf = (s) => s ? new Date(Date.UTC(+s.slice(0, 4), +s.slice(4, 6) - 1, +s.slice(6, 8), +s.slice(8, 10), +s.slice(10, 12))) : null;
+  const fz = (d) => `${p2(d.getUTCHours())}${p2(d.getUTCMinutes())}Z`;
+  const fkst = (d) => {                                   // 한국시각 (날짜가 UTC와 다르면 날짜도 표시)
+    const k = new Date(d.getTime() + 9 * 3600e3);
+    const day = k.getUTCDate() !== d.getUTCDate() ? `${k.getUTCMonth() + 1}/${k.getUTCDate()} ` : "";
+    return `${day}${p2(k.getUTCHours())}:${p2(k.getUTCMinutes())} KST`;
+  };
+  const fdate = (d) => `${d.getUTCMonth() + 1}/${d.getUTCDate()}(${WD[d.getUTCDay() || 7]})`;
+  const kstToZ = (hhmm) => {                              // 'HHMM' KST → 'HHMMZ' (전날이면 -1)
+    if (!/^\d{4}$/.test(hhmm || "")) return "";
+    let m = +hhmm.slice(0, 2) * 60 + +hhmm.slice(2) - 540, d = "";
+    if (m < 0) { m += 1440; d = "(전날)"; }
+    return `${p2(Math.floor(m / 60))}${p2(m % 60)}Z${d}`;
+  };
+  function schedRoute(sc) {
+    if (!sc) return null;
+    const i = (sc.inst || [])[0];
+    if (i) return i[2] === "D" ? ["ICN", i[3]] : [i[3], "ICN"];
+    const d = (sc.season || []).find((x) => x.kind === "dom");
+    return d ? [d.dep, d.arr] : null;
+  }
+  function nextType(sc) {
+    const now = Date.now() - 6 * 3600e3;
+    return ((sc && sc.inst) || []).find((i) => i[4] && utcOf(i[0]) >= now) || ((sc && sc.inst) || []).filter((i) => i[4]).pop();
+  }
+  function renderSched(sc) {
+    if (!sc) return "";
+    const wd = sc.wd || "";
+    let h = `<div class="sch"><div class="apx-hd"><span>운항 스케줄</span><span class="sch-src">${sc.src === "ICN" ? "인천공항 D-3~D+6" : "한국공항공사 시즌"}${sc.cargo ? " · 화물" : ""}</span></div>`;
+    if (wd) {
+      h += `<div class="wd">${[1, 2, 3, 4, 5, 6, 7].map((d) => `<span class="${wd.includes(d) ? "on" : ""}">${WD[d]}</span>`).join("")}
+        <b>${wd.length === 7 ? "매일" : "주 " + wd.length + "회"}</b></div>`;
+    }
+    const now = Date.now() - 6 * 3600e3;
+    const up = (sc.inst || []).filter((i) => utcOf(i[0]) >= now).slice(0, 4);
+    for (const i of up) {
+      const t = utcOf(i[0]), e = utcOf(i[1]);
+      const moved = e && Math.abs(e - t) >= 5 * 60e3;
+      const what = i[2] === "D" ? `ICN 출발 → ${esc(i[3])}` : `${esc(i[3])} → ICN 도착`;
+      const bad = /결항|지연|회항/.test(i[7] || "");
+      h += `<div class="si"><div class="si-t"><small>${fdate(t)}</small> <b>${fz(t)}</b> <small>${fkst(t)}</small>
+          ${moved ? `<span class="chg">변경 ${fz(e)}</span>` : ""}${bad ? `<span class="bad">${esc(i[7])}</span>` : ""}</div>
+        <div class="si-m">${what}${i[4] ? ` · <b>${esc(i[4])}</b>` : ""}${i[5] ? ` ${esc(i[5])}` : ""}${i[6] ? ` · 게이트 ${esc(i[6])}` : ""}</div></div>`;
+    }
+    if (!up.length && (sc.inst || []).length) h += `<div class="si-m muted">앞으로 6일 안에 인천공항 운항 예정이 없습니다.</div>`;
+    for (const x of sc.season || []) {
+      const per = `${+x.from.slice(4, 6)}/${+x.from.slice(6)}–${+x.to.slice(4, 6)}/${+x.to.slice(6)}`;
+      if (x.kind === "dom") {
+        h += `<div class="si"><div class="si-t"><b>${esc(x.dep)} ${kstToZ(x.std)} → ${esc(x.arr)} ${kstToZ(x.sta)}</b></div>
+          <div class="si-m">${esc(x.std.slice(0, 2))}:${esc(x.std.slice(2))} → ${esc(x.sta.slice(0, 2))}:${esc(x.sta.slice(2))} KST · ${[...x.wd].map((d) => WD[d]).join("")} · ${per}</div></div>`;
+      } else if (!(sc.inst || []).length) {
+        h += `<div class="si"><div class="si-m">${esc(x.a)}–${esc(x.b)} · ${[...x.wd].map((d) => WD[d]).join("")} · 운항기간 ${per}</div></div>`;
+      }
+    }
+    return h + `</div>`;
+  }
 
   // ---------- 일출·일몰 (오프라인 계산, 오차 1~2분) ----------
   // 공항 현지 날짜 기준으로 계산해 UTC 날짜·시각으로 표시
@@ -420,19 +504,26 @@ button.b:disabled { opacity: .5; }
   function renderFlight(cs, f) {
     const al = DB.airlines[cs.slice(0, 3)] || {};
     let h = `<div class="card"><div class="card-hd"><div class="cs">${esc(cs)}<small>${esc(al.name || "")} ${esc(al.iata ? al.iata + cs.slice(3) : "")}</small></div></div>`;
-    if (f.r && f.r.length >= 2) {
-      h += `<div class="route">${apBlock(f.r[0], "org")}<div class="arrow">→</div>${apBlock(f.r[f.r.length - 1], "dst")}</div>`;
-      if (f.r.length > 2) {
-        h += `<div class="via">전체 경로: ${f.r.map((c) => { const a = ap(c); return `<b>${esc(a.iata || c)}</b>`; }).join(" → ")}</div>`;
+    const r = f.r && f.r.length >= 2 ? f.r : schedRoute(f.sch);
+    if (r) {
+      h += `<div class="route">${apBlock(r[0], "org")}<div class="arrow">→</div>${apBlock(r[r.length - 1], "dst")}</div>`;
+      if (r.length > 2) {
+        h += `<div class="via">전체 경로: ${r.map((c) => { const a = ap(c); return `<b>${esc(a.iata || c)}</b>`; }).join(" → ")}</div>`;
       }
-      h += `<div class="apx"><div class="apx-hd"><span>표고 · 일출·일몰 (UTC)</span>
-        <span class="apx-day"><button data-sunday="0" aria-pressed="${sunDay === 0}">오늘</button><button data-sunday="1" aria-pressed="${sunDay === 1}">내일</button></span></div>
-        <div class="apx-g">${apInfo(f.r[0], "org")}${apInfo(f.r[f.r.length - 1], "dst")}</div></div>`;
     } else {
       h += `<div class="none"><b>노선 정보 없음</b> — 기종만 관측된 Call Sign입니다.</div>`;
     }
-    const ty = f.ty || [];
-    if (ty.length) {
+    h += renderSched(f.sch);
+    if (r) {
+      h += `<div class="apx"><div class="apx-hd"><span>표고 · 일출·일몰 (UTC)</span>
+        <span class="apx-day"><button data-sunday="0" aria-pressed="${sunDay === 0}">오늘</button><button data-sunday="1" aria-pressed="${sunDay === 1}">내일</button></span></div>
+        <div class="apx-g">${apInfo(r[0], "org")}${apInfo(r[r.length - 1], "dst")}</div></div>`;
+    }
+    const ty = f.ty || [], nt = nextType(f.sch);
+    if (!ty.length && nt) {
+      h += `<div class="type"><div class="tcode">${esc(nt[4])}</div><div><div class="tname">${esc(tname(nt[4]) || "기종")}</div>
+        <div class="tmeta">공항 스케줄 기준 · ${fdate(utcOf(nt[0]))}${nt[5] ? " · " + esc(nt[5]) : ""}</div></div></div>`;
+    } else if (ty.length) {
       const p = ty[0];
       const meta = p.manual ? `<span class="tag manual">수동 지정</span>` :
         `관측 ${p.n}일 · 최근 ${esc(p.last)}${p.reg ? " · " + esc(p.reg) : ""}`;

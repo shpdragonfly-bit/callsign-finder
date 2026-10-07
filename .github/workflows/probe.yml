@@ -3,10 +3,7 @@
 name: probe-public-api
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ["tools/probe_*.py", "probe/calls.json"]
+  workflow_dispatch:          # 필요할 때 Actions 탭에서 수동 실행
 
 permissions:
   contents: write
