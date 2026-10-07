@@ -1,0 +1,304 @@
+{
+ "15095074": {
+  "urls": [
+   "https://apis.data.go.kr/B551177/StatusOfPassengerFlightsDSOdp",
+   "https://apis.data.go.kr/B551177/StatusOfPassengerFlightsDSOdp/getPassengerArrivalsDSOdp"
+  ],
+  "ops": [
+   "getCategoryClass",
+   "getElementById",
+   "getMypageUrl",
+   "getOrCreateQuickSummary",
+   "getPassengerArrivalsDSOdp",
+   "getSsoApiUrl",
+   "getTemplate"
+  ],
+  "swagger": [
+   "swagger",
+   "swagger-guide/gw/gateway_swagger_guide.pdf",
+   "swagger-ui",
+   "swagger-ui.css",
+   "swagger-v4/swagger-ui-bundle.js",
+   "swagger-v4/swagger-ui-standalone-preset.js",
+   "swaggerJson",
+   "swaggerJson);",
+   "swaggerUrl",
+   "swaggerUrl;"
+  ],
+  "pk": [
+   "15095074",
+   "dataPk",
+   "publicDataPk",
+   "value"
+  ]
+ },
+ "15103969": {
+  "urls": [],
+  "ops": [
+   "getCargoArrivalsDSOdp",
+   "getCargoDeparturesDSOdp",
+   "getCategoryClass",
+   "getElementById",
+   "getMypageUrl",
+   "getOrCreateQuickSummary",
+   "getSsoApiUrl",
+   "getTemplate"
+  ],
+  "swagger": [
+   "swagger",
+   "swagger-guide/gw/1.jpg",
+   "swagger-guide/gw/2.jpg",
+   "swagger-guide/gw/3.jpg",
+   "swagger-guide/gw/4.jpg",
+   "swagger-guide/gw/5.jpg",
+   "swagger-guide/gw/6.jpg",
+   "swagger-guide/gw/7.jpg",
+   "swagger-guide/gw/8.jpg",
+   "swagger-guide/gw/gateway_swagger_guide.pdf",
+   "swagger-ui",
+   "swagger-ui.css",
+   "swagger-v4/swagger-ui-bundle.js",
+   "swagger-v4/swagger-ui-standalone-preset.js",
+   "swaggerJson",
+   "swaggerJson);",
+   "swaggerOprtinVOs",
+   "swaggerUrl",
+   "swaggerUrl;"
+  ],
+  "pk": [
+   "15103969",
+   "dataPk",
+   "publicDataPk",
+   "value"
+  ]
+ },
+ "15140153": {
+  "urls": [],
+  "ops": [
+   "getCategoryClass",
+   "getElementById",
+   "getFltArrivalsDeOdp",
+   "getFltArrivalsDeOdp_response",
+   "getFltDeparturesDeOdp",
+   "getFltDeparturesDeOdp_response",
+   "getMypageUrl",
+   "getOrCreateQuickSummary",
+   "getSsoApiUrl",
+   "getTemplate"
+  ],
+  "swagger": [
+   "swagger",
+   "swagger-guide/gw/1.jpg",
+   "swagger-guide/gw/2.jpg",
+   "swagger-guide/gw/3.jpg",
+   "swagger-guide/gw/4.jpg",
+   "swagger-guide/gw/5.jpg",
+   "swagger-guide/gw/6.jpg",
+   "swagger-guide/gw/7.jpg",
+   "swagger-guide/gw/8.jpg",
+   "swagger-guide/gw/gateway_swagger_guide.pdf",
+   "swagger-ui",
+   "swagger-ui.css",
+   "swagger-v4/swagger-ui-bundle.js",
+   "swagger-v4/swagger-ui-standalone-preset.js",
+   "swaggerJson",
+   "swaggerJson);",
+   "swaggerOprtinVOs",
+   "swaggerUrl",
+   "swaggerUrl;"
+  ],
+  "pk": [
+   "15140153",
+   "dataPk",
+   "publicDataPk",
+   "value"
+  ]
+ },
+ "15095059": {
+  "urls": [
+   "https://apis.data.go.kr/B551177/PaxFltSched",
+   "https://apis.data.go.kr/B551177/PaxFltSched/getPaxFltSchedArrivals"
+  ],
+  "ops": [
+   "getCategoryClass",
+   "getElementById",
+   "getMypageUrl",
+   "getOrCreateQuickSummary",
+   "getPaxFltSchedArrivals",
+   "getSsoApiUrl",
+   "getTemplate"
+  ],
+  "swagger": [
+   "swagger",
+   "swagger-guide/gw/gateway_swagger_guide.pdf",
+   "swagger-ui",
+   "swagger-ui.css",
+   "swagger-v4/swagger-ui-bundle.js",
+   "swagger-v4/swagger-ui-standalone-preset.js",
+   "swaggerJson",
+   "swaggerJson);",
+   "swaggerUrl",
+   "swaggerUrl;"
+  ],
+  "pk": [
+   "15095059",
+   "dataPk",
+   "publicDataPk",
+   "value"
+  ]
+ },
+ "15095051": {
+  "urls": [
+   "https://apis.data.go.kr/B551177/CgoFltSched",
+   "https://apis.data.go.kr/B551177/CgoFltSched/getCgoFltSchedArrivals"
+  ],
+  "ops": [
+   "getCategoryClass",
+   "getCgoFltSchedArrivals",
+   "getElementById",
+   "getMypageUrl",
+   "getOrCreateQuickSummary",
+   "getSsoApiUrl",
+   "getTemplate"
+  ],
+  "swagger": [
+   "swagger",
+   "swagger-guide/gw/gateway_swagger_guide.pdf",
+   "swagger-ui",
+   "swagger-ui.css",
+   "swagger-v4/swagger-ui-bundle.js",
+   "swagger-v4/swagger-ui-standalone-preset.js",
+   "swaggerJson",
+   "swaggerJson);",
+   "swaggerUrl",
+   "swaggerUrl;"
+  ],
+  "pk": [
+   "15095051",
+   "dataPk",
+   "publicDataPk",
+   "value"
+  ]
+ },
+ "15158949": {
+  "urls": [],
+  "ops": [
+   "getCategoryClass",
+   "getElementById",
+   "getMypageUrl",
+   "getOrCreateQuickSummary",
+   "getSsoApiUrl",
+   "getTemplate"
+  ],
+  "swagger": [
+   "swagger",
+   "swagger-guide/gw/1.jpg",
+   "swagger-guide/gw/2.jpg",
+   "swagger-guide/gw/3.jpg",
+   "swagger-guide/gw/4.jpg",
+   "swagger-guide/gw/5.jpg",
+   "swagger-guide/gw/6.jpg",
+   "swagger-guide/gw/7.jpg",
+   "swagger-guide/gw/8.jpg",
+   "swagger-guide/gw/gateway_swagger_guide.pdf",
+   "swagger-ui",
+   "swagger-ui.css",
+   "swagger-v4/swagger-ui-bundle.js",
+   "swagger-v4/swagger-ui-standalone-preset.js",
+   "swaggerJson",
+   "swaggerJson);",
+   "swaggerUrl",
+   "swaggerUrl;"
+  ],
+  "pk": [
+   "15158949",
+   "dataPk",
+   "publicDataPk",
+   "value"
+  ]
+ },
+ "15114085": {
+  "urls": [],
+  "ops": [
+   "getCategoryClass",
+   "getElementById",
+   "getMypageUrl",
+   "getOrCreateQuickSummary",
+   "getPaxFltSchedArrivalsDeOdp",
+   "getPaxFltSchedArrivalsDeOdp_response",
+   "getPaxFltSchedDeparturesDeOdp",
+   "getPaxFltSchedDeparturesDeOdp_response",
+   "getSsoApiUrl",
+   "getTemplate"
+  ],
+  "swagger": [
+   "swagger",
+   "swagger-guide/gw/1.jpg",
+   "swagger-guide/gw/2.jpg",
+   "swagger-guide/gw/3.jpg",
+   "swagger-guide/gw/4.jpg",
+   "swagger-guide/gw/5.jpg",
+   "swagger-guide/gw/6.jpg",
+   "swagger-guide/gw/7.jpg",
+   "swagger-guide/gw/8.jpg",
+   "swagger-guide/gw/gateway_swagger_guide.pdf",
+   "swagger-ui",
+   "swagger-ui.css",
+   "swagger-v4/swagger-ui-bundle.js",
+   "swagger-v4/swagger-ui-standalone-preset.js",
+   "swaggerJson",
+   "swaggerJson);",
+   "swaggerOprtinVOs",
+   "swaggerUrl",
+   "swaggerUrl;"
+  ],
+  "pk": [
+   "15114085",
+   "dataPk",
+   "publicDataPk",
+   "value"
+  ]
+ },
+ "15114086": {
+  "urls": [],
+  "ops": [
+   "getCategoryClass",
+   "getCgoFltSchedArrivalsDeOdp",
+   "getCgoFltSchedArrivalsDeOdp_response",
+   "getCgoFltSchedDeparturesDeOdp",
+   "getCgoFltSchedDeparturesDeOdp_response",
+   "getElementById",
+   "getMypageUrl",
+   "getOrCreateQuickSummary",
+   "getSsoApiUrl",
+   "getTemplate"
+  ],
+  "swagger": [
+   "swagger",
+   "swagger-guide/gw/1.jpg",
+   "swagger-guide/gw/2.jpg",
+   "swagger-guide/gw/3.jpg",
+   "swagger-guide/gw/4.jpg",
+   "swagger-guide/gw/5.jpg",
+   "swagger-guide/gw/6.jpg",
+   "swagger-guide/gw/7.jpg",
+   "swagger-guide/gw/8.jpg",
+   "swagger-guide/gw/gateway_swagger_guide.pdf",
+   "swagger-ui",
+   "swagger-ui.css",
+   "swagger-v4/swagger-ui-bundle.js",
+   "swagger-v4/swagger-ui-standalone-preset.js",
+   "swaggerJson",
+   "swaggerJson);",
+   "swaggerOprtinVOs",
+   "swaggerUrl",
+   "swaggerUrl;"
+  ],
+  "pk": [
+   "15114086",
+   "dataPk",
+   "publicDataPk",
+   "value"
+  ]
+ }
+}
