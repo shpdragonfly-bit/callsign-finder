@@ -185,8 +185,6 @@ button.b:disabled { opacity: .5; }
 .tres span { display: block; font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: .04em; }
 .tres b { display: block; font: 700 28px/1.2 var(--mono); }
 .tres small { font-size: 11px; color: var(--muted); }
-.ft-apply { margin-top: 8px; }
-.ft-apply .b { width: 100%; }
 @media (max-width: 560px) { .times { grid-template-columns: 1fr 1fr; } }
 
 .sg .badge { font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 5px; background: var(--accent-soft); color: var(--accent); margin-left: 6px; }
@@ -273,7 +271,6 @@ button.b:disabled { opacity: .5; }
         <div><span>FLT Time</span><b id="rFLT">—</b><small>L/D − T/O</small></div>
         <div><span>Block Time</span><b id="rBLK">—</b><small>R/I − R/O</small></div>
       </div>
-      <div class="ft-apply" id="ftApplyWrap" hidden><button class="b" id="ftApply" type="button"></button></div>
       <div id="ftOut"></div>
     </div>
     <div id="ft-other" hidden>
@@ -821,9 +818,6 @@ button.b:disabled { opacity: .5; }
     const flt = span(tval("to"), tval("ld")), blk = span(tval("ro"), tval("ri"));
     $("rFLT").textContent = flt == null ? "—" : fmt(flt);
     $("rBLK").textContent = blk == null ? "—" : fmt(blk);
-    const can = flt != null && flt > 0 && flt !== st.T;
-    $("ftApplyWrap").hidden = !can;
-    if (can) $("ftApply").textContent = `FLT Time ${fmt(flt)}을 전체 비행시간에 적용`;
   }
   function setTime(k, text) {
     st.times[k] = text;
@@ -845,12 +839,6 @@ button.b:disabled { opacity: .5; }
     const txt = zt(m).replace("Z", "");
     $("t" + b.dataset.k.toUpperCase()).value = txt;
     setTime(b.dataset.k, txt);
-  });
-  $("ftApply").addEventListener("click", () => {
-    const flt = span(tval("to"), tval("ld"));
-    if (!flt) return;
-    $("ftH").value = Math.floor(flt / 60); $("ftM").value = String(flt % 60).padStart(2, "0");
-    setTotalFromInputs(false);
   });
 
   // ----- 초기 표시 (이전 입력 복원) -----
