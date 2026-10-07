@@ -117,6 +117,7 @@ body[data-tab="ft"] .cs-only { display: none; }
 .via b { color: var(--text); font-family: var(--mono); }
 
 .type { border-top: 1px solid var(--line); padding: 14px 16px; display: flex; gap: 14px; align-items: center; background: var(--accent-soft); }
+.alts + .sch, .type + .sch, .alts + .apx, .type + .apx { border-top: 1px solid var(--line); }
 .type .tcode { font: 700 28px var(--mono); min-width: 84px; }
 .type .tname { font-size: 15px; }
 .type .tmeta { font-size: 12px; color: var(--muted); }
@@ -521,12 +522,6 @@ button.b:disabled { opacity: .5; }
     } else {
       h += `<div class="none"><b>노선 정보 없음</b> — 기종만 관측된 Call Sign입니다.</div>`;
     }
-    h += renderSched(f.sch);
-    if (r) {
-      h += `<div class="apx"><div class="apx-hd"><span>표고 · 일출·일몰 (UTC)</span>
-        <span class="apx-day"><button data-sunday="0" aria-pressed="${sunDay === 0}">오늘</button><button data-sunday="1" aria-pressed="${sunDay === 1}">내일</button></span></div>
-        <div class="apx-g">${apInfo(r[0], "org")}${apInfo(r[r.length - 1], "dst")}</div></div>`;
-    }
     const ty = f.ty || [], nt = nextType(f.sch);
     if (!ty.length && nt) {
       h += `<div class="type"><div class="tcode">${esc(nt[4])}</div><div><div class="tname">${esc(tname(nt[4]) || "기종")}</div>
@@ -539,6 +534,12 @@ button.b:disabled { opacity: .5; }
       if (ty.length > 1) h += `<div class="alts">${ty.slice(1).map((t) => `<span>${esc(t.t)}${t.n ? " ×" + t.n : ""}</span>`).join("")}</div>`;
     } else {
       h += `<div class="type"><div class="tcode">—</div><div><div class="tname">기종 미확인</div><div class="tmeta">업데이트 시 ADS-B 관측으로 누적됩니다</div></div></div>`;
+    }
+    h += renderSched(f.sch);
+    if (r) {
+      h += `<div class="apx"><div class="apx-hd"><span>표고 · 일출·일몰 (UTC)</span>
+        <span class="apx-day"><button data-sunday="0" aria-pressed="${sunDay === 0}">오늘</button><button data-sunday="1" aria-pressed="${sunDay === 1}">내일</button></span></div>
+        <div class="apx-g">${apInfo(r[0], "org")}${apInfo(r[r.length - 1], "dst")}</div></div>`;
     }
     if (f.memo) h += `<div class="memo">메모: ${esc(f.memo)}</div>`;
     return h + `</div>`;
