@@ -420,7 +420,7 @@ button.b:disabled { opacity: .5; }
   function renderSched(sc) {
     if (!sc) return "";
     const wd = sc.wd || "";
-    let h = `<div class="sch"><div class="apx-hd"><span>운항 스케줄</span><span class="sch-src">${sc.src === "ICN" ? "인천공항 D-3~D+6" : "한국공항공사 시즌"}${sc.cargo ? " · 화물" : ""}</span></div>`;
+    let h = `<div class="sch"><div class="apx-hd"><span>운항 스케줄</span><span class="sch-src">${sc.cargo ? "화물" : ""}</span></div>`;
     if (wd) {
       h += `<div class="wd">${[1, 2, 3, 4, 5, 6, 7].map((d) => `<span class="${wd.includes(d) ? "on" : ""}">${WD[d]}</span>`).join("")}
         <b>${wd.length === 7 ? "매일" : "주 " + wd.length + "회"}</b></div>`;
@@ -599,7 +599,7 @@ button.b:disabled { opacity: .5; }
       `${esc(names)} · Call Sign ${s.flights ?? Object.keys(DB.flights).length}건 · 기종 확보 ${s.with_type ?? "-"}건`;
   }
 
-  function msg(t, cls) { $("msg").textContent = t; $("msg").className = cls || ""; }
+  function msg(t, cls) { $("msg").textContent = t; $("msg").className = "cs-only" + (cls ? " " + cls : ""); }
 
   function renderNet() {
     const on = navigator.onLine;
