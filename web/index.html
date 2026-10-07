@@ -126,6 +126,63 @@ button.b:disabled { opacity: .5; }
 #msg { margin-top: 10px; min-height: 1.2em; }
 #msg.err { color: var(--warn); } #msg.ok { color: var(--ok); }
 .small { font-size: 12px; margin-top: 12px; line-height: 1.6; }
+/* ---------- 비행시간계산 ---------- */
+.seg { display: flex; background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px; padding: 4px; gap: 4px; }
+.seg button { flex: 1; border: 0; background: none; color: var(--muted); font: 700 15px inherit; font-family: inherit; padding: 10px 4px; border-radius: 9px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--panel); color: var(--accent); box-shadow: var(--shadow); }
+:root[data-theme="dark"] .seg button[aria-pressed="true"] { background: var(--accent-soft); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .seg button[aria-pressed="true"] { background: var(--accent-soft); } }
+.seg button small { display: block; font-weight: 500; font-size: 11px; opacity: .8; }
+.lbl { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: .06em; margin: 18px 2px 6px; }
+.tt { display: flex; align-items: center; gap: 8px; background: var(--panel); border: 2px solid var(--line); border-radius: 14px; padding: 10px 14px; box-shadow: var(--shadow); }
+.tt:focus-within { border-color: var(--accent); }
+.tt input { width: 2.6em; min-width: 0; border: 0; outline: none; background: none; color: var(--text); font: 700 34px/1.1 var(--mono); text-align: right; padding: 0; }
+.tt input#ftH { width: 3.2em; }
+.tt span { font-size: 15px; color: var(--muted); white-space: nowrap; }
+.tt .tsum { margin-left: auto; font: 600 14px var(--mono); color: var(--muted); }
+.ft-hint { color: var(--muted); font-size: 12px; margin: 6px 2px 0; }
+
+.gantt { padding: 14px 16px 10px; }
+.lane { display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 8px; margin-bottom: 6px; }
+.lane .who { font: 700 13px var(--mono); }
+.lane .who small { display: block; font: 500 10px system-ui, sans-serif; color: var(--muted); }
+.track { display: flex; height: 22px; border-radius: 6px; overflow: hidden; background: var(--panel-2); }
+.track i { display: block; height: 100%; border-right: 1px solid var(--panel); }
+.track i:last-child { border-right: 0; }
+.track i.on { background: var(--pc); }
+.track i.off { background: repeating-linear-gradient(135deg, transparent 0 4px, var(--line) 4px 6px); }
+.axis { display: flex; justify-content: space-between; margin-left: 72px; font: 11px var(--mono); color: var(--muted); }
+.c-C1 { --pc: #0078C2; } .c-C2 { --pc: #2AA198; } .c-F { --pc: #E09A2B; }
+:root[data-theme="dark"] .c-C1 { --pc: #4CC2F2; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .c-C1 { --pc: #4CC2F2; } }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--pc); margin-right: 5px; vertical-align: 1px; }
+
+.segs { border-top: 1px solid var(--line); }
+.sg { display: grid; grid-template-columns: 1fr auto; gap: 6px 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); align-items: center; }
+.sg:last-child { border-bottom: 0; }
+.sg .when { font: 600 13px var(--mono); color: var(--muted); }
+.sg .when b { color: var(--text); }
+.sg .crew { font-size: 14px; margin-top: 3px; }
+.sg .crew .rest { color: var(--muted); font-size: 13px; }
+.sg .badge { font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 5px; background: var(--accent-soft); color: var(--accent); margin-left: 6px; }
+.len { display: flex; align-items: center; gap: 4px; }
+.len button { width: 34px; height: 34px; border-radius: 9px; border: 1px solid var(--line); background: var(--panel-2); color: var(--text); font: 600 18px/1 system-ui; cursor: pointer; }
+.len input { width: 4.4em; text-align: center; font: 700 18px var(--mono); color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 9px; padding: 6px 2px; outline: none; }
+.len input:focus { border-color: var(--accent); }
+.sg.warn .len input { border-color: var(--warn); color: var(--warn); }
+.sg.edited .len input { border-color: var(--accent); }
+
+.sum { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); background: var(--accent-soft); }
+.sum > div { padding: 12px 10px; text-align: center; }
+.sum > div + div { border-left: 1px solid var(--line); }
+.sum .who { font: 700 13px var(--mono); }
+.sum .w { font: 700 22px var(--mono); margin: 0 0 2px; }
+.sum .who { margin-bottom: 6px; }
+.sum .r { font-size: 12px; color: var(--muted); }
+.checks { padding: 10px 16px 12px; font-size: 13px; }
+.checks div { margin: 2px 0; }
+.checks .ok { color: var(--ok); } .checks .bad { color: var(--warn); }
+.ft-actions { display: flex; justify-content: flex-end; padding: 0 16px 14px; }
 </style>
 </head>
 <body>
@@ -156,10 +213,24 @@ button.b:disabled { opacity: .5; }
   </section>
 
   <section class="panel" id="panel-ft" role="tabpanel" aria-labelledby="tab-ft" hidden>
-    <div class="card soon">
-      <div class="ico">◷</div>
-      <h2>비행시간계산</h2>
-      <p>준비 중입니다.</p>
+    <div class="seg" role="group" aria-label="편조 구성">
+      <button data-mode="3P" aria-pressed="true">3 Pilot</button>
+      <button data-mode="2S" aria-pressed="false">2 Set<small>준비 중</small></button>
+      <button data-mode="5P" aria-pressed="false">5 Pilot<small>준비 중</small></button>
+    </div>
+
+    <div id="ft-3P">
+      <div class="lbl">전체 비행시간</div>
+      <div class="tt">
+        <input id="ftH" inputmode="tel" autocomplete="off" placeholder="00" aria-label="시간 (12+30 형식 입력 가능)"><span>시간</span>
+        <input id="ftM" inputmode="numeric" autocomplete="off" placeholder="00" maxlength="2" aria-label="분"><span>분</span>
+        <span class="tsum" id="ftSum"></span>
+      </div>
+      <p class="ft-hint">시간 칸에 <b>12+30</b> 처럼 입력해도 됩니다.</p>
+      <div id="ftOut"></div>
+    </div>
+    <div id="ft-other" hidden>
+      <div class="card soon"><div class="ico">◷</div><h2 id="ftOtherTitle"></h2><p>준비 중입니다. 계산 규칙을 알려주시면 추가합니다.</p></div>
     </div>
   </section>
 
@@ -394,6 +465,195 @@ button.b:disabled { opacity: .5; }
   if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
     navigator.serviceWorker.register("sw.js").catch(() => {});
   }
+})();
+</script>
+<script>
+// ===================== 비행시간계산 (3 Pilot) =====================
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const SKEY = "csf-ft";
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+  };
+  const PILOTS = [
+    { id: "C1", role: "PC" },
+    { id: "C2", role: "NC" },
+    { id: "F",  role: "NF" },
+  ];
+  // 3 Pilot 편조 순서: 이륙·착륙은 C1+F, 항상 2명 조종석, 각자 휴식 = 전체의 1/3
+  //  ① C1+F (C2 휴식, 이륙)  ② C2+F (C1 휴식)  ③ C1+F (C2 휴식)  ④ C1+C2 (F 휴식)  ⑤ C1+F (C2 휴식, 착륙)
+  const SEGS = [
+    { duty: ["C1", "F"], rest: "C2", tag: "이륙" },
+    { duty: ["C2", "F"], rest: "C1" },
+    { duty: ["C1", "F"], rest: "C2" },
+    { duty: ["C1", "C2"], rest: "F" },
+    { duty: ["C1", "F"], rest: "C2", tag: "착륙" },
+  ];
+  const DEF_FIRST = 60, DEF_LAST = 60, MIN_LAST = 60, STEP = 5;
+
+  let st = { mode: "3P", T: 0, s: [DEF_FIRST, 0, 0, 0, DEF_LAST], want: [DEF_FIRST, DEF_LAST], edited: null, hText: "", mText: "" };
+  try { st = Object.assign(st, JSON.parse(store.get(SKEY) || "{}")); } catch (e) {}
+  const save = () => store.set(SKEY, JSON.stringify(st));
+
+  const fmt = (m) => { m = Math.max(0, Math.round(m)); return Math.floor(m / 60) + "+" + String(m % 60).padStart(2, "0"); };
+  const fmtKo = (m) => `${Math.floor(m / 60)}시간 ${String(m % 60).padStart(2, "0")}분`;
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+  // "12+30", "12:30", "12 30", "12시간30분" → 분 / 숫자 하나: 2자리 이하 & ≤24 → 시간, 3~4자리 → HHMM, 그 외 → 분
+  function parseDur(text) {
+    const nums = (String(text).match(/\d+/g) || []).map(Number);
+    if (!nums.length) return null;
+    if (nums.length >= 2) return nums[0] * 60 + clamp(nums[1], 0, 59);
+    const t = String(text).match(/\d+/)[0];
+    if (t.length >= 3) return Number(t.slice(0, -2)) * 60 + clamp(Number(t.slice(-2)), 0, 59);
+    return nums[0] <= 24 ? nums[0] * 60 : nums[0];
+  }
+
+  // 수동 조정한 칸(edited)은 그대로 두고 나머지를 전체 시간에 맞춰 재배분
+  function rebalance(edited) {
+    const T = st.T, s = st.s.map((v) => Math.max(0, Math.round(v || 0)));
+    if (T <= 0) return;
+    if (edited === 0 || edited === 4) st.want = [s[0], s[4]];   // 사용자가 정한 처음/마지막 구간 기억
+    if (edited == null) {
+      s[0] = st.want[0]; s[4] = st.want[1];
+      // 짧은 비행: 처음+마지막 구간이 C2 휴식 몫(1/3)을 넘으면 이륙 후 첫 구간을 줄여 균등 유지 (마지막 1시간은 유지)
+      const c2 = T - 2 * Math.round(T / 3);
+      if (s[0] + s[4] > c2) s[0] = Math.max(0, c2 - s[4]);
+    }
+    if (edited == null || edited === 0 || edited === 4) {
+      if (edited === 4) { s[4] = clamp(s[4], 0, T); s[0] = clamp(s[0], 0, T - s[4]); }
+      else { s[0] = clamp(s[0], 0, T); s[4] = clamp(s[4], 0, T - s[0]); }
+      const r = Math.round(T / 3);
+      const mid = (T - 2 * r) - s[0] - s[4];          // C2의 중간 휴식
+      if (mid >= 0) { s[1] = r; s[2] = mid; s[3] = r; }
+      else { const R = T - s[0] - s[4]; s[2] = 0; s[1] = Math.floor(R / 2); s[3] = R - s[1]; }
+    } else if (edited === 1 || edited === 3) {
+      const o = edited === 1 ? 3 : 1;
+      s[edited] = clamp(s[edited], 0, T - s[0] - s[4]);
+      const R = T - s[0] - s[4] - s[edited];
+      const other = clamp(Math.round((R + s[0] + s[4]) / 2), 0, R);  // 남은 두 사람 휴식을 같게
+      s[o] = other; s[2] = R - other;
+    } else if (edited === 2) {
+      s[2] = clamp(s[2], 0, T - s[0] - s[4]);
+      const R = T - s[0] - s[4] - s[2];
+      s[1] = Math.floor(R / 2); s[3] = R - s[1];
+    }
+    st.s = s;
+  }
+
+  function totals() {
+    const rest = { C1: 0, C2: 0, F: 0 };
+    st.s.forEach((v, i) => { rest[SEGS[i].rest] += v; });
+    return rest;
+  }
+
+  function render() {
+    const out = $("ftOut");
+    $("ftSum").textContent = st.T > 0 ? "= " + fmt(st.T) : "";
+    if (st.T <= 0) { out.innerHTML = ""; return; }
+    const T = st.T, rest = totals();
+    const work = Object.fromEntries(PILOTS.map((p) => [p.id, T - rest[p.id]]));
+
+    // 간트 차트
+    let h = `<div class="card"><div class="gantt">`;
+    for (const p of PILOTS) {
+      h += `<div class="lane c-${p.id}"><div class="who">${p.id}<small>${p.role}</small></div><div class="track">`;
+      st.s.forEach((v, i) => { if (v > 0) h += `<i class="${SEGS[i].rest === p.id ? "off" : "on"}" style="width:${(v / T) * 100}%"></i>`; });
+      h += `</div></div>`;
+    }
+    h += `<div class="axis"><span>0+00</span><span>${fmt(T / 2)}</span><span>${fmt(T)}</span></div></div>`;
+
+    // 구간 목록
+    h += `<div class="segs">`;
+    let t = 0;
+    st.s.forEach((v, i) => {
+      const g = SEGS[i];
+      const warn = (i === 4 && v < MIN_LAST) || (i === 0 && v <= 0);
+      const cls = ["sg", warn ? "warn" : "", st.edited === i ? "edited" : ""].join(" ");
+      h += `<div class="${cls}" style="${v === 0 && !warn ? "opacity:.45" : ""}">
+        <div><div class="when"><b>${fmt(t)} → ${fmt(t + v)}</b>${g.tag ? `<span class="badge">${g.tag}</span>` : ""}</div>
+        <div class="crew">${g.duty.map((d) => `<span class="c-${d}"><span class="dot"></span>${d}</span>`).join(" · ")}
+        <span class="rest">&nbsp;휴식 ${g.rest}</span></div></div>
+        <div class="len"><button data-i="${i}" data-d="-1" aria-label="5분 감소">−</button>
+        <input data-i="${i}" inputmode="tel" value="${fmt(v)}" aria-label="구간 ${i + 1} 시간">
+        <button data-i="${i}" data-d="1" aria-label="5분 증가">+</button></div></div>`;
+      t += v;
+    });
+    h += `</div>`;
+
+    // 요약
+    h += `<div class="sum">${PILOTS.map((p) => `<div class="c-${p.id}"><div class="who"><span class="dot"></span>${p.id} (${p.role})</div>
+      <div class="r">근무</div><div class="w">${fmt(work[p.id])}</div><div class="r">휴식 ${fmt(rest[p.id])}</div></div>`).join("")}</div>`;
+
+    const ws = Object.values(work), diff = Math.max(...ws) - Math.min(...ws);
+    const ck = (ok, txt) => `<div class="${ok ? "ok" : "bad"}">${ok ? "✓" : "!"} ${txt}</div>`;
+    h += `<div class="checks">
+      ${ck(true, "조종석 항상 2명")}
+      ${ck(st.s[0] > 0 && st.s[4] > 0, "이륙·착륙 C1(PC) · F(NF)")}
+      ${ck(st.s[4] >= MIN_LAST, `착륙 전 마지막 교대 ${fmt(st.s[4])} (최소 1+00)`)}
+      ${ck(diff <= 1, diff <= 1 ? "3명 근무시간 균등 (각 " + fmt(T * 2 / 3) + ")" : `근무시간 차이 ${fmt(diff)} — 다른 구간을 조정하세요`)}
+    </div>`;
+    h += `<div class="ft-actions"><button class="b" id="ftReset">기본값으로</button></div></div>`;
+    out.innerHTML = h;
+  }
+
+  function setTotalFromInputs(normalize) {
+    const hRaw = $("ftH").value;
+    let T;
+    if (/\d\D+\d/.test(hRaw)) {                       // 12+30 형식
+      T = parseDur(hRaw);
+      if (normalize) { $("ftH").value = Math.floor(T / 60); $("ftM").value = String(T % 60).padStart(2, "0"); }
+    } else {
+      const hh = Number((hRaw.match(/\d+/) || [0])[0]);
+      const mm = clamp(Number(($("ftM").value.match(/\d+/) || [0])[0]), 0, 59);
+      T = hh * 60 + mm;
+    }
+    st.hText = $("ftH").value; st.mText = $("ftM").value;
+    const changed = T !== st.T;
+    if (changed) { st.T = T; st.edited = null; rebalance(null); }
+    save();
+    if (changed) render();                            // 값이 같으면 다시 그리지 않음 (입력 포커스 유지)
+  }
+
+  function editSeg(i, minutes) {
+    st.s[i] = minutes; st.edited = i;
+    rebalance(i); save(); render();
+  }
+
+  // ----- 이벤트 -----
+  $("ftH").addEventListener("input", () => setTotalFromInputs(/\d\D+\d{2}$/.test($("ftH").value)));
+  $("ftH").addEventListener("blur", () => setTotalFromInputs(true));
+  $("ftM").addEventListener("input", () => setTotalFromInputs(false));
+  for (const el of [$("ftH"), $("ftM")]) el.addEventListener("keydown", (e) => { if (e.key === "Enter") el.blur(); });
+
+  $("ftOut").addEventListener("click", (e) => {
+    const b = e.target.closest("button");
+    if (!b) return;
+    if (b.id === "ftReset") { st.want = [DEF_FIRST, DEF_LAST]; st.edited = null; rebalance(null); save(); render(); return; }
+    if (b.dataset.d) { const i = +b.dataset.i; editSeg(i, Math.max(0, st.s[i] + STEP * +b.dataset.d)); }
+  });
+  $("ftOut").addEventListener("change", (e) => {
+    const inp = e.target.closest("input[data-i]");
+    if (!inp) return;
+    const m = parseDur(inp.value);
+    if (m == null) { render(); return; }
+    editSeg(+inp.dataset.i, m);
+  });
+  $("ftOut").addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.matches("input[data-i]")) e.target.blur(); });
+  $("ftOut").addEventListener("focusin", (e) => { if (e.target.matches("input[data-i]")) e.target.select(); });
+
+  document.querySelectorAll(".seg button").forEach((b) => b.addEventListener("click", () => { st.mode = b.dataset.mode; save(); showMode(); }));
+  function showMode() {
+    document.querySelectorAll(".seg button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.mode === st.mode));
+    $("ft-3P").hidden = st.mode !== "3P";
+    $("ft-other").hidden = st.mode === "3P";
+    $("ftOtherTitle").textContent = st.mode === "2S" ? "2 Set" : "5 Pilot";
+  }
+
+  // ----- 초기 표시 (이전 입력 복원) -----
+  $("ftH").value = st.hText || ""; $("ftM").value = st.mText || "";
+  showMode(); render();
 })();
 </script>
 </body>
