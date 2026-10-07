@@ -283,11 +283,11 @@ button.b:disabled { opacity: .5; }
       <div class="seg" role="group" aria-label="구간 방식" id="ftSub"></div>
       <div class="lbl">전체 비행시간</div>
       <div class="tt">
-        <input id="ftH" inputmode="tel" autocomplete="off" placeholder="00" aria-label="시간 (12+30 형식 입력 가능)"><span>시간</span>
+        <input id="ftH" inputmode="tel" autocomplete="off" placeholder="00" maxlength="5" aria-label="시간 (12+30 형식 입력 가능)"><span>시간</span>
         <input id="ftM" inputmode="numeric" autocomplete="off" placeholder="00" maxlength="2" aria-label="분"><span>분</span>
         <span class="tsum" id="ftSum"></span>
       </div>
-      <p class="ft-hint">시간 칸에 <b>12+30</b> 처럼 입력해도 됩니다.</p>
+      <p class="ft-hint">시간 칸에 <b>1230</b> 또는 <b>12+30</b> 처럼 입력해도 됩니다.</p>
       <div class="lbl">운항 시각 (UTC)</div>
       <div class="times" id="ftTimes">
         <div class="tm"><label for="tRO">R/O<small>Ramp out</small></label><div class="tmin"><input id="tRO" data-k="ro" inputmode="tel" autocomplete="off" placeholder="0000" maxlength="5"><span>Z</span></div><button type="button" class="now" data-k="ro">지금</button></div>
@@ -920,6 +920,10 @@ button.b:disabled { opacity: .5; }
     if (/\d\D+\d/.test(hRaw)) {                       // 12+30 형식
       T = parseDur(hRaw);
       if (normalize) { $("ftH").value = Math.floor(T / 60); $("ftM").value = String(T % 60).padStart(2, "0"); }
+    } else if (/^\s*\d{3,4}\s*$/.test(hRaw)) {          // 1230 형식 (HHMM, 3자리면 HMM)
+      const d = hRaw.trim();
+      T = Number(d.slice(0, -2)) * 60 + clamp(Number(d.slice(-2)), 0, 59);
+      if (normalize) { $("ftH").value = Math.floor(T / 60); $("ftM").value = String(T % 60).padStart(2, "0"); }
     } else {
       const hh = Number((hRaw.match(/\d+/) || [0])[0]);
       const mm = clamp(Number(($("ftM").value.match(/\d+/) || [0])[0]), 0, 59);
@@ -939,7 +943,8 @@ button.b:disabled { opacity: .5; }
   }
 
   // ----- 이벤트 -----
-  $("ftH").addEventListener("input", () => setTotalFromInputs(/\d\D+\d{2}$/.test($("ftH").value)));
+  // 4자리(1230) 또는 12+30 입력이 끝나면 시간·분 칸으로 나눠 표시
+  $("ftH").addEventListener("input", () => setTotalFromInputs(/\d\D+\d{2}$|^\s*\d{4}\s*$/.test($("ftH").value)));
   $("ftH").addEventListener("blur", () => setTotalFromInputs(true));
   $("ftM").addEventListener("input", () => setTotalFromInputs(false));
   for (const el of [$("ftH"), $("ftM")]) el.addEventListener("keydown", (e) => { if (e.key === "Enter") el.blur(); });
