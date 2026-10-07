@@ -182,7 +182,8 @@ button.b:disabled { opacity: .5; }
 .checks { padding: 10px 16px 12px; font-size: 13px; }
 .checks div { margin: 2px 0; }
 .checks .ok { color: var(--ok); } .checks .bad { color: var(--warn); }
-.ft-actions { display: flex; justify-content: flex-end; padding: 0 16px 14px; }
+.ft-actions { display: flex; justify-content: flex-end; gap: 8px; padding: 0 16px 14px; }
+.sum .cont { font-size: 11px; color: var(--muted); margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -220,6 +221,11 @@ button.b:disabled { opacity: .5; }
     </div>
 
     <div id="ft-3P">
+      <div class="lbl">구간 방식</div>
+      <div class="seg" role="group" aria-label="구간 방식" id="ftSub">
+        <button data-sub="4" aria-pressed="true">4구간<small>교대 3회</small></button>
+        <button data-sub="7" aria-pressed="false">7구간<small>교대 6회 · 휴식 분할</small></button>
+      </div>
       <div class="lbl">전체 비행시간</div>
       <div class="tt">
         <input id="ftH" inputmode="tel" autocomplete="off" placeholder="00" aria-label="시간 (12+30 형식 입력 가능)"><span>시간</span>
@@ -471,7 +477,7 @@ button.b:disabled { opacity: .5; }
 // ===================== 비행시간계산 (3 Pilot) =====================
 (() => {
   const $ = (id) => document.getElementById(id);
-  const SKEY = "csf-ft";
+  const SKEY = "csf-ft2";
   const store = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -481,26 +487,36 @@ button.b:disabled { opacity: .5; }
     { id: "C2", role: "NC" },
     { id: "F",  role: "NF" },
   ];
-  // 3 Pilot 편조 순서: 이륙·착륙은 C1+F, 항상 2명 조종석, 각자 휴식 = 전체의 1/3
-  //  ① C1+F (C2 휴식, 이륙)  ② C2+F (C1 휴식)  ③ C1+F (C2 휴식)  ④ C1+C2 (F 휴식)  ⑤ C1+F (C2 휴식, 착륙)
-  const SEGS = [
-    { duty: ["C1", "F"], rest: "C2", tag: "이륙" },
-    { duty: ["C2", "F"], rest: "C1" },
-    { duty: ["C1", "F"], rest: "C2" },
-    { duty: ["C1", "C2"], rest: "F" },
-    { duty: ["C1", "F"], rest: "C2", tag: "착륙" },
-  ];
-  const DEF_FIRST = 60, DEF_LAST = 60, MIN_LAST = 60, STEP = 5;
+  const seg = (a, b, rest, tag) => ({ duty: [a, b], rest, tag });
+  // 이륙·착륙은 C1+F, 항상 2명 조종석. 첫 휴식 F, 착륙 전 마지막 휴식 C1
+  const PLANS = {
+    "4": {
+      segs: [seg("C1", "F", "C2", "이륙"), seg("C1", "C2", "F"), seg("C2", "F", "C1"), seg("C1", "F", "C2", "착륙")],
+      want: [120, 90],                 // 기본값: 이륙 후 2+00, 착륙 전 1+30
+    },
+    "7": {
+      segs: [seg("C1", "F", "C2", "이륙"), seg("C1", "C2", "F"), seg("C2", "F", "C1"), seg("C1", "F", "C2"),
+             seg("C1", "C2", "F"), seg("C2", "F", "C1"), seg("C1", "F", "C2", "착륙")],
+      want: [60, 60],                  // 기본값: 이륙 후 1+00, 착륙 전 1+00
+      shrinkFirst: true,               // 짧은 비행은 첫 구간을 줄여 균등 유지
+    },
+  };
+  const MIN_LAST = 60, STEP = 5;
 
-  let st = { mode: "3P", T: 0, s: [DEF_FIRST, 0, 0, 0, DEF_LAST], want: [DEF_FIRST, DEF_LAST], edited: null, hText: "", mText: "" };
-  try { st = Object.assign(st, JSON.parse(store.get(SKEY) || "{}")); } catch (e) {}
+  const blank = (k) => ({ s: [], want: PLANS[k].want.slice(), edited: null });
+  let st = { mode: "3P", sub: "4", T: 0, hText: "", mText: "", p: { "4": blank("4"), "7": blank("7") } };
+  try {
+    const sv = JSON.parse(store.get(SKEY) || "{}");
+    st = Object.assign(st, sv, { p: Object.assign(st.p, sv.p || {}) });
+  } catch (e) {}
   const save = () => store.set(SKEY, JSON.stringify(st));
+  const plan = () => PLANS[st.sub];
+  const cur = () => st.p[st.sub];
 
   const fmt = (m) => { m = Math.max(0, Math.round(m)); return Math.floor(m / 60) + "+" + String(m % 60).padStart(2, "0"); };
-  const fmtKo = (m) => `${Math.floor(m / 60)}시간 ${String(m % 60).padStart(2, "0")}분`;
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
-  // "12+30", "12:30", "12 30", "12시간30분" → 분 / 숫자 하나: 2자리 이하 & ≤24 → 시간, 3~4자리 → HHMM, 그 외 → 분
+  // "12+30", "12:30", "12 30", "12시간30분" → 분 / 숫자 하나: ≤24 → 시간, 3~4자리 → HHMM, 그 외 → 분
   function parseDur(text) {
     const nums = (String(text).match(/\d+/g) || []).map(Number);
     if (!nums.length) return null;
@@ -510,67 +526,90 @@ button.b:disabled { opacity: .5; }
     return nums[0] <= 24 ? nums[0] * 60 : nums[0];
   }
 
-  // 수동 조정한 칸(edited)은 그대로 두고 나머지를 전체 시간에 맞춰 재배분
+  // 처음·마지막 구간과 방금 수정한 구간은 고정, 나머지는 '각자 휴식 = 전체의 1/3'이 되도록 배분 후
+  // 남거나 모자란 시간은 고정되지 않은 구간에 고르게 나눔
   function rebalance(edited) {
-    const T = st.T, s = st.s.map((v) => Math.max(0, Math.round(v || 0)));
+    const T = st.T, P = plan(), c = cur(), n = P.segs.length, last = n - 1;
     if (T <= 0) return;
-    if (edited === 0 || edited === 4) st.want = [s[0], s[4]];   // 사용자가 정한 처음/마지막 구간 기억
-    if (edited == null) {
-      s[0] = st.want[0]; s[4] = st.want[1];
-      // 짧은 비행: 처음+마지막 구간이 C2 휴식 몫(1/3)을 넘으면 이륙 후 첫 구간을 줄여 균등 유지 (마지막 1시간은 유지)
-      const c2 = T - 2 * Math.round(T / 3);
-      if (s[0] + s[4] > c2) s[0] = Math.max(0, c2 - s[4]);
+    let s = P.segs.map((_, i) => Math.max(0, Math.round(c.s[i] || 0)));
+    if (edited === 0 || edited === last) c.want = [s[0], s[last]];
+    const r = Math.round(T / 3), target = { C1: r, F: r, C2: T - 2 * r };
+    let w0 = c.want[0], wl = c.want[1];
+    if (edited == null && P.shrinkFirst && w0 + wl > target.C2) w0 = Math.max(0, target.C2 - wl);
+    if (edited === 0) { s[0] = clamp(w0, 0, T); s[last] = clamp(wl, 0, T - s[0]); }
+    else { s[last] = clamp(wl, 0, T); s[0] = clamp(w0, 0, T - s[last]); }
+    const fixed = new Set([0, last]);
+    if (edited != null && !fixed.has(edited)) { s[edited] = clamp(s[edited], 0, T - s[0] - s[last]); fixed.add(edited); }
+
+    const free = [];
+    for (const pid of ["C1", "C2", "F"]) {
+      const idx = P.segs.map((g, i) => i).filter((i) => P.segs[i].rest === pid);
+      const fixedSum = idx.filter((i) => fixed.has(i)).reduce((a, i) => a + s[i], 0);
+      const fr = idx.filter((i) => !fixed.has(i));
+      const left = Math.max(0, target[pid] - fixedSum);
+      // 5분 단위로 나누고, 5분 미만 나머지는 앞 구간에
+      const units = Math.floor(left / STEP), rem = left - units * STEP;
+      fr.forEach((i, k) => { s[i] = (Math.floor(units / fr.length) + (k < units % fr.length ? 1 : 0)) * STEP + (k === 0 ? rem : 0); });
+      free.push(...fr);
     }
-    if (edited == null || edited === 0 || edited === 4) {
-      if (edited === 4) { s[4] = clamp(s[4], 0, T); s[0] = clamp(s[0], 0, T - s[4]); }
-      else { s[0] = clamp(s[0], 0, T); s[4] = clamp(s[4], 0, T - s[0]); }
-      const r = Math.round(T / 3);
-      const mid = (T - 2 * r) - s[0] - s[4];          // C2의 중간 휴식
-      if (mid >= 0) { s[1] = r; s[2] = mid; s[3] = r; }
-      else { const R = T - s[0] - s[4]; s[2] = 0; s[1] = Math.floor(R / 2); s[3] = R - s[1]; }
-    } else if (edited === 1 || edited === 3) {
-      const o = edited === 1 ? 3 : 1;
-      s[edited] = clamp(s[edited], 0, T - s[0] - s[4]);
-      const R = T - s[0] - s[4] - s[edited];
-      const other = clamp(Math.round((R + s[0] + s[4]) / 2), 0, R);  // 남은 두 사람 휴식을 같게
-      s[o] = other; s[2] = R - other;
-    } else if (edited === 2) {
-      s[2] = clamp(s[2], 0, T - s[0] - s[4]);
-      const R = T - s[0] - s[4] - s[2];
-      s[1] = Math.floor(R / 2); s[3] = R - s[1];
+    // 합계를 전체 비행시간에 맞춤
+    let diff = T - s.reduce((a, b) => a + b, 0), guard = 0;
+    while (diff !== 0 && free.length && guard++ < 10000) {
+      const pool = diff > 0 ? free : free.filter((i) => s[i] > 0);
+      if (!pool.length) break;
+      for (const i of pool) {
+        if (diff === 0) break;
+        const step = Math.min(Math.abs(diff) >= STEP ? STEP : 1, diff > 0 ? Infinity : s[i]);
+        if (diff > 0) { s[i] += step; diff -= step; } else if (step > 0) { s[i] -= step; diff += step; }
+      }
     }
-    st.s = s;
+    if (diff !== 0 && edited != null && !(edited === 0 || edited === last)) s[edited] += diff;   // 남은 차이는 수정한 칸에서
+    c.s = s;
   }
 
-  function totals() {
-    const rest = { C1: 0, C2: 0, F: 0 };
-    st.s.forEach((v, i) => { rest[SEGS[i].rest] += v; });
-    return rest;
+  function stats() {
+    const P = plan(), s = cur().s, T = st.T;
+    const rest = { C1: 0, C2: 0, F: 0 }, cont = { C1: 0, C2: 0, F: 0 }, run = { C1: 0, C2: 0, F: 0 };
+    s.forEach((v, i) => {
+      rest[P.segs[i].rest] += v;
+      for (const p of PILOTS) {
+        if (v === 0) continue;
+        if (P.segs[i].rest === p.id) run[p.id] = 0; else run[p.id] += v;
+        cont[p.id] = Math.max(cont[p.id], run[p.id]);
+      }
+    });
+    const work = Object.fromEntries(PILOTS.map((p) => [p.id, T - rest[p.id]]));
+    return { rest, work, cont };
   }
 
+  let rendering = false;
   function render() {
+    if (rendering) return;                            // 다시 그리는 중 발생한 blur/change 무시
+    rendering = true;
+    try { renderInner(); } finally { rendering = false; }
+  }
+  function renderInner() {
     const out = $("ftOut");
     $("ftSum").textContent = st.T > 0 ? "= " + fmt(st.T) : "";
+    document.querySelectorAll("#ftSub button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.sub === st.sub));
     if (st.T <= 0) { out.innerHTML = ""; return; }
-    const T = st.T, rest = totals();
-    const work = Object.fromEntries(PILOTS.map((p) => [p.id, T - rest[p.id]]));
+    const T = st.T, P = plan(), c = cur(), last = P.segs.length - 1;
+    if (c.s.length !== P.segs.length) rebalance(null);
+    const { rest, work, cont } = stats();
 
-    // 간트 차트
     let h = `<div class="card"><div class="gantt">`;
     for (const p of PILOTS) {
       h += `<div class="lane c-${p.id}"><div class="who">${p.id}<small>${p.role}</small></div><div class="track">`;
-      st.s.forEach((v, i) => { if (v > 0) h += `<i class="${SEGS[i].rest === p.id ? "off" : "on"}" style="width:${(v / T) * 100}%"></i>`; });
+      c.s.forEach((v, i) => { if (v > 0) h += `<i class="${P.segs[i].rest === p.id ? "off" : "on"}" style="width:${(v / T) * 100}%"></i>`; });
       h += `</div></div>`;
     }
-    h += `<div class="axis"><span>0+00</span><span>${fmt(T / 2)}</span><span>${fmt(T)}</span></div></div>`;
+    h += `<div class="axis"><span>0+00</span><span>${fmt(T / 2)}</span><span>${fmt(T)}</span></div></div><div class="segs">`;
 
-    // 구간 목록
-    h += `<div class="segs">`;
     let t = 0;
-    st.s.forEach((v, i) => {
-      const g = SEGS[i];
-      const warn = (i === 4 && v < MIN_LAST) || (i === 0 && v <= 0);
-      const cls = ["sg", warn ? "warn" : "", st.edited === i ? "edited" : ""].join(" ");
+    c.s.forEach((v, i) => {
+      const g = P.segs[i];
+      const warn = (i === last && v < MIN_LAST) || (i === 0 && v <= 0);
+      const cls = ["sg", warn ? "warn" : "", c.edited === i ? "edited" : ""].join(" ");
       h += `<div class="${cls}" style="${v === 0 && !warn ? "opacity:.45" : ""}">
         <div><div class="when"><b>${fmt(t)} → ${fmt(t + v)}</b>${g.tag ? `<span class="badge">${g.tag}</span>` : ""}</div>
         <div class="crew">${g.duty.map((d) => `<span class="c-${d}"><span class="dot"></span>${d}</span>`).join(" · ")}
@@ -582,19 +621,19 @@ button.b:disabled { opacity: .5; }
     });
     h += `</div>`;
 
-    // 요약
     h += `<div class="sum">${PILOTS.map((p) => `<div class="c-${p.id}"><div class="who"><span class="dot"></span>${p.id} (${p.role})</div>
-      <div class="r">근무</div><div class="w">${fmt(work[p.id])}</div><div class="r">휴식 ${fmt(rest[p.id])}</div></div>`).join("")}</div>`;
+      <div class="r">근무</div><div class="w">${fmt(work[p.id])}</div><div class="r">휴식 ${fmt(rest[p.id])}</div>
+      <div class="cont">최대 연속 ${fmt(cont[p.id])}</div></div>`).join("")}</div>`;
 
     const ws = Object.values(work), diff = Math.max(...ws) - Math.min(...ws);
     const ck = (ok, txt) => `<div class="${ok ? "ok" : "bad"}">${ok ? "✓" : "!"} ${txt}</div>`;
     h += `<div class="checks">
       ${ck(true, "조종석 항상 2명")}
-      ${ck(st.s[0] > 0 && st.s[4] > 0, "이륙·착륙 C1(PC) · F(NF)")}
-      ${ck(st.s[4] >= MIN_LAST, `착륙 전 마지막 교대 ${fmt(st.s[4])} (최소 1+00)`)}
-      ${ck(diff <= 1, diff <= 1 ? "3명 근무시간 균등 (각 " + fmt(T * 2 / 3) + ")" : `근무시간 차이 ${fmt(diff)} — 다른 구간을 조정하세요`)}
+      ${ck(c.s[0] > 0 && c.s[last] > 0, "이륙·착륙 C1(PC) · F(NF)")}
+      ${ck(c.s[last] >= MIN_LAST, `착륙 전 마지막 교대 ${fmt(c.s[last])} (최소 1+00)`)}
+      ${ck(diff <= 1, diff <= 1 ? "3명 근무시간 균등 (각 " + fmt(T * 2 / 3) + ")" : `근무시간 차이 ${fmt(diff)}`)}
     </div>`;
-    h += `<div class="ft-actions"><button class="b" id="ftReset">기본값으로</button></div></div>`;
+    h += `<div class="ft-actions">${st.sub === "4" ? `<button class="b" id="ftEqual">6등분 균등 배분</button>` : ""}<button class="b" id="ftReset">기본값으로</button></div></div>`;
     out.innerHTML = h;
   }
 
@@ -611,13 +650,17 @@ button.b:disabled { opacity: .5; }
     }
     st.hText = $("ftH").value; st.mText = $("ftM").value;
     const changed = T !== st.T;
-    if (changed) { st.T = T; st.edited = null; rebalance(null); }
+    if (changed) {
+      st.T = T;
+      for (const k of Object.keys(PLANS)) { const was = st.sub; st.sub = k; st.p[k].edited = null; rebalance(null); st.sub = was; }
+    }
     save();
     if (changed) render();                            // 값이 같으면 다시 그리지 않음 (입력 포커스 유지)
   }
 
   function editSeg(i, minutes) {
-    st.s[i] = minutes; st.edited = i;
+    const c = cur();
+    c.s[i] = minutes; c.edited = i;
     rebalance(i); save(); render();
   }
 
@@ -630,12 +673,14 @@ button.b:disabled { opacity: .5; }
   $("ftOut").addEventListener("click", (e) => {
     const b = e.target.closest("button");
     if (!b) return;
-    if (b.id === "ftReset") { st.want = [DEF_FIRST, DEF_LAST]; st.edited = null; rebalance(null); save(); render(); return; }
-    if (b.dataset.d) { const i = +b.dataset.i; editSeg(i, Math.max(0, st.s[i] + STEP * +b.dataset.d)); }
+    const c = cur();
+    if (b.id === "ftReset") { c.want = plan().want.slice(); c.edited = null; rebalance(null); save(); render(); return; }
+    if (b.id === "ftEqual") { const e6 = Math.round(st.T / 6); c.want = [e6, e6]; c.edited = null; rebalance(null); save(); render(); return; }
+    if (b.dataset.d) { const i = +b.dataset.i; editSeg(i, Math.max(0, c.s[i] + STEP * +b.dataset.d)); }
   });
   $("ftOut").addEventListener("change", (e) => {
     const inp = e.target.closest("input[data-i]");
-    if (!inp) return;
+    if (!inp || rendering) return;
     const m = parseDur(inp.value);
     if (m == null) { render(); return; }
     editSeg(+inp.dataset.i, m);
@@ -643,9 +688,10 @@ button.b:disabled { opacity: .5; }
   $("ftOut").addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.matches("input[data-i]")) e.target.blur(); });
   $("ftOut").addEventListener("focusin", (e) => { if (e.target.matches("input[data-i]")) e.target.select(); });
 
-  document.querySelectorAll(".seg button").forEach((b) => b.addEventListener("click", () => { st.mode = b.dataset.mode; save(); showMode(); }));
+  document.querySelectorAll("#ftSub button").forEach((b) => b.addEventListener("click", () => { st.sub = b.dataset.sub; save(); render(); }));
+  document.querySelectorAll(".seg button[data-mode]").forEach((b) => b.addEventListener("click", () => { st.mode = b.dataset.mode; save(); showMode(); }));
   function showMode() {
-    document.querySelectorAll(".seg button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.mode === st.mode));
+    document.querySelectorAll(".seg button[data-mode]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.mode === st.mode));
     $("ft-3P").hidden = st.mode !== "3P";
     $("ft-other").hidden = st.mode === "3P";
     $("ftOtherTitle").textContent = st.mode === "2S" ? "2 Set" : "5 Pilot";
