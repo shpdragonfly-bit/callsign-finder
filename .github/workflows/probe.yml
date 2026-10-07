@@ -1,0 +1,39 @@
+# 공공데이터 API 연동 점검용 (임시). tools/probe_*.py 를 바꿔서 올리면 자동 실행되고,
+# 결과(명세·응답 샘플)를 probe/ 폴더에 저장합니다. 인증키 값은 저장·출력하지 않습니다.
+name: probe-public-api
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["tools/probe_*.py", "probe/calls.json"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: callsign-update
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: API 명세 수집
+        run: python tools/probe_specs.py
+      - name: API 호출 샘플 수집
+        if: hashFiles('probe/calls.json') != ''
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+        run: python tools/probe_calls.py
+      - name: 결과 커밋
+        run: |
+          git config user.name "callsign-bot"
+          git config user.email "callsign-bot@users.noreply.github.com"
+          git add probe
+          git diff --cached --quiet || git commit -m "probe: $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3; do git pull --rebase -q && git push && break; sleep 5; done
