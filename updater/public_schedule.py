@@ -68,7 +68,7 @@ def _items(resp):
     return int(body.get("totalCount") or 0), it
 
 
-def _paged(url, params, key, rows=1000, max_pages=30):
+def _paged(url, params, key, rows=1000, max_pages=60):
     out, page = [], 1
     while page <= max_pages:
         total, items = _items(_get_json(url, dict(params, pageNo=page, numOfRows=rows, type="json"), key))
@@ -143,7 +143,8 @@ def fetch_kac(key, iata_map, today):
     out = {}
     ymd = today.strftime("%Y%m%d")
     for iata in iata_map:
-        dom = _paged(KAC_URL.format(op="dom"), {"schAirLine": iata, "schDate": ymd}, key)
+        # 한국공항공사 API는 한 번에 100건 이하로 요청해야 함
+        dom = _paged(KAC_URL.format(op="dom"), {"schAirLine": iata, "schDate": ymd}, key, rows=100)
         for x in dom:
             cs = flight_to_callsign(x.get("domesticNum"), iata_map)
             if not cs or not (_date(x.get("domesticStdate")) <= ymd <= _date(x.get("domesticEddate"))):
@@ -153,11 +154,12 @@ def fetch_kac(key, iata_map, today):
                 "std": x.get("domesticStartTime") or "", "sta": x.get("domesticArrivalTime") or "",
                 "wd": _wd(x, "domestic"), "from": _date(x.get("domesticStdate")), "to": _date(x.get("domesticEddate")),
             })
-        intl = _paged(KAC_URL.format(op="int"), {"schAirLine": iata, "schDate": ymd}, key)
+        intl = _paged(KAC_URL.format(op="int"), {"schAirLine": iata, "schDate": ymd}, key, rows=100)
         for x in intl:
             cs = flight_to_callsign(x.get("internationalNum"), iata_map)
             if not cs or not (_date(x.get("internationalStdate")) <= ymd <= _date(x.get("internationalEddate"))):
                 continue
+            # OUT: a(한국 공항) 출발 → b, 시각=출발 현지시각 / IN: b → a 도착, 시각=도착 현지시각
             out.setdefault(cs, []).append({
                 "kind": "int", "io": x.get("internationalIoType") or "",
                 "a": x.get("airportCode") or "", "b": x.get("cityCode") or "",
@@ -185,7 +187,7 @@ def collect(airlines, cache_path, now):
         cache["icn_at"] = now.strftime("%Y-%m-%dT%H:%MZ")
     except Exception as e:
         log("  ! 인천공항 수집 실패: %s (이전 값 유지)" % e)
-    if cache.get("kac_date") != today_kst.isoformat():              # 시즌 스케줄은 하루 한 번
+    if cache.get("kac_date") != today_kst.isoformat() or not cache.get("kac"):   # 시즌 스케줄은 하루 한 번
         try:
             cache["kac"] = fetch_kac(key, iata_map, today_kst)
             cache["kac_date"] = today_kst.isoformat()

@@ -388,6 +388,7 @@ button.b:disabled { opacity: .5; }
 
   // ---------- 운항 스케줄 (공공데이터: 인천공항 D-3~D+6, 한국공항공사 시즌 스케줄) ----------
   const WD = ["", "월", "화", "수", "목", "금", "토", "일"];
+  const KR = new Set(["ICN", "GMP", "PUS", "CJU", "TAE", "CJJ", "MWX", "YNY", "KWJ", "USN", "RSU", "KPO", "WJU", "HIN", "KUV"]);
   const p2 = (n) => String(n).padStart(2, "0");
   const utcOf = (s) => s ? new Date(Date.UTC(+s.slice(0, 4), +s.slice(4, 6) - 1, +s.slice(6, 8), +s.slice(8, 10), +s.slice(10, 12))) : null;
   const fz = (d) => `${p2(d.getUTCHours())}${p2(d.getUTCMinutes())}Z`;
@@ -408,7 +409,9 @@ button.b:disabled { opacity: .5; }
     const i = (sc.inst || [])[0];
     if (i) return i[2] === "D" ? ["ICN", i[3]] : [i[3], "ICN"];
     const d = (sc.season || []).find((x) => x.kind === "dom");
-    return d ? [d.dep, d.arr] : null;
+    if (d) return [d.dep, d.arr];
+    const n = (sc.season || []).find((x) => x.kind === "int");
+    return n ? (n.io === "OUT" ? [n.a, n.b] : [n.b, n.a]) : null;
   }
   function nextType(sc) {
     const now = Date.now() - 6 * 3600e3;
@@ -439,8 +442,13 @@ button.b:disabled { opacity: .5; }
       if (x.kind === "dom") {
         h += `<div class="si"><div class="si-t"><b>${esc(x.dep)} ${kstToZ(x.std)} → ${esc(x.arr)} ${kstToZ(x.sta)}</b></div>
           <div class="si-m">${esc(x.std.slice(0, 2))}:${esc(x.std.slice(2))} → ${esc(x.sta.slice(0, 2))}:${esc(x.sta.slice(2))} KST · ${[...x.wd].map((d) => WD[d]).join("")} · ${per}</div></div>`;
-      } else if (!(sc.inst || []).length) {
-        h += `<div class="si"><div class="si-m">${esc(x.a)}–${esc(x.b)} · ${[...x.wd].map((d) => WD[d]).join("")} · 운항기간 ${per}</div></div>`;
+      } else {
+        // 국제선 시즌: OUT = 한국 공항 출발 시각, IN = 도착 공항 도착 시각 (각 공항 현지시각)
+        const out = x.io === "OUT", apt = x.a, tm = /^\d{4}$/.test(x.time) ? `${x.time.slice(0, 2)}:${x.time.slice(2)}` : "";
+        const z = KR.has(apt) && tm ? ` = ${kstToZ(x.time)}` : "";
+        const line = out ? `${esc(apt)} 출발 ${tm} → ${esc(x.b)}` : `${esc(x.b)} → ${esc(apt)} 도착 ${tm}`;
+        h += `<div class="si"><div class="si-t"><b>${line}</b></div>
+          <div class="si-m">${KR.has(apt) ? "한국시각" : esc(apt) + " 현지시각"}${z} · ${[...x.wd].map((d) => WD[d]).join("")} · ${per}</div></div>`;
       }
     }
     return h + `</div>`;
