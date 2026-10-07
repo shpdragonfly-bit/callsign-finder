@@ -1,0 +1,37 @@
+{
+ "icn_all_dep_KE017": {
+  "status": 200,
+  "length": 2325,
+  "head": "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"numOfRows\":5,\"pageNo\":1,\"totalCount\":9,\"items\":[{\"fid\":\"2026092900000007836825\",\"codeshare\":\"Master\",\"masterFlightId\":null,\"flightId\":\"KE017\",\"airline\":\"대한항공\",\"airport\":\"로스앤젤레스\",\"airportCode\":\"LAX\",\"passengerOrCargo\":\"P"
+ },
+ "icn_all_dep_cargo": {
+  "status": 200,
+  "length": 2298,
+  "head": "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"numOfRows\":5,\"pageNo\":1,\"totalCount\":623,\"items\":[{\"fid\":\"2026092900000007836362\",\"codeshare\":\"Master\",\"masterFlightId\":null,\"flightId\":\"K4539\",\"airline\":\"칼리타항공\",\"airport\":\"앵커리지\",\"airportCode\":\"ANC\",\"passengerOrCargo\":\""
+ },
+ "icn_pax_weekly_dep": {
+  "status": 200,
+  "length": 1874327,
+  "head": "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"totalCount\":7160,\"items\":[{\"airline\":\"싱가포르항공\",\"flightId\":\"SQ605Y\",\"scheduleDateTime\":\"202610080005\",\"estimatedDateTime\":\"202610072357\",\"airport\":\"싱가포르\",\"chkinrange\":\"F01-F05\",\"gatenumber\":\"32\",\"codeshare\":\"Master\",\"mast"
+ },
+ "icn_cargo_weekly_dep": {
+  "status": 200,
+  "length": 1400,
+  "head": "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"numOfRows\":5,\"pageNo\":1,\"totalCount\":447,\"items\":[{\"airline\":\"대한항공\",\"flightId\":\"KE283\",\"scheduleDateTime\":\"202610080005\",\"estimatedDateTime\":\"202610072348\",\"airport\":\"시카고/오헤어\",\"chkinrange\":null,\"gatenumber\":\"601\",\"codes"
+ },
+ "icn_pax_sched_dep_LAX": {
+  "status": 403,
+  "length": 192,
+  "head": "{\n  \"OpenAPI_ServiceResponse\": {\n    \"cmmMsgHeader\": {\n      \"errMsg\": \"SERVICE_KEY_IS_NOT_REGISTERED_ERROR\",\n      \"returnAuthMsg\": \"등록되지 않은 서비스키\",\n      \"returnReasonCode\": \"30\"\n    }\n  }\n}\n"
+ },
+ "kac_int_KE": {
+  "status": 200,
+  "length": 2862,
+  "head": "{\"response\": {\"header\": {\"resultCode\": \"00\", \"resultMsg\": \"NORMAL SERVICE.\"}, \"body\": {\"numOfRows\": 5, \"pageNo\": 1, \"totalCount\": 10768, \"items\": {\"item\": [{\"airlinehomepageUrl\": null, \"airlineKorean\": \"대한항공\", \"airlineEnglish\": \"KOREAN AIR\", \"airport\": \"마닐라\", \"airportCode\": \"MNL\", \"city\": \"인천\", \"cit"
+ },
+ "kac_dom_KE": {
+  "status": 200,
+  "length": 2711,
+  "head": "{\"response\": {\"header\": {\"resultCode\": \"00\", \"resultMsg\": \"NORMAL SERVICE.\"}, \"body\": {\"numOfRows\": 5, \"pageNo\": 1, \"totalCount\": 13448, \"items\": {\"item\": [{\"airlinehomepageUrl\": null, \"airlineKorean\": \"대한항공\", \"airlineEnglish\": \"KOREAN AIR\", \"arrivalcity\": \"대구\", \"arrivalcityCode\": \"TAE\", \"domesticAr"
+ }
+}
