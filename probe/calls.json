@@ -1,0 +1,5 @@
+[
+ {"name": "kac_dom_KE_date", "url": "https://apis.data.go.kr/B551178/flight-schedule/dom", "params": {"pageNo": 1, "numOfRows": 1000, "type": "json", "schAirLine": "KE", "schDate": "20261008"}},
+ {"name": "kac_int_KE_date", "url": "https://apis.data.go.kr/B551178/flight-schedule/int", "params": {"pageNo": 1, "numOfRows": 1000, "type": "json", "schAirLine": "KE", "schDate": "20261008"}},
+ {"name": "kac_dom_KE_p2", "url": "https://apis.data.go.kr/B551178/flight-schedule/dom", "params": {"pageNo": 2, "numOfRows": 20, "type": "json", "schAirLine": "KE"}}
+]

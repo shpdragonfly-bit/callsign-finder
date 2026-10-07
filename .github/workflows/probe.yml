@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: API 명세 수집
-        run: python tools/probe_specs.py
+        run: echo skip
       - name: API 호출 샘플 수집
         if: hashFiles('probe/calls.json') != ''
         env:
