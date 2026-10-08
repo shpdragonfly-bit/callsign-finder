@@ -4,12 +4,15 @@
  * 사용법: Google 시트 → 확장 프로그램 → Apps Script 에 이 코드를 그대로 붙여넣고 저장 →
  *        배포 → 새 배포 → 웹 앱 (실행: 나 / 액세스: 모든 사용자) → 웹 앱 URL 복사
  *
- * 앱이 보내는 것: 익명 기기번호, 동작(실행·검색 등), 항공사 탭, 세부(편조 종류 등), 기기 종류, 앱 버전, 사용 시각
+ * 앱이 보내는 것: 익명 기기번호, 동작(실행·검색 등), 항공사 탭, 세부(편조 종류 등), 기기 종류, 앱 버전, 사용 시각,
+ *               개발 예정 기능 요청과 사용자가 직접 적은 의견
+ *
+ * 코드를 고친 뒤에는: 배포 → 배포 관리 → ✏️ 수정 → 버전 "새 버전" → 배포 (웹 앱 URL 은 그대로)
  * 받지 않는 것: 검색한 편명, 이름, 위치
  */
 const SHEET = "기록";
-const HEAD = ["수신시각", "사용시각", "기기번호", "동작", "항공사", "세부", "기기", "앱버전"];
-const ACTIONS = ["실행", "검색", "공항검색", "비행시간"];
+const HEAD = ["수신시각", "사용시각", "기기번호", "동작", "항공사", "세부", "기기", "앱버전", "의견"];
+const ACTIONS = ["실행", "검색", "공항검색", "비행시간", "요청", "의견"];
 
 function doPost(e) {
   let body;
@@ -18,7 +21,7 @@ function doPost(e) {
   const now = new Date();
   const rows = body.e.slice(0, 300)
     .filter((x) => x && ACTIONS.indexOf(x.a) >= 0)
-    .map((x) => [now, safeDate(x.t, now), body.d, x.a, cut(x.al, 8), cut(x.m, 20), cut(body.dev, 12), cut(body.ver, 12)]);
+    .map((x) => [now, safeDate(x.t, now), body.d, x.a, cut(x.al, 8), cut(x.m, 20), cut(body.dev, 12), cut(body.ver, 12), clean(x.c)]);
   if (!rows.length) return out("empty");
   const lock = LockService.getScriptLock();
   lock.waitLock(20000);
@@ -36,9 +39,10 @@ function sheet() {
   let sh = ss.getSheetByName(SHEET);
   if (!sh) {
     sh = ss.insertSheet(SHEET, 0);
-    sh.getRange(1, 1, 1, HEAD.length).setValues([HEAD]).setFontWeight("bold");
     sh.setFrozenRows(1);
   }
+  if (sh.getRange(1, HEAD.length).getValue() !== HEAD[HEAD.length - 1])   // 예전 시트에 새 열 제목 추가
+    sh.getRange(1, 1, 1, HEAD.length).setValues([HEAD]).setFontWeight("bold");
   return sh;
 }
 
@@ -68,9 +72,16 @@ function setup() {
   s.getRange("J2").setFormula("=QUERY(기록!A2:H, \"select G, count(D) where D='실행' group by G label G '기기', count(D) '실행'\", 0)");
   s.getRange("M1").setValue("세부 (편조 종류 등)");
   s.getRange("M2").setFormula("=QUERY(기록!A2:H, \"select F, count(D) where F<>'' group by F order by count(D) desc label F '세부', count(D) '횟수'\", 0)");
+  s.getRange("P1").setValue("기능 요청 (기기 수)");
+  s.getRange("P2").setFormula("=QUERY(기록!A2:I, \"select F, count(C) where D='요청' group by F order by count(C) desc label F '기능', count(C) '요청'\", 0)");
+  s.getRange("S1").setValue("의견 (최근 순)");
+  s.getRange("S2").setFormula("=IFERROR(SORT(FILTER({기록!B2:B, 기록!F2:F, 기록!I2:I}, 기록!D2:D=\"의견\"), 1, FALSE), \"아직 없음\")");
+  s.setColumnWidth(21, 360);
   s.getRange("A1").setFontWeight("bold").setFontSize(13);
 }
 
 function safeDate(t, fallback) { const d = new Date(t); return isNaN(d) || d > fallback ? fallback : d; }
+// 의견: 수식으로 해석되지 않도록 = + - @ 로 시작하면 앞에 ' 를 붙임
+function clean(v) { const t = cut(v, 300); return /^[=+\-@]/.test(t) ? "'" + t : t; }
 function cut(v, n) { return String(v == null ? "" : v).slice(0, n); }
 function out(s) { return ContentService.createTextOutput(s); }

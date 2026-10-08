@@ -2,7 +2,8 @@
 import json, os, urllib.request, datetime as dt
 URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec"
 body = {"v": 1, "d": "testprobe01", "dev": "TEST", "ver": "probe",
-        "e": [{"t": dt.datetime.now(dt.timezone.utc).isoformat(), "a": "실행", "al": "KAL", "m": "테스트"}]}
+        "e": [{"t": dt.datetime.now(dt.timezone.utc).isoformat(), "a": "요청", "al": "", "m": "테스트"},
+              {"t": dt.datetime.now(dt.timezone.utc).isoformat(), "a": "의견", "al": "", "m": "테스트", "c": "=테스트 의견 (지워도 됩니다)"}]}
 req = urllib.request.Request(URL, data=json.dumps(body).encode(), headers={"Content-Type": "text/plain"})
 try:
     with urllib.request.urlopen(req, timeout=60) as r:

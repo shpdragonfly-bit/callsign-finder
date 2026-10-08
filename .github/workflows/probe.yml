@@ -27,7 +27,6 @@ jobs:
         if: false
         run: python tools/probe_wx.py
       - name: 통계 웹 앱 점검
-        if: false
         run: python tools/probe_stats.py
       - name: API 호출 샘플 수집
         if: hashFiles('probe/calls.json') != ''
