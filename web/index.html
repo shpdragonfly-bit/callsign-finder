@@ -69,6 +69,11 @@ body {
 body[data-tab="ft"] .cs-only, body[data-tab="pk"] .cs-only { display: none; }
 
 .search { position: relative; }
+.hnav { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.hnav button { flex: 1; font: inherit; font-size: 14px; font-weight: 600; padding: 8px 10px; border-radius: 10px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--panel); color: var(--accent); }
+.hnav button:disabled { color: var(--muted); opacity: .45; cursor: default; }
+.hnav span { min-width: 54px; text-align: center; font: 600 12px var(--mono); color: var(--muted); }
 .al-tabs { margin-bottom: 10px; }
 .al-tabs button { font-size: 14px; padding: 9px 0; white-space: nowrap; letter-spacing: -0.3px; }
 @media (max-width: 400px) { .al-tabs button { font-size: 13px; letter-spacing: -0.5px; } }
@@ -408,6 +413,11 @@ button.b:disabled { opacity: .5; }
              placeholder="KE17 / 17 / LAX" aria-label="Call Sign 입력">
       <button class="clear" id="clear" aria-label="지우기">×</button>
     </div>
+    <div class="hnav" id="hnav" hidden>
+      <button type="button" id="hBack" aria-label="이전 조회">◀ 이전</button>
+      <span id="hPos"></span>
+      <button type="button" id="hFwd" aria-label="다음 조회">다음 ▶</button>
+    </div>
     <p class="hint" id="hint">ICAO(KAL017), IATA(KE17), 무선호출부호(KOREANAIR 17), 숫자만 입력해도 됩니다. 공항 코드(LAX, KLAX)를 넣으면 해당 공항 편이 나옵니다.</p>
     <div id="result"></div>
     <div id="sugg" class="list"></div>
@@ -549,7 +559,7 @@ button.b:disabled { opacity: .5; }
 // 보내지 않는 것: 검색한 편명·공항, 이름, 위치. 오프라인이면 모아 두었다가 인터넷 연결 시 전송.
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
-  const VER = "v33", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v34", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -1107,16 +1117,17 @@ window.csfStat = (() => {
     $("clear").style.display = raw ? "block" : "none";
     $("result").innerHTML = ""; $("sugg").innerHTML = "";
     if (!DB) { $("result").innerHTML = `<div class="card none"><b>데이터가 없습니다.</b> 인터넷 연결 상태에서 "최신 데이터 받기"를 누르세요.</div>`; return; }
-    if (!raw.trim()) { renderRecent(); return; }
+    if (!raw.trim()) { H?.seen(null); renderRecent(); return; }
     $("recent").innerHTML = "";
     const apt = airportCode(raw);
-    if (apt) { $("result").innerHTML = renderAirport(apt); clearTimeout(aptTimer); aptTimer = setTimeout(() => csfStat("공항검색", AL), 1500); return; }
+    if (apt) { $("result").innerHTML = renderAirport(apt); H?.seen(ap(apt).iata || apt); clearTimeout(aptTimer); aptTimer = setTimeout(() => csfStat("공항검색", AL), 1500); return; }
     const cands = candidates(raw);
     const hit = cands.find((c) => DB.flights[c]);
     if (hit && !ofAL(hit) && DB.airlines[hit.slice(0, 3)]) setAirline(hit.slice(0, 3), true);   // 다른 항공사 편명을 직접 입력하면 탭도 전환
-    if (hit) { $("result").innerHTML = renderFlight(hit, DB.flights[hit]); remember(hit); }
-    else if (cands.length) {
-      $("result").innerHTML = `<div class="card none"><b>${esc(cands[0])}</b> 에 대한 자료가 없습니다.</div>`;
+    if (hit) { $("result").innerHTML = renderFlight(hit, DB.flights[hit]); remember(hit); H?.seen(hit); }
+    else {
+      H?.seen(null);
+      if (cands.length) $("result").innerHTML = `<div class="card none"><b>${esc(cands[0])}</b> 에 대한 자료가 없습니다.</div>`;
     }
     // 앞자리 일치 후보
     const pre = cands.filter((c) => c !== hit);
@@ -1222,6 +1233,68 @@ window.csfStat = (() => {
     setAirline(b.dataset.al);
   });
   loadData(); renderNet();
+  // ---------- 조회 기록: 뒤로 · 앞으로 가기 ----------
+  // 결과가 1초 이상 떠 있던 조회만 기록 (입력 중간 단계 제외), 최근 30건 기기에 저장.
+  // 브라우저 기록(history)과 맞물려 Android 뒤로 가기 버튼도 같은 순서로 이동
+  var H = (() => {
+    const K = "csf-hist", MAX = 30;
+    let st = { l: [], i: -1 };
+    try { const v = JSON.parse(store.get(K) || "null"); if (v && Array.isArray(v.l)) st = v; } catch (e) {}
+    st.i = Math.min(Math.max(st.i, -1), st.l.length - 1);
+    let timer = null, nav = false, bBack = 0, bFwd = 0;           // bBack/bFwd: 이번 실행 중 브라우저 기록에 쌓인 앞뒤 개수
+    const save = () => store.set(K, JSON.stringify(st));
+    const same = (a, b) => a && b && a.q === b.q && a.al === b.al;
+    const paint = () => {
+      $("hnav").hidden = st.l.length < 2;
+      $("hBack").disabled = st.i <= 0;
+      $("hFwd").disabled = st.i >= st.l.length - 1;
+      $("hPos").textContent = st.l.length ? `${st.i + 1} / ${st.l.length}` : "";
+    };
+    function seen(key) {
+      clearTimeout(timer);
+      if (!key || nav) return;
+      timer = setTimeout(() => {
+        const e = { q: key, al: AL };
+        if (same(st.l[st.i], e)) return;
+        st.l = st.l.slice(0, st.i + 1); st.l.push(e);              // 중간에서 새로 조회하면 앞쪽 기록은 버림 (브라우저와 같음)
+        if (st.l.length > MAX) st.l = st.l.slice(-MAX);
+        st.i = st.l.length - 1; save(); paint();
+        try { history.pushState({ h: st.i }, ""); bBack++; bFwd = 0; } catch (e) {}
+      }, 1000);
+    }
+    function show(i) {
+      const e = st.l[i]; if (!e) return;
+      st.i = i; save(); paint();
+      nav = true;
+      try {
+        if (document.body.dataset.tab !== "cs") showTab("cs");
+        if (e.al !== AL && DB && DB.airlines[e.al]) setAirline(e.al, true);
+        $("q").value = e.q; store.set(QKEY, e.q); search();
+      } finally { nav = false; }
+      clearTimeout(timer);
+    }
+    function back() {
+      if (st.i <= 0) return;
+      if (bBack > 0) history.back();                           // popstate 에서 화면 이동
+      else { show(st.i - 1); try { history.replaceState({ h: st.i }, ""); } catch (e) {} }
+    }
+    function fwd() {
+      if (st.i >= st.l.length - 1) return;
+      if (bFwd > 0) history.forward();
+      else { show(st.i + 1); try { history.pushState({ h: st.i }, ""); bBack++; } catch (e) {} }
+    }
+    addEventListener("popstate", (ev) => {
+      const h = ev.state && typeof ev.state.h === "number" ? ev.state.h : null;
+      if (h == null) return;
+      if (h < st.i) { bBack = Math.max(0, bBack - 1); bFwd++; } else if (h > st.i) { bFwd = Math.max(0, bFwd - 1); bBack++; }
+      show(Math.min(h, st.l.length - 1));
+    });
+    try { history.replaceState({ h: st.i }, ""); } catch (e) {}
+    $("hBack").addEventListener("click", back);
+    $("hFwd").addEventListener("click", fwd);
+    paint();
+    return { seen };
+  })();
   csfStat("실행", AL);
   // 개발 예정 기능 요청 (기기당 기능별 1회, 의견은 선택)
   const REQKEY = "csf-req";
