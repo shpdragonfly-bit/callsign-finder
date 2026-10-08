@@ -1,0 +1,98 @@
+{
+ "metar_json": {
+  "status": 200,
+  "headers": {
+   "Date": "Thu, 08 Oct 2026 04:23:11 GMT",
+   "Content-Type": "application/json; charset=utf-8",
+   "Content-Length": "3450",
+   "Connection": "close",
+   "Vary": "Accept-Encoding",
+   "Cache-control": "max-age=60",
+   "ETag": "W/\"d7a-V4ZQhl3432OIrJW5VUF5AA7+Xs4\"",
+   "X-Frame-Options": "SAMEORIGIN",
+   "Content-Security-Policy": "frame-ancestors 'self' *.weather.gov",
+   "Strict-Transport-Security": "max-age=63072000; includeSubDomains",
+   "x-azure-ref": "20261008T042311Z-r17f994d464zzbthhC1YVRg69w00000020h0000000001hbg",
+   "x-fd-int-roxy-purgeid": "66959008",
+   "X-Cache": "TCP_MISS",
+   "Accept-Ranges": "bytes"
+  },
+  "len": 3450
+ },
+ "taf_json": {
+  "status": 200,
+  "headers": {
+   "Date": "Thu, 08 Oct 2026 04:23:11 GMT",
+   "Content-Type": "application/json; charset=utf-8",
+   "Content-Length": "16327",
+   "Connection": "close",
+   "Vary": "Accept-Encoding",
+   "Cache-control": "max-age=60",
+   "ETag": "W/\"3fc7-5dVlkZyss0GXLUWJ+/k23yNEB/E\"",
+   "X-Frame-Options": "SAMEORIGIN",
+   "Content-Security-Policy": "frame-ancestors 'self' *.weather.gov",
+   "Strict-Transport-Security": "max-age=63072000; includeSubDomains",
+   "x-azure-ref": "20261008T042311Z-16dd5556fb752gqqhC1BY1r0xc00000001q00000000033c1",
+   "x-fd-int-roxy-purgeid": "66959008",
+   "X-Cache": "TCP_MISS",
+   "Accept-Ranges": "bytes"
+  },
+  "len": 16327
+ },
+ "metar_raw": {
+  "status": 200,
+  "headers": {
+   "Date": "Thu, 08 Oct 2026 04:23:11 GMT",
+   "Content-Type": "text/plain; charset=utf-8",
+   "Content-Length": "527",
+   "Connection": "close",
+   "Cache-control": "max-age=60",
+   "ETag": "W/\"20f-blBd29TWG5zDXv3E79Di1+IaP70\"",
+   "X-Frame-Options": "SAMEORIGIN",
+   "Content-Security-Policy": "frame-ancestors 'self' *.weather.gov",
+   "Strict-Transport-Security": "max-age=63072000; includeSubDomains",
+   "x-azure-ref": "20261008T042311Z-16dd5556fb7pn9wdhC1BY1vtdc0000000v70000000000gkx",
+   "X-Cache": "CONFIG_NOCACHE",
+   "Accept-Ranges": "bytes"
+  },
+  "len": 527
+ },
+ "taf_raw": {
+  "status": 200,
+  "headers": {
+   "Date": "Thu, 08 Oct 2026 04:23:30 GMT",
+   "Content-Type": "text/plain; charset=utf-8",
+   "Content-Length": "1355",
+   "Connection": "close",
+   "Vary": "Accept-Encoding",
+   "Cache-control": "max-age=60",
+   "ETag": "W/\"54b-UX8VEL4+jG/gM1nfKKftZb2f818\"",
+   "X-Frame-Options": "SAMEORIGIN",
+   "Content-Security-Policy": "frame-ancestors 'self' *.weather.gov",
+   "Strict-Transport-Security": "max-age=63072000; includeSubDomains",
+   "x-azure-ref": "20261008T042311Z-16dd5556fb7rp4kchC1BY1vm200000000tq0000000000t7z",
+   "X-Cache": "CONFIG_NOCACHE",
+   "Accept-Ranges": "bytes"
+  },
+  "len": 1355
+ },
+ "metar_many": {
+  "status": 200,
+  "headers": {
+   "Date": "Thu, 08 Oct 2026 04:23:30 GMT",
+   "Content-Type": "application/json; charset=utf-8",
+   "Content-Length": "13431",
+   "Connection": "close",
+   "Vary": "Accept-Encoding",
+   "Cache-control": "max-age=60",
+   "ETag": "W/\"3477-OhbdgdaDjQ/iX7qkbjtQKlqAod8\"",
+   "X-Frame-Options": "SAMEORIGIN",
+   "Content-Security-Policy": "frame-ancestors 'self' *.weather.gov",
+   "Strict-Transport-Security": "max-age=63072000; includeSubDomains",
+   "x-azure-ref": "20261008T042330Z-16dd5556fb752gqqhC1BY1r0xc00000001q00000000033qq",
+   "X-Cache": "CONFIG_NOCACHE",
+   "Accept-Ranges": "bytes"
+  },
+  "len": 13431
+ }
+}
