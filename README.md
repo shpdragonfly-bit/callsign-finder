@@ -218,7 +218,8 @@
 | `data/observations.json` | ADS-B 기종 관측 누적 (120일 보관) |
 | `.github/workflows/update.yml` | 6시간마다, 그리고 코드 변경 시 자동 갱신 후 GitHub Pages로 배포 |
 | `updater/wx.py`, `.github/workflows/wx.yml` | 매시간 NOAA METAR/TAF를 받아 `web/wx.json`으로 배포 (저장소에는 커밋하지 않음) |
-| `.github/workflows/probe.yml`, `tools/` | 공공데이터 API 점검용 (수동 실행) |
+| `.github/workflows/probe.yml`, `tools/` | 공공데이터 API·통계 수신 점검용 (수동 실행) |
+| `tools/stats_apps_script.gs` | 사용 통계를 받는 Google Apps Script (관리자 Google 시트에 설치) |
 
 ### 자동 갱신 설정
 - **배포**: 저장소 **Settings → Pages → Source**를 **GitHub Actions**로 둡니다.
@@ -233,6 +234,14 @@
 1. `config/airlines.json`에 항목을 추가하거나 `enabled`를 `true`로 바꿉니다. 필요한 값은 ICAO 3자리, IATA 2자리, 무선호출부호, 이름입니다.
 2. 그 항공사 보유 기종이 `type_sweep` 목록에 없으면 추가합니다.
 3. 화면 탭 이름과 색상은 `web/index.html`의 `SHORT` 목록과 `[data-al="..."]` 색상 규칙에서 지정합니다.
+
+### 사용 통계
+- 앱은 익명 사용 기록을 관리자 Google 시트로 보냅니다. 광고·외부 분석 서비스는 쓰지 않습니다.
+- **보내는 것**: 무작위 기기번호(설치마다 새로 생성), 동작(실행·검색·공항검색·비행시간), 항공사 탭, 편조 종류(예: 5P-5), 기기 종류(iPhone·iPad·Android·PC, 홈 화면 앱 여부), 앱 버전, 사용 시각
+- **보내지 않는 것**: 검색한 편명·공항 코드, 이름, 위치, 입력한 시간
+- 오프라인에서 쓴 기록은 기기에 모았다가(최대 300건) 인터넷이 연결되면 보냅니다.
+- 시트의 **요약** 탭에서 사용자 수(전체·30일·7일), 항공사별·동작별·월별·기기별 횟수를 봅니다.
+- 수신 주소를 바꾸려면 `web/index.html`의 `csfStat` 안 `URL`을 고칩니다. Apps Script 코드를 고치면 **배포 → 배포 관리 → 수정 → 새 버전**으로 다시 배포합니다 (주소 유지).
 
 ### PC에서 직접 갱신
 - **Windows**: `업데이트_Windows.bat`
