@@ -560,7 +560,7 @@ button.b:disabled { opacity: .5; }
 // 보내지 않는 것: 검색한 편명·공항, 이름, 위치. 오프라인이면 모아 두었다가 인터넷 연결 시 전송.
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
-  const VER = "v35", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v36", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -655,7 +655,7 @@ window.csfStat = (() => {
   }
   function setAirline(k, keepQuery) {
     if (k === AL) return;
-    AL = k; store.set(ALKEY, k); renderAirlineTabs(); renderStat();
+    AL = k; store.set(ALKEY, k); renderAirlineTabs(); renderStat(); H?.onAirline();
     if (!keepQuery) search();
   }
 
@@ -1234,67 +1234,86 @@ window.csfStat = (() => {
     setAirline(b.dataset.al);
   });
   loadData(); renderNet();
-  // ---------- 조회 기록: 뒤로 · 앞으로 가기 ----------
-  // 결과가 1초 이상 떠 있던 조회만 기록 (입력 중간 단계 제외), 최근 30건 기기에 저장.
-  // 브라우저 기록(history)과 맞물려 Android 뒤로 가기 버튼도 같은 순서로 이동
+  // ---------- 조회 기록: 뒤로 · 앞으로 가기 (항공사 탭별로 따로) ----------
+  // 결과가 1초 이상 떠 있던 조회만 기록 (입력 중간 단계 제외), 항공사별 최근 30건 기기에 저장.
+  // 다른 항공사 탭으로 가면 그 항공사의 기록으로 바뀌고, 돌아오면 보던 위치부터 이어짐.
+  // 브라우저 기록(history)과 맞물려 Android 뒤로 가기 버튼도 같은 순서로 이동 (현재 항공사 안에서만)
   var H = (() => {
     const K = "csf-hist", MAX = 30;
-    let st = { l: [], i: -1 };
-    try { const v = JSON.parse(store.get(K) || "null"); if (v && Array.isArray(v.l)) st = v; } catch (e) {}
-    st.i = Math.min(Math.max(st.i, -1), st.l.length - 1);
-    let timer = null, nav = false, bBack = 0, bFwd = 0;           // bBack/bFwd: 이번 실행 중 브라우저 기록에 쌓인 앞뒤 개수
-    const save = () => store.set(K, JSON.stringify(st));
-    const same = (a, b) => a && b && a.q === b.q && a.al === b.al;
+    let all = {};
+    try {
+      const v = JSON.parse(store.get(K) || "null");
+      if (v && v.by) all = v.by;
+      else if (v && Array.isArray(v.l)) for (const e of v.l) { const x = all[e.al] || (all[e.al] = { l: [], i: -1 }); x.l.push(e); x.i = x.l.length - 1; }   // 예전 형식(전체 한 줄) 변환
+    } catch (e) {}
+    const cur = () => { const x = all[AL] || (all[AL] = { l: [], i: -1 }); x.i = Math.min(Math.max(x.i, -1), x.l.length - 1); return x; };
+    let timer = null, nav = false, bBack = 0, bFwd = 0;           // bBack/bFwd: 이번 실행 중 브라우저 기록에 쌓인 앞뒤 개수 (현재 항공사)
+    let shown = false;                                           // 현재 위치의 조회가 화면에 떠 있는지 (빈 화면이면 ◀ 가 그 조회부터 다시 보여 줌)
+    const save = () => store.set(K, JSON.stringify({ by: all }));
     const paint = () => {
-      $("hnav").hidden = st.l.length < 2;
-      $("hBack").disabled = st.i <= 0;
-      $("hFwd").disabled = st.i >= st.l.length - 1;
-      $("hPos").textContent = st.l.length ? `${st.i + 1} / ${st.l.length}` : "";
+      const x = cur();
+      $("hnav").hidden = x.l.length < 2;
+      $("hBack").disabled = shown ? x.i <= 0 : x.i < 0;
+      $("hFwd").disabled = x.i >= x.l.length - 1;
+      $("hPos").textContent = x.l.length ? `${shown ? x.i + 1 : "–"} / ${x.l.length}` : "";
     };
+    let seq = 0, curN = 0;                                       // 브라우저 기록 순번 (앞뒤 방향 판단용)
+    const mark = (push) => { if (push) curN = ++seq; try { history[push ? "pushState" : "replaceState"]({ h: cur().i, al: AL, n: curN }, ""); } catch (e) {} };
     function seen(key) {
       clearTimeout(timer);
-      if (!key || nav) return;
+      if (nav) return;
+      if (!key) { if (shown) { shown = false; paint(); } return; }
+      const al0 = AL;
       timer = setTimeout(() => {
-        const e = { q: key, al: AL };
-        if (same(st.l[st.i], e)) return;
-        st.l = st.l.slice(0, st.i + 1); st.l.push(e);              // 중간에서 새로 조회하면 앞쪽 기록은 버림 (브라우저와 같음)
-        if (st.l.length > MAX) st.l = st.l.slice(-MAX);
-        st.i = st.l.length - 1; save(); paint();
-        try { history.pushState({ h: st.i }, ""); bBack++; bFwd = 0; } catch (e) {}
+        if (AL !== al0) return;
+        const x = cur(), last = x.l[x.i];
+        if (last && last.q === key) { if (!shown) { shown = true; paint(); } return; }
+        x.l = x.l.slice(0, x.i + 1); x.l.push({ q: key, al: AL });  // 중간에서 새로 조회하면 앞쪽 기록은 버림 (브라우저와 같음)
+        if (x.l.length > MAX) x.l = x.l.slice(-MAX);
+        x.i = x.l.length - 1; shown = true; save(); paint();
+        mark(true); bBack++; bFwd = 0;
       }, 1000);
     }
     function show(i) {
-      const e = st.l[i]; if (!e) return;
-      st.i = i; save(); paint();
+      const x = cur(), e = x.l[i]; if (!e) return;
+      x.i = i; shown = true; save(); paint();
       nav = true;
       try {
         if (document.body.dataset.tab !== "cs") showTab("cs");
-        if (e.al !== AL && DB && DB.airlines[e.al]) setAirline(e.al, true);
         $("q").value = e.q; store.set(QKEY, e.q); search();
       } finally { nav = false; }
       clearTimeout(timer);
     }
     function back() {
-      if (st.i <= 0) return;
+      const x = cur();
+      if (!shown) { if (x.i >= 0) { show(x.i); mark(false); } return; }  // 빈 화면 → 보던 조회부터
+      if (x.i <= 0) return;
       if (bBack > 0) history.back();                           // popstate 에서 화면 이동
-      else { show(st.i - 1); try { history.replaceState({ h: st.i }, ""); } catch (e) {} }
+      else { show(x.i - 1); mark(false); }
     }
     function fwd() {
-      if (st.i >= st.l.length - 1) return;
+      const x = cur(); if (x.i >= x.l.length - 1) return;
       if (bFwd > 0) history.forward();
-      else { show(st.i + 1); try { history.pushState({ h: st.i }, ""); bBack++; } catch (e) {} }
+      else { show(x.i + 1); mark(true); bBack++; }
     }
     addEventListener("popstate", (ev) => {
-      const h = ev.state && typeof ev.state.h === "number" ? ev.state.h : null;
-      if (h == null) return;
-      if (h < st.i) { bBack = Math.max(0, bBack - 1); bFwd++; } else if (h > st.i) { bFwd = Math.max(0, bFwd - 1); bBack++; }
-      show(Math.min(h, st.l.length - 1));
+      const s0 = ev.state || {}, x = cur();
+      if (typeof s0.n !== "number") return;
+      const backDir = s0.n < curN; curN = s0.n;
+      if (backDir) { bBack = Math.max(0, bBack - 1); bFwd++; } else { bFwd = Math.max(0, bFwd - 1); bBack++; }
+      // 같은 항공사 기록이면 그 위치로, 아니면(다른 항공사 때 쌓인 기록) 현재 항공사 안에서 한 칸 이동
+      let t = s0.al === AL && typeof s0.h === "number" && (backDir ? s0.h < x.i : s0.h > x.i) ? s0.h : x.i + (backDir ? -1 : 1);
+      if (backDir && !shown && x.i >= 0) t = x.i;               // 빈 화면이면 보던 조회부터
+      if (t >= 0 && t < x.l.length) show(t);
     });
-    try { history.replaceState({ h: st.i }, ""); } catch (e) {}
+    function onAirline() {                                      // 항공사 탭을 바꾸면 그 항공사 기록으로
+      clearTimeout(timer); bBack = 0; bFwd = 0; shown = false; mark(false); paint();
+    }
+    mark(false);
     $("hBack").addEventListener("click", back);
     $("hFwd").addEventListener("click", fwd);
     paint();
-    return { seen };
+    return { seen, onAirline };
   })();
   csfStat("실행", AL);
   // 개발 예정 기능 요청 (기기당 기능별 1회, 의견은 선택)
