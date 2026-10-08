@@ -54,7 +54,7 @@ TYPE_NAMES = {
     "B763": "Boeing 767-300", "B772": "Boeing 777-200(ER)", "B77L": "Boeing 777-200LR/777F",
     "B77W": "Boeing 777-300ER", "B788": "Boeing 787-8", "B789": "Boeing 787-9",
     "B78X": "Boeing 787-10", "BCS1": "Airbus A220-100", "BCS3": "Airbus A220-300",
-    "A20N": "Airbus A320neo", "B773": "Boeing 777-300",
+    "A20N": "Airbus A320neo", "B773": "Boeing 777-300", "B737": "Boeing 737-700",
 }
 
 

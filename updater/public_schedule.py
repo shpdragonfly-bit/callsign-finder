@@ -29,7 +29,7 @@ IATA_EQUIP = {
     "748": "B748", "74H": "B748", "74J": "B748", "74N": "B748", "744": "B744", "74F": "B744", "74Y": "B744", "74X": "B744",
     "77W": "B77W", "772": "B772", "77L": "B77L", "77F": "B77L", "77X": "B77L", "773": "B773",
     "788": "B788", "789": "B789", "781": "B78X", "78J": "B78X",
-    "738": "B738", "739": "B739", "7M8": "B38M", "7M9": "B39M", "763": "B763",
+    "738": "B738", "739": "B739", "73H": "B738", "73J": "B739", "737": "B737", "7M8": "B38M", "7M9": "B39M", "763": "B763",
     "388": "A388", "332": "A332", "333": "A333", "339": "A339", "359": "A359", "351": "A35K",
     "321": "A321", "32Q": "A21N", "32N": "A20N", "320": "A320", "221": "BCS1", "223": "BCS3",
 }
@@ -188,10 +188,13 @@ def collect(airlines, cache_path, now):
         cache["icn_at"] = now.strftime("%Y-%m-%dT%H:%MZ")
     except Exception as e:
         log("  ! 인천공항 수집 실패: %s (이전 값 유지)" % e)
-    if cache.get("kac_date") != today_kst.isoformat() or not cache.get("kac"):   # 시즌 스케줄은 하루 한 번
+    al_key = ",".join(sorted(iata_map))
+    # 시즌 스케줄은 하루 한 번 (항공사 구성이 바뀌면 즉시 다시)
+    if cache.get("kac_date") != today_kst.isoformat() or not cache.get("kac") or cache.get("kac_airlines") != al_key:
         try:
             cache["kac"] = fetch_kac(key, iata_map, today_kst)
             cache["kac_date"] = today_kst.isoformat()
+            cache["kac_airlines"] = al_key
         except Exception as e:
             log("  ! 한국공항공사 수집 실패: %s (이전 값 유지)" % e)
     os.makedirs(os.path.dirname(cache_path), exist_ok=True)

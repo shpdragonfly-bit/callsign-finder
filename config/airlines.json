@@ -10,25 +10,64 @@
       "enabled": true
     },
     {
+      "icao": "JNA",
+      "iata": "LJ",
+      "name": "진에어",
+      "name_en": "Jin Air",
+      "telephony": "JIN AIR",
+      "enabled": true
+    },
+    {
+      "icao": "JJA",
+      "iata": "7C",
+      "name": "제주항공",
+      "name_en": "Jeju Air",
+      "telephony": "JEJU AIR",
+      "enabled": true
+    },
+    {
+      "icao": "TWB",
+      "iata": "TW",
+      "name": "티웨이",
+      "name_en": "T'way Air",
+      "telephony": "TEEWAY",
+      "enabled": true
+    },
+    {
       "icao": "AAR",
       "iata": "OZ",
       "name": "아시아나항공",
       "name_en": "Asiana Airlines",
       "telephony": "ASIANA",
       "enabled": false
-    },
-    {
-      "icao": "JNA",
-      "iata": "LJ",
-      "name": "진에어",
-      "name_en": "Jin Air",
-      "telephony": "JIN AIR",
-      "enabled": false
     }
   ],
   "type_sweep": [
-    "A21N", "A320", "A321", "A332", "A333", "A339", "A359", "A35K", "A388",
-    "B38M", "B39M", "B738", "B739", "B744", "B748", "B763", "B772", "B77L", "B77W",
-    "B788", "B789", "B78X", "BCS1", "BCS3"
+    "A21N",
+    "A320",
+    "A321",
+    "A332",
+    "A333",
+    "A339",
+    "A359",
+    "A35K",
+    "A388",
+    "B38M",
+    "B39M",
+    "B738",
+    "B739",
+    "B744",
+    "B748",
+    "B763",
+    "B772",
+    "B77L",
+    "B77W",
+    "B788",
+    "B789",
+    "B78X",
+    "BCS1",
+    "BCS3",
+    "A20N",
+    "B737"
   ]
 }
