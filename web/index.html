@@ -219,6 +219,16 @@ button.b:disabled { opacity: .5; }
 .rl { display: inline-flex; align-items: center; white-space: nowrap; }
 .klt { font: 700 12px var(--mono); color: var(--text); white-space: nowrap; margin-left: 3px; }
 .klt-note { padding: 8px 16px 0; font-size: 11px; color: var(--muted); }
+/* 근무 교대 시각: 구간 사이 띠로 크게 */
+.ho { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; padding: 8px 16px; background: var(--accent-soft);
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: -1px; }
+.ho-lbl { font-size: 11px; font-weight: 800; color: var(--accent-ink); background: var(--accent); padding: 2px 7px; border-radius: 6px; letter-spacing: .04em; }
+.ho-klt { font: 800 26px/1 var(--mono); color: var(--accent); letter-spacing: .02em; }
+.ho-klt small { font: 700 12px var(--mono); margin-left: 3px; color: var(--accent); opacity: .85; }
+.ho-z { font: 600 13px var(--mono); color: var(--muted); }
+.ho-who { margin-left: auto; font-size: 13px; color: var(--text); white-space: nowrap; }
+.ho-who .dot { margin-right: 3px; }
+@media (max-width: 420px) { .ho-klt { font-size: 24px; } .ho-who { margin-left: 0; width: 100%; font-size: 12px; } }
 .utc small { font-weight: 500; color: var(--muted); }
 .tt .b { padding: 6px 10px; font-size: 13px; white-space: nowrap; flex: none; }
 .times { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
@@ -1080,7 +1090,7 @@ button.b:disabled { opacity: .5; }
       h += `</div></div>`;
     }
     h += st.utc != null
-      ? `<div class="axis"><span>${zt(st.utc)}</span><span>${zt(st.utc + T / 2)}</span><span>${zt(st.utc + T)}</span></div></div><div class="klt-note">휴식 옆 시각 = 휴식 종료 시각 · KLT(Korea Local Time, UTC+9)</div><div class="segs">`
+      ? `<div class="axis"><span>${zt(st.utc)}</span><span>${zt(st.utc + T / 2)}</span><span>${zt(st.utc + T)}</span></div></div><div class="klt-note">교대 시각: KLT(Korea Local Time, UTC+9) · 작은 글씨는 UTC</div><div class="segs">`
       : `<div class="axis"><span>0+00</span><span>${fmt(T / 2)}</span><span>${fmt(T)}</span></div></div><div class="segs">`;
 
     let t = 0;
@@ -1091,12 +1101,20 @@ button.b:disabled { opacity: .5; }
       h += `<div class="${cls}" style="${v === 0 && !warn ? "opacity:.45" : ""}">
         <div><div class="when"><b>${fmt(t)} → ${fmt(t + v)}</b></div>
         <div class="crew">${dutyOf(g).map((d) => `<span class="c-${pcls(d)}"><span class="dot"></span>${d.id}</span>`).join(" · ")}${tag ? `<span class="badge">${tag}</span>` : ""}</div></div>
-        <div class="mid"><span class="rl"><span class="rp c-${C.duty ? "N" : g}">${restOf(g).map((d) => d.id).join("·")} 휴식</span>${st.utc != null ? `<span class="klt">: ${klt(st.utc + t + v)}</span>` : ""}</span>
+        <div class="mid"><span class="rl"><span class="rp c-${C.duty ? "N" : g}">${restOf(g).map((d) => d.id).join("·")} 휴식</span></span>
         ${st.utc != null ? `<div class="utc">${zt(st.utc + t).slice(0, 4)}<small>–</small>${zt(st.utc + t + v)}</div>` : ""}</div>
         <div class="len"><button data-i="${i}" data-d="-1" aria-label="5분 감소">−</button>
         <input data-i="${i}" inputmode="tel" value="${fmt(v)}" aria-label="구간 ${i + 1} 시간">
         <button data-i="${i}" data-d="1" aria-label="5분 증가">+</button></div></div>`;
       t += v;
+      // 근무 교대 시각 (휴식 종료 = 다음 구간 시작). 마지막 구간 끝은 착륙이라 표시하지 않음
+      if (st.utc != null && i < last && v > 0) {
+        const now = dutyOf(g), nx = dutyOf(P.rest[i + 1]);
+        const inn = nx.filter((p) => !now.includes(p)), out = now.filter((p) => !nx.includes(p));
+        h += `<div class="ho"><span class="ho-lbl">교대</span><b class="ho-klt">${klt(st.utc + t).replace(" KLT", "")}<small>KLT</small></b>
+          <span class="ho-z">${zt(st.utc + t)}</span>
+          <span class="ho-who">${inn.map((d) => `<span class="c-${pcls(d)}"><span class="dot"></span>${d.id}</span>`).join(" ")} 근무${out.length ? ` · ${out.map((d) => d.id).join(" ")} 휴식` : ""}</span></div>`;
+      }
     });
     h += `</div>`;
 
