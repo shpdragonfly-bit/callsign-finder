@@ -93,6 +93,7 @@ body[data-tab="ft"] .cs-only, body[data-tab="pk"] .cs-only { display: none; }
 .cs { font: 700 22px var(--mono); letter-spacing: .04em; }
 .cs small { font: 500 13px system-ui, sans-serif; color: var(--muted); margin-left: 8px; letter-spacing: 0; }
 .cs small.utz { color: var(--accent); font-weight: 700; border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; vertical-align: 3px; }
+.utz { display: inline-block; font: 700 12px system-ui, sans-serif; letter-spacing: 0; color: var(--accent); border: 1px solid var(--line); border-radius: 6px; padding: 0 5px; line-height: 1.5; vertical-align: 1px; white-space: nowrap; }
 
 .route { display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 8px; padding: 14px 16px 16px; }
 .ap .code { font: 700 40px/1 var(--mono); color: var(--accent); }
@@ -559,7 +560,7 @@ button.b:disabled { opacity: .5; }
 // 보내지 않는 것: 검색한 편명·공항, 이름, 위치. 오프라인이면 모아 두었다가 인터넷 연결 시 전송.
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
-  const VER = "v34", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v35", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -810,7 +811,7 @@ window.csfStat = (() => {
   function apBlock(code, cls) {
     const a = ap(code);
     return `<div class="ap ${cls}"><div class="code">${esc(a.iata || code)}</div>
-      <div class="icao">${esc(code)}</div><div class="name">${esc(a.name)}</div>
+      <div class="icao">${esc(code)}${utcLabel(code) ? ` <span class="utz">${utcLabel(code)}</span>` : ""}</div><div class="name">${esc(a.name)}</div>
       <div class="city">${esc([a.city, a.cc].filter(Boolean).join(", "))}</div></div>`;
   }
 
@@ -1070,7 +1071,7 @@ window.csfStat = (() => {
   const ago = (sec) => { const m = Math.round((Date.now() / 1000 - sec) / 60); return m < 60 ? `${m}분 전` : m < 2880 ? `${Math.floor(m / 60)}시간 ${m % 60}분 전` : `${Math.floor(m / 1440)}일 전`; };
   function wxBlock(cs, code, k, label, sched, user) {
     const icao = icaoOf(code), w = WX && WX.wx && WX.wx[icao], a = ap(code);
-    let h = `<div class="wxb"><div class="wxb-hd"><b>${esc(a.iata || code)}</b><small>${esc(icao)} · ${label}</small>${w && w.cat ? `<span class="cat cat-${esc(w.cat)}">${esc(w.cat)}</span>` : ""}</div>`;
+    let h = `<div class="wxb"><div class="wxb-hd"><b>${esc(a.iata || code)}</b><small>${esc(icao)} · ${label}</small>${utcLabel(code) ? `<span class="utz">${utcLabel(code)}</span>` : ""}${w && w.cat ? `<span class="cat cat-${esc(w.cat)}">${esc(w.cat)}</span>` : ""}</div>`;
     if (!w || (!w.m && !w.t)) return h + `<div class="wx-none">기상 자료 없음${WX ? "" : " · 인터넷 연결 시 받아옵니다"}</div></div>`;
     if (w.m) {
       const z = new Date(w.mo * 1000);
