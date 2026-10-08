@@ -922,11 +922,11 @@ button.b:disabled { opacity: .5; }
     const x = ((k % 1440) + 1440) % 1440;
     return `${String(Math.floor(x / 60)).padStart(2, "0")}${String(x % 60).padStart(2, "0")} KLT`;
   };
-  // UTC 표기: 1430Z, 자정을 넘기면 +1
+  // UTC 표기: 1430Z
   const zt = (m, long) => {
     m = Math.round(m); const d = Math.floor(m / 1440), x = ((m % 1440) + 1440) % 1440;
     const s = String(Math.floor(x / 60)).padStart(2, "0") + String(x % 60).padStart(2, "0") + "Z";
-    return d > 0 ? s + (long ? ` (+${d}일)` : `+${d}`) : s;
+    return s;                                            // 날짜 넘김 표시(+1) 없이 시각만
   };
   // "1430", "14:30", "14+30", "930", "14" → 분 (잘못된 값은 null)
   function parseUtc(text) {
