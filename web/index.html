@@ -883,8 +883,8 @@ button.b:disabled { opacity: .5; }
       // 구간 종류(근무 편조): A=C1·F1(이륙·착륙만), B=C2·F2, C=C2·C3, D=C3·F2
       // 5명 조종석 근무 균등 → C1·F1 = 2T/5 (이륙+착륙), B·C·D 각 T/5
       title: "5 Pilot",
-      pilots: [{ id: "C1", role: "", cls: "A" }, { id: "F1", role: "", cls: "A" }, { id: "C2", role: "", cls: "B" },
-               { id: "C3", role: "", cls: "C" }, { id: "F2", role: "", cls: "D" }],
+      pilots: [{ id: "C1", role: "ZC", cls: "A" }, { id: "F1", role: "VF", cls: "A" }, { id: "C2", role: "VC", cls: "B" },
+               { id: "C3", role: "VC", cls: "C" }, { id: "F2", role: "VF", cls: "D" }],
       duty: { A: ["C1", "F1"], B: ["C2", "F2"], C: ["C2", "C3"], D: ["C3", "F2"] },
       perPilot: true,
       subs: [
@@ -1118,7 +1118,7 @@ button.b:disabled { opacity: .5; }
     });
     h += `</div>`;
 
-    const units = C.perPilot ? C.pilots.map((p) => ({ id: p.id, cls: pcls(p), name: p.id }))
+    const units = C.perPilot ? C.pilots.map((p) => ({ id: p.id, cls: pcls(p), name: pname(p) }))
       : C.groups.map((g) => ({ id: g.id, cls: g.id, name: st.mode === "3P" ? g.name : restOf(g.id).map(pname).join(" · ") }));
     h += `<div class="sum${units.length > 3 && C.perPilot ? " sum5" : ""}" style="grid-template-columns:repeat(${units.length},minmax(0,1fr))">${units.map((u) => `<div class="c-${u.cls}">
       <div class="who"><span class="dot"></span>${u.name}</div>
