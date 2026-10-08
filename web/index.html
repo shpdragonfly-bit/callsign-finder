@@ -89,6 +89,15 @@ body[data-tab="ft"] .cs-only { display: none; }
 .arrow { color: var(--accent); font-size: 26px; padding-top: 6px; opacity: .7; }
 .via { padding: 0 16px 12px; font-size: 13px; color: var(--muted); }
 .apx { border-top: 1px solid var(--line); padding: 10px 16px 12px; }
+.apt-name { padding: 6px 16px 12px; font-size: 14px; }
+.apt-name span { display: block; font-size: 12px; color: var(--muted); }
+.aptsec { margin-bottom: 10px; }
+.aptsec summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--muted); padding: 6px 2px; list-style: none; }
+.aptsec summary::-webkit-details-marker { display: none; }
+.aptsec summary::before { content: "▾ "; }
+.aptsec:not([open]) summary::before { content: "▸ "; }
+.aptsec summary b { color: var(--accent); margin-left: 4px; }
+.aptsec .row .r { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .sch { border-top: 1px solid var(--line); padding: 10px 16px 12px; }
 .sch-src { font-weight: 500; font-size: 11px; }
 .wd { display: flex; align-items: center; gap: 4px; margin-bottom: 8px; }
@@ -197,6 +206,9 @@ button.b:disabled { opacity: .5; }
 :root[data-theme="dark"] .rp { color: #04121F; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .rp { color: #04121F; } }
 .utc { font: 700 12px var(--mono); color: var(--text); margin-top: 4px; white-space: nowrap; }
+.rl { display: inline-flex; align-items: center; white-space: nowrap; }
+.klt { font: 700 12px var(--mono); color: var(--text); white-space: nowrap; margin-left: 3px; }
+.klt-note { padding: 8px 16px 0; font-size: 11px; color: var(--muted); }
 .utc small { font-weight: 500; color: var(--muted); }
 .tt .b { padding: 6px 10px; font-size: 13px; white-space: nowrap; flex: none; }
 .times { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
@@ -241,8 +253,17 @@ button.b:disabled { opacity: .5; }
   .sg .when { font-size: 11px; }
   .sg .crew { font-size: 13px; }
   .rp { font-size: 11px; padding: 1px 7px; }
-  .utc { font-size: 11px; }
-}</style>
+  .utc, .klt { font-size: 11px; }
+  .klt { margin-left: 1px; }
+}
+@media (max-width: 560px) {
+  /* 휴대폰: 휴식 정보를 구간 아래 한 줄로 */
+  .sg { grid-template-columns: 1fr auto; }
+  .sg .mid { grid-column: 1 / -1; order: 3; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; text-align: left; overflow: visible; }
+  .sg .mid .utc { margin-top: 0; color: var(--muted); }
+  .sg .len { order: 2; }
+}
+</style>
 </head>
 <body>
 <div class="bar">
@@ -262,10 +283,10 @@ button.b:disabled { opacity: .5; }
   <section class="panel" id="panel-cs" role="tabpanel" aria-labelledby="tab-cs">
     <div class="search">
       <input id="q" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false"
-             placeholder="KAL017 / KE17 / 17" aria-label="Call Sign 입력">
+             placeholder="KE17 / 17 / LAX" aria-label="Call Sign 입력">
       <button class="clear" id="clear" aria-label="지우기">×</button>
     </div>
-    <p class="hint">ICAO(KAL017), IATA(KE17), 무선호출부호(KOREANAIR 17), 숫자만 입력해도 됩니다.</p>
+    <p class="hint">ICAO(KAL017), IATA(KE17), 무선호출부호(KOREANAIR 17), 숫자만 입력해도 됩니다. 공항 코드(LAX, KLAX)를 넣으면 해당 공항 편이 나옵니다.</p>
     <div id="result"></div>
     <div id="sugg" class="list"></div>
     <div id="recent" class="list"></div>
@@ -556,6 +577,82 @@ button.b:disabled { opacity: .5; }
     }).join("");
   }
 
+  // ---------- 공항 코드 역검색 (IATA 3자리 / ICAO 4자리) ----------
+  let aptIdx = null, aptIdxGen = "";
+  function airportIndex() {
+    if (aptIdx && aptIdxGen === DB.generated) return aptIdx;
+    const i2i = {};
+    for (const [k, v] of Object.entries(DB.airports)) if (v[0]) i2i[v[0]] = k;
+    const toIcao = (c) => (DB.airports[c] ? c : i2i[c] || c);
+    const by = {};                                         // ICAO → {dep:[], arr:[], via:[]}
+    for (const [cs, f] of Object.entries(DB.flights)) {
+      const r0 = f.r && f.r.length >= 2 ? f.r : schedRoute(f.sch);
+      if (!r0) continue;
+      const r = r0.map(toIcao);
+      r.forEach((c, i) => {
+        const e = by[c] = by[c] || { dep: [], arr: [], via: [] };
+        (i === 0 ? e.dep : i === r.length - 1 ? e.arr : e.via).push(cs);
+      });
+    }
+    aptIdx = { i2i, by }; aptIdxGen = DB.generated;
+    return aptIdx;
+  }
+  function airportCode(raw) {
+    const s = (raw || "").toUpperCase().replace(/[^A-Z]/g, "");
+    if (s.length !== (raw || "").replace(/\s/g, "").length) return null;   // 숫자 등이 섞이면 편명
+    if (s.length === 4 && DB.airports[s]) return s;
+    if (s.length === 3) { const k = airportIndex().i2i[s]; if (k) return k; }
+    return null;
+  }
+  function nextAt(cs, code, io) {                          // 해당 공항 기준 다음 예정 시각 (UTC Date)
+    const sc = DB.flights[cs].sch, now = Date.now() - 2 * 3600e3;
+    const ia = DB.airports[code] && DB.airports[code][0];
+    for (const i of (sc && sc.inst) || []) {
+      const t = utcOf(i[0]);
+      if (t < now) continue;
+      if (ia === "ICN" && i[2] === io) return t;
+      if (ia !== "ICN" && i[3] === ia && i[2] !== io) return t;
+    }
+    return null;
+  }
+  const collator = new Intl.Collator("en", { numeric: true });
+  function seasonAt(cs, code, io) {                        // 국내선 시즌 스케줄의 해당 공항 출발/도착 시각 (KST 'HHMM')
+    const ia = DB.airports[code] && DB.airports[code][0], sc = DB.flights[cs].sch;
+    const d = ((sc && sc.season) || []).find((x) => x.kind === "dom" && (io === "D" ? x.dep : x.arr) === ia);
+    return d ? (io === "D" ? d.std : d.sta) : "";
+  }
+  function aptRows(list, code, io) {
+    const rows = list.map((cs) => {
+      const t = nextAt(cs, code, io), k = t ? "" : seasonAt(cs, code, io);
+      return { cs, t, k, key: t ? t.getTime() : k ? 9e15 + +k : 9.9e15 };
+    });
+    rows.sort((a, b) => a.key - b.key || collator.compare(a.cs, b.cs));
+    return rows.map(({ cs, t, k }) => {
+      const f = DB.flights[cs];
+      const r = f.r && f.r.length >= 2 ? f.r : schedRoute(f.sch) || [];
+      const other = io === "D" ? r[r.length - 1] : r[0];
+      const o = other ? ap(other).iata || other : "?";
+      const ty = (f.ty && f.ty[0] && f.ty[0].t) || ((nextType(f.sch) || [])[4]) || "";
+      // 짧게: 인천 운항편은 날짜+UTC, 국내선 시즌은 매일 반복이라 UTC 시각만
+      const when = t ? ` · ${t.getUTCMonth() + 1}/${t.getUTCDate()} ${fz(t)}` : k ? ` · ${kstToZ(k).slice(0, 5)}` : "";
+      const right = `${io === "D" ? "→ " + o : o + " →"}${when}${ty ? " · " + ty : ""}`;
+      return `<button class="row" data-cs="${esc(cs)}"><span class="l">${esc(cs)}</span><span class="r">${esc(right)}</span></button>`;
+    }).join("");
+  }
+  function renderAirport(code) {
+    const a = ap(code), e = airportIndex().by[code] || { dep: [], arr: [], via: [] };
+    let h = `<div class="card"><div class="card-hd"><div class="cs">${esc(a.iata || code)}<small>${esc(code)}</small></div></div>
+      <div class="apt-name">${esc(a.name)}<span>${esc([a.city, a.cc].filter(Boolean).join(", "))}</span></div>
+      <div class="apx"><div class="apx-hd"><span>표고 · 일출·일몰 (UTC)</span>
+        <span class="apx-day"><button data-sunday="0" aria-pressed="${sunDay === 0}">오늘</button><button data-sunday="1" aria-pressed="${sunDay === 1}">내일</button></span></div>
+        <div class="apx-g">${apInfo(code, "org")}<div></div></div></div></div>`;
+    const sec = (title, list, io) => list.length
+      ? `<details class="aptsec" open><summary>${title} <b>${list.length}</b></summary>${aptRows(list, code, io)}</details>` : "";
+    h += `<div class="list">${sec(`${esc(a.iata || code)} 출발`, e.dep, "D")}${sec(`${esc(a.iata || code)} 도착`, e.arr, "A")}${sec("경유", e.via, "D")}</div>`;
+    if (!e.dep.length && !e.arr.length && !e.via.length) h += `<div class="card none">이 공항을 오가는 Call Sign 자료가 없습니다.</div>`;
+    return h;
+  }
+
   function search() {
     const raw = $("q").value;
     $("clear").style.display = raw ? "block" : "none";
@@ -563,6 +660,8 @@ button.b:disabled { opacity: .5; }
     if (!DB) { $("result").innerHTML = `<div class="card none"><b>데이터가 없습니다.</b> 인터넷 연결 상태에서 "최신 데이터 받기"를 누르세요.</div>`; return; }
     if (!raw.trim()) { renderRecent(); return; }
     $("recent").innerHTML = "";
+    const apt = airportCode(raw);
+    if (apt) { $("result").innerHTML = renderAirport(apt); return; }
     const cands = candidates(raw);
     const hit = cands.find((c) => DB.flights[c]);
     if (hit) { $("result").innerHTML = renderFlight(hit, DB.flights[hit]); remember(hit); }
@@ -734,6 +833,12 @@ button.b:disabled { opacity: .5; }
   const fmt = (m) => { m = Math.max(0, Math.round(m)); return Math.floor(m / 60) + "+" + String(m % 60).padStart(2, "0"); };
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
   const r5 = (m) => Math.round(m / STEP) * STEP;
+  // 휴식 종료 한국시각 (KLT = UTC+9). T/O의 한국 날짜보다 뒤면 +1
+  const klt = (m) => {
+    const k = Math.round(m) + 540, base = Math.floor((st.utc + 540) / 1440), d = Math.floor(k / 1440) - base;
+    const x = ((k % 1440) + 1440) % 1440;
+    return `${String(Math.floor(x / 60)).padStart(2, "0")}${String(x % 60).padStart(2, "0")}${d > 0 ? "+" + d : ""} KLT`;
+  };
   // UTC 표기: 1430Z, 자정을 넘기면 +1
   const zt = (m, long) => {
     m = Math.round(m); const d = Math.floor(m / 1440), x = ((m % 1440) + 1440) % 1440;
@@ -885,7 +990,7 @@ button.b:disabled { opacity: .5; }
       h += `</div></div>`;
     }
     h += st.utc != null
-      ? `<div class="axis"><span>${zt(st.utc)}</span><span>${zt(st.utc + T / 2)}</span><span>${zt(st.utc + T)}</span></div></div><div class="segs">`
+      ? `<div class="axis"><span>${zt(st.utc)}</span><span>${zt(st.utc + T / 2)}</span><span>${zt(st.utc + T)}</span></div></div><div class="klt-note">휴식 옆 시각 = 휴식 종료 시각 · KLT(Korea Local Time, UTC+9)</div><div class="segs">`
       : `<div class="axis"><span>0+00</span><span>${fmt(T / 2)}</span><span>${fmt(T)}</span></div></div><div class="segs">`;
 
     let t = 0;
@@ -896,7 +1001,7 @@ button.b:disabled { opacity: .5; }
       h += `<div class="${cls}" style="${v === 0 && !warn ? "opacity:.45" : ""}">
         <div><div class="when"><b>${fmt(t)} → ${fmt(t + v)}</b></div>
         <div class="crew">${dutyOf(g).map((d) => `<span class="c-${d.g}"><span class="dot"></span>${d.id}</span>`).join(" · ")}${tag ? `<span class="badge">${tag}</span>` : ""}</div></div>
-        <div class="mid"><span class="rp c-${g}">${restOf(g).map((d) => d.id).join("·")} 휴식</span>
+        <div class="mid"><span class="rl"><span class="rp c-${g}">${restOf(g).map((d) => d.id).join("·")} 휴식</span>${st.utc != null ? `<span class="klt">: ${klt(st.utc + t + v)}</span>` : ""}</span>
         ${st.utc != null ? `<div class="utc">${zt(st.utc + t).slice(0, 4)}<small>–</small>${zt(st.utc + t + v)}</div>` : ""}</div>
         <div class="len"><button data-i="${i}" data-d="-1" aria-label="5분 감소">−</button>
         <input data-i="${i}" inputmode="tel" value="${fmt(v)}" aria-label="구간 ${i + 1} 시간">
