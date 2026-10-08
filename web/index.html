@@ -23,7 +23,7 @@
   --shadow: 0 1px 2px rgba(11,37,69,.06), 0 4px 14px rgba(11,37,69,.05);
 }
 /* 항공사별 색상 (주간). 야간 기본값보다 앞에 두어 야간 모드에서는 아래 야간 규칙이 적용됨 */
-:root[data-al="JNA"] { --bg: #F6F2FA; --panel-2: #EFE7F6; --line: #DDD0EA; --accent: #6A2C9A; --accent-soft: #F0E6F8; --bar-1: #8E44C4; --bar-2: #5E2190; }
+:root[data-al="JNA"] { --bg: #F6FAF0; --panel-2: #EAF3DD; --line: #D4E5BF; --accent: #4B8512; --accent-soft: #EDF6E0; --bar-1: #97CC3E; --bar-2: #5E9E1F; }
 :root[data-al="JJA"] { --bg: #FFF7F2; --panel-2: #FDEEE4; --line: #F2D9C9; --accent: #D64A0E; --accent-soft: #FFEDE2; --bar-1: #FF8A2A; --bar-2: #E85412; }
 :root[data-al="TWB"] { --bg: #FDF5F6; --panel-2: #FAE9EB; --line: #EFD3D7; --accent: #C41E32; --accent-soft: #FCE8EA; --bar-1: #EC4359; --bar-2: #B91A2E; }
 :root[data-theme="dark"] {
@@ -285,11 +285,11 @@ button.b:disabled { opacity: .5; }
 }
 
 /* 항공사별 색상 (야간) */
-:root[data-theme="dark"][data-al="JNA"] { --accent: #C59AE8; --accent-soft: #2A1A3D; --bar-1: #1E1030; --bar-2: #1E1030; --line: #3A2A52; }
+:root[data-theme="dark"][data-al="JNA"] { --accent: #A9DC5F; --accent-soft: #22301A; --bar-1: #16210C; --bar-2: #16210C; --line: #34452A; }
 :root[data-theme="dark"][data-al="JJA"] { --accent: #FF9B5C; --accent-soft: #3A2414; --bar-1: #2A1609; --bar-2: #2A1609; --line: #4A3222; }
 :root[data-theme="dark"][data-al="TWB"] { --accent: #FF7C8C; --accent-soft: #3A1820; --bar-1: #2A0E15; --bar-2: #2A0E15; --line: #4A2830; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"])[data-al="JNA"] { --accent: #C59AE8; --accent-soft: #2A1A3D; --bar-1: #1E1030; --bar-2: #1E1030; --line: #3A2A52; }
+  :root:not([data-theme="light"])[data-al="JNA"] { --accent: #A9DC5F; --accent-soft: #22301A; --bar-1: #16210C; --bar-2: #16210C; --line: #34452A; }
   :root:not([data-theme="light"])[data-al="JJA"] { --accent: #FF9B5C; --accent-soft: #3A2414; --bar-1: #2A1609; --bar-2: #2A1609; --line: #4A3222; }
   :root:not([data-theme="light"])[data-al="TWB"] { --accent: #FF7C8C; --accent-soft: #3A1820; --bar-1: #2A0E15; --bar-2: #2A0E15; --line: #4A2830; }
 }
