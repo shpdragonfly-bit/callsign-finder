@@ -34,6 +34,14 @@
       "enabled": true
     },
     {
+      "icao": "ESR",
+      "iata": "ZE",
+      "name": "이스타항공",
+      "name_en": "Eastar Jet",
+      "telephony": "EASTAR JET",
+      "enabled": true
+    },
+    {
       "icao": "AAR",
       "iata": "OZ",
       "name": "아시아나항공",

@@ -26,6 +26,7 @@
 :root[data-al="JNA"] { --bg: #F6FAF0; --panel-2: #EAF3DD; --line: #D4E5BF; --accent: #4B8512; --accent-soft: #EDF6E0; --bar-1: #97CC3E; --bar-2: #5E9E1F; }
 :root[data-al="JJA"] { --bg: #FFF7F2; --panel-2: #FDEEE4; --line: #F2D9C9; --accent: #D64A0E; --accent-soft: #FFEDE2; --bar-1: #FF8A2A; --bar-2: #E85412; }
 :root[data-al="TWB"] { --bg: #FDF5F6; --panel-2: #FAE9EB; --line: #EFD3D7; --accent: #C41E32; --accent-soft: #FCE8EA; --bar-1: #EC4359; --bar-2: #B91A2E; }
+:root[data-al="ESR"] { --bg: #F9F3F4; --panel-2: #F1E2E5; --line: #E0C6CC; --accent: #7E0B22; --accent-soft: #F3E1E5; --bar-1: #8E1530; --bar-2: #5A0616; }
 :root[data-theme="dark"] {
   --bg: #06101D; --panel: #0D1B2E; --panel-2: #132640; --line: #1E3555;
   --text: #E4EEF8; --muted: #8AA2BF; --accent: #4CC2F2; --accent-soft: #0F2C47; --accent-ink: #04121F;
@@ -69,7 +70,8 @@ body[data-tab="ft"] .cs-only { display: none; }
 
 .search { position: relative; }
 .al-tabs { margin-bottom: 10px; }
-.al-tabs button { font-size: 14px; padding: 9px 2px; }
+.al-tabs button { font-size: 14px; padding: 9px 0; white-space: nowrap; letter-spacing: -0.3px; }
+@media (max-width: 400px) { .al-tabs button { font-size: 13px; letter-spacing: -0.5px; } }
 .search input {
   width: 100%; font: 600 34px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase;
   background: var(--panel); color: var(--text); border: 2px solid var(--line); border-radius: 14px;
@@ -288,10 +290,12 @@ button.b:disabled { opacity: .5; }
 :root[data-theme="dark"][data-al="JNA"] { --accent: #A9DC5F; --accent-soft: #22301A; --bar-1: #16210C; --bar-2: #16210C; --line: #34452A; }
 :root[data-theme="dark"][data-al="JJA"] { --accent: #FF9B5C; --accent-soft: #3A2414; --bar-1: #2A1609; --bar-2: #2A1609; --line: #4A3222; }
 :root[data-theme="dark"][data-al="TWB"] { --accent: #FF7C8C; --accent-soft: #3A1820; --bar-1: #2A0E15; --bar-2: #2A0E15; --line: #4A2830; }
+:root[data-theme="dark"][data-al="ESR"] { --accent: #D9939F; --accent-soft: #331019; --bar-1: #22060C; --bar-2: #22060C; --line: #47202A; }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"])[data-al="JNA"] { --accent: #A9DC5F; --accent-soft: #22301A; --bar-1: #16210C; --bar-2: #16210C; --line: #34452A; }
   :root:not([data-theme="light"])[data-al="JJA"] { --accent: #FF9B5C; --accent-soft: #3A2414; --bar-1: #2A1609; --bar-2: #2A1609; --line: #4A3222; }
   :root:not([data-theme="light"])[data-al="TWB"] { --accent: #FF7C8C; --accent-soft: #3A1820; --bar-1: #2A0E15; --bar-2: #2A0E15; --line: #4A2830; }
+  :root:not([data-theme="light"])[data-al="ESR"] { --accent: #D9939F; --accent-soft: #331019; --bar-1: #22060C; --bar-2: #22060C; --line: #47202A; }
 }
 
 /* 기상 (METAR / TAF) */
@@ -401,7 +405,7 @@ button.b:disabled { opacity: .5; }
 // 보내지 않는 것: 검색한 편명·공항, 이름, 위치. 오프라인이면 모아 두었다가 인터넷 연결 시 전송.
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
-  const VER = "v28", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v29", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -476,7 +480,7 @@ window.csfStat = (() => {
   // ---------- 항공사 선택 (내부 탭) ----------
   const ALKEY = "csf-airline";
   let AL = store.get(ALKEY) || "KAL";
-  const SHORT = { KAL: "대한항공", JNA: "진에어", JJA: "제주항공", TWB: "티웨이" };
+  const SHORT = { KAL: "대한항공", JNA: "진에어", JJA: "제주항공", TWB: "티웨이", ESR: "이스타" };
   const ofAL = (cs) => cs.slice(0, 3) === AL;
   function updateThemeColor() {                           // 휴대폰 상단 상태표시줄 색
     const c = getComputedStyle(document.documentElement).getPropertyValue("--bar-2").trim();
@@ -529,7 +533,7 @@ window.csfStat = (() => {
       a = iataIdx[code];
       if (!a) return { iata: code, name: "공항 정보 없음", city: "", cc: "" };
     }
-    return a ? { iata: a[0], name: a[1], city: a[2], cc: a[3], lat: a[4], lon: a[5], elev: a[6] } : { iata: "", name: "공항 정보 없음", city: "", cc: "" };
+    return a ? { iata: a[0], name: a[1], city: a[2], cc: a[3], lat: a[4], lon: a[5], elev: a[6], tz: a[7] || "" } : { iata: "", name: "공항 정보 없음", city: "", cc: "" };
   };
 
   // ---------- 운항 스케줄 (공공데이터: 인천공항 D-3~D+6, 한국공항공사 시즌 스케줄) ----------
@@ -799,23 +803,96 @@ window.csfStat = (() => {
     if (d < now - 6 * 3600e3) d.setUTCDate(d.getUTCDate() + 1);
     return d;
   }
-  const kstHHMMtoZ = (k) => { if (!/^\d{4}$/.test(k || "")) return ""; let m = +k.slice(0, 2) * 60 + +k.slice(2) - 540; m = (m + 1440) % 1440; return p2(Math.floor(m / 60)) + p2(m % 60); };
-  // 스케줄에서 이륙·착륙 예정 시각 추정 (UTC HHMM). 모르면 ""
+  // ---- 공항 현지시각 ↔ UTC (공항별 시간대, 서머타임 반영. 기기에 내장된 시간대 정보 사용 → 오프라인 가능) ----
+  const tzFmt = {};
+  function tzOff(ms, tz) {                                // tz 의 UTC 대비 시차(분)
+    try {
+      const f = tzFmt[tz] || (tzFmt[tz] = new Intl.DateTimeFormat("en-US", { timeZone: tz, hourCycle: "h23",
+        year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" }));
+      const p = {}; f.formatToParts(new Date(ms)).forEach((x) => { p[x.type] = x.value; });
+      return Math.round((Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute) - ms) / 60000);
+    } catch (e) { return null; }
+  }
+  const tzOfCode = (code) => { const a = ap(code); return a.tz || (KR.has(a.iata || code) || /^RK/.test(code) ? "Asia/Seoul" : ""); };
+  // 현지 날짜(y,m,d — UTC 필드로 표현) + HHMM → UTC Date
+  function localToUtc(y, mo, d, hhmm, tz) {
+    const g = Date.UTC(y, mo, d, +hhmm.slice(0, 2), +hhmm.slice(2));
+    const o1 = tzOff(g, tz); if (o1 == null) return null;
+    let u = g - o1 * 60000; const o2 = tzOff(u, tz);
+    if (o2 != null && o2 !== o1) u = g - o2 * 60000;
+    return new Date(u);
+  }
+  // 현지 HHMM 이 after 이후 처음 오는 시각 (wd: 현지 요일 1=월…7=일 제한, 선택)
+  function nextLocal(hhmm, tz, after, wd, maxDays) {
+    if (!/^\d{4}$/.test(hhmm || "") || !tz) return null;
+    const off = tzOff(after, tz); if (off == null) return null;
+    const L = new Date(after + off * 60000);
+    for (let k = -1; k <= (maxDays || 8); k++) {
+      const t = localToUtc(L.getUTCFullYear(), L.getUTCMonth(), L.getUTCDate() + k, hhmm, tz);
+      if (!t || t.getTime() <= after) continue;
+      if (wd) { const lw = new Date(t.getTime() + tzOff(t.getTime(), tz) * 60000).getUTCDay() || 7; if (!wd.includes(lw)) continue; }
+      return t;
+    }
+    return null;
+  }
+  const localHHMM = (d, tz) => {                          // 현지 시각 (UTC와 날짜가 다르면 현지 날짜도)
+    const o = tzOff(d.getTime(), tz); if (o == null) return "";
+    const x = new Date(d.getTime() + o * 60000), day = x.getUTCDate() !== d.getUTCDate() ? `${x.getUTCMonth() + 1}/${x.getUTCDate()} ` : "";
+    return `${day}${p2(x.getUTCHours())}:${p2(x.getUTCMinutes())}`;
+  };
+  // 스케줄에서 출발·도착 예정 시각 (UTC Date). 도착은 실제 착륙이 아닌 스케줄상 도착 시각
   function schedTimes(sc, r) {
-    const out = { d: "", a: "" };
-    if (!sc) return out;
-    const now = Date.now() - 3 * 3600e3;
-    const i = (sc.inst || []).find((x) => utcOf(x[0]) >= now);
-    if (i) { const z = fz(utcOf(i[0])).slice(0, 4); if (i[2] === "D") out.d = z; else out.a = z; }
+    const out = { d: null, a: null };
+    if (!sc || !r) return out;
+    const now = Date.now();
     const ia = (c) => (DB.airports[c] ? DB.airports[c][0] : c);
+    const org = r[0], dst = r[r.length - 1], tzD = tzOfCode(org), tzA = tzOfCode(dst);
+    let depT = "", depWd = "", arrT = "", arrWd = "";        // 시즌 스케줄: 현지 HHMM
     for (const x of sc.season || []) {
-      if (x.kind === "dom") { out.d = out.d || kstHHMMtoZ(x.std); out.a = out.a || kstHHMMtoZ(x.sta); }
-      else if (KR.has(x.a)) {                               // 한국 공항 기준 시각만 UTC로 바꿀 수 있음
-        if (x.io === "OUT" && r && ia(r[0]) === x.a) out.d = out.d || kstHHMMtoZ(x.time);
-        if (x.io === "IN" && r && ia(r[r.length - 1]) === x.a) out.a = out.a || kstHHMMtoZ(x.time);
+      if (x.kind === "dom") { if (ia(org) === x.dep) { depT = depT || x.std; depWd = depWd || x.wd; } if (ia(dst) === x.arr) arrT = arrT || x.sta; }
+      else {
+        if (x.io === "OUT" && ia(org) === x.a) { depT = depT || x.time; depWd = depWd || x.wd; }
+        if (x.io === "IN" && ia(dst) === x.a) { arrT = arrT || x.time; arrWd = arrWd || x.wd; }
       }
     }
+    const arrAfter = (dep) => nextLocal(arrT, tzA, dep.getTime() + 20 * 60000, "", 2);
+    const okArr = (dep, a) => a && a.getTime() - dep.getTime() < 22 * 3600e3;
+    const inst = sc.inst || [];
+    const ds = inst.filter((x) => x[2] === "D").map((x) => utcOf(x[0])), as = inst.filter((x) => x[2] === "A").map((x) => utcOf(x[0]));
+    if (ds.length) {
+      // 운항 중이면 지금 비행 중인 편(도착 전)을, 아니면 다음 편
+      for (const dep of ds) {
+        if (dep.getTime() < now - 20 * 3600e3) continue;
+        const a = arrT ? arrAfter(dep) : null;
+        if ((okArr(dep, a) && a.getTime() >= now - 3600e3) || dep.getTime() >= now - 3 * 3600e3) { out.d = dep; out.a = okArr(dep, a) ? a : null; break; }
+      }
+    } else if (as.length) {
+      out.a = as.find((a) => a.getTime() >= now - 3600e3) || null;
+      if (out.a && depT) { const d = nextLocal(depT, tzD, out.a.getTime() - 22 * 3600e3, "", 2); if (d && d < out.a) out.d = d; }
+    }
+    if (!out.d && !out.a && depT) {
+      const wd = depWd ? [...depWd].map(Number) : null;
+      // 이미 출발해 도착 전인 편이 있으면 그 편
+      let dep = nextLocal(depT, tzD, now - 20 * 3600e3, wd, 9);
+      while (dep) {
+        const a = arrT ? arrAfter(dep) : null;
+        if ((okArr(dep, a) && a.getTime() >= now - 3600e3) || dep.getTime() >= now - 3 * 3600e3) { out.d = dep; out.a = okArr(dep, a) ? a : null; break; }
+        dep = nextLocal(depT, tzD, dep.getTime(), wd, 9);
+      }
+    }
+    if (!out.a && !out.d && arrT) out.a = nextLocal(arrT, tzA, now - 3600e3, arrWd ? [...arrWd].map(Number) : null, 9);
     return out;
+  }
+  // 직접 입력한 HHMM(UTC) → 스케줄 시각과 가장 가까운 날짜, 스케줄이 없으면 지금 기준
+  function refDate(hhmm, near) {
+    if (!near) return hhmmToDate(hhmm);
+    if (!/^\d{4}$/.test(hhmm || "") || +hhmm.slice(0, 2) > 23 || +hhmm.slice(2) > 59) return null;
+    let best = null;
+    for (let k = -1; k <= 1; k++) {
+      const t = new Date(Date.UTC(near.getUTCFullYear(), near.getUTCMonth(), near.getUTCDate() + k, +hhmm.slice(0, 2), +hhmm.slice(2)));
+      if (!best || Math.abs(t - near) < Math.abs(best - near)) best = t;
+    }
+    return best;
   }
   // TAF 원문을 변화군 단위로 나눔 (기본 / FM / BECMG / TEMPO / PROBxx [TEMPO])
   function tafGroups(raw) {
@@ -828,7 +905,7 @@ window.csfStat = (() => {
     return g.map((x) => x.join(" "));
   }
   const ago = (sec) => { const m = Math.round((Date.now() / 1000 - sec) / 60); return m < 60 ? `${m}분 전` : m < 2880 ? `${Math.floor(m / 60)}시간 ${m % 60}분 전` : `${Math.floor(m / 1440)}일 전`; };
-  function wxBlock(cs, code, k, label, refZ) {
+  function wxBlock(cs, code, k, label, sched, user) {
     const icao = icaoOf(code), w = WX && WX.wx && WX.wx[icao], a = ap(code);
     let h = `<div class="wxb"><div class="wxb-hd"><b>${esc(a.iata || code)}</b><small>${esc(icao)} · ${label}</small>${w && w.cat ? `<span class="cat cat-${esc(w.cat)}">${esc(w.cat)}</span>` : ""}</div>`;
     if (!w || (!w.m && !w.t)) return h + `<div class="wx-none">기상 자료 없음${WX ? "" : " · 인터넷 연결 시 받아옵니다"}</div></div>`;
@@ -836,10 +913,14 @@ window.csfStat = (() => {
       const z = new Date(w.mo * 1000);
       h += `<div class="wx-lbl">METAR <small>관측 ${fz(z)} · ${ago(w.mo)}</small></div><div class="wx-raw">${esc(w.m)}</div>`;
     } else h += `<div class="wx-lbl">METAR <small>자료 없음</small></div>`;
-    const ref = hhmmToDate(refZ), sec = ref ? ref.getTime() / 1000 : null;
+    const typed = user != null && user !== "";
+    const ref = typed ? refDate(user, sched) : sched, sec = ref ? ref.getTime() / 1000 : null;
+    const refZ = typed ? user : ref ? fz(ref).slice(0, 4) : "";
+    const tz = tzOfCode(code), lt = ref && tz ? localHHMM(ref, tz) : "";
+    const note = ref ? `<small>${fdate(ref)}${lt ? ` · 현지 ${lt}` : ""}${typed ? " · 직접 입력" : " · 스케줄"}</small>` : `<small>시각을 넣으면 해당 예보를 강조</small>`;
     h += `<div class="wx-lbl">TAF <small>${label} 기준</small>
-      <span class="wx-t"><input data-cs="${esc(cs)}" data-k="${k}" inputmode="numeric" maxlength="4" placeholder="----" value="${esc(refZ || "")}" aria-label="${label} 기준 시각 UTC">Z</span>
-      ${ref ? `<small>${fdate(ref)}</small>` : `<small>시각을 넣으면 해당 예보를 강조</small>`}</div>`;
+      <span class="wx-t"><input data-cs="${esc(cs)}" data-k="${k}" inputmode="numeric" maxlength="4" placeholder="----" value="${esc(refZ)}" aria-label="${label} 기준 시각 UTC">Z</span>
+      ${note}</div>`;
     if (!w.t) return h + `<div class="wx-none">TAF 없음</div></div>`;
     const gs = tafGroups(w.t), f = w.f || [];
     const match = f.length === gs.length;                  // 원문 변화군 순서 = NOAA 해석(fcsts) 순서일 때만 강조
@@ -855,10 +936,9 @@ window.csfStat = (() => {
   function renderWx(cs, f, r) {
     if (!r) return "";
     const st0 = schedTimes(f.sch, r), u = wxRef[cs] || {};
-    const d = u.d ?? st0.d, a = u.a ?? st0.a;
     const gen = WX && WX.generated ? `<small>${esc(fmtDate(WX.generated))} 수신</small>` : "";
     return `<div class="wx"><div class="apx-hd"><span>기상 (NOAA)</span>${gen}</div>
-      ${wxBlock(cs, r[0], "d", "이륙", d)}${wxBlock(cs, r[r.length - 1], "a", "착륙", a)}</div>`;
+      ${wxBlock(cs, r[0], "d", "출발", st0.d, u.d)}${wxBlock(cs, r[r.length - 1], "a", "도착", st0.a, u.a)}</div>`;
   }
   document.addEventListener("change", (e) => {
     const inp = e.target.closest(".wx-t input");

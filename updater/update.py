@@ -32,6 +32,15 @@ import public_schedule  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = os.path.join(ROOT, "config", "airlines.json")
 OVERRIDES = os.path.join(ROOT, "config", "overrides.csv")
+AIRPORT_TZ = os.path.join(ROOT, "config", "airport_tz.json")   # ICAO → IANA 시간대 (OpenFlights 기반 + 수동 보완)
+# 시간대가 하나뿐인 나라는 목록에 없는 공항도 나라로 채움
+COUNTRY_TZ = {"KR": "Asia/Seoul", "JP": "Asia/Tokyo", "CN": "Asia/Shanghai", "TW": "Asia/Taipei", "HK": "Asia/Hong_Kong",
+              "MO": "Asia/Macau", "PH": "Asia/Manila", "VN": "Asia/Ho_Chi_Minh", "TH": "Asia/Bangkok", "SG": "Asia/Singapore",
+              "MY": "Asia/Kuala_Lumpur", "KH": "Asia/Phnom_Penh", "LA": "Asia/Vientiane", "MN": "Asia/Ulaanbaatar",
+              "IN": "Asia/Kolkata", "TR": "Europe/Istanbul", "AE": "Asia/Dubai", "GU": "Pacific/Guam", "MP": "Pacific/Saipan",
+              "UZ": "Asia/Tashkent", "KG": "Asia/Bishkek", "FR": "Europe/Paris", "DE": "Europe/Berlin", "GB": "Europe/London",
+              "IT": "Europe/Rome", "ES": "Europe/Madrid", "NL": "Europe/Amsterdam", "AT": "Europe/Vienna", "CZ": "Europe/Prague",
+              "HU": "Europe/Budapest", "IL": "Asia/Jerusalem", "NZ": "Pacific/Auckland"}
 OBS_FILE = os.path.join(ROOT, "data", "observations.json")
 SCHED_CACHE = os.path.join(ROOT, "data", "public_cache.json")
 WEB_DIR = os.path.join(ROOT, "web")
@@ -135,6 +144,14 @@ def num(v, nd):
         return None
 
 
+TZ = {}
+try:
+    with open(AIRPORT_TZ, encoding="utf-8") as _f:
+        TZ = json.load(_f)
+except (OSError, ValueError):
+    pass
+
+
 def load_airports(src, codes):
     prefixes = sorted({c[:2] for c in codes if len(c) >= 2})
     airports = {}
@@ -152,6 +169,7 @@ def load_airports(src, codes):
                         num(row.get("Latitude"), 4),     # 위도 (일출·일몰 계산용)
                         num(row.get("Longitude"), 4),    # 경도
                         num(row.get("AltitudeFeet"), 0), # 표고 ft
+                        TZ.get(code) or COUNTRY_TZ.get(row.get("CountryISO2") or "", ""),  # 시간대 (현지시각 ↔ UTC)
                     ]
         if not src.local_dir and i % 20 == 0:
             log(f"  공항 파일 {i}/{len(prefixes)}")
