@@ -833,11 +833,11 @@ button.b:disabled { opacity: .5; }
   const fmt = (m) => { m = Math.max(0, Math.round(m)); return Math.floor(m / 60) + "+" + String(m % 60).padStart(2, "0"); };
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
   const r5 = (m) => Math.round(m / STEP) * STEP;
-  // 휴식 종료 한국시각 (KLT = UTC+9). T/O의 한국 날짜보다 뒤면 +1
+  // 휴식 종료 한국시각 (KLT = UTC+9), 시각만 표시
   const klt = (m) => {
-    const k = Math.round(m) + 540, base = Math.floor((st.utc + 540) / 1440), d = Math.floor(k / 1440) - base;
+    const k = Math.round(m) + 540;
     const x = ((k % 1440) + 1440) % 1440;
-    return `${String(Math.floor(x / 60)).padStart(2, "0")}${String(x % 60).padStart(2, "0")}${d > 0 ? "+" + d : ""} KLT`;
+    return `${String(Math.floor(x / 60)).padStart(2, "0")}${String(x % 60).padStart(2, "0")} KLT`;
   };
   // UTC 표기: 1430Z, 자정을 넘기면 +1
   const zt = (m, long) => {

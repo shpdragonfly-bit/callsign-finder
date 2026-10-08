@@ -1,6 +1,6 @@
 // 오프라인 지원용 Service Worker
 // 온라인이면 항상 최신 파일을 받아 캐시에 저장하고, 오프라인이면 캐시에서 제공합니다.
-const CACHE = "callsign-v18";
+const CACHE = "callsign-v19";
 const SHELL = ["./", "index.html", "data.js", "data.json", "manifest.webmanifest", "icon.svg", "icon-180.png", "icon-512.png"];
 
 self.addEventListener("install", (e) => {
