@@ -22,6 +22,10 @@
   --mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
   --shadow: 0 1px 2px rgba(11,37,69,.06), 0 4px 14px rgba(11,37,69,.05);
 }
+/* 항공사별 색상 (주간). 야간 기본값보다 앞에 두어 야간 모드에서는 아래 야간 규칙이 적용됨 */
+:root[data-al="JNA"] { --bg: #F6F2FA; --panel-2: #EFE7F6; --line: #DDD0EA; --accent: #6A2C9A; --accent-soft: #F0E6F8; --bar-1: #8E44C4; --bar-2: #5E2190; }
+:root[data-al="JJA"] { --bg: #FFF7F2; --panel-2: #FDEEE4; --line: #F2D9C9; --accent: #D64A0E; --accent-soft: #FFEDE2; --bar-1: #FF8A2A; --bar-2: #E85412; }
+:root[data-al="TWB"] { --bg: #FDF5F6; --panel-2: #FAE9EB; --line: #EFD3D7; --accent: #C41E32; --accent-soft: #FCE8EA; --bar-1: #EC4359; --bar-2: #B91A2E; }
 :root[data-theme="dark"] {
   --bg: #06101D; --panel: #0D1B2E; --panel-2: #132640; --line: #1E3555;
   --text: #E4EEF8; --muted: #8AA2BF; --accent: #4CC2F2; --accent-soft: #0F2C47; --accent-ink: #04121F;
@@ -37,7 +41,7 @@
   }
 }
 * { box-sizing: border-box; }
-html, body { margin: 0; background: var(--bg); color: var(--text); }
+html, body { margin: 0; background: var(--bg); color: var(--text); transition: background-color .25s; }
 body {
   font: 16px/1.45 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
   padding-bottom: calc(24px + env(safe-area-inset-bottom));
@@ -265,6 +269,16 @@ button.b:disabled { opacity: .5; }
   .sg .mid .utc { margin-top: 0; color: var(--muted); }
   .sg .len { order: 2; }
 }
+
+/* 항공사별 색상 (야간) */
+:root[data-theme="dark"][data-al="JNA"] { --accent: #C59AE8; --accent-soft: #2A1A3D; --bar-1: #1E1030; --bar-2: #1E1030; --line: #3A2A52; }
+:root[data-theme="dark"][data-al="JJA"] { --accent: #FF9B5C; --accent-soft: #3A2414; --bar-1: #2A1609; --bar-2: #2A1609; --line: #4A3222; }
+:root[data-theme="dark"][data-al="TWB"] { --accent: #FF7C8C; --accent-soft: #3A1820; --bar-1: #2A0E15; --bar-2: #2A0E15; --line: #4A2830; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-al="JNA"] { --accent: #C59AE8; --accent-soft: #2A1A3D; --bar-1: #1E1030; --bar-2: #1E1030; --line: #3A2A52; }
+  :root:not([data-theme="light"])[data-al="JJA"] { --accent: #FF9B5C; --accent-soft: #3A2414; --bar-1: #2A1609; --bar-2: #2A1609; --line: #4A3222; }
+  :root:not([data-theme="light"])[data-al="TWB"] { --accent: #FF7C8C; --accent-soft: #3A1820; --bar-1: #2A0E15; --bar-2: #2A0E15; --line: #4A2830; }
+}
 </style>
 </head>
 <body>
@@ -385,9 +399,15 @@ button.b:disabled { opacity: .5; }
   let AL = store.get(ALKEY) || "KAL";
   const SHORT = { KAL: "대한항공", JNA: "진에어", JJA: "제주항공", TWB: "티웨이" };
   const ofAL = (cs) => cs.slice(0, 3) === AL;
+  function updateThemeColor() {                           // 휴대폰 상단 상태표시줄 색
+    const c = getComputedStyle(document.documentElement).getPropertyValue("--bar-2").trim();
+    if (c) $("themeColor").setAttribute("content", c);
+  }
   function renderAirlineTabs() {
     const al = (DB && DB.airlines) || {};
     if (!al[AL]) AL = Object.keys(al)[0] || "KAL";
+    document.documentElement.dataset.al = AL;             // 항공사별 색상
+    updateThemeColor();
     $("alTabs").innerHTML = Object.entries(al).map(([k, a]) =>
       `<button role="tab" data-al="${esc(k)}" aria-pressed="${k === AL}" aria-selected="${k === AL}">${esc(SHORT[k] || a.name)}</button>`).join("");
     const a = al[AL] || {};
@@ -765,7 +785,7 @@ button.b:disabled { opacity: .5; }
   const isDark = () => (document.documentElement.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")) === "dark";
   const applyTheme = (t) => {
     if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
-    $("themeColor").setAttribute("content", isDark() ? "#0A1C33" : "#0084CC");
+    updateThemeColor();
   };
   applyTheme(store.get(TKEY));
   $("btnTheme").addEventListener("click", () => {
