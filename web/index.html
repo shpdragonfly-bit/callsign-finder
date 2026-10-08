@@ -537,7 +537,7 @@ button.b:disabled { opacity: .5; }
     <div class="small cs-only">
       노선: VRS standing-data(사용자 제보 기반) · 기종: ADS-B 관측 누적값입니다. 실제 운항 기종·노선은 당일 운항 정보와 다를 수 있으니 참고용으로만 사용하세요.
     </div>
-    <div class="credit cs-only">© 2026 Made by aa717457</div>
+    <div class="credit cs-only">© 2026 Made by aa717457 <span id="appVer"></span></div>
   </footer>
 </div>
 
@@ -548,7 +548,7 @@ button.b:disabled { opacity: .5; }
 // 보내지 않는 것: 검색한 편명·공항, 이름, 위치. 오프라인이면 모아 두었다가 인터넷 연결 시 전송.
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
-  const VER = "v31", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v32", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -582,6 +582,7 @@ window.csfStat = (() => {
   }
   addEventListener("online", flush);
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") flush(); });
+  try { document.getElementById("appVer").textContent = VER; } catch (e) {}      // 하단 제작자 옆 앱 버전
   return log;
 })();
 </script>
