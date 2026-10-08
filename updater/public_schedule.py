@@ -48,13 +48,20 @@ def _get_json(url, params, key, retries=2):
         try:
             req = urllib.request.Request(full, headers={"User-Agent": UA})
             with urllib.request.urlopen(req, timeout=60) as r:
-                return json.loads(r.read().decode("utf-8", "replace"))
+                body = r.read().decode("utf-8", "replace")
+            if "OpenAPI_ServiceResponse" in body or body.lstrip().startswith("<"):
+                m = re.search(r'(?:errMsg|returnAuthMsg)["\s:>]+"?([^"<]+)', body)
+                last = "API 오류: %s (%s)" % (m.group(1).strip() if m else body[:80], urllib.parse.urlparse(url).path)
+                if "LIMITED" in body or "SERVICE_KEY" in body:
+                    break                                  # 트래픽 초과·키 오류는 재시도 무의미
+            else:
+                return json.loads(body)
         except urllib.error.HTTPError as e:
-            last = "HTTP %s" % e.code
+            last = "HTTP %s %s" % (e.code, urllib.parse.urlparse(url).path)
             if e.code in (401, 403):
                 break
         except Exception as e:
-            last = e.__class__.__name__
+            last = "%s %s" % (e.__class__.__name__, str(e)[:120])
         time.sleep(2 * (attempt + 1))
     raise RuntimeError(last)
 
@@ -188,6 +195,7 @@ def collect(airlines, cache_path, now):
         cache["icn_at"] = now.strftime("%Y-%m-%dT%H:%MZ")
     except Exception as e:
         log("  ! 인천공항 수집 실패: %s (이전 값 유지)" % e)
+        cache.setdefault("errors", {})["icn"] = "%s %s" % (now.strftime("%Y-%m-%dT%H:%MZ"), e)
     al_key = ",".join(sorted(iata_map))
     # 시즌 스케줄은 하루 한 번 (항공사 구성이 바뀌면 즉시 다시)
     if cache.get("kac_date") != today_kst.isoformat() or not cache.get("kac") or cache.get("kac_airlines") != al_key:
@@ -197,6 +205,7 @@ def collect(airlines, cache_path, now):
             cache["kac_airlines"] = al_key
         except Exception as e:
             log("  ! 한국공항공사 수집 실패: %s (이전 값 유지)" % e)
+            cache.setdefault("errors", {})["kac"] = "%s %s" % (now.strftime("%Y-%m-%dT%H:%MZ"), e)
     os.makedirs(os.path.dirname(cache_path), exist_ok=True)
     with open(cache_path, "w", encoding="utf-8") as f:
         json.dump(cache, f, ensure_ascii=False, separators=(",", ":"))
