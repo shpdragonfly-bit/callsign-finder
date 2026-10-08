@@ -21,7 +21,10 @@ jobs:
         with:
           python-version: "3.12"
       - name: API 명세 수집
+        if: false
         run: python tools/probe_specs.py
+      - name: 기상(NOAA) API 점검
+        run: python tools/probe_wx.py
       - name: API 호출 샘플 수집
         if: hashFiles('probe/calls.json') != ''
         env:
