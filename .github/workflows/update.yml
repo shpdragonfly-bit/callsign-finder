@@ -38,6 +38,8 @@ jobs:
           git add data web/data.json web/data.js
           git diff --cached --quiet || git commit -m "data: $(date -u +%Y-%m-%dT%H:%MZ)"
           git push || true
+      - name: 기상(METAR/TAF) 수집
+        run: python updater/wx.py || true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web

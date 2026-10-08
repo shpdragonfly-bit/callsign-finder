@@ -293,6 +293,28 @@ button.b:disabled { opacity: .5; }
   :root:not([data-theme="light"])[data-al="JJA"] { --accent: #FF9B5C; --accent-soft: #3A2414; --bar-1: #2A1609; --bar-2: #2A1609; --line: #4A3222; }
   :root:not([data-theme="light"])[data-al="TWB"] { --accent: #FF7C8C; --accent-soft: #3A1820; --bar-1: #2A0E15; --bar-2: #2A0E15; --line: #4A2830; }
 }
+
+/* 기상 (METAR / TAF) */
+.wx { border-top: 1px solid var(--line); padding: 10px 16px 12px; }
+.wx .apx-hd small { font-weight: 500; font-size: 11px; }
+.wxb { padding: 8px 0 10px; }
+.wxb + .wxb { border-top: 1px dashed var(--line); }
+.wxb-hd { display: flex; align-items: baseline; gap: 6px; margin-bottom: 4px; }
+.wxb-hd b { font: 700 15px var(--mono); color: var(--accent); }
+.wxb-hd small { font-size: 12px; color: var(--muted); }
+.cat { margin-left: auto; font: 700 11px var(--mono); padding: 1px 7px; border-radius: 5px; color: #fff; }
+.cat-VFR { background: #1E9E5A; } .cat-MVFR { background: #2F6FD6; } .cat-IFR { background: #D63A3A; } .cat-LIFR { background: #B03AB8; }
+.wx-lbl { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; font: 700 12px var(--mono); color: var(--text); margin-top: 6px; }
+.wx-lbl small { font: 500 11px system-ui, sans-serif; color: var(--muted); }
+.wx-raw { font: 500 12.5px/1.5 var(--mono); color: var(--text); background: var(--panel-2); border-radius: 8px; padding: 6px 8px; margin-top: 3px; word-break: break-word; }
+.wx-taf { font: 500 12.5px/1.5 var(--mono); background: var(--panel-2); border-radius: 8px; padding: 4px 0; margin-top: 3px; }
+.wx-taf div { padding: 2px 8px; word-break: break-word; color: var(--muted); }
+.wx-taf div:first-child { color: var(--text); }
+.wx-taf div.on { color: var(--text); background: var(--accent-soft); box-shadow: inset 3px 0 0 var(--accent); font-weight: 700; }
+.wx-t { display: inline-flex; align-items: center; gap: 1px; font: 700 12px var(--mono); color: var(--muted); }
+.wx-t input { width: 3.3em; font: 700 13px var(--mono); color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 2px 4px; text-align: center; outline: none; }
+.wx-t input:focus { border-color: var(--accent); }
+.wx-none { font-size: 12px; color: var(--muted); margin-top: 4px; }
 </style>
 </head>
 <body>
@@ -620,6 +642,7 @@ button.b:disabled { opacity: .5; }
       h += `<div class="apx"><div class="apx-hd"><span>표고 · 일출·일몰 (UTC)</span>
         <span class="apx-day"><button data-sunday="0" aria-pressed="${sunDay === 0}">오늘</button><button data-sunday="1" aria-pressed="${sunDay === 1}">내일</button></span></div>
         <div class="apx-g">${apInfo(r[0], "org")}${apInfo(r[r.length - 1], "dst")}</div></div>`;
+      h += renderWx(cs, f, r);
     }
     if (f.memo) h += `<div class="memo">메모: ${esc(f.memo)}</div>`;
     return h + `</div>`;
@@ -711,6 +734,98 @@ button.b:disabled { opacity: .5; }
     return h;
   }
 
+  // ---------- 기상 (NOAA METAR / TAF) ----------
+  // wx.json 은 서버에서 매시간 만들어 배포 (브라우저가 NOAA를 직접 부를 수 없음). 받은 것은 기기에 저장해 오프라인에서도 표시
+  const WXKEY = "csf-wx";
+  let WX = null;
+  try { WX = JSON.parse(store.get(WXKEY) || "null"); } catch (e) {}
+  function loadWx() {
+    if (!location.protocol.startsWith("http")) return;
+    fetch("wx.json?t=" + Date.now(), { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).then((w) => {
+      if (w && w.wx && (!WX || w.generated > WX.generated)) { WX = w; store.set(WXKEY, JSON.stringify(w)); if ($("result").querySelector(".wx")) search(); }
+    }).catch(() => {});
+  }
+  const wxRef = {};                                       // 사용자가 고친 이륙/착륙 기준 시각 (Call Sign별, HHMM UTC)
+  const icaoOf = (code) => { if (!code) return ""; if (DB.airports[code]) return code; const k = airportIndex().i2i[code]; return k || code; };
+  // HHMM(UTC) → 지금과 가장 가까운 앞쪽 시각 (6시간 전 ~ 42시간 뒤)
+  function hhmmToDate(hhmm) {
+    if (!/^\d{4}$/.test(hhmm || "")) return null;
+    const h = +hhmm.slice(0, 2), m = +hhmm.slice(2);
+    if (h > 23 || m > 59) return null;
+    const now = new Date(), d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m));
+    if (d < now - 6 * 3600e3) d.setUTCDate(d.getUTCDate() + 1);
+    return d;
+  }
+  const kstHHMMtoZ = (k) => { if (!/^\d{4}$/.test(k || "")) return ""; let m = +k.slice(0, 2) * 60 + +k.slice(2) - 540; m = (m + 1440) % 1440; return p2(Math.floor(m / 60)) + p2(m % 60); };
+  // 스케줄에서 이륙·착륙 예정 시각 추정 (UTC HHMM). 모르면 ""
+  function schedTimes(sc, r) {
+    const out = { d: "", a: "" };
+    if (!sc) return out;
+    const now = Date.now() - 3 * 3600e3;
+    const i = (sc.inst || []).find((x) => utcOf(x[0]) >= now);
+    if (i) { const z = fz(utcOf(i[0])).slice(0, 4); if (i[2] === "D") out.d = z; else out.a = z; }
+    const ia = (c) => (DB.airports[c] ? DB.airports[c][0] : c);
+    for (const x of sc.season || []) {
+      if (x.kind === "dom") { out.d = out.d || kstHHMMtoZ(x.std); out.a = out.a || kstHHMMtoZ(x.sta); }
+      else if (KR.has(x.a)) {                               // 한국 공항 기준 시각만 UTC로 바꿀 수 있음
+        if (x.io === "OUT" && r && ia(r[0]) === x.a) out.d = out.d || kstHHMMtoZ(x.time);
+        if (x.io === "IN" && r && ia(r[r.length - 1]) === x.a) out.a = out.a || kstHHMMtoZ(x.time);
+      }
+    }
+    return out;
+  }
+  // TAF 원문을 변화군 단위로 나눔 (기본 / FM / BECMG / TEMPO / PROBxx [TEMPO])
+  function tafGroups(raw) {
+    const tk = (raw || "").replace(/\s+/g, " ").trim().split(" "), g = [[]];
+    tk.forEach((t, k) => {
+      const start = /^(FM\d{6}|BECMG|TEMPO|PROB\d{2})$/.test(t) && !(t === "TEMPO" && /^PROB\d{2}$/.test(tk[k - 1] || ""));
+      if (start && g[g.length - 1].length) g.push([]);
+      g[g.length - 1].push(t);
+    });
+    return g.map((x) => x.join(" "));
+  }
+  const ago = (sec) => { const m = Math.round((Date.now() / 1000 - sec) / 60); return m < 60 ? `${m}분 전` : m < 2880 ? `${Math.floor(m / 60)}시간 ${m % 60}분 전` : `${Math.floor(m / 1440)}일 전`; };
+  function wxBlock(cs, code, k, label, refZ) {
+    const icao = icaoOf(code), w = WX && WX.wx && WX.wx[icao], a = ap(code);
+    let h = `<div class="wxb"><div class="wxb-hd"><b>${esc(a.iata || code)}</b><small>${esc(icao)} · ${label}</small>${w && w.cat ? `<span class="cat cat-${esc(w.cat)}">${esc(w.cat)}</span>` : ""}</div>`;
+    if (!w || (!w.m && !w.t)) return h + `<div class="wx-none">기상 자료 없음${WX ? "" : " · 인터넷 연결 시 받아옵니다"}</div></div>`;
+    if (w.m) {
+      const z = new Date(w.mo * 1000);
+      h += `<div class="wx-lbl">METAR <small>관측 ${fz(z)} · ${ago(w.mo)}</small></div><div class="wx-raw">${esc(w.m)}</div>`;
+    } else h += `<div class="wx-lbl">METAR <small>자료 없음</small></div>`;
+    const ref = hhmmToDate(refZ), sec = ref ? ref.getTime() / 1000 : null;
+    h += `<div class="wx-lbl">TAF <small>${label} 기준</small>
+      <span class="wx-t"><input data-cs="${esc(cs)}" data-k="${k}" inputmode="numeric" maxlength="4" placeholder="----" value="${esc(refZ || "")}" aria-label="${label} 기준 시각 UTC">Z</span>
+      ${ref ? `<small>${fdate(ref)}</small>` : `<small>시각을 넣으면 해당 예보를 강조</small>`}</div>`;
+    if (!w.t) return h + `<div class="wx-none">TAF 없음</div></div>`;
+    const gs = tafGroups(w.t), f = w.f || [];
+    const match = f.length === gs.length;                  // 원문 변화군 순서 = NOAA 해석(fcsts) 순서일 때만 강조
+    const out = sec != null && (sec < w.vf || sec >= w.vt);
+    h += `<div class="wx-taf">${gs.map((g, idx) => {
+      const fi = match ? f[idx] : null;
+      const on = sec != null && !out && fi && sec >= fi[0] && sec < fi[1];
+      return `<div class="${on ? "on" : ""}">${esc(g)}</div>`;
+    }).join("")}</div>`;
+    if (out) h += `<div class="wx-none">기준 시각이 TAF 유효기간 밖입니다</div>`;
+    return h + `</div>`;
+  }
+  function renderWx(cs, f, r) {
+    if (!r) return "";
+    const st0 = schedTimes(f.sch, r), u = wxRef[cs] || {};
+    const d = u.d ?? st0.d, a = u.a ?? st0.a;
+    const gen = WX && WX.generated ? `<small>${esc(fmtDate(WX.generated))} 수신</small>` : "";
+    return `<div class="wx"><div class="apx-hd"><span>기상 (NOAA)</span>${gen}</div>
+      ${wxBlock(cs, r[0], "d", "이륙", d)}${wxBlock(cs, r[r.length - 1], "a", "착륙", a)}</div>`;
+  }
+  document.addEventListener("change", (e) => {
+    const inp = e.target.closest(".wx-t input");
+    if (!inp) return;
+    const v = inp.value.replace(/\D/g, "");
+    wxRef[inp.dataset.cs] = Object.assign({}, wxRef[inp.dataset.cs], { [inp.dataset.k]: v });
+    search();
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.closest(".wx-t input")) e.target.blur(); });
+
   function search() {
     const raw = $("q").value;
     $("clear").style.display = raw ? "block" : "none";
@@ -780,6 +895,7 @@ button.b:disabled { opacity: .5; }
       const r = await fetch("data.json?t=" + Date.now(), { cache: "no-store" });
       if (!r.ok) throw new Error("HTTP " + r.status);
       const d = await r.json();
+      loadWx();
       if (DB && d.generated === DB.generated) msg(`이미 최신입니다 (${fmtDate(d.generated)}).`, "ok");
       else useData(d, "서버");
       if (navigator.serviceWorker && navigator.serviceWorker.controller) navigator.serviceWorker.controller.postMessage("refresh");
@@ -833,6 +949,7 @@ button.b:disabled { opacity: .5; }
   search();
   showTab(store.get(TABKEY) === "ft" ? "ft" : "cs");
 
+  if (navigator.onLine) loadWx();
   // 온라인이면 조용히 최신 데이터 확인 (오프라인/파일 모드에서는 생략)
   if (navigator.onLine && location.protocol.startsWith("http")) {
     fetch("data.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null)
