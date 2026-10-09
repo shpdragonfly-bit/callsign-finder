@@ -1,6 +1,6 @@
 // 오프라인 지원용 Service Worker
 // 온라인이면 항상 최신 파일을 받아 캐시에 저장하고, 오프라인이면 캐시에서 제공합니다.
-const CACHE = "callsign-v38";
+const CACHE = "callsign-v39";
 const ASSETS = "callsign-assets-1";     // PDF 라이브러리·한글 글꼴: 버전이 바뀌어도 지우지 않음 (처음 PDF 만들 때 한 번 받음)
 const SHELL = ["./", "index.html", "data.js", "data.json", "manifest.webmanifest", "icon.svg", "icon-180.png", "icon-512.png"];
 
