@@ -400,6 +400,44 @@ body[data-tab="oz"] #alTabs { display: none; }
 .pk-cal div b { display: block; font-size: 15px; margin-bottom: 2px; }
 .pk-cal div span { color: var(--muted); }
 .pk-foot { margin: 16px 2px 0; font-size: 13px; color: var(--muted); line-height: 1.6; }
+/* ---------- Gemini AI 연결 (어르신도 읽기 쉽게: 큰 글씨 · 큰 버튼) ---------- */
+.gm { margin-top: 14px; padding: 16px; }
+.gm-hd { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.gm-hd h2 { margin: 0; font-size: 21px; }
+.gm-hd p { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+.gm-st { flex: 0 0 auto; font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 99px; border: 1.5px solid var(--line); color: var(--muted); white-space: nowrap; }
+.gm-st.ok { color: var(--ok); border-color: var(--ok); }
+.gm-st.bad { color: var(--warn); border-color: var(--warn); }
+.gm-ac { margin-top: 10px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel-2); overflow: hidden; }
+.gm-ac summary { list-style: none; cursor: pointer; padding: 14px 44px 14px 14px; font-size: 17px; font-weight: 700; position: relative; display: flex; align-items: center; gap: 10px; }
+.gm-ac summary::-webkit-details-marker { display: none; }
+.gm-ac summary::after { content: "펼치기 ▾"; position: absolute; right: 12px; font-size: 12px; font-weight: 600; color: var(--accent); }
+.gm-ac[open] summary::after { content: "접기 ▴"; }
+.gm-ac .n { flex: 0 0 auto; width: 26px; height: 26px; line-height: 26px; text-align: center; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font: 700 14px var(--mono); }
+.gm-ac.warn .n { background: var(--warn); color: #fff; }
+.gm-body { padding: 0 14px 14px; font-size: 16px; line-height: 1.65; }
+.gm-body p { margin: 8px 0; }
+.gm-tip { background: var(--panel); border-left: 4px solid var(--accent); border-radius: 8px; padding: 8px 10px; font-size: 15px; }
+.gm-ac.warn .gm-tip { border-left-color: var(--warn); }
+.gm-steps { margin: 8px 0; padding-left: 26px; }
+.gm-steps li { margin: 8px 0; padding-left: 2px; }
+.gm-safe { margin: 4px 0 0; padding-left: 20px; }
+.gm-safe li { margin: 10px 0; }
+.gm-open { display: block; margin-top: 14px; text-align: center; text-decoration: none; font-size: 17px; font-weight: 700; padding: 14px; border-radius: 14px;
+  border: 2px solid var(--accent); color: var(--accent); background: var(--accent-soft); }
+.gm-in { margin-top: 16px; }
+.gm-in label { display: block; font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.gm-row { display: flex; gap: 8px; }
+.gm-row input { flex: 1; min-width: 0; font: 16px var(--mono); padding: 14px 12px; border-radius: 12px; border: 2px solid var(--line); background: var(--panel); color: var(--text); }
+.gm-row input:focus { outline: none; border-color: var(--accent); }
+.gm-row button { flex: 0 0 auto; font: inherit; font-size: 15px; font-weight: 600; padding: 0 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--panel-2); color: var(--text); cursor: pointer; }
+.gm-btns { display: flex; gap: 8px; margin-top: 10px; }
+.gm-btns .b { flex: 1; font-size: 16px; padding: 14px 10px; }
+.gm-btns #gmDel { flex: 0 0 auto; }
+.gm-msg { margin-top: 10px; font-size: 15px; line-height: 1.55; min-height: 1em; }
+.gm-msg.ok { color: var(--ok); font-weight: 700; }
+.gm-msg.bad { color: var(--warn); font-weight: 700; }
+.gm-msg small { display: block; color: var(--muted); font-weight: 400; margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -475,6 +513,67 @@ body[data-tab="oz"] #alTabs { display: none; }
   <section class="panel" id="panel-pk" role="tabpanel" aria-labelledby="tab-pk" hidden>
     <p class="pk-intro">준비 중인 기능입니다. 필요하면 <b>요청하기</b>를 눌러 주세요. 요청이 많은 기능부터 개발합니다.</p>
 
+    <div class="card gm" id="gmCard">
+      <div class="gm-hd">
+        <div><h2>Gemini AI 연결</h2><p>AI 분석 기능을 쓰려면 본인 Gemini API 키를 한 번 등록합니다.</p></div>
+        <span class="gm-st" id="gmSt">미연결</span>
+      </div>
+
+      <details class="gm-ac">
+        <summary><span class="n">1</span>API 키가 뭔가요?</summary>
+        <div class="gm-body">
+          <p><b>API 키는 ‘이 앱에서 내 구글 계정으로 제미나이(Gemini) AI를 쓰게 해 주는 출입증’</b>입니다. 길고 복잡한 영문·숫자 조합으로 되어 있습니다.</p>
+          <p>구글 계정(Gmail)만 있으면 <b>무료로</b> 받을 수 있고, 한 번 등록하면 이 기기에서 계속 쓸 수 있습니다.</p>
+          <p class="gm-tip">비밀번호처럼 다루세요. 남이 알면 내 무료 사용량을 대신 쓸 수 있습니다.</p>
+        </div>
+      </details>
+
+      <details class="gm-ac">
+        <summary><span class="n">2</span>API 키 받는 방법 (따라하기)</summary>
+        <div class="gm-body">
+          <p class="gm-tip">이 앱을 쓸 휴대폰·패드에서 직접 받아 붙여넣는 것이 가장 안전하고 쉽습니다.</p>
+          <ol class="gm-steps">
+            <li><b>아래 [Google AI Studio 열기] 버튼</b>을 누릅니다.</li>
+            <li><b>구글 계정(Gmail)으로 로그인</b>합니다.</li>
+            <li>처음이면 <b>이용약관 화면</b>이 나옵니다. 동의에 체크하고 계속 누릅니다. 이때 키가 자동으로 하나 만들어지기도 합니다.</li>
+            <li><b>API Keys</b>(API 키) 화면에 키가 보이면 그 키를 씁니다. 없으면 <b>Create API key</b>(API 키 만들기)를 누릅니다.</li>
+            <li>키 옆의 <b>복사 버튼</b>(겹친 네모 모양)을 누릅니다.</li>
+            <li>이 앱으로 돌아와 <b>아래 입력칸을 길게 눌러 붙여넣기</b>합니다.</li>
+            <li><b>[저장하고 연결 확인]</b>을 누르고, 위에 <b>‘연결됨’</b>이 나오면 끝입니다.</li>
+          </ol>
+          <p class="gm-tip"><b>결제(Billing) · 카드 등록 화면이 나오면 누르지 마세요.</b> 키를 받는 데 결제는 필요 없습니다.</p>
+        </div>
+      </details>
+
+      <details class="gm-ac warn">
+        <summary><span class="n">3</span>안전하게 쓰는 법 (꼭 읽어 주세요)</summary>
+        <div class="gm-body">
+          <ul class="gm-safe">
+            <li><b>무료로만 쓰세요.</b> AI Studio나 Google Cloud에 <b>결제 정보(카드)를 등록하지 마세요.</b> 결제를 등록하지 않으면 키가 새어 나가도 <b>요금이 나오지 않습니다.</b> 최악의 경우라도 그날 무료 사용량이 먼저 소진될 뿐입니다.</li>
+            <li><b>호텔 · 공항 · 카페 와이파이</b>처럼 여러 사람이 함께 쓰는 와이파이에서는 키가 노출될 가능성을 완전히 막을 수 없습니다. <b>키는 언제든 노출될 수 있다</b>고 생각하고, 그래서 꼭 무료로만 쓰세요.</li>
+            <li>키를 <b>카톡 · 문자 · 메일로 보내거나 화면을 찍어 공유하지 마세요.</b></li>
+            <li>키는 <b>이 기기 안에만 저장</b>됩니다. 앱 제작자를 포함해 어디에도 보내지 않고, AI 분석을 요청할 때만 구글로 직접 전달됩니다.</li>
+            <li><b>새어 나간 것 같으면:</b> AI Studio의 API Keys 화면에서 그 키를 삭제하고 새 키를 만든 뒤, 이 앱에서 [지우기]를 누르고 새 키를 등록하세요.</li>
+          </ul>
+        </div>
+      </details>
+
+      <a class="gm-open" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Google AI Studio 열기 ↗</a>
+
+      <div class="gm-in">
+        <label for="gmKey">API 키</label>
+        <div class="gm-row">
+          <input id="gmKey" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="여기에 붙여넣기">
+          <button type="button" id="gmShow" aria-label="키 보기">보기</button>
+        </div>
+        <div class="gm-btns">
+          <button type="button" class="b primary" id="gmSave">저장하고 연결 확인</button>
+          <button type="button" class="b" id="gmDel">지우기</button>
+        </div>
+        <div class="gm-msg" id="gmMsg" role="status"></div>
+      </div>
+    </div>
+
     <div class="card pk-hero pk-feat">
       <span class="pk-badge">개발 예정</span>
       <h2>FLT Package 분석</h2>
@@ -506,15 +605,11 @@ body[data-tab="oz"] #alTabs { display: none; }
         <div class="hd"><h3>AI 분석</h3><span class="tag">Gemini API 키</span></div>
         <ul>
           <li>NOTAM · 기상 문장을 읽고 이번 비행에 중요한 것만 골라 요약</li>
-          <li>판단이 필요한 글만 보내고 패키지 전체는 보내지 않음</li>
-          <li>키는 이 기기에만 저장</li>
+          <li>패키지 PDF를 제미나이가 읽고 미리 정한 양식으로 정리</li>
+          <li>키는 이 기기에만 저장 (위 ‘Gemini AI 연결’에서 등록)</li>
           <li class="note">인터넷 연결 필요 (운항 전)</li>
         </ul>
-        <div class="pk-todo"><b>미리 할 일 (본인)</b><ol>
-          <li><a href="https://aistudio.google.com/" target="_blank" rel="noopener">Google AI Studio</a>에 본인 구글 계정으로 로그인</li>
-          <li><b style="display:inline">Get API key</b>에서 API 키 만들기</li>
-          <li>만든 키를 이 화면에 한 번 붙여넣기</li>
-        </ol><small>무료 한도와 요금은 본인 AI Studio 화면에서 확인합니다.</small></div>
+        <div class="pk-todo"><b>미리 할 일 (본인)</b><small>위 <b>Gemini AI 연결</b>에서 API 키를 한 번 등록합니다. 받는 방법은 그 안의 ‘따라하기’를 보세요.</small></div>
         <div class="pk-req" data-req="PKG-AI"><button type="button">AI 분석 요청하기</button>
           <div class="cm"><input maxlength="300" placeholder="의견 남기기 (선택)" aria-label="의견"><button type="button">보내기</button></div>
           <div class="thx">고맙습니다. 의견이 전달됐습니다.</div></div>
@@ -572,7 +667,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 // 보내지 않는 것: 검색한 편명·공항, 이름, 위치. 오프라인이면 모아 두었다가 인터넷 연결 시 전송.
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
-  const VER = "v37", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v38", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -1350,6 +1445,83 @@ window.csfStat = (() => {
     $("hFwd").addEventListener("click", fwd);
     paint();
     return { seen, onAirline };
+  })();
+
+  // ---------- Gemini AI 연결 (API 키는 이 기기 localStorage 에만 저장) ----------
+  const GM = (() => {
+    const K = "csf-gemini-key", OKK = "csf-gemini-ok", API = "https://generativelanguage.googleapis.com/v1beta";
+    const get = () => store.get(K) || "";
+    const mask = (k) => k.length > 10 ? k.slice(0, 4) + "••••••" + k.slice(-4) : "••••";
+    const msg = (t, cls, sub) => { $("gmMsg").className = "gm-msg" + (cls ? " " + cls : ""); $("gmMsg").innerHTML = esc(t) + (sub ? `<small>${esc(sub)}</small>` : ""); };
+    const status = () => {
+      const k = get(), ok = store.get(OKK);
+      $("gmSt").textContent = !k ? "미연결" : ok ? "연결됨 ✓" : "확인 필요";
+      $("gmSt").className = "gm-st" + (!k ? "" : ok ? " ok" : " bad");
+      if (k && !$("gmKey").value) $("gmKey").placeholder = "등록됨 " + mask(k);
+    };
+    // 키가 맞는지 실제로 구글에 물어봄 (모델 목록 조회, 사용량은 거의 들지 않음)
+    async function check(key) {
+      let r;
+      try {
+        r = await fetch(API + "/models?pageSize=50", { headers: { "x-goog-api-key": key } });
+      } catch (e) { return { ok: false, why: "net" }; }
+      if (r.ok) {
+        let models = [];
+        try { models = ((await r.json()).models || []).map((m) => (m.name || "").replace(/^models\//, "")).filter((n) => /flash/i.test(n)); } catch (e) {}
+        return { ok: true, models };
+      }
+      let body = {}; try { body = await r.json(); } catch (e) {}
+      const t = JSON.stringify(body);
+      if (r.status === 400 && /API_KEY_INVALID|API key not valid/i.test(t)) return { ok: false, why: "invalid" };
+      if (r.status === 429) return { ok: false, why: "quota" };
+      if (r.status === 403) return { ok: false, why: /blocked|restrict/i.test(t) ? "blocked" : "denied" };
+      return { ok: false, why: "other", code: r.status };
+    }
+    const WHY = {
+      net: ["인터넷에 연결되지 않았습니다.", "와이파이나 데이터 연결을 확인하고 다시 눌러 주세요."],
+      invalid: ["키가 맞지 않습니다.", "AI Studio에서 키를 다시 복사해 붙여넣어 주세요. 앞뒤 빈칸이 들어가지 않게 주의하세요."],
+      quota: ["오늘 무료 사용량을 다 썼습니다.", "키는 정상입니다. 내일 다시 시도하거나 잠시 뒤에 다시 눌러 주세요."],
+      blocked: ["이 키는 구글에서 막혀 있습니다.", "AI Studio에서 새 키를 만들어 다시 등록해 주세요."],
+      denied: ["이 키로는 Gemini를 쓸 수 없습니다.", "AI Studio의 API Keys 화면에서 새 키를 만들어 다시 등록해 주세요."],
+      other: ["확인 중 문제가 생겼습니다.", "잠시 뒤 다시 눌러 주세요."],
+    };
+    async function save() {
+      const key = $("gmKey").value.replace(/\s+/g, "") || get();
+      if (!key) { msg("API 키를 먼저 붙여넣어 주세요.", "bad"); return; }
+      if (key.length < 20) { msg("키가 너무 짧습니다.", "bad", "키 전체를 복사했는지 확인해 주세요."); return; }
+      $("gmSave").disabled = true; msg("구글에 연결을 확인하는 중…");
+      const r = await check(key);
+      $("gmSave").disabled = false;
+      const rejected = ["invalid", "blocked", "denied"].includes(r.why);
+      if (!rejected) { store.set(K, key); $("gmKey").value = ""; $("gmKey").type = "password"; $("gmShow").textContent = "보기"; }  // 틀린 키는 저장하지 않고 칸에 남겨 고칠 수 있게
+      if (r.ok) {
+        store.set(OKK, String(Date.now()));
+        if (r.models && r.models.length) store.set("csf-gemini-models", JSON.stringify(r.models.slice(0, 20)));
+        msg("연결됐습니다. 이제 AI 분석을 쓸 수 있습니다.", "ok", "키는 이 기기에만 저장했습니다.");
+      } else {
+        if (!rejected) store.set(OKK, r.why === "quota" ? String(Date.now()) : "");
+        const w = WHY[r.why] || WHY.other;
+        msg(w[0], r.why === "quota" ? "ok" : "bad", w[1] + (r.code ? ` (코드 ${r.code})` : ""));
+      }
+      status();
+    }
+    $("gmSave").addEventListener("click", save);
+    $("gmKey").addEventListener("keydown", (e) => { if (e.key === "Enter") save(); });
+    $("gmShow").addEventListener("click", () => {
+      const i = $("gmKey");
+      if (!i.value && get()) { i.value = get(); }
+      i.type = i.type === "password" ? "text" : "password";
+      $("gmShow").textContent = i.type === "password" ? "보기" : "숨기기";
+    });
+    $("gmDel").addEventListener("click", () => {
+      if (!get() && !$("gmKey").value) return;
+      store.set(K, ""); store.set(OKK, ""); store.set("csf-gemini-models", "");
+      $("gmKey").value = ""; $("gmKey").placeholder = "여기에 붙여넣기"; $("gmKey").type = "password"; $("gmShow").textContent = "보기";
+      msg("키를 지웠습니다. 이 기기에서 더 이상 쓰지 않습니다.");
+      status();
+    });
+    status();
+    return { key: get, connected: () => !!(get() && store.get(OKK)) };
   })();
   csfStat("실행", AL);
   // 개발 예정 기능 요청 (기기당 기능별 1회, 의견은 선택)
