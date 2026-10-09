@@ -606,7 +606,7 @@ window.csfStat = (() => {
   }
   addEventListener("online", flush);
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") flush(); });
-  try { document.getElementById("appVer").textContent = VER; } catch (e) {}      // 하단 제작자 옆 앱 버전
+  try { document.getElementById("appVer").textContent = VER + (/^(localhost|127\.)/.test(location.hostname) ? " · 개발 서버" : ""); } catch (e) {}      // 하단 제작자 옆 앱 버전 (PC 개발 서버면 표시)
   return log;
 })();
 </script>

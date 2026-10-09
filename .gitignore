@@ -3,3 +3,9 @@ __pycache__/
 .DS_Store
 # 기상 자료는 배포 때마다 새로 만들고 저장소에는 넣지 않음
 web/wx.json
+
+# 이 PC 전용 키 설정 (절대 올리지 않음)
+config/local.env
+*.local.env
+# 테스트용 실제 자료 (운항 패키지·근무표 PDF 등)
+private/

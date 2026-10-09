@@ -144,6 +144,17 @@ def num(v, nd):
         return None
 
 
+# config/local.env (이 PC 전용, GitHub 미포함) 의 KEY=값 을 환경변수로 읽음. 이미 있는 환경변수가 우선
+_LOCAL_ENV = os.path.join(ROOT, "config", "local.env")
+if os.path.exists(_LOCAL_ENV):
+    with open(_LOCAL_ENV, encoding="utf-8-sig") as _f:
+        for _line in _f:
+            _line = _line.strip()
+            if _line and not _line.startswith("#") and "=" in _line:
+                _k, _v = _line.split("=", 1)
+                if _v.strip() and not os.environ.get(_k.strip()):
+                    os.environ[_k.strip()] = _v.strip()
+
 TZ = {}
 try:
     with open(AIRPORT_TZ, encoding="utf-8") as _f:
