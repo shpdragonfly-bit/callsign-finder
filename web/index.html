@@ -55,7 +55,10 @@ body {
 .bar { position: sticky; top: 0; z-index: 10; background: linear-gradient(135deg, var(--bar-1), var(--bar-2));
   color: var(--bar-ink); padding-top: env(safe-area-inset-top); border-bottom: 1px solid var(--line); }
 .bar-top { display: flex; align-items: center; justify-content: space-between; padding: 12px 0 6px; }
-.brand { font-size: 13px; font-weight: 600; letter-spacing: .14em; color: var(--bar-sub); text-transform: uppercase; }
+.brand { font-size: 13px; font-weight: 600; letter-spacing: .14em; color: var(--bar-sub); text-transform: uppercase; display: flex; align-items: center; }
+.uid { font: 700 13px var(--mono); letter-spacing: .08em; color: var(--bar-ink); background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28);
+  border-radius: 8px; padding: 2px 8px; margin-left: 8px; cursor: pointer; }
+.uid::before { content: "ID "; font-weight: 500; opacity: .7; letter-spacing: .04em; }
 .pill { font-size: 12px; padding: 3px 10px; border-radius: 99px; border: 1px solid currentColor; color: var(--bar-sub); white-space: nowrap; }
 .pill.off { color: #FFD166; }
 .tabs { display: flex; gap: 4px; }
@@ -400,13 +403,44 @@ body[data-tab="oz"] #alTabs { display: none; }
 .pk-cal div b { display: block; font-size: 15px; margin-bottom: 2px; }
 .pk-cal div span { color: var(--muted); }
 .pk-foot { margin: 16px 2px 0; font-size: 13px; color: var(--muted); line-height: 1.6; }
+/* ---------- 내 아이디 (기기 연결) 시트 ---------- */
+.mono { font-family: var(--mono); }
+.sheet-bg { position: fixed; inset: 0; z-index: 50; background: rgba(5, 15, 30, .55); display: flex; align-items: flex-end; justify-content: center; }
+.sheet-bg[hidden] { display: none; }
+.sheet { width: 100%; max-width: 560px; max-height: 92vh; overflow: auto; background: var(--panel); color: var(--text); border-radius: 20px 20px 0 0;
+  padding: 20px 18px calc(22px + env(safe-area-inset-bottom)); box-shadow: 0 -8px 30px rgba(0,0,0,.25); }
+@media (min-width: 600px) { .sheet-bg { align-items: center; } .sheet { border-radius: 20px; } }
+.sheet h2 { margin: 0; font-size: 22px; }
+.sh-hd { display: flex; justify-content: space-between; align-items: center; }
+.sh-x { font: inherit; font-size: 15px; font-weight: 600; border: 1px solid var(--line); background: var(--panel-2); color: var(--text); border-radius: 10px; padding: 8px 14px; cursor: pointer; }
+.sh-p { font-size: 16px; line-height: 1.6; margin: 10px 0 14px; }
+.sh-big { display: block; width: 100%; text-align: left; font: inherit; font-size: 18px; font-weight: 700; padding: 16px; margin-top: 10px; border-radius: 14px;
+  border: 2px solid var(--line); background: var(--panel-2); color: var(--text); cursor: pointer; }
+.sh-big small { display: block; font-size: 14px; font-weight: 400; color: var(--muted); margin-top: 3px; }
+.sh-big.primary { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+.sh-big.primary small { color: inherit; opacity: .8; }
+.sh-big:disabled { opacity: .45; cursor: default; }
+.sh-id { font-size: 40px; font-weight: 700; letter-spacing: .12em; text-align: center; margin: 14px 0 4px; color: var(--accent); }
+.sh-box { border: 1px solid var(--line); border-radius: 14px; padding: 14px; background: var(--panel-2); }
+.sh-lbl { font-size: 15px; font-weight: 700; }
+.sh-lbl small { color: var(--warn); font-weight: 600; margin-left: 6px; }
+.sh-code { font-size: 24px; font-weight: 700; letter-spacing: .08em; margin: 8px 0; }
+.sh-row { display: flex; gap: 8px; }
+.sh-row .b { flex: 1; font-size: 16px; padding: 12px; }
+.sh-tip { font-size: 14px; line-height: 1.6; color: var(--muted); margin: 10px 0 0; }
+.sh-steps { font-size: 16px; line-height: 1.6; padding-left: 22px; margin: 12px 0; }
+.sh-in { width: 100%; font-size: 24px; letter-spacing: .08em; text-transform: uppercase; padding: 14px; border-radius: 12px; border: 2px solid var(--line); background: var(--panel); color: var(--text); }
+.sh-in:focus { outline: none; border-color: var(--accent); }
+.sh-msg { min-height: 1.4em; font-size: 15px; margin: 8px 2px; line-height: 1.5; }
+.sh-msg.ok { color: var(--ok); font-weight: 700; } .sh-msg.bad { color: var(--warn); font-weight: 700; }
+.sh-link { display: block; margin: 12px auto 0; font: inherit; font-size: 15px; color: var(--muted); background: none; border: 0; text-decoration: underline; cursor: pointer; }
 </style>
 </head>
 <body>
 <div class="bar">
   <div class="wrap">
     <div class="bar-top">
-      <span class="brand">Flight Assist</span>
+      <span class="brand">Flight Assist<button type="button" class="uid" id="uidBtn" aria-label="내 아이디" hidden></button></span>
       <span id="net" class="pill">확인 중</span>
     </div>
     <div class="tabs" role="tablist">
@@ -418,6 +452,41 @@ body[data-tab="oz"] #alTabs { display: none; }
   </div>
 </div>
 
+
+<!-- 내 아이디 (기기 연결) -->
+<div class="sheet-bg" id="uidSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="uidTitle">
+    <div id="uidFirst" hidden>
+      <h2 id="uidTitle">처음 오셨나요?</h2>
+      <p class="sh-p">이 기기에 아이디 <b class="mono" data-uid></b> 가 만들어졌습니다. 나중에 근무표를 동료와 공유할 때 쓰는 아이디입니다.</p>
+      <button type="button" class="sh-big primary" id="uidNew">처음 써요<small>이 아이디를 그대로 씁니다</small></button>
+      <button type="button" class="sh-big" id="uidHave">다른 기기에서 이미 쓰고 있어요<small>쓰던 아이디로 연결합니다</small></button>
+    </div>
+    <div id="uidMain" hidden>
+      <div class="sh-hd"><h2>내 아이디</h2><button type="button" class="sh-x" data-close aria-label="닫기">닫기</button></div>
+      <div class="sh-id mono" data-uid></div>
+      <p class="sh-p">근무표 공유 등 앞으로 나올 기능에서 나를 구분하는 아이디입니다. 동료에게 알려 줘도 괜찮습니다.</p>
+      <div class="sh-box">
+        <div class="sh-lbl">연결 코드 <small>본인만 보관</small></div>
+        <div class="sh-code mono" id="uidCode">••••-••••-••••</div>
+        <div class="sh-row"><button type="button" class="b" id="uidShow">보기</button><button type="button" class="b" id="uidCopy">복사</button></div>
+        <p class="sh-tip">내 <b>다른 휴대폰·패드</b>에서 이 코드를 넣으면 같은 아이디로 연결됩니다. <b>수첩이나 메모 앱에 적어 두세요.</b> 앱을 지우면 코드 없이는 아이디를 되찾을 수 없습니다. 아이디만으로는 이 코드를 알 수 없습니다.</p>
+      </div>
+    </div>
+    <div id="uidLink" hidden>
+      <div class="sh-hd"><h2>쓰던 아이디로 연결</h2><button type="button" class="sh-x" data-close aria-label="닫기">닫기</button></div>
+      <ol class="sh-steps">
+        <li>원래 쓰던 기기에서 왼쪽 위 <b>ID</b>를 누릅니다.</li>
+        <li><b>연결 코드</b>의 [보기]를 눌러 12자리를 확인합니다.</li>
+        <li>아래 칸에 그대로 입력합니다. 띄어쓰기·대소문자는 상관없습니다.</li>
+      </ol>
+      <input id="uidIn" class="sh-in mono" maxlength="20" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="ABCD-EFGH-JKMN">
+      <div class="sh-msg" id="uidMsg"></div>
+      <button type="button" class="sh-big primary" id="uidApply" disabled>이 아이디로 바꾸기</button>
+      <button type="button" class="sh-link" id="uidBack">돌아가기</button>
+    </div>
+  </div>
+</div>
 <div class="wrap">
   <section class="panel" id="panel-cs" role="tabpanel" aria-labelledby="tab-cs">
     <div class="seg al-tabs" id="alTabs" role="tablist" aria-label="항공사"></div>
@@ -572,7 +641,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 // 보내지 않는 것: 검색한 편명·공항, 이름, 위치. 오프라인이면 모아 두었다가 인터넷 연결 시 전송.
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
-  const VER = "v37", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v38", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -1384,6 +1453,96 @@ window.csfStat = (() => {
   if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
     navigator.serviceWorker.register("sw.js").catch(() => {});
   }
+})();
+</script>
+<script>
+// ===================== 내 아이디 (기기 연결) =====================
+// 연결 코드(12자리, 본인만) → SHA-256 → 아이디(6자리, 공개). 같은 코드를 넣으면 어느 기기에서나 같은 아이디.
+// 아이디만으로는 코드를 알 수 없음 → 나중에 근무표 공유 때 본인 확인 열쇠로 사용. 서버 없이 기기에만 저장, 통계로 보내지 않음.
+window.UID = (() => {
+  const $ = (id) => document.getElementById(id);
+  const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  const K = "csf-uid", ASKED = "csf-uid-asked";
+  const AB = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";            // 헷갈리는 0 O 1 I L 제외 (31자)
+  // SHA-256 (파일로 열 때도 동작하도록 직접 계산)
+  function sha256(str) {
+    const b = new TextEncoder().encode(str), K2 = [], H = [0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19];
+    let n = 2; for (let i = 0; i < 64; n++) { let p = true; for (let d = 2; d * d <= n; d++) if (n % d === 0) { p = false; break; } if (p) K2[i++] = (Math.pow(n, 1 / 3) * 4294967296) | 0; }
+    const l = b.length, m = new Uint8Array(((l + 9 + 63) >> 6) << 6); m.set(b); m[l] = 0x80;
+    const dv = new DataView(m.buffer); dv.setUint32(m.length - 4, l * 8); dv.setUint32(m.length - 8, Math.floor(l / 536870912));
+    const w = new Array(64), r = (x, y) => (x >>> y) | (x << (32 - y));
+    for (let o = 0; o < m.length; o += 64) {
+      for (let i = 0; i < 16; i++) w[i] = dv.getUint32(o + i * 4);
+      for (let i = 16; i < 64; i++) { const a = w[i - 15], c = w[i - 2]; w[i] = (w[i - 16] + (r(a, 7) ^ r(a, 18) ^ (a >>> 3)) + w[i - 7] + (r(c, 17) ^ r(c, 19) ^ (c >>> 10))) | 0; }
+      let [A, B, C, D, E, F, G, Hh] = H;
+      for (let i = 0; i < 64; i++) {
+        const t1 = (Hh + (r(E, 6) ^ r(E, 11) ^ r(E, 25)) + ((E & F) ^ (~E & G)) + K2[i] + w[i]) | 0, t2 = ((r(A, 2) ^ r(A, 13) ^ r(A, 22)) + ((A & B) ^ (A & C) ^ (B & C))) | 0;
+        Hh = G; G = F; F = E; E = (D + t1) | 0; D = C; C = B; B = A; A = (t1 + t2) | 0;
+      }
+      H[0] = (H[0] + A) | 0; H[1] = (H[1] + B) | 0; H[2] = (H[2] + C) | 0; H[3] = (H[3] + D) | 0; H[4] = (H[4] + E) | 0; H[5] = (H[5] + F) | 0; H[6] = (H[6] + G) | 0; H[7] = (H[7] + Hh) | 0;
+    }
+    return H.map((x) => x >>> 0);
+  }
+  const check = (s11) => { let t = 0; for (let i = 0; i < s11.length; i++) t += (AB.indexOf(s11[i]) + 1) * (i + 1); return AB[t % AB.length]; };   // 오타 확인용 마지막 글자
+  const idOf = (code) => { const h = sha256("flt-assist-id-v1:" + code); let out = "", x = 0; for (let i = 0; i < 6; i++) { x = h[i]; out += AB[x % AB.length]; } return out; };
+  function newCode() {
+    const rnd = new Uint32Array(11); (window.crypto || window.msCrypto).getRandomValues(rnd);
+    const s = Array.from(rnd, (v) => AB[v % AB.length]).join("");
+    return s + check(s);
+  }
+  const norm = (t) => String(t || "").toUpperCase().replace(/[\s\-_.·]/g, "");
+  const fmt = (c) => c.replace(/(.{4})(?=.)/g, "$1-");
+  function validate(raw) {
+    const c = norm(raw);
+    if (!c) return { st: "empty" };
+    const bad = [...c].filter((ch) => !AB.includes(ch));
+    if (bad.length) return { st: "bad", msg: `코드에 쓰이지 않는 글자가 있습니다: ${[...new Set(bad)].join(" ")}  (O·0·I·1·L 은 쓰지 않습니다)` };
+    if (c.length < 12) return { st: "short", msg: `${c.length}/12자리` };
+    if (c.length > 12) return { st: "bad", msg: "12자리보다 깁니다." };
+    if (check(c.slice(0, 11)) !== c[11]) return { st: "bad", msg: "코드가 맞지 않습니다. 한 글자씩 다시 확인해 주세요." };
+    return { st: "ok", code: c, id: idOf(c) };
+  }
+  let me = null;
+  try { me = JSON.parse(ls.get(K) || "null"); } catch (e) {}
+  if (!me || !me.code || validate(me.code).st !== "ok") { const c = newCode(); me = { code: c, id: idOf(c), at: new Date().toISOString(), src: "new" }; ls.set(K, JSON.stringify(me)); }
+  else me.id = idOf(me.code);
+  const paint = () => {
+    document.querySelectorAll("[data-uid]").forEach((e) => { e.textContent = me.id; });
+    $("uidBtn").textContent = me.id; $("uidBtn").hidden = false;
+    $("uidCode").textContent = "••••-••••-••••"; $("uidShow").textContent = "보기";
+  };
+  const view = (v) => { for (const k of ["uidFirst", "uidMain", "uidLink"]) $(k).hidden = k !== v; $("uidSheet").hidden = !v; if (v === "uidLink") { $("uidIn").value = ""; onInput(); setTimeout(() => $("uidIn").focus(), 50); } };
+  let from = "uidMain";
+  function onInput() {
+    const r = validate($("uidIn").value), msg = $("uidMsg");
+    $("uidApply").disabled = r.st !== "ok";
+    msg.className = "sh-msg" + (r.st === "ok" ? " ok" : r.st === "bad" ? " bad" : "");
+    msg.textContent = r.st === "ok" ? (r.id === me.id ? `이미 이 기기의 아이디(${r.id})입니다.` : `이 코드의 아이디: ${r.id}`) : r.msg || "";
+    if (r.st === "ok" && r.id === me.id) $("uidApply").disabled = true;
+  }
+  $("uidIn").addEventListener("input", onInput);
+  $("uidApply").addEventListener("click", () => {
+    const r = validate($("uidIn").value); if (r.st !== "ok") return;
+    me = { code: r.code, id: r.id, at: new Date().toISOString(), src: "linked" };
+    ls.set(K, JSON.stringify(me)); ls.set(ASKED, "1"); paint(); view("uidMain");
+  });
+  $("uidBtn").addEventListener("click", () => view("uidMain"));
+  $("uidNew").addEventListener("click", () => { ls.set(ASKED, "1"); view(null); });
+  $("uidHave").addEventListener("click", () => { from = "uidFirst"; view("uidLink"); });
+  $("uidBack").addEventListener("click", () => view(from));
+  $("uidShow").addEventListener("click", () => { const on = $("uidShow").textContent === "보기"; $("uidCode").textContent = on ? fmt(me.code) : "••••-••••-••••"; $("uidShow").textContent = on ? "가리기" : "보기"; });
+  $("uidCopy").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(fmt(me.code)); $("uidCopy").textContent = "복사됨 ✓"; } catch (e) { $("uidCode").textContent = fmt(me.code); $("uidShow").textContent = "가리기"; $("uidCopy").textContent = "길게 눌러 복사"; }
+    setTimeout(() => { $("uidCopy").textContent = "복사"; }, 2500);
+  });
+  document.querySelectorAll("#uidSheet [data-close]").forEach((b) => b.addEventListener("click", () => view(null)));
+  $("uidSheet").addEventListener("click", (e) => { if (e.target === $("uidSheet") && $("uidFirst").hidden) view(null); });   // 바깥 누르면 닫기 (처음 묻는 화면은 버튼으로만)
+  // 다른 기기 연결 화면에 "다른 기기의 아이디로 바꾸기" 진입 버튼
+  const link = document.createElement("button"); link.type = "button"; link.className = "sh-big"; link.innerHTML = "다른 기기에서 쓰던 아이디로 바꾸기<small>연결 코드를 입력합니다</small>";
+  link.addEventListener("click", () => { from = "uidMain"; view("uidLink"); }); $("uidMain").appendChild(link);
+  paint();
+  if (!ls.get(ASKED)) setTimeout(() => view("uidFirst"), 600);       // 이 기기에서 처음 한 번만 묻기
+  return { id: () => me.id };
 })();
 </script>
 <script>
