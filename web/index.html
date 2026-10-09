@@ -438,6 +438,44 @@ body[data-tab="oz"] #alTabs { display: none; }
 .gm-msg.ok { color: var(--ok); font-weight: 700; }
 .gm-msg.bad { color: var(--warn); font-weight: 700; }
 .gm-msg small { display: block; color: var(--muted); font-weight: 400; margin-top: 2px; }
+/* ---------- FLT Package 분석 (AI) ---------- */
+.pa { margin-top: 14px; padding: 16px; }
+.pa-beta { font-size: 12px; font-weight: 700; vertical-align: 3px; color: var(--warn); border: 1px solid var(--warn); border-radius: 6px; padding: 1px 6px; }
+.pa-need { margin-top: 10px; font-size: 15px; background: var(--panel-2); border-left: 4px solid var(--warn); border-radius: 8px; padding: 10px 12px; }
+.pa-steps { list-style: none; margin: 12px 0 0; padding: 0; }
+.pa-steps > li { padding: 12px 0; border-top: 1px dashed var(--line); }
+.pa-steps > li:first-child { border-top: 0; }
+.pa-lbl { display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+.pa-lbl .n { width: 26px; height: 26px; line-height: 26px; text-align: center; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font: 700 14px var(--mono); }
+.pa-file { display: block; text-align: center; font-size: 17px; font-weight: 700; padding: 14px; border-radius: 14px; border: 2px dashed var(--accent); color: var(--accent); background: var(--accent-soft); cursor: pointer; }
+.pa-fname { margin-top: 6px; font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
+.pa-go, .pa-out .b { width: 100%; font-size: 17px; padding: 14px 10px; }
+.pa-out { display: flex; gap: 8px; }
+.pa-out .b { flex: 1; }
+.pa-prog { margin-top: 10px; font-size: 15px; line-height: 1.6; background: var(--panel-2); border-radius: 10px; padding: 10px 12px; }
+.pa-prog .on { font-weight: 700; color: var(--accent); }
+.pa-prog .done { color: var(--ok); }
+.pa-prog .err { color: var(--warn); font-weight: 700; }
+.pa-prog small { color: var(--muted); }
+.pa-foot { margin: 12px 0 0; font-size: 13px; color: var(--muted); line-height: 1.6; }
+.pr { margin-top: 12px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.pr-hd { padding: 12px 14px; background: var(--panel-2); border-bottom: 1px solid var(--line); }
+.pr-hd b { font: 700 17px var(--mono); }
+.pr-hd small { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+.pr-sec { padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.pr-sec:last-child { border-bottom: 0; }
+.pr-sec h4 { margin: 0 0 6px; font-size: 14px; color: var(--accent); }
+.pr-kv { display: grid; grid-template-columns: 112px minmax(0, 1fr) auto; gap: 3px 8px; font-size: 14px; align-items: baseline; }
+.pr-kv .k { color: var(--muted); font-size: 12px; font-weight: 700; }
+.pr-kv .v { font-family: var(--mono); overflow-wrap: anywhere; }
+.pr-pg { font: 600 11px var(--mono); color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 0 4px; white-space: nowrap; align-self: start; height: max-content; }
+.pr-chk { margin-top: 6px; font-size: 13px; font-weight: 700; }
+.pr-chk.ok { color: var(--ok); } .pr-chk.bad { color: var(--warn); }
+.pr-li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 8px; padding: 6px 0; border-top: 1px dashed var(--line); font-size: 14px; }
+.pr-li:first-of-type { border-top: 0; }
+.pr-li b { font-family: var(--mono); }
+.pr-li small { color: var(--muted); }
+.pr-miss { color: var(--warn); font-size: 12px; font-weight: 700; }
 </style>
 </head>
 <body>
@@ -572,6 +610,35 @@ body[data-tab="oz"] #alTabs { display: none; }
         </div>
         <div class="gm-msg" id="gmMsg" role="status"></div>
       </div>
+    </div>
+
+    <div class="card pa" id="paCard">
+      <div class="gm-hd">
+        <div><h2>FLT Package 분석 <span class="pa-beta">시험판</span></h2><p>운항 패키지 PDF를 Gemini가 읽고 요약 PDF로 만들어 드립니다.</p></div>
+      </div>
+      <div class="pa-need" id="paNeed">먼저 위 <b>Gemini AI 연결</b>에서 API 키를 등록해 주세요.</div>
+      <ol class="pa-steps">
+        <li>
+          <div class="pa-lbl"><span class="n">1</span>패키지 PDF 고르기</div>
+          <label class="pa-file" for="paFile">PDF 파일 선택</label>
+          <input id="paFile" type="file" accept="application/pdf,.pdf" hidden>
+          <div class="pa-fname" id="paFname">선택한 파일 없음</div>
+        </li>
+        <li>
+          <div class="pa-lbl"><span class="n">2</span>분석하기</div>
+          <button type="button" class="b primary pa-go" id="paGo" disabled>분석 시작</button>
+          <div class="pa-prog" id="paProg" hidden></div>
+        </li>
+        <li>
+          <div class="pa-lbl"><span class="n">3</span>요약 PDF 받기</div>
+          <div class="pa-out">
+            <button type="button" class="b primary" id="paPdf" disabled>PDF 저장</button>
+            <button type="button" class="b" id="paShare" disabled hidden>다른 앱으로 보내기</button>
+          </div>
+        </li>
+      </ol>
+      <div id="paRes"></div>
+      <p class="pa-foot">AI가 만든 참고 자료입니다. 숫자와 NOTAM은 반드시 원본과 대조하세요. 마지막 결과는 이 기기에 남아 있어 인터넷이 없어도 PDF를 다시 받을 수 있습니다. <span id="paFmt"></span></p>
     </div>
 
     <div class="card pk-hero pk-feat">
@@ -1503,7 +1570,7 @@ window.csfStat = (() => {
         const w = WHY[r.why] || WHY.other;
         msg(w[0], r.why === "quota" ? "ok" : "bad", w[1] + (r.code ? ` (코드 ${r.code})` : ""));
       }
-      status();
+      status(); try { PA.paint(); } catch (e) {}
     }
     $("gmSave").addEventListener("click", save);
     $("gmKey").addEventListener("keydown", (e) => { if (e.key === "Enter") save(); });
@@ -1518,10 +1585,299 @@ window.csfStat = (() => {
       store.set(K, ""); store.set(OKK, ""); store.set("csf-gemini-models", "");
       $("gmKey").value = ""; $("gmKey").placeholder = "여기에 붙여넣기"; $("gmKey").type = "password"; $("gmShow").textContent = "보기";
       msg("키를 지웠습니다. 이 기기에서 더 이상 쓰지 않습니다.");
-      status();
+      status(); try { PA.paint(); } catch (e) {}
     });
     status();
     return { key: get, connected: () => !!(get() && store.get(OKK)) };
+  })();
+
+  // ---------- FLT Package 분석 (Gemini) ----------
+  // 출력 양식(임시). 사용자가 만든 실제 양식이 오면 이 블록만 바꾸면 화면·PDF·Gemini 지시문이 함께 바뀜
+  const PKG_FORMAT = {
+    name: "임시 양식 v0",
+    groups: [
+      { id: "basic", title: "비행 기본", fields: [
+        ["flt", "편명", "예: KE017 또는 KAL017"], ["date", "운항 날짜", "UTC 기준 YYYY-MM-DD"], ["reg", "등록부호", "예: HL7642"],
+        ["type", "기종", "ICAO 기종 코드, 예: B748"], ["dep", "출발 공항", "ICAO 4자리"], ["arr", "도착 공항", "ICAO 4자리"],
+        ["etd", "출발 예정 (UTC)", "STD/ETD, HHMM"], ["eta", "도착 예정 (UTC)", "STA/ETA, HHMM"], ["trip_time", "비행 시간", "HH:MM"],
+        ["fl", "순항 고도", "예: FL350, 계단식이면 처음과 최고"], ["altn", "교체 공항", "ICAO 코드, 여러 개면 쉼표"], ["route", "항로 요약", "주요 항로·웨이포인트 한 줄"] ] },
+      { id: "fuel", title: "연료 (kg)", fields: [
+        ["f_trip", "TRIP", ""], ["f_cont", "CONTINGENCY", ""], ["f_altn", "ALTERNATE", ""], ["f_final", "FINAL RESERVE", ""],
+        ["f_extra", "EXTRA", "추가·재량 연료 (DISCRETIONARY 포함)"], ["f_taxi", "TAXI", ""], ["f_total", "TOTAL (BLOCK)", "탑재 총 연료"] ] },
+      { id: "wt", title: "중량 (kg)", fields: [
+        ["zfw", "ZFW (예상)", ""], ["tow", "TOW (예상)", ""], ["ldw", "LDW (예상)", ""], ["mzfw", "MZFW", "최대"], ["mtow", "MTOW", "최대"], ["mldw", "MLDW", "최대"] ] },
+    ],
+    lists: [
+      { id: "notams", title: "주요 NOTAM", hint: "출발·도착·교체 공항과 항로의 운항에 영향이 큰 것만 (활주로·유도로 폐쇄, ILS·항행시설 고장, 장애물, 공역 제한 등). 최대 15개, 중요한 순서" },
+      { id: "weather", title: "기상 요약", hint: "출발·도착·교체 공항의 METAR/TAF와 항로 기상(SIGMET·난기류·뇌우·화산재) 핵심만" },
+      { id: "cautions", title: "기타 주의사항", hint: "회사 공지, MEL/CDL, 특이사항 등 조종사가 꼭 알아야 할 것" },
+    ],
+  };
+  const PA = (() => {
+    const RK = "csf-pkg-last", API = "https://generativelanguage.googleapis.com/v1beta";
+    const MAXMB = 20;
+    let file = null, result = null, busy = false;
+    const keys = PKG_FORMAT.groups.flatMap((g) => g.fields.map((f) => f[0]));
+    const label = Object.fromEntries(PKG_FORMAT.groups.flatMap((g) => g.fields.map((f) => [f[0], f[1]])));
+    // Gemini 에 줄 지시문과 응답 형식 (JSON 스키마)
+    const prompt = () => [
+      "너는 항공사 운항승무원(조종사)을 돕는 운항 브리핑 보조원이다. 첨부한 PDF는 비행 전 받은 운항 패키지(OFP, 연료·중량, NOTAM, 기상 등)다.",
+      "아래 항목을 패키지에서 찾아 JSON으로만 답하라.",
+      "규칙: (1) 숫자·코드·시각은 원문 그대로 옮기고 계산·추측하지 마라. (2) 찾지 못한 항목은 fields 에 넣지 마라. (3) page 는 그 값이 있는 PDF 쪽 번호(1부터). (4) 요약 문장은 한국어로 짧게, 공항·활주로·주파수·코드는 원문 표기 유지. (5) 시각은 UTC.",
+      "fields 의 key 목록:",
+      ...PKG_FORMAT.groups.flatMap((g) => g.fields.map((f) => `- ${f[0]}: ${g.title} · ${f[1]}${f[2] ? " (" + f[2] + ")" : ""}`)),
+      ...PKG_FORMAT.lists.map((l) => `${l.id}: ${l.title} — ${l.hint}`),
+    ].join("\n");
+    const item = (props) => ({ type: "object", properties: props, required: Object.keys(props).filter((k) => k !== "valid" && k !== "airport") });
+    const schema = {
+      type: "object",
+      properties: {
+        fields: { type: "array", items: item({ key: { type: "string", enum: keys }, value: { type: "string" }, page: { type: "integer" } }) },
+        notams: { type: "array", items: item({ airport: { type: "string" }, summary: { type: "string" }, valid: { type: "string" }, page: { type: "integer" } }) },
+        weather: { type: "array", items: item({ airport: { type: "string" }, summary: { type: "string" }, page: { type: "integer" } }) },
+        cautions: { type: "array", items: item({ summary: { type: "string" }, page: { type: "integer" } }) },
+      },
+      required: ["fields", "notams", "weather", "cautions"],
+    };
+    const MODELS = ["gemini-3.8-flash", "gemini-flash-latest", "gemini-3.7-flash", "gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.5-flash-lite"];
+    function pickModels() {
+      let have = []; try { have = JSON.parse(store.get("csf-gemini-models") || "[]"); } catch (e) {}
+      const first = MODELS.filter((m) => have.includes(m));
+      return [...new Set([...first, "gemini-3.8-flash", "gemini-flash-latest"])].slice(0, 3);
+    }
+    const toB64 = (buf) => { const b = new Uint8Array(buf); let s = ""; for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000)); return btoa(s); };
+    // 응답 모양이 바뀌어도 답 글자를 찾아냄: output_text → type:text 조각들 → 아무 text 문자열
+    function textOf(o) {
+      if (!o) return "";
+      if (typeof o.output_text === "string") return o.output_text;
+      const typed = [], any = [];
+      (function walk(x) {
+        if (Array.isArray(x)) return x.forEach(walk);
+        if (x && typeof x === "object") {
+          if (typeof x.text === "string") { (x.type === "text" ? typed : any).push(x.text); }
+          for (const k in x) if (k !== "text") walk(x[k]);
+        }
+      })(o.outputs || o.candidates || o.steps || o);
+      return (typed.length ? typed : any).join("");
+    }
+    const parseJson = (t) => { const m = String(t).replace(/^\s*```(?:json)?/i, "").replace(/```\s*$/, "").trim(); return JSON.parse(m.slice(m.indexOf("{"), m.lastIndexOf("}") + 1)); };
+    async function call(key, model, b64, signal) {
+      const h = { "x-goog-api-key": key, "Content-Type": "application/json" };
+      let r = await fetch(API + "/interactions", { method: "POST", headers: h, signal, body: JSON.stringify({
+        model, input: [{ type: "document", data: b64, mime_type: "application/pdf" }, { type: "text", text: prompt() }],
+        response_format: { type: "text", mime_type: "application/json", schema } }) });
+      if (r.status === 404) {                                           // 예전 방식 (generateContent) 으로 한 번 더
+        r = await fetch(`${API}/models/${model}:generateContent`, { method: "POST", headers: h, signal, body: JSON.stringify({
+          contents: [{ role: "user", parts: [{ inline_data: { mime_type: "application/pdf", data: b64 } }, { text: prompt() }] }],
+          generationConfig: { responseMimeType: "application/json" } }) });
+      }
+      return r;
+    }
+    const prog = (rows) => { $("paProg").hidden = false; $("paProg").innerHTML = rows.join("<br>"); };
+    async function run() {
+      if (busy || !file) return;
+      const key = GM.key();
+      if (!key) { prog([`<span class="err">먼저 Gemini AI 연결에서 API 키를 등록해 주세요.</span>`]); return; }
+      if (!navigator.onLine) { prog([`<span class="err">인터넷에 연결되지 않았습니다.</span> <small>분석은 인터넷이 될 때(운항 전) 해 주세요.</small>`]); return; }
+      busy = true; paint();
+      const t0 = Date.now(); let stage = 1, timer;
+      const tick = () => { const s = Math.round((Date.now() - t0) / 1000);
+        prog([`${stage > 1 ? '<span class="done">✓</span>' : '<span class="on">●</span>'} PDF 읽기`,
+              `${stage > 2 ? '<span class="done">✓</span>' : stage === 2 ? '<span class="on">●</span>' : "○"} Gemini 분석 <small>${stage === 2 ? s + "초 · 보통 30초~2분" : ""}</small>`,
+              `${stage > 3 ? '<span class="done">✓</span>' : stage === 3 ? '<span class="on">●</span>' : "○"} 결과 정리`]); };
+      timer = setInterval(tick, 1000); tick();
+      const ctl = new AbortController(), kill = setTimeout(() => ctl.abort(), 180000);
+      try {
+        const b64 = toB64(await file.arrayBuffer());
+        stage = 2; tick();
+        let r, last = null;
+        for (const m of pickModels()) {
+          r = await call(key, m, b64, ctl.signal);
+          if (r.ok) { last = m; break; }
+          if (![404, 400].includes(r.status) || !/model|not found/i.test(await r.clone().text())) break;
+        }
+        if (!r.ok) {
+          const t = await r.text();
+          const why = r.status === 429 ? "오늘 무료 사용량을 다 썼거나 잠시 요청이 많습니다. 잠시 뒤(또는 내일) 다시 해 주세요."
+            : r.status === 413 || /too large|size/i.test(t) ? "PDF가 너무 큽니다."
+            : r.status === 400 && /API_KEY|API key/i.test(t) ? "API 키가 맞지 않습니다. Gemini AI 연결에서 키를 다시 등록해 주세요."
+            : r.status === 403 ? "이 키로는 Gemini를 쓸 수 없습니다. 새 키를 등록해 주세요."
+            : `분석 요청이 실패했습니다 (코드 ${r.status}). 잠시 뒤 다시 해 주세요.`;
+          throw new Error(why);
+        }
+        stage = 3; tick();
+        const data = parseJson(textOf(await r.json()));
+        result = normalize(data, { file: file.name, model: last, at: new Date().toISOString() });
+        store.set(RK, JSON.stringify(result));
+        stage = 4; tick();
+        $("paProg").innerHTML += `<br><span class="done">분석 완료</span> <small>${Math.round((Date.now() - t0) / 1000)}초 · 아래 내용을 확인하고 PDF를 받으세요.</small>`;
+        renderRes();
+      } catch (e) {
+        const msg = e.name === "AbortError" ? "3분이 지나도 답이 없어 중단했습니다. 잠시 뒤 다시 해 주세요."
+          : e instanceof SyntaxError ? "Gemini 답을 정리하지 못했습니다. 한 번 더 분석해 주세요."
+          : /Failed to fetch|NetworkError|Load failed/i.test(e.message) ? "인터넷 연결이 끊겼습니다. 연결을 확인하고 다시 해 주세요."
+          : e.message;
+        clearInterval(timer);
+        $("paProg").innerHTML = $("paProg").innerHTML.replace('<span class="on">●</span>', '<span class="err">✕</span>') + `<br><span class="err">${esc(msg)}</span>`;
+      } finally { clearInterval(timer); clearTimeout(kill); busy = false; paint(); }
+    }
+    function normalize(d, meta) {
+      const f = {};
+      for (const x of d.fields || []) if (x && keys.includes(x.key) && String(x.value || "").trim()) f[x.key] = { v: String(x.value).trim(), p: x.page | 0 };
+      const L = (a) => (Array.isArray(a) ? a : []).filter((x) => x && x.summary).map((x) => ({ a: x.airport || "", s: String(x.summary), v: x.valid || "", p: x.page | 0 }));
+      return { meta, f, notams: L(d.notams).slice(0, 20), weather: L(d.weather), cautions: L(d.cautions) };
+    }
+    const num = (x) => { const n = parseFloat(String(x || "").replace(/[^\d.\-]/g, "")); return isFinite(n) ? n : null; };
+    // 숫자 교차 검증 (AI 가 옮긴 값이 서로 맞는지)
+    function checks(f) {
+      const out = [], g = (k) => f[k] ? num(f[k].v) : null;
+      const parts = ["f_trip", "f_cont", "f_altn", "f_final", "f_extra", "f_taxi"].map(g);
+      if (g("f_total") != null && parts.every((x) => x != null)) {
+        const d = parts.reduce((a, b) => a + b, 0) - g("f_total");
+        out.push(Math.abs(d) <= 10 ? { ok: true, t: "연료 합계 일치" } : { ok: false, t: `연료 합계 차이 ${d > 0 ? "+" : ""}${Math.round(d)} kg — 원본 확인` });
+      }
+      if (g("zfw") != null && g("tow") != null && g("f_total") != null && g("f_taxi") != null) {
+        const d = g("zfw") + g("f_total") - g("f_taxi") - g("tow");
+        out.push(Math.abs(d) <= 100 ? { ok: true, t: "ZFW + 이륙 연료 ≈ TOW" } : { ok: false, t: `ZFW + 이륙 연료와 TOW 차이 ${Math.round(d)} kg — 원본 확인` });
+      }
+      if (g("tow") != null && g("ldw") != null && g("f_trip") != null) {
+        const d = g("tow") - g("f_trip") - g("ldw");
+        out.push(Math.abs(d) <= 100 ? { ok: true, t: "TOW - TRIP ≈ LDW" } : { ok: false, t: `TOW - TRIP 과 LDW 차이 ${Math.round(d)} kg — 원본 확인` });
+      }
+      for (const [k, m] of [["zfw", "mzfw"], ["tow", "mtow"], ["ldw", "mldw"]]) if (g(k) != null && g(m) != null && g(k) > g(m)) out.push({ ok: false, t: `${label[k]}이(가) ${label[m]}보다 큽니다 — 원본 확인` });
+      return out;
+    }
+    const pg = (p) => p ? `<span class="pr-pg">p.${p}</span>` : "<span></span>";
+    function renderRes() {
+      if (!result) { $("paRes").innerHTML = ""; return; }
+      const R = result, f = R.f;
+      const title = [f.flt && f.flt.v, f.dep && f.arr ? `${f.dep.v} → ${f.arr.v}` : "", f.date && f.date.v].filter(Boolean).join(" · ") || "운항 패키지 요약";
+      let h = `<div class="pr"><div class="pr-hd"><b>${esc(title)}</b><small>${esc(R.meta.file || "")} · ${esc(fmtDate(R.meta.at))} 분석</small></div>`;
+      for (const g of PKG_FORMAT.groups) {
+        h += `<div class="pr-sec"><h4>${esc(g.title)}</h4><div class="pr-kv">`;
+        for (const [k, l] of g.fields) h += `<span class="k">${esc(l)}</span>${f[k] ? `<span class="v">${esc(f[k].v)}</span>${pg(f[k].p)}` : `<span class="pr-miss">확인 필요</span><span></span>`}`;
+        h += `</div>`;
+        if (g.id === "wt") for (const c of checks(f)) h += `<div class="pr-chk ${c.ok ? "ok" : "bad"}">${c.ok ? "✓" : "!"} ${esc(c.t)}</div>`;
+        h += `</div>`;
+      }
+      for (const l of PKG_FORMAT.lists) {
+        const a = R[l.id] || [];
+        h += `<div class="pr-sec"><h4>${esc(l.title)} <small>${a.length}건</small></h4>`;
+        h += a.length ? a.map((x) => `<div class="pr-li"><span>${x.a ? `<b>${esc(x.a)}</b> ` : ""}${esc(x.s)}${x.v ? ` <small>${esc(x.v)}</small>` : ""}</span>${pg(x.p)}</div>`).join("") : `<div class="pr-li"><small>없음</small><span></span></div>`;
+        h += `</div>`;
+      }
+      $("paRes").innerHTML = h + `</div>`;
+    }
+    // ---- 요약 PDF (jsPDF + 나눔고딕, 처음 한 번 받으면 오프라인에서도 생성) ----
+    let libP = null;
+    function loadLib() {
+      if (libP) return libP;
+      const js = new Promise((ok, no) => { if (window.jspdf) return ok(); const s = document.createElement("script"); s.src = "vendor/jspdf.umd.min.js"; s.onload = ok; s.onerror = () => no(new Error("lib")); document.head.appendChild(s); });
+      const font = (u) => fetch(u).then((r) => { if (!r.ok) throw new Error("font"); return r.arrayBuffer(); }).then(toB64);
+      libP = Promise.all([js, font("fonts/NanumGothic-Regular.ttf"), font("fonts/NanumGothic-Bold.ttf")]).catch((e) => { libP = null; throw e; });
+      return libP;
+    }
+    async function makePdf() {
+      const [, reg, bold] = await loadLib();
+      const { jsPDF } = window.jspdf, d = new jsPDF({ unit: "mm", format: "a4" });
+      d.addFileToVFS("NG-R.ttf", reg); d.addFont("NG-R.ttf", "NG", "normal");
+      d.addFileToVFS("NG-B.ttf", bold); d.addFont("NG-B.ttf", "NG", "bold");
+      const R = result, f = R.f, W = 210, M = 14, CW = W - M * 2;
+      const ACC = [0, 90, 150], MUT = [110, 120, 135], WARN = [200, 70, 20], OK = [20, 130, 70];
+      let y = 0, pageNo = 1;
+      const title = [f.flt && f.flt.v, f.dep && f.arr ? `${f.dep.v} → ${f.arr.v}` : "", f.date && f.date.v].filter(Boolean).join("   ") || "운항 패키지 요약";
+      const header = () => {
+        d.setFillColor(...ACC); d.rect(0, 0, W, 20, "F");
+        d.setTextColor(255); d.setFont("NG", "bold"); d.setFontSize(15); d.text(title, M, 12.5);
+        d.setFont("NG", "normal"); d.setFontSize(8); d.text("FLT PACKAGE 요약 · AI 참고자료", W - M, 8, { align: "right" });
+        d.text(`${fmtDate(R.meta.at)} 분석`, W - M, 13, { align: "right" });
+        y = 28;
+      };
+      const footer = () => { d.setTextColor(...MUT); d.setFont("NG", "normal"); d.setFontSize(7.5);
+        d.text("운항 도우미 · Gemini 요약 · 숫자와 NOTAM은 반드시 원본과 대조", M, 290); d.text(`${pageNo}`, W - M, 290, { align: "right" }); };
+      const need = (h) => { if (y + h > 282) { footer(); d.addPage(); pageNo++; header(); } };
+      const sec = (t) => { need(14); d.setFillColor(235, 241, 247); d.rect(M, y - 4.5, CW, 7, "F"); d.setTextColor(...ACC); d.setFont("NG", "bold"); d.setFontSize(10.5); d.text(t, M + 2, y); y += 7; };
+      header();
+      for (const g of PKG_FORMAT.groups) {
+        sec(g.title);
+        const half = g.id === "basic" ? 1 : 2, colW = CW / half;
+        let col = 0, rowH = 0;
+        for (const [k, l] of g.fields) {
+          const x = M + col * colW, v = f[k] ? f[k].v : "확인 필요";
+          d.setFont("NG", "normal"); d.setFontSize(9.5);
+          const lines = d.splitTextToSize(v, colW - 44);
+          const h = Math.max(5.2, lines.length * 4.3 + 1);
+          if (col === 0) need(h);
+          d.setTextColor(...MUT); d.setFontSize(8); d.text(l, x + 1, y);
+          d.setFontSize(9.5); d.setTextColor(...(f[k] ? [20, 30, 45] : WARN)); d.setFont("NG", f[k] ? "normal" : "bold"); d.text(lines, x + 32, y);
+          if (f[k] && f[k].p) { d.setTextColor(...MUT); d.setFont("NG", "normal"); d.setFontSize(7); d.text(`p.${f[k].p}`, x + colW - 2, y, { align: "right" }); }
+          rowH = Math.max(rowH, h);
+          if (++col >= half) { col = 0; y += rowH; rowH = 0; }
+        }
+        if (col) { y += rowH; }
+        if (g.id === "wt") for (const c of checks(f)) { need(5); d.setFont("NG", "bold"); d.setFontSize(9); d.setTextColor(...(c.ok ? OK : WARN)); d.text(`${c.ok ? "[확인]" : "[주의]"} ${c.t}`, M + 1, y); y += 5; }
+        y += 3;
+      }
+      for (const l of PKG_FORMAT.lists) {
+        const a = R[l.id] || [];
+        sec(`${l.title} (${a.length}건)`);
+        if (!a.length) { d.setFont("NG", "normal"); d.setFontSize(9); d.setTextColor(...MUT); d.text("없음", M + 1, y); y += 6; continue; }
+        a.forEach((x, i) => {
+          d.setFont("NG", "normal"); d.setFontSize(9.5);
+          const txt = (x.a ? x.a + "  " : "") + x.s + (x.v ? `  (${x.v})` : "");
+          const lines = d.splitTextToSize(txt, CW - 18);
+          need(lines.length * 4.4 + 2);
+          d.setTextColor(...MUT); d.setFontSize(8); d.text(String(i + 1), M + 1, y);
+          d.setTextColor(20, 30, 45); d.setFontSize(9.5); d.text(lines, M + 7, y);
+          if (x.p) { d.setTextColor(...MUT); d.setFontSize(7); d.text(`p.${x.p}`, W - M, y, { align: "right" }); }
+          y += lines.length * 4.4 + 1.6;
+        });
+        y += 3;
+      }
+      footer();
+      const name = (["FLT", f.flt && f.flt.v, f.date && f.date.v].filter(Boolean).join("_").replace(/[^\w\-]+/g, "_") || "FLT_summary") + ".pdf";   // 영문 이름 (한글이면 일부 기기에서 'download' 로 저장됨)
+      return { blob: d.output("blob"), name };
+    }
+    async function savePdf(share) {
+      if (!result) return;
+      const btn = share ? $("paShare") : $("paPdf"), old = btn.textContent;
+      btn.disabled = true; btn.textContent = "PDF 만드는 중…";
+      try {
+        const { blob, name } = await makePdf();
+        const fileObj = new File([blob], name, { type: "application/pdf" });
+        if (share && navigator.canShare && navigator.canShare({ files: [fileObj] })) {
+          await navigator.share({ files: [fileObj], title: name }).catch(() => {});
+        } else {
+          const u = URL.createObjectURL(blob), a = document.createElement("a");
+          a.href = u; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+          setTimeout(() => URL.revokeObjectURL(u), 60000);
+        }
+      } catch (e) {
+        prog([`<span class="err">PDF를 만들지 못했습니다.</span> <small>처음 한 번은 인터넷 연결이 필요합니다 (한글 글꼴 받기).</small>`]);
+      } finally { btn.textContent = old; paint(); }
+    }
+    function paint() {
+      const on = !!GM.key();
+      $("paNeed").hidden = on;
+      $("paGo").disabled = !on || !file || busy;
+      $("paGo").textContent = busy ? "분석 중…" : "분석 시작";
+      $("paPdf").disabled = !result || busy;
+      const canShare = !!(navigator.canShare && window.File && navigator.canShare({ files: [new File(["x"], "x.pdf", { type: "application/pdf" })] }));
+      $("paShare").hidden = !canShare; $("paShare").disabled = !result || busy;
+    }
+    $("paFile").addEventListener("change", (e) => {
+      const f = e.target.files && e.target.files[0];
+      if (!f) return;
+      if (f.size > MAXMB * 1048576) { file = null; $("paFname").textContent = `파일이 너무 큽니다 (${(f.size / 1048576).toFixed(1)}MB). ${MAXMB}MB 이하만 됩니다.`; paint(); return; }
+      file = f; $("paFname").textContent = `${f.name} · ${(f.size / 1048576).toFixed(1)}MB`; $("paProg").hidden = true; paint();
+    });
+    $("paGo").addEventListener("click", run);
+    $("paPdf").addEventListener("click", () => savePdf(false));
+    $("paShare").addEventListener("click", () => savePdf(true));
+    try { result = JSON.parse(store.get(RK) || "null"); } catch (e) {}
+    $("paFmt").textContent = `(출력 양식: ${PKG_FORMAT.name})`;
+    renderRes(); paint();
+    return { paint };
   })();
   csfStat("실행", AL);
   // 개발 예정 기능 요청 (기기당 기능별 1회, 의견은 선택)
