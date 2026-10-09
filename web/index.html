@@ -26,6 +26,7 @@
 :root[data-al="JNA"] { --bg: #F6FAF0; --panel-2: #EAF3DD; --line: #D4E5BF; --accent: #4B8512; --accent-soft: #EDF6E0; --bar-1: #97CC3E; --bar-2: #5E9E1F; }
 :root[data-al="JJA"] { --bg: #FFF7F2; --panel-2: #FDEEE4; --line: #F2D9C9; --accent: #D64A0E; --accent-soft: #FFEDE2; --bar-1: #FF8A2A; --bar-2: #E85412; }
 :root[data-al="TWB"] { --bg: #FDF5F6; --panel-2: #FAE9EB; --line: #EFD3D7; --accent: #C41E32; --accent-soft: #FCE8EA; --bar-1: #EC4359; --bar-2: #B91A2E; }
+:root[data-al="AAR"] { --bg: #F7F5F2; --panel-2: #EFEBE5; --line: #DED7CD; --accent: #8A5F2E; --accent-soft: #F4ECE1; --bar-1: #8F877E; --bar-2: #605850; }
 :root[data-al="ESR"] { --bg: #F9F3F4; --panel-2: #F1E2E5; --line: #E0C6CC; --accent: #7E0B22; --accent-soft: #F3E1E5; --bar-1: #8E1530; --bar-2: #5A0616; }
 :root[data-theme="dark"] {
   --bg: #06101D; --panel: #0D1B2E; --panel-2: #132640; --line: #1E3555;
@@ -297,11 +298,13 @@ button.b:disabled { opacity: .5; }
 :root[data-theme="dark"][data-al="JNA"] { --accent: #A9DC5F; --accent-soft: #22301A; --bar-1: #16210C; --bar-2: #16210C; --line: #34452A; }
 :root[data-theme="dark"][data-al="JJA"] { --accent: #FF9B5C; --accent-soft: #3A2414; --bar-1: #2A1609; --bar-2: #2A1609; --line: #4A3222; }
 :root[data-theme="dark"][data-al="TWB"] { --accent: #FF7C8C; --accent-soft: #3A1820; --bar-1: #2A0E15; --bar-2: #2A0E15; --line: #4A2830; }
+:root[data-theme="dark"][data-al="AAR"] { --accent: #E0BC8A; --accent-soft: #2E2418; --bar-1: #1F1B17; --bar-2: #1F1B17; --line: #3D352C; }
 :root[data-theme="dark"][data-al="ESR"] { --accent: #D9939F; --accent-soft: #331019; --bar-1: #22060C; --bar-2: #22060C; --line: #47202A; }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"])[data-al="JNA"] { --accent: #A9DC5F; --accent-soft: #22301A; --bar-1: #16210C; --bar-2: #16210C; --line: #34452A; }
   :root:not([data-theme="light"])[data-al="JJA"] { --accent: #FF9B5C; --accent-soft: #3A2414; --bar-1: #2A1609; --bar-2: #2A1609; --line: #4A3222; }
   :root:not([data-theme="light"])[data-al="TWB"] { --accent: #FF7C8C; --accent-soft: #3A1820; --bar-1: #2A0E15; --bar-2: #2A0E15; --line: #4A2830; }
+  :root:not([data-theme="light"])[data-al="AAR"] { --accent: #E0BC8A; --accent-soft: #2E2418; --bar-1: #1F1B17; --bar-2: #1F1B17; --line: #3D352C; }
   :root:not([data-theme="light"])[data-al="ESR"] { --accent: #D9939F; --accent-soft: #331019; --bar-1: #22060C; --bar-2: #22060C; --line: #47202A; }
 }
 
@@ -329,6 +332,14 @@ button.b:disabled { opacity: .5; }
 /* ---------- FLT Package 분석 (개발 예정 안내) ---------- */
 .tab .new { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #FFD166; margin-left: 4px; vertical-align: 3px; }
 @media (max-width: 400px) { .tab { font-size: 15px; letter-spacing: -0.3px; white-space: nowrap; padding-left: 0; padding-right: 0; } }
+/* 아시아나항공 탭: 꼬리날개 색동 줄무늬 + 탭 4개일 때 글자 크기 */
+:root[data-al="AAR"] .bar::after { content: ""; position: absolute; left: 0; right: 0; bottom: -5px; height: 5px;
+  background: linear-gradient(90deg, #C8102E 0 20%, #F08300 20% 40%, #FFD100 40% 60%, #00A3E0 60% 80%, #1F3F99 80% 100%); }
+.tab .oz-dot { display: inline-block; width: 18px; height: 6px; margin-left: 4px; vertical-align: 3px; border-radius: 2px;
+  background: linear-gradient(90deg, #C8102E 0 20%, #F08300 20% 40%, #FFD100 40% 60%, #00A3E0 60% 80%, #1F3F99 80% 100%); }
+body[data-tab="oz"] #alTabs { display: none; }
+.tabs.n4 .tab { font-size: 15px; letter-spacing: -0.4px; white-space: nowrap; padding-left: 0; padding-right: 0; }
+@media (max-width: 400px) { .tabs.n4 .tab { font-size: 13.5px; letter-spacing: -0.6px; } .tab .oz-dot { display: none; } }
 .pk-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--accent); background: var(--accent-soft);
   border: 1px solid var(--line); border-radius: 99px; padding: 3px 10px; }
 .pk-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: pkPulse 1.8s ease-in-out infinite; }
@@ -400,6 +411,7 @@ button.b:disabled { opacity: .5; }
     </div>
     <div class="tabs" role="tablist">
       <button class="tab" role="tab" id="tab-cs" aria-controls="panel-cs" aria-selected="true" data-tab="cs">Call Sign 조회</button>
+      <button class="tab" role="tab" id="tab-oz" aria-controls="panel-cs" aria-selected="false" data-tab="oz" hidden>아시아나</button>
       <button class="tab" role="tab" id="tab-ft" aria-controls="panel-ft" aria-selected="false" data-tab="ft">비행시간계산</button>
       <button class="tab" role="tab" id="tab-pk" aria-controls="panel-pk" aria-selected="false" data-tab="pk">개발 예정<span class="new" aria-label="새 기능"></span></button>
     </div>
@@ -560,7 +572,7 @@ button.b:disabled { opacity: .5; }
 // 보내지 않는 것: 검색한 편명·공항, 이름, 위치. 오프라인이면 모아 두었다가 인터넷 연결 시 전송.
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
-  const VER = "v36", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v37", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -636,7 +648,17 @@ window.csfStat = (() => {
   // ---------- 항공사 선택 (내부 탭) ----------
   const ALKEY = "csf-airline";
   let AL = store.get(ALKEY) || "KAL";
-  const SHORT = { KAL: "대한항공", JNA: "진에어", JJA: "제주항공", TWB: "티웨이", ESR: "이스타" };
+  const SHORT = { KAL: "대한항공", JNA: "진에어", JJA: "제주항공", TWB: "티웨이", ESR: "이스타", AAR: "아시아나" };
+  // 별도 상단 탭으로 보여 주는 항공사 (config 의 tab 값, 지금은 아시아나항공). 데이터에 없으면 탭도 숨김
+  const MAINKEY = "csf-al-main";
+  const isSep = (k) => !!(DB && DB.airlines && DB.airlines[k] && DB.airlines[k].tab);
+  let SEP = null;
+  function syncSepTab() {
+    SEP = DB && DB.airlines ? (Object.keys(DB.airlines).find(isSep) || null) : null;
+    $("tab-oz").hidden = !SEP;
+    $("tab-oz").closest(".tabs").classList.toggle("n4", !!SEP);
+    if (SEP) $("tab-oz").innerHTML = `${esc(SHORT[SEP] || DB.airlines[SEP].name)}<span class="oz-dot" aria-hidden="true"></span>`;
+  }
   const ofAL = (cs) => cs.slice(0, 3) === AL;
   function updateThemeColor() {                           // 휴대폰 상단 상태표시줄 색
     const c = getComputedStyle(document.documentElement).getPropertyValue("--bar-2").trim();
@@ -647,7 +669,8 @@ window.csfStat = (() => {
     if (!al[AL]) AL = Object.keys(al)[0] || "KAL";
     document.documentElement.dataset.al = AL;             // 항공사별 색상
     updateThemeColor();
-    $("alTabs").innerHTML = Object.entries(al).map(([k, a]) =>
+    syncSepTab();
+    $("alTabs").innerHTML = Object.entries(al).filter(([k]) => !isSep(k)).map(([k, a]) =>
       `<button role="tab" data-al="${esc(k)}" aria-pressed="${k === AL}" aria-selected="${k === AL}">${esc(SHORT[k] || a.name)}</button>`).join("");
     const a = al[AL] || {};
     $("q").placeholder = `${a.iata || ""}17 / 17 / LAX`;
@@ -655,7 +678,11 @@ window.csfStat = (() => {
   }
   function setAirline(k, keepQuery) {
     if (k === AL) return;
-    AL = k; store.set(ALKEY, k); renderAirlineTabs(); renderStat(); H?.onAirline();
+    AL = k; store.set(ALKEY, k); if (!isSep(k)) store.set(MAINKEY, k);
+    renderAirlineTabs(); renderStat(); H?.onAirline();
+    const tab = document.body.dataset.tab;                 // 다른 탭 항공사 편명을 직접 입력하면 상단 탭도 전환
+    if (isSep(k) && tab === "cs") showTab("oz");
+    else if (!isSep(k) && tab === "oz") showTab("cs");
     if (!keepQuery) search();
   }
 
@@ -1215,13 +1242,21 @@ window.csfStat = (() => {
 
   // ---------- 탭 (화면은 숨기기만 하므로 입력·결과가 그대로 유지됨) ----------
   function showTab(name) {
-    document.querySelectorAll(".tab").forEach((t) => {
-      const on = t.dataset.tab === name;
-      t.setAttribute("aria-selected", on);
-      $("panel-" + t.dataset.tab).hidden = !on;
-    });
+    if (name === "oz" && !SEP) name = "cs";
+    const panel = name === "oz" ? "cs" : name;            // 아시아나 탭은 Call Sign 조회 화면을 그대로 씀
+    document.querySelectorAll(".tab").forEach((t) => t.setAttribute("aria-selected", t.dataset.tab === name));
+    document.querySelectorAll(".panel").forEach((p) => { p.hidden = p.id !== "panel-" + panel; });
     document.body.dataset.tab = name;
     store.set(TABKEY, name);
+    // 탭과 항공사 맞추기: 아시아나 탭 ↔ 별도 항공사, Call Sign 조회 탭 ↔ 나머지 항공사
+    if (name === "oz" && AL !== SEP) switchAirline(SEP);
+    if (name === "cs" && isSep(AL)) switchAirline(store.get(MAINKEY) || "KAL");
+  }
+  // 탭을 옮길 때 입력값 처리는 항공사 탭 누를 때와 같음 (숫자·공항 코드는 유지, 다른 항공사 편명은 비움)
+  function switchAirline(k) {
+    const q = $("q").value.trim();
+    if (q && !/^\d+[A-Z]?$/i.test(q) && !airportCode(q)) { $("q").value = ""; store.set(QKEY, ""); }
+    setAirline(k);
   }
   document.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => showTab(t.dataset.tab)));
 
@@ -1279,7 +1314,8 @@ window.csfStat = (() => {
       x.i = i; shown = true; save(); paint();
       nav = true;
       try {
-        if (document.body.dataset.tab !== "cs") showTab("cs");
+        const want = isSep(AL) ? "oz" : "cs";
+        if (document.body.dataset.tab !== want) showTab(want);
         $("q").value = e.q; store.set(QKEY, e.q); search();
       } finally { nav = false; }
       clearTimeout(timer);
@@ -1337,7 +1373,7 @@ window.csfStat = (() => {
   });
   $("q").value = store.get(QKEY) || "";   // 앱을 다시 열어도 마지막 입력 복원
   search();
-  showTab(["ft", "pk"].includes(store.get(TABKEY)) ? store.get(TABKEY) : "cs");
+  showTab(["ft", "pk", "oz"].includes(store.get(TABKEY)) ? store.get(TABKEY) : (isSep(AL) ? "oz" : "cs"));
 
   if (navigator.onLine) loadWx();
   // 온라인이면 조용히 최신 데이터 확인 (오프라인/파일 모드에서는 생략)

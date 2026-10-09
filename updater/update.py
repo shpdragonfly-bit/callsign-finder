@@ -329,7 +329,8 @@ def main():
     data = {
         "version": 1,
         "generated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "airlines": {a["icao"]: {k: a.get(k, "") for k in ("iata", "name", "name_en", "telephony")}
+        "airlines": {a["icao"]: dict({k: a.get(k, "") for k in ("iata", "name", "name_en", "telephony")},
+                                     **({"tab": a["tab"]} if a.get("tab") else {}))   # tab: 별도 상단 탭으로 보여 줄 항공사
                      for a in airlines},
         "type_names": TYPE_NAMES,
         "stats": {"flights": len(flights), "with_type": with_type, "adsb_updated": adsb_ok,

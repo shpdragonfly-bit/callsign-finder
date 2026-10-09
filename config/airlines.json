@@ -47,7 +47,9 @@
       "name": "아시아나항공",
       "name_en": "Asiana Airlines",
       "telephony": "ASIANA",
-      "enabled": false
+      "enabled": true,
+      "tab": "oz",
+      "_메모": "별도 탭(아시아나항공)으로 표시. 2026-10-09 추가, 약 2개월 사용 후 enabled=false 로 끔"
     }
   ],
   "type_sweep": [
