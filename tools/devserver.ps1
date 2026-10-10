@@ -1,7 +1,7 @@
 ﻿# 운항 도우미 개발 서버 (설치 필요 없음 · Windows PowerShell 기본 기능만 사용)
 # 개발서버_시작.bat 으로 실행합니다. web 폴더를 http://localhost:8000 으로 띄우고 브라우저를 엽니다.
 # - 파일을 고친 뒤 브라우저에서 새로고침하면 바로 반영 (캐시 안 함)
-# - 기상(wx.json)은 저장소에 없으므로 실제 앱 주소에서 받아와 그대로 전달
+# - 기상(wx.json)·공항버스 시간표(bus.json)가 폴더에 없으면 실제 앱 주소에서 받아와 그대로 전달
 # - localhost 에서는 앱이 사용 통계를 보내지 않음
 param([int]$Port = 8000)
 $ErrorActionPreference = "Stop"
@@ -35,8 +35,8 @@ while ($L.IsListening) {
     if (-not $full.StartsWith($Root)) { $res.StatusCode = 403; continue }
     $bytes = $null
     if (Test-Path -LiteralPath $full -PathType Leaf) { $bytes = [IO.File]::ReadAllBytes($full) }
-    elseif ($path -eq "wx.json") {
-      try { $bytes = (New-Object Net.WebClient).DownloadData($Live + "wx.json") } catch { }
+    elseif ($path -eq "wx.json" -or $path -eq "bus.json") {
+      try { $bytes = (New-Object Net.WebClient).DownloadData($Live + $path) } catch { }
     }
     if ($null -eq $bytes) { $res.StatusCode = 404; Write-Host ("404  " + $path) -ForegroundColor DarkYellow; continue }
     $ext = [IO.Path]::GetExtension($full).ToLower()
