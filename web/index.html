@@ -520,7 +520,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 .cm-card { padding: 14px 16px; }
 .cm-hd { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .cm-hd h3 { margin: 0; font-size: 18px; }
-.cm-badge { font-size: 12px; font-weight: 700; color: var(--warn); border: 1px solid var(--warn); border-radius: 6px; padding: 1px 6px; }
+.cm-badge { white-space: nowrap; flex: 0 0 auto; font-size: 12px; font-weight: 700; color: var(--warn); border: 1px solid var(--warn); border-radius: 6px; padding: 1px 6px; }
 .cm-row { display: flex; gap: 8px; margin-top: 12px; }
 .cm-row input { flex: 1; min-width: 0; font: 700 22px var(--mono); padding: 12px; border-radius: 12px; border: 2px solid var(--line); background: var(--panel); color: var(--text); }
 .cm-row input:focus { outline: none; border-color: var(--accent); }
@@ -552,6 +552,15 @@ body[data-tab="oz"] #alTabs { display: none; }
 .cm-rt details div { font-size: 13px; color: var(--muted); }
 .cm-more { display: block; width: 100%; margin-top: 8px; font: inherit; font-size: 14px; padding: 9px; border-radius: 10px; border: 1px dashed var(--line); background: none; color: var(--accent); cursor: pointer; }
 .cm-src { margin-top: 10px; font-size: 12px; color: var(--muted); }
+.cm-rno { font-size: 13px; font-weight: 600; color: var(--muted); margin-left: 4px; }
+.cm-badge.ok { color: var(--ok); border-color: var(--ok); }
+.cm-sh { margin-top: 8px; font-size: 15px; line-height: 1.6; }
+.cm-sh .gap { display: flex; align-items: baseline; gap: 8px; padding: 10px 12px; border-radius: 12px; background: var(--panel-2); margin-top: 8px; }
+.cm-sh .gap b { font: 700 22px var(--mono); color: var(--accent); }
+.cm-stops { list-style: none; margin: 8px 0 0; padding: 0; font-size: 14px; }
+.cm-stops li { position: relative; padding: 3px 0 3px 18px; }
+.cm-stops li::before { content: ""; position: absolute; left: 4px; top: 11px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+.cm-stops li.end::before { background: var(--warn); }
 </style>
 </head>
 <body>
@@ -686,9 +695,9 @@ body[data-tab="oz"] #alTabs { display: none; }
     </div>
 
     <div class="card cm-card" id="cmShuttle">
-      <div class="cm-hd"><h3>장기주차장 ↔ T2 셔틀버스</h3><span class="cm-badge">준비 중</span></div>
+      <div class="cm-hd"><h3>장기주차장 ↔ T2 셔틀 <small class="cm-rno">공항02 · 무료</small></h3><span class="cm-badge ok">24시간</span></div>
       <div class="cm-sub" id="cmShDir"></div>
-      <div class="cm-note">현재 위치와 1시간 시간표를 보여 줄 예정입니다. 셔틀 활용가이드를 받은 뒤 연결합니다.</div>
+      <div id="cmShBody"></div>
     </div>
   </section>
   <section class="panel" id="panel-pk" role="tabpanel" aria-labelledby="tab-pk" hidden>
@@ -2224,6 +2233,22 @@ window.UID = (() => {
     if (r.s.length) h += `<details><summary>정류장 ${r.s.length}곳</summary><div>${r.s.map(esc).join(" → ")}</div></details>`;
     return h + `</div>`;
   }
+  // 장기주차장 ↔ T2 셔틀 (공항02): 공공데이터·공사 홈페이지 모두 분 단위 시간표가 없어 확인된 운행 정보만 표시
+  // 분 단위 시간표를 받으면 SHUTTLE.times 에 넣으면 1시간 목록으로 바뀜
+  const SHUTTLE = {
+    gap: "6~30분", round: "왕복 약 30분", tel: "032-741-3217",
+    t2: "제2여객터미널 1층 중앙 5~6번 출입구 앞",
+    lot: ["정비단지 앞 탑승장 (07~19시만)", "주차구역 E", "주차구역 F", "1번 탑승장 (B113)", "2번 탑승장 (D122)", "3번 탑승장 (남측 주차타워)", "4번 탑승장 (북측 주차타워)", "5번 탑승장 (B121)"],
+    times: null,                                       // { go: {wd:[...], we:[...]}, t2: {...} } 형식 (HHMM)
+  };
+  function shuttleHtml(mode) {
+    const S = SHUTTLE;
+    let h = `<div class="cm-sh"><div class="gap"><span>배차</span><b>${S.gap}</b><span>${S.round} · 24시간</span></div>`;
+    if (mode === "go") h += `<div style="margin-top:8px"><b>타는 곳:</b> 장기주차장 탑승장 (순서대로 정차)</div><ul class="cm-stops">${S.lot.map((x) => `<li>${esc(x)}</li>`).join("")}<li class="end"><b>제2여객터미널</b> 1층 5~6번 출입구</li></ul>`;
+    else h += `<div style="margin-top:8px"><b>타는 곳:</b> ${esc(S.t2)}</div><div class="cm-note" style="margin-top:4px">장기주차장 탑승장 1~5번 순서로 정차합니다.</div>`;
+    h += `<div class="cm-note">분 단위 시간표와 실시간 위치는 공공데이터에 없어 아직 표시하지 못합니다. 셔틀 운영사무실 <a href="tel:${S.tel}">${S.tel}</a></div></div>`;
+    return h;
+  }
   let showAll = false;
   function paint() {
     document.querySelectorAll("#cmMode button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.cm === st.mode));
@@ -2235,6 +2260,7 @@ window.UID = (() => {
     $("cmStop").hidden = st.mode !== "go";
     $("cmShuttle").hidden = st.mode === "t1";
     $("cmShDir").textContent = st.mode === "go" ? "장기주차장 출발 → T2" : "T2 출발 → 장기주차장";
+    $("cmShBody").innerHTML = shuttleHtml(st.mode);
     if ($("cmBus").value !== st.bus) $("cmBus").value = st.bus;
     $("cmBusTitle").textContent = st.mode === "go" ? "공항버스 · 출근" : `공항버스 · ${st.mode === "t1" ? "T1" : "T2"} 출발`;
     $("cmBadge").hidden = st.mode !== "go";
