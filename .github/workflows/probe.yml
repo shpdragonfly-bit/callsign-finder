@@ -26,7 +26,12 @@ jobs:
       - name: 기상(NOAA) API 점검
         if: false
         run: python tools/probe_wx.py
+      - name: 공항버스 시간표 수집 시험
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+        run: python updater/bus.py probe/bus/bus.json
       - name: 출퇴근 버스 자료 점검
+        if: false
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python tools/probe_bus.py
