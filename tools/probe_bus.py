@@ -15,15 +15,12 @@ def get(url, n=12000):
         return "ERR %s\n%s" % (e, body)
 k = urllib.parse.quote(KEY, safe="")
 CALLS = {
-  "icn_businfo_area1": f"https://apis.data.go.kr/B551177/BusInformation/getBusInfo?serviceKey={k}&type=json&numOfRows=3&pageNo=1&area=1",
-  "icn_businfo_all": f"https://apis.data.go.kr/B551177/BusInformation/getBusInfo?serviceKey={k}&type=json&numOfRows=500&pageNo=1",
-  "icn_shtb_pred": f"https://apis.data.go.kr/B551177/ShtbusInfo/getShtbArrivalPredInfo?serviceKey={k}&type=json&numOfRows=50&pageNo=1&routeId=11100009",
-  "icn_shtb_pred_noroute": f"https://apis.data.go.kr/B551177/ShtbusInfo/getShtbArrivalPredInfo?serviceKey={k}&type=json&numOfRows=200&pageNo=1",
-  "seoul_route_6001": f"http://ws.bus.go.kr/api/rest/busRouteInfo/getBusRouteList?serviceKey={k}&strSrch=6001&resultType=json",
-  "seoul_route_6002": f"http://ws.bus.go.kr/api/rest/busRouteInfo/getBusRouteList?serviceKey={k}&strSrch=6002&resultType=json",
   "gbis_route_8844": f"https://apis.data.go.kr/6410000/busrouteservice/v2/getBusRouteListv2?serviceKey={k}&keyword=8844&format=json",
-  "incheon_route_list": f"https://apis.data.go.kr/6280000/busRouteService/getBusRouteNo?serviceKey={k}&numOfRows=5&pageNo=1&routeNo=306",
-  "tago_route_icn": f"https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey={k}&cityCode=23&routeNo=6001&_type=json",
+  "gbis_route_7000": f"https://apis.data.go.kr/6410000/busrouteservice/v2/getBusRouteListv2?serviceKey={k}&keyword=7000&format=json",
+  "gbis_station_v2": f"https://apis.data.go.kr/6410000/busstationservice/v2/getBusStationListv2?serviceKey={k}&keyword=%EC%95%88%EC%82%B0&format=json",
+  "seoul_stations_6001": f"http://ws.bus.go.kr/api/rest/busRouteInfo/getStaionByRoute?serviceKey={k}&busRouteId=100100412&resultType=json",
+  "seoul_arr_6001": f"http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll?serviceKey={k}&busRouteId=100100412&resultType=json",
+  "icn_shtb_pred_day": f"https://apis.data.go.kr/B551177/ShtbusInfo/getShtbArrivalPredInfo?serviceKey={k}&type=json&numOfRows=200&pageNo=1",
 }
 res = {}
 for name, url in CALLS.items():
