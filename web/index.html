@@ -528,6 +528,19 @@ body[data-tab="oz"] #alTabs { display: none; }
 .cm-row select[hidden] { display: none; }
 .cm-sub { margin-top: 6px; font-size: 15px; font-weight: 700; color: var(--accent); }
 .cm-note { margin-top: 10px; font-size: 14px; color: var(--muted); line-height: 1.6; }
+.cm-q { margin-top: 10px; padding: 10px 12px; border-radius: 14px; background: var(--panel); border: 1px solid var(--line); }
+.cm-q1 { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.cm-q1 > * { white-space: nowrap; }
+.cm-ql { font-weight: 700; color: var(--muted); }
+.cm-mode-t { font-size: 12px; font-weight: 700; padding: 1px 7px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); }
+.cm-mode-t.set { background: #FFF1D6; color: #9A5B00; }
+.cm-q1 .cm-day { margin-left: auto; }
+.cm-q2 { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+.cm-q2 .b { flex: 0 0 auto; padding: 9px 10px; font-size: 14px; }
+.cm-q2 input[type=time] { flex: 1 1 auto; min-width: 0; font: 700 19px var(--mono); text-align: center; color: var(--text); background: var(--panel-2); border: 2px solid var(--line); border-radius: 10px; padding: 6px; }
+.cm-q2 input[type=time]:focus { outline: none; border-color: var(--accent); }
+.cm-range { flex: 0 0 auto; font: 700 14px var(--mono); color: var(--text); white-space: nowrap; }
+.cm-nowbtn { width: 100%; margin-top: 8px; font-size: 14px; }
 .cm-base { flex-wrap: wrap; row-gap: 6px; }
 .cm-base > * { white-space: nowrap; }
 .cm-plus { font-size: 13px; font-weight: 700; color: var(--muted); }
@@ -676,10 +689,14 @@ body[data-tab="oz"] #alTabs { display: none; }
       <button data-cm="t1" aria-pressed="false">퇴근 T1</button>
       <button data-cm="t2" aria-pressed="false">퇴근 T2</button>
     </div>
-    <div class="cm-base">
-      <input type="time" id="cmTime" aria-label="기준 시각"><span class="cm-plus">+1시간</span>
-      <span class="cm-day" id="cmDay"></span>
-      <button type="button" class="b" id="cmRefresh">지금</button>
+    <div class="cm-q">
+      <div class="cm-q1"><span class="cm-ql">조회</span><span class="cm-range" id="cmRange"></span><span class="cm-mode-t" id="cmFollow">지금</span><span class="cm-day" id="cmDay"></span></div>
+      <div class="cm-q2">
+        <button type="button" class="b" data-shift="-30" aria-label="30분 앞으로">−30분</button>
+        <input type="time" id="cmTime" aria-label="조회 시작 시각 (눌러서 변경)">
+        <button type="button" class="b" data-shift="30" aria-label="30분 뒤로">+30분</button>
+      </div>
+      <button type="button" class="b cm-nowbtn" id="cmRefresh" hidden>지금 시각으로 돌아가기</button>
     </div>
 
     <div class="card cm-card">
@@ -2218,7 +2235,7 @@ window.UID = (() => {
     if (dest === num) dest = "";
     return `<div class="cm-dep"><div class="t">${fmt(x.m)}</div>
       <div><div class="bn">${esc(num)}<small>${esc(dest)}</small></div><div class="lo">${term === "t1" ? "T1" : "T2"} 승차 ${esc(x.lo || "-")} · ${esc(x.r.a)}</div></div>
-      <div class="in">${nowish ? (wait <= 0 ? "곧 출발" : `${wait}분 후`) : ""}${x.last ? "<small>막차</small>" : ""}</div></div>`;
+      <div class="in">${nowish ? (wait <= 0 ? "곧 출발" : `${wait}분 후`) : `+${wait}분`}${x.last ? "<small>막차</small>" : ""}</div></div>`;
   };
   const isNow = () => follow;
   function routeCard(r, term) {
@@ -2253,8 +2270,12 @@ window.UID = (() => {
   function paint() {
     document.querySelectorAll("#cmMode button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.cm === st.mode));
     $("cmTime").value = fmt(base.min);
+    $("cmRange").textContent = `${fmt(base.min)} ~ ${fmt((base.min + 60) % 1440)}`;
+    $("cmFollow").textContent = follow ? "지금" : "직접";
+    $("cmFollow").className = "cm-mode-t" + (follow ? "" : " set");
+    $("cmRefresh").hidden = follow;
     const dtp = dayType(base.y, base.m, base.d);
-    $("cmDay").textContent = (dtp === "we" ? "주말 시간표" : "평일 시간표") + (st.day ? " (직접)" : "");
+    $("cmDay").textContent = (dtp === "we" ? "주말" : "평일") + (st.day ? "*" : "") + " 시간표";
     $("cmArea").innerHTML = AREAS.map(([v, l]) => `<button type="button" data-a="${v}" aria-pressed="${st.area === v}">${l}</button>`).join("");
     $("cmArea").hidden = st.mode === "go";
     $("cmStop").hidden = st.mode !== "go";
@@ -2292,6 +2313,13 @@ window.UID = (() => {
   $("cmTime").addEventListener("change", () => { const v = $("cmTime").value; if (/^\d{2}:\d{2}$/.test(v)) { base.min = +v.slice(0, 2) * 60 + +v.slice(3); follow = false; paint(); } });
   $("cmDay").addEventListener("click", () => { const auto = isWeekend(base.y, base.m, base.d) ? "we" : "wd"; st.day = st.day ? "" : (auto === "we" ? "wd" : "we"); save(); paint(); });   // 공휴일이면 눌러서 주말 시간표로
   $("cmRefresh").addEventListener("click", () => { setNow(); paint(); });
+  document.querySelectorAll("#panel-cm [data-shift]").forEach((b) => b.addEventListener("click", () => {
+    let m = base.min + +b.dataset.shift;
+    if (m < 0) { const d = new Date(Date.UTC(base.y, base.m, base.d - 1)); base = { y: d.getUTCFullYear(), m: d.getUTCMonth(), d: d.getUTCDate(), min: m + 1440 }; }
+    else if (m >= 1440) { const d = new Date(Date.UTC(base.y, base.m, base.d + 1)); base = { y: d.getUTCFullYear(), m: d.getUTCMonth(), d: d.getUTCDate(), min: m - 1440 }; }
+    else base.min = m;
+    follow = false; paint();
+  }));
   $("tab-cm").addEventListener("click", () => { setNow(); load(); paint(); });
   setInterval(() => { if (document.body.dataset.tab === "cm" && follow && $("cmTime") !== document.activeElement) { setNow(); paint(); } }, 30000);   // '지금' 기준이면 계속 따라감
   paint(); load();
