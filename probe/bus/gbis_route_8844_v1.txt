@@ -1,1 +1,9 @@
-ERR <urlopen error timed out>
+ERR HTTP Error 400: Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenAPI_ServiceResponse>
+<cmmMsgHeader>
+  <errMsg>NO_OPENAPI_SERVICE_ERROR</errMsg>
+  <returnAuthMsg>해당 오픈API 서비스가 없거나 폐기됨</returnAuthMsg>
+  <returnReasonCode>12</returnReasonCode>
+</cmmMsgHeader>
+</OpenAPI_ServiceResponse>

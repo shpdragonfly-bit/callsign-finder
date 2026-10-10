@@ -1,1 +1,657 @@
-ERR 
+200 text/html;charset=UTF-8
+ 공공데이터포털 
+ 콘텐츠 바로가기 
+ 푸터 바로가기 
+ 이 누리집은 대한민국 공식 전자정부 누리집입니다. -->
+ 이 누리집은 대한민국 공식 전자정부 누리집입니다. 
+ DATA.GO.KR 공공데이터포털 
+ English
+ 로그인 
+ 회원가입 
+ 전체메뉴 
+ 전체메뉴 열기 
+ 공공데이터 
+ 공공데이터 
+ AI 검색
+ 데이터목록
+ 데이터 큐레이션
+ 국가중점데이터
+ 공공데이터 제공신청
+ 분쟁조정 신청
+ 데이터활용 
+ 데이터활용 
+ 공공데이터맵
+ 공공데이터 시각화
+ 국민참여지도
+ 위치정보 시각화
+ 공공데이터 활용사례
+ 공공데이터 우수사례
+ 기업공공데이터 문제해결지원센터 
+ 정보공유 
+ 정보공유 
+ 공공 Git저장소
+ 데이터 공유하기
+ 공지사항
+ 자료실
+ 포털뉴스
+ 이용안내 
+ 이용안내 
+ 문의하기
+ 소개
+ 이용가이드
+ 정책
+ 품질관리
+ 홈 
+ 회원가입 
+ English 
+ 로그인을 해주세요 
+ 공공데이터
+ 데이터활용
+ 기업공공데이터 문제해결지원센터
+ 정보공유
+ 이용안내
+ 공공데이터
+ AI 검색
+ 데이터목록
+ 데이터 큐레이션
+ 국가중점데이터
+ 공공데이터 제공신청
+ 분쟁조정 신청
+ 데이터활용
+ 공공데이터맵
+ 공공데이터 시각화
+ 국민참여지도
+ 위치정보 시각화
+ 공공데이터 활용사례
+ 공공데이터 우수사례
+ 기업공공데이터 문제해결지원센터
+ 정보공유
+ 공공 Git저장소
+ 데이터 공유하기
+ 공지사항
+ 자료실
+ 포털뉴스
+ 이용안내
+ 문의하기
+ 소개
+ 이용가이드
+ 정책
+ 품질관리
+ 전체메뉴 닫기 
+ DATA.GO.KR 공공데이터포털 
+ 공공데이터 
+ AI 검색
+ 데이터목록
+ 데이터 큐레이션
+ 국가중점데이터
+ 공공데이터 제공신청
+ 분쟁조정 신청
+ 데이터활용 
+ 공공데이터맵
+ 공공데이터 시각화
+ 국민참여지도
+ 위치정보 시각화
+ 공공데이터 활용사례
+ 공공데이터 우수사례
+ 기업공공데이터 문제해결지원센터
+ 정보공유 
+ 공공 Git저장소
+ 데이터 공유하기
+ 공지사항
+ 자료실
+ 포털뉴스
+ 이용안내 
+ 문의하기
+ 소개
+ 이용가이드
+ 정책
+ 품질관리
+ 회원 
+ 회원가입 
+ 로그인 
+ 바로가기 링크 
+ 공공데이터전략위원회 
+ 공공데이터분쟁조정위원회 
+ 공공데이터 활용 창업경진대회 
+ 공공데이터 지원 오픈스퀘어-D 
+ 오픈데이터 포럼 
+ 전체메뉴 닫기 
+ 홈 
+ 데이터 목록 
+ 키워드 검색 선택됨 
+ 하이브리드 검색 
+ 현재 3 건의 데이터가 있습니다. 
+ 검색어 입력창 
+ 검색 
+ 데이터명 
+ 기관 
+ 키워드 
+ 검색조건 열기
+ 적용된 검색 조건 
+ 검색조건 초기화하기 
+ 상세검색 
+ 파일데이터 
+ 오픈 API 
+ 표준데이터셋 
+ 연계데이터셋 
+ 국가중점데이터 
+ 국가중점데이터 
+ 119 구급정보 
+ 3차원 정밀도로지도 정보 
+ AI공문서 데이터 
+ GIS 해양정보 
+ IoT기술을 활용한 교통 및 환경정보 
+ SRT 승차권 정보 
+ SRT 회원현황 정보 
+ 가맹사업거래정보 
+ 가뭄대응정보 
+ 가뭄통합정보 
+ 가축분뇨 위탁처리 정보 
+ 감염병 관련 정보 및 의약품 임상정보 
+ 감염병 진료정보 및 치료시설 정보 
+ 건축정보 
+ 경력단절여성 취업지원서비스 정책정보 
+ 경상남도 어린이 통학로 교통안전 정보 
+ 고용보험정보 
+ 공간융합정보 
+ 공공기관 청년 일자리 정보 
+ 공공시설물안전정보 
+ 공영자전거 데이터 
+ 교육행정정보 
+ 교통사고 원인조사 대상 및 사고다발지점 개방정보 
+ 교통사고정보 
+ 교통신호정보 
+ 교통카드 이용내역 합성데이터 
+ 국가공간정보 
+ 국가과학기술연구정보 
+ 국가서지 데이터 
+ 국가암협력병기조사데이터 
+ 국가종합전자조달정보 
+ 국가통계통합정보 
+ 국가화재정보 
+ 국고보조금정보 
+ 국민 체감형 가뭄정보 
+ 국민건강알람정보 
+ 국민연금정보 
+ 국민의료정보 
+ 국민체력100 동영상 정보 
+ 국민취업지원제도 정책정보 
+ 국토교통부 공적공간정보 
+ 국회 의정활동 정보 
+ 굴뚝 대기오염물질 정보 
+ 금융표준종합정보 
+ 금융회사 자금지원 및 회수내역 정보 
+ 기상정보 
+ 냉매관리제도 정보 
+ 노동보험정보 
+ 농산물 유통정보 
+ 농수축산 경락 및 조사가격정보 
+ 농식품 인증 정보 
+ 농업활동지원정보 
+ 다국어5종의 음성과 영어대역문장DB 
+ 대기오염배출물질정보 
+ 대용량기상데이터 
+ 대중교통 이동형 IoT 통합정보 
+ 대중교통 이용 통계 정보 
+ 대체인력 채용지원서비스 정책정보 
+ 대학 교육과정 및 강의내용 정보 
+ 대학일자리센터 및 구직자 취업역량 강화 정보 
+ 대한민국 전자관보 정보 
+ 도로명주소정보 
+ 도로상 비정형특성 인지정보 
+ 도로터널정보 
+ 도시계획정보 
+ 도시재생종합정보 
+ 등록원부 데이터 
+ 등산로 및 국가생물종 정보 
+ 먹는샘물안전정보 
+ 민원분석정보 
+ 발전소 운영데이터 
+ 범죄 통계 데이터 
+ 법령정보 
+ 부동산거래관리정보 
+ 부동산종합정보 
+ 부보금융회사 종합정보 
+ 비산먼지 사업장정보 
+ 비점오염 저감시설 정보 
+ 사업용차량운행기록정보 
+ 사회보장정보 
+ 산사태정보 
+ 산업기술정보 
+ 산업재산권정보 
+ 산재·고용보험 가입·완납 증명서 진위확인 
+ 산재보험 요양 신청·승인 데이터 
+ 산재판례정보 
+ 상권정보 
+ 상용차량 운전자 위험상황 모니터링정보 
+ 상장사 주석 및 비상장사 재무제표 
+ 생태자연도 
+ 생태자연도평가정보 
+ 생활편의정보 
+ 서울 V2X 자율주행 정보 
+ 서울지하철 실시간 이용정보 서비스 개방 
+ 선거공약정보 
+ 선거종합정보 
+ 세종테크노파크 자율주행 정보 
+ 세종특별자치시 스마트서비스 데이터 
+ 소비자 안전정보 
+ 소비자행태조사정보 
+ 수산정보 
+ 수질오염방제정보 
+ 수출입무역통계 
+ 숲길종합정보 
+ 스마트 교통 정보 
+ 스마트 전력거래 정보 
+ 스마트팜 온실환경 및 작물생장 연구데이터 
+ 승강기 안전정보 
+ 시드뱅크 종자 및 백두대간 식물정보 
+ 식의약품종합정보 
+ 식의약헬스종합정보 
+ 식중독 균주정보 등 식의약 위해정보 
+ 식품안전인증정보 
+ 신재생에너지 데이터 
+ 실내공기질 정보 
+ 실시간 일사량 데이터 제공 서비스 
+ 실시간 홍반자외선 데이터 제공 서비스 
+ 실시간수도정보 
+ 심사결정서.업무상질병판정서 정보 
+ 아동·청소년·청년 조사 데이터 
+ 아이돌봄 지원사업 데이터 
+ 악취분야 오염물질 측정정보 
+ 암검진자정보 
+ 에너지 사용 및 온실가스 배출량 정보 
+ 여권 정보 
+ 여성가족패널조사정보 
+ 연안여객선 교통정보 
+ 우체국 우편물류데이터 
+ 울산항만 시설 운영 정보 데이터 
+ 울산항만 실시간 선박 운항 정보 
+ 위원회 결정문 데이터 
+ 음식물쓰레기정보 
+ 의료영상정보 
+ 인체조직 및 수입식품 검사정보 
+ 일자리종합정보 
+ 임상연구정보 
+ 자동차종합정보 및 사업용 차량 이력정보 
+ 자율주행 공간정보 인식기술 활성화정보 
+ 자율주행 딥러닝 학습정보 
+ 자율주행 실차 운행 정보 
+ 자율주행 인식기술개발용 영상 정보 
+ 재난관리정보 
+ 재난배상책임보험사업장 
+ 재활용 전주기 정보 
+ 전국 도매시장 실시간 경매 및 정산정보 
+ 전국푸드뱅크 정보 
+ 전력사용량 정보 
+ 전통식품정보 
+ 종이형 지역사랑상품권 판매·환전 지점 정보 
+ 주민등록 정보 
+ 주택저당증권 시세정보 
+ 중소기업지원사업 현황정보 
+ 중앙부처 법령해석 
+ 지방재정정보 
+ 지방행정 인허가정보 
+ 지역사랑상품권 가맹점 정보 
+ 지진대피소정보 
+ 지하안전정보 
+ 참조표준 데이터 
+ 창업지원 및 교육데이터 
+ 철도종합정보 
+ 청량 아시아 산림 미세먼지 측정넷정보 
+ 청소년 자원봉사증 진위확인 
+ 청소년 정책 데이터 
+ 청소년 활동 지원사업 데이터 
+ 청소년활동지도사 자격증 진위확인 
+ 침수차량 진위확인정보 
+ 코로나 관련 의약품 임상시험 정보 
+ 코로나19 및 독거노인응급안전안심정보 
+ 탄소중립포인트 에너지 정보 
+ 태양 및 풍력에너지 자원정보 DB 정보 
+ 통합재정정보 
+ 특별행정심판 재결례 
+ 특수교량 안전 및 계측데이터 
+ 특정소방대상물 데이터 
+ 특정소방대상물 소방시설정보 데이터 
+ 폐기물 관련 현황정보 
+ 폐기물 통합 반입 정보 
+ 프랜차이즈 사업정보 융·복합데이터 
+ 학교급식계약정보 
+ 한국 아동 패널, 영유아 교육·보육 패널 데이터 
+ 한국철도공사 열차운행 및 역무편의시설 정보 
+ 한국철도공사 철도 지연열차 승차권 확인 서비스 
+ 해부학 및 의료행위 기록설명그림 정보 
+ 해양공간정보 
+ 해양안전정보 
+ 해양환경 연구 기초데이터 
+ 해양환경생태정보 
+ 해양환경정보 
+ 해외시장진출지원정보 
+ 해외안전융합정보 
+ 해운항만물류정보 
+ 헌법재판소 판례정보 
+ 혈액세포 홀로그램 및 3D 영상 정보 
+ 홍수위험지도 개방형 API 제공 서비스 
+ 환경영향평가정보 
+ 상세 데이터 
+ 항목검색 
+ 도움말 
+ 항목 검색에 관한 설명입니다. 
+ AND ( + ) 
+ 입력한 키워드 포함하여 검색 (예: 버스+정류장) 
+ OR ( | ) 
+ 입력한 키워드 중 한 개라도 포함되면 검색 (예: 버스 | 정류장) 
+ NOT ( - ) 
+ NOT(-)연산자 뒤의 키워드를 포함하지 않도록 검색 (예: 버스-정류장) 
+ 구문검색 (“키워드”) 
+ 키워드가 순서대로 인접하여 나열되어 있는 데이터 검색 (예: “버스정류장”) 
+ 닫기 
+ 제공기관 
+ 제공기관명 검색창 
+ 검색 
+ 검색분류 
+ 분류체계 선택됨 
+ 서비스유형 
+ 제공기관유형 
+ 확장자 
+ 항목 
+ 전체 
+ 전체 
+ 전체 
+ 전체 
+ 선택 조건 
+ 초기화 
+ 닫기 
+ 전체 초기화 
+ 검색 
+ 닫기 
+ 전체 3건 
+ 파일데이터 0건 
+ 오픈 API 3건 
+ 표준데이터셋 0개 (0건) 
+ 연계데이터 0건 
+ 데이터 관련 의견이 있으신가요?
+ 민원게시판 
+ 정렬기준 
+ 정확도순 
+ 조회순 
+ 활용순 
+ 수정일자순 
+ 파일데이터
+ (0건)
+ 더보기 
+ 검색 결과가 없습니다.
+ 오픈API
+ (3건)
+ 더보기 
+ 교통물류 
+ 공공기관 
+ XML
+ JSON
+ 인천국제공항공사 _버스정보
+ 인천국제 공항 공사 에서 제공하는 인천 공항 제 1여객터미널과 제 2여객터미널에 운항중인 공항 버스 에 대한 데이터입니다.
+ 제공기관 
+ 인천국제공항공사 
+ 수정일 
+ 2026-08-06
+ 조회수 
+ 8,301회
+ 활용신청 
+ 412건
+ 키워드 
+ 버스 ,터미널,인천공항,공항버스,막차
+ 미리보기
+ 미리보기
+ 활용신청 
+ 교통물류 
+ 공공기관 
+ XML
+ JSON
+ 인천국제공항공사 _셔틀버스정보
+ 인천국제 공항 공사 에서 제공하는 셔틀버스에 대한 데이터입니다.
+ 제공기관 
+ 인천국제공항공사 
+ 수정일 
+ 2026-08-06
+ 조회수 
+ 10,063회
+ 활용신청 
+ 206건
+ 키워드 
+ 셔틀버스,정류장,노선버스,출발시간,도착예측
+ 미리보기
+ 미리보기
+ 활용신청 
+ 교통물류 
+ 공공기관 
+ XML
+ JSON
+ 한국 공항 공사 _전국 공항 버스 노선_GW
+ 한국 공항 공사 는 인천 국제 공항 을 제외한 김포, 김해, 제주, 대구 등 전국 14개 공항 을 통합 관리하고 운영하는 대한민국의 대표적인 공공기관입니다.
+ 제공기관 
+ 한국 공항 공사 
+ 수정일 
+ 2026-08-19
+ 조회수 
+ 798회
+ 활용신청 
+ 104건
+ 키워드 
+ 한국공항공사,공항 버스노선,공항 버스,김포공항 버스,김해공항 버스,제주공항 버스
+ 미리보기
+ 미리보기
+ 활용신청 
+ 표준데이터셋
+ 0개 (0건) 
+ 더보기 
+ 검색 결과가 없습니다.
+ 연계데이터 (0건) 
+ 더보기 
+ 연계데이터'는 「공공데이터 관리지침」 제14조에 따라, 개별 포털로부터 수집되는 데이터입니다. 
+ 검색 결과가 없습니다.
+ 활용신청 
+ 기업회원입니다. 활용신청할 서비스키를 선택해주세요
+ 프로젝트 서비스키 
+ 개인 서비스키 
+ 닫기 
+ let isEnterWordLayer = false;
+ function showWordLayer() {
+ $('#autoLayer').attr('hidden', true);
+ $('#wordLayer').show();
+ }
+ function hideWordLayer() {
+ if (!isEnterWordLayer) {
+ $('#wordLayer').hide();
+ }
+ }
+ function clickKeyword(keyword) {
+ $("#keyword").val(keyword);
+ eventFnObj.fn_searchBtnClick();
+ }
+ function goDetailView(url, pk, sj) {
+ let dType = $('#detail-search-form-d-type').val();
+ const param = {
+ dType: dType === 'TOTAL' ? 'all' : dType.toLowerCase(),
+ publicDataPk: pk,
+ publicDataSj: sj
+ };
+ $.ajax({
+ url: '/tcs/dss/insertLogDetailView.do',
+ data: param,
+ dataType: 'json',
+ complete: function() {
+ location.href = url.concat('?dType=', dType);
+ }
+ });
+ }
+ //검색조건 객체
+ var conditionObj = {
+ dType : ["TOTAL"], // 데이터 타입
+ brm : [], // 분류체계(필터)
+ instt : [], // 제공기관(필터)
+ svcType : [], // 서비스유형(필터)
+ kwrdArray : [], // 키워드(필터)
+ extsn : [], // 확장자(필터)
+ org : "", // 기관명(필터, 제공기간 상세검색)
+ coreDataNmArray : [], // 중요데이터(필터, 국가중점데이터로 판단)
+ keyword : "인천국제공항공사 버스", // 키워드(검색어)
+ sort : "score", // 정렬대상(활용도순, 조회순, 정확도순, 등록순, 가나다순)
+ sort_order : "desc", // 정렬기준
+ operator : "", // 조회조건(and, or)
+ must_not : "", // 조회조건(not in)
+ size : 5, // 페이징(5, 10, 20, 30, 40)
+ // 테스트시 페이징 유지를 위한 로직
+ currentPage : "1", // 현재 페이지
+// currentPage : 0, // 현재 페이지
+ currentSelectedCond : "", // 마지막으로 선택된 필터
+ page : 0,
+ detailKeyword : "", // 상세검색 키워드
+ publicDataPk : "", // pk(국가중점데이터 화면에서 pk 여러개 넘기는 경우 존재)
+ relKeyword : "", // 연관검색어 결과를 위한 프로프티
+ relRadio : "" // 연관검색어 중 파일인지, api인지 구분 하는 프로퍼티
+ }
+ // 메인 인기, 최신 더보기 클릭 으로 넘어온 경우 정렬순서 / selectBox 선택
+ var dataSeCdSplit = ''.split("_");
+ if (dataSeCdSplit[0] === "POPULAR") { // 인기 : 조회순 (view)
+ conditionObj.sort = "view";
+ $("#selectSort").val("view");
+ } else if (dataSeCdSplit[0] === "NEWEST"){ // 최신 : 수정일자순 (date)
+ conditionObj.sort = "date";
+ $("#selectSort").val("date");
+ }
+ // 이벤트메서드 객체
+ var eventFnObj = {
+ // 초기화 메서드
+ fn_reset : function() {
+ $(".checkbox").prop("checked", false);
+ searchObj.selectedCondIdArr = [];
+ $("#selectedCond > span").remove();
+ $("#selectedCond").hide();
+ conditionObj["brm"] = [];
+ conditionObj["instt"] = [];
+ conditionObj["svcType"] = [];
+ conditionObj["kwrdArray"] = [];
+ conditionObj["extsn"] = [];
+ conditionObj["coreDataNmArray"] = [];
+ conditionObj["publicDataPk"] = [];
+ $('#statusFrm [name="publicDataPk"], #detailSearchFrm [name="publicDataPk"]').val('');
+ $('#statusFrm [name="brm"]').val("");
+ $('#statusFrm [name="svcType"]').val("");
+ $('#statusFrm [name="instt"]').val("");
+ $('#statusFrm [name="kwrdArray"]').val("");
+ $('#statusFrm [name="extsn"]').val("");
+ $('#statusFrm [name="coreDataNmArray"]').val("");
+ $('#statusFrm [name="org"]').val("");
+ $('#statusFrm [name="orgFilter"]').val("");
+ $('#statusFrm [name="orgFullName"]').val("");
+ // ── 키워드 검색 영역도 함께 초기화 (상세검색만 초기화되던 문제 수정) ──
+ $("#keyword").val(""); // 눈에 보이는 키워드 입력창 (pageMove의 keyword 파라미터 제거)
+ $("#formKeyword").val(""); // pageMove hidden 미러
+ // 상세검색 팝업 폼(detailSearchFrm)의 검색조건 값 초기화
+ $('#detailSearchFrm [name="keyword"]').val("");
+ $('#detailSearchFrm [name="brm"]').val("");
+ $('#detailSearchFrm [name="svcType"]').val("");
+ $('#detailSearchFrm [name="instt"]').val("");
+ $('#detailSearchFrm [name="extsn"]').val("");
+ $('#detailSearchFrm [name="orgNm"]').val("");
+ $('#detailSearchFrm [name="keywrdSrchArtcl"]').val("");
+ $('#detailSearchFrm [name="keywrdSrchText"]').val("");
+ // statusFrm의 키워드/상세검색 관련 hidden 값 초기화
+ $('#statusFrm [name="keyword"]').val("");
+ $('#statusFrm [name="detailKeyword"]').val("");
+ $('#statusFrm [name="detailText"]').val("");
+ $('#statusFrm [name="relatedKeyword"]').val("");
+ $('#statusFrm [name="must_not"]').val("");
+ $('#statusFrm [name="commaNotInData"]').val("");
+ $('#statusFrm [name="commaAndData"]').val("");
+ $('#statusFrm [name="commaOrData"]').val("");
+ // conditionObj 키워드/상세 조건 초기화
+ conditionObj["keyword"] = "";
+ conditionObj["detailKeyword"] = "";
+ conditionObj["must_not"] = "";
+ // 상단 '적용된 검색 조건' 태그 영역 비우기
+ $('.data-sch-filter .krds-tag-wrap').empty();
+ //searchObj.fn_searchAjax('fiterInit');
+ eventFnObj.fn_searchBtnClick();
+ },
+ // 파일데이터, api, 표준데이터 탭 클릭 메서드
+ fn_dTypeClick : function(dType) {
+ $("#relDTypeDiv").hide();
+ $("body > #layer_filedata_preview").remove();
+ $("body > #layer_openapi_preview").remove();
+ conditionObj["dType"] = [];
+ conditionObj["dType"].push(dType);
+ conditionObj["page"] = 0;
+ // 탭 이동시 1페이지로 가도록 하기 위한 작업 20200503
+ if (arguments[1] !== "detailToList") {
+ conditionObj["currentPage"] = 1;
+ }
+ var $orgBtn = $("#orgBtn");
+ if (dType === "FILE" || dType === "API" || dType === "STD" || dType === "REL" || dType === "TOTAL" || dType === "LINKED") {
+ conditionObj["size"] = 10;
+ $("#selectSize").val("10").prop("selected", true);
+ if (dType === "FILE" || dType === "API" || dType === "TOTAL") {
+ $orgBtn.show();
+ } else {
+ $orgBtn.hide();
+ }
+ } else {
+ conditionObj["size"] = 5;
+ $("#selectSize").val("5").prop("selected", true);
+ $orgBtn.hide();
+ }
+ searchObj.fn_searchAjax(dType);
+ },
+ // 필터 변경 메서드
+ fn_filterChange : function(type) {
+ // 해당 분류의 배열 초기화
+ conditionObj[type] = [];
+ $("." + type).each(function() {
+ var $this = $(this);
+ var id = $this.attr("id");
+ if ($this.prop("checked") === true) {
+ // 선택한 조건 데이터 셋팅
+ if (searchObj.selectedCondIdArr.indexOf(id) -1) {
+ searchObj.selectedCondIdArr.splice(index, 1);
+ $("[data-id='" + id + "']").parent().remove();
+ if ($("#selectedCond").children().size() -1) {
+ conditionObj.sort_order = "asc";
+ value = value.split(":")[0];
+ } else {
+ conditionObj.sort_order = "desc";
+ }
+ $("#statusFrm [name=sort]").val( value );
+ conditionObj.sort = value;
+ searchObj.fn_searchAjax("sort");
+ },
+ // 페이지 사이즈 메서드
+ fn_sizeChange : function(obj) {
+ conditionObj.size = obj.value;
+ searchObj.fn_searchAjax("size");
+ },
+ // 선택한 조건에 조건 삭제
+ fn_selectedConditionRemove : function(targetObj) {
+ var $target = $(targetObj);
+ var id = $target.data("id");
+ var filter = $target.data("filter");
+ $target.parent().remove();
+ var $selectedCond = $("#selectedCond");
+ if($selectedCond.children().size() " + val;
+ } else if (type === "org") {
+ val = "최상단 명 > " + val;
+ }
+ var html = " " + val +
+ ' 삭제 ' +
+ ' ';
+ $selectedCond.append(html);
+ },
+ // 검색 버튼 클릭 이벤트
+ fn_searchBtnClick : function() {
+ $("#formKeyword").val($("#keyword").val());
+ if ( $("#keyword").val() == "") {
+ $("#formconditionType").val("dType");
+ } else {
+ $("#formconditionType").val("search");
+ }
+ // 최근 검색어 추가
+ searchWordObj.addCookie($('#keyword').val());
+ var $pageMove = $("#pageMov
