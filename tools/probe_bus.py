@@ -2,7 +2,7 @@
 import os, re, json, urllib.request, urllib.parse
 KEY = os.environ.get("DATA_GO_KR_KEY", "")
 OUT = "probe/bus"; os.makedirs(OUT, exist_ok=True)
-def get(url, n=4000):
+def get(url, n=12000):
     url = url.replace("http://apis.data.go.kr", "https://apis.data.go.kr")
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 callsign-finder probe"})
@@ -16,24 +16,19 @@ def get(url, n=4000):
 k = urllib.parse.quote(KEY, safe="")
 CALLS = {
   "icn_businfo_area1": f"https://apis.data.go.kr/B551177/BusInformation/getBusInfo?serviceKey={k}&type=json&numOfRows=3&pageNo=1&area=1",
-  "icn_businfo_noarea": f"https://apis.data.go.kr/B551177/BusInformation/getBusInfo?serviceKey={k}&type=json&numOfRows=3&pageNo=1",
-  "icn_businfo_v2": f"http://apis.data.go.kr/B551177/BusInformation/getBusInfo?serviceKey={k}&type=json&numOfRows=3&pageNo=1&area=2",
-  "icn_shtb_pred": f"https://apis.data.go.kr/B551177/ShtbusInfo/getShtbArrivalPredInfo?serviceKey={k}&type=json&numOfRows=5&pageNo=1&routeId=11100009",
+  "icn_businfo_all": f"https://apis.data.go.kr/B551177/BusInformation/getBusInfo?serviceKey={k}&type=json&numOfRows=500&pageNo=1",
+  "icn_shtb_pred": f"https://apis.data.go.kr/B551177/ShtbusInfo/getShtbArrivalPredInfo?serviceKey={k}&type=json&numOfRows=50&pageNo=1&routeId=11100009",
+  "icn_shtb_pred_noroute": f"https://apis.data.go.kr/B551177/ShtbusInfo/getShtbArrivalPredInfo?serviceKey={k}&type=json&numOfRows=200&pageNo=1",
   "seoul_route_6001": f"http://ws.bus.go.kr/api/rest/busRouteInfo/getBusRouteList?serviceKey={k}&strSrch=6001&resultType=json",
+  "seoul_route_6002": f"http://ws.bus.go.kr/api/rest/busRouteInfo/getBusRouteList?serviceKey={k}&strSrch=6002&resultType=json",
   "gbis_route_8844": f"https://apis.data.go.kr/6410000/busrouteservice/v2/getBusRouteListv2?serviceKey={k}&keyword=8844&format=json",
-  "gbis_route_8844_v1": f"https://apis.data.go.kr/6410000/busrouteservice/getBusRouteList?serviceKey={k}&keyword=8844",
+  "incheon_route_list": f"https://apis.data.go.kr/6280000/busRouteService/getBusRouteNo?serviceKey={k}&numOfRows=5&pageNo=1&routeNo=306",
+  "tago_route_icn": f"https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteNoList?serviceKey={k}&cityCode=23&routeNo=6001&_type=json",
 }
 res = {}
 for name, url in CALLS.items():
-    txt = get(url); res[name] = txt.replace(k, "KEY")[:4000]
-PAGES = {"page_15095015": "https://www.data.go.kr/data/15095015/openapi.do",
-         "page_15098224": "https://www.data.go.kr/data/15098224/openapi.do",
-         "search_bus": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD%EA%B3%B5%EC%82%AC%20%EB%B2%84%EC%8A%A4&recmSe=N&publicDataPk=&brm=&instt=&svcType=&kwrdArray=&extsn=&coreDataNmArray="}
-for name, url in PAGES.items():
-    html = get(url, 400000)
-    text = re.sub(r"<script.*?</script>|<style.*?</style>", " ", html, flags=re.S)
-    text = re.sub(r"<[^>]+>", " ", text); text = re.sub(r"[ \t\r\f\v]+", " ", text); text = re.sub(r"\n\s*\n+", "\n", text)
-    res[name] = text[:12000]
+    txt = get(url, 200000 if name == "icn_businfo_all" else 12000); res[name] = txt.replace(k, "KEY")[:60000] if name == "icn_businfo_all" else txt.replace(k, "KEY")[:12000]
+
 for n, t in res.items():
     open(os.path.join(OUT, n + ".txt"), "w", encoding="utf-8").write(t)
 print({n: t[:120] for n, t in res.items()})
