@@ -1,10 +1,2 @@
-ERR HTTP Error 403: Forbidden
-{
-  "OpenAPI_ServiceResponse": {
-    "cmmMsgHeader": {
-      "errMsg": "SERVICE_KEY_IS_NOT_REGISTERED_ERROR",
-      "returnAuthMsg": "등록되지 않은 서비스키",
-      "returnReasonCode": "30"
-    }
-  }
-}
+200 application/json;charset=UTF-8
+{"response":{"comMsgHeader":"","msgHeader":{"queryTime":"2026-10-11 00:51:44.796","resultCode":0,"resultMessage":"정상적으로 처리되었습니다."},"msgBody":{"busRouteList":[{"adminName":"경기도","districtCd":2,"endStationId":161000612,"endStationName":"인천공항B1층입국장(T2)","regionName":"남양주,서울,인천","routeId":241005890,"routeName":8844,"routeTypeCd":51,"routeTypeName":"리무진형 공항버스","startStationId":222002002,"startStationName":"광릉내종점(공항버스)"},{"adminName":"경기도","districtCd":2,"endStationId":161000612,"endStationName":"인천공항B1층입국장(T2)","regionName":"남양주,인천","routeId":241007251,"routeName":"N8844","routeTypeCd":53,"routeTypeName":"일반형 공항버스","startStationId":222002002,"startStationName":"광릉내종점(공항버스)"}]}}}
