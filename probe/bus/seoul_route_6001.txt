@@ -1,0 +1,2 @@
+ERR HTTP Error 401: Unauthorized
+{"error":"Unauthorized","message":"유효하지 않은 서비스키입니다: 등록되지 않은 서비스키","status":401}
