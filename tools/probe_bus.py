@@ -3,23 +3,25 @@ import os, re, json, urllib.request, urllib.parse
 KEY = os.environ.get("DATA_GO_KR_KEY", "")
 OUT = "probe/bus"; os.makedirs(OUT, exist_ok=True)
 def get(url, n=4000):
+    url = url.replace("http://apis.data.go.kr", "https://apis.data.go.kr")
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 callsign-finder probe"})
         with urllib.request.urlopen(req, timeout=40) as r:
             return "%s %s\n%s" % (r.status, r.headers.get("Content-Type"), r.read().decode("utf-8", "replace")[:n])
     except Exception as e:
         body = ""
-        try: body = e.read().decode("utf-8", "replace")[:1500]
+        try: body = e.read().decode("utf-8", "replace")[:3000]
         except Exception: pass
         return "ERR %s\n%s" % (e, body)
 k = urllib.parse.quote(KEY, safe="")
 CALLS = {
-  "icn_businfo_area1": f"http://apis.data.go.kr/B551177/BusInformation/getBusInfo?serviceKey={k}&type=json&numOfRows=3&pageNo=1&area=1",
-  "icn_businfo_noarea": f"http://apis.data.go.kr/B551177/BusInformation/getBusInfo?serviceKey={k}&type=json&numOfRows=3&pageNo=1",
-  "icn_shtb_pred": f"http://apis.data.go.kr/B551177/ShtbusInfo/getShtbArrivalPredInfo?serviceKey={k}&type=json&numOfRows=5&pageNo=1&routeId=11100009",
+  "icn_businfo_area1": f"https://apis.data.go.kr/B551177/BusInformation/getBusInfo?serviceKey={k}&type=json&numOfRows=3&pageNo=1&area=1",
+  "icn_businfo_noarea": f"https://apis.data.go.kr/B551177/BusInformation/getBusInfo?serviceKey={k}&type=json&numOfRows=3&pageNo=1",
+  "icn_businfo_v2": f"http://apis.data.go.kr/B551177/BusInformation/getBusInfo?serviceKey={k}&type=json&numOfRows=3&pageNo=1&area=2",
+  "icn_shtb_pred": f"https://apis.data.go.kr/B551177/ShtbusInfo/getShtbArrivalPredInfo?serviceKey={k}&type=json&numOfRows=5&pageNo=1&routeId=11100009",
   "seoul_route_6001": f"http://ws.bus.go.kr/api/rest/busRouteInfo/getBusRouteList?serviceKey={k}&strSrch=6001&resultType=json",
   "gbis_route_8844": f"https://apis.data.go.kr/6410000/busrouteservice/v2/getBusRouteListv2?serviceKey={k}&keyword=8844&format=json",
-  "gbis_route_8844_v1": f"http://apis.data.go.kr/6410000/busrouteservice/getBusRouteList?serviceKey={k}&keyword=8844",
+  "gbis_route_8844_v1": f"https://apis.data.go.kr/6410000/busrouteservice/getBusRouteList?serviceKey={k}&keyword=8844",
 }
 res = {}
 for name, url in CALLS.items():
