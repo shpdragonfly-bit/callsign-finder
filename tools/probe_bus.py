@@ -15,16 +15,13 @@ def get(url, n=12000):
         return "ERR %s\n%s" % (e, body)
 k = urllib.parse.quote(KEY, safe="")
 CALLS = {
-  "gbis_route_8844": f"https://apis.data.go.kr/6410000/busrouteservice/v2/getBusRouteListv2?serviceKey={k}&keyword=8844&format=json",
-  "gbis_route_7000": f"https://apis.data.go.kr/6410000/busrouteservice/v2/getBusRouteListv2?serviceKey={k}&keyword=7000&format=json",
-  "gbis_station_v2": f"https://apis.data.go.kr/6410000/busstationservice/v2/getBusStationListv2?serviceKey={k}&keyword=%EC%95%88%EC%82%B0&format=json",
-  "seoul_stations_6001": f"http://ws.bus.go.kr/api/rest/busRouteInfo/getStaionByRoute?serviceKey={k}&busRouteId=100100412&resultType=json",
-  "seoul_arr_6001": f"http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll?serviceKey={k}&busRouteId=100100412&resultType=json",
-  "icn_shtb_pred_day": f"https://apis.data.go.kr/B551177/ShtbusInfo/getShtbArrivalPredInfo?serviceKey={k}&type=json&numOfRows=200&pageNo=1",
+  "shtb_time_wd": f"https://apis.data.go.kr/B551177/ShtbusInfo/getShtbTimeInfo?serviceKey={k}&type=json&day_type=1&numOfRows=5000&pageNo=1",
+  "shtb_time_we": f"https://apis.data.go.kr/B551177/ShtbusInfo/getShtbTimeInfo?serviceKey={k}&type=json&day_type=2&numOfRows=5000&pageNo=1",
+  "shtb_pred_now": f"https://apis.data.go.kr/B551177/ShtbusInfo/getShtbArrivalPredInfo?serviceKey={k}&type=json&numOfRows=500&pageNo=1",
 }
 res = {}
 for name, url in CALLS.items():
-    txt = get(url, 200000 if name == "icn_businfo_all" else 12000); res[name] = txt.replace(k, "KEY")[:60000] if name == "icn_businfo_all" else txt.replace(k, "KEY")[:12000]
+    txt = get(url, 3000000); res[name] = txt.replace(k, "KEY")
 
 for n, t in res.items():
     open(os.path.join(OUT, n + ".txt"), "w", encoding="utf-8").write(t)
