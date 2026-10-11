@@ -495,6 +495,20 @@ body[data-tab="oz"] #alTabs { display: none; }
 .pa-beta { font-size: 12px; font-weight: 700; vertical-align: 3px; color: var(--warn); border: 1px solid var(--warn); border-radius: 6px; padding: 1px 6px; }
 #paSteps[hidden], #paRes[hidden], #gmGuide[hidden], .gm-manage[hidden] { display: none; }
 .gm-manage { width: 100%; margin-top: 12px; }
+.gq-row { display: flex; gap: 8px; margin-top: 10px; }
+.gq-row .b { flex: 1; }
+.gq-row .b[hidden] { display: none; }
+.gq-l { display: block; margin-top: 6px; font-size: 14px; font-weight: 700; color: var(--muted); }
+.gq-pin { letter-spacing: .4em; text-align: center; font-size: 26px; }
+.gq-qr { width: min(78vw, 300px); margin: 6px auto 0; padding: 10px; background: #fff; border-radius: 14px; }
+.gq-qr svg { display: block; width: 100%; height: auto; }
+.gq-exp { font: 600 13px var(--mono); color: var(--muted); }
+.gq-cam { position: relative; width: 100%; max-width: 360px; aspect-ratio: 1; margin: 6px auto 0; border-radius: 16px; overflow: hidden; background: #000; }
+.gq-cam video { width: 100%; height: 100%; object-fit: cover; }
+.gq-frame { position: absolute; inset: 18%; border: 3px solid rgba(255,255,255,.85); border-radius: 14px; box-shadow: 0 0 0 999px rgba(0,0,0,.35); }
+#gqRecvMsg { white-space: pre-line; }
+.gq-file { display: block; text-align: center; margin-top: 10px; cursor: pointer; }
+
 .pa-need { margin-top: 10px; font-size: 15px; background: var(--panel-2); border-left: 4px solid var(--warn); border-radius: 8px; padding: 10px 12px; }
 .pa-steps { list-style: none; margin: 12px 0 0; padding: 0; }
 .pa-steps > li { padding: 12px 0; border-top: 1px dashed var(--line); }
@@ -559,7 +573,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 .sh-in { width: 100%; font-size: 24px; letter-spacing: .08em; text-transform: uppercase; padding: 14px; border-radius: 12px; border: 2px solid var(--line); background: var(--panel); color: var(--text); }
 .sh-in:focus { outline: none; border-color: var(--accent); }
 .sh-msg { min-height: 1.4em; font-size: 15px; margin: 8px 2px; line-height: 1.5; }
-.sh-msg.ok { color: var(--ok); font-weight: 700; } .sh-msg.bad { color: var(--warn); font-weight: 700; }
+.sh-msg.ok { color: var(--ok); font-weight: 700; } .sh-msg.bad { color: var(--warn); font-weight: 700; background: none; padding: 0; font-size: 15px; font-family: inherit; border-radius: 0; }
 .sh-link { display: block; margin: 12px auto 0; font: inherit; font-size: 15px; color: var(--muted); background: none; border: 0; text-decoration: underline; cursor: pointer; }
 /* ---------- 출퇴근 ---------- */
 .cm-mode { margin-top: 12px; }
@@ -821,6 +835,36 @@ body[data-tab="oz"] #alTabs { display: none; }
   <button type="button" data-fab="theme" aria-label="주/야간 바꾸기"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><span>주/야간</span></button>
   <button type="button" data-fab="menu" aria-label="메뉴"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>메뉴</span></button>
 </nav>
+<div class="sheet-bg" id="gqSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="gqTitle">
+    <div class="sh-hd"><h2 id="gqTitle">키 옮기기</h2><button type="button" class="sh-x" id="gqClose">닫기</button></div>
+    <div id="gqSend" hidden>
+      <p class="sh-p">이 기기의 Gemini 키를 <b>내 다른 기기</b>로 옮깁니다. QR은 <b>비밀번호</b>와 <b>내 아이디</b>로 잠겨, 같은 아이디(<b class="mono" data-uid></b>)인 기기에서 비밀번호를 넣어야만 열립니다.</p>
+      <label class="gq-l" for="gqPin1">비밀번호 정하기 (숫자 4~8자리)</label>
+      <input id="gqPin1" class="sh-in mono gq-pin" inputmode="numeric" maxlength="8" autocomplete="off" placeholder="••••">
+      <div class="sh-msg" id="gqSendMsg"></div>
+      <button type="button" class="sh-big primary" id="gqMake" disabled>QR 만들기</button>
+    </div>
+    <div id="gqShow" hidden>
+      <div class="gq-qr" id="gqQr"></div>
+      <p class="sh-p" style="text-align:center">받을 기기에서 <b>개발 예정 → Gemini AI 연결 → 📥 QR로 받기</b>를 누르고 이 화면을 비추세요.<br><small class="gq-exp" id="gqExp"></small></p>
+      <p class="mn-note">QR 화면을 사진으로 남기거나 다른 사람에게 보여 주지 마세요. 10분이 지나면 쓸 수 없습니다.</p>
+    </div>
+    <div id="gqRecv" hidden>
+      <p class="sh-p">보내는 기기에 뜬 QR을 비추세요. 두 기기의 아이디가 같아야 받을 수 있습니다 (이 기기: <b class="mono" data-uid></b>).</p>
+      <div class="gq-cam"><video id="gqVideo" playsinline muted></video><div class="gq-frame"></div></div>
+      <div class="sh-msg" id="gqRecvMsg">카메라를 켜는 중…</div>
+      <label class="sh-link gq-file" for="gqImg">카메라가 안 되면: QR 사진 고르기</label>
+      <input id="gqImg" type="file" accept="image/*" hidden>
+    </div>
+    <div id="gqPin" hidden>
+      <p class="sh-p">QR을 읽었습니다. 보내는 기기에서 정한 <b>비밀번호</b>를 넣으세요.</p>
+      <input id="gqPin2" class="sh-in mono gq-pin" inputmode="numeric" maxlength="8" autocomplete="off" placeholder="••••">
+      <div class="sh-msg" id="gqPinMsg"></div>
+      <button type="button" class="sh-big primary" id="gqOpen" disabled>키 받기</button>
+    </div>
+  </div>
+</div>
 <div class="sheet-bg" id="menuSheet" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mnTitle">
     <div id="mnMain">
@@ -962,6 +1006,7 @@ body[data-tab="oz"] #alTabs { display: none; }
       </div>
 
       <button type="button" class="b gm-manage" id="gmManage" hidden>키 관리 · 안내 다시 보기</button>
+      <div class="gq-row"><button type="button" class="b" id="gqSendBtn" hidden>📤 다른 기기로 보내기</button><button type="button" class="b" id="gqRecvBtn">📥 QR로 받기</button></div>
       <div id="gmGuide">
       <details class="gm-ac">
         <summary><span class="n">1</span>API 키가 뭔가요?</summary>
@@ -2062,6 +2107,132 @@ window.csfStat = (() => {
     $("gmManage").addEventListener("click", () => { status.opened = true; $("gmGuide").hidden = false; $("gmManage").hidden = true; });
     return { key: get, connected: () => !!(get() && store.get(OKK)) };
   })();
+  // ---------- Gemini 키를 내 다른 기기로 옮기기 (QR, 서버 거치지 않음) ----------
+  // QR 내용 = "FLTA1." + base64url(JSON{i: 보내는 아이디, t: 만든 시각(초), s: salt, n: iv, c: 암호문})
+  // 암호 키 = PBKDF2-SHA256(내 아이디 연결 코드 + "|" + 비밀번호, salt, 250,000회) → AES-GCM 256
+  //   → 같은 연결 코드(=같은 아이디)를 가진 기기 + 비밀번호가 있어야만 풀림. 10분 지나면 받지 않음
+  const GQ = (() => {
+    const PFX = "FLTA1.", TTL = 600, ITER = 250000;
+    const te = new TextEncoder(), td = new TextDecoder();
+    const b64 = (u8) => btoa(String.fromCharCode(...u8)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    const unb64 = (s) => Uint8Array.from(atob(s.replace(/-/g, "+").replace(/_/g, "/")), (c) => c.charCodeAt(0));
+    async function aesKey(pin, salt) {
+      const base = await crypto.subtle.importKey("raw", te.encode(window.UID.code() + "|" + pin), "PBKDF2", false, ["deriveKey"]);
+      return crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations: ITER, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+    }
+    async function seal(key, pin) {
+      const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12));
+      const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, await aesKey(pin, salt), te.encode(key)));
+      return PFX + b64(te.encode(JSON.stringify({ i: window.UID.id(), t: Math.floor(Date.now() / 1000), s: b64(salt), n: b64(iv), c: b64(ct) })));
+    }
+    function parse(txt) {
+      if (!txt || !txt.startsWith(PFX)) return { err: "운항 도우미 키 QR이 아닙니다." };
+      let o; try { o = JSON.parse(td.decode(unb64(txt.slice(PFX.length)))); } catch (e) { return { err: "QR을 읽지 못했습니다. 다시 비춰 주세요." }; }
+      const age = Date.now() / 1000 - o.t;
+      if (o.i !== window.UID.id()) return { err: `다른 아이디의 QR입니다. 보낸 기기 ${o.i} · 이 기기 ${window.UID.id()}\n본인 기기라면 먼저 왼쪽 위 아이디 → '다른 기기에서 쓰던 아이디로 바꾸기'로 같은 아이디를 연결하세요.` };
+      if (!(age < TTL && age > -300)) return { err: "만든 지 10분이 지난 QR입니다. 보내는 기기에서 새로 만들어 주세요." };
+      return { o };
+    }
+    async function open(o, pin) {
+      const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: unb64(o.n) }, await aesKey(pin, unb64(o.s)), unb64(o.c));
+      return td.decode(pt);
+    }
+    const lib = (src, name) => window[name] ? Promise.resolve(window[name]) : new Promise((ok, no) => { const s = document.createElement("script"); s.src = src; s.onload = () => ok(window[name]); s.onerror = no; document.head.appendChild(s); });
+    let stream = null, timer = null, got = null, tries = 0, expT = null;
+    const v = (id) => { ["gqSend", "gqShow", "gqRecv", "gqPin"].forEach((x) => { $(x).hidden = x !== id; }); };
+    function stop() { if (stream) stream.getTracks().forEach((t) => t.stop()); stream = null; clearTimeout(timer); clearInterval(expT); }
+    function close() { stop(); $("gqSheet").hidden = true; $("gqQr").innerHTML = ""; $("gqPin1").value = ""; $("gqPin2").value = ""; }
+    const fill = () => document.querySelectorAll("#gqSheet [data-uid]").forEach((e) => { e.textContent = window.UID.id(); });
+    function startSend() {
+      if (!GM.key()) return;
+      fill(); v("gqSend"); $("gqTitle").textContent = "다른 기기로 보내기"; $("gqSendMsg").textContent = ""; $("gqSheet").hidden = false; setTimeout(() => $("gqPin1").focus(), 50);
+    }
+    $("gqPin1").addEventListener("input", (e) => { e.target.value = e.target.value.replace(/\D/g, ""); $("gqMake").disabled = e.target.value.length < 4; });
+    $("gqMake").addEventListener("click", async () => {
+      const pin = $("gqPin1").value; if (pin.length < 4) return;
+      $("gqMake").disabled = true; $("gqSendMsg").textContent = "만드는 중…";
+      try {
+        const [qrcode, txt] = await Promise.all([lib("vendor/qrcode.js", "qrcode"), seal(GM.key(), pin)]);
+        const q = qrcode(0, "M"); q.addData(txt); q.make();
+        $("gqQr").innerHTML = q.createSvgTag({ cellSize: 5, margin: 4, scalable: true });
+        v("gqShow");
+        const end = Date.now() + TTL * 1000;
+        const tick = () => { const s = Math.max(0, Math.round((end - Date.now()) / 1000)); $("gqExp").textContent = s ? `남은 시간 ${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}` : "시간이 지났습니다. 닫고 다시 만들어 주세요."; if (!s) { $("gqQr").innerHTML = ""; clearInterval(expT); } };
+        tick(); expT = setInterval(tick, 1000);
+      } catch (e) { $("gqSendMsg").textContent = "QR을 만들지 못했습니다. 처음 한 번은 인터넷 연결이 필요합니다."; $("gqMake").disabled = false; }
+    });
+    function onText(txt) {
+      const r = parse(txt);
+      if (r.err) { $("gqRecvMsg").className = "sh-msg bad"; $("gqRecvMsg").textContent = r.err; return false; }
+      got = r.o; tries = 0; stop(); v("gqPin"); $("gqPinMsg").textContent = ""; setTimeout(() => $("gqPin2").focus(), 50); return true;
+    }
+    async function scanLoop(video) {
+      let det = null;
+      try { if ("BarcodeDetector" in window && (await BarcodeDetector.getSupportedFormats()).includes("qr_code")) det = new BarcodeDetector({ formats: ["qr_code"] }); } catch (e) {}
+      const jsQR = det ? null : await lib("vendor/jsQR.js", "jsQR");
+      const cv = document.createElement("canvas"), cx = cv.getContext("2d", { willReadFrequently: true });
+      const step = async () => {
+        if (!stream) return;
+        try {
+          if (video.readyState >= 2) {
+            let txt = null;
+            if (det) { const r = await det.detect(video); txt = r[0] && r[0].rawValue; }
+            else { const w = video.videoWidth, h = video.videoHeight, k = Math.min(1, 640 / w); cv.width = w * k; cv.height = h * k; cx.drawImage(video, 0, 0, cv.width, cv.height); const r = jsQR(cx.getImageData(0, 0, cv.width, cv.height).data, cv.width, cv.height, { inversionAttempts: "dontInvert" }); txt = r && r.data; }
+            if (txt && onText(txt)) return;
+          }
+        } catch (e) {}
+        timer = setTimeout(step, 250);
+      };
+      step();
+    }
+    async function startRecv() {
+      fill(); v("gqRecv"); $("gqTitle").textContent = "QR로 받기"; $("gqSheet").hidden = false;
+      $("gqRecvMsg").className = "sh-msg"; $("gqRecvMsg").textContent = "카메라를 켜는 중…";
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false });
+        const video = $("gqVideo"); video.srcObject = stream; await video.play();
+        $("gqRecvMsg").textContent = "QR을 네모 안에 맞춰 주세요.";
+        scanLoop(video);
+      } catch (e) { $("gqRecvMsg").className = "sh-msg bad"; $("gqRecvMsg").textContent = "카메라를 쓸 수 없습니다. 카메라 권한을 허용하거나 아래 'QR 사진 고르기'를 쓰세요."; }
+    }
+    $("gqImg").addEventListener("change", async (e) => {
+      const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f) return;
+      try {
+        const jsQR = await lib("vendor/jsQR.js", "jsQR"), img = await createImageBitmap(f);
+        const k = Math.min(1, 1200 / Math.max(img.width, img.height)), cv = document.createElement("canvas"); cv.width = img.width * k; cv.height = img.height * k;
+        const cx = cv.getContext("2d"); cx.drawImage(img, 0, 0, cv.width, cv.height);
+        const r = jsQR(cx.getImageData(0, 0, cv.width, cv.height).data, cv.width, cv.height);
+        if (!r) { $("gqRecvMsg").className = "sh-msg bad"; $("gqRecvMsg").textContent = "사진에서 QR을 찾지 못했습니다."; return; }
+        onText(r.data);
+      } catch (x) { $("gqRecvMsg").className = "sh-msg bad"; $("gqRecvMsg").textContent = "사진을 읽지 못했습니다."; }
+    });
+    $("gqPin2").addEventListener("input", (e) => { e.target.value = e.target.value.replace(/\D/g, ""); $("gqOpen").disabled = e.target.value.length < 4; });
+    $("gqOpen").addEventListener("click", async () => {
+      if (!got) return;
+      $("gqOpen").disabled = true; $("gqPinMsg").className = "sh-msg"; $("gqPinMsg").textContent = "확인 중…";
+      let key = null; try { key = await open(got, $("gqPin2").value); } catch (e) {}
+      if (!key) {
+        tries++; $("gqPin2").value = "";
+        $("gqPinMsg").className = "sh-msg bad";
+        $("gqPinMsg").textContent = tries >= 5 ? "5번 틀렸습니다. 보내는 기기에서 QR을 새로 만들어 주세요." : `비밀번호가 맞지 않습니다 (${tries}/5).`;
+        if (tries >= 5) got = null;
+        return;
+      }
+      got = null;
+      $("gqPinMsg").className = "sh-msg ok"; $("gqPinMsg").textContent = "키를 받았습니다. 연결을 확인합니다…";
+      const once = () => { document.removeEventListener("csf-gm", once); setTimeout(() => { $("gqPinMsg").textContent = GM.connected() ? "연결됨 ✓ 이 기기에서도 FLT Package 분석을 쓸 수 있습니다." : "키는 저장했지만 연결 확인이 안 됐습니다. 인터넷 연결 후 [저장하고 연결 확인]을 눌러 주세요."; }, 50); };
+      document.addEventListener("csf-gm", once);
+      $("gmKey").value = key; $("gmSave").click();
+    });
+    $("gqClose").addEventListener("click", close);
+    $("gqSheet").addEventListener("click", (e) => { if (e.target === $("gqSheet")) close(); });
+    $("gqSendBtn").addEventListener("click", startSend);
+    $("gqRecvBtn").addEventListener("click", startRecv);
+    const paintBtns = () => { $("gqSendBtn").hidden = !GM.key(); };
+    document.addEventListener("csf-gm", paintBtns); paintBtns();
+    return { parse };
+  })();
+
 
   // ---------- FLT Package 분석 (Gemini) ----------
   // 출력 양식(임시). 사용자가 만든 실제 양식이 오면 이 블록만 바꾸면 화면·PDF·Gemini 지시문이 함께 바뀜
@@ -2474,7 +2645,7 @@ window.UID = (() => {
   link.addEventListener("click", () => { from = "uidMain"; view("uidLink"); }); $("uidMain").appendChild(link);
   paint();
   if (!ls.get(ASKED)) setTimeout(() => view("uidFirst"), 600);       // 이 기기에서 처음 한 번만 묻기
-  return { id: () => me.id };
+  return { id: () => me.id, code: () => me.code };   // code: 키 옮기기 QR 암호화에만 사용 (밖으로 보내지 않음)
 })();
 </script>
 <script>
