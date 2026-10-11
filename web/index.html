@@ -604,6 +604,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 #cmShuttle.has-car .cm-hd, #cmShuttle.has-car .sh-dirrow { padding-right: 124px; }
 #cmShuttle.has-car .cm-hd h3 { font-size: 16.5px; white-space: nowrap; letter-spacing: -.3px; } #cmShuttle.has-car .cm-rno { display: none; }
 #cmShuttle.has-car .sh-dirrow { min-height: 36px; margin-top: 4px; }
+@media (max-width: 350px) { #cmShuttle.has-car .lp { display: none; } }
 .sh-mycar { position: absolute; top: 10px; right: 14px; width: 116px; box-sizing: border-box; text-align: center; padding: 5px 6px; border-radius: 12px; background: var(--accent-soft); border: 1.5px solid var(--accent); }
 .sh-mycar[hidden] { display: none; }
 .sh-mycar b { display: block; font: 800 21px var(--mono); line-height: 1.2; white-space: nowrap; }
@@ -2583,7 +2584,7 @@ window.UID = (() => {
     $("cmStop").hidden = st.mode !== "go";
     $("cmShuttle").hidden = false;
     $("cmShPos").hidden = false;
-    $("cmShTitle").innerHTML = st.mode === "t1" ? `장기주차장 ↔ T1 셔틀 <small class="cm-rno">공항01 · 무료</small>` : `장기주차장 ↔ T2 셔틀 <small class="cm-rno">무료</small>`;
+    $("cmShTitle").innerHTML = st.mode === "t1" ? `장기주차장 ↔ T1 셔틀 <small class="cm-rno">공항01 · 무료</small>` : `<span class="lp">장기주차장 ↔ </span>T2 셔틀 <small class="cm-rno">무료</small>`;
     $("cmShBadge").textContent = st.mode === "t1" ? "04:30~23:42" : "24시간";
     $("cmShBadge").hidden = st.mode === "t2";
     {
