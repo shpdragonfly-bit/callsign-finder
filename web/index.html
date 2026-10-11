@@ -2300,6 +2300,8 @@ window.csfStat = (() => {
       point: PKG_S("'REFILE FLT PLAN' 쪽의 재출항 지점 (예 '- SDE TO RKSI' 의 SDE). 그 쪽이 없으면 ''"),
       init_dest: PKG_S("처음 목적지 (예 '- KSEA TO RJTT' 의 RJTT)"), init_altn: PKG_S("처음 목적지 쪽 ALTN/ 공항 (예 RJBB)"),
       final_dest: PKG_S("최종 목적지 (예 '- SDE TO RKSI' 의 RKSI)"),
+      time_to_point: PKG_S("처음 목적지 쪽 연료표 '출발지 TO 재출항 지점' 줄의 TIME (예 'KSEA TO SDE 1587 09.32' 의 09.32)"),
+      time_point_init: PKG_S("처음 목적지 쪽 연료표 '재출항 지점 TO 처음 목적지' 줄의 TIME (예 'SDE TO RJTT 0043 00.41' 의 00.41)"),
       trip_to_point: PKG_S("처음 목적지 쪽 연료표에서 출발지→재출항 지점 TRIP 연료 원문 (예 'KSEA TO SDE 1587' 의 1587)"),
       rqrd_init: PKG_S("처음 목적지 쪽 RQRD 연료 원문 (예 1912)"), rqrd_final: PKG_S("최종 목적지 쪽(재출항 지점→최종) RQRD 연료 원문 (예 0409)"),
       planned_rf: PKG_S("'PLANNED R/F AT REFILE POINT' 값 원문 (예 00494)"), ref_weight: PKG_S("'WEIGHT AT REF POINT' 값 원문"),
@@ -2315,8 +2317,8 @@ window.csfStat = (() => {
       fuel_adj: { type: "array", items: PKG_S("'FUEL BURN ADJUSTMENT' 의 각 줄 원문") },
       notes: { type: "array", items: PKG_S("'DISPATCH NOTES' 의 각 줄 원문 (들여쓴 '*' 줄도 한 줄씩, 다음 쪽까지 이어진 줄 포함)") },
       page: { type: "integer" } }, "DISPATCH RELEASE INFORMATION"),
-    wx: PKG_ARR({ role: { type: "string", enum: ["DEP", "ARR", "ALTN"] }, icao: PKG_S("공항 ICAO"), taf: PKG_S("TAF 원문 전체 (줄바꿈 유지, 'TAF' 부터 마지막 변화군까지)") },
-      "WEATHER BRIEFING 의 DEPARTURE / ARRIVAL / ALTERNATE WEATHER 에 있는 TAF. ALTERNATE 는 목적지 교체공항(DEST ALTN) 것만. ENROUTE WEATHER 는 제외"),
+    wx: PKG_ARR({ role: { type: "string", enum: ["DEP", "ARR", "ALTN", "REF", "REF_ALTN"] }, icao: PKG_S("공항 ICAO"), taf: PKG_S("TAF 원문 전체 (줄바꿈 유지, 'TAF' 부터 마지막 변화군까지)") },
+      "WEATHER BRIEFING 의 DEPARTURE / ARRIVAL / ALTERNATE WEATHER 에 있는 TAF. DEP=출발, ARR=최종 목적지, ALTN=목적지 교체공항(DEST ALTN). REFILE FLT PLAN 이 있으면 REF=처음 목적지(예 RJTT), REF_ALTN=처음 목적지의 ALTN(예 RJBB) 도 넣음. EDTO 교체공항·ENROUTE WEATHER 는 제외"),
     names: PKG_OBJ({ dest_en: PKG_S("NOTAM PACKAGE 1 의 '[DEST]YSSY/ SYD/ 이름, 도시, 국가' 에서 이름 부분 원문"),
       dest_ko: PKG_S("기내 안내방송 문구용 도착 공항 한국어 이름만 (예 '시드니 국제공항'). 운항 자료가 아님") }, "공항 이름"),
   }, "운항 패키지에서 옮겨 적은 값");
@@ -2559,11 +2561,18 @@ window.csfStat = (() => {
       return { lines: out, all: keep.every(Boolean) };
     }
     function wxRows(R) {
-      const t = fltTimes(R), rows = [];
-      for (const [role, lbl, key] of [["DEP", "출발(DEP)", "std"], ["ARR", "도착(ARR)", "sta"], ["ALTN", "교체(ALTN)", "sta"]]) {
-        const w = R.wx.find((x) => x.role === role);
-        if (!w) { rows.push([lbl, "패키지에 없음"]); continue; }
-        const f = tafWindow(w.taf, t && t[key]);
+      const t = fltTimes(R), rows = [], F = R.refile || {}, A = R.alt || {};
+      const pick = (role, icao) => R.wx.find((x) => x.role === role && icao && x.icao === icao) || (icao && R.wx.find((x) => x.icao === icao)) || R.wx.find((x) => x.role === role);
+      // 처음 목적지 ETA = STD + 출발지→재출항 지점 시간 + 지점→처음 목적지 시간 (없으면 STA)
+      let refEta = t && t.sta;
+      const a1 = hm2m(F.time_to_point), a2 = hm2m(F.time_point_init);
+      if (t && a1 != null && a2 != null) refEta = t.std + (a1 + a2) * 60000;
+      const list = [["DEP", "출발(DEP)", t && t.std, R.flight.dep], ["ARR", "도착(ARR)", t && t.sta, R.flight.arr], ["ALTN", "교체(ALTN)", t && t.sta, A.dest_altn]];
+      if (F.point) list.push(["REF", "Refile 도착", refEta, F.init_dest], ["REF_ALTN", "Refile 교체", refEta, F.init_altn]);
+      for (const [role, lbl, center, icao] of list) {
+        const w = pick(role, icao);
+        if (!w) { rows.push([icao ? `${lbl}\n${icao}` : lbl, "패키지에 없음"]); continue; }
+        const f = tafWindow(w.taf, center);
         rows.push([`${lbl}\n${w.icao}`, f.none ? `${w.icao} TAF 유효시간이 STD/STA ±2시간을 덮지 않음 (패키지 TAF 기준)` : f.lines.join("\n")]);
       }
       return rows;
