@@ -600,12 +600,15 @@ body[data-tab="oz"] #alTabs { display: none; }
 .sh-park .x[hidden] { display: none; }
 .sh-dirrow { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 6px; min-height: 34px; }
 .sh-dirrow .cm-sub { margin-top: 0; flex: 0 0 auto; }
-.sh-mycar { display: flex; align-items: center; gap: 10px; padding: 6px 12px 6px 7px; border-radius: 12px; background: var(--accent-soft); border: 1.5px solid var(--accent); flex: 1 1 auto; min-width: 0; max-width: 260px; }
-.sh-mycar > div { flex: 1; min-width: 0; text-align: center; }
+#cmShuttle { position: relative; }
+#cmShuttle.has-car .cm-hd, #cmShuttle.has-car .sh-dirrow { padding-right: 124px; }
+#cmShuttle.has-car .cm-hd h3 { font-size: 16.5px; white-space: nowrap; letter-spacing: -.3px; } #cmShuttle.has-car .cm-rno { display: none; }
+#cmShuttle.has-car .sh-dirrow { min-height: 36px; margin-top: 4px; }
+.sh-mycar { position: absolute; top: 10px; right: 14px; width: 116px; box-sizing: border-box; text-align: center; padding: 5px 6px; border-radius: 12px; background: var(--accent-soft); border: 1.5px solid var(--accent); }
 .sh-mycar[hidden] { display: none; }
-.sh-mycar .ic { flex: 0 0 auto; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 6px; background: var(--accent); color: var(--accent-ink); font: 800 15px system-ui, sans-serif; }
-.sh-mycar b { display: block; font: 800 22px var(--mono); letter-spacing: 1px; line-height: 1.15; white-space: nowrap; }
-.sh-mycar small { display: block; font-size: 11px; color: var(--muted); white-space: nowrap; }
+.sh-mycar b { display: block; font: 800 21px var(--mono); line-height: 1.2; white-space: nowrap; }
+.sh-mycar small { display: block; font-size: 11px; color: var(--muted); white-space: nowrap; line-height: 1.3; }
+.sh-mycar small.l { color: var(--accent); font-weight: 800; }
 .sh-pick[hidden] { display: none; }
 .sh-list { max-height: 196px; overflow-y: auto; overscroll-behavior: contain; margin-top: 8px; border: 1px solid var(--line); border-radius: 12px; padding: 0 12px; scroll-snap-type: y mandatory; }
 .sh-list .cm-dep { scroll-snap-align: start; min-height: 45px; }
@@ -2550,7 +2553,8 @@ window.UID = (() => {
     parkEl.querySelector("#cmParkClr").hidden = !carTxt();
     const show = $("cmCarShow"), t = carTxt();
     show.hidden = st.mode !== "t2" || !t;
-    if (t) show.innerHTML = `<span class="ic">P</span><div><b>${esc(t)}</b><small>${esc(carWhen())}</small></div>`;
+    if (t) show.innerHTML = `<small class="l">내 차 위치</small><b>${esc(t)}</b><small>${esc(carWhen().replace(" 저장", "").replace("오늘 ", ""))} 저장</small>`;
+    $("cmShuttle").classList.toggle("has-car", !show.hidden);
   }
   const saveCar = () => { if (car && !car.z && !car.n) car = null; if (car) car.at = Date.now(); ls.set(PK, JSON.stringify(car)); paintPark(); };
   parkEl.addEventListener("click", (e) => {
