@@ -36,6 +36,10 @@ jobs:
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python tools/probe_bus.py
+      - name: 공항버스 실시간 도착 점검
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+        run: python tools/probe_bus_rt.py
       - name: 통계 웹 앱 점검
         if: false
         run: python tools/probe_stats.py
