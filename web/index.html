@@ -1145,7 +1145,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 
     <div class="card pa" id="paCard">
       <div class="gm-hd">
-        <div><h2>FLT Package 분석 <span class="pa-beta">시험판</span></h2><p>운항 패키지 PDF를 Gemini가 읽고 요약 PDF로 만들어 드립니다.<br><b class="pa-al">(대한항공, 아시아나항공 분석 가능)</b></p></div>
+        <div><h2>FLT Package 분석 <span class="pa-beta">시험판</span></h2><p>운항 패키지 PDF를 Gemini가 읽고 요약 PDF로 만들어 드립니다.<br><b class="pa-al">(KE, OZ 분석 가능)</b></p></div>
       </div>
       <div class="pa-need" id="paNeed">🔒 <b>Gemini API 키를 등록한 분만</b> 쓸 수 있습니다. 위 <b>Gemini AI 연결</b>에서 키를 한 번 등록하면 열립니다.</div>
       <ol class="pa-steps" id="paSteps">
@@ -1322,7 +1322,7 @@ window.FPREP = (() => {
       if (!icao || SKIP.includes(icao)) continue;
       const d = await airport(icao, company);
       if (!d) { out.push({ role, icao, none: true }); continue; }
-      out.push({ role, icao, ver: verTxt(d), items: sortIt(forType((d.items || []).filter((x) => x.role === role), F.type)) });
+      out.push({ role, icao, ver: verTxt(d), items: sortIt(forType((d.items || []).filter((x) => x.role === role && (x.priority || 3) === 1), F.type)) });
     }
     return out;
   }
@@ -1344,7 +1344,7 @@ window.FPREP = (() => {
     $("fpRecent").innerHTML = recent().map((r) => `<button type="button" data-r="${esc(r)}">${esc(r.replace("|", " → ").replace(/^ → | → $/, ""))}</button>`).join("");
   }
   function itemsHtml(items) {
-    if (!items.length) return `<p class="fp-empty" style="padding:8px 0 0">해당 항목 없음</p>`;
+    if (!items.length) return `<p class="fp-empty" style="padding:8px 0 0">중요 항목 없음</p>`;
     return [1, 2, 3].map((p) => {
       const g = items.filter((x) => (x.priority || 3) === p); if (!g.length) return "";
       return `<div class="fp-grp p${p}"><b>${p === 1 ? "🔴 " : ""}${PRI[p]} ${g.length}</b>` + g.map((x) =>
@@ -1368,7 +1368,7 @@ window.FPREP = (() => {
       if (!a) continue;
       const icao = a.icao, d = await airport(icao, a.company);
       if (!d) { h += `<div class="card fp-empty">${esc(icao)} 요약을 읽지 못했습니다. 잠시 후 다시 고르세요.</div>`; continue; }
-      const items = sortIt(forType((d.items || []).filter((x) => x.role === role), ""));
+      const items = sortIt(forType((d.items || []).filter((x) => x.role === role && (x.priority || 3) === 1), ""));   // 중요만
       const ch = (d.changes || []).filter((c) => !c.role || c.role === role || c.role === "general");
       h += `<div class="card fp-ap"><h3>${esc(label(d))} ${ttl}<small>${esc(verTxt(d))}</small></h3>${itemsHtml(items)}` +
         (ch.length ? `<details class="fp-chg"><summary>이전 버전과 달라진 점 ${ch.length}건</summary><ul>${ch.map((c) => `<li><b>${esc(c.type || "")}</b> ${esc(c.text)}</li>`).join("")}</ul></details>` : "") + `</div>`;
@@ -1464,7 +1464,7 @@ window.FPREP = (() => {
 // 보내지 않는 것: 검색한 편명·공항, 이름, 위치. 오프라인이면 모아 두었다가 인터넷 연결 시 전송.
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
-  const VER = "v46", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v47", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -2968,7 +2968,7 @@ window.csfStat = (() => {
             if (a.none) { rows.push([head, "자료 없음", 0]); continue; }
             const its = a.items.filter((x) => (x.priority || 3) <= maxP), shown = cap == null ? its : its.slice(0, cap);
             cut += a.items.length - shown.length;
-            if (!a.items.length) { rows.push([head, "해당 항목 없음", 0]); continue; }
+            if (!a.items.length) { rows.push([head, "중요 항목 없음", 0]); continue; }
             let first = true;
             for (const p of [1, 2, 3]) { const g = shown.filter((x) => (x.priority || 3) === p); if (!g.length) continue; rows.push([(first ? head + "\n" : "") + ["", "중요", "보통", "참고"][p], g.map(line).join("\n"), p]); first = false; }
             if (!shown.length) rows.push([head, "중요 항목 없음", 0]);
