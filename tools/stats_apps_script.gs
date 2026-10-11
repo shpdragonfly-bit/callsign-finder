@@ -9,6 +9,10 @@
  *
  * 코드를 고친 뒤에는: 배포 → 배포 관리 → ✏️ 수정 → 버전 "새 버전" → 배포 (웹 앱 URL 은 그대로)
  * 받지 않는 것: 검색한 편명, 이름, 위치
+ *
+ * 주간 메일 (사용자 요청·의견 모아 받기): 편집기 위쪽에서 setupWeekly 선택 → ▶ 실행 (권한 허용) 한 번이면
+ *   매주 월요일 오전 9시쯤 지난 7일 의견을 이 스크립트 주인 메일로 보냅니다. 의견이 없으면 보내지 않습니다.
+ *   바로 시험: weeklyDigest 선택 → ▶ 실행.  끄기: stopWeekly 실행.
  */
 const SHEET = "기록";
 const HEAD = ["수신시각", "사용시각", "기기번호", "동작", "항공사", "세부", "기기", "앱버전", "의견"];
@@ -78,6 +82,42 @@ function setup() {
   s.getRange("S2").setFormula("=IFERROR(SORT(FILTER({기록!B2:B, 기록!F2:F, 기록!I2:I}, 기록!D2:D=\"의견\"), 1, FALSE), \"아직 없음\")");
   s.setColumnWidth(21, 360);
   s.getRange("A1").setFontWeight("bold").setFontSize(13);
+}
+
+/** 주간 메일 켜기 (한 번만 실행) */
+function setupWeekly() {
+  stopWeekly();
+  ScriptApp.newTrigger("weeklyDigest").timeBased().onWeekDay(ScriptApp.WeekDay.MONDAY).atHour(9).inTimezone("Asia/Seoul").create();
+  Logger.log("매주 월요일 09시 주간 메일을 켰습니다");
+}
+/** 주간 메일 끄기 */
+function stopWeekly() {
+  ScriptApp.getProjectTriggers().filter((t) => t.getHandlerFunction() === "weeklyDigest").forEach((t) => ScriptApp.deleteTrigger(t));
+}
+/** 지난 7일 의견·기능 요청을 모아 메일로 보냄 */
+function weeklyDigest() {
+  const sh = sheet(), last = sh.getLastRow();
+  if (last < 2) return;
+  const since = new Date(Date.now() - 7 * 24 * 3600e3);
+  const rows = sh.getRange(2, 1, last - 1, HEAD.length).getValues().filter((r) => r[0] >= since && (r[3] === "의견" || r[3] === "요청"));
+  const ops = rows.filter((r) => r[3] === "의견" && String(r[8]).trim());
+  const reqs = {};
+  rows.filter((r) => r[3] === "요청").forEach((r) => { reqs[r[5]] = reqs[r[5]] || {}; reqs[r[5]][r[2]] = 1; });
+  if (!ops.length && !Object.keys(reqs).length) { Logger.log("지난 7일 의견·요청 없음 - 메일 안 보냄"); return; }
+  const tz = "Asia/Seoul", fmt = (d) => Utilities.formatDate(new Date(d), tz, "MM/dd HH:mm");
+  const kind = (m) => String(m).replace(/^메뉴-/, "") || "의견";   // 기능요청·오류신고·기타의견, 개발 예정 탭 의견은 기능 키(PKG-AI 등)
+  let txt = `운항 도우미 · 지난 7일 사용자 의견 ${ops.length}건\n(${fmt(since)} ~ ${fmt(new Date())})\n\n`;
+  const groups = {};
+  ops.forEach((r) => { const k = kind(r[5]); (groups[k] = groups[k] || []).push(r); });
+  Object.keys(groups).forEach((k) => {
+    txt += `■ ${k} (${groups[k].length})\n`;
+    groups[k].forEach((r) => { txt += `  - ${fmt(r[1])} · ${r[6]} ${r[7]}\n    ${String(r[8]).replace(/^'/, "")}\n`; });
+    txt += "\n";
+  });
+  const rk = Object.keys(reqs);
+  if (rk.length) { txt += "■ 개발 예정 기능 요청 (기기 수)\n"; rk.forEach((k) => { txt += `  - ${k}: ${Object.keys(reqs[k]).length}\n`; }); txt += "\n"; }
+  txt += "전체 기록: " + SpreadsheetApp.getActiveSpreadsheet().getUrl();
+  MailApp.sendEmail(Session.getEffectiveUser().getEmail(), `[운항 도우미] 주간 사용자 의견 ${ops.length}건`, txt);
 }
 
 function safeDate(t, fallback) { const d = new Date(t); return isNaN(d) || d > fallback ? fallback : d; }

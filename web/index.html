@@ -850,15 +850,7 @@ body[data-tab="oz"] #alTabs { display: none; }
     <div id="mnFaq" hidden>
       <div class="sh-hd"><button type="button" class="mn-back" data-mv="mnMain">‹ 메뉴</button><button type="button" class="sh-x" data-mclose>닫기</button></div>
       <h2 style="margin-top:8px">자주 묻는 질문</h2>
-      <div class="faq">
-        <details><summary>인터넷이 안 되는 기내에서도 쓸 수 있나요?</summary><p>네. 출발 전 인터넷이 될 때 앱을 한 번 열어 두면(아래 '최신 데이터 받기') Call Sign 조회, 비행시간, 셔틀 시간표는 오프라인에서도 됩니다. 기상과 공항버스 실시간 도착은 인터넷이 필요합니다.</p></details>
-        <details><summary>휴대폰에 앱처럼 설치하려면?</summary><p>아이폰·아이패드: Safari에서 열고 공유 버튼 → '홈 화면에 추가'. 안드로이드: Chrome 메뉴(⋮) → '홈 화면에 추가' 또는 '앱 설치'.</p></details>
-        <details><summary>기종·노선 정보가 실제와 다를 때가 있어요.</summary><p>노선은 공개 자료(VRS), 기종은 ADS-B 관측 누적값이라 당일 운항과 다를 수 있습니다. 참고용으로 쓰시고, 틀린 내용은 '사용자 요청 → 오류 신고'로 알려 주세요.</p></details>
-        <details><summary>셔틀 위치는 실제 버스 위치인가요?</summary><p>아닙니다. 공사 시간표로 계산한 예상 위치라 교통 상황에 따라 몇 분 차이 날 수 있습니다. 공항버스 '실시간 도착'은 서울·경기 버스정보의 실제 위치 기반입니다.</p></details>
-        <details><summary>주/야간이 저절로 바뀌어요.</summary><p>기본은 기기 시각 기준 자동(06시 주간, 19시 야간)입니다. 메뉴의 '주/야간'에서 항상 주간 또는 항상 야간으로 고정할 수 있습니다.</p></details>
-        <details><summary>내 아이디·주차 위치는 어디에 저장되나요?</summary><p>이 기기 안에만 저장되고 서버나 통계로 보내지 않습니다. 앱 데이터를 지우면 함께 지워집니다. 아이디는 '연결 코드'로 다른 기기에서 이어 쓸 수 있습니다.</p></details>
-        <details><summary>어떤 정보가 수집되나요?</summary><p>사용 횟수 파악을 위한 익명 통계(기능 이름, 항공사 탭, 기기 종류, 앱 버전)만 보냅니다. 편명·공항 코드·이름·위치·아이디는 보내지 않습니다.</p></details>
-      </div>
+      <div class="faq" id="mnFaqList"></div>
     </div>
   </div>
 </div>
@@ -1159,13 +1151,14 @@ body[data-tab="oz"] #alTabs { display: none; }
 </script>
 <script>
 // ===================== 메뉴 (☰): 공지사항 · 사용자 요청 · 자주 묻는 질문 · 주/야간 =====================
-// 공지: web/notice.json (배포 때 함께 갱신, 기기에 저장해 오프라인에서도 보임, 안 읽은 공지가 있으면 ☰ 에 빨간 점)
+// 공지: web/notice.json, 자주 묻는 질문: web/faq.json (GitHub 에서 직접 고치면 자동 배포, 기기에 저장해 오프라인에서도 보임, 안 읽은 공지가 있으면 ☰ 에 빨간 점)
 // 사용자 요청: 익명 통계와 같은 경로로 '의견'(세부 = 메뉴-기능요청/오류신고/기타의견) 전송 → 통계 시트 S열
 (() => {
   const $ = (id) => document.getElementById(id);
   const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const NK = "csf-notice", SEEN = "csf-notice-seen";
+  const NK = "csf-notice", SEEN = "csf-notice-seen", FK = "csf-faq";
+  let FAQ = null; try { FAQ = JSON.parse(ls.get(FK) || "null"); } catch (e) {}
   let NOTICE = null; try { NOTICE = JSON.parse(ls.get(NK) || "null"); } catch (e) {}
   const seen = () => { try { return JSON.parse(ls.get(SEEN) || "[]"); } catch (e) { return []; } };
   const unread = () => ((NOTICE && NOTICE.items) || []).filter((x) => !seen().includes(x.id));
@@ -1174,6 +1167,9 @@ body[data-tab="oz"] #alTabs { display: none; }
     if (!location.protocol.startsWith("http")) return;
     fetch("notice.json?t=" + Date.now(), { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).then((d) => {
       if (d && Array.isArray(d.items)) { NOTICE = d; ls.set(NK, JSON.stringify(d)); badge(); }
+    }).catch(() => {});
+    fetch("faq.json?t=" + Date.now(), { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).then((d) => {
+      if (d && Array.isArray(d.items)) { FAQ = d; ls.set(FK, JSON.stringify(d)); }
     }).catch(() => {});
   }
   function showNotice() {
@@ -1186,6 +1182,9 @@ body[data-tab="oz"] #alTabs { display: none; }
   function view(id) {
     ["mnMain", "mnNotice", "mnReq", "mnFaq"].forEach((v) => { $(v).hidden = v !== id; });
     if (id === "mnNotice") showNotice();
+    if (id === "mnFaq") $("mnFaqList").innerHTML = FAQ && FAQ.items && FAQ.items.length
+      ? FAQ.items.map((x) => `<details><summary>${esc(x.q)}</summary><p>${esc(x.a)}</p></details>`).join("")
+      : `<p class="mn-note">자주 묻는 질문을 아직 받지 못했습니다. 인터넷에 연결된 상태에서 다시 열어 보세요.</p>`;
     $("menuSheet").querySelector(".sheet").scrollTop = 0;
   }
   function paintTheme() { const m = window.csfTheme ? window.csfTheme.mode() : "auto"; $("mnTheme").querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.t === m)); }
