@@ -2045,6 +2045,21 @@ window.csfStat = (() => {
     return { seen, onAirline };
   })();
 
+  // Gemini 무료 사용량(하루 한도)은 미국 태평양 시간 자정에 다시 채워짐 → 한국시간 16:00 (서머타임 아닐 때 17:00)
+  function geminiReset() {
+    const now = Date.now();
+    const off = (t) => { const p = new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", hour12: false, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).formatToParts(new Date(t)).reduce((o, x) => (o[x.type] = x.value, o), {});
+      return Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute) - Math.floor(t / 60000) * 60000; };
+    const la = new Date(now + off(now));                                       // 미국 서부 현재 시각 (UTC 필드로 표현)
+    const midLA = Date.UTC(la.getUTCFullYear(), la.getUTCMonth(), la.getUTCDate() + 1);
+    let t = midLA - off(midLA);                                                // 다음 자정(미국 서부)의 실제 시각
+    const k = new Date(t + 9 * 3600e3), kn = new Date(now + 9 * 3600e3);
+    const day = k.getUTCDate() === kn.getUTCDate() ? "오늘" : "내일";
+    return `${day} ${String(k.getUTCHours()).padStart(2, "0")}:00 (한국시간)`;
+  }
+  const quotaMsg = (body) => /PerMinute|per minute|RATE_LIMIT/i.test(body || "") && !/PerDay|per day/i.test(body || "")
+    ? "1분 동안 요청이 너무 많았습니다. 1분쯤 뒤 다시 해 주세요."
+    : `오늘 무료 사용량을 다 썼습니다. 무료 사용량은 매일 미국 서부 자정, 한국시간 16:00 (11월~3월 서머타임이 아닐 때는 17:00)에 다시 채워집니다. 다음 리셋: ${geminiReset()}`;
   // ---------- Gemini AI 연결 (API 키는 이 기기 localStorage 에만 저장) ----------
   const GM = (() => {
     const K = "csf-gemini-key", OKK = "csf-gemini-ok", API = "https://generativelanguage.googleapis.com/v1beta";
@@ -2083,7 +2098,7 @@ window.csfStat = (() => {
     const WHY = {
       net: ["인터넷에 연결되지 않았습니다.", "와이파이나 데이터 연결을 확인하고 다시 눌러 주세요."],
       invalid: ["키가 맞지 않습니다.", "AI Studio에서 키를 다시 복사해 붙여넣어 주세요. 앞뒤 빈칸이 들어가지 않게 주의하세요."],
-      quota: ["오늘 무료 사용량을 다 썼습니다.", "키는 정상입니다. 내일 다시 시도하거나 잠시 뒤에 다시 눌러 주세요."],
+      quota: ["오늘 무료 사용량을 다 썼습니다.", "키는 정상입니다. 한국시간 16:00 (11월~3월은 17:00)에 다시 채워집니다."],
       blocked: ["이 키는 구글에서 막혀 있습니다.", "AI Studio에서 새 키를 만들어 다시 등록해 주세요."],
       denied: ["이 키로는 Gemini를 쓸 수 없습니다.", "AI Studio의 API Keys 화면에서 새 키를 만들어 다시 등록해 주세요."],
       other: ["확인 중 문제가 생겼습니다.", "잠시 뒤 다시 눌러 주세요."],
@@ -2385,7 +2400,7 @@ window.csfStat = (() => {
         }
         if (!r.ok) {
           const t = await r.text();
-          const why = r.status === 429 ? "오늘 무료 사용량을 다 썼거나 잠시 요청이 많습니다. 잠시 뒤(또는 내일) 다시 해 주세요."
+          const why = r.status === 429 ? quotaMsg(t)
             : r.status === 413 || /too large|size/i.test(t) ? "PDF가 너무 큽니다."
             : r.status === 400 && /API_KEY|API key/i.test(t) ? "API 키가 맞지 않습니다. Gemini AI 연결에서 키를 다시 등록해 주세요."
             : r.status === 403 ? "이 키로는 Gemini를 쓸 수 없습니다. 새 키를 등록해 주세요."
