@@ -1,0 +1,3 @@
+200
+# [6, 222000718, ' 23800', '오남역', 'N', '남양주']
+{"response":{"comMsgHeader":"","msgHeader":{"queryTime":"2026-10-11 20:00:18.367","resultCode":0,"resultMessage":"정상적으로 처리되었습니다."},"msgBody":{"busArrivalItem":{"crowded1":"","crowded2":"","flag":"PASS","locationNo1":"","locationNo2":"","lowPlate1":"","lowPlate2":"","plateNo1":"","plateNo2":"","predictTime1":"","predictTime2":"","remainSeatCnt1":"","remainSeatCnt2":"","routeDestId":161000611,"routeDestName":"인천공항3층출국장(T2)","routeId":241005890,"routeName":8844,"routeTypeCd":51,"staOrder":6,"stationId":222000718,"stationNm1":"","stationNm2":"","taglessCd1":"","taglessCd2":"","turnSeq":34,"vehId1":"","vehId2":""}}}}
