@@ -580,6 +580,10 @@ body[data-tab="oz"] #alTabs { display: none; }
 .sh-gr .c.past b { color: var(--muted); text-decoration: line-through; opacity: .6; } .sh-gr .c.past small { color: var(--muted); }
 .sh-gr .c.t2 b { font-size: 17px; color: var(--muted); } .sh-gr .c.t2 small { color: var(--muted); font-weight: 500; }
 .sh-now > div + div { margin-top: 4px; }
+.sh-list.t1 .sh-gh, .sh-list.t1 .sh-gr { grid-template-columns: 34px 1fr 1fr; }
+.sh-map .m-term { fill: none; stroke: var(--line); stroke-width: 26; stroke-linecap: round; }
+.sh-map .m-stop.term rect { fill: var(--accent); }
+.m-key.t { background: var(--accent); }
 .sh-pick[hidden] { display: none; }
 .sh-list { max-height: 196px; overflow-y: auto; overscroll-behavior: contain; margin-top: 8px; border: 1px solid var(--line); border-radius: 12px; padding: 0 12px; scroll-snap-type: y mandatory; }
 .sh-list .cm-dep { scroll-snap-align: start; min-height: 45px; }
@@ -781,7 +785,7 @@ body[data-tab="oz"] #alTabs { display: none; }
     </div>
 
     <div class="card cm-card" id="cmShuttle">
-      <div class="cm-hd"><h3>장기주차장 ↔ T2 셔틀 <small class="cm-rno">무료</small></h3><span class="cm-badge ok">24시간</span></div>
+      <div class="cm-hd"><h3 id="cmShTitle">장기주차장 ↔ T2 셔틀 <small class="cm-rno">무료</small></h3><span class="cm-badge ok" id="cmShBadge">24시간</span></div>
       <div class="cm-sub" id="cmShDir"></div>
       <div id="cmShBody"></div>
     </div>
@@ -2368,6 +2372,8 @@ window.UID = (() => {
         const l3 = shAt(tr, "L3") + o, l5 = shAt(tr, "L5") + o, t2 = shAt(tr, "T2E") + o;
         if (l5 >= from && l3 < from + 1440) out.push({ m: l3, l3, l5, t2, r: tr.r });
       }
+    } else if (mode === "t1") {
+      for (const c of SHD1.c3) for (const o of [-1440, 0, 1440]) { const c3 = c + o, c13 = c3 + T1_OFF.C13; if (c13 >= from && c3 < from + 1440) out.push({ m: c3, c3, c13, r: "01" }); }
     } else for (const s of SHD.t2) for (const o of [-1440, 0, 1440]) { const m = s + o; if (m >= from && m < from + 1440) out.push({ m, r: "02" }); }
     return out.sort((a, b) => a.m - b.m).slice(0, 12);
   }
@@ -2379,12 +2385,17 @@ window.UID = (() => {
       const cell = (t) => { const w = t - base.min; return `<div class="c${w < 0 ? " past" : ""}"><b>${fmt(t % 1440)}</b><small>${w < 0 ? "지나감" : waitTxt(w)}</small></div>`; };
       h = `<div class="sh-list go"><div class="sh-gh"><span></span><span>장기3<small>남측 주차타워</small></span><span>장기5<small>주차구역 A</small></span><span>T2 도착</span></div>` + deps.map((x) =>
         `<div class="sh-gr">${shBadge(x.r)}${cell(x.l3)}${cell(x.l5)}<div class="c t2"><b>${fmt(x.t2 % 1440)}</b><small>${x.r === "03" ? "3층 7번" : "1층 5번"}</small></div></div>`).join("") + `</div>`;
+    } else if (mode === "t1") {
+      const cell = (t) => { const w = t - base.min; return `<div class="c${w < 0 ? " past" : ""}"><b>${fmt(t % 1440)}</b><small>${w < 0 ? "지나감" : waitTxt(w)}</small></div>`; };
+      h = `<div class="sh-list go t1"><div class="sh-gh"><span></span><span>3C<small>1층 3번 출입구 길 건너</small></span><span>13C<small>1층 13번 출입구 길 건너</small></span></div>` + deps.map((x) =>
+        `<div class="sh-gr">${shBadge(x.r)}${cell(x.c3)}${cell(x.c13)}</div>`).join("") + `</div>`;
     } else {
       h = `<div class="sh-list">` + deps.map((x) => `<div class="cm-dep sh-dep"><div class="t">${fmt(x.m % 1440)}</div><div><div class="bn">${shBadge(x.r)}</div><div class="lo">장기주차장 방면</div></div>
         <div class="in">${waitTxt(x.m - base.min)}</div></div>`).join("") + `</div>`;
     }
     if (!deps.length) h = `<div class="cm-note">출발 예정 셔틀이 없습니다.</div>`;
     if (mode === "go") h += `<div class="cm-note"><span class="sh-r">03</span> 번은 같은 정류장에 정차한 뒤 T2 <b>3층 7번 출입구</b>를 거쳐 다른 곳으로 이동하는 차량입니다. 출근할 때 타도 됩니다.</div>`;
+    else if (mode === "t1") h += `<div class="cm-note">01번: 3C 출발 → 13C (3분) → 장기주차장 탑승장 1~7 → 3C, 한 바퀴 약 16분 · 04:30~23:42 운행</div>`;
     else h += `<div class="cm-note">타는 곳: <b>T2 1층 5번 출입구</b> 앞 · 운영사무실 <a href="tel:032-741-3217">032-741-3217</a></div>`;
     return h;
   }
@@ -2395,22 +2406,23 @@ window.UID = (() => {
     ["R1", 619, 125], ["R2", 619, 190], [0, 619, 243], [0, 213, 243], ["DEPOT", 213, 268], ["L1", 213, 312], [0, 213, 350],
     ["L2", 358, 350], ["L3", 459, 350], ["L4", 494, 350], [0, 528, 350], [0, 528, 442], ["L5", 135, 442], [0, 45, 442], [0, 45, 466], ["T2E", -18, 466],
   ];
-  const SH_LEN = (() => { let L = 0, prev = null; const at = {}; const pts = SH_PATH.map(([k, x, y]) => { if (prev) L += Math.hypot(x - prev[0], y - prev[1]); prev = [x, y]; if (k) at[k] = L; return { x, y, L }; }); return { pts, at }; })();
-  function shXY(len) {
-    const p = SH_LEN.pts;
+  const mkLen = (path) => { let L = 0, prev = null; const at = {}; const pts = path.map(([k, x, y]) => { if (prev) L += Math.hypot(x - prev[0], y - prev[1]); prev = [x, y]; if (k) at[k] = L; return { x, y, L }; }); return { pts, at }; };
+  const SH_LEN = mkLen(SH_PATH);
+  function shXY(len, LN = SH_LEN) {
+    const p = LN.pts;
     for (let i = 1; i < p.length; i++) if (len <= p[i].L) { const a = p[i - 1], b = p[i], f = (len - a.L) / ((b.L - a.L) || 1); return [a.x + (b.x - a.x) * f, a.y + (b.y - a.y) * f]; }
     return [p[p.length - 1].x, p[p.length - 1].y];
   }
   // 시간표로 계산한 버스 위치 (GPS 아님)
-  function shuttleBuses(now) {
+  function shuttleBuses(now, trips = SH_TRIPS, LN = SH_LEN, endK = "T2E") {
     const out = [];
-    for (const tr of SH_TRIPS) for (const o of [0, 1440]) {
+    for (const tr of trips) for (const o of [0, 1440]) {
       const n = now + o, p = tr.p;
       if (n < p[0][1] || n >= p[p.length - 1][1]) continue;
       let i = 0; while (n >= p[i + 1][1]) i++;
       const a = p[i], b = p[i + 1], f = (n - a[1]) / (b[1] - a[1]);
       const stop = i > 0 && n - a[1] < 1 ? a[0] : null;
-      out.push({ r: tr.r, xy: shXY(stop ? SH_LEN.at[stop] : SH_LEN.at[a[0]] + (SH_LEN.at[b[0]] - SH_LEN.at[a[0]]) * f), stop, from: a[0], to: b[0], eta: Math.max(1, Math.ceil(b[1] - n)), t2e: shAt(tr, "T2E") - o, mine: (k) => { const t = shAt(tr, k); return t != null && t - o >= n ? t - o - n : null; } });
+      out.push({ r: tr.r, xy: shXY(stop ? LN.at[stop] : LN.at[a[0]] + (LN.at[b[0]] - LN.at[a[0]]) * f, LN), stop, from: a[0], to: b[0], eta: Math.max(1, Math.ceil(b[1] - n)), t2e: shAt(tr, endK) - o, mine: (k) => { const t = shAt(tr, k); return t != null && t - o >= n ? t - o - n : null; } });
     }
     return out;
   }
@@ -2451,8 +2463,32 @@ window.UID = (() => {
     }
     return s + `</svg>`;
   }
+  // ===== T1 ↔ 장기주차장 셔틀 (공항01): 3C 출발 → 13C (+3) → 탑승장 1~7 → 3C (+16), 정류장 간격 일정 =====
+  const SHD1 = /*SHUTTLE1_DATA*/{"from":"260114","c3":[270,286,302,318,334,350,366,374,382,390,398,406,422,438,454,470,486,502,518,534,550,566,582,598,614,630,646,662,678,694,710,726,742,758,774,790,806,822,838,854,870,886,902,918,934,950,966,982,998,1014,1030,1046,1062,1078,1094,1110,1126,1142,1158,1174,1190,1206,1222,1238,1246,1254,1262,1270,1278,1286,1294,1310,1326,1342,1358,1374,1390,1406,1422]}/*END1*/;
+  const T1_OFF = { C13: 3, S1: 6, S2: 7, S3: 8, S4: 10, S5: 11, S6: 12, S7: 13, C3E: 16 };
+  const T1_TRIPS = SHD1.c3.map((t) => ({ r: "01", p: [["C3", t], ...Object.entries(T1_OFF).map(([k, o]) => [k, t + o])] }));
+  const T1_PATH = [
+    ["C3", 372, 118], ["C13", 228, 118], [0, 252, 118], [0, 252, 150], ["S1", 420, 150], [0, 522, 150], ["S2", 522, 222], [0, 522, 292],
+    ["S3", 400, 292], ["S4", 222, 292], ["S5", 152, 292], [0, 88, 292], ["S6", 88, 222], [0, 88, 150], ["S7", 182, 150], [0, 300, 150], [0, 300, 118], ["C3E", 372, 118],
+  ];
+  const T1_LEN = mkLen(T1_PATH);
+  const T1_NAME = { C3: "3C", C3E: "3C", C13: "13C", S1: "탑승장1", S2: "탑승장2", S3: "탑승장3", S4: "탑승장4", S5: "탑승장5", S6: "탑승장6", S7: "탑승장7" };
+  function t1MapSvg(buses, me) {
+    const road = (d) => `<path d="${d}" class="m-road"/>`;
+    let s = `<svg class="sh-map" viewBox="50 20 510 310" role="img" aria-label="T1 장기주차장 셔틀 버스 위치">`;
+    s += `<path d="M120 104 Q300 18 480 104" class="m-term"/><text x="300" y="66" class="m-cap">제1여객터미널</text>`;
+    s += road("M140 125H460 M252 125V150 M300 125V150") + `<rect x="88" y="150" width="434" height="142" rx="34" class="m-road" style="fill:none"/>`;
+    s += `<rect x="112" y="172" width="176" height="98" rx="12" class="m-lot"/><text x="200" y="230" class="m-bt b">P2 서측</text>`;
+    s += `<rect x="322" y="172" width="176" height="98" rx="12" class="m-lot"/><text x="410" y="230" class="m-bt b">P1 동측</text>`;
+    s += `<path d="${T1_PATH.map(([, x, y], i) => (i ? "L" : "M") + x + " " + y).join("")}" class="m-route"/>`;
+    for (const k of ["C3", "C13"]) { const [x, y] = shXY(T1_LEN.at[k], T1_LEN); s += `<g class="m-stop term${me.includes(k) ? " me" : ""}"><rect x="${x - 26}" y="${y - 15}" width="52" height="30" rx="8"/><text x="${x}" y="${y + 8}">${T1_NAME[k]}</text></g>`; }
+    for (let i = 1; i <= 7; i++) { const [x, y] = shXY(T1_LEN.at["S" + i], T1_LEN); s += `<g class="m-stop"><rect x="${x - 15}" y="${y - 15}" width="30" height="30" rx="6"/><text x="${x}" y="${y + 8}">${i}</text></g>`; }
+    for (const b of buses) { const [x, y] = b.xy; s += `<g class="m-bus" transform="translate(${x.toFixed(1)} ${(y - 27).toFixed(1)}) scale(.6)">${SH_BUS}<text x="1" y="14">${esc(b.r)}</text></g>`; }
+    return s + `</svg>`;
+  }
   function posHtml() {
     const k = kst(), now = follow ? k.getUTCHours() * 60 + k.getUTCMinutes() + k.getUTCSeconds() / 60 : base.min;
+    if (st.mode === "t1") return posHtmlT1(now);
     const me = st.mode === "go" ? ["L3", "L5"] : ["T2"], buses = shuttleBuses(now);
     const nm = (x) => ({ T2: "T2", T2E: "T2", DEPOT: "차고지", MT: "정비단지", R1: "예약1", R2: "예약2" })[x] || SH_NAME[x].replace(" ", "");
     // 내 정류장에 다음으로 오는 버스
@@ -2461,6 +2497,16 @@ window.UID = (() => {
     h += mapSvg(buses, me);
     h += `<div class="sh-legend"><svg class="m-key-bus sh-map" viewBox="-42 -26 84 54"><g class="m-bus">${SH_BUS}</g></svg> 셔틀 · <span class="m-key"></span> 탑승장 (테두리: 내 정류장)</div>`;
     h += `<div class="sh-buses">` + buses.sort((a, c) => a.t2e - c.t2e).map((b) => `<div>${shBadge(b.r)} ${b.stop ? `<b>${nm(b.stop)}</b> 정차 중` : `${nm(b.from)} → <b>${nm(b.to)}</b> ${b.eta}분`}<small>T2 ${fmt(Math.round(b.t2e) % 1440)}</small></div>`).join("") + `</div>`;
+    $("cmShPosNote").innerHTML = `<b>${fmt(Math.floor(now) % 1440)}</b> 기준 운행 중 <b>${buses.length}</b>대 · 시간표로 계산한 <b>예상 위치</b> (실제 GPS 아님)${follow ? " · 자동 갱신" : " · 조회 시각 기준"}`;
+    return h;
+  }
+  function posHtmlT1(now) {
+    const me = ["C3", "C13"], buses = shuttleBuses(now, T1_TRIPS, T1_LEN, "C3E"), nm = (x) => T1_NAME[x];
+    const nextAt = (k) => buses.map((b) => ({ b, w: b.mine(k === "C3" ? "C3E" : k) })).filter((x) => x.w != null).sort((a, c) => a.w - c.w)[0];
+    let h = `<div class="sh-now">` + me.map((k) => { const n = nextAt(k); return `<div>${n ? `${shBadge(n.b.r)} <b>${nm(k)}</b>에 <b>${Math.max(0, Math.round(n.w))}분</b> 후 도착 예상` : `<b>${nm(k)}</b> 쪽으로 오는 셔틀이 지금 없습니다`}</div>`; }).join("") + `</div>`;
+    h += t1MapSvg(buses, me);
+    h += `<div class="sh-legend"><svg class="m-key-bus sh-map" viewBox="-42 -26 84 54"><g class="m-bus">${SH_BUS}</g></svg> 셔틀 · <span class="m-key t"></span> 터미널 타는 곳 · <span class="m-key"></span> 장기주차장 탑승장</div>`;
+    h += `<div class="sh-buses">` + buses.sort((a, c) => a.t2e - c.t2e).map((b) => `<div>${shBadge(b.r)} ${b.stop ? `<b>${nm(b.stop)}</b> 정차 중` : `${nm(b.from)} → <b>${nm(b.to)}</b> ${b.eta}분`}<small>3C ${fmt(Math.round(b.t2e) % 1440)}</small></div>`).join("") + `</div>`;
     $("cmShPosNote").innerHTML = `<b>${fmt(Math.floor(now) % 1440)}</b> 기준 운행 중 <b>${buses.length}</b>대 · 시간표로 계산한 <b>예상 위치</b> (실제 GPS 아님)${follow ? " · 자동 갱신" : " · 조회 시각 기준"}`;
     return h;
   }
@@ -2477,10 +2523,12 @@ window.UID = (() => {
     $("cmArea").innerHTML = AREAS.map(([v, l]) => `<button type="button" data-a="${v}" aria-pressed="${st.area === v}">${l}</button>`).join("");
     $("cmArea").hidden = st.mode === "go";
     $("cmStop").hidden = st.mode !== "go";
-    $("cmShuttle").hidden = st.mode === "t1";
-    $("cmShPos").hidden = st.mode === "t1";
-    if (st.mode !== "t1") {
-      $("cmShDir").textContent = st.mode === "go" ? "장기3 · 장기5 출발 → T2" : "T2 출발 시각 (조회 시각 이후)";
+    $("cmShuttle").hidden = false;
+    $("cmShPos").hidden = false;
+    $("cmShTitle").innerHTML = st.mode === "t1" ? `장기주차장 ↔ T1 셔틀 <small class="cm-rno">공항01 · 무료</small>` : `장기주차장 ↔ T2 셔틀 <small class="cm-rno">무료</small>`;
+    $("cmShBadge").textContent = st.mode === "t1" ? "04:30~23:42" : "24시간";
+    {
+      $("cmShDir").textContent = st.mode === "t1" ? "T1 출발 시각 (조회 시각 이후)" : st.mode === "go" ? "장기3 · 장기5 출발 → T2" : "T2 출발 시각 (조회 시각 이후)";
       $("cmShBody").innerHTML = shuttleHtml(st.mode);
       $("cmShLine").innerHTML = posHtml();
     }
@@ -2524,7 +2572,7 @@ window.UID = (() => {
   }));
   $("tab-cm").addEventListener("click", () => { setNow(); load(); paint(); });
   setInterval(() => { if (document.body.dataset.tab === "cm" && follow && $("cmTime") !== document.activeElement) { setNow(); paint(); } }, 30000);
-  setInterval(() => { if (document.body.dataset.tab === "cm" && follow && st.mode !== "t1" && !document.hidden) $("cmShLine").innerHTML = posHtml(); }, 5000);   // 셔틀 위치는 5초마다   // '지금' 기준이면 계속 따라감
+  setInterval(() => { if (document.body.dataset.tab === "cm" && follow && !document.hidden) $("cmShLine").innerHTML = posHtml(); }, 5000);   // 셔틀 위치는 5초마다   // '지금' 기준이면 계속 따라감
   paint(); load();
 })();
 </script>
