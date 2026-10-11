@@ -42,9 +42,12 @@ jobs:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python tools/probe_bus_rt.py
       - name: 공항버스 정류장 ID 수집 시험
+        if: false
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python updater/busstops.py probe/bus_rt/busstops.json --force
+      - name: 실시간 도착 중계 점검
+        run: python tools/probe_relay.py
       - name: 통계 웹 앱 점검
         if: false
         run: python tools/probe_stats.py
