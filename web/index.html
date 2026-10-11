@@ -648,6 +648,10 @@ body[data-tab="oz"] #alTabs { display: none; }
 .sh-ov { position: absolute; left: 1.6%; top: 3%; width: 76%; box-sizing: border-box; padding: 5px 9px; border-radius: 10px; background: var(--panel); border: 1.5px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
 .sh-ov .sh-now.big { margin: 0; padding: 0; background: none; font-size: clamp(13px, 4.1vw, 16px); font-weight: 600; white-space: nowrap; }
 .sh-ov .sh-now.big .sh-r { font-size: .85em; }
+.sh-ov.two { width: 62%; padding: 4px 8px; }
+.sh-ov.two .sh-now.big { font-size: clamp(12.5px, 3.6vw, 15px); line-height: 1.35; }
+.sh-ov.two .sh-now.big > div + div { margin-top: 1px; }
+.sh-ov.two .sh-meta { font-size: clamp(9px, 2.5vw, 10.5px); margin-top: 1px; }
 .sh-ov .sh-meta { margin-top: 2px; font-size: clamp(9.5px, 2.7vw, 11px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.35; color: var(--muted); }
 .sh-park { position: absolute; left: 1.6%; top: 4.5%; width: 72%; padding: 6px 8px; border-radius: 10px; background: var(--panel); border: 1.5px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
 .sh-park .hd { font-size: 12px; font-weight: 800; color: var(--accent); white-space: nowrap; overflow: hidden; }
@@ -2778,13 +2782,15 @@ window.UID = (() => {
     const nm = (x) => ({ T2: "T2", T2E: "T2", DEPOT: "차고지", MT: "정비단지", R1: "예약1", R2: "예약2" })[x] || SH_NAME[x].replace(" ", "");
     // 내 정류장에 다음으로 오는 버스
     const nextAt = (k) => buses.map((b) => ({ b, w: b.mine(k === "T2" ? "T2E" : k) })).filter((x) => x.w != null).sort((a, c) => a.w - c.w)[0];
-    let nowH = `<div class="sh-now">` + me.map((k) => { const n = nextAt(k); return `<div>${n ? `${shBadge(n.b.r)} <b>${nm(k)}</b>에 <b>${Math.max(0, Math.round(n.w))}분</b> 후 도착 예상` : `<b>${nm(k)}</b> 쪽으로 오는 셔틀이 지금 없습니다`}</div>`; }).join("") + `</div>`;
+    const two = me.length > 1;                            // 출근: 정류장 2곳 → 짧게 두 줄
+    const when = (w) => (w < 1 ? "<b>곧 도착</b>" : `<b>${Math.round(w)}분</b> 후 도착${two ? "" : " 예상"}`);
+    let nowH = `<div class="sh-now">` + me.map((k) => { const n = nextAt(k); return `<div>${n ? `${shBadge(n.b.r)} <b>${nm(k)}</b>${two ? " · " : "에 "}${when(n.w)}` : `<b>${nm(k)}</b>${two ? " · 오는 셔틀 없음" : " 쪽으로 오는 셔틀이 지금 없습니다"}`}</div>`; }).join("") + `</div>`;
     const note = `<b>${fmt(Math.floor(now) % 1440)}</b> 기준 · 운행 중 ${buses.length}대 · 시간표로 계산한 예상 위치 (실제 GPS 아님)${follow ? " · 자동 갱신" : ""}`;
     const noteS = `${fmt(Math.floor(now) % 1440)} 기준 · ${buses.length}대 운행 · 예상 위치 (GPS 아님)`;
     let h;
     if (st.mode !== "t1") {                               // 출근·퇴근 T2: 지도 왼쪽 위 빈 곳에 겹쳐 표시
-      h = `<div class="sh-mapwrap">${mapSvg(buses, me)}<div class="sh-ov">${nowH.replace('class="sh-now"', 'class="sh-now big"')}<div class="sh-meta">${noteS}</div></div></div>`;
-      $("cmShPosNote").innerHTML = "";
+      h = `<div class="sh-mapwrap">${mapSvg(buses, me)}<div class="sh-ov${two ? " two" : ""}">${nowH.replace('class="sh-now"', 'class="sh-now big"')}${two ? "" : `<div class="sh-meta">${noteS}</div>`}</div></div>`;
+      $("cmShPosNote").innerHTML = two ? noteS + (follow ? " · 자동 갱신" : "") : "";
     } else {
       h = nowH + `<div class="sh-mapwrap">${mapSvg(buses, me)}</div>`;
       $("cmShPosNote").innerHTML = note;
