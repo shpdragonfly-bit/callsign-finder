@@ -586,6 +586,13 @@ body[data-tab="oz"] #alTabs { display: none; }
 .sh-map .m-stop.term rect { fill: var(--accent); }
 .m-key.t { background: var(--accent); }
 .sh-mapwrap { position: relative; }
+#cmShPosNote { font-size: 12px; line-height: 1.5; margin-top: 4px; }
+#cmShPosNote:empty { display: none; }
+.sh-now { font-size: 16px; }
+.sh-ov { position: absolute; left: 1.6%; top: 3%; width: 76%; box-sizing: border-box; padding: 5px 9px; border-radius: 10px; background: var(--panel); border: 1.5px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.sh-ov .sh-now.big { margin: 0; padding: 0; background: none; font-size: clamp(13px, 4.1vw, 16px); font-weight: 600; white-space: nowrap; }
+.sh-ov .sh-now.big .sh-r { font-size: .85em; }
+.sh-ov .sh-meta { margin-top: 2px; font-size: clamp(9.5px, 2.7vw, 11px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.35; color: var(--muted); }
 .sh-park { position: absolute; left: 1.6%; top: 4.5%; width: 72%; padding: 6px 8px; border-radius: 10px; background: var(--panel); border: 1.5px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
 .sh-park .hd { font-size: 12px; font-weight: 800; color: var(--accent); white-space: nowrap; overflow: hidden; }
 .sh-park .hd small { font-weight: 600; color: var(--muted); margin-left: 4px; }
@@ -2519,11 +2526,19 @@ window.UID = (() => {
     const nm = (x) => ({ T2: "T2", T2E: "T2", DEPOT: "차고지", MT: "정비단지", R1: "예약1", R2: "예약2" })[x] || SH_NAME[x].replace(" ", "");
     // 내 정류장에 다음으로 오는 버스
     const nextAt = (k) => buses.map((b) => ({ b, w: b.mine(k === "T2" ? "T2E" : k) })).filter((x) => x.w != null).sort((a, c) => a.w - c.w)[0];
-    let h = `<div class="sh-now">` + me.map((k) => { const n = nextAt(k); return `<div>${n ? `${shBadge(n.b.r)} <b>${nm(k)}</b>에 <b>${Math.max(0, Math.round(n.w))}분</b> 후 도착 예상` : `<b>${nm(k)}</b> 쪽으로 오는 셔틀이 지금 없습니다`}</div>`; }).join("") + `</div>`;
-    h += `<div class="sh-mapwrap">${mapSvg(buses, me)}</div>`;
+    let nowH = `<div class="sh-now">` + me.map((k) => { const n = nextAt(k); return `<div>${n ? `${shBadge(n.b.r)} <b>${nm(k)}</b>에 <b>${Math.max(0, Math.round(n.w))}분</b> 후 도착 예상` : `<b>${nm(k)}</b> 쪽으로 오는 셔틀이 지금 없습니다`}</div>`; }).join("") + `</div>`;
+    const note = `<b>${fmt(Math.floor(now) % 1440)}</b> 기준 · 운행 중 ${buses.length}대 · 시간표로 계산한 예상 위치 (실제 GPS 아님)${follow ? " · 자동 갱신" : ""}`;
+    const noteS = `${fmt(Math.floor(now) % 1440)} 기준 · ${buses.length}대 운행 · 예상 위치 (GPS 아님)`;
+    let h;
+    if (st.mode === "t2") {                               // 퇴근 T2: 지도 왼쪽 위 빈 곳에 겹쳐 표시
+      h = `<div class="sh-mapwrap">${mapSvg(buses, me)}<div class="sh-ov">${nowH.replace('class="sh-now"', 'class="sh-now big"')}<div class="sh-meta">${noteS}</div></div></div>`;
+      $("cmShPosNote").innerHTML = "";
+    } else {
+      h = nowH + `<div class="sh-mapwrap">${mapSvg(buses, me)}</div>`;
+      $("cmShPosNote").innerHTML = note;
+    }
     h += `<div class="sh-legend"><svg class="m-key-bus sh-map" viewBox="-42 -26 84 54"><g class="m-bus">${SH_BUS}</g></svg> 셔틀 · <span class="m-key"></span> 탑승장 (테두리: 내 정류장)</div>`;
     h += `<div class="sh-buses">` + buses.sort((a, c) => a.t2e - c.t2e).map((b) => `<div>${shBadge(b.r)} ${b.stop ? `<b>${nm(b.stop)}</b> 정차 중` : `${nm(b.from)} → <b>${nm(b.to)}</b> ${b.eta}분`}<small>T2 ${fmt(Math.round(b.t2e) % 1440)}</small></div>`).join("") + `</div>`;
-    $("cmShPosNote").innerHTML = `<b>${fmt(Math.floor(now) % 1440)}</b> 기준 운행 중 <b>${buses.length}</b>대 · 시간표로 계산한 <b>예상 위치</b> (실제 GPS 아님)${follow ? " · 자동 갱신" : " · 조회 시각 기준"}`;
     return h;
   }
   function posHtmlT1(now) {
@@ -2533,7 +2548,7 @@ window.UID = (() => {
     h += t1MapSvg(buses, me);
     h += `<div class="sh-legend"><svg class="m-key-bus sh-map" viewBox="-42 -26 84 54"><g class="m-bus">${SH_BUS}</g></svg> 셔틀 · <span class="m-key t"></span> 터미널 타는 곳 · <span class="m-key"></span> 장기주차장 탑승장</div>`;
     h += `<div class="sh-buses">` + buses.sort((a, c) => a.t2e - c.t2e).map((b) => `<div>${shBadge(b.r)} ${b.stop ? `<b>${nm(b.stop)}</b> 정차 중` : `${nm(b.from)} → <b>${nm(b.to)}</b> ${b.eta}분`}<small>3C ${fmt(Math.round(b.t2e) % 1440)}</small></div>`).join("") + `</div>`;
-    $("cmShPosNote").innerHTML = `<b>${fmt(Math.floor(now) % 1440)}</b> 기준 운행 중 <b>${buses.length}</b>대 · 시간표로 계산한 <b>예상 위치</b> (실제 GPS 아님)${follow ? " · 자동 갱신" : " · 조회 시각 기준"}`;
+    $("cmShPosNote").innerHTML = `<b>${fmt(Math.floor(now) % 1440)}</b> 기준 · 운행 중 ${buses.length}대 · 시간표로 계산한 예상 위치 (실제 GPS 아님)${follow ? " · 자동 갱신" : ""}`;
     return h;
   }
   // ----- 내 주차 위치: 출근 지도 빈 곳에 입력 → 퇴근 T2 셔틀 시간표 위에 표시 (이 기기에만 저장) -----
