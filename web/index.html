@@ -598,7 +598,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 .sh-map .m-stop rect { fill: #E8710A; } .sh-map .m-stop text { font: 800 21px system-ui, sans-serif; fill: #fff; text-anchor: middle; }
 .sh-map .m-stop.me rect { stroke: var(--text); stroke-width: 5; }
 .sh-map .m-bus .bd { fill: #1F2F6B; stroke: #fff; stroke-width: 3; stroke-linejoin: round; } .sh-map .m-bus .ws { fill: #BFD3FF; } .sh-map .m-bus .wh { fill: #222; stroke: #fff; stroke-width: 2.5; }
-.sh-map .m-bus text { font: 800 19px var(--mono); fill: #fff; text-anchor: middle; }
+.sh-map .m-bus text { font: 800 25px var(--mono); letter-spacing: -1px; fill: #fff; text-anchor: middle; }
 .sh-legend { margin-top: 6px; font-size: 12px; color: var(--muted); line-height: 1.8; }
 .sh-legend .sh-r { font-size: 11px; padding: 0 5px; }
 .m-key { display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: #E8710A; box-shadow: 0 0 0 2px var(--text); vertical-align: -1px; }
@@ -2417,8 +2417,8 @@ window.UID = (() => {
   const SH_LBL = { T2: "T2", MT: "정비", R1: "예1", R2: "예2", L1: "1", L2: "2", L3: "3", L4: "4", L5: "5" };
   // 버스 그림 (옆모습: 창문 5칸 + 앞유리 + 바퀴 2개, 차체 아래쪽에 노선 번호)
   const SH_BUS = `<path class="bd" d="M-36 -22h62q8 0 10 8l3 14v15q0 6-6 6h-69q-6 0-6-6v-31q0-6 6-6z"/>`
-    + [-31, -19, -7, 5].map((x) => `<rect class="ws" x="${x}" y="-17" width="10" height="11" rx="2"/>`).join("")
-    + `<path class="ws" d="M17 -17h9q4 0 5 4l2 7h-16z"/><circle class="wh" cx="-22" cy="21" r="6"/><circle class="wh" cx="22" cy="21" r="6"/>`;
+    + [-31, -19, -7, 5].map((x) => `<rect class="ws" x="${x}" y="-18" width="10" height="8" rx="2"/>`).join("")
+    + `<path class="ws" d="M17 -18h9q4 0 5 4l1 4h-15z"/><circle class="wh" cx="-22" cy="21" r="6"/><circle class="wh" cx="22" cy="21" r="6"/>`;
   function mapSvg(buses, me) {
     const road = (d) => `<path d="${d}" class="m-road"/>`;
     let s = `<svg class="sh-map" viewBox="-44 64 738 500" role="img" aria-label="장기주차장 셔틀 버스 위치">`;
@@ -2447,7 +2447,7 @@ window.UID = (() => {
     // 버스
     for (const b of buses) {
       const [x, y] = b.xy;
-      s += `<g class="m-bus" transform="translate(${x.toFixed(1)} ${(y - 40).toFixed(1)})">${SH_BUS}<text x="2" y="13">${b.r}</text></g>`;
+      s += `<g class="m-bus" transform="translate(${x.toFixed(1)} ${(y - 27).toFixed(1)}) scale(.6)">${SH_BUS}<text x="1" y="14">${esc(b.r)}</text></g>`;
     }
     return s + `</svg>`;
   }
