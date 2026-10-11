@@ -2579,7 +2579,8 @@ window.csfStat = (() => {
       d.addFileToVFS("NG-B.ttf", bold); d.addFont("NG-B.ttf", "NG", "bold");
       const R = result, F = R.flight, PW = 210, PH = 297, M = 8, TOP = 16, BOT = 287;
       const NAVY = [16, 42, 84], GRAY = [236, 239, 243], LINE = [190, 196, 205], TXT = [20, 26, 36], MUT = [105, 112, 124], WARN = [190, 60, 20], OKC = [20, 120, 60];
-      const col = { L: { x: M, w: 112, y: TOP, pg: 1 }, R: { x: M + 112 + 4, w: PW - M * 2 - 116, y: TOP, pg: 1 } };
+      const CWID = (PW - M * 2 - 4) / 2;                    // 1단·2단 같은 폭
+      const col = { L: { x: M, w: CWID, y: TOP, pg: 1 }, R: { x: M + CWID + 4, w: CWID, y: TOP, pg: 1 } };
       const title = `비행정보(${F.flt || ""} ${F.dep || ""}/${F.arr || ""} ${F.date || ""})`;
       const goto = (c) => { while (d.getNumberOfPages() < c.pg) d.addPage(); d.setPage(c.pg); };
       const need = (c, h) => { if (c.y + h > BOT) { c.pg++; c.y = TOP; } goto(c); };
@@ -2606,7 +2607,7 @@ window.csfStat = (() => {
       }
       function kv(c, rows, lw = 24) { for (const r of rows) row(c, [{ w: lw, t: r[0], head: true }, { w: c.w - lw, t: r[1] }]); }
       function kv4(c, rows) { const a = 18, b = c.w / 2 - 18; for (const r of rows) row(c, r.length === 2 ? [{ w: a, t: r[0], head: true }, { w: c.w - a, t: r[1] }] : [{ w: a, t: r[0], head: true }, { w: b, t: r[1] }, { w: a, t: r[2], head: true }, { w: b, t: r[3] }]); }
-      function grid(c, G, headRows) { const w = c.w / G[0].length; G.forEach((r, i) => row(c, r.map((t) => ({ w, t, head: headRows(i) })))); }
+      function grid(c, G, headRows, wts) { const ws = wts || G[0].map(() => 1), sum = ws.reduce((a, b) => a + b, 0); G.forEach((r, i) => row(c, r.map((t, j) => ({ w: c.w * ws[j] / sum, t, head: headRows(i) })))); }
       function text(c, t, fs = FS) { const L = wrap(t, c.w - 2.4, fs); for (let i = 0; i < L.length; i += 20) { const part = L.slice(i, i + 20), h = part.length * LH + 1.4; need(c, h); cell(c, c.x, c.w, h, part, { fs }); c.y += h; } }
       const gap = (c) => { c.y += 2.2; };
       // 제목
@@ -2621,7 +2622,7 @@ window.csfStat = (() => {
         if (T.type === "kv") kv(L, T.rows, T.t.startsWith("Alternate") ? 30 : 24);
         if (T.type === "text") text(L, T.text, 6.8);
         if (T.type === "grid") grid(L, T.rows, (i) => i % 2 === 0);
-        if (T.grid) grid(L, T.grid, (i) => i === 0);
+        if (T.grid) grid(L, T.grid, (i) => i === 0, [0.8, 1.3, 1.6, 1, 1.1]);
         if (T.checks && T.checks.length) { const t = T.checks.map((x) => `${x.ok ? "[확인]" : "[주의]"} ${x.t}`); const bad = T.checks.some((x) => !x.ok); const Lw = wrap(t.join("   "), L.w - 2.4, 6.6); need(L, Lw.length * 3 + 1.4); d.setTextColor(...(bad ? WARN : OKC)); d.setFont("NG", "bold"); d.setFontSize(6.6); d.text(Lw, L.x + 1.2, L.y + 2.6); L.y += Lw.length * 3 + 1.4; }
         gap(L);
       }
