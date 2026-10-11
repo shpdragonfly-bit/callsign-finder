@@ -608,6 +608,15 @@ body[data-tab="oz"] #alTabs { display: none; }
 .sh-dirrow { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 6px; min-height: 34px; }
 .sh-dirrow .cm-sub { margin-top: 0; flex: 0 0 auto; }
 #cmShuttle { position: relative; }
+#cmShuttle.has-park .cm-hd, #cmShuttle.has-park .sh-dirrow { padding-right: 166px; }
+#cmShuttle.has-park .cm-hd h3 { font-size: 16.5px; white-space: nowrap; letter-spacing: -.3px; } #cmShuttle.has-park .lp { display: none; }
+#cmShuttle.has-park .sh-dirrow { min-height: 40px; margin-top: 4px; }
+.sh-park.hd-park { left: auto; right: 14px; top: 10px; width: 158px; box-sizing: border-box; padding: 5px 7px; box-shadow: none; background: var(--accent-soft); }
+.sh-park[hidden] { display: none; }
+.sh-park .hd { display: flex; align-items: center; gap: 4px; }
+.sh-park .hd .x { margin-left: auto; padding: 0 5px; font-size: 11px; line-height: 18px; }
+.sh-park.hd-park .pk-seg button { padding: 4px 7px; font-size: 14px; }
+.sh-park.hd-park input { font-size: 18px; letter-spacing: 2px; padding: 2px 2px; }
 #cmShuttle.has-car .cm-hd, #cmShuttle.has-car .sh-dirrow { padding-right: 124px; }
 #cmShuttle.has-car .cm-hd h3 { font-size: 16.5px; white-space: nowrap; letter-spacing: -.3px; } #cmShuttle.has-car .cm-rno { display: none; }
 #cmShuttle.has-car .sh-dirrow { min-height: 36px; margin-top: 4px; }
@@ -2530,7 +2539,7 @@ window.UID = (() => {
     const note = `<b>${fmt(Math.floor(now) % 1440)}</b> 기준 · 운행 중 ${buses.length}대 · 시간표로 계산한 예상 위치 (실제 GPS 아님)${follow ? " · 자동 갱신" : ""}`;
     const noteS = `${fmt(Math.floor(now) % 1440)} 기준 · ${buses.length}대 운행 · 예상 위치 (GPS 아님)`;
     let h;
-    if (st.mode === "t2") {                               // 퇴근 T2: 지도 왼쪽 위 빈 곳에 겹쳐 표시
+    if (st.mode !== "t1") {                               // 출근·퇴근 T2: 지도 왼쪽 위 빈 곳에 겹쳐 표시
       h = `<div class="sh-mapwrap">${mapSvg(buses, me)}<div class="sh-ov">${nowH.replace('class="sh-now"', 'class="sh-now big"')}<div class="sh-meta">${noteS}</div></div></div>`;
       $("cmShPosNote").innerHTML = "";
     } else {
@@ -2557,20 +2566,23 @@ window.UID = (() => {
   const carTxt = () => car && (car.z || car.n) ? `${car.z || ""} ${car.n || ""}`.trim() : "";
   const carWhen = () => { if (!car || !car.at) return ""; const d = new Date(car.at + 9 * 3600e3), k = kst(); const same = d.getUTCDate() === k.getUTCDate() && d.getUTCMonth() === k.getUTCMonth(); return `${same ? "오늘" : `${d.getUTCMonth() + 1}/${d.getUTCDate()}`} ${p2(d.getUTCHours())}:${p2(d.getUTCMinutes())} 저장`; };
   const parkEl = document.createElement("div");
-  parkEl.className = "sh-park";
-  parkEl.innerHTML = `<div class="hd">내 주차 위치 <small id="cmParkAt"></small></div>
+  parkEl.className = "sh-park hd-park";
+  $("cmShuttle").appendChild(parkEl);                  // 출근: 셔틀 카드 오른쪽 위 (제목 두 줄 높이)
+  parkEl.innerHTML = `<div class="hd">내 주차 위치 <small id="cmParkAt"></small><button type="button" class="x" id="cmParkClr" aria-label="지우기">지움</button></div>
     <div class="pk-r"><div class="pk-seg" role="group" aria-label="주차장">${["P1", "P2"].map((z) => `<button type="button" data-z="${z}">${z}</button>`).join("")}</div>
     <input id="cmParkNo" inputmode="numeric" pattern="[0-9]*" maxlength="3" placeholder="000" autocomplete="off" aria-label="주차 구역 번호 3자리">
-    <button type="button" class="x" id="cmParkClr" aria-label="지우기">지움</button></div>`;
+    </div>`;
   function paintPark() {
     parkEl.querySelectorAll("[data-z]").forEach((b) => b.setAttribute("aria-pressed", !!car && car.z === b.dataset.z));
     const inp = parkEl.querySelector("#cmParkNo"); if (document.activeElement !== inp) inp.value = car?.n || "";
-    parkEl.querySelector("#cmParkAt").textContent = carWhen();
+    parkEl.querySelector("#cmParkAt").textContent = carWhen().replace("오늘 ", "").replace(" 저장", "");
     parkEl.querySelector("#cmParkClr").hidden = !carTxt();
     const show = $("cmCarShow"), t = carTxt();
     show.hidden = st.mode !== "t2" || !t;
     if (t) show.innerHTML = `<small class="l">내 차 위치</small><b>${esc(t)}</b><small>${esc(carWhen().replace(" 저장", "").replace("오늘 ", ""))} 저장</small>`;
     $("cmShuttle").classList.toggle("has-car", !show.hidden);
+    parkEl.hidden = st.mode !== "go";
+    $("cmShuttle").classList.toggle("has-park", st.mode === "go");
   }
   const saveCar = () => { if (car && !car.z && !car.n) car = null; if (car) car.at = Date.now(); ls.set(PK, JSON.stringify(car)); paintPark(); };
   parkEl.addEventListener("click", (e) => {
@@ -2581,7 +2593,6 @@ window.UID = (() => {
   function renderPos() {
     $("cmShLine").innerHTML = posHtml();
     const w = $("cmShLine").querySelector(".sh-mapwrap");
-    if (w && st.mode === "go") w.appendChild(parkEl);
     paintPark();
   }
   let showAll = false;
@@ -2601,9 +2612,9 @@ window.UID = (() => {
     $("cmShPos").hidden = false;
     $("cmShTitle").innerHTML = st.mode === "t1" ? `장기주차장 ↔ T1 셔틀 <small class="cm-rno">공항01 · 무료</small>` : `<span class="lp">장기주차장 ↔ </span>T2 셔틀 <small class="cm-rno">무료</small>`;
     $("cmShBadge").textContent = st.mode === "t1" ? "04:30~23:42" : "24시간";
-    $("cmShBadge").hidden = st.mode === "t2";
+    $("cmShBadge").hidden = st.mode !== "t1";
     {
-      $("cmShDir").textContent = st.mode === "t1" ? "T1 출발 시각" : st.mode === "go" ? "장기3 · 장기5 출발 → T2" : "T2 출발 시각";
+      $("cmShDir").textContent = st.mode === "t1" ? "T1 출발 시각" : st.mode === "go" ? "장기3·5 → T2" : "T2 출발 시각";
       $("cmShBody").innerHTML = shuttleHtml(st.mode);
       renderPos();
     }
