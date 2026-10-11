@@ -2361,21 +2361,27 @@ window.csfStat = (() => {
       if (!key) { prog([`<span class="err">먼저 Gemini AI 연결에서 API 키를 등록해 주세요.</span>`]); return; }
       if (!navigator.onLine) { prog([`<span class="err">인터넷에 연결되지 않았습니다.</span> <small>분석은 인터넷이 될 때(운항 전) 해 주세요.</small>`]); return; }
       busy = true; paint();
-      const t0 = Date.now(); let stage = 1, timer;
+      const t0 = Date.now(); let stage = 1, timer, note = "";
       const tick = () => { const s = Math.round((Date.now() - t0) / 1000);
         prog([`${stage > 1 ? '<span class="done">✓</span>' : '<span class="on">●</span>'} PDF 읽기`,
-              `${stage > 2 ? '<span class="done">✓</span>' : stage === 2 ? '<span class="on">●</span>' : "○"} Gemini 분석 <small>${stage === 2 ? s + "초 · 보통 30초~2분" : ""}</small>`,
+              `${stage > 2 ? '<span class="done">✓</span>' : stage === 2 ? '<span class="on">●</span>' : "○"} Gemini 분석 <small>${stage === 2 ? s + "초 · 보통 30초~2분" + (note ? " · " + note : "") : ""}</small>`,
               `${stage > 3 ? '<span class="done">✓</span>' : stage === 3 ? '<span class="on">●</span>' : "○"} 결과 정리`]); };
       timer = setInterval(tick, 1000); tick();
       const ctl = new AbortController(), kill = setTimeout(() => ctl.abort(), 180000);
       try {
         const b64 = toB64(await file.arrayBuffer());
         stage = 2; tick();
-        let r, last = null;
-        for (const m of pickModels()) {
-          r = await call(key, m, b64, ctl.signal);
-          if (r.ok) { last = m; break; }
-          if (![404, 400].includes(r.status) || !/model|not found/i.test(await r.clone().text())) break;
+        // 모델별로 시도: 없는 모델(404/400)은 다음 모델로, 서버 혼잡(429 제외 5xx)은 잠시 쉬고 한 번 더 → 그래도 안 되면 다음 모델
+        let r, last = null, tried = [];
+        const wait = (ms) => new Promise((ok) => setTimeout(ok, ms));
+        outer: for (const m of pickModels()) {
+          for (let k = 0; k < 2; k++) {
+            r = await call(key, m, b64, ctl.signal); tried.push(`${m}:${r.status}`);
+            if (r.ok) { last = m; break outer; }
+            if ([500, 502, 503, 504].includes(r.status)) { if (k === 0) { note = `서버 혼잡(${r.status}) · 다시 시도 중`; tick(); await wait(5000); continue; } continue outer; }
+            if ([404, 400].includes(r.status) && /model|not found/i.test(await r.clone().text())) continue outer;
+            break outer;
+          }
         }
         if (!r.ok) {
           const t = await r.text();
@@ -2383,6 +2389,7 @@ window.csfStat = (() => {
             : r.status === 413 || /too large|size/i.test(t) ? "PDF가 너무 큽니다."
             : r.status === 400 && /API_KEY|API key/i.test(t) ? "API 키가 맞지 않습니다. Gemini AI 연결에서 키를 다시 등록해 주세요."
             : r.status === 403 ? "이 키로는 Gemini를 쓸 수 없습니다. 새 키를 등록해 주세요."
+            : [500, 502, 503, 504].includes(r.status) ? `Gemini 서버가 지금 붐벼서 응답하지 못했습니다 (코드 ${r.status}). 구글 쪽 일시 문제라 키나 PDF 문제는 아닙니다. 1~2분 뒤 다시 해 주세요. (시도: ${tried.join(", ")})`
             : `분석 요청이 실패했습니다 (코드 ${r.status}). 잠시 뒤 다시 해 주세요.`;
           throw new Error(why);
         }
