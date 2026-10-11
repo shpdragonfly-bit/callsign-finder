@@ -2312,7 +2312,7 @@ window.UID = (() => {
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const K = "csf-cm", BK = "csf-bus", SK = "csf-bs";
   // 공항버스 실시간 도착 중계 (Google Apps Script 웹 앱, 공공데이터 키는 그 스크립트 속성에만 있음) - tools/bus_relay.gs
-  const BUS_RELAY = ls.get("csf-relay") || "";       // 시험용으로 localStorage csf-relay 로 바꿀 수 있음
+  const BUS_RELAY = ls.get("csf-relay") || "https://script.google.com/macros/s/AKfycbzTAeL3aNCqJmxqog74kBSE5nhEfoeXI3xEFBwj4bY6nDm9XsfW-4dtoy0q4qRvxbNP/exec";
   let st = { mode: "go", bus: "", area: "", day: "", sh: "L3", shTo: "L3" }; try { st = Object.assign(st, JSON.parse(ls.get(K) || "{}")); } catch (e) {}
   const save = () => ls.set(K, JSON.stringify(st));
   let BUS = null; try { BUS = JSON.parse(ls.get(BK) || "null"); } catch (e) {}
