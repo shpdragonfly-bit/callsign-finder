@@ -1,0 +1,7 @@
+{
+ "seoul_stations": 63,
+ "seoul_toair": 15,
+ "gbis_stations": 71,
+ "gbis_arr_item": "200 {\"response\":{\"comMsgHeader\":\"\",\"msgHeader\":{\"queryTime\":\"2026-10-11 20:00:18.367\",\"resultCode\":0,\"resultMessage\":\"정상적으로 처리되었습니다.\"},\"msgBody\":{\"busArrivalItem\":{\"crowded1\":\"\",\"crowded2\":\"\",\"flag\":\"PASS",
+ "gbis_location": "ERR HTTP Error 403: Forbidden {\n  \"OpenAPI_ServiceResponse\": {\n    \"cmmMsgHeader\": {\n      \"errMsg\": \"SERVICE_KEY_IS_NOT_REGISTERED_ERROR\",\n      \"returnAuthMsg\": \"등록되지 않은 서비스키\",\n      \"returnReasonCode\": \"30\"\n    }\n  }\n}\n"
+}
