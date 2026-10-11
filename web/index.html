@@ -566,6 +566,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 .cm-more { display: block; width: 100%; margin-top: 8px; font: inherit; font-size: 14px; padding: 9px; border-radius: 10px; border: 1px dashed var(--line); background: none; color: var(--accent); cursor: pointer; }
 .cm-src { margin-top: 10px; font-size: 12px; color: var(--muted); }
 .cm-rno { font-size: 13px; font-weight: 600; color: var(--muted); margin-left: 4px; }
+.cm-badge[hidden] { display: none; }
 .cm-badge.ok { color: var(--ok); border-color: var(--ok); }
 .sh-list.go { padding: 0 10px; max-height: 232px; scroll-padding-top: 48px; }
 .sh-gh, .sh-gr { display: grid; grid-template-columns: 34px 1fr 1fr 1fr; gap: 6px; align-items: center; }
@@ -598,12 +599,13 @@ body[data-tab="oz"] #alTabs { display: none; }
 .sh-park .x { flex: 0 0 auto; font: inherit; font-size: 12px; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: none; color: var(--muted); cursor: pointer; }
 .sh-park .x[hidden] { display: none; }
 .sh-dirrow { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 6px; min-height: 34px; }
-.sh-dirrow .cm-sub { margin-top: 0; }
-.sh-mycar { display: flex; align-items: center; gap: 7px; padding: 4px 10px 4px 5px; border-radius: 10px; background: var(--accent-soft); border: 1.5px solid var(--accent); flex: 0 0 auto; }
+.sh-dirrow .cm-sub { margin-top: 0; flex: 0 0 auto; }
+.sh-mycar { display: flex; align-items: center; gap: 10px; padding: 6px 12px 6px 7px; border-radius: 12px; background: var(--accent-soft); border: 1.5px solid var(--accent); flex: 1 1 auto; min-width: 0; max-width: 260px; }
+.sh-mycar > div { flex: 1; min-width: 0; text-align: center; }
 .sh-mycar[hidden] { display: none; }
-.sh-mycar .ic { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 6px; background: var(--accent); color: var(--accent-ink); font: 800 15px system-ui, sans-serif; }
-.sh-mycar b { display: block; font: 800 18px var(--mono); line-height: 1.1; }
-.sh-mycar small { display: block; font-size: 10px; color: var(--muted); }
+.sh-mycar .ic { flex: 0 0 auto; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 6px; background: var(--accent); color: var(--accent-ink); font: 800 15px system-ui, sans-serif; }
+.sh-mycar b { display: block; font: 800 22px var(--mono); letter-spacing: 1px; line-height: 1.15; white-space: nowrap; }
+.sh-mycar small { display: block; font-size: 11px; color: var(--muted); white-space: nowrap; }
 .sh-pick[hidden] { display: none; }
 .sh-list { max-height: 196px; overflow-y: auto; overscroll-behavior: contain; margin-top: 8px; border: 1px solid var(--line); border-radius: 12px; padding: 0 12px; scroll-snap-type: y mandatory; }
 .sh-list .cm-dep { scroll-snap-align: start; min-height: 45px; }
@@ -2579,6 +2581,7 @@ window.UID = (() => {
     $("cmShPos").hidden = false;
     $("cmShTitle").innerHTML = st.mode === "t1" ? `장기주차장 ↔ T1 셔틀 <small class="cm-rno">공항01 · 무료</small>` : `장기주차장 ↔ T2 셔틀 <small class="cm-rno">무료</small>`;
     $("cmShBadge").textContent = st.mode === "t1" ? "04:30~23:42" : "24시간";
+    $("cmShBadge").hidden = st.mode === "t2";
     {
       $("cmShDir").textContent = st.mode === "t1" ? "T1 출발 시각" : st.mode === "go" ? "장기3 · 장기5 출발 → T2" : "T2 출발 시각";
       $("cmShBody").innerHTML = shuttleHtml(st.mode);
