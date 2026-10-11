@@ -2477,7 +2477,6 @@ window.UID = (() => {
     $("cmArea").innerHTML = AREAS.map(([v, l]) => `<button type="button" data-a="${v}" aria-pressed="${st.area === v}">${l}</button>`).join("");
     $("cmArea").hidden = st.mode === "go";
     $("cmStop").hidden = st.mode !== "go";
-    $("cmBusCard").hidden = st.mode === "go";            // 출근은 셔틀만 (공항버스 검색 없음)
     $("cmShuttle").hidden = st.mode === "t1";
     $("cmShPos").hidden = st.mode === "t1";
     if (st.mode !== "t1") {
