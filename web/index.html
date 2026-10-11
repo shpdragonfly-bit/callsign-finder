@@ -567,6 +567,19 @@ body[data-tab="oz"] #alTabs { display: none; }
 .cm-src { margin-top: 10px; font-size: 12px; color: var(--muted); }
 .cm-rno { font-size: 13px; font-weight: 600; color: var(--muted); margin-left: 4px; }
 .cm-badge.ok { color: var(--ok); border-color: var(--ok); }
+.sh-list.go { padding: 0 10px; max-height: 232px; scroll-padding-top: 48px; }
+.sh-gh, .sh-gr { display: grid; grid-template-columns: 34px 1fr 1fr 1fr; gap: 6px; align-items: center; }
+.sh-gh { position: sticky; top: 0; z-index: 1; background: var(--panel); padding: 7px 0 5px; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 700; color: var(--muted); text-align: center; }
+.sh-gh small { display: block; font-size: 10px; font-weight: 500; }
+.sh-gr { padding: 8px 0; border-top: 1px solid var(--line); scroll-snap-align: start; min-height: 46px; }
+.sh-gr:nth-child(2) { border-top: 0; }
+.sh-gr .sh-r { justify-self: start; font-size: 12px; padding: 1px 5px; }
+.sh-gr .c { text-align: center; line-height: 1.2; }
+.sh-gr .c b { display: block; font: 700 19px var(--mono); }
+.sh-gr .c small { font-size: 11px; font-weight: 700; color: var(--accent); }
+.sh-gr .c.past b { color: var(--muted); text-decoration: line-through; opacity: .6; } .sh-gr .c.past small { color: var(--muted); }
+.sh-gr .c.t2 b { font-size: 17px; color: var(--muted); } .sh-gr .c.t2 small { color: var(--muted); font-weight: 500; }
+.sh-now > div + div { margin-top: 4px; }
 .sh-pick[hidden] { display: none; }
 .sh-list { max-height: 196px; overflow-y: auto; overscroll-behavior: contain; margin-top: 8px; border: 1px solid var(--line); border-radius: 12px; padding: 0 12px; scroll-snap-type: y mandatory; }
 .sh-list .cm-dep { scroll-snap-align: start; min-height: 45px; }
@@ -584,8 +597,8 @@ body[data-tab="oz"] #alTabs { display: none; }
 .sh-map .m-t2t { font: 800 22px system-ui, sans-serif; fill: #fff; text-anchor: middle; }
 .sh-map .m-stop rect { fill: #E8710A; } .sh-map .m-stop text { font: 800 21px system-ui, sans-serif; fill: #fff; text-anchor: middle; }
 .sh-map .m-stop.me rect { stroke: var(--text); stroke-width: 5; }
-.sh-map .m-bus .bd { fill: #1F2F6B; stroke: #fff; stroke-width: 3; } .sh-map .m-bus .ws { fill: #9FB4E8; } .sh-map .m-bus .wh { fill: #111; stroke: #fff; stroke-width: 2; }
-.sh-map .m-bus text { font: 800 22px var(--mono); fill: #fff; text-anchor: middle; }
+.sh-map .m-bus .bd { fill: #1F2F6B; stroke: #fff; stroke-width: 3; stroke-linejoin: round; } .sh-map .m-bus .ws { fill: #BFD3FF; } .sh-map .m-bus .wh { fill: #222; stroke: #fff; stroke-width: 2.5; }
+.sh-map .m-bus text { font: 800 19px var(--mono); fill: #fff; text-anchor: middle; }
 .sh-legend { margin-top: 6px; font-size: 12px; color: var(--muted); line-height: 1.8; }
 .sh-legend .sh-r { font-size: 11px; padding: 0 5px; }
 .m-key { display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: #E8710A; box-shadow: 0 0 0 2px var(--text); vertical-align: -1px; }
@@ -602,7 +615,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 .sh-seg button small { font-size: 12px; color: var(--muted); }
 .sh-seg button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
 .sh-seg button[aria-pressed="true"] b { color: var(--accent); }
-.m-key-bus { width: 24px; height: 16px; vertical-align: -3px; } .m-key-bus rect { fill: #1F2F6B; } .m-key-bus circle { fill: #111; }
+.sh-legend .m-key-bus { display: inline-block; width: 30px; height: 20px; margin: 0; border: 0; background: none; vertical-align: -5px; }
 .sh-dep .lo { font-size: 13px; margin-top: 2px; }
 .sh-dep .lo b { font-family: var(--mono); color: var(--text); }
 .sh-dep .lo em { font-style: normal; color: #D93025; font-weight: 600; }
@@ -770,7 +783,6 @@ body[data-tab="oz"] #alTabs { display: none; }
     <div class="card cm-card" id="cmShuttle">
       <div class="cm-hd"><h3>장기주차장 ↔ T2 셔틀 <small class="cm-rno">무료</small></h3><span class="cm-badge ok">24시간</span></div>
       <div class="cm-sub" id="cmShDir"></div>
-      <div class="cm-row sh-pick"><span id="cmShLbl">타는 곳</span><div class="sh-seg" id="cmShStop" role="group" aria-label="셔틀 타는 곳"></div></div>
       <div id="cmShBody"></div>
     </div>
 
@@ -2347,22 +2359,30 @@ window.UID = (() => {
   // 시간표 시각 t 를 조회 창 [from, to) 안의 연속 분으로 (전날 24:xx·다음 날 포함)
   const inWin = (t, from, to) => { for (const o of [0, -1440, 1440]) { const m = t + o; if (m >= from && m < to) return m; } return null; };
   // 출발 목록: 조회 시각 이후 다음 12편 (스크롤 상자, 3편씩 보임)
-  function shuttleDeps(mode, stop) {
+  // 출발 목록: 조회 시각 이후 다음 12편 (스크롤 상자, 3편씩 보임)
+  // 출근: 한 줄 = 버스 1대 (장기3 · 장기5 · T2 도착), 퇴근 T2: T2 출발
+  function shuttleDeps(mode) {
     const from = base.min, out = [];
-    const push = (t, r, arr) => { for (const o of [-1440, 0, 1440]) { const m = t + o; if (m >= from && m < from + 1440) out.push({ m, r, arr: arr == null ? null : arr + o }); } };
-    if (mode === "go") for (const tr of SH_TRIPS) { const t = shAt(tr, stop); if (t != null) push(t, tr.r, shAt(tr, "T2E")); }
-    else for (const s of SHD.t2) push(s, "02", null);
-    const seen = new Set();
-    return out.sort((a, b) => a.m - b.m).filter((x) => { const k = x.m + x.r; if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 12);
+    if (mode === "go") {
+      for (const tr of SH_TRIPS) for (const o of [-1440, 0, 1440]) {
+        const l3 = shAt(tr, "L3") + o, l5 = shAt(tr, "L5") + o, t2 = shAt(tr, "T2E") + o;
+        if (l5 >= from && l3 < from + 1440) out.push({ m: l3, l3, l5, t2, r: tr.r });
+      }
+    } else for (const s of SHD.t2) for (const o of [-1440, 0, 1440]) { const m = s + o; if (m >= from && m < from + 1440) out.push({ m, r: "02" }); }
+    return out.sort((a, b) => a.m - b.m).slice(0, 12);
   }
+  const waitTxt = (w) => w <= 0 && isNow() ? "곧 출발" : (isNow() ? "" : "+") + (w >= 60 ? `${Math.floor(w / 60)}시간 ${w % 60}분` : `${w}분`) + (isNow() ? " 후" : "");
   function shuttleHtml(mode) {
-    const stop = mode === "go" ? st.sh : "T2", deps = shuttleDeps(mode, stop);
-    let h = `<div class="sh-list">` + deps.map((x) => {
-      const wait = x.m - base.min;
-      const sub = mode === "go" ? `T2 도착 <b>${fmt(x.arr % 1440)}</b> · ${x.arr - x.m}분${x.r === "03" ? " · 3층" : ""}` : "장기주차장 방면";
-      return `<div class="cm-dep sh-dep"><div class="t">${fmt(x.m % 1440)}</div><div><div class="bn">${shBadge(x.r)}</div><div class="lo">${sub}</div></div>
-        <div class="in">${wait <= 0 && isNow() ? "곧 출발" : (isNow() ? "" : "+") + (wait >= 60 ? `${Math.floor(wait / 60)}시간 ${wait % 60}분` : `${wait}분`) + (isNow() ? " 후" : "")}</div></div>`;
-    }).join("") + `</div>`;
+    const deps = shuttleDeps(mode);
+    let h;
+    if (mode === "go") {
+      const cell = (t) => { const w = t - base.min; return `<div class="c${w < 0 ? " past" : ""}"><b>${fmt(t % 1440)}</b><small>${w < 0 ? "지나감" : waitTxt(w)}</small></div>`; };
+      h = `<div class="sh-list go"><div class="sh-gh"><span></span><span>장기3<small>남측 주차타워</small></span><span>장기5<small>주차구역 A</small></span><span>T2 도착</span></div>` + deps.map((x) =>
+        `<div class="sh-gr">${shBadge(x.r)}${cell(x.l3)}${cell(x.l5)}<div class="c t2"><b>${fmt(x.t2 % 1440)}</b><small>${x.r === "03" ? "3층 7번" : "1층 5번"}</small></div></div>`).join("") + `</div>`;
+    } else {
+      h = `<div class="sh-list">` + deps.map((x) => `<div class="cm-dep sh-dep"><div class="t">${fmt(x.m % 1440)}</div><div><div class="bn">${shBadge(x.r)}</div><div class="lo">장기주차장 방면</div></div>
+        <div class="in">${waitTxt(x.m - base.min)}</div></div>`).join("") + `</div>`;
+    }
     if (!deps.length) h = `<div class="cm-note">출발 예정 셔틀이 없습니다.</div>`;
     if (mode === "go") h += `<div class="cm-note"><span class="sh-r">03</span> 번은 같은 정류장에 정차한 뒤 T2 <b>3층 7번 출입구</b>를 거쳐 다른 곳으로 이동하는 차량입니다. 출근할 때 타도 됩니다.</div>`;
     else h += `<div class="cm-note">타는 곳: <b>T2 1층 5번 출입구</b> 앞 · 운영사무실 <a href="tel:032-741-3217">032-741-3217</a></div>`;
@@ -2395,6 +2415,10 @@ window.UID = (() => {
     return out;
   }
   const SH_LBL = { T2: "T2", MT: "정비", R1: "예1", R2: "예2", L1: "1", L2: "2", L3: "3", L4: "4", L5: "5" };
+  // 버스 그림 (옆모습: 창문 5칸 + 앞유리 + 바퀴 2개, 차체 아래쪽에 노선 번호)
+  const SH_BUS = `<path class="bd" d="M-36 -22h62q8 0 10 8l3 14v15q0 6-6 6h-69q-6 0-6-6v-31q0-6 6-6z"/>`
+    + [-31, -19, -7, 5].map((x) => `<rect class="ws" x="${x}" y="-17" width="10" height="11" rx="2"/>`).join("")
+    + `<path class="ws" d="M17 -17h9q4 0 5 4l2 7h-16z"/><circle class="wh" cx="-22" cy="21" r="6"/><circle class="wh" cx="22" cy="21" r="6"/>`;
   function mapSvg(buses, me) {
     const road = (d) => `<path d="${d}" class="m-road"/>`;
     let s = `<svg class="sh-map" viewBox="-44 64 738 500" role="img" aria-label="장기주차장 셔틀 버스 위치">`;
@@ -2413,37 +2437,32 @@ window.UID = (() => {
     // 경로 화살표 (진행 방향)
     s += `<path d="${SH_PATH.map(([, x, y], i) => (i ? "L" : "M") + x + " " + y).join("")}" class="m-route"/>`;
     // T2
-    s += `<rect x="-40" y="446" width="46" height="66" rx="8" class="m-t2${me === "T2" ? " me" : ""}"/><text x="-17" y="487" class="m-t2t">T2</text>`;
+    s += `<rect x="-40" y="446" width="46" height="66" rx="8" class="m-t2${me.includes("T2") ? " me" : ""}"/><text x="-17" y="487" class="m-t2t">T2</text>`;
     // 정류장
     for (const k of ["MT", "R1", "R2", "L1", "L2", "L3", "L4", "L5"]) {
       const [x, y] = shXY(SH_LEN.at[k]), w = SH_LBL[k].length > 1 ? 48 : 30;
-      s += `<g class="m-stop${k === me ? " me" : ""}"><rect x="${x - w / 2}" y="${y - 15}" width="${w}" height="30" rx="6"/><text x="${x}" y="${y + 8}">${SH_LBL[k]}</text></g>`;
+      s += `<g class="m-stop${me.includes(k) ? " me" : ""}"><rect x="${x - w / 2}" y="${y - 15}" width="${w}" height="30" rx="6"/><text x="${x}" y="${y + 8}">${SH_LBL[k]}</text></g>`;
     }
     s += `<text x="330" y="557" class="m-cap">정비단지 (07~19시)</text>`;
     // 버스
     for (const b of buses) {
       const [x, y] = b.xy;
-      s += `<g class="m-bus" transform="translate(${x.toFixed(1)} ${(y - 36).toFixed(1)})"><rect class="bd" x="-30" y="-19" width="60" height="34" rx="9"/><rect class="ws" x="-26" y="-15" width="52" height="5" rx="2"/><circle class="wh" cx="-16" cy="16" r="5"/><circle class="wh" cx="16" cy="16" r="5"/><text y="9">${b.r}</text></g>`;
+      s += `<g class="m-bus" transform="translate(${x.toFixed(1)} ${(y - 40).toFixed(1)})">${SH_BUS}<text x="2" y="13">${b.r}</text></g>`;
     }
     return s + `</svg>`;
   }
   function posHtml() {
     const k = kst(), now = follow ? k.getUTCHours() * 60 + k.getUTCMinutes() + k.getUTCSeconds() / 60 : base.min;
-    const me = st.mode === "go" ? st.sh : "T2", buses = shuttleBuses(now);
+    const me = st.mode === "go" ? ["L3", "L5"] : ["T2"], buses = shuttleBuses(now);
     const nm = (x) => ({ T2: "T2", T2E: "T2", DEPOT: "차고지", MT: "정비단지", R1: "예약1", R2: "예약2" })[x] || SH_NAME[x].replace(" ", "");
     // 내 정류장에 다음으로 오는 버스
-    const next = buses.map((b) => ({ b, w: b.mine(me === "T2" ? "T2E" : me) })).filter((x) => x.w != null).sort((a, c) => a.w - c.w)[0];
-    let h = `<div class="sh-now">${next ? `${shBadge(next.b.r)} <b>${nm(me)}</b>에 <b>${Math.max(0, Math.round(next.w))}분</b> 후 도착 예상` : `<b>${nm(me)}</b> 쪽으로 오는 셔틀이 지금 없습니다`}</div>`;
+    const nextAt = (k) => buses.map((b) => ({ b, w: b.mine(k === "T2" ? "T2E" : k) })).filter((x) => x.w != null).sort((a, c) => a.w - c.w)[0];
+    let h = `<div class="sh-now">` + me.map((k) => { const n = nextAt(k); return `<div>${n ? `${shBadge(n.b.r)} <b>${nm(k)}</b>에 <b>${Math.max(0, Math.round(n.w))}분</b> 후 도착 예상` : `<b>${nm(k)}</b> 쪽으로 오는 셔틀이 지금 없습니다`}</div>`; }).join("") + `</div>`;
     h += mapSvg(buses, me);
-    h += `<div class="sh-legend"><svg class="m-key-bus" viewBox="0 0 30 20"><rect x="1" y="1" width="28" height="15" rx="4"/><circle cx="8" cy="17" r="2.5"/><circle cx="22" cy="17" r="2.5"/></svg> 셔틀(안에 노선 번호) · <span class="m-key"></span> 탑승장 (테두리 = 내 정류장)</div>`;
+    h += `<div class="sh-legend"><svg class="m-key-bus sh-map" viewBox="-42 -26 84 54"><g class="m-bus">${SH_BUS}</g></svg> 셔틀 · <span class="m-key"></span> 탑승장 (테두리: 내 정류장)</div>`;
     h += `<div class="sh-buses">` + buses.sort((a, c) => a.t2e - c.t2e).map((b) => `<div>${shBadge(b.r)} ${b.stop ? `<b>${nm(b.stop)}</b> 정차 중` : `${nm(b.from)} → <b>${nm(b.to)}</b> ${b.eta}분`}<small>T2 ${fmt(Math.round(b.t2e) % 1440)}</small></div>`).join("") + `</div>`;
     $("cmShPosNote").innerHTML = `<b>${fmt(Math.floor(now) % 1440)}</b> 기준 운행 중 <b>${buses.length}</b>대 · 시간표로 계산한 <b>예상 위치</b> (실제 GPS 아님)${follow ? " · 자동 갱신" : " · 조회 시각 기준"}`;
     return h;
-  }
-  const SH_GO = [["L3", "장기3", "남측 주차타워"], ["L5", "장기5", "주차구역 A"]];   // 출근 탑승 위치
-  function shStopOpts() {
-    if (!SH_GO.some(([k]) => k === st.sh)) st.sh = "L3";
-    return SH_GO.map(([k, n, d]) => `<button type="button" data-k="${k}" aria-pressed="${k === st.sh}"><b>${n}</b><small>${d}</small></button>`).join("");
   }
   let showAll = false;
   function paint() {
@@ -2462,9 +2481,7 @@ window.UID = (() => {
     $("cmShuttle").hidden = st.mode === "t1";
     $("cmShPos").hidden = st.mode === "t1";
     if (st.mode !== "t1") {
-      $("cmShDir").textContent = st.mode === "go" ? "장기주차장 → T2 출발 시각" : "T2 출발 시각 (조회 시각 이후)";
-      document.querySelector("#cmShuttle .sh-pick").hidden = st.mode !== "go";
-      if (st.mode === "go") $("cmShStop").innerHTML = shStopOpts();
+      $("cmShDir").textContent = st.mode === "go" ? "장기3 · 장기5 출발 → T2" : "T2 출발 시각 (조회 시각 이후)";
       $("cmShBody").innerHTML = shuttleHtml(st.mode);
       $("cmShLine").innerHTML = posHtml();
     }
@@ -2493,7 +2510,6 @@ window.UID = (() => {
     $("cmBusList").innerHTML = h;
   }
   $("cmMode").addEventListener("click", (e) => { const b = e.target.closest("button[data-cm]"); if (!b) return; st.mode = b.dataset.cm; showAll = false; save(); paint(); });
-  $("cmShStop").addEventListener("click", (e) => { const b = e.target.closest("button[data-k]"); if (!b) return; st.sh = b.dataset.k; save(); paint(); });
   $("cmArea").addEventListener("click", (e) => { const b = e.target.closest("button[data-a]"); if (!b) return; st.area = b.dataset.a; showAll = false; save(); paint(); });
   $("cmBus").addEventListener("input", () => { st.bus = $("cmBus").value; showAll = false; save(); paint(); });
   $("cmBusList").addEventListener("click", (e) => { if (e.target.id === "cmMore") { showAll = true; paint(); } });
