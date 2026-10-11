@@ -2581,12 +2581,13 @@ window.csfStat = (() => {
     function refileTxt(R) {
       const f = R.refile || {};
       if (!f.point) return "-";
-      const pr = n0(f.planned_rf), rq = n0(f.rqrd_final), ri = n0(f.rqrd_init), tp = n0(f.trip_to_point), u = R.fuel.unit || "";
+      const pr = n0(f.planned_rf), rq = n0(f.rqrd_final), ri = n0(f.rqrd_init), tp = n0(f.trip_to_point);
       const pad = (v) => String(v).padStart(4, "0");
-      const L = [`${f.point} → ${f.final_dest || "-"}  (처음 목적지 ${f.init_dest || "-"}${f.init_altn ? " / ALTN " + f.init_altn : ""})`,
-        `재출항 지점 계획 R/F ${f.planned_rf || "-"}`];
-      if (rq != null) L.push(`${f.final_dest || "최종"} 쪽 RQRD ${f.rqrd_final}` + (pr != null ? (pr >= rq ? `  → 여유 ${pr - rq}` : `  → 부족 ${rq - pr}, 원본 확인`) : ""));
-      if (ri != null && tp != null && ri >= tp) L.push(`${f.init_dest || "처음 목적지"} 쪽 필요 ${pad(ri - tp)}  (RQRD ${f.rqrd_init} - ${f.point}까지 TRIP ${f.trip_to_point}, ${u})`);
+      const head = `${f.point} → ${f.final_dest || "-"} : `;
+      let l1 = `${head}R/F ${f.planned_rf || "-"} / RQRD ${f.rqrd_final || "-"}`;
+      if (pr != null && rq != null) l1 += pr >= rq ? ` → 여유 ${pr - rq}` : ` → 부족 ${rq - pr}`;
+      const L = [l1];
+      if (f.init_dest) L.push(`${" ".repeat(f.point.length + 6)}${f.init_dest} : RQRD ${ri != null && tp != null && ri >= tp ? pad(ri - tp) : "-"}`);
       return L.join("\n");
     }
     // 화면·PDF 공통: 표 데이터 (화면은 Dispatch Release 까지)
