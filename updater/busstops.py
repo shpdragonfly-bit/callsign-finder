@@ -74,7 +74,7 @@ def seoul(num, label):
     stops = []
     for s in st:
         name, ars = (s.get("stationNm") or "").strip(), (s.get("arsId") or "").strip()
-        if not ars or ars == "0" or "가상" in name or "미정차" in (s.get("stationNo") or ""):
+        if not ars or ars == "0" or "가상" in name or "(경유)" in name or "미정차" in (s.get("stationNo") or ""):
             continue                                   # 가상·미정차 정류장 제외
         if not re.search(r"공항|인천", s.get("direction") or "") or AIR.search(name):
             continue                                   # 공항 가는 방향만, 공항 안 정류장 제외
@@ -105,8 +105,8 @@ def gbis(num, label):
     stops = []
     for s in st:
         seq, name = int(s["stationSeq"]), (s.get("stationName") or "").strip()
-        if (seq > turn) != from_air or AIR.search(name):
-            continue                                   # 공항 가는 방향만
+        if (seq > turn) != from_air or AIR.search(name) or "(경유)" in name or "대기" in name:
+            continue                                   # 공항 가는 방향만, 경유·대기 지점 제외
         stops.append([seq, s["stationId"], name, str(s.get("mobileNo") or "").strip()])
     return {"src": "g", "id": rid, "stops": stops} if stops else None
 
