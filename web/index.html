@@ -2590,11 +2590,29 @@ window.csfStat = (() => {
       if (f.init_dest) L.push(`${" ".repeat(f.point.length + 6)}${f.init_dest} : RQRD ${ri != null && tp != null && ri >= tp ? pad(ri - tp) : "-"}`);
       return L.join("\n");
     }
+    // Dispatch Notes 의 늘 같은(루틴) 문구는 출력에서 뺌. 한 줄에 여러 문구가 붙어 와도 그 부분만 지우고, 남는 내용이 있으면 남김
+    const ROUTINE = [
+      /CCF\s*:\s*0+\s*LBS(\s+INCLUDED\s+IN\s+DISC)?/,          // 0 LBS 일 때만 뺌
+      /TANK\s*:\s*0+\s*LBS/,                                   // 0 LBS 일 때만 뺌
+      /DISC\s+FUEL\s+DUE\s+TO\s+DW\s*\(\s*ENRTE\s+WX\s*\)/,
+      /(TURB\s*\/\s*CB\s+)?PLZ\s+USE\s+CAUTION\s+UNEXPECTED\s+EN-?\s*ROUTE\s+CB\s*&\s*TURB/,
+      /PLZ\s+USE\s+CAUTION\s+EXPECTED\s+SIG\s+WX\s*\(\s*REFER\s+TO\s+SIG\s*&\s*TURB\s+CHART\s*\)/,
+      /BE\s+AWARE\s+OF\s+TURBULENCE\s+AREA\s+IN\s+VERTICAL\s+CHART/,
+      /CHECKED\s+ABOVE\s+MEL\s*\(\s*NO\s+RESTRICTION\s+FOR\s+FLT\s+PLANNING\s*\)/,
+    ];
+    function routineOut(arr) {
+      return (arr || []).map((x) => {
+        let t = sv(x);
+        for (const re of ROUTINE) t = t.replace(new RegExp(re.source, "gi"), " ");
+        t = t.replace(/\s{2,}/g, " ").trim();
+        return /[A-Z0-9가-힣]/i.test(t.replace(/^[*\-–•]\s*/, "")) ? t : "";
+      }).filter(Boolean);
+    }
     // 화면·PDF 공통: 표 데이터 (화면은 Dispatch Release 까지)
     function tables(R) {
       const F = R.flight, U = R.fuel, A = R.alt, dash = (x) => sv(x) || "-";
       const nd = (a) => (a || []).map((x) => sv(x).replace(/^[-–•]\s*/, "")).filter(Boolean);       // 예전 결과에 남은 줄 앞 '- ' 정리
-      const D = Object.assign({}, R.dispatch, { mel: nd(R.dispatch.mel), fuel_adj: nd(R.dispatch.fuel_adj), notes: nd(R.dispatch.notes) });
+      const D = Object.assign({}, R.dispatch, { mel: nd(R.dispatch.mel), fuel_adj: nd(R.dispatch.fuel_adj), notes: routineOut(nd(R.dispatch.notes)) });
       const m = hm2m(F.trip_time), pa = paTime(F.trip_time);
       const pax = (s) => { const x = sv(s).match(/^(\d+)\s*\/\s*(\d+)$/); return x ? [x[1], x[2]] : [sv(s), ""]; };
       const pf = pax(D.first), pc = pax(D.business), py = pax(D.economy);
