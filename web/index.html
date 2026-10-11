@@ -2479,6 +2479,15 @@ window.csfStat = (() => {
       AAR: { ko: "스타얼라이언스 아시아나항공", en: "Asiana Airlines, a member of Star Alliance", en2: "Asiana Airlines" },
       KAL: { ko: "스카이팀 대한항공", en: "Korean Air, a member of SkyTeam", en2: "Korean Air" },
     };
+    // 난기류 지속 시 고정 방송 문구 (패키지와 무관)
+    const TURB_PA = [
+      "[ Turbulence 지속 시 ]",
+      "손님 여러분, 저는 기장입니다. 우리 비행기는 기류의 영향으로 계속해서 흔들리고 있습니다.",
+      "다시 한번 좌석 벨트를 매셨는지 확인해 주시기 바랍니다.",
+      "",
+      "This is your captain speaking. We are currently experiencing some turbulence.",
+      "Please make sure your seatbelt is securely fastened.",
+    ];
     function welcome(R) {
       const al = AIRLINE[sv(R.flight.flt).slice(0, 3)] || AIRLINE.AAR, m = paTime(R.flight.trip_time);
       const h = m == null ? null : Math.floor(m / 60), mi = m == null ? null : m % 60;
@@ -2670,6 +2679,8 @@ window.csfStat = (() => {
       kv(C, wxRows(R), 17.5); gap(C);
       bar(C, "WELCOME ANNOUNCEMENT");
       text(C, welcome(R).join("\n"), 7.4, 4.6); gap(C);
+      bar(C, "Turbulence PA 방송문구");
+      text(C, TURB_PA.join("\n"), 7.4, 4.6); gap(C);
       for (const n of ["NOTAM Package 1", "NOTAM Package 2 (EDTO/ERA)", "NOTAM Package 3 (FIR)"]) { bar(C, n); text(C, `${n.split(" (")[0]} : 원문참조`); gap(C); }
       // 쪽 번호
       const N = d.getNumberOfPages();
