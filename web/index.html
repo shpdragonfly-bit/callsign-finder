@@ -547,6 +547,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 .pr-txt { font: 12.5px/1.5 var(--mono); overflow-wrap: anywhere; }
 .pr-sec h4 .pr-pg { margin-left: 6px; vertical-align: 1px; }
 .pr-more { color: var(--muted); }
+.pa-al { color: var(--accent); font-weight: 700; }
 .pr-kv2 .v.red { color: #D32F2F; font-weight: 700; }
 .pr-hd { padding: 12px 14px; background: var(--panel-2); border-bottom: 1px solid var(--line); }
 .pr-hd b { font: 700 17px var(--mono); }
@@ -1087,7 +1088,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 
     <div class="card pa" id="paCard">
       <div class="gm-hd">
-        <div><h2>FLT Package 분석 <span class="pa-beta">시험판</span></h2><p>운항 패키지 PDF를 Gemini가 읽고 요약 PDF로 만들어 드립니다.</p></div>
+        <div><h2>FLT Package 분석 <span class="pa-beta">시험판</span></h2><p>운항 패키지 PDF를 Gemini가 읽고 요약 PDF로 만들어 드립니다.<br><b class="pa-al">(대한항공, 아시아나항공 분석 가능)</b></p></div>
       </div>
       <div class="pa-need" id="paNeed">🔒 <b>Gemini API 키를 등록한 분만</b> 쓸 수 있습니다. 위 <b>Gemini AI 연결</b>에서 키를 한 번 등록하면 열립니다.</div>
       <ol class="pa-steps" id="paSteps">
@@ -1245,7 +1246,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 // 보내지 않는 것: 검색한 편명·공항, 이름, 위치. 오프라인이면 모아 두었다가 인터넷 연결 시 전송.
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
-  const VER = "v43", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v44", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },

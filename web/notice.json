@@ -1,6 +1,12 @@
 {
   "items": [
     {
+      "id": "2026-10-11-v44",
+      "date": "2026-10-11",
+      "title": "FLT Package 분석: 대한항공·아시아나 요약 양식",
+      "body": "개발 예정 → FLT Package 분석이 대한항공·아시아나항공 패키지 양식으로 바뀌었습니다. Gemini는 패키지에 있는 내용만 옮기고, 비행시간·SR 구간·FL 변화·±2H 기상은 앱이 계산합니다. 요약 PDF는 Flight/Fuel/Route/EDTO/Dispatch Release, 기상, 안내방송, Turbulence 방송문구, NOTAM(원문참조) 순서로 한 쪽에 정리됩니다. Gemini 키를 등록한 분만 쓸 수 있습니다."
+    },
+    {
       "id": "2026-10-11-v42",
       "date": "2026-10-11",
       "title": "Gemini 키를 내 다른 기기로 옮기기 (QR)",
