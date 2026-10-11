@@ -54,8 +54,44 @@ body {
 /* 상단 바 + 탭 */
 .bar { position: sticky; top: 0; z-index: 10; background: linear-gradient(135deg, var(--bar-1), var(--bar-2));
   color: var(--bar-ink); padding-top: env(safe-area-inset-top); border-bottom: 1px solid var(--line); }
-.bar-top { display: flex; align-items: center; justify-content: space-between; padding: 12px 0 6px; }
-.brand { font-size: 13px; font-weight: 600; letter-spacing: .14em; color: var(--bar-sub); text-transform: uppercase; display: flex; align-items: center; }
+.bar-top { display: flex; align-items: center; gap: 8px; padding: 10px 0 6px; }
+.brand { font-size: 15px; font-weight: 700; letter-spacing: .04em; color: var(--bar-ink); display: flex; align-items: center; white-space: nowrap; }
+.menu-btn { position: relative; margin-left: auto; width: 40px; height: 40px; display: grid; place-items: center; border: 0; border-radius: 10px; background: transparent; color: var(--bar-ink); cursor: pointer; }
+.menu-btn:active { background: rgba(255,255,255,.15); }
+.menu-btn svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+.menu-btn .dot { position: absolute; top: 7px; right: 6px; width: 9px; height: 9px; border-radius: 50%; background: #FF4D4F; box-shadow: 0 0 0 2px var(--bar-2); }
+.menu-btn .dot[hidden] { display: none; }
+.mn-list { margin-top: 12px; }
+.mn-item { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; font: inherit; font-size: 17px; font-weight: 700; padding: 14px 12px; border: 0; border-bottom: 1px solid var(--line); background: none; color: var(--text); cursor: pointer; }
+.mn-item .ic { width: 36px; height: 36px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 10px; background: var(--accent-soft); color: var(--accent); font-size: 18px; }
+.mn-item small { display: block; font-size: 13px; font-weight: 400; color: var(--muted); margin-top: 2px; }
+.mn-item .go { margin-left: auto; color: var(--muted); font-size: 20px; }
+.mn-item .new { font-size: 11px; font-weight: 800; color: #fff; background: #FF4D4F; border-radius: 6px; padding: 1px 5px; margin-left: 6px; vertical-align: 2px; }
+.mn-item .new[hidden] { display: none; }
+.mn-sub { margin-top: 18px; font-size: 13px; font-weight: 700; color: var(--muted); }
+.mn-seg { display: flex; margin-top: 8px; border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; }
+.mn-seg button { flex: 1; font: inherit; font-size: 15px; font-weight: 700; padding: 10px 4px; border: 0; background: var(--panel-2); color: var(--muted); cursor: pointer; }
+.mn-seg button + button { border-left: 1.5px solid var(--line); }
+.mn-seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.mn-note { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+.mn-back { font: inherit; font-size: 15px; font-weight: 600; border: 0; background: none; color: var(--accent); padding: 4px 0; cursor: pointer; }
+.nt { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.nt .d { font: 600 12px var(--mono); color: var(--muted); }
+.nt b { display: block; font-size: 16px; margin: 2px 0 4px; }
+.nt p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--text); }
+.nt.unread b::after { content: "NEW"; font-size: 10px; font-weight: 800; color: #fff; background: #FF4D4F; border-radius: 5px; padding: 1px 4px; margin-left: 6px; vertical-align: 2px; }
+.rq-type { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+.rq-type button { font: inherit; font-size: 14px; font-weight: 700; padding: 8px 12px; border-radius: 99px; border: 1.5px solid var(--line); background: var(--panel-2); color: var(--muted); cursor: pointer; }
+.rq-type button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.rq-text { width: 100%; box-sizing: border-box; min-height: 120px; margin-top: 10px; font: inherit; font-size: 16px; padding: 12px; border-radius: 12px; border: 2px solid var(--line); background: var(--panel-2); color: var(--text); resize: vertical; }
+.rq-text:focus { outline: none; border-color: var(--accent); }
+.rq-cnt { text-align: right; font-size: 12px; color: var(--muted); }
+.faq details { border-bottom: 1px solid var(--line); padding: 12px 0; }
+.faq summary { font-size: 16px; font-weight: 700; cursor: pointer; list-style: none; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::before { content: "Q. "; color: var(--accent); }
+.faq details p { margin: 8px 0 0; font-size: 14px; line-height: 1.65; color: var(--text); }
+
 .uid { font: 700 13px var(--mono); letter-spacing: .08em; color: var(--bar-ink); background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28);
   border-radius: 8px; padding: 2px 8px; margin-left: 8px; cursor: pointer; }
 .uid::before { content: "ID "; font-weight: 500; opacity: .7; letter-spacing: .04em; }
@@ -698,13 +734,24 @@ body[data-tab="oz"] #alTabs { display: none; }
 .cm-stops li::before { content: ""; position: absolute; left: 4px; top: 11px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
 .cm-stops li.end::before { background: var(--warn); }
 </style>
+<script>
+// 화면 그리기 전에 주/야간 먼저 적용 (자세한 처리는 아래 '주/야간')
+(function () { try {
+  var m = localStorage.getItem("csf-theme"), v2 = localStorage.getItem("csf-theme-v2"), t;
+  if (v2 && (m === "light" || m === "dark")) t = m;
+  else { var o = JSON.parse(localStorage.getItem("csf-theme-tmp") || "null"); var h = new Date().getHours();
+    t = o && v2 && o.until > Date.now() ? o.t : (h >= 6 && h < 19 ? "light" : "dark"); }
+  document.documentElement.dataset.theme = t;
+} catch (e) {} })();
+</script>
 </head>
 <body>
 <div class="bar">
   <div class="wrap">
     <div class="bar-top">
-      <span class="brand">Flight Assist<button type="button" class="uid" id="uidBtn" aria-label="내 아이디" hidden></button></span>
+      <span class="brand">FLT Assist<button type="button" class="uid" id="uidBtn" aria-label="내 아이디" hidden></button></span>
       <span id="net" class="pill">확인 중</span>
+      <button type="button" class="menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><i class="dot" id="menuDot" hidden></i></button>
     </div>
     <div class="tabs" role="tablist">
       <button class="tab" role="tab" id="tab-cs" aria-controls="panel-cs" aria-selected="true" data-tab="cs">CallSign조회</button>
@@ -751,6 +798,50 @@ body[data-tab="oz"] #alTabs { display: none; }
     </div>
   </div>
 </div>
+<div class="sheet-bg" id="menuSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mnTitle">
+    <div id="mnMain">
+      <div class="sh-hd"><h2 id="mnTitle">메뉴</h2><button type="button" class="sh-x" data-mclose>닫기</button></div>
+      <div class="mn-list">
+        <button type="button" class="mn-item" data-mv="mnNotice"><span class="ic">📢</span><span>공지사항<span class="new" id="mnNew" hidden>NEW</span><small>새 기능·변경 안내</small></span><span class="go">›</span></button>
+        <button type="button" class="mn-item" data-mv="mnReq"><span class="ic">✉️</span><span>사용자 요청<small>기능 요청·오류 신고·의견 보내기</small></span><span class="go">›</span></button>
+        <button type="button" class="mn-item" data-mv="mnFaq"><span class="ic">❓</span><span>자주 묻는 질문<small>사용법·오프라인·자료 출처</small></span><span class="go">›</span></button>
+      </div>
+      <div class="mn-sub">주/야간</div>
+      <div class="mn-seg" id="mnTheme"><button type="button" data-t="auto">자동</button><button type="button" data-t="light">항상 주간</button><button type="button" data-t="dark">항상 야간</button></div>
+      <div class="mn-note">자동: 기기 시각 06시~19시 주간, 그 외 야간. 화면 아래 '주/야간 설정' 버튼은 다음 전환 시각까지만 바꿉니다.</div>
+      <div class="mn-note" id="mnVer" style="margin-top:16px"></div>
+    </div>
+    <div id="mnNotice" hidden>
+      <div class="sh-hd"><button type="button" class="mn-back" data-mv="mnMain">‹ 메뉴</button><button type="button" class="sh-x" data-mclose>닫기</button></div>
+      <h2 style="margin-top:8px">공지사항</h2>
+      <div id="mnNoticeList"></div>
+    </div>
+    <div id="mnReq" hidden>
+      <div class="sh-hd"><button type="button" class="mn-back" data-mv="mnMain">‹ 메뉴</button><button type="button" class="sh-x" data-mclose>닫기</button></div>
+      <h2 style="margin-top:8px">사용자 요청</h2>
+      <div class="rq-type" id="rqType"><button type="button" data-k="기능요청" aria-pressed="true">기능 요청</button><button type="button" data-k="오류신고" aria-pressed="false">오류 신고</button><button type="button" data-k="기타의견" aria-pressed="false">기타 의견</button></div>
+      <textarea class="rq-text" id="rqText" maxlength="300" placeholder="필요한 기능이나 불편한 점을 적어 주세요. (300자)"></textarea>
+      <div class="rq-cnt" id="rqCnt">0 / 300</div>
+      <button type="button" class="sh-big primary" id="rqSend" disabled>보내기</button>
+      <div class="mn-note" id="rqMsg">이름·아이디·위치 없이 내용만 전달됩니다. 오프라인이면 저장해 두었다가 인터넷이 연결될 때 보냅니다. 답장이 필요하면 연락처를 같이 적어 주세요.</div>
+    </div>
+    <div id="mnFaq" hidden>
+      <div class="sh-hd"><button type="button" class="mn-back" data-mv="mnMain">‹ 메뉴</button><button type="button" class="sh-x" data-mclose>닫기</button></div>
+      <h2 style="margin-top:8px">자주 묻는 질문</h2>
+      <div class="faq">
+        <details><summary>인터넷이 안 되는 기내에서도 쓸 수 있나요?</summary><p>네. 출발 전 인터넷이 될 때 앱을 한 번 열어 두면(아래 '최신 데이터 받기') Call Sign 조회, 비행시간, 셔틀 시간표는 오프라인에서도 됩니다. 기상과 공항버스 실시간 도착은 인터넷이 필요합니다.</p></details>
+        <details><summary>휴대폰에 앱처럼 설치하려면?</summary><p>아이폰·아이패드: Safari에서 열고 공유 버튼 → '홈 화면에 추가'. 안드로이드: Chrome 메뉴(⋮) → '홈 화면에 추가' 또는 '앱 설치'.</p></details>
+        <details><summary>기종·노선 정보가 실제와 다를 때가 있어요.</summary><p>노선은 공개 자료(VRS), 기종은 ADS-B 관측 누적값이라 당일 운항과 다를 수 있습니다. 참고용으로 쓰시고, 틀린 내용은 '사용자 요청 → 오류 신고'로 알려 주세요.</p></details>
+        <details><summary>셔틀 위치는 실제 버스 위치인가요?</summary><p>아닙니다. 공사 시간표로 계산한 예상 위치라 교통 상황에 따라 몇 분 차이 날 수 있습니다. 공항버스 '실시간 도착'은 서울·경기 버스정보의 실제 위치 기반입니다.</p></details>
+        <details><summary>주/야간이 저절로 바뀌어요.</summary><p>기본은 기기 시각 기준 자동(06시 주간, 19시 야간)입니다. 메뉴의 '주/야간'에서 항상 주간 또는 항상 야간으로 고정할 수 있습니다.</p></details>
+        <details><summary>내 아이디·주차 위치는 어디에 저장되나요?</summary><p>이 기기 안에만 저장되고 서버나 통계로 보내지 않습니다. 앱 데이터를 지우면 함께 지워집니다. 아이디는 '연결 코드'로 다른 기기에서 이어 쓸 수 있습니다.</p></details>
+        <details><summary>어떤 정보가 수집되나요?</summary><p>사용 횟수 파악을 위한 익명 통계(기능 이름, 항공사 탭, 기기 종류, 앱 버전)만 보냅니다. 편명·공항 코드·이름·위치·아이디는 보내지 않습니다.</p></details>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="wrap">
   <section class="panel" id="panel-cs" role="tabpanel" aria-labelledby="tab-cs">
     <div class="seg al-tabs" id="alTabs" role="tablist" aria-label="항공사"></div>
@@ -1026,6 +1117,60 @@ body[data-tab="oz"] #alTabs { display: none; }
 </div>
 
 <script src="data.js"></script>
+<script>
+// ===================== 메뉴 (☰): 공지사항 · 사용자 요청 · 자주 묻는 질문 · 주/야간 =====================
+// 공지: web/notice.json (배포 때 함께 갱신, 기기에 저장해 오프라인에서도 보임, 안 읽은 공지가 있으면 ☰ 에 빨간 점)
+// 사용자 요청: 익명 통계와 같은 경로로 '의견'(세부 = 메뉴-기능요청/오류신고/기타의견) 전송 → 통계 시트 S열
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const NK = "csf-notice", SEEN = "csf-notice-seen";
+  let NOTICE = null; try { NOTICE = JSON.parse(ls.get(NK) || "null"); } catch (e) {}
+  const seen = () => { try { return JSON.parse(ls.get(SEEN) || "[]"); } catch (e) { return []; } };
+  const unread = () => ((NOTICE && NOTICE.items) || []).filter((x) => !seen().includes(x.id));
+  function badge() { const n = unread().length; $("menuDot").hidden = !n; $("mnNew").hidden = !n; }
+  function loadNotice() {
+    if (!location.protocol.startsWith("http")) return;
+    fetch("notice.json?t=" + Date.now(), { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).then((d) => {
+      if (d && Array.isArray(d.items)) { NOTICE = d; ls.set(NK, JSON.stringify(d)); badge(); }
+    }).catch(() => {});
+  }
+  function showNotice() {
+    const items = (NOTICE && NOTICE.items) || [], s = seen();
+    $("mnNoticeList").innerHTML = items.length ? items.map((x) => `<div class="nt${s.includes(x.id) ? "" : " unread"}"><div class="d">${esc(x.date)}</div><b>${esc(x.title)}</b><p>${esc(x.body)}</p></div>`).join("")
+      : `<p class="mn-note">공지가 없습니다. 인터넷에 연결된 상태에서 다시 열어 보세요.</p>`;
+    ls.set(SEEN, JSON.stringify([...new Set([...s, ...items.map((x) => x.id)])].slice(-100)));
+    badge();
+  }
+  function view(id) {
+    ["mnMain", "mnNotice", "mnReq", "mnFaq"].forEach((v) => { $(v).hidden = v !== id; });
+    if (id === "mnNotice") showNotice();
+    $("menuSheet").querySelector(".sheet").scrollTop = 0;
+  }
+  function paintTheme() { const m = window.csfTheme ? window.csfTheme.mode() : "auto"; $("mnTheme").querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.t === m)); }
+  function open() { view("mnMain"); paintTheme(); $("mnVer").textContent = "FLT Assist " + (($("appVer") && $("appVer").textContent) || ""); $("menuSheet").hidden = false; }
+  const close = () => { $("menuSheet").hidden = true; };
+  $("menuBtn").addEventListener("click", open);
+  $("menuSheet").addEventListener("click", (e) => {
+    if (e.target === $("menuSheet") || e.target.closest("[data-mclose]")) return close();
+    const v = e.target.closest("[data-mv]"); if (v) return view(v.dataset.mv);
+    const t = e.target.closest("#mnTheme [data-t]"); if (t && window.csfTheme) { window.csfTheme.set(t.dataset.t); paintTheme(); }
+    const k = e.target.closest("#rqType [data-k]"); if (k) $("rqType").querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b === k));
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("menuSheet").hidden) close(); });
+  document.addEventListener("csf-theme", paintTheme);
+  $("rqText").addEventListener("input", () => { $("rqCnt").textContent = `${$("rqText").value.length} / 300`; $("rqSend").disabled = $("rqText").value.trim().length < 2; });
+  $("rqSend").addEventListener("click", () => {
+    const v = $("rqText").value.trim(); if (v.length < 2) return;
+    const k = ($("rqType").querySelector('[aria-pressed="true"]') || {}).dataset?.k || "기타의견";
+    if (window.csfStat) window.csfStat("의견", "", "메뉴-" + k, v);
+    $("rqText").value = ""; $("rqCnt").textContent = "0 / 300"; $("rqSend").disabled = true;
+    $("rqMsg").innerHTML = `<b style="color:var(--ok)">보냈습니다. 고맙습니다!</b> ${navigator.onLine ? "" : "(인터넷이 연결되면 전송됩니다)"}`;
+  });
+  badge(); loadNotice();
+})();
+</script>
 <script>
 // ===================== 익명 사용 통계 =====================
 // 보내는 것: 무작위 기기번호, 동작, 항공사 탭, 세부(편조 종류), 기기 종류, 앱 버전, 시각
@@ -1688,16 +1833,37 @@ window.csfStat = (() => {
   document.addEventListener("click", (e) => { const b = e.target.closest(".row"); if (b) { $("q").value = b.dataset.cs; store.set(QKEY, b.dataset.cs); search(); window.scrollTo(0, 0); } });
   $("btnUpdate").addEventListener("click", update);
   // ---------- 주/야간 ----------
-  const isDark = () => (document.documentElement.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")) === "dark";
-  const applyTheme = (t) => {
-    if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
-    updateThemeColor();
+  // 기본은 '자동': 기기 시각 06:00~18:59 주간, 그 외 야간. 아래 버튼은 다음 전환 시각까지만 반대로 바꿈.
+  // 메뉴(☰)에서 항상 주간 / 항상 야간 으로 고정 가능. csf-theme = "auto" | "light" | "dark", csf-theme-tmp = {t, until}
+  const DAY_FROM = 6, DAY_TO = 19, TMP = "csf-theme-tmp";
+  const isDark = () => document.documentElement.dataset.theme === "dark";
+  const autoT = (d = new Date()) => (d.getHours() >= DAY_FROM && d.getHours() < DAY_TO ? "light" : "dark");
+  const nextSwitch = (d = new Date()) => { const n = new Date(d); const h = d.getHours(); if (h < DAY_FROM) n.setHours(DAY_FROM, 0, 0, 0); else if (h < DAY_TO) n.setHours(DAY_TO, 0, 0, 0); else { n.setDate(n.getDate() + 1); n.setHours(DAY_FROM, 0, 0, 0); } return n; };
+  if (!store.get("csf-theme-v2")) { store.set(TKEY, "auto"); store.set("csf-theme-v2", "1"); }     // 예전 수동 설정은 한 번 자동으로 초기화
+  const themeMode = () => { const m = store.get(TKEY); return m === "light" || m === "dark" ? m : "auto"; };
+  const tmpT = () => { try { const o = JSON.parse(store.get(TMP) || "null"); return o && o.until > Date.now() ? o.t : null; } catch (e) { return null; } };
+  const wantT = () => { const m = themeMode(); return m !== "auto" ? m : (tmpT() || autoT()); };
+  function applyTheme() {
+    const t = wantT();
+    if (document.documentElement.dataset.theme !== t) { document.documentElement.dataset.theme = t; updateThemeColor(); }
+    const m = themeMode(), tmp = m === "auto" && tmpT();
+    $("btnTheme").textContent = `주/야간 설정 · ${m === "auto" ? (tmp ? `수동 ${t === "dark" ? "야간" : "주간"} (${p2h(nextSwitch().getHours())}:00 자동)` : `자동 ${t === "dark" ? "야간" : "주간"}`) : `항상 ${m === "dark" ? "야간" : "주간"}`}`;
+    document.dispatchEvent(new CustomEvent("csf-theme"));
+  }
+  const p2h = (n) => String(n).padStart(2, "0");
+  window.csfTheme = {
+    mode: themeMode, now: () => wantT(),
+    set(m) { store.set(TKEY, m); store.set(TMP, ""); applyTheme(); },
   };
-  applyTheme(store.get(TKEY));
+  applyTheme();
   $("btnTheme").addEventListener("click", () => {
-    const next = isDark() ? "light" : "dark";
-    applyTheme(next); store.set(TKEY, next);
+    const m = themeMode(), next = isDark() ? "light" : "dark";
+    if (m === "auto") { if (next === autoT()) store.set(TMP, ""); else store.set(TMP, JSON.stringify({ t: next, until: +nextSwitch() })); }
+    else store.set(TKEY, next);
+    applyTheme();
   });
+  setInterval(applyTheme, 60000);                      // 06:00 / 19:00 에 자동 전환
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) applyTheme(); });
   addEventListener("online", renderNet); addEventListener("offline", renderNet);
 
   // ---------- 탭 (화면은 숨기기만 하므로 입력·결과가 그대로 유지됨) ----------
