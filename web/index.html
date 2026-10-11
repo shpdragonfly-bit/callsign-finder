@@ -2293,9 +2293,17 @@ window.csfStat = (() => {
       ldw: PKG_S("LDW 값 (PLAN 칸)"), mldw: PKG_S("MLDW 값"), page: { type: "integer" } }, "CFP 첫 쪽 연료·중량 표. 원문 숫자 그대로(앞자리 0 포함)"),
     route: PKG_OBJ({ cfp: PKG_S("CFP 첫 쪽의 항로 문단 원문 (RKSI.. 로 시작해 ..YSSY 로 끝남)"), atc: PKG_S("ATS FPL 의 항로 부분 원문: '-RKSI2240' 줄부터 '-YSSY0936 YBBN' 줄까지"), page: { type: "integer" } }, "항로"),
     navlog: PKG_ARR({ wpt: PKG_S("웨이포인트 이름 (둘째 줄 첫 칸)"), fl: PKG_S("FL 칸 원문: CLB / DSC / 숫자"), sr: PKG_S("SR 칸 숫자 2자리, '..' 이면 ''"), time: PKG_S("누적 시간 HH.MM (둘째 줄의 ZT/ACTM, 예 00.33)") },
-      "CFP 항법 기록표의 모든 웨이포인트를 순서대로 한 번씩 (출발~도착). 반복 인쇄된 쪽은 제외"),
+      "CFP 항법 기록표의 모든 웨이포인트를 순서대로 한 번씩 (출발~도착). 반복 인쇄된 쪽과 'REFILE FLT PLAN' 쪽의 재출항 구간 항법 기록표는 제외"),
     alt: PKG_OBJ({ dest_altn: PKG_S("목적지 교체공항 ICAO (연료표 'ALTN/YBBN')"), era3: PKG_S("'3% CONTINGENCY ERA VALIDATION' 표의 ERA ICAO, 없으면 ''"),
-      refile: PKG_S("재출항(REFILE) 지점·공항이 있으면 원문, 없거나 REFILE RES 0000 이면 ''"), page: { type: "integer" } }, "교체공항"),
+      refile: PKG_S("항상 '' (아래 refile 항목 사용)"), page: { type: "integer" } }, "교체공항"),
+    refile: PKG_OBJ({
+      point: PKG_S("'REFILE FLT PLAN' 쪽의 재출항 지점 (예 '- SDE TO RKSI' 의 SDE). 그 쪽이 없으면 ''"),
+      init_dest: PKG_S("처음 목적지 (예 '- KSEA TO RJTT' 의 RJTT)"), init_altn: PKG_S("처음 목적지 쪽 ALTN/ 공항 (예 RJBB)"),
+      final_dest: PKG_S("최종 목적지 (예 '- SDE TO RKSI' 의 RKSI)"),
+      trip_to_point: PKG_S("처음 목적지 쪽 연료표에서 출발지→재출항 지점 TRIP 연료 원문 (예 'KSEA TO SDE 1587' 의 1587)"),
+      rqrd_init: PKG_S("처음 목적지 쪽 RQRD 연료 원문 (예 1912)"), rqrd_final: PKG_S("최종 목적지 쪽(재출항 지점→최종) RQRD 연료 원문 (예 0409)"),
+      planned_rf: PKG_S("'PLANNED R/F AT REFILE POINT' 값 원문 (예 00494)"), ref_weight: PKG_S("'WEIGHT AT REF POINT' 값 원문"),
+      page: { type: "integer" } }, "재출항 계획 (REFILE FLT PLAN). CFP 머리에 REFILE 이 없고 그 쪽도 없으면 모두 ''"),
     edto: PKG_ARR({ apt: PKG_S("ICAO"), from: PKG_S("SUITABLE FROM 시각 4자리"), to: PKG_S("TO 시각 4자리") }, "'ENROUTE ALTERNATES ... SUITABLE FROM ... TO ...' 줄들"),
     etp: PKG_ARR({ name: PKG_S("ETP1 등"), apts: PKG_S("예 RJBB/PGUM"), cfr: PKG_S("CFR 원문"), time: PKG_S("TIME TO POINT/ALT 중 ALT 쪽 시간 (예 01.52)"), fob: PKG_S("FOB 원문"), exc: PKG_S("EXC 원문") },
       "EDTO EQUAL TIME POINT DATA 요약표 (ETP1, ETP2 …)"),
@@ -2325,6 +2333,7 @@ window.csfStat = (() => {
     "",
     "[패키지 구성 참고 — 대한항공·아시아나 공용]",
     "- CFP(OFP): 'CFP PLAN', 'FLIGHT RELEASE ... ON dd/MMM/yy', 연료표(TRIP/RESERVE/ALTN/FINAL RES/3 PCT CONT/REFILE RES/ETP RES/RQD TAKEOFF/DISC/TANKERING/PLN TAKEOFF/TAXI/RAMP OUT/FOD), 중량(AGTOW/SOW/PLD/ZFW/TOF/TOW/LDW 와 MZFW/MTOW/MLDW), 항로 문단, 항법 기록표(DIST/LATITUDE/MC/FL/…/SR/…/ZT), ALTERNATE, 3% CONTINGENCY ERA VALIDATION, EDTO EQUAL TIME POINT DATA",
+    "- REFILE FLT PLAN (있을 때만): 처음 목적지까지 / 재출항 지점에서 최종 목적지까지의 연료표와 별도 항법 기록표",
     "- ATS FPL 사본 '(FPL-...'",
     "- DISPATCH RELEASE INFORMATION: 1. PAX/CARGO RESERVATION, 3. MEL / CDL ITEMS, 4. FUEL BURN ADJUSTMENT, 5. DISPATCH NOTES",
     "- WEATHER BRIEFING: DEPARTURE / ARRIVAL / ALTERNATE / ENROUTE WEATHER 의 TAF",
@@ -2437,7 +2446,7 @@ window.csfStat = (() => {
       const eq = clean(d.equip); for (const k of ["equip", "pbn"]) if (eq[k]) eq[k] = eq[k].replace(/^-\s*/, "");
       return {
         v: 1, meta,
-        flight: clean(d.flight), fuel: clean(d.fuel), route: clean(d.route), alt: clean(d.alt), equip: eq, dispatch: dd, names: clean(d.names),
+        flight: clean(d.flight), fuel: clean(d.fuel), route: clean(d.route), alt: clean(d.alt), refile: clean(d.refile), equip: eq, dispatch: dd, names: clean(d.names),
         navlog: a(d.navlog).map(clean).filter((x) => x.wpt), edto: a(d.edto).map(clean).filter((x) => x.apt), etp: a(d.etp).map(clean).filter((x) => x.name || x.apts),
         wx: a(d.wx).map(clean).filter((x) => x.taf),
       };
@@ -2559,6 +2568,18 @@ window.csfStat = (() => {
       }
       return rows;
     }
+    // 재출항: 지점 → 최종 목적지, 처음 목적지/교체, 재출항 지점 계획 연료와 필요 연료 비교 (앱 계산)
+    function refileTxt(R) {
+      const f = R.refile || {};
+      if (!f.point) return "-";
+      const pr = n0(f.planned_rf), rq = n0(f.rqrd_final), ri = n0(f.rqrd_init), tp = n0(f.trip_to_point), u = R.fuel.unit || "";
+      const pad = (v) => String(v).padStart(4, "0");
+      const L = [`${f.point} → ${f.final_dest || "-"}  (처음 목적지 ${f.init_dest || "-"}${f.init_altn ? " / ALTN " + f.init_altn : ""})`,
+        `재출항 지점 계획 R/F ${f.planned_rf || "-"}`];
+      if (rq != null) L.push(`${f.final_dest || "최종"} 쪽 RQRD ${f.rqrd_final}` + (pr != null ? (pr >= rq ? `  → 여유 ${pr - rq}` : `  → 부족 ${rq - pr}, 원본 확인`) : ""));
+      if (ri != null && tp != null && ri >= tp) L.push(`${f.init_dest || "처음 목적지"} 쪽 필요 ${pad(ri - tp)}  (RQRD ${f.rqrd_init} - ${f.point}까지 TRIP ${f.trip_to_point}, ${u})`);
+      return L.join("\n");
+    }
     // 화면·PDF 공통: 표 데이터 (화면은 Dispatch Release 까지)
     function tables(R) {
       const F = R.flight, U = R.fuel, A = R.alt, dash = (x) => sv(x) || "-";
@@ -2575,7 +2596,7 @@ window.csfStat = (() => {
         ["AGTOW", "ZFW", "TOW", "MTOW", "LDW"], [U.agtow, U.zfw, U.tow, U.mtow, U.ldw]], checks: checks(R) });
       T.push({ t: "Route", type: "text", p: R.route.page, text: [R.route.cfp, R.route.atc].filter(Boolean).join("\n") });
       T.push({ t: "Cruise FL / SR≥04 구간", type: "kv", rows: [["Cruise FL 변화", cruise(R).join(" → ")], ["SR≥04 구간", srSegs(R).join("\n") || "없음"]] });
-      T.push({ t: "Alternate / EDTO / Refile Point", type: "kv", p: A.page, rows: [["DEST ALTN / 3% ERA", `${dash(A.dest_altn)} / ${dash(A.era3)}`], ["Refile FLT", dash(A.refile)],
+      T.push({ t: "Alternate / EDTO / Refile Point", type: "kv", p: A.page, rows: [["DEST ALTN / 3% ERA", `${dash(A.dest_altn)} / ${dash(A.era3)}`], ["Refile FLT", refileTxt(R)],
         ["EDTO / ENR ALTN", R.edto.map((e) => `${e.apt}: ${e.from} UTC ~ ${e.to} UTC`).join("\n") || "-"]],
         grid: R.etp.length ? [["ETP", "교체공항", "CFR", "FOB", "Different"], ...R.etp.map((e) => [e.name, e.apts, `${e.cfr}${e.time ? "(" + e.time + ")" : ""}`, e.fob, e.exc])] : null });
       T.push({ t: "Equipment / PBN Codes", type: "kv", rows: [["장비코드", sv(R.equip.equip).replace(/^-\s*/, "")], ["PBN", sv(R.equip.pbn).replace(/^-\s*/, "")]] });
