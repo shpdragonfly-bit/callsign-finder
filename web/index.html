@@ -560,7 +560,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 .pr-kv .v { font-family: var(--mono); overflow-wrap: anywhere; }
 .pr-pg { font: 600 11px var(--mono); color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 0 4px; white-space: nowrap; align-self: start; height: max-content; }
 .pr-chk { margin-top: 6px; font-size: 13px; font-weight: 700; }
-.pr-chk.ok { color: var(--ok); } .pr-chk.bad { color: var(--warn); }
+.pr-chk.ok { color: var(--ok); } .pr-chk.bad { color: #E0322B; background: none; padding: 0; border: 0; }
 .pr-li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 8px; padding: 6px 0; border-top: 1px dashed var(--line); font-size: 14px; }
 .pr-li:first-of-type { border-top: 0; }
 .pr-li b { font-family: var(--mono); }
@@ -1246,7 +1246,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 // 보내지 않는 것: 검색한 편명·공항, 이름, 위치. 오프라인이면 모아 두었다가 인터넷 연결 시 전송.
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
-  const VER = "v44", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v45", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -2293,9 +2293,19 @@ window.csfStat = (() => {
       ldw: PKG_S("LDW 값 (PLAN 칸)"), mldw: PKG_S("MLDW 값"), page: { type: "integer" } }, "CFP 첫 쪽 연료·중량 표. 원문 숫자 그대로(앞자리 0 포함)"),
     route: PKG_OBJ({ cfp: PKG_S("CFP 첫 쪽의 항로 문단 원문 (RKSI.. 로 시작해 ..YSSY 로 끝남)"), atc: PKG_S("ATS FPL 의 항로 부분 원문: '-RKSI2240' 줄부터 '-YSSY0936 YBBN' 줄까지"), page: { type: "integer" } }, "항로"),
     navlog: PKG_ARR({ wpt: PKG_S("웨이포인트 이름 (둘째 줄 첫 칸)"), fl: PKG_S("FL 칸 원문: CLB / DSC / 숫자"), sr: PKG_S("SR 칸 숫자 2자리, '..' 이면 ''"), time: PKG_S("누적 시간 HH.MM (둘째 줄의 ZT/ACTM, 예 00.33)") },
-      "CFP 항법 기록표의 모든 웨이포인트를 순서대로 한 번씩 (출발~도착). 반복 인쇄된 쪽은 제외"),
+      "CFP 항법 기록표의 모든 웨이포인트를 순서대로 한 번씩 (출발~도착). 반복 인쇄된 쪽과 'REFILE FLT PLAN' 쪽의 재출항 구간 항법 기록표는 제외"),
     alt: PKG_OBJ({ dest_altn: PKG_S("목적지 교체공항 ICAO (연료표 'ALTN/YBBN')"), era3: PKG_S("'3% CONTINGENCY ERA VALIDATION' 표의 ERA ICAO, 없으면 ''"),
-      refile: PKG_S("재출항(REFILE) 지점·공항이 있으면 원문, 없거나 REFILE RES 0000 이면 ''"), page: { type: "integer" } }, "교체공항"),
+      refile: PKG_S("항상 '' (아래 refile 항목 사용)"), page: { type: "integer" } }, "교체공항"),
+    refile: PKG_OBJ({
+      point: PKG_S("'REFILE FLT PLAN' 쪽의 재출항 지점 (예 '- SDE TO RKSI' 의 SDE). 그 쪽이 없으면 ''"),
+      init_dest: PKG_S("처음 목적지 (예 '- KSEA TO RJTT' 의 RJTT)"), init_altn: PKG_S("처음 목적지 쪽 ALTN/ 공항 (예 RJBB)"),
+      final_dest: PKG_S("최종 목적지 (예 '- SDE TO RKSI' 의 RKSI)"),
+      time_to_point: PKG_S("처음 목적지 쪽 연료표 '출발지 TO 재출항 지점' 줄의 TIME (예 'KSEA TO SDE 1587 09.32' 의 09.32)"),
+      time_point_init: PKG_S("처음 목적지 쪽 연료표 '재출항 지점 TO 처음 목적지' 줄의 TIME (예 'SDE TO RJTT 0043 00.41' 의 00.41)"),
+      trip_to_point: PKG_S("처음 목적지 쪽 연료표에서 출발지→재출항 지점 TRIP 연료 원문 (예 'KSEA TO SDE 1587' 의 1587)"),
+      rqrd_init: PKG_S("처음 목적지 쪽 RQRD 연료 원문 (예 1912)"), rqrd_final: PKG_S("최종 목적지 쪽(재출항 지점→최종) RQRD 연료 원문 (예 0409)"),
+      planned_rf: PKG_S("'PLANNED R/F AT REFILE POINT' 값 원문 (예 00494)"), ref_weight: PKG_S("'WEIGHT AT REF POINT' 값 원문"),
+      page: { type: "integer" } }, "재출항 계획 (REFILE FLT PLAN). CFP 머리에 REFILE 이 없고 그 쪽도 없으면 모두 ''"),
     edto: PKG_ARR({ apt: PKG_S("ICAO"), from: PKG_S("SUITABLE FROM 시각 4자리"), to: PKG_S("TO 시각 4자리") }, "'ENROUTE ALTERNATES ... SUITABLE FROM ... TO ...' 줄들"),
     etp: PKG_ARR({ name: PKG_S("ETP1 등"), apts: PKG_S("예 RJBB/PGUM"), cfr: PKG_S("CFR 원문"), time: PKG_S("TIME TO POINT/ALT 중 ALT 쪽 시간 (예 01.52)"), fob: PKG_S("FOB 원문"), exc: PKG_S("EXC 원문") },
       "EDTO EQUAL TIME POINT DATA 요약표 (ETP1, ETP2 …)"),
@@ -2307,8 +2317,8 @@ window.csfStat = (() => {
       fuel_adj: { type: "array", items: PKG_S("'FUEL BURN ADJUSTMENT' 의 각 줄 원문") },
       notes: { type: "array", items: PKG_S("'DISPATCH NOTES' 의 각 줄 원문 (들여쓴 '*' 줄도 한 줄씩, 다음 쪽까지 이어진 줄 포함)") },
       page: { type: "integer" } }, "DISPATCH RELEASE INFORMATION"),
-    wx: PKG_ARR({ role: { type: "string", enum: ["DEP", "ARR", "ALTN"] }, icao: PKG_S("공항 ICAO"), taf: PKG_S("TAF 원문 전체 (줄바꿈 유지, 'TAF' 부터 마지막 변화군까지)") },
-      "WEATHER BRIEFING 의 DEPARTURE / ARRIVAL / ALTERNATE WEATHER 에 있는 TAF. ALTERNATE 는 목적지 교체공항(DEST ALTN) 것만. ENROUTE WEATHER 는 제외"),
+    wx: PKG_ARR({ role: { type: "string", enum: ["DEP", "ARR", "ALTN", "REF", "REF_ALTN"] }, icao: PKG_S("공항 ICAO"), taf: PKG_S("TAF 원문 전체 (줄바꿈 유지, 'TAF' 부터 마지막 변화군까지)") },
+      "WEATHER BRIEFING 의 DEPARTURE / ARRIVAL / ALTERNATE WEATHER 에 있는 TAF. DEP=출발, ARR=최종 목적지, ALTN=목적지 교체공항(DEST ALTN). REFILE FLT PLAN 이 있으면 REF=처음 목적지(예 RJTT), REF_ALTN=처음 목적지의 ALTN(예 RJBB) 도 넣음. EDTO 교체공항·ENROUTE WEATHER 는 제외"),
     names: PKG_OBJ({ dest_en: PKG_S("NOTAM PACKAGE 1 의 '[DEST]YSSY/ SYD/ 이름, 도시, 국가' 에서 이름 부분 원문"),
       dest_ko: PKG_S("기내 안내방송 문구용 도착 공항 한국어 이름만 (예 '시드니 국제공항'). 운항 자료가 아님") }, "공항 이름"),
   }, "운항 패키지에서 옮겨 적은 값");
@@ -2325,6 +2335,7 @@ window.csfStat = (() => {
     "",
     "[패키지 구성 참고 — 대한항공·아시아나 공용]",
     "- CFP(OFP): 'CFP PLAN', 'FLIGHT RELEASE ... ON dd/MMM/yy', 연료표(TRIP/RESERVE/ALTN/FINAL RES/3 PCT CONT/REFILE RES/ETP RES/RQD TAKEOFF/DISC/TANKERING/PLN TAKEOFF/TAXI/RAMP OUT/FOD), 중량(AGTOW/SOW/PLD/ZFW/TOF/TOW/LDW 와 MZFW/MTOW/MLDW), 항로 문단, 항법 기록표(DIST/LATITUDE/MC/FL/…/SR/…/ZT), ALTERNATE, 3% CONTINGENCY ERA VALIDATION, EDTO EQUAL TIME POINT DATA",
+    "- REFILE FLT PLAN (있을 때만): 처음 목적지까지 / 재출항 지점에서 최종 목적지까지의 연료표와 별도 항법 기록표",
     "- ATS FPL 사본 '(FPL-...'",
     "- DISPATCH RELEASE INFORMATION: 1. PAX/CARGO RESERVATION, 3. MEL / CDL ITEMS, 4. FUEL BURN ADJUSTMENT, 5. DISPATCH NOTES",
     "- WEATHER BRIEFING: DEPARTURE / ARRIVAL / ALTERNATE / ENROUTE WEATHER 의 TAF",
@@ -2437,7 +2448,7 @@ window.csfStat = (() => {
       const eq = clean(d.equip); for (const k of ["equip", "pbn"]) if (eq[k]) eq[k] = eq[k].replace(/^-\s*/, "");
       return {
         v: 1, meta,
-        flight: clean(d.flight), fuel: clean(d.fuel), route: clean(d.route), alt: clean(d.alt), equip: eq, dispatch: dd, names: clean(d.names),
+        flight: clean(d.flight), fuel: clean(d.fuel), route: clean(d.route), alt: clean(d.alt), refile: clean(d.refile), equip: eq, dispatch: dd, names: clean(d.names),
         navlog: a(d.navlog).map(clean).filter((x) => x.wpt), edto: a(d.edto).map(clean).filter((x) => x.apt), etp: a(d.etp).map(clean).filter((x) => x.name || x.apts),
         wx: a(d.wx).map(clean).filter((x) => x.taf),
       };
@@ -2468,12 +2479,12 @@ window.csfStat = (() => {
     // 숫자 교차 검증 (패키지 숫자끼리 서로 맞는지)
     function checks(R) {
       const f = R.fuel, g = (k) => n0(f[k]), out = [];
-      const eq = (name, a, b) => { if (a == null || b == null) return; out.push(a === b ? { ok: true, t: `${name} 일치` } : { ok: false, t: `${name} 차이 ${a - b > 0 ? "+" : ""}${a - b} — 원본 확인` }); };
+      const eq = (name, a, b) => { if (a == null || b == null) return; out.push(a === b ? { ok: true, t: `${name} 일치` } : { ok: false, t: `${name} 차이 ${a - b > 0 ? "+" : ""}${a - b} - 원본 확인` }); };
       if (g("pln_takeoff") != null && g("taxi") != null) eq("PLN TAKEOFF + TAXI = RAMP OUT", g("pln_takeoff") + g("taxi"), g("ramp_out"));
       if (g("pln_takeoff") != null && g("trip") != null) eq("PLN TAKEOFF - TRIP = FOD", g("pln_takeoff") - g("trip"), g("fod"));
       if (g("zfw") != null && g("pln_takeoff") != null) eq("ZFW + TOF = TOW", g("zfw") + g("pln_takeoff"), g("tow"));
       if (g("tow") != null && g("trip") != null) eq("TOW - TRIP = LDW", g("tow") - g("trip"), g("ldw"));
-      for (const [k, m] of [["zfw", "mzfw"], ["tow", "mtow"], ["tow", "agtow"], ["ldw", "mldw"]]) if (g(k) != null && g(m) != null && g(k) > g(m)) out.push({ ok: false, t: `${k.toUpperCase()} 가 ${m.toUpperCase()} 보다 큼 — 원본 확인` });
+      for (const [k, m] of [["zfw", "mzfw"], ["tow", "mtow"], ["tow", "agtow"], ["ldw", "mldw"]]) if (g(k) != null && g(m) != null && g(k) > g(m)) out.push({ ok: false, t: `${k.toUpperCase()} 가 ${m.toUpperCase()} 보다 큼 - 원본 확인` });
       return out;
     }
     const AIRLINE = {
@@ -2550,20 +2561,58 @@ window.csfStat = (() => {
       return { lines: out, all: keep.every(Boolean) };
     }
     function wxRows(R) {
-      const t = fltTimes(R), rows = [];
-      for (const [role, lbl, key] of [["DEP", "출발(DEP)", "std"], ["ARR", "도착(ARR)", "sta"], ["ALTN", "교체(ALTN)", "sta"]]) {
-        const w = R.wx.find((x) => x.role === role);
-        if (!w) { rows.push([lbl, "패키지에 없음"]); continue; }
-        const f = tafWindow(w.taf, t && t[key]);
+      const t = fltTimes(R), rows = [], F = R.refile || {}, A = R.alt || {};
+      const pick = (role, icao) => R.wx.find((x) => x.role === role && icao && x.icao === icao) || (icao && R.wx.find((x) => x.icao === icao)) || R.wx.find((x) => x.role === role);
+      // 처음 목적지 ETA = STD + 출발지→재출항 지점 시간 + 지점→처음 목적지 시간 (없으면 STA)
+      let refEta = t && t.sta;
+      const a1 = hm2m(F.time_to_point), a2 = hm2m(F.time_point_init);
+      if (t && a1 != null && a2 != null) refEta = t.std + (a1 + a2) * 60000;
+      const list = [["DEP", "출발(DEP)", t && t.std, R.flight.dep], ["ARR", "도착(ARR)", t && t.sta, R.flight.arr], ["ALTN", "교체(ALTN)", t && t.sta, A.dest_altn]];
+      if (F.point) list.push(["REF", "Refile 도착", refEta, F.init_dest], ["REF_ALTN", "Refile 교체", refEta, F.init_altn]);
+      for (const [role, lbl, center, icao] of list) {
+        const w = pick(role, icao);
+        if (!w) { rows.push([icao ? `${lbl}\n${icao}` : lbl, "패키지에 없음"]); continue; }
+        const f = tafWindow(w.taf, center);
         rows.push([`${lbl}\n${w.icao}`, f.none ? `${w.icao} TAF 유효시간이 STD/STA ±2시간을 덮지 않음 (패키지 TAF 기준)` : f.lines.join("\n")]);
       }
       return rows;
+    }
+    // 재출항: 지점 → 최종 목적지, 처음 목적지/교체, 재출항 지점 계획 연료와 필요 연료 비교 (앱 계산)
+    function refileTxt(R) {
+      const f = R.refile || {};
+      if (!f.point) return "-";
+      const pr = n0(f.planned_rf), rq = n0(f.rqrd_final), ri = n0(f.rqrd_init), tp = n0(f.trip_to_point);
+      const pad = (v) => String(v).padStart(4, "0");
+      const head = `${f.point} → ${f.final_dest || "-"} : `;
+      let l1 = `${head}R/F ${f.planned_rf || "-"} / RQRD ${f.rqrd_final || "-"}`;
+      if (pr != null && rq != null) l1 += pr >= rq ? ` → 여유 ${pr - rq}` : ` → 부족 ${rq - pr}`;
+      const L = [l1];
+      if (f.init_dest) L.push(`${" ".repeat(f.point.length + 6)}${f.init_dest} : RQRD ${ri != null && tp != null && ri >= tp ? pad(ri - tp) : "-"}`);
+      return L.join("\n");
+    }
+    // Dispatch Notes 의 늘 같은(루틴) 문구는 출력에서 뺌. 한 줄에 여러 문구가 붙어 와도 그 부분만 지우고, 남는 내용이 있으면 남김
+    const ROUTINE = [
+      /CCF\s*:\s*0+\s*LBS(\s+INCLUDED\s+IN\s+DISC)?/,          // 0 LBS 일 때만 뺌
+      /TANK\s*:\s*0+\s*LBS/,                                   // 0 LBS 일 때만 뺌
+      /DISC\s+FUEL\s+DUE\s+TO\s+DW\s*\(\s*ENRTE\s+WX\s*\)/,
+      /(TURB\s*\/\s*CB\s+)?PLZ\s+USE\s+CAUTION\s+UNEXPECTED\s+EN-?\s*ROUTE\s+CB\s*&\s*TURB/,
+      /PLZ\s+USE\s+CAUTION\s+EXPECTED\s+SIG\s+WX\s*\(\s*REFER\s+TO\s+SIG\s*&\s*TURB\s+CHART\s*\)/,
+      /BE\s+AWARE\s+OF\s+TURBULENCE\s+AREA\s+IN\s+VERTICAL\s+CHART/,
+      /CHECKED\s+ABOVE\s+MEL\s*\(\s*NO\s+RESTRICTION\s+FOR\s+FLT\s+PLANNING\s*\)/,
+    ];
+    function routineOut(arr) {
+      return (arr || []).map((x) => {
+        let t = sv(x);
+        for (const re of ROUTINE) t = t.replace(new RegExp(re.source, "gi"), " ");
+        t = t.replace(/\s{2,}/g, " ").trim();
+        return /[A-Z0-9가-힣]/i.test(t.replace(/^[*\-–•]\s*/, "")) ? t : "";
+      }).filter(Boolean);
     }
     // 화면·PDF 공통: 표 데이터 (화면은 Dispatch Release 까지)
     function tables(R) {
       const F = R.flight, U = R.fuel, A = R.alt, dash = (x) => sv(x) || "-";
       const nd = (a) => (a || []).map((x) => sv(x).replace(/^[-–•]\s*/, "")).filter(Boolean);       // 예전 결과에 남은 줄 앞 '- ' 정리
-      const D = Object.assign({}, R.dispatch, { mel: nd(R.dispatch.mel), fuel_adj: nd(R.dispatch.fuel_adj), notes: nd(R.dispatch.notes) });
+      const D = Object.assign({}, R.dispatch, { mel: nd(R.dispatch.mel), fuel_adj: nd(R.dispatch.fuel_adj), notes: routineOut(nd(R.dispatch.notes)) });
       const m = hm2m(F.trip_time), pa = paTime(F.trip_time);
       const pax = (s) => { const x = sv(s).match(/^(\d+)\s*\/\s*(\d+)$/); return x ? [x[1], x[2]] : [sv(s), ""]; };
       const pf = pax(D.first), pc = pax(D.business), py = pax(D.economy);
@@ -2575,7 +2624,7 @@ window.csfStat = (() => {
         ["AGTOW", "ZFW", "TOW", "MTOW", "LDW"], [U.agtow, U.zfw, U.tow, U.mtow, U.ldw]], checks: checks(R) });
       T.push({ t: "Route", type: "text", p: R.route.page, text: [R.route.cfp, R.route.atc].filter(Boolean).join("\n") });
       T.push({ t: "Cruise FL / SR≥04 구간", type: "kv", rows: [["Cruise FL 변화", cruise(R).join(" → ")], ["SR≥04 구간", srSegs(R).join("\n") || "없음"]] });
-      T.push({ t: "Alternate / EDTO / Refile Point", type: "kv", p: A.page, rows: [["DEST ALTN / 3% ERA", `${dash(A.dest_altn)} / ${dash(A.era3)}`], ["Refile FLT", dash(A.refile)],
+      T.push({ t: "Alternate / EDTO / Refile Point", type: "kv", p: A.page, rows: [["DEST ALTN / 3% ERA", `${dash(A.dest_altn)} / ${dash(A.era3)}`], ["Refile FLT", refileTxt(R)],
         ["EDTO / ENR ALTN", R.edto.map((e) => `${e.apt}: ${e.from} UTC ~ ${e.to} UTC`).join("\n") || "-"]],
         grid: R.etp.length ? [["ETP", "교체공항", "CFR", "FOB", "Different"], ...R.etp.map((e) => [e.name, e.apts, `${e.cfr}${e.time ? "(" + e.time + ")" : ""}`, e.fob, e.exc])] : null });
       T.push({ t: "Equipment / PBN Codes", type: "kv", rows: [["장비코드", sv(R.equip.equip).replace(/^-\s*/, "")], ["PBN", sv(R.equip.pbn).replace(/^-\s*/, "")]] });
@@ -2599,7 +2648,7 @@ window.csfStat = (() => {
         if (T.type === "kv") h += `<div class="pr-kv2">${T.rows.map((r) => `<span class="k">${esc(r[0])}</span><span class="v${r[2] === "red" ? " red" : ""}">${v(r[1])}</span>`).join("")}</div>`;
         if (T.type === "text") h += `<div class="pr-txt">${v(T.text)}</div>`;
         if (T.type === "grid" || T.grid) { const G = T.type === "grid" ? T.rows : T.grid; h += `<div class="pr-grid" style="grid-template-columns:repeat(${G[0].length},minmax(0,1fr))">${G.map((r, i) => r.map((c) => `<span class="${(T.type === "grid" ? i % 2 === 0 : i === 0) ? "h" : "c"}">${v(c)}</span>`).join("")).join("")}</div>`; }
-        if (T.checks) for (const c of T.checks) h += `<div class="pr-chk ${c.ok ? "ok" : "bad"}">${c.ok ? "✓" : "!"} ${esc(c.t)}</div>`;
+        if (T.checks) for (const c of T.checks.filter((x) => !x.ok)) h += `<div class="pr-chk ${c.ok ? "ok" : "bad"}">${c.ok ? "✓" : "!"} ${esc(c.t)}</div>`;
         h += `</div>`;
       }
       h += `<div class="pr-sec"><small class="pr-more">기상 · 안내방송 · NOTAM 은 요약 PDF 에 들어 있습니다.</small></div>`;
@@ -2673,6 +2722,8 @@ window.csfStat = (() => {
         if (T.type === "text") text(L, T.text, 6.8);
         if (T.type === "grid") grid(L, T.rows, (i) => i % 2 === 0);
         if (T.grid) grid(L, T.grid, (i) => i === 0, [0.8, 1.3, 1.6, 1, 1.1]);
+        const bad = (T.checks || []).filter((x) => !x.ok);   // 연료·중량 내부 검증: 다를 때만 빨간 글씨로
+        if (bad.length) kv(L, bad.map((x) => ["검증", x.t, "red"]));
         gap(L);
       }
       // 오른쪽: 기상 → 안내방송 → NOTAM (요약 기준이 정해질 때까지 원문 참조)
