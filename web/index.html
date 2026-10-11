@@ -546,6 +546,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 .cm-plus { font-size: 13px; font-weight: 700; color: var(--muted); }
 .cm-base input[type=time] { font: 700 16px var(--mono); color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 4px 6px; }
 .cm-day { font-size: 12px; font-weight: 700; color: var(--accent); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; cursor: pointer; }
+.cm-area[hidden] { display: none; }
 .cm-area { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .cm-area button { font: inherit; font-size: 13px; font-weight: 600; padding: 5px 10px; border-radius: 99px; border: 1px solid var(--line); background: var(--panel-2); color: var(--muted); cursor: pointer; }
 .cm-area button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
@@ -566,7 +567,129 @@ body[data-tab="oz"] #alTabs { display: none; }
 .cm-more { display: block; width: 100%; margin-top: 8px; font: inherit; font-size: 14px; padding: 9px; border-radius: 10px; border: 1px dashed var(--line); background: none; color: var(--accent); cursor: pointer; }
 .cm-src { margin-top: 10px; font-size: 12px; color: var(--muted); }
 .cm-rno { font-size: 13px; font-weight: 600; color: var(--muted); margin-left: 4px; }
+.cm-badge[hidden] { display: none; }
 .cm-badge.ok { color: var(--ok); border-color: var(--ok); }
+.sh-list.go { padding: 0 10px; max-height: 232px; scroll-padding-top: 48px; }
+.sh-gh, .sh-gr { display: grid; grid-template-columns: 34px 1fr 1fr 1fr; gap: 6px; align-items: center; }
+.sh-gh { position: sticky; top: 0; z-index: 1; background: var(--panel); padding: 7px 0 5px; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 700; color: var(--muted); text-align: center; }
+.sh-gh small { display: block; font-size: 10px; font-weight: 500; }
+.sh-gr { padding: 8px 0; border-top: 1px solid var(--line); scroll-snap-align: start; min-height: 46px; }
+.sh-gr:nth-child(2) { border-top: 0; }
+.sh-gr .sh-r { justify-self: start; font-size: 12px; padding: 1px 5px; }
+.sh-gr .c { text-align: center; line-height: 1.2; }
+.sh-gr .c b { display: block; font: 700 19px var(--mono); }
+.sh-gr .c small { font-size: 11px; font-weight: 700; color: var(--accent); }
+.sh-gr .c.past b { color: var(--muted); text-decoration: line-through; opacity: .6; } .sh-gr .c.past small { color: var(--muted); }
+.sh-gr .c.t2 b { font-size: 17px; color: var(--muted); } .sh-gr .c.t2 small { color: var(--muted); font-weight: 500; }
+.sh-now > div + div { margin-top: 4px; }
+.sh-list.t1 .sh-gh, .sh-list.t1 .sh-gr { grid-template-columns: 34px 1fr 1fr; }
+.sh-map .m-term { fill: none; stroke: var(--line); stroke-width: 26; stroke-linecap: round; }
+.sh-map .m-stop.term rect { fill: var(--accent); }
+.m-key.t { background: var(--accent); }
+.cm-rt.rt { background: var(--accent-soft); }
+.rt-hd { font-size: 15px; } .rt-hd small { display: block; font-size: 11px; color: var(--muted); }
+.rt-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin-top: 6px; }
+.rt-row .bn { font: 800 15px var(--mono); padding: 1px 6px; border-radius: 6px; background: var(--panel); }
+.rt-row .m { font: 800 22px var(--mono); color: var(--accent); }
+.rt-row + .rt-row .m { font-size: 17px; color: var(--text); }
+.rt-row .sub { font-size: 13px; color: var(--muted); }
+.sh-mapwrap { position: relative; }
+#cmShPosNote { font-size: 12px; line-height: 1.5; margin-top: 4px; }
+#cmShPosNote:empty { display: none; }
+.sh-now { font-size: 16px; }
+.sh-ov { position: absolute; left: 1.6%; top: 3%; width: 76%; box-sizing: border-box; padding: 5px 9px; border-radius: 10px; background: var(--panel); border: 1.5px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.sh-ov .sh-now.big { margin: 0; padding: 0; background: none; font-size: clamp(13px, 4.1vw, 16px); font-weight: 600; white-space: nowrap; }
+.sh-ov .sh-now.big .sh-r { font-size: .85em; }
+.sh-ov .sh-meta { margin-top: 2px; font-size: clamp(9.5px, 2.7vw, 11px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.35; color: var(--muted); }
+.sh-park { position: absolute; left: 1.6%; top: 4.5%; width: 72%; padding: 6px 8px; border-radius: 10px; background: var(--panel); border: 1.5px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.sh-park .hd { font-size: 12px; font-weight: 800; color: var(--accent); white-space: nowrap; overflow: hidden; }
+.sh-park .hd small { font-weight: 600; color: var(--muted); margin-left: 4px; }
+.sh-park .pk-r { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+.sh-park .pk-seg { display: flex; flex: 0 0 auto; border: 1.5px solid var(--line); border-radius: 8px; overflow: hidden; }
+.sh-park .pk-seg button { font: 800 15px var(--mono); padding: 5px 9px; border: 0; background: var(--panel-2); color: var(--muted); cursor: pointer; }
+.sh-park .pk-seg button + button { border-left: 1.5px solid var(--line); }
+.sh-park .pk-seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.sh-park input { flex: 1 1 auto; min-width: 0; width: 60px; font: 800 19px var(--mono); letter-spacing: 3px; text-align: center; padding: 3px 4px; border-radius: 8px; border: 1.5px solid var(--line); background: var(--panel-2); color: var(--text); }
+.sh-park input:focus { outline: none; border-color: var(--accent); }
+.sh-park .x { flex: 0 0 auto; font: inherit; font-size: 12px; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: none; color: var(--muted); cursor: pointer; }
+.sh-park .x[hidden] { display: none; }
+.sh-dirrow { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 6px; min-height: 34px; }
+.sh-dirrow .cm-sub { margin-top: 0; flex: 0 0 auto; }
+#cmShuttle { position: relative; }
+#cmShuttle.has-park .cm-hd, #cmShuttle.has-park .sh-dirrow { padding-right: 166px; }
+#cmShuttle.has-park .cm-hd h3 { font-size: 16.5px; white-space: nowrap; letter-spacing: -.3px; } #cmShuttle.has-park .lp { display: none; }
+#cmShuttle.has-park .sh-dirrow { min-height: 40px; margin-top: 4px; }
+.sh-park.hd-park { left: auto; right: 14px; top: 10px; width: 158px; box-sizing: border-box; padding: 5px 7px; box-shadow: none; background: var(--accent-soft); }
+.sh-park[hidden] { display: none; }
+.sh-park .hd { display: flex; align-items: center; gap: 4px; }
+.sh-park .hd .x { margin-left: auto; padding: 0 5px; font-size: 11px; line-height: 18px; }
+.sh-park.hd-park .pk-seg button { padding: 4px 7px; font-size: 14px; }
+.sh-park.hd-park input { font-size: 18px; letter-spacing: 2px; padding: 2px 2px; }
+#cmShuttle.has-car .cm-hd, #cmShuttle.has-car .sh-dirrow { padding-right: 124px; }
+#cmShuttle.has-car .cm-hd h3 { font-size: 16.5px; white-space: nowrap; letter-spacing: -.3px; } #cmShuttle.has-car .cm-rno { display: none; }
+#cmShuttle.has-car .sh-dirrow { min-height: 36px; margin-top: 4px; }
+@media (max-width: 350px) { #cmShuttle.has-car .lp { display: none; } }
+.sh-mycar { position: absolute; top: 10px; right: 14px; width: 116px; box-sizing: border-box; text-align: center; padding: 5px 6px; border-radius: 12px; background: var(--accent-soft); border: 1.5px solid var(--accent); }
+.sh-mycar[hidden] { display: none; }
+.sh-mycar b { display: block; font: 800 21px var(--mono); line-height: 1.2; white-space: nowrap; }
+.sh-mycar small { display: block; font-size: 11px; color: var(--muted); white-space: nowrap; line-height: 1.3; }
+.sh-mycar small.l { color: var(--accent); font-weight: 800; }
+.sh-pick[hidden] { display: none; }
+.sh-list { max-height: 196px; overflow-y: auto; overscroll-behavior: contain; margin-top: 8px; border: 1px solid var(--line); border-radius: 12px; padding: 0 12px; scroll-snap-type: y mandatory; }
+.sh-list .cm-dep { scroll-snap-align: start; min-height: 45px; }
+.sh-now { margin-top: 10px; padding: 9px 12px; border-radius: 12px; background: var(--accent-soft); font-size: 15px; }
+.sh-now b { font-family: var(--mono); }
+.sh-map { display: block; width: 100%; height: auto; margin-top: 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+.sh-map .m-road { fill: none; stroke: var(--line); stroke-width: 18; stroke-linejoin: round; }
+.sh-map .m-lot { fill: var(--panel-2); stroke: var(--line); stroke-width: 2; }
+.sh-map .m-blk { fill: var(--line); opacity: .75; }
+.sh-map .m-bt { font: 600 12px system-ui, sans-serif; fill: var(--muted); text-anchor: middle; }
+.sh-map .m-bt.b { font-size: 22px; font-weight: 800; opacity: .8; }
+.sh-map .m-cap { font: 800 19px system-ui, sans-serif; fill: var(--muted); text-anchor: middle; }
+.sh-map .m-route { fill: none; stroke: #F0A15A; stroke-width: 5; stroke-dasharray: 10 8; stroke-linejoin: round; opacity: .9; }
+.sh-map .m-t2 { fill: var(--accent); } .sh-map .m-t2.me { stroke: #111; stroke-width: 3; }
+.sh-map .m-t2t { font: 800 22px system-ui, sans-serif; fill: #fff; text-anchor: middle; }
+.sh-map .m-stop rect { fill: #E8710A; } .sh-map .m-stop text { font: 800 21px system-ui, sans-serif; fill: #fff; text-anchor: middle; }
+.sh-map .m-stop.me rect { stroke: var(--text); stroke-width: 5; }
+.sh-map .m-bus .bd { fill: #1F2F6B; stroke: #fff; stroke-width: 3; stroke-linejoin: round; } .sh-map .m-bus .ws { fill: #BFD3FF; } .sh-map .m-bus .wh { fill: #222; stroke: #fff; stroke-width: 2.5; }
+.sh-map .m-bus text { font: 800 25px var(--mono); letter-spacing: -1px; fill: #fff; text-anchor: middle; }
+.sh-legend { margin-top: 6px; font-size: 12px; color: var(--muted); line-height: 1.8; }
+.sh-legend .sh-r { font-size: 11px; padding: 0 5px; }
+.m-key { display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: #E8710A; box-shadow: 0 0 0 2px var(--text); vertical-align: -1px; }
+.sh-buses { margin-top: 8px; display: grid; gap: 4px; font-size: 13px; }
+.sh-buses > div { display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 8px; background: var(--panel-2); }
+.sh-buses small { margin-left: auto; font: 600 12px var(--mono); color: var(--muted); }
+.sh-pick { align-items: center; }
+.sh-pick span { flex: 0 0 auto; font-size: 14px; font-weight: 700; color: var(--muted); }
+.sh-r { display: inline-block; font: 700 13px var(--mono); padding: 1px 7px; border-radius: 6px; color: #fff; background: var(--accent); white-space: nowrap; }
+.sh-r { background: #1F2F6B; }
+.sh-seg { display: flex; flex: 1; gap: 8px; }
+.sh-seg button { flex: 1; font: inherit; padding: 8px 6px; border-radius: 12px; border: 2px solid var(--line); background: var(--panel-2); color: var(--text); cursor: pointer; line-height: 1.25; }
+.sh-seg button b { display: block; font-size: 17px; }
+.sh-seg button small { font-size: 12px; color: var(--muted); }
+.sh-seg button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.sh-seg button[aria-pressed="true"] b { color: var(--accent); }
+.sh-legend .m-key-bus { display: inline-block; width: 30px; height: 20px; margin: 0; border: 0; background: none; vertical-align: -5px; }
+.sh-dep .lo { font-size: 13px; margin-top: 2px; }
+.sh-dep .lo b { font-family: var(--mono); color: var(--text); }
+.sh-dep .lo em { font-style: normal; color: #D93025; font-weight: 600; }
+.sh-line { margin-top: 10px; position: relative; padding-left: 4px; }
+.sh-st { position: relative; display: flex; align-items: flex-start; gap: 10px; padding: 6px 0 6px 22px; min-height: 30px; }
+.sh-st::before { content: ""; position: absolute; left: 7px; top: 0; bottom: 0; width: 3px; background: var(--line); }
+.sh-st:first-child::before { top: 14px; } .sh-st:last-child::before { bottom: calc(100% - 14px); }
+.sh-st > i { position: absolute; left: 2px; top: 9px; width: 13px; height: 13px; border-radius: 50%; background: var(--panel); border: 3px solid var(--accent); box-sizing: border-box; }
+.sh-st.term > i { background: var(--accent); }
+.sh-st b { font-size: 15px; white-space: nowrap; } .sh-st small { display: block; font-size: 12px; color: var(--muted); }
+.sh-st em { font-style: normal; font-size: 11px; font-weight: 700; color: var(--accent-ink); background: var(--accent); border-radius: 5px; padding: 0 5px; margin-left: 4px; }
+.sh-st.me b, .sh-st.to b { color: var(--accent); }
+.sh-st > div:first-of-type { flex: 1 1 auto; min-width: 0; }
+.sh-at { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+.sh-gap { position: relative; display: flex; flex-direction: column; gap: 3px; padding: 4px 0 4px 22px; }
+.sh-gap::before { content: ""; position: absolute; left: 7px; top: 0; bottom: 0; width: 3px; background: var(--accent); opacity: .35; }
+.sh-bus { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 13px; padding: 3px 8px; border-radius: 8px; background: var(--panel-2); border: 1px solid var(--line); align-self: flex-start; }
+.sh-at .sh-bus { align-self: flex-end; }
+.sh-bus b { font-family: var(--mono); }
+.sh-bus small { font: 600 12px var(--mono); color: var(--muted); }
 .cm-sh { margin-top: 8px; font-size: 15px; line-height: 1.6; }
 .cm-sh .gap { display: flex; align-items: baseline; gap: 8px; padding: 10px 12px; border-radius: 12px; background: var(--panel-2); margin-top: 8px; }
 .cm-sh .gap b { font: 700 22px var(--mono); color: var(--accent); }
@@ -699,7 +822,7 @@ body[data-tab="oz"] #alTabs { display: none; }
       <button type="button" class="b cm-nowbtn" id="cmRefresh" hidden>지금 시각으로 돌아가기</button>
     </div>
 
-    <div class="card cm-card">
+    <div class="card cm-card" id="cmBusCard">
       <div class="cm-hd"><h3 id="cmBusTitle">공항버스</h3><span class="cm-badge" id="cmBadge" hidden>준비 중</span></div>
       <div class="cm-row">
         <input id="cmBus" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="버스 번호" aria-label="버스 번호 (예: 6001)">
@@ -712,9 +835,15 @@ body[data-tab="oz"] #alTabs { display: none; }
     </div>
 
     <div class="card cm-card" id="cmShuttle">
-      <div class="cm-hd"><h3>장기주차장 ↔ T2 셔틀 <small class="cm-rno">공항02 · 무료</small></h3><span class="cm-badge ok">24시간</span></div>
-      <div class="cm-sub" id="cmShDir"></div>
+      <div class="cm-hd"><h3 id="cmShTitle">장기주차장 ↔ T2 셔틀 <small class="cm-rno">무료</small></h3><span class="cm-badge ok" id="cmShBadge">24시간</span></div>
+      <div class="sh-dirrow"><div class="cm-sub" id="cmShDir"></div><div class="sh-mycar" id="cmCarShow" hidden></div></div>
       <div id="cmShBody"></div>
+    </div>
+
+    <div class="card cm-card" id="cmShPos">
+      <div class="cm-hd"><h3>셔틀 위치</h3><span class="cm-badge">시간표 기준 추정</span></div>
+      <div class="cm-note" id="cmShPosNote"></div>
+      <div id="cmShLine"></div>
     </div>
   </section>
   <section class="panel" id="panel-pk" role="tabpanel" aria-labelledby="tab-pk" hidden>
@@ -903,7 +1032,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 // 보내지 않는 것: 검색한 편명·공항, 이름, 위치. 오프라인이면 모아 두었다가 인터넷 연결 시 전송.
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
-  const VER = "v39", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v40", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -2181,10 +2310,13 @@ window.UID = (() => {
   const $ = (id) => document.getElementById(id);
   const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const K = "csf-cm", BK = "csf-bus";
-  let st = { mode: "go", bus: "", area: "", day: "" }; try { st = Object.assign(st, JSON.parse(ls.get(K) || "{}")); } catch (e) {}
+  const K = "csf-cm", BK = "csf-bus", SK = "csf-bs";
+  // 공항버스 실시간 도착 중계 (Google Apps Script 웹 앱, 공공데이터 키는 그 스크립트 속성에만 있음) - tools/bus_relay.gs
+  const BUS_RELAY = ls.get("csf-relay") || "https://script.google.com/macros/s/AKfycbzTAeL3aNCqJmxqog74kBSE5nhEfoeXI3xEFBwj4bY6nDm9XsfW-4dtoy0q4qRvxbNP/exec";
+  let st = { mode: "go", bus: "", area: "", day: "", sh: "L3", shTo: "L3" }; try { st = Object.assign(st, JSON.parse(ls.get(K) || "{}")); } catch (e) {}
   const save = () => ls.set(K, JSON.stringify(st));
   let BUS = null; try { BUS = JSON.parse(ls.get(BK) || "null"); } catch (e) {}
+  let BS = null; try { BS = JSON.parse(ls.get(SK) || "null"); } catch (e) {}   // 노선별 공항 방향 정류장 ID (busstops.json)
   const p2 = (n) => String(n).padStart(2, "0");
   // 한국 시각 기준 (기기 시간대와 무관)
   const kst = () => new Date(Date.now() + 9 * 3600e3);
@@ -2205,6 +2337,9 @@ window.UID = (() => {
     if (!location.protocol.startsWith("http")) return;
     fetch("bus.json?t=" + Date.now(), { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).then((d) => {
       if (d && Array.isArray(d.routes) && (!BUS || d.generated > BUS.generated)) { BUS = d; ls.set(BK, JSON.stringify(d)); paint(); }
+    }).catch(() => {});
+    fetch("busstops.json?t=" + Date.now(), { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).then((d) => {
+      if (d && d.routes && (!BS || d.generated > BS.generated)) { BS = d; ls.set(SK, JSON.stringify(d)); paint(); }
     }).catch(() => {});
   }
   // 기준 시각부터 60분 안의 출발 (자정 넘어가면 다음 날 시간표)
@@ -2238,11 +2373,38 @@ window.UID = (() => {
       <div class="in">${nowish ? (wait <= 0 ? "곧 출발" : `${wait}분 후`) : `+${wait}분`}${x.last ? "<small>막차</small>" : ""}</div></div>`;
   };
   const isNow = () => follow;
+  // ----- 출근: 공항버스 실시간 도착 (온라인일 때만) -----
+  let rtRoute = null, rtData = null, rtBusy = false;
+  const rtSel = () => { if (!rtRoute || !BS || !BS.routes[rtRoute.n]) return null; const b = BS.routes[rtRoute.n], id = (st.gs || {})[rtRoute.n]; const x = id && b.stops.find((s) => String(s[1]) === String(id)); return x ? { src: b.src, rid: b.id, stop: x, key: rtRoute.n + "|" + x[1] } : null; };
+  function rtHtml() {
+    const sel = rtSel(), num = rtRoute ? split(rtRoute.n)[0] : "";
+    if (!sel) return `<b>실시간 도착</b><br>위에서 <b>탑승 정류장</b>을 고르면 버스가 몇 분 후에 오는지 보여 줍니다.`;
+    let h = `<div class="rt-hd"><b>${esc(sel.stop[2])}</b> 실시간 도착${rtData && rtData.key === sel.key && rtData.at ? `<small>${rtData.at} 기준 · 30초마다 갱신</small>` : ""}</div>`;
+    if (!BUS_RELAY) return h + `<div class="cm-note" style="margin-top:4px">실시간 도착 연결을 준비 중입니다 (관리자 설정 후 표시).</div>`;
+    if (!navigator.onLine) return h + `<div class="cm-note" style="margin-top:4px">인터넷에 연결되면 표시합니다.</div>`;
+    const d = rtData && rtData.key === sel.key ? rtData : null;
+    if (!d) return h + `<div class="cm-note" style="margin-top:4px">불러오는 중…</div>`;
+    if (d.err) return h + `<div class="cm-note" style="margin-top:4px">지금은 실시간 정보를 받지 못했습니다. 잠시 후 다시 시도합니다.</div>`;
+    if (!d.b.length) return h + `<div class="cm-note" style="margin-top:4px">${esc(d.msg || "도착 예정 버스 없음")}</div>`;
+    return h + d.b.map((x, i) => `<div class="rt-row"><span class="bn">${esc(num)}</span><span class="m">${x.m <= 1 ? "곧 도착" : `${x.m}분 후`}</span><span class="sub">${x.left != null ? (x.left ? `${x.left}정류장 전` : "곧 도착") : ""}${x.seat != null ? ` · 빈자리 ${x.seat}` : ""}${x.last ? " · <b>막차</b>" : ""}${i ? " · 다음 버스" : ""}</span></div>`).join("");
+  }
+  function rtPaint() { const el = document.getElementById("cmRt"); if (el) el.innerHTML = rtHtml(); }
+  function rtFetch(force) {
+    const sel = rtSel();
+    if (!sel || !BUS_RELAY || !navigator.onLine || rtBusy) return rtPaint();
+    if (!force && rtData && rtData.key === sel.key && Date.now() - rtData.t < 25000) return rtPaint();
+    rtBusy = true; rtPaint();
+    const u = `${BUS_RELAY}?s=${sel.src}&r=${encodeURIComponent(sel.rid)}&st=${encodeURIComponent(sel.stop[1])}&o=${sel.stop[0]}`;
+    fetch(u, { cache: "no-store" }).then((r) => r.json()).then((d) => {
+      const k = kst();
+      rtData = { key: sel.key, t: Date.now(), at: `${p2(k.getUTCHours())}:${p2(k.getUTCMinutes())}:${p2(k.getUTCSeconds())}`, b: d && d.ok ? d.b || [] : [], msg: d && d.msg, err: !(d && d.ok) };
+    }).catch(() => { rtData = { key: sel.key, t: Date.now(), err: true }; }).finally(() => { rtBusy = false; rtPaint(); });
+  }
   function routeCard(r, term) {
     const [num, lab] = split(r.n), T = r[term];
     const tel = (r.cp.match(/\(([\d\-~]+)\)/) || [])[1];
     let h = `<div class="cm-rt"><b>${esc(num)}</b> ${esc(lab)} · ${esc(r.a)} · ${esc(r.c)} · ${esc((r.f || "").split(",")[0])}원<br>`;
-    if (term === "go") h += `정류장 도착 시각은 실시간 도착 연결 후 표시됩니다.<br>`;
+    if (term === "go") { /* 출근: 실시간 도착 칸이 따로 있음 */ }
     else if (T) { const n = nextAfter(r, term); h += `${term === "t1" ? "T1" : "T2"} 첫차 <b>${fmt(hm(T.first || T.wd[0]))}</b> · 막차 <b>${fmt(hm(T.last || T.wd[T.wd.length - 1]))}</b> · 승차 ${esc(T.lo || "-")}<br>`;
       if (n) h += `다음 출발 <b>${fmt(hm(n.t))}</b>${n.dd ? (n.dd === 1 ? " (내일)" : " (모레)") : ""}<br>`; }
     else h += `${term === "t1" ? "T1" : "T2"}에서 출발하지 않는 노선입니다.<br>`;
@@ -2250,21 +2412,229 @@ window.UID = (() => {
     if (r.s.length) h += `<details><summary>정류장 ${r.s.length}곳</summary><div>${r.s.map(esc).join(" → ")}</div></details>`;
     return h + `</div>`;
   }
-  // 장기주차장 ↔ T2 셔틀 (공항02): 공공데이터·공사 홈페이지 모두 분 단위 시간표가 없어 확인된 운행 정보만 표시
-  // 분 단위 시간표를 받으면 SHUTTLE.times 에 넣으면 1시간 목록으로 바뀜
-  const SHUTTLE = {
-    gap: "6~30분", round: "왕복 약 30분", tel: "032-741-3217",
-    t2: "제2여객터미널 1층 중앙 5~6번 출입구 앞",
-    lot: ["정비단지 앞 탑승장 (07~19시만)", "주차구역 E", "주차구역 F", "1번 탑승장 (B113)", "2번 탑승장 (D122)", "3번 탑승장 (남측 주차타워)", "4번 탑승장 (북측 주차타워)", "5번 탑승장 (B121)"],
-    times: null,                                       // { go: {wd:[...], we:[...]}, t2: {...} } 형식 (HHMM)
-  };
+  // ===== 장기주차장 ↔ T2 셔틀 (공항02 순환 + 공항03: 같은 정류장 정차 후 T2 거쳐 다른 곳으로) =====
+  // 시간표: 인천공항 순환버스 시간표 (정류장별 xlsx) → tools/shuttle_xlsx.py 로 갱신
+  // 02: 예약주차장1 시각(r1)에서 정류장 간격이 일정 → 나머지 정류장은 계산. t2 = 터미널 도착(=다음 출발) 시각
+  // 03: 차고지 → 장기3·4·5 → T2 3층 7번 출입구 → (다른 곳으로 계속). x3 = 장기3, x5 = 장기5
+  // 시각은 분 (24:xx 는 1440+ = 다음 날 00:xx, 같은 운행일)
+  const SHD = /*SHUTTLE_DATA*/{"from":"260213","r1":[60,90,150,180,210,240,245,250,255,260,265,270,275,280,285,290,295,300,306,312,318,324,330,336,342,348,354,359,365,371,377,383,389,395,401,407,413,419,424,429,434,439,443,449,454,459,464,469,474,479,484,489,494,499,504,509,514,519,524,529,535,541,547,553,559,565,571,577,583,589,595,600,605,610,615,620,625,630,635,640,645,650,655,660,665,670,675,680,686,692,698,704,710,716,722,728,734,740,746,752,758,764,770,776,781,786,791,796,801,806,811,816,821,826,831,836,841,846,851,856,861,867,873,879,885,891,897,903,909,915,921,927,933,939,945,951,957,962,967,972,977,982,987,992,997,1002,1007,1012,1018,1024,1030,1036,1042,1048,1054,1060,1066,1072,1078,1083,1088,1093,1098,1103,1108,1113,1118,1123,1128,1133,1139,1145,1151,1157,1163,1169,1175,1181,1187,1193,1199,1205,1211,1217,1223,1229,1235,1241,1247,1253,1259,1265,1271,1277,1283,1289,1295,1301,1307,1313,1319,1325,1331,1337,1343,1349,1355,1361,1367,1373,1379,1385,1391,1397,1403,1409,1415,1421,1427,1433,1440,1470],"t2":[81,111,171,201,231,261,266,271,276,281,286,291,296,301,306,311,316,321,327,333,339,345,351,357,363,369,375,380,386,392,398,404,410,416,422,428,434,440,445,450,455,460,464,470,475,480,485,490,495,500,505,510,515,520,525,530,535,540,545,550,556,562,568,574,580,586,592,598,604,610,616,621,626,631,636,641,646,651,656,661,666,671,676,681,686,691,696,701,707,713,719,725,731,737,743,749,755,761,767,773,779,785,791,797,802,807,812,817,822,827,832,837,842,847,852,857,862,867,872,877,882,888,894,900,906,912,918,924,930,936,942,948,954,960,966,972,978,983,988,993,998,1003,1008,1013,1018,1023,1028,1033,1039,1045,1051,1057,1063,1069,1075,1081,1087,1093,1099,1104,1109,1114,1119,1124,1129,1134,1139,1144,1149,1154,1160,1166,1172,1178,1184,1190,1196,1204,1209,1214,1220,1226,1232,1238,1244,1250,1256,1264,1269,1274,1280,1286,1292,1298,1304,1310,1316,1324,1329,1334,1340,1346,1352,1358,1364,1370,1376,1384,1389,1394,1400,1406,1412,1418,1424,1430,1436,1442,1448,1454,1461,1491],"mt":[426,432,438,444,449,454,459,464,468,474,479,484,489,494,499,504,509,514,519,524,529,534,539,544,549,554,560,566,572,578,584,590,596,602,608,614,620,625,630,635,640,645,650,655,660,665,670,675,680,685,690,695,700,705,711,717,723,729,735,741,747,753,759,765,771,777,783,789,795,801,806,811,816,821,826,831,836,841,846,851,856,861,866,871,876,881,886,892,898,904,910,916,922,928,934,940,946,952,958,964,970,976,982,987,992,997,1002,1007,1012,1017,1022,1027,1032,1037,1043,1049,1055,1061,1067,1073,1079,1085,1091,1097,1103,1108,1113,1118,1123,1128,1133,1138,1143],"x3":[275,287,299,311,323,335,348,361,374,387,400,413,426,439,453,463,474,483,492,509,526,543,560,577,594,611,628,645,662,679,696,713,730,747,764,781,798,815,832,849,866,883,900,917,934,951,968,985,1002,1019,1036,1046,1054,1061,1078,1093,1101,1115,1130,1145,1160,1175,1190,1205,1220,1235,1250,1265,1280,1295,1310,1325,1345,1365,1385,1405,1420],"x5":[279,291,303,315,327,339,352,365,378,391,404,417,430,443,457,467,478,487,496,513,530,547,564,581,598,615,632,649,666,683,700,717,734,751,768,785,802,819,836,853,870,887,904,921,938,955,972,989,1006,1023,1040,1050,1058,1065,1082,1097,1105,1119,1134,1149,1164,1179,1194,1209,1224,1239,1254,1269,1284,1299,1314,1329,1346,1369,1389,1409,1424]}/*END*/;
+  const SH_ST = [
+    ["T2", "T2 출발", "1층 5번 출입구"], ["MT", "정비단지", "07~19시만 정차"], ["R1", "예약주차장 1", "서편"], ["R2", "예약주차장 2", "동편"],
+    ["L1", "장기 1", "주차구역 B"], ["L2", "장기 2", "주차구역 D"], ["L3", "장기 3", "남측 주차타워"], ["L4", "장기 4", "북측 주차타워"],
+    ["L5", "장기 5", "주차구역 A"], ["T2E", "T2 도착", "02: 1층 5번 · 03: 3층 7번"],
+  ];
+  const SH_NAME = Object.fromEntries(SH_ST.map(([k, n, d]) => [k, n]));
+  const SH_OFF = { R1: 0, R2: 2, L1: 7, L2: 9, L3: 11, L4: 12, L5: 15 };
+  const SH_TRIPS = (() => {
+    const mt = new Set(SHD.mt), out = [];
+    SHD.r1.forEach((r, k) => {
+      const m = mt.has(r - 5), p = [["T2", r - (m ? 9 : 4)]];
+      if (m) p.push(["MT", r - 5]);
+      for (const s in SH_OFF) p.push([s, r + SH_OFF[s]]);
+      p.push(["T2E", Math.max(SHD.t2[k] || 0, r + 21)]);
+      out.push({ r: "02", p });
+    });
+    SHD.x3.forEach((e, i) => {
+      const f = Math.max(SHD.x5[i] || 0, e + 4);           // 원본 1곳 오타(장기4=장기5) 보정
+      out.push({ r: "03", p: [["DEPOT", e - 9], ["L3", e], ["L4", e + 1], ["L5", f], ["T2E", f + 6]] });
+    });
+    return out;
+  })();
+  const shAt = (tr, k) => (tr.p.find((x) => x[0] === k) || [])[1];
+  const shBadge = (r) => `<span class="sh-r">${r}</span>`;
+  const shKeyOk = (k) => SH_OFF[k] != null || k === "MT";
+  // 시간표 시각 t 를 조회 창 [from, to) 안의 연속 분으로 (전날 24:xx·다음 날 포함)
+  const inWin = (t, from, to) => { for (const o of [0, -1440, 1440]) { const m = t + o; if (m >= from && m < to) return m; } return null; };
+  // 출발 목록: 조회 시각 이후 다음 12편 (스크롤 상자, 3편씩 보임)
+  // 출발 목록: 조회 시각 이후 다음 12편 (스크롤 상자, 3편씩 보임)
+  // 출근: 한 줄 = 버스 1대 (장기3 · 장기5 · T2 도착), 퇴근 T2: T2 출발
+  function shuttleDeps(mode) {
+    const from = base.min, out = [];
+    if (mode === "go") {
+      for (const tr of SH_TRIPS) for (const o of [-1440, 0, 1440]) {
+        const l3 = shAt(tr, "L3") + o, l5 = shAt(tr, "L5") + o, t2 = shAt(tr, "T2E") + o;
+        if (l5 >= from && l3 < from + 1440) out.push({ m: l3, l3, l5, t2, r: tr.r });
+      }
+    } else if (mode === "t1") {
+      for (const c of SHD1.c3) for (const o of [-1440, 0, 1440]) { const c3 = c + o, c13 = c3 + T1_OFF.C13; if (c13 >= from && c3 < from + 1440) out.push({ m: c3, c3, c13, r: "01" }); }
+    } else for (const s of SHD.t2) for (const o of [-1440, 0, 1440]) { const m = s + o; if (m >= from && m < from + 1440) out.push({ m, r: "02" }); }
+    return out.sort((a, b) => a.m - b.m).slice(0, 12);
+  }
+  const waitTxt = (w) => w <= 0 && isNow() ? "곧 출발" : (isNow() ? "" : "+") + (w >= 60 ? `${Math.floor(w / 60)}시간 ${w % 60}분` : `${w}분`) + (isNow() ? " 후" : "");
   function shuttleHtml(mode) {
-    const S = SHUTTLE;
-    let h = `<div class="cm-sh"><div class="gap"><span>배차</span><b>${S.gap}</b><span>${S.round} · 24시간</span></div>`;
-    if (mode === "go") h += `<div style="margin-top:8px"><b>타는 곳:</b> 장기주차장 탑승장 (순서대로 정차)</div><ul class="cm-stops">${S.lot.map((x) => `<li>${esc(x)}</li>`).join("")}<li class="end"><b>제2여객터미널</b> 1층 5~6번 출입구</li></ul>`;
-    else h += `<div style="margin-top:8px"><b>타는 곳:</b> ${esc(S.t2)}</div><div class="cm-note" style="margin-top:4px">장기주차장 탑승장 1~5번 순서로 정차합니다.</div>`;
-    h += `<div class="cm-note">분 단위 시간표와 실시간 위치는 공공데이터에 없어 아직 표시하지 못합니다. 셔틀 운영사무실 <a href="tel:${S.tel}">${S.tel}</a></div></div>`;
+    const deps = shuttleDeps(mode);
+    let h;
+    if (mode === "go") {
+      const cell = (t) => { const w = t - base.min; return `<div class="c${w < 0 ? " past" : ""}"><b>${fmt(t % 1440)}</b><small>${w < 0 ? "지나감" : waitTxt(w)}</small></div>`; };
+      h = `<div class="sh-list go"><div class="sh-gh"><span></span><span>장기3<small>남측 주차타워</small></span><span>장기5<small>주차구역 A</small></span><span>T2 도착</span></div>` + deps.map((x) =>
+        `<div class="sh-gr">${shBadge(x.r)}${cell(x.l3)}${cell(x.l5)}<div class="c t2"><b>${fmt(x.t2 % 1440)}</b><small>${x.r === "03" ? "3층 7번" : "1층 5번"}</small></div></div>`).join("") + `</div>`;
+    } else if (mode === "t1") {
+      const cell = (t) => { const w = t - base.min; return `<div class="c${w < 0 ? " past" : ""}"><b>${fmt(t % 1440)}</b><small>${w < 0 ? "지나감" : waitTxt(w)}</small></div>`; };
+      h = `<div class="sh-list go t1"><div class="sh-gh"><span></span><span>3C<small>1층 3번 출입구 길 건너</small></span><span>13C<small>1층 13번 출입구 길 건너</small></span></div>` + deps.map((x) =>
+        `<div class="sh-gr">${shBadge(x.r)}${cell(x.c3)}${cell(x.c13)}</div>`).join("") + `</div>`;
+    } else {
+      h = `<div class="sh-list">` + deps.map((x) => `<div class="cm-dep sh-dep"><div class="t">${fmt(x.m % 1440)}</div><div><div class="bn">${shBadge(x.r)}</div><div class="lo">장기주차장 방면</div></div>
+        <div class="in">${waitTxt(x.m - base.min)}</div></div>`).join("") + `</div>`;
+    }
+    if (!deps.length) h = `<div class="cm-note">출발 예정 셔틀이 없습니다.</div>`;
+    if (mode === "go") h += `<div class="cm-note"><span class="sh-r">03</span> 번은 같은 정류장에 정차한 뒤 T2 <b>3층 7번 출입구</b>를 거쳐 다른 곳으로 이동하는 차량입니다. 출근할 때 타도 됩니다.</div>`;
+    else if (mode === "t1") h += `<div class="cm-note">01번: 3C 출발 → 13C (3분) → 장기주차장 탑승장 1~7 → 3C, 한 바퀴 약 16분 · 04:30~23:42 운행</div>`;
+    else h += `<div class="cm-note">타는 곳: <b>T2 1층 5번 출입구</b> 앞 · 운영사무실 <a href="tel:032-741-3217">032-741-3217</a></div>`;
     return h;
+  }
+  // ----- 장기주차장 지도 (탑승장 안내도를 단순화해 직접 그린 그림) -----
+  // 02 운행 경로: T2 → 정비단지 → 예약주차장 1·2 → 장기 1~5 → T2. 경로 위 점 + 정류장 키
+  const SH_PATH = [
+    ["T2", -18, 492], [0, 45, 492], [0, 45, 528], ["MT", 225, 528], [0, 557, 528], [0, 557, 243], [0, 680, 243], [0, 680, 125],
+    ["R1", 619, 125], ["R2", 619, 190], [0, 619, 243], [0, 213, 243], ["DEPOT", 213, 268], ["L1", 213, 312], [0, 213, 350],
+    ["L2", 358, 350], ["L3", 459, 350], ["L4", 494, 350], [0, 528, 350], [0, 528, 442], ["L5", 135, 442], [0, 45, 442], [0, 45, 466], ["T2E", -18, 466],
+  ];
+  const mkLen = (path) => { let L = 0, prev = null; const at = {}; const pts = path.map(([k, x, y]) => { if (prev) L += Math.hypot(x - prev[0], y - prev[1]); prev = [x, y]; if (k) at[k] = L; return { x, y, L }; }); return { pts, at }; };
+  const SH_LEN = mkLen(SH_PATH);
+  function shXY(len, LN = SH_LEN) {
+    const p = LN.pts;
+    for (let i = 1; i < p.length; i++) if (len <= p[i].L) { const a = p[i - 1], b = p[i], f = (len - a.L) / ((b.L - a.L) || 1); return [a.x + (b.x - a.x) * f, a.y + (b.y - a.y) * f]; }
+    return [p[p.length - 1].x, p[p.length - 1].y];
+  }
+  // 시간표로 계산한 버스 위치 (GPS 아님)
+  function shuttleBuses(now, trips = SH_TRIPS, LN = SH_LEN, endK = "T2E") {
+    const out = [];
+    for (const tr of trips) for (const o of [0, 1440]) {
+      const n = now + o, p = tr.p;
+      if (n < p[0][1] || n >= p[p.length - 1][1]) continue;
+      let i = 0; while (n >= p[i + 1][1]) i++;
+      const a = p[i], b = p[i + 1], f = (n - a[1]) / (b[1] - a[1]);
+      const stop = i > 0 && n - a[1] < 1 ? a[0] : null;
+      out.push({ r: tr.r, xy: shXY(stop ? LN.at[stop] : LN.at[a[0]] + (LN.at[b[0]] - LN.at[a[0]]) * f, LN), stop, from: a[0], to: b[0], eta: Math.max(1, Math.ceil(b[1] - n)), t2e: shAt(tr, endK) - o, mine: (k) => { const t = shAt(tr, k); return t != null && t - o >= n ? t - o - n : null; } });
+    }
+    return out;
+  }
+  const SH_LBL = { T2: "T2", MT: "정비", R1: "예1", R2: "예2", L1: "1", L2: "2", L3: "3", L4: "4", L5: "5" };
+  // 버스 그림 (옆모습: 창문 5칸 + 앞유리 + 바퀴 2개, 차체 아래쪽에 노선 번호)
+  const SH_BUS = `<path class="bd" d="M-36 -22h62q8 0 10 8l3 14v15q0 6-6 6h-69q-6 0-6-6v-31q0-6 6-6z"/>`
+    + [-31, -19, -7, 5].map((x) => `<rect class="ws" x="${x}" y="-18" width="10" height="8" rx="2"/>`).join("")
+    + `<path class="ws" d="M17 -18h9q4 0 5 4l1 4h-15z"/><circle class="wh" cx="-22" cy="21" r="6"/><circle class="wh" cx="22" cy="21" r="6"/>`;
+  function mapSvg(buses, me) {
+    const road = (d) => `<path d="${d}" class="m-road"/>`;
+    let s = `<svg class="sh-map" viewBox="-44 64 738 500" role="img" aria-label="장기주차장 셔틀 버스 위치">`;
+    // 도로
+    s += road("M-40 243H695 M557 75V540 M680 75V540 M-40 480H695 M45 440V528H557 M528 350V442");
+    // 장기주차장 구역
+    s += `<rect x="42" y="268" width="490" height="182" rx="14" class="m-lot"/>`;
+    // 구역 (A~E 열, P1·P2) - 작은 화면에서도 보이게 글자만 크게
+    for (const [c, x] of [["A", 63], ["B", 140], ["C", 218], ["D", 295], ["E", 373]]) for (const y of [286, 364])
+      s += `<rect x="${x}" y="${y}" width="65" height="60" rx="5" class="m-blk"/><text x="${x + 32.5}" y="${y + 38}" class="m-bt b">${c}</text>`;
+    s += `<rect x="445" y="286" width="68" height="138" rx="5" class="m-blk"/><text x="479" y="330" class="m-bt b">P1</text><text x="479" y="400" class="m-bt b">P2</text>`;
+    // 예약주차장
+    s += `<rect x="572" y="92" width="94" height="128" rx="8" class="m-lot"/>`;
+    for (const [t, x, y] of [["D·E", 575, 125], ["C·B", 645, 125], ["F", 575, 190], ["A", 645, 190]]) s += `<text x="${x}" y="${y + 6}" class="m-bt b" style="font-size:15px">${t}</text>`;
+    s += `<text x="619" y="86" class="m-cap">예약주차장</text><text x="380" y="232" class="m-cap">장기주차장</text>`;
+    // 경로 화살표 (진행 방향)
+    s += `<path d="${SH_PATH.map(([, x, y], i) => (i ? "L" : "M") + x + " " + y).join("")}" class="m-route"/>`;
+    // T2
+    s += `<rect x="-40" y="446" width="46" height="66" rx="8" class="m-t2${me.includes("T2") ? " me" : ""}"/><text x="-17" y="487" class="m-t2t">T2</text>`;
+    // 정류장
+    for (const k of ["MT", "R1", "R2", "L1", "L2", "L3", "L4", "L5"]) {
+      const [x, y] = shXY(SH_LEN.at[k]), w = SH_LBL[k].length > 1 ? 48 : 30;
+      s += `<g class="m-stop${me.includes(k) ? " me" : ""}"><rect x="${x - w / 2}" y="${y - 15}" width="${w}" height="30" rx="6"/><text x="${x}" y="${y + 8}">${SH_LBL[k]}</text></g>`;
+    }
+    s += `<text x="330" y="557" class="m-cap">정비단지 (07~19시)</text>`;
+    // 버스
+    for (const b of buses) {
+      const [x, y] = b.xy;
+      s += `<g class="m-bus" transform="translate(${x.toFixed(1)} ${(y - 27).toFixed(1)}) scale(.6)">${SH_BUS}<text x="1" y="14">${esc(b.r)}</text></g>`;
+    }
+    return s + `</svg>`;
+  }
+  // ===== T1 ↔ 장기주차장 셔틀 (공항01): 3C 출발 → 13C (+3) → 탑승장 1~7 → 3C (+16), 정류장 간격 일정 =====
+  const SHD1 = /*SHUTTLE1_DATA*/{"from":"260114","c3":[270,286,302,318,334,350,366,374,382,390,398,406,422,438,454,470,486,502,518,534,550,566,582,598,614,630,646,662,678,694,710,726,742,758,774,790,806,822,838,854,870,886,902,918,934,950,966,982,998,1014,1030,1046,1062,1078,1094,1110,1126,1142,1158,1174,1190,1206,1222,1238,1246,1254,1262,1270,1278,1286,1294,1310,1326,1342,1358,1374,1390,1406,1422]}/*END1*/;
+  const T1_OFF = { C13: 3, S1: 6, S2: 7, S3: 8, S4: 10, S5: 11, S6: 12, S7: 13, C3E: 16 };
+  const T1_TRIPS = SHD1.c3.map((t) => ({ r: "01", p: [["C3", t], ...Object.entries(T1_OFF).map(([k, o]) => [k, t + o])] }));
+  const T1_PATH = [
+    ["C3", 372, 118], ["C13", 228, 118], [0, 252, 118], [0, 252, 150], ["S1", 420, 150], [0, 522, 150], ["S2", 522, 222], [0, 522, 292],
+    ["S3", 400, 292], ["S4", 222, 292], ["S5", 152, 292], [0, 88, 292], ["S6", 88, 222], [0, 88, 150], ["S7", 182, 150], [0, 300, 150], [0, 300, 118], ["C3E", 372, 118],
+  ];
+  const T1_LEN = mkLen(T1_PATH);
+  const T1_NAME = { C3: "3C", C3E: "3C", C13: "13C", S1: "탑승장1", S2: "탑승장2", S3: "탑승장3", S4: "탑승장4", S5: "탑승장5", S6: "탑승장6", S7: "탑승장7" };
+  function t1MapSvg(buses, me) {
+    const road = (d) => `<path d="${d}" class="m-road"/>`;
+    let s = `<svg class="sh-map" viewBox="50 20 510 310" role="img" aria-label="T1 장기주차장 셔틀 버스 위치">`;
+    s += `<path d="M120 104 Q300 18 480 104" class="m-term"/><text x="300" y="66" class="m-cap">제1여객터미널</text>`;
+    s += road("M140 125H460 M252 125V150 M300 125V150") + `<rect x="88" y="150" width="434" height="142" rx="34" class="m-road" style="fill:none"/>`;
+    s += `<rect x="112" y="172" width="176" height="98" rx="12" class="m-lot"/><text x="200" y="230" class="m-bt b">P2 서측</text>`;
+    s += `<rect x="322" y="172" width="176" height="98" rx="12" class="m-lot"/><text x="410" y="230" class="m-bt b">P1 동측</text>`;
+    s += `<path d="${T1_PATH.map(([, x, y], i) => (i ? "L" : "M") + x + " " + y).join("")}" class="m-route"/>`;
+    for (const k of ["C3", "C13"]) { const [x, y] = shXY(T1_LEN.at[k], T1_LEN); s += `<g class="m-stop term${me.includes(k) ? " me" : ""}"><rect x="${x - 26}" y="${y - 15}" width="52" height="30" rx="8"/><text x="${x}" y="${y + 8}">${T1_NAME[k]}</text></g>`; }
+    for (let i = 1; i <= 7; i++) { const [x, y] = shXY(T1_LEN.at["S" + i], T1_LEN); s += `<g class="m-stop"><rect x="${x - 15}" y="${y - 15}" width="30" height="30" rx="6"/><text x="${x}" y="${y + 8}">${i}</text></g>`; }
+    for (const b of buses) { const [x, y] = b.xy; s += `<g class="m-bus" transform="translate(${x.toFixed(1)} ${(y - 27).toFixed(1)}) scale(.6)">${SH_BUS}<text x="1" y="14">${esc(b.r)}</text></g>`; }
+    return s + `</svg>`;
+  }
+  function posHtml() {
+    const k = kst(), now = follow ? k.getUTCHours() * 60 + k.getUTCMinutes() + k.getUTCSeconds() / 60 : base.min;
+    if (st.mode === "t1") return posHtmlT1(now);
+    const me = st.mode === "go" ? ["L3", "L5"] : ["T2"], buses = shuttleBuses(now);
+    const nm = (x) => ({ T2: "T2", T2E: "T2", DEPOT: "차고지", MT: "정비단지", R1: "예약1", R2: "예약2" })[x] || SH_NAME[x].replace(" ", "");
+    // 내 정류장에 다음으로 오는 버스
+    const nextAt = (k) => buses.map((b) => ({ b, w: b.mine(k === "T2" ? "T2E" : k) })).filter((x) => x.w != null).sort((a, c) => a.w - c.w)[0];
+    let nowH = `<div class="sh-now">` + me.map((k) => { const n = nextAt(k); return `<div>${n ? `${shBadge(n.b.r)} <b>${nm(k)}</b>에 <b>${Math.max(0, Math.round(n.w))}분</b> 후 도착 예상` : `<b>${nm(k)}</b> 쪽으로 오는 셔틀이 지금 없습니다`}</div>`; }).join("") + `</div>`;
+    const note = `<b>${fmt(Math.floor(now) % 1440)}</b> 기준 · 운행 중 ${buses.length}대 · 시간표로 계산한 예상 위치 (실제 GPS 아님)${follow ? " · 자동 갱신" : ""}`;
+    const noteS = `${fmt(Math.floor(now) % 1440)} 기준 · ${buses.length}대 운행 · 예상 위치 (GPS 아님)`;
+    let h;
+    if (st.mode !== "t1") {                               // 출근·퇴근 T2: 지도 왼쪽 위 빈 곳에 겹쳐 표시
+      h = `<div class="sh-mapwrap">${mapSvg(buses, me)}<div class="sh-ov">${nowH.replace('class="sh-now"', 'class="sh-now big"')}<div class="sh-meta">${noteS}</div></div></div>`;
+      $("cmShPosNote").innerHTML = "";
+    } else {
+      h = nowH + `<div class="sh-mapwrap">${mapSvg(buses, me)}</div>`;
+      $("cmShPosNote").innerHTML = note;
+    }
+    h += `<div class="sh-legend"><svg class="m-key-bus sh-map" viewBox="-42 -26 84 54"><g class="m-bus">${SH_BUS}</g></svg> 셔틀 · <span class="m-key"></span> 탑승장 (테두리: 내 정류장)</div>`;
+    h += `<div class="sh-buses">` + buses.sort((a, c) => a.t2e - c.t2e).map((b) => `<div>${shBadge(b.r)} ${b.stop ? `<b>${nm(b.stop)}</b> 정차 중` : `${nm(b.from)} → <b>${nm(b.to)}</b> ${b.eta}분`}<small>T2 ${fmt(Math.round(b.t2e) % 1440)}</small></div>`).join("") + `</div>`;
+    return h;
+  }
+  function posHtmlT1(now) {
+    const me = ["C3", "C13"], buses = shuttleBuses(now, T1_TRIPS, T1_LEN, "C3E"), nm = (x) => T1_NAME[x];
+    const nextAt = (k) => buses.map((b) => ({ b, w: b.mine(k === "C3" ? "C3E" : k) })).filter((x) => x.w != null).sort((a, c) => a.w - c.w)[0];
+    let h = `<div class="sh-now">` + me.map((k) => { const n = nextAt(k); return `<div>${n ? `${shBadge(n.b.r)} <b>${nm(k)}</b>에 <b>${Math.max(0, Math.round(n.w))}분</b> 후 도착 예상` : `<b>${nm(k)}</b> 쪽으로 오는 셔틀이 지금 없습니다`}</div>`; }).join("") + `</div>`;
+    h += t1MapSvg(buses, me);
+    h += `<div class="sh-legend"><svg class="m-key-bus sh-map" viewBox="-42 -26 84 54"><g class="m-bus">${SH_BUS}</g></svg> 셔틀 · <span class="m-key t"></span> 터미널 타는 곳 · <span class="m-key"></span> 장기주차장 탑승장</div>`;
+    h += `<div class="sh-buses">` + buses.sort((a, c) => a.t2e - c.t2e).map((b) => `<div>${shBadge(b.r)} ${b.stop ? `<b>${nm(b.stop)}</b> 정차 중` : `${nm(b.from)} → <b>${nm(b.to)}</b> ${b.eta}분`}<small>3C ${fmt(Math.round(b.t2e) % 1440)}</small></div>`).join("") + `</div>`;
+    $("cmShPosNote").innerHTML = `<b>${fmt(Math.floor(now) % 1440)}</b> 기준 · 운행 중 ${buses.length}대 · 시간표로 계산한 예상 위치 (실제 GPS 아님)${follow ? " · 자동 갱신" : ""}`;
+    return h;
+  }
+  // ----- 내 주차 위치: 출근 지도 빈 곳에 입력 → 퇴근 T2 셔틀 시간표 위에 표시 (이 기기에만 저장) -----
+  const PK = "csf-park";
+  let car = null; try { car = JSON.parse(ls.get(PK) || "null"); } catch (e) {}
+  const carTxt = () => car && (car.z || car.n) ? `${car.z || ""} ${car.n || ""}`.trim() : "";
+  const carWhen = () => { if (!car || !car.at) return ""; const d = new Date(car.at + 9 * 3600e3), k = kst(); const same = d.getUTCDate() === k.getUTCDate() && d.getUTCMonth() === k.getUTCMonth(); return `${same ? "오늘" : `${d.getUTCMonth() + 1}/${d.getUTCDate()}`} ${p2(d.getUTCHours())}:${p2(d.getUTCMinutes())} 저장`; };
+  const parkEl = document.createElement("div");
+  parkEl.className = "sh-park hd-park";
+  $("cmShuttle").appendChild(parkEl);                  // 출근: 셔틀 카드 오른쪽 위 (제목 두 줄 높이)
+  parkEl.innerHTML = `<div class="hd">내 주차 위치 <small id="cmParkAt"></small><button type="button" class="x" id="cmParkClr" aria-label="지우기">지움</button></div>
+    <div class="pk-r"><div class="pk-seg" role="group" aria-label="주차장">${["P1", "P2"].map((z) => `<button type="button" data-z="${z}">${z}</button>`).join("")}</div>
+    <input id="cmParkNo" inputmode="numeric" pattern="[0-9]*" maxlength="3" placeholder="000" autocomplete="off" aria-label="주차 구역 번호 3자리">
+    </div>`;
+  function paintPark() {
+    parkEl.querySelectorAll("[data-z]").forEach((b) => b.setAttribute("aria-pressed", !!car && car.z === b.dataset.z));
+    const inp = parkEl.querySelector("#cmParkNo"); if (document.activeElement !== inp) inp.value = car?.n || "";
+    parkEl.querySelector("#cmParkAt").textContent = carWhen().replace("오늘 ", "").replace(" 저장", "");
+    parkEl.querySelector("#cmParkClr").hidden = !carTxt();
+    const show = $("cmCarShow"), t = carTxt();
+    show.hidden = st.mode !== "t2" || !t;
+    if (t) show.innerHTML = `<small class="l">내 차 위치</small><b>${esc(t)}</b><small>${esc(carWhen().replace(" 저장", "").replace("오늘 ", ""))} 저장</small>`;
+    $("cmShuttle").classList.toggle("has-car", !show.hidden);
+    parkEl.hidden = st.mode !== "go";
+    $("cmShuttle").classList.toggle("has-park", st.mode === "go");
+  }
+  const saveCar = () => { if (car && !car.z && !car.n) car = null; if (car) car.at = Date.now(); ls.set(PK, JSON.stringify(car)); paintPark(); };
+  parkEl.addEventListener("click", (e) => {
+    const z = e.target.closest("[data-z]"); if (z) { car = Object.assign(car || {}, { z: car?.z === z.dataset.z ? "" : z.dataset.z }); saveCar(); return; }
+    if (e.target.id === "cmParkClr") { car = null; ls.set(PK, "null"); paintPark(); }
+  });
+  parkEl.querySelector("#cmParkNo").addEventListener("input", (e) => { const v = e.target.value.replace(/\D/g, "").slice(0, 3); e.target.value = v; car = Object.assign(car || {}, { n: v }); saveCar(); });
+  function renderPos() {
+    $("cmShLine").innerHTML = posHtml();
+    const w = $("cmShLine").querySelector(".sh-mapwrap");
+    paintPark();
   }
   let showAll = false;
   function paint() {
@@ -2279,23 +2649,39 @@ window.UID = (() => {
     $("cmArea").innerHTML = AREAS.map(([v, l]) => `<button type="button" data-a="${v}" aria-pressed="${st.area === v}">${l}</button>`).join("");
     $("cmArea").hidden = st.mode === "go";
     $("cmStop").hidden = st.mode !== "go";
-    $("cmShuttle").hidden = st.mode === "t1";
-    $("cmShDir").textContent = st.mode === "go" ? "장기주차장 출발 → T2" : "T2 출발 → 장기주차장";
-    $("cmShBody").innerHTML = shuttleHtml(st.mode);
+    $("cmShuttle").hidden = false;
+    $("cmShPos").hidden = false;
+    $("cmShTitle").innerHTML = st.mode === "t1" ? `장기주차장 ↔ T1 셔틀 <small class="cm-rno">공항01 · 무료</small>` : `<span class="lp">장기주차장 ↔ </span>T2 셔틀 <small class="cm-rno">무료</small>`;
+    $("cmShBadge").textContent = st.mode === "t1" ? "04:30~23:42" : "24시간";
+    $("cmShBadge").hidden = st.mode !== "t1";
+    {
+      $("cmShDir").textContent = st.mode === "t1" ? "T1 출발 시각" : st.mode === "go" ? "장기3·5 → T2" : "T2 출발 시각";
+      $("cmShBody").innerHTML = shuttleHtml(st.mode);
+      renderPos();
+    }
     if ($("cmBus").value !== st.bus) $("cmBus").value = st.bus;
     $("cmBusTitle").textContent = st.mode === "go" ? "공항버스 · 출근" : `공항버스 · ${st.mode === "t1" ? "T1" : "T2"} 출발`;
     $("cmBadge").hidden = st.mode !== "go";
+    $("cmBadge").textContent = BUS_RELAY ? "실시간" : "준비 중"; $("cmBadge").classList.toggle("ok", !!BUS_RELAY);
     $("cmSrc").textContent = BUS ? `인천국제공항공사 공항버스 시간표 · ${new Date(BUS.generated).toLocaleDateString("ko-KR")} 받음` : "";
     if (!BUS) { $("cmBusNote").textContent = "시간표가 아직 없습니다. 인터넷에 연결된 상태에서 이 화면을 한 번 열어 주세요."; $("cmBusList").innerHTML = ""; return; }
     const hits = BUS.routes.filter((r) => match(r) && (st.mode === "go" || inArea(r)));
     if (st.mode === "go") {
       const one = q() ? hits.find((r) => split(r.n)[0].toUpperCase() === q()) || (hits.length === 1 ? hits[0] : null) : null;
-      const stops = one ? one.s.filter((x) => !/인천공항|공항[12]?터미널|T[12]/.test(x)) : [];
-      const cur = $("cmStop").value;
-      $("cmStop").innerHTML = `<option value="">${one ? "탑승 정류장" : "버스 번호 먼저"}</option>` + stops.map((x) => `<option${x === cur ? " selected" : ""}>${esc(x)}</option>`).join("");
+      const bs = one && BS && BS.routes[one.n];
+      rtRoute = one;
+      if (bs) {                                         // 정류장 ID 가 있는 노선 (서울·경기): 실시간 도착 가능
+        const cur = (st.gs || {})[one.n] || "";
+        $("cmStop").innerHTML = `<option value="">탑승 정류장 (공항 방향)</option>` + bs.stops.map((x) => `<option value="${esc(x[1])}"${String(x[1]) === String(cur) ? " selected" : ""}>${esc(x[2])}${x[3] ? ` (${esc(x[3])})` : ""}</option>`).join("");
+      } else {
+        const stops = one ? one.s.filter((x) => !/인천공항|공항[12]?터미널|T[12]/.test(x)) : [];
+        const cur = $("cmStop").value;
+        $("cmStop").innerHTML = `<option value="">${one ? "탑승 정류장" : "버스 번호 먼저"}</option>` + stops.map((x) => `<option${x === cur ? " selected" : ""}>${esc(x)}</option>`).join("");
+      }
       $("cmStop").disabled = !one;
-      $("cmBusNote").textContent = one ? "정류장 실시간 도착(몇 분 후)은 다음 단계에서 연결합니다. 지금은 노선 정보와 첫차·막차를 보여 줍니다." : q() ? (hits.length ? `일치하는 노선 ${hits.length}개 — 번호를 정확히 넣어 주세요: ${hits.slice(0, 8).map((r) => split(r.n)[0]).join(", ")}` : "일치하는 공항버스 노선이 없습니다.") : "타는 공항버스 번호를 넣어 주세요 (예: 6001).";
-      $("cmBusList").innerHTML = one ? routeCard(one, "go") : "";
+      $("cmBusNote").textContent = one ? (bs ? "" : "이 노선은 실시간 도착 정보가 없습니다 (서울·경기 노선만 지원). 노선 정보와 첫차·막차를 보여 줍니다.") : q() ? (hits.length ? `일치하는 노선 ${hits.length}개 — 번호를 정확히 넣어 주세요: ${hits.slice(0, 8).map((r) => split(r.n)[0]).join(", ")}` : "일치하는 공항버스 노선이 없습니다.") : "타는 공항버스 번호를 넣어 주세요 (예: 6001).";
+      $("cmBusList").innerHTML = one ? (bs ? `<div class="cm-rt rt" id="cmRt">${rtHtml()}</div>` : "") + routeCard(one, "go") : "";
+      if (bs) rtFetch();
       return;
     }
     const term = st.mode, deps = departures(term);
@@ -2307,6 +2693,9 @@ window.UID = (() => {
     $("cmBusList").innerHTML = h;
   }
   $("cmMode").addEventListener("click", (e) => { const b = e.target.closest("button[data-cm]"); if (!b) return; st.mode = b.dataset.cm; showAll = false; save(); paint(); });
+  $("cmStop").addEventListener("change", () => { if (st.mode !== "go" || !rtRoute) return; st.gs = Object.assign(st.gs || {}, { [rtRoute.n]: $("cmStop").value }); save(); rtData = null; rtFetch(true); });
+  setInterval(() => { if (document.body.dataset.tab === "cm" && st.mode === "go" && !document.hidden && rtSel()) rtFetch(); }, 30000);   // 실시간 도착 30초마다
+  window.addEventListener("online", () => rtFetch(true)); window.addEventListener("offline", rtPaint);
   $("cmArea").addEventListener("click", (e) => { const b = e.target.closest("button[data-a]"); if (!b) return; st.area = b.dataset.a; showAll = false; save(); paint(); });
   $("cmBus").addEventListener("input", () => { st.bus = $("cmBus").value; showAll = false; save(); paint(); });
   $("cmBusList").addEventListener("click", (e) => { if (e.target.id === "cmMore") { showAll = true; paint(); } });
@@ -2321,7 +2710,8 @@ window.UID = (() => {
     follow = false; paint();
   }));
   $("tab-cm").addEventListener("click", () => { setNow(); load(); paint(); });
-  setInterval(() => { if (document.body.dataset.tab === "cm" && follow && $("cmTime") !== document.activeElement) { setNow(); paint(); } }, 30000);   // '지금' 기준이면 계속 따라감
+  setInterval(() => { if (document.body.dataset.tab === "cm" && follow && $("cmTime") !== document.activeElement) { setNow(); paint(); } }, 30000);
+  setInterval(() => { if (document.body.dataset.tab === "cm" && follow && !document.hidden && !parkEl.contains(document.activeElement)) renderPos(); }, 5000);   // 셔틀 위치는 5초마다   // '지금' 기준이면 계속 따라감
   paint(); load();
 })();
 </script>
