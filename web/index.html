@@ -546,6 +546,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 .cm-plus { font-size: 13px; font-weight: 700; color: var(--muted); }
 .cm-base input[type=time] { font: 700 16px var(--mono); color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 4px 6px; }
 .cm-day { font-size: 12px; font-weight: 700; color: var(--accent); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; cursor: pointer; }
+.cm-area[hidden] { display: none; }
 .cm-area { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .cm-area button { font: inherit; font-size: 13px; font-weight: 600; padding: 5px 10px; border-radius: 99px; border: 1px solid var(--line); background: var(--panel-2); color: var(--muted); cursor: pointer; }
 .cm-area button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
@@ -585,6 +586,13 @@ body[data-tab="oz"] #alTabs { display: none; }
 .sh-map .m-term { fill: none; stroke: var(--line); stroke-width: 26; stroke-linecap: round; }
 .sh-map .m-stop.term rect { fill: var(--accent); }
 .m-key.t { background: var(--accent); }
+.cm-rt.rt { background: var(--accent-soft); }
+.rt-hd { font-size: 15px; } .rt-hd small { display: block; font-size: 11px; color: var(--muted); }
+.rt-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin-top: 6px; }
+.rt-row .bn { font: 800 15px var(--mono); padding: 1px 6px; border-radius: 6px; background: var(--panel); }
+.rt-row .m { font: 800 22px var(--mono); color: var(--accent); }
+.rt-row + .rt-row .m { font-size: 17px; color: var(--text); }
+.rt-row .sub { font-size: 13px; color: var(--muted); }
 .sh-mapwrap { position: relative; }
 #cmShPosNote { font-size: 12px; line-height: 1.5; margin-top: 4px; }
 #cmShPosNote:empty { display: none; }
@@ -2302,10 +2310,13 @@ window.UID = (() => {
   const $ = (id) => document.getElementById(id);
   const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const K = "csf-cm", BK = "csf-bus";
+  const K = "csf-cm", BK = "csf-bus", SK = "csf-bs";
+  // 공항버스 실시간 도착 중계 (Google Apps Script 웹 앱, 공공데이터 키는 그 스크립트 속성에만 있음) - tools/bus_relay.gs
+  const BUS_RELAY = ls.get("csf-relay") || "";       // 시험용으로 localStorage csf-relay 로 바꿀 수 있음
   let st = { mode: "go", bus: "", area: "", day: "", sh: "L3", shTo: "L3" }; try { st = Object.assign(st, JSON.parse(ls.get(K) || "{}")); } catch (e) {}
   const save = () => ls.set(K, JSON.stringify(st));
   let BUS = null; try { BUS = JSON.parse(ls.get(BK) || "null"); } catch (e) {}
+  let BS = null; try { BS = JSON.parse(ls.get(SK) || "null"); } catch (e) {}   // 노선별 공항 방향 정류장 ID (busstops.json)
   const p2 = (n) => String(n).padStart(2, "0");
   // 한국 시각 기준 (기기 시간대와 무관)
   const kst = () => new Date(Date.now() + 9 * 3600e3);
@@ -2326,6 +2337,9 @@ window.UID = (() => {
     if (!location.protocol.startsWith("http")) return;
     fetch("bus.json?t=" + Date.now(), { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).then((d) => {
       if (d && Array.isArray(d.routes) && (!BUS || d.generated > BUS.generated)) { BUS = d; ls.set(BK, JSON.stringify(d)); paint(); }
+    }).catch(() => {});
+    fetch("busstops.json?t=" + Date.now(), { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).then((d) => {
+      if (d && d.routes && (!BS || d.generated > BS.generated)) { BS = d; ls.set(SK, JSON.stringify(d)); paint(); }
     }).catch(() => {});
   }
   // 기준 시각부터 60분 안의 출발 (자정 넘어가면 다음 날 시간표)
@@ -2359,11 +2373,38 @@ window.UID = (() => {
       <div class="in">${nowish ? (wait <= 0 ? "곧 출발" : `${wait}분 후`) : `+${wait}분`}${x.last ? "<small>막차</small>" : ""}</div></div>`;
   };
   const isNow = () => follow;
+  // ----- 출근: 공항버스 실시간 도착 (온라인일 때만) -----
+  let rtRoute = null, rtData = null, rtBusy = false;
+  const rtSel = () => { if (!rtRoute || !BS || !BS.routes[rtRoute.n]) return null; const b = BS.routes[rtRoute.n], id = (st.gs || {})[rtRoute.n]; const x = id && b.stops.find((s) => String(s[1]) === String(id)); return x ? { src: b.src, rid: b.id, stop: x, key: rtRoute.n + "|" + x[1] } : null; };
+  function rtHtml() {
+    const sel = rtSel(), num = rtRoute ? split(rtRoute.n)[0] : "";
+    if (!sel) return `<b>실시간 도착</b><br>위에서 <b>탑승 정류장</b>을 고르면 버스가 몇 분 후에 오는지 보여 줍니다.`;
+    let h = `<div class="rt-hd"><b>${esc(sel.stop[2])}</b> 실시간 도착${rtData && rtData.key === sel.key && rtData.at ? `<small>${rtData.at} 기준 · 30초마다 갱신</small>` : ""}</div>`;
+    if (!BUS_RELAY) return h + `<div class="cm-note" style="margin-top:4px">실시간 도착 연결을 준비 중입니다 (관리자 설정 후 표시).</div>`;
+    if (!navigator.onLine) return h + `<div class="cm-note" style="margin-top:4px">인터넷에 연결되면 표시합니다.</div>`;
+    const d = rtData && rtData.key === sel.key ? rtData : null;
+    if (!d) return h + `<div class="cm-note" style="margin-top:4px">불러오는 중…</div>`;
+    if (d.err) return h + `<div class="cm-note" style="margin-top:4px">지금은 실시간 정보를 받지 못했습니다. 잠시 후 다시 시도합니다.</div>`;
+    if (!d.b.length) return h + `<div class="cm-note" style="margin-top:4px">${esc(d.msg || "도착 예정 버스 없음")}</div>`;
+    return h + d.b.map((x, i) => `<div class="rt-row"><span class="bn">${esc(num)}</span><span class="m">${x.m <= 1 ? "곧 도착" : `${x.m}분 후`}</span><span class="sub">${x.left != null ? (x.left ? `${x.left}정류장 전` : "곧 도착") : ""}${x.seat != null ? ` · 빈자리 ${x.seat}` : ""}${x.last ? " · <b>막차</b>" : ""}${i ? " · 다음 버스" : ""}</span></div>`).join("");
+  }
+  function rtPaint() { const el = document.getElementById("cmRt"); if (el) el.innerHTML = rtHtml(); }
+  function rtFetch(force) {
+    const sel = rtSel();
+    if (!sel || !BUS_RELAY || !navigator.onLine || rtBusy) return rtPaint();
+    if (!force && rtData && rtData.key === sel.key && Date.now() - rtData.t < 25000) return rtPaint();
+    rtBusy = true; rtPaint();
+    const u = `${BUS_RELAY}?s=${sel.src}&r=${encodeURIComponent(sel.rid)}&st=${encodeURIComponent(sel.stop[1])}&o=${sel.stop[0]}`;
+    fetch(u, { cache: "no-store" }).then((r) => r.json()).then((d) => {
+      const k = kst();
+      rtData = { key: sel.key, t: Date.now(), at: `${p2(k.getUTCHours())}:${p2(k.getUTCMinutes())}:${p2(k.getUTCSeconds())}`, b: d && d.ok ? d.b || [] : [], msg: d && d.msg, err: !(d && d.ok) };
+    }).catch(() => { rtData = { key: sel.key, t: Date.now(), err: true }; }).finally(() => { rtBusy = false; rtPaint(); });
+  }
   function routeCard(r, term) {
     const [num, lab] = split(r.n), T = r[term];
     const tel = (r.cp.match(/\(([\d\-~]+)\)/) || [])[1];
     let h = `<div class="cm-rt"><b>${esc(num)}</b> ${esc(lab)} · ${esc(r.a)} · ${esc(r.c)} · ${esc((r.f || "").split(",")[0])}원<br>`;
-    if (term === "go") h += `정류장 도착 시각은 실시간 도착 연결 후 표시됩니다.<br>`;
+    if (term === "go") { /* 출근: 실시간 도착 칸이 따로 있음 */ }
     else if (T) { const n = nextAfter(r, term); h += `${term === "t1" ? "T1" : "T2"} 첫차 <b>${fmt(hm(T.first || T.wd[0]))}</b> · 막차 <b>${fmt(hm(T.last || T.wd[T.wd.length - 1]))}</b> · 승차 ${esc(T.lo || "-")}<br>`;
       if (n) h += `다음 출발 <b>${fmt(hm(n.t))}</b>${n.dd ? (n.dd === 1 ? " (내일)" : " (모레)") : ""}<br>`; }
     else h += `${term === "t1" ? "T1" : "T2"}에서 출발하지 않는 노선입니다.<br>`;
@@ -2621,17 +2662,26 @@ window.UID = (() => {
     if ($("cmBus").value !== st.bus) $("cmBus").value = st.bus;
     $("cmBusTitle").textContent = st.mode === "go" ? "공항버스 · 출근" : `공항버스 · ${st.mode === "t1" ? "T1" : "T2"} 출발`;
     $("cmBadge").hidden = st.mode !== "go";
+    $("cmBadge").textContent = BUS_RELAY ? "실시간" : "준비 중"; $("cmBadge").classList.toggle("ok", !!BUS_RELAY);
     $("cmSrc").textContent = BUS ? `인천국제공항공사 공항버스 시간표 · ${new Date(BUS.generated).toLocaleDateString("ko-KR")} 받음` : "";
     if (!BUS) { $("cmBusNote").textContent = "시간표가 아직 없습니다. 인터넷에 연결된 상태에서 이 화면을 한 번 열어 주세요."; $("cmBusList").innerHTML = ""; return; }
     const hits = BUS.routes.filter((r) => match(r) && (st.mode === "go" || inArea(r)));
     if (st.mode === "go") {
       const one = q() ? hits.find((r) => split(r.n)[0].toUpperCase() === q()) || (hits.length === 1 ? hits[0] : null) : null;
-      const stops = one ? one.s.filter((x) => !/인천공항|공항[12]?터미널|T[12]/.test(x)) : [];
-      const cur = $("cmStop").value;
-      $("cmStop").innerHTML = `<option value="">${one ? "탑승 정류장" : "버스 번호 먼저"}</option>` + stops.map((x) => `<option${x === cur ? " selected" : ""}>${esc(x)}</option>`).join("");
+      const bs = one && BS && BS.routes[one.n];
+      rtRoute = one;
+      if (bs) {                                         // 정류장 ID 가 있는 노선 (서울·경기): 실시간 도착 가능
+        const cur = (st.gs || {})[one.n] || "";
+        $("cmStop").innerHTML = `<option value="">탑승 정류장 (공항 방향)</option>` + bs.stops.map((x) => `<option value="${esc(x[1])}"${String(x[1]) === String(cur) ? " selected" : ""}>${esc(x[2])}${x[3] ? ` (${esc(x[3])})` : ""}</option>`).join("");
+      } else {
+        const stops = one ? one.s.filter((x) => !/인천공항|공항[12]?터미널|T[12]/.test(x)) : [];
+        const cur = $("cmStop").value;
+        $("cmStop").innerHTML = `<option value="">${one ? "탑승 정류장" : "버스 번호 먼저"}</option>` + stops.map((x) => `<option${x === cur ? " selected" : ""}>${esc(x)}</option>`).join("");
+      }
       $("cmStop").disabled = !one;
-      $("cmBusNote").textContent = one ? "정류장 실시간 도착(몇 분 후)은 다음 단계에서 연결합니다. 지금은 노선 정보와 첫차·막차를 보여 줍니다." : q() ? (hits.length ? `일치하는 노선 ${hits.length}개 — 번호를 정확히 넣어 주세요: ${hits.slice(0, 8).map((r) => split(r.n)[0]).join(", ")}` : "일치하는 공항버스 노선이 없습니다.") : "타는 공항버스 번호를 넣어 주세요 (예: 6001).";
-      $("cmBusList").innerHTML = one ? routeCard(one, "go") : "";
+      $("cmBusNote").textContent = one ? (bs ? "" : "이 노선은 실시간 도착 정보가 없습니다 (서울·경기 노선만 지원). 노선 정보와 첫차·막차를 보여 줍니다.") : q() ? (hits.length ? `일치하는 노선 ${hits.length}개 — 번호를 정확히 넣어 주세요: ${hits.slice(0, 8).map((r) => split(r.n)[0]).join(", ")}` : "일치하는 공항버스 노선이 없습니다.") : "타는 공항버스 번호를 넣어 주세요 (예: 6001).";
+      $("cmBusList").innerHTML = one ? (bs ? `<div class="cm-rt rt" id="cmRt">${rtHtml()}</div>` : "") + routeCard(one, "go") : "";
+      if (bs) rtFetch();
       return;
     }
     const term = st.mode, deps = departures(term);
@@ -2643,6 +2693,9 @@ window.UID = (() => {
     $("cmBusList").innerHTML = h;
   }
   $("cmMode").addEventListener("click", (e) => { const b = e.target.closest("button[data-cm]"); if (!b) return; st.mode = b.dataset.cm; showAll = false; save(); paint(); });
+  $("cmStop").addEventListener("change", () => { if (st.mode !== "go" || !rtRoute) return; st.gs = Object.assign(st.gs || {}, { [rtRoute.n]: $("cmStop").value }); save(); rtData = null; rtFetch(true); });
+  setInterval(() => { if (document.body.dataset.tab === "cm" && st.mode === "go" && !document.hidden && rtSel()) rtFetch(); }, 30000);   // 실시간 도착 30초마다
+  window.addEventListener("online", () => rtFetch(true)); window.addEventListener("offline", rtPaint);
   $("cmArea").addEventListener("click", (e) => { const b = e.target.closest("button[data-a]"); if (!b) return; st.area = b.dataset.a; showAll = false; save(); paint(); });
   $("cmBus").addEventListener("input", () => { st.bus = $("cmBus").value; showAll = false; save(); paint(); });
   $("cmBusList").addEventListener("click", (e) => { if (e.target.id === "cmMore") { showAll = true; paint(); } });
