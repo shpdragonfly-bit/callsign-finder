@@ -2430,9 +2430,12 @@ window.csfStat = (() => {
       const o = (x) => (x && typeof x === "object" && !Array.isArray(x) ? x : {});
       const a = (x) => (Array.isArray(x) ? x : []);
       const clean = (x) => Object.fromEntries(Object.entries(o(x)).map(([k, v]) => [k, Array.isArray(v) ? v.map(sv).filter(Boolean) : k === "page" ? v | 0 : sv(v)]));
+      // Gemini 가 줄 앞 '- ' 를 같이 옮겨 오면 표시용으로만 떼어냄 (내용은 그대로)
+      const dd = clean(d.dispatch); for (const k of ["mel", "fuel_adj", "notes"]) if (Array.isArray(dd[k])) dd[k] = dd[k].map((x) => x.replace(/^[-–•]\s*/, "")).filter(Boolean);
+      const eq = clean(d.equip); for (const k of ["equip", "pbn"]) if (eq[k]) eq[k] = eq[k].replace(/^-\s*/, "");
       return {
         v: 1, meta,
-        flight: clean(d.flight), fuel: clean(d.fuel), route: clean(d.route), alt: clean(d.alt), equip: clean(d.equip), dispatch: clean(d.dispatch), names: clean(d.names),
+        flight: clean(d.flight), fuel: clean(d.fuel), route: clean(d.route), alt: clean(d.alt), equip: eq, dispatch: dd, names: clean(d.names),
         navlog: a(d.navlog).map(clean).filter((x) => x.wpt), edto: a(d.edto).map(clean).filter((x) => x.apt), etp: a(d.etp).map(clean).filter((x) => x.name || x.apts),
         wx: a(d.wx).map(clean).filter((x) => x.taf),
       };
@@ -2543,7 +2546,9 @@ window.csfStat = (() => {
     }
     // 화면·PDF 공통: 표 데이터 (화면은 Dispatch Release 까지)
     function tables(R) {
-      const F = R.flight, U = R.fuel, D = R.dispatch, A = R.alt, dash = (x) => sv(x) || "-";
+      const F = R.flight, U = R.fuel, A = R.alt, dash = (x) => sv(x) || "-";
+      const nd = (a) => (a || []).map((x) => sv(x).replace(/^[-–•]\s*/, "")).filter(Boolean);       // 예전 결과에 남은 줄 앞 '- ' 정리
+      const D = Object.assign({}, R.dispatch, { mel: nd(R.dispatch.mel), fuel_adj: nd(R.dispatch.fuel_adj), notes: nd(R.dispatch.notes) });
       const m = hm2m(F.trip_time), pa = paTime(F.trip_time);
       const pax = (s) => { const x = sv(s).match(/^(\d+)\s*\/\s*(\d+)$/); return x ? [x[1], x[2]] : [sv(s), ""]; };
       const pf = pax(D.first), pc = pax(D.business), py = pax(D.economy);
@@ -2558,11 +2563,11 @@ window.csfStat = (() => {
       T.push({ t: "Alternate / EDTO / Refile Point", type: "kv", p: A.page, rows: [["DEST ALTN / 3% ERA", `${dash(A.dest_altn)} / ${dash(A.era3)}`], ["Refile FLT", dash(A.refile)],
         ["EDTO / ENR ALTN", R.edto.map((e) => `${e.apt}: ${e.from} UTC ~ ${e.to} UTC`).join("\n") || "-"]],
         grid: R.etp.length ? [["ETP", "교체공항", "CFR", "FOB", "Different"], ...R.etp.map((e) => [e.name, e.apts, `${e.cfr}${e.time ? "(" + e.time + ")" : ""}`, e.fob, e.exc])] : null });
-      T.push({ t: "Equipment / PBN Codes", type: "kv", rows: [["장비코드", R.equip.equip], ["PBN", R.equip.pbn]] });
+      T.push({ t: "Equipment / PBN Codes", type: "kv", rows: [["장비코드", sv(R.equip.equip).replace(/^-\s*/, "")], ["PBN", sv(R.equip.pbn).replace(/^-\s*/, "")]] });
       T.push({ t: "Dispatch Release", type: "kv", p: D.page, rows: [
         ["PAX", D.first || D.business || D.economy ? `F ${pf[0]} / C ${pc[0]} / Y ${py[0]}${pf[1] || pc[1] || py[1] ? ` (F${pf[1]}/C${pc[1]}/Y${py[1]})` : ""}` : ""],
         ["Weight", [D.pax_wt && "PAX " + D.pax_wt, D.cargo_wt && "CARGO " + D.cargo_wt, D.others_wt && "OTHERS " + D.others_wt].filter(Boolean).join(" / ")],
-        ["MEL/CDL", (D.mel || []).join("\n") || "-"], ["연료조정", (D.fuel_adj || []).join("\n") || "-"], ["Dispatch Notes", (D.notes || []).map((x) => (/^[*]/.test(x) ? "  " : "- ") + x).join("\n") || "-"]] });
+        ["MEL/CDL", (D.mel || []).join("\n") || "-"], ["연료조정", (D.fuel_adj || []).map((x) => "- " + x).join("\n") || "-"], ["Dispatch Notes", (D.notes || []).map((x) => (/^[*]/.test(x) ? "  " : "- ") + x).join("\n") || "-"]] });
       return T;
     }
     const pg = (p) => p ? `<span class="pr-pg">p.${p}</span>` : "";
@@ -2634,8 +2639,6 @@ window.csfStat = (() => {
       const gap = (c) => { c.y += 2.2; };
       // 제목
       goto(col.L); d.setTextColor(...NAVY); d.setFont("NG", "bold"); d.setFontSize(13); d.text(title, M, 10.5);
-      d.setFont("NG", "normal"); d.setFontSize(6.5); d.setTextColor(...MUT);
-      d.text(`${fmtDate(R.meta.at)} 분석 · ${PKG_FORMAT.name} · Gemini 전사 + 앱 계산 · 원본과 반드시 대조`, PW - M, 10.5, { align: "right" });
       // 왼쪽: 표들
       const L = col.L;
       for (const T of tables(R)) {
