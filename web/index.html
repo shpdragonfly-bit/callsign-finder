@@ -2493,7 +2493,8 @@ window.csfStat = (() => {
       const h = m == null ? null : Math.floor(m / 60), mi = m == null ? null : m % 60;
       const ko = m == null ? "○시간 ○분" : `${h}시간${mi ? " " + mi + "분" : ""}`;
       const en = m == null ? "○ hours ○ minutes" : `${h} hour${h === 1 ? "" : "s"}${mi ? ` and ${mi} minutes` : ""}`;
-      const destKo = R.names.dest_ko || R.flight.arr || "○○", destEn = R.names.dest_en || R.flight.arr || "○○";
+      // '[DEST]RKSI/ ICN/ 이름, 도시, 국가' 에서 이름만 (Gemini 가 도시·국가까지 옮겨 오면 잘라냄)
+      const destKo = R.names.dest_ko || R.flight.arr || "○○", destEn = sv(R.names.dest_en).split(",")[0].trim() || R.flight.arr || "○○";
       return [
         "손님 여러분, 안녕하십니까? 저는 여러분을 모시고 가는 기장 입니다.",
         `${al.ko}을 이용해 주셔서 대단히 고맙습니다.`,
