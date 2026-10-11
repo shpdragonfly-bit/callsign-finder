@@ -560,7 +560,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 .pr-kv .v { font-family: var(--mono); overflow-wrap: anywhere; }
 .pr-pg { font: 600 11px var(--mono); color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 0 4px; white-space: nowrap; align-self: start; height: max-content; }
 .pr-chk { margin-top: 6px; font-size: 13px; font-weight: 700; }
-.pr-chk.ok { color: var(--ok); } .pr-chk.bad { color: var(--warn); }
+.pr-chk.ok { color: var(--ok); } .pr-chk.bad { color: #E0322B; background: none; padding: 0; border: 0; }
 .pr-li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 8px; padding: 6px 0; border-top: 1px dashed var(--line); font-size: 14px; }
 .pr-li:first-of-type { border-top: 0; }
 .pr-li b { font-family: var(--mono); }
@@ -2479,12 +2479,12 @@ window.csfStat = (() => {
     // 숫자 교차 검증 (패키지 숫자끼리 서로 맞는지)
     function checks(R) {
       const f = R.fuel, g = (k) => n0(f[k]), out = [];
-      const eq = (name, a, b) => { if (a == null || b == null) return; out.push(a === b ? { ok: true, t: `${name} 일치` } : { ok: false, t: `${name} 차이 ${a - b > 0 ? "+" : ""}${a - b} — 원본 확인` }); };
+      const eq = (name, a, b) => { if (a == null || b == null) return; out.push(a === b ? { ok: true, t: `${name} 일치` } : { ok: false, t: `${name} 차이 ${a - b > 0 ? "+" : ""}${a - b} - 원본 확인` }); };
       if (g("pln_takeoff") != null && g("taxi") != null) eq("PLN TAKEOFF + TAXI = RAMP OUT", g("pln_takeoff") + g("taxi"), g("ramp_out"));
       if (g("pln_takeoff") != null && g("trip") != null) eq("PLN TAKEOFF - TRIP = FOD", g("pln_takeoff") - g("trip"), g("fod"));
       if (g("zfw") != null && g("pln_takeoff") != null) eq("ZFW + TOF = TOW", g("zfw") + g("pln_takeoff"), g("tow"));
       if (g("tow") != null && g("trip") != null) eq("TOW - TRIP = LDW", g("tow") - g("trip"), g("ldw"));
-      for (const [k, m] of [["zfw", "mzfw"], ["tow", "mtow"], ["tow", "agtow"], ["ldw", "mldw"]]) if (g(k) != null && g(m) != null && g(k) > g(m)) out.push({ ok: false, t: `${k.toUpperCase()} 가 ${m.toUpperCase()} 보다 큼 — 원본 확인` });
+      for (const [k, m] of [["zfw", "mzfw"], ["tow", "mtow"], ["tow", "agtow"], ["ldw", "mldw"]]) if (g(k) != null && g(m) != null && g(k) > g(m)) out.push({ ok: false, t: `${k.toUpperCase()} 가 ${m.toUpperCase()} 보다 큼 - 원본 확인` });
       return out;
     }
     const AIRLINE = {
@@ -2648,7 +2648,7 @@ window.csfStat = (() => {
         if (T.type === "kv") h += `<div class="pr-kv2">${T.rows.map((r) => `<span class="k">${esc(r[0])}</span><span class="v${r[2] === "red" ? " red" : ""}">${v(r[1])}</span>`).join("")}</div>`;
         if (T.type === "text") h += `<div class="pr-txt">${v(T.text)}</div>`;
         if (T.type === "grid" || T.grid) { const G = T.type === "grid" ? T.rows : T.grid; h += `<div class="pr-grid" style="grid-template-columns:repeat(${G[0].length},minmax(0,1fr))">${G.map((r, i) => r.map((c) => `<span class="${(T.type === "grid" ? i % 2 === 0 : i === 0) ? "h" : "c"}">${v(c)}</span>`).join("")).join("")}</div>`; }
-        if (T.checks) for (const c of T.checks) h += `<div class="pr-chk ${c.ok ? "ok" : "bad"}">${c.ok ? "✓" : "!"} ${esc(c.t)}</div>`;
+        if (T.checks) for (const c of T.checks.filter((x) => !x.ok)) h += `<div class="pr-chk ${c.ok ? "ok" : "bad"}">${c.ok ? "✓" : "!"} ${esc(c.t)}</div>`;
         h += `</div>`;
       }
       h += `<div class="pr-sec"><small class="pr-more">기상 · 안내방송 · NOTAM 은 요약 PDF 에 들어 있습니다.</small></div>`;
@@ -2722,6 +2722,8 @@ window.csfStat = (() => {
         if (T.type === "text") text(L, T.text, 6.8);
         if (T.type === "grid") grid(L, T.rows, (i) => i % 2 === 0);
         if (T.grid) grid(L, T.grid, (i) => i === 0, [0.8, 1.3, 1.6, 1, 1.1]);
+        const bad = (T.checks || []).filter((x) => !x.ok);   // 연료·중량 내부 검증: 다를 때만 빨간 글씨로
+        if (bad.length) kv(L, bad.map((x) => ["검증", x.t, "red"]));
         gap(L);
       }
       // 오른쪽: 기상 → 안내방송 → NOTAM (요약 기준이 정해질 때까지 원문 참조)
