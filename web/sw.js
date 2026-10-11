@@ -1,6 +1,6 @@
 // 오프라인 지원용 Service Worker
 // 온라인이면 항상 최신 파일을 받아 캐시에 저장하고, 오프라인이면 캐시에서 제공합니다.
-const CACHE = "callsign-v45";
+const CACHE = "callsign-v46";
 const ASSETS = "callsign-assets-1";     // PDF 라이브러리·한글 글꼴: 버전이 바뀌어도 지우지 않음 (처음 PDF 만들 때 한 번 받음)
 const SHELL = ["./", "index.html", "data.js", "data.json", "manifest.webmanifest", "icon.svg", "icon-180.png", "icon-512.png"];
 
@@ -23,6 +23,7 @@ self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET" || new URL(req.url).origin !== location.origin) return;
   const url = new URL(req.url);
+  if (/\/fpdata\//.test(url.pathname)) return;    // 비행준비 자료(PC 개발 서버 전용 회사 자료): 캐시에 남기지 않음
   url.search = "";                       // data.json?t=… 도 같은 캐시 항목으로 저장
   const key = req.mode === "navigate" ? new URL("index.html", self.registration.scope).href : url.href;
   if (/\/(vendor|fonts)\//.test(url.pathname)) {         // 잘 안 바뀌는 큰 파일: 캐시 먼저

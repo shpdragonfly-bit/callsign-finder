@@ -787,6 +787,41 @@ body[data-tab="oz"] #alTabs { display: none; }
 .cm-stops li { position: relative; padding: 3px 0 3px 18px; }
 .cm-stops li::before { content: ""; position: absolute; left: 4px; top: 11px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
 .cm-stops li.end::before { background: var(--warn); }
+/* 비행준비 (공항별 유의사항, PC 개발 서버 전용) */
+#pkSub button { font-size: 14px; }
+.pk-sub[data-pks="fp"] { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }   /* 비행준비: 눌러도 글자 블럭(선택) 안 잡힘 */
+@media (max-width: 400px) { #pkSub button { font-size: 12.5px; letter-spacing: -0.6px; } }
+.fp-card { padding: 14px 16px; }
+.fp-hd { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.fp-hd h3 { margin: 0; font-size: 17px; }
+.fp-src { font-size: 12px; color: var(--muted); }
+.fp-sel { display: flex; align-items: flex-end; gap: 8px; margin-top: 12px; }
+.fp-sel label { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 700; color: var(--muted); }
+.fp-sel select { font: inherit; font-size: 15px; font-weight: 600; padding: 10px; border-radius: 12px; border: 2px solid var(--line); background: var(--panel-2); color: var(--text); min-width: 0; }
+.fp-swap { flex: none; padding: 10px 12px; margin-bottom: 20px; }
+.fp-in { font: inherit; font-family: var(--mono); font-size: 18px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line); background: var(--panel-2); color: var(--text); min-width: 0; width: 100%; box-sizing: border-box; -webkit-user-select: text; user-select: text; }
+.fp-in:focus { outline: none; border-color: var(--accent); }
+.fp-in.bad { border-color: #E0322B; background: var(--panel-2); }
+.fp-hint { min-height: 16px; font-size: 12px; font-weight: 600; color: var(--muted); }
+.fp-hint.no { color: #E0322B; }
+.fp-recent { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.fp-recent button { border: 1px solid var(--line); background: var(--panel); color: var(--text); border-radius: 99px; padding: 6px 12px; font: 600 13px var(--mono); cursor: pointer; }
+.fp-note { margin: 10px 0 0; font-size: 12px; color: var(--muted); line-height: 1.5; }
+.fp-ap { padding: 14px 16px; }
+.fp-ap h3 { margin: 0; font-size: 17px; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.fp-ap h3 small { font-size: 12px; color: var(--muted); font-weight: 600; }
+.fp-grp { margin-top: 12px; }
+.fp-grp > b { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 99px; background: var(--panel-2); color: var(--muted); }
+.fp-grp.p1 > b { background: #FDE2E1; color: #B42318; }
+.fp-it { margin: 8px 0 0; padding: 0 0 8px 12px; border-left: 3px solid var(--line); font-size: 14.5px; line-height: 1.55; }
+.fp-grp.p1 .fp-it { border-left-color: #E0322B; }
+.fp-it .t { font-size: 11.5px; font-weight: 700; color: var(--accent); margin-right: 4px; }
+.fp-it .m { font-size: 11.5px; color: var(--muted); margin-left: 4px; white-space: nowrap; }
+.fp-it .v { font-size: 11.5px; font-weight: 700; color: #E0322B; margin-left: 4px; white-space: nowrap; }
+.fp-chg { margin-top: 12px; font-size: 13.5px; }
+.fp-chg summary { cursor: pointer; font-weight: 700; color: var(--muted); }
+.fp-chg li { margin: 4px 0; line-height: 1.5; }
+.fp-empty { padding: 14px 16px; color: var(--muted); font-size: 14px; }
 </style>
 <script>
 // 화면 그리기 전에 주/야간 먼저 적용 (자세한 처리는 아래 '주/야간')
@@ -1019,7 +1054,29 @@ body[data-tab="oz"] #alTabs { display: none; }
     </div>
   </section>
   <section class="panel" id="panel-pk" role="tabpanel" aria-labelledby="tab-pk" hidden>
-    <p class="pk-intro"><b>FLT Package 분석</b>은 본인 <b>Gemini API 키</b>를 등록한 분만 쓸 수 있습니다. 아래 준비 중인 기능은 <b>요청하기</b>를 눌러 주세요.</p>
+    <div class="seg al-tabs" id="pkSub" role="tablist" aria-label="개발 예정 메뉴">
+      <button type="button" role="tab" data-pks="fp" aria-pressed="true">비행준비</button>
+      <button type="button" role="tab" data-pks="pa" aria-pressed="false">FLT Package 분석</button>
+      <button type="button" role="tab" data-pks="rs" aria-pressed="false">근무표 등록</button>
+    </div>
+    <div class="pk-sub" data-pks="fp">
+      <div id="fpNone" class="card fp-empty">공항별 이·착륙 유의사항 · 준비 중입니다.</div>
+      <div id="fpWrap" hidden>
+    <div class="card fp-card">
+      <div class="fp-hd"><h3>공항별 이·착륙 유의사항</h3><span class="fp-src" id="fpSrc"></span></div>
+      <div class="fp-sel">
+        <label>출발 · 이륙<input id="fpDep" class="fp-in" list="fpList" maxlength="4" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="ICAO·IATA" aria-label="출발 공항 코드 (ICAO 4자리 또는 IATA 3자리)"><span class="fp-hint" id="fpDepH"></span></label>
+        <button type="button" class="b fp-swap" id="fpSwap" aria-label="출발·도착 바꾸기">⇄</button>
+        <label>도착 · 착륙<input id="fpArr" class="fp-in" list="fpList" maxlength="4" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="ICAO·IATA" aria-label="도착 공항 코드 (ICAO 4자리 또는 IATA 3자리)"><span class="fp-hint" id="fpArrH"></span></label>
+      </div>
+      <datalist id="fpList"></datalist>
+      <div class="fp-recent" id="fpRecent"></div>
+    </div>
+    <div id="fpOut"></div>
+      </div>
+    </div>
+    <div class="pk-sub" data-pks="pa" hidden>
+    <p class="pk-intro"><b>FLT Package 분석</b>은 본인 <b>Gemini API 키</b>를 등록한 분만 쓸 수 있습니다. </p>
 
     <div class="card gm" id="gmCard">
       <div class="gm-hd">
@@ -1115,6 +1172,8 @@ body[data-tab="oz"] #alTabs { display: none; }
       <p class="pa-foot">AI가 만든 참고 자료입니다. 숫자와 NOTAM은 반드시 원본과 대조하세요. 마지막 결과는 이 기기에 남아 있어 인터넷이 없어도 PDF를 다시 받을 수 있습니다. <span id="paFmt"></span></p>
     </div>
 
+    </div>
+    <div class="pk-sub" data-pks="rs" hidden>
     <div class="card pk-hero pk-feat">
       <span class="pk-badge">개발 예정</span>
       <h2>근무표 → 캘린더</h2>
@@ -1143,6 +1202,7 @@ body[data-tab="oz"] #alTabs { display: none; }
     </div>
 
     <p class="pk-foot">요청과 의견은 이름 없이 전달되며, 개발 순서를 정하는 데만 씁니다. 개발이 끝나면 앱 업데이트만으로 이 화면에서 바로 쓸 수 있습니다.</p>
+    </div>
   </section>
 
   <footer>
@@ -1177,6 +1237,164 @@ body[data-tab="oz"] #alTabs { display: none; }
   document.addEventListener("focusin", upd); document.addEventListener("focusout", () => setTimeout(upd, 50));
   new MutationObserver(upd).observe(document.body, { subtree: true, attributes: true, attributeFilter: ["hidden"] });
   upd();
+})();
+</script>
+<script>
+// ===================== 개발 예정 탭 서브 메뉴: 비행준비 · FLT Package 분석 · 근무표 등록 =====================
+(() => {
+  const box = document.getElementById("pkSub"), K = "csf-pk-sub";
+  const show = (k) => {
+    box.querySelectorAll("button").forEach((b) => { b.setAttribute("aria-pressed", b.dataset.pks === k); b.setAttribute("aria-selected", b.dataset.pks === k); });
+    document.querySelectorAll(".pk-sub").forEach((d) => { d.hidden = d.dataset.pks !== k; });
+    try { localStorage.setItem(K, k); } catch (e) {}
+  };
+  box.addEventListener("click", (e) => { const b = e.target.closest("button[data-pks]"); if (b) show(b.dataset.pks); });
+  let k = null; try { k = localStorage.getItem(K); } catch (e) {}
+  show(["fp", "pa", "rs"].includes(k) ? k : "fp");
+})();
+</script>
+<script>
+// ===================== 비행준비: 공항별 이·착륙 유의사항 (PC 개발 서버 전용) =====================
+// 자료: 같은 PC 의 개인 AI 비서 봇이 내보낸 공항별 요약 (index.json → 공항 파일). 개발 서버가 /fpdata/ 로 읽기 전용 전달.
+// 회사 내부 자료: GitHub·실제 앱 주소에는 없고, 캐시(SW)·통계·Gemini 로 보내지 않음. 기기에는 마지막 선택 공항 코드만 저장.
+window.FPREP = (() => {
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  const ON = location.protocol.startsWith("http") && !/github\.io$/i.test(location.hostname);   // 실제 앱 주소에서는 아예 요청하지 않음
+  const SKIP = ["RKSI", "RKSS"];                       // FLT 요약 PDF 에서는 인천·김포 생략 (분량)
+  const CO = { AAR: "아시아나항공", KAL: "대한항공" };   // 패키지 편명 → 자료의 회사
+  const PRI = { 1: "중요", 2: "보통", 3: "참고" };
+  let IDX = null, ready = null;
+  const cache = {};
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  async function getJson(path) { const r = await fetch("fpdata/" + path.split("/").map(encodeURIComponent).join("/") + "?t=" + Date.now(), { cache: "no-store" }); if (!r.ok) throw Object.assign(new Error("HTTP " + r.status), { status: r.status }); return r.json(); }
+  // 안내대로: index.json → 공항 파일. 갱신 중이라 없거나 깨졌으면 1초 쉬고 index 부터 다시 (최대 3번)
+  async function loadIndex(force) {
+    if (!ON) return null;
+    if (IDX && !force) return IDX;
+    for (let i = 0; i < 3; i++) {
+      try { const d = await getJson("index.json"); if (d && Array.isArray(d.airports)) { IDX = d; return d; } return null; }
+      catch (e) { if (e.status === 404 || e.status === 403) return null; await sleep(1000); }
+    }
+    return null;
+  }
+  async function airport(icao, company) {
+    for (let i = 0; i < 3; i++) {
+      const idx = await loadIndex(i > 0); if (!idx) return null;
+      const a = idx.airports.find((x) => x.icao === icao && (!company || x.company === company));
+      if (!a) return null;
+      const k = a.file + "|" + idx.updated;
+      if (cache[k]) return cache[k];
+      try { const d = await getJson(a.file); cache[k] = d; return d; } catch (e) { await sleep(1000); }
+    }
+    return null;
+  }
+  // 기종: 패키지 772/773/77W → B777, 359 → A350, 321 → A320 계열. 자료의 B777-300ER → B777. 계열이 같으면 해당
+  function fam(x) {
+    const m = String(x || "").toUpperCase().match(/([AB])?\s*-?\s*([37])(\d)(\d)?/);
+    if (!m) return String(x || "").toUpperCase().trim();
+    return m[2] === "7" ? `B7${m[3]}7` : `A3${m[3]}0`;
+  }
+  const sortIt = (a) => a.slice().sort((x, y) => (x.priority || 3) - (y.priority || 3) || (x.order || 0) - (y.order || 0));
+  // 비행 기종에 맞는 항목만. 다른 세부 기종(예 B777-300) 항목은 그 표기를 붙여 남김
+  function forType(items, type) {
+    const f = type ? fam(type) : "";
+    return items.map((it) => {
+      const ac = (it.aircraft || []).filter(Boolean);
+      if (!ac.length) return it;
+      if (!f) return Object.assign({}, it, { tag: ac.join(", ") });
+      const hit = ac.filter((v) => fam(v) === f);
+      if (!hit.length) return null;
+      const sub = hit.filter((v) => String(v).toUpperCase().replace(/\s/g, "") !== f);
+      return Object.assign({}, it, { tag: sub.length && sub.length === hit.length ? sub.join(", ") : "" });
+    }).filter(Boolean);
+  }
+  const label = (a) => `${a.icao}${a.iata ? " " + a.iata : ""}`;
+  const verTxt = (d) => [d.date_label || d.eff_date || "", d.version ? "v" + d.version : ""].filter(Boolean).join(" ");
+
+  // ---------- FLT 요약 PDF 용 ----------
+  async function forFlight(F) {
+    if (!(await loadIndex())) return null;
+    const company = CO[String(F.flt || "").slice(0, 3).toUpperCase()] || null;
+    const out = [];
+    for (const [role, icao] of [["dep", F.dep], ["arr", F.arr]]) {
+      if (!icao || SKIP.includes(icao)) continue;
+      const d = await airport(icao, company);
+      if (!d) { out.push({ role, icao, none: true }); continue; }
+      out.push({ role, icao, ver: verTxt(d), items: sortIt(forType((d.items || []).filter((x) => x.role === role), F.type)) });
+    }
+    return out;
+  }
+
+  // ---------- 비행준비 탭 ----------
+  // 공항 코드 직접 입력 (ICAO 4자리·IATA 3자리, 대소문자 무관) + 자료에 있는 공항 자동 완성 + 최근 구간
+  function resolve(v) {
+    const u = String(v || "").trim().toUpperCase().split("|")[0];
+    if (u.length < 3 || !IDX) return null;
+    return (IDX.airports || []).find((a) => a.icao === u) || (IDX.airports || []).find((a) => a.iata === u) || null;
+  }
+  function fillList() {
+    const list = (IDX.airports || []).slice().sort((a, b) => a.icao.localeCompare(b.icao));
+    $("fpList").innerHTML = list.map((a) => `<option value="${esc(a.icao)}">${esc(label(a))}</option>`).join("");
+  }
+  const RK = "csf-fp-recent";
+  const recent = () => { try { return JSON.parse(ls.get(RK) || "[]"); } catch (e) { return []; } };
+  function paintRecent() {
+    $("fpRecent").innerHTML = recent().map((r) => `<button type="button" data-r="${esc(r)}">${esc(r.replace("|", " → ").replace(/^ → | → $/, ""))}</button>`).join("");
+  }
+  function itemsHtml(items) {
+    if (!items.length) return `<p class="fp-empty" style="padding:8px 0 0">해당 항목 없음</p>`;
+    return [1, 2, 3].map((p) => {
+      const g = items.filter((x) => (x.priority || 3) === p); if (!g.length) return "";
+      return `<div class="fp-grp p${p}"><b>${p === 1 ? "🔴 " : ""}${PRI[p]} ${g.length}</b>` + g.map((x) =>
+        `<p class="fp-it">${x.tag ? `<span class="t">[${esc(x.tag)}]</span>` : ""}${esc(x.text)}</p>`).join("") + `</div>`;
+    }).join("");
+  }
+  async function paint() {
+    const out = $("fpOut"), A = {};
+    for (const [k, inp, hint] of [["dep", "fpDep", "fpDepH"], ["arr", "fpArr", "fpArrH"]]) {
+      const v = $(inp).value.trim().toUpperCase(), a = resolve(v), H = $(hint);
+      A[k] = a; $(inp).classList.toggle("bad", v.length >= 3 && !a);
+      H.className = "fp-hint" + (v.length >= 3 && !a ? " no" : "");
+      H.textContent = a ? label(a) : v.length >= 3 ? "자료 없음" : "";
+    }
+    ls.set("csf-fp-dep", A.dep ? A.dep.icao : ""); ls.set("csf-fp-arr", A.arr ? A.arr.icao : "");
+    if (!A.dep && !A.arr) { out.innerHTML = `<div class="card fp-empty">공항 코드를 입력하세요. ICAO 4자리(RJTT) 또는 IATA 3자리(HND)</div>`; return; }
+    const key = `${A.dep ? A.dep.icao : ""}|${A.arr ? A.arr.icao : ""}`;
+    if (A.dep && A.arr) { ls.set(RK, JSON.stringify([key, ...recent().filter((r) => r !== key)].slice(0, 6))); paintRecent(); }   // 최근 구간: 출발·도착 둘 다 있을 때만
+    let h = "";
+    for (const [role, a, ttl] of [["dep", A.dep, "이륙 시 유의사항"], ["arr", A.arr, "착륙 시 유의사항"]]) {
+      if (!a) continue;
+      const icao = a.icao, d = await airport(icao, a.company);
+      if (!d) { h += `<div class="card fp-empty">${esc(icao)} 요약을 읽지 못했습니다. 잠시 후 다시 고르세요.</div>`; continue; }
+      const items = sortIt(forType((d.items || []).filter((x) => x.role === role), ""));
+      const ch = (d.changes || []).filter((c) => !c.role || c.role === role || c.role === "general");
+      h += `<div class="card fp-ap"><h3>${esc(label(d))} ${ttl}<small>${esc(verTxt(d))}</small></h3>${itemsHtml(items)}` +
+        (ch.length ? `<details class="fp-chg"><summary>이전 버전과 달라진 점 ${ch.length}건</summary><ul>${ch.map((c) => `<li><b>${esc(c.type || "")}</b> ${esc(c.text)}</li>`).join("")}</ul></details>` : "") + `</div>`;
+    }
+    out.innerHTML = h;
+  }
+  async function init() {
+    const idx = await loadIndex(); if (!idx) return;
+    $("fpNone").hidden = true; $("fpWrap").hidden = false;
+    $("fpSrc").textContent = idx.updated ? "자료 " + String(idx.updated).replace("T", " ").slice(0, 16) : "";
+    fillList();
+    $("fpDep").value = String(ls.get("csf-fp-dep") || "").split("|")[0]; $("fpArr").value = String(ls.get("csf-fp-arr") || "").split("|")[0];
+    let tm = null;
+    const on = (e) => { e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ""); clearTimeout(tm); const n = e.target.value.length; if (n === 0 || n >= 3) tm = setTimeout(paint, n === 3 ? 600 : 50); };
+    for (const id of ["fpDep", "fpArr"]) {
+      $(id).addEventListener("input", on);
+      $(id).addEventListener("change", () => { clearTimeout(tm); paint(); });
+      $(id).addEventListener("keydown", (e) => { if (e.key === "Enter") { clearTimeout(tm); paint(); e.target.blur(); } });
+      $(id).addEventListener("focus", (e) => e.target.select());
+    }
+    $("fpSwap").addEventListener("click", () => { const a = $("fpDep").value, b = $("fpArr").value; $("fpDep").value = b; $("fpArr").value = a; paint(); });
+    $("fpRecent").addEventListener("click", (e) => { const b = e.target.closest("[data-r]"); if (!b) return; const [x, y] = b.dataset.r.split("|"); $("fpDep").value = x; $("fpArr").value = y; paint(); });
+    paintRecent(); paint();
+  }
+  ready = init();
+  return { forFlight, ready: () => ready, fam, forType };
 })();
 </script>
 <script>
@@ -1246,7 +1464,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 // 보내지 않는 것: 검색한 편명·공항, 이름, 위치. 오프라인이면 모아 두었다가 인터넷 연결 시 전송.
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
-  const VER = "v45", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v46", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -2687,13 +2905,16 @@ window.csfStat = (() => {
         if (opt.fill) { d.setFillColor(...opt.fill); d.rect(x, c.y, w, h, "F"); }
         d.setDrawColor(...LINE); d.setLineWidth(0.15); d.rect(x, c.y, w, h);
         d.setTextColor(...(opt.color || TXT)); d.setFont("NG", opt.bold ? "bold" : "normal"); d.setFontSize(opt.fs || FS);
-        d.text(lines, x + 1.2, c.y + 2.6);
+        if (!opt.fs || opt.fs === FS) d.text(lines, x + 1.2, c.y + 2.6);
+        else d.text(lines, x + 1.2, c.y + 2.6 * opt.fs / FS, { lineHeightFactor: 1.15 * FS / FS });
       }
+      let RFS = FS;                                               // 표 글자 크기 (이·착륙 유의사항 칸을 1쪽에 맞출 때만 줄임)
+      const rowH = (cells) => Math.max(...cells.map((k) => wrap(k.t, k.w - 2.4, RFS, k.head).length)) * LH * RFS / FS + 1.4;
       function row(c, cells) {                                    // cells: [{w, t, head}]
-        const L = cells.map((k) => wrap(k.t, k.w - 2.4, FS, k.head));
-        const h = Math.max(...L.map((l) => l.length)) * LH + 1.4;
+        const L = cells.map((k) => wrap(k.t, k.w - 2.4, RFS, k.head));
+        const h = Math.max(...L.map((l) => l.length)) * LH * RFS / FS + 1.4;
         need(c, h);
-        let x = c.x; cells.forEach((k, i) => { cell(c, x, k.w, h, L[i], { fill: k.head ? GRAY : null, bold: k.head || k.bold, color: k.color }); x += k.w; });
+        let x = c.x; cells.forEach((k, i) => { cell(c, x, k.w, h, L[i], { fill: k.head ? GRAY : null, bold: k.head || k.bold, color: k.color, fs: RFS }); x += k.w; });
         c.y += h;
       }
       const RED = [210, 30, 30];
@@ -2735,6 +2956,34 @@ window.csfStat = (() => {
       bar(C, "Turbulence PA 방송문구");
       text(C, TURB_PA.join("\n"), 7.4, 4.6); gap(C);
       for (const n of ["NOTAM Package 1", "NOTAM Package 2 (EDTO/ERA)", "NOTAM Package 3 (FIR)"]) { bar(C, n); text(C, `${n.split(" (")[0]} : 원문참조`); gap(C); }
+      // 이·착륙 유의사항 (PC 개발 서버에 자료가 있을 때만, 인천·김포 생략, 비행 기종에 맞는 항목만) → 오른쪽 남은 공간에 1쪽으로 맞춤
+      const AF = window.FPREP ? await window.FPREP.forFlight(F).catch(() => null) : null;
+      if (AF && AF.length) {
+        const LW = 17.5, room = BOT - C.y - 5.2 - 0.5;
+        const line = (x) => `- ${x.tag ? "[" + x.tag + "] " : ""}${sv(x.text)}`;
+        const build = (maxP, cap) => {
+          const rows = []; let cut = 0;
+          for (const a of AF) {
+            const head = `${a.icao}\n${a.role === "dep" ? "이륙" : "착륙"}`;
+            if (a.none) { rows.push([head, "자료 없음", 0]); continue; }
+            const its = a.items.filter((x) => (x.priority || 3) <= maxP), shown = cap == null ? its : its.slice(0, cap);
+            cut += a.items.length - shown.length;
+            if (!a.items.length) { rows.push([head, "해당 항목 없음", 0]); continue; }
+            let first = true;
+            for (const p of [1, 2, 3]) { const g = shown.filter((x) => (x.priority || 3) === p); if (!g.length) continue; rows.push([(first ? head + "\n" : "") + ["", "중요", "보통", "참고"][p], g.map(line).join("\n"), p]); first = false; }
+            if (!shown.length) rows.push([head, "중요 항목 없음", 0]);
+          }
+          return { rows, cut };
+        };
+        const H = (b) => b.rows.reduce((t, r) => t + rowH([{ w: LW, t: r[0], head: true }, { w: C.w - LW, t: r[1], bold: r[2] === 1 }]), 0) + (b.cut ? LH * RFS / FS + 1.4 : 0);
+        let pick = null;
+        for (const [maxP, fs] of [[3, 7.2], [2, 7.2], [2, 6.5], [1, 6.5], [1, 5.8]]) { RFS = fs; const b = build(maxP, null); if (H(b) <= room) { pick = b; break; } }
+        if (!pick) { RFS = 5.8; for (let cap = 12; cap >= 1; cap--) { const b = build(1, cap); if (H(b) <= room || cap === 1) { pick = b; break; } } }
+        bar(C, "이·착륙 유의사항", [`기종 ${window.FPREP.fam(F.type) || "-"}`, AF.filter((a) => a.ver).map((a) => `${a.icao} ${a.ver}`).join(" · ")].filter(Boolean).join(" · "));
+        for (const r of pick.rows) row(C, [{ w: LW, t: r[0], head: true }, { w: C.w - LW, t: r[1], bold: r[2] === 1 }]);
+        if (pick.cut) row(C, [{ w: C.w, t: `분량 때문에 ${pick.cut}건 생략 · 전체는 비행준비 탭 참고` }]);
+        RFS = FS;
+      }
       // 쪽 번호
       const N = d.getNumberOfPages();
       for (let i = 1; i <= N; i++) { d.setPage(i); d.setFont("NG", "normal"); d.setFontSize(6.5); d.setTextColor(...MUT); d.text("운항 도우미 · 패키지에 있는 내용만 옮김 (추측 없음) · 계산값: FLT Time·SR 구간·FL 변화·±2H 기상", M, PH - 5); d.text(`${i}/${N}`, PW - M, PH - 5, { align: "right" }); }
