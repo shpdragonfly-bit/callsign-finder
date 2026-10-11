@@ -2460,10 +2460,10 @@ window.csfStat = (() => {
       }
       if (cur) out.push(cur);
       return out.map((g) => { const t1 = hm2m(g.a.time), t2 = hm2m(g.b.time);
-        return `${g.a.wpt === g.b.wpt ? g.a.wpt : g.a.wpt + "~" + g.b.wpt} / 최대SR${String(g.max).padStart(2, "0")} / ${g.a.time}${g.a.time !== g.b.time ? "~" + g.b.time : ""} / ${t1 != null && t2 != null ? t2 - t1 + "분" : "-"}`; });
+        return `${g.a.wpt === g.b.wpt ? g.a.wpt : g.a.wpt + "~" + g.b.wpt} / 최대SR${String(g.max).padStart(2, "0")} / ${g.a.time}${g.a.time !== g.b.time ? "~" + g.b.time : ""} / ${t1 != null && t2 != null ? (t2 - t1 >= 60 ? `${Math.floor((t2 - t1) / 60)}시간 ${(t2 - t1) % 60}분` : t2 - t1 + "분") : "-"}`; });
     }
-    // 방송 비행시간: 5분 단위 올림 (09.36 → 9시간 40분)
-    const paTime = (t) => { const m = hm2m(t); return m == null ? null : Math.ceil(m / 5) * 5; };
+    // 방송 비행시간: 10분 단위 올림 (09.36 → 9시간 40분, 10.15 → 10시간 20분, 10.20 → 10시간 20분)
+    const paTime = (t) => { const m = hm2m(t); return m == null ? null : Math.ceil(m / 10) * 10; };
     // 숫자 교차 검증 (패키지 숫자끼리 서로 맞는지)
     function checks(R) {
       const f = R.fuel, g = (k) => n0(f[k]), out = [];
@@ -2528,6 +2528,9 @@ window.csfStat = (() => {
         if (fm[i] != null) { const nf = fm.slice(i + 1).find((t) => t != null); return fm[i] < w1 && (nf == null ? ve : nf) > w0; }
         const p = l.match(/\b(\d{2})(\d{2})\/(\d{2})(\d{2})\b/);
         if (!p) return true;
+        // BECMG: 바뀐 뒤의 상태가 계속되므로 창(±2H) 끝보다 먼저 시작했으면 포함 (다음 FM 전까지)
+        if (/^BECMG\b/.test(l)) { const st = at(p[1], p[2]), nf = fm.slice(i + 1).find((t) => t != null), pf = [...fm.slice(0, i)].reverse().find((t) => t != null);
+          return st < w1 && (nf == null || nf > w0) && (pf == null || pf <= st); }
         return at(p[1], p[2]) < w1 && at(p[3], p[4]) > w0;
       });
       if (!(ve > w0 && vs < w1)) return { lines: [], none: true };
@@ -2568,7 +2571,7 @@ window.csfStat = (() => {
       T.push({ t: "Dispatch Release", type: "kv", p: D.page, rows: [
         ["PAX", D.first || D.business || D.economy ? `F ${pf[0]} / C ${pc[0]} / Y ${py[0]}${pf[1] || pc[1] || py[1] ? ` (F${pf[1]}/C${pc[1]}/Y${py[1]})` : ""}` : ""],
         ["Weight", [D.pax_wt && "PAX " + D.pax_wt, D.cargo_wt && "CARGO " + D.cargo_wt, D.others_wt && "OTHERS " + D.others_wt].filter(Boolean).join(" / ")],
-        ["MEL/CDL", (D.mel || []).join("\n") || "-", "red"], ["연료조정", (D.fuel_adj || []).map((x) => "- " + x).join("\n") || "-"], ["Dispatch Notes", (D.notes || []).map((x) => (/^[*]/.test(x) ? "  " : "- ") + x).join("\n") || "-"]] });
+        ["MEL/CDL", (D.mel || []).join("\n") || "-", (D.mel || []).some((x) => !/^(NIL|NONE|N\/A|-)$/i.test(x)) ? "red" : ""], ["연료조정", (D.fuel_adj || []).map((x) => "- " + x).join("\n") || "-"], ["Dispatch Notes", (D.notes || []).map((x) => (/^[*]/.test(x) ? "  " : "- ") + x).join("\n") || "-"]] });
       return T;
     }
     const pg = (p) => p ? `<span class="pr-pg">p.${p}</span>` : "";
