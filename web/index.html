@@ -577,6 +577,10 @@ body[data-tab="oz"] #alTabs { display: none; }
 .mono { font-family: var(--mono); }
 .sheet-bg { position: fixed; inset: 0; z-index: 50; background: rgba(5, 15, 30, .55); display: flex; align-items: flex-end; justify-content: center; }
 .sheet-bg[hidden] { display: none; }
+#gqSheet { z-index: 60; }
+.mn-help { margin-top: 16px; border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: inherit; }      /* 메뉴(Gemini AI 연결) 위에 QR 화면 */
+.mn-cards .card { margin: 12px 0 0; box-shadow: none; }
+.pa-link { border: 0; background: none; padding: 0; font: inherit; font-weight: 700; color: var(--accent); text-decoration: underline; cursor: pointer; }
 .sheet { width: 100%; max-width: 560px; max-height: 92vh; overflow: auto; background: var(--panel); color: var(--text); border-radius: 20px 20px 0 0;
   padding: 20px 18px calc(22px + env(safe-area-inset-bottom)); box-shadow: 0 -8px 30px rgba(0,0,0,.25); }
 @media (min-width: 600px) { .sheet-bg { align-items: center; } .sheet { border-radius: 20px; } }
@@ -605,7 +609,13 @@ body[data-tab="oz"] #alTabs { display: none; }
 .sh-msg.ok { color: var(--ok); font-weight: 700; } .sh-msg.bad { color: var(--warn); font-weight: 700; background: none; padding: 0; font-size: 15px; font-family: inherit; border-radius: 0; }
 .sh-link { display: block; margin: 12px auto 0; font: inherit; font-size: 15px; color: var(--muted); background: none; border: 0; text-decoration: underline; cursor: pointer; }
 /* ---------- 출퇴근 ---------- */
-.cm-mode { margin-top: 12px; }
+.cm-mode { margin-top: 0; }
+/* 탭 바로 아래 서브메뉴: 모든 탭에서 높이(48px)와 아래 간격(12px)을 같게 */
+.panel > .seg:first-child { margin: 0 0 12px; }
+.panel > .seg:first-child > button { padding: 9px 4px; line-height: 20px; min-height: 38px; font-size: 14px; letter-spacing: -0.3px; white-space: nowrap; }
+@media (max-width: 411px) { .panel > .seg:first-child > button { font-size: 13.5px; } }     /* iPhone 390·393 */
+@media (max-width: 375px) { .panel > .seg:first-child > button { font-size: 13px; } }       /* iPhone SE · 작은 안드로이드 360 */
+.panel > .seg:first-child + *, .panel > .seg:first-child + * > :first-child, .panel > .seg:first-child ~ .pk-sub > :first-child, #fpWrap > :first-child { margin-top: 0; }
 .cm-mode button { font-size: 16px; padding: 11px 4px; }
 .cm-base { display: flex; align-items: center; gap: 8px; margin: 10px 2px 0; font-size: 14px; color: var(--muted); }
 .cm-base b { font: 700 16px var(--mono); color: var(--text); }
@@ -795,9 +805,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 .cm-stops li::before { content: ""; position: absolute; left: 4px; top: 11px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
 .cm-stops li.end::before { background: var(--warn); }
 /* 비행준비 (공항별 유의사항, PC 개발 서버 전용) */
-#pkSub button { font-size: 14px; }
 .pk-sub[data-pks="fp"] { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }   /* 비행준비: 눌러도 글자 블럭(선택) 안 잡힘 */
-@media (max-width: 400px) { #pkSub button { font-size: 12.5px; letter-spacing: -0.6px; } }
 .fp-card { padding: 14px 16px; }
 .fp-hd { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
 .fp-hd h3 { margin: 0; font-size: 17px; }
@@ -989,7 +997,7 @@ body[data-tab="oz"] #alTabs { display: none; }
     </div>
     <div id="gqShow" hidden>
       <div class="gq-qr" id="gqQr"></div>
-      <p class="sh-p" style="text-align:center">받을 기기에서 <b>개발 예정 → Gemini AI 연결 → 📥 QR로 받기</b>를 누르고 이 화면을 비추세요.<br><small class="gq-exp" id="gqExp"></small></p>
+      <p class="sh-p" style="text-align:center">받을 기기에서 <b>☰ 메뉴 → Gemini AI 연결 → 📥 QR로 받기</b>를 누르고 이 화면을 비추세요.<br><small class="gq-exp" id="gqExp"></small></p>
       <p class="mn-note">QR 화면을 사진으로 남기거나 다른 사람에게 보여 주지 마세요. 10분이 지나면 쓸 수 없습니다.</p>
     </div>
     <div id="gqRecv" hidden>
@@ -1048,6 +1056,9 @@ body[data-tab="oz"] #alTabs { display: none; }
       <div class="sh-hd"><h2 id="mnTitle">메뉴</h2><button type="button" class="sh-x" data-mclose>닫기</button></div>
       <div class="mn-list">
         <button type="button" class="mn-item" id="mnCal"><span class="ic">📅</span><span>내 스케줄<small>저장된 근무표를 월별로 보기</small></span><span class="go">›</span></button>
+        <button type="button" class="mn-item" data-mv="mnGm"><span class="ic">🤖</span><span>Gemini AI 연결<small>FLT Package 분석 · 사진 읽기용 키 등록</small></span><span class="go">›</span></button>
+        <button type="button" class="mn-item" data-mv="mnGuide"><span class="ic">🗓️</span><span>근무표 → 캘린더 안내<small>근무표 등록 방법 · 앱/구글 캘린더</small></span><span class="go">›</span></button>
+        <button type="button" class="mn-item" data-mv="mnGc"><span class="ic">🔗</span><span>구글 캘린더 연결<small>휴대폰 캘린더 · 알림으로 보기 (선택)</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnNotice"><span class="ic">📢</span><span>공지사항<span class="new" id="mnNew" hidden>NEW</span><small>새 기능·변경 안내</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnReq"><span class="ic">✉️</span><span>사용자 요청<small>기능 요청·오류 신고·의견 보내기</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnFaq"><span class="ic">❓</span><span>자주 묻는 질문<small>사용법·오프라인·자료 출처</small></span><span class="go">›</span></button>
@@ -1055,7 +1066,191 @@ body[data-tab="oz"] #alTabs { display: none; }
       <div class="mn-sub">주/야간</div>
       <div class="mn-seg" id="mnTheme"><button type="button" data-t="auto">자동</button><button type="button" data-t="light">항상 주간</button><button type="button" data-t="dark">항상 야간</button></div>
       <div class="mn-note">자동: 기기 시각 06시~19시 주간, 그 외 야간. 화면 아래 '주/야간 설정' 버튼은 다음 전환 시각까지만 바꿉니다.</div>
+      <a class="mn-item mn-help" href="help.pdf" download="FLT_Assist_Guide.pdf"><span class="ic">📘</span><span>사용자 도움말 (PDF)<small>전체 사용법 · 받아서 보관</small></span><span class="go">⬇</span></a>
       <div class="mn-note" id="mnVer" style="margin-top:16px"></div>
+    </div>
+    <div id="mnGm" class="mn-cards" hidden>
+      <div class="sh-hd"><button type="button" class="mn-back" data-mv="mnMain">‹ 메뉴</button><button type="button" class="sh-x" data-mclose>닫기</button></div>
+      <h2 style="margin-top:8px">Gemini AI 연결</h2>
+    <div class="card gm" id="gmCard">
+      <div class="gm-hd">
+        <div><h2>Gemini AI 연결</h2><p>AI 분석 기능을 쓰려면 본인 Gemini API 키를 한 번 등록합니다.</p></div>
+        <span class="gm-st" id="gmSt">미연결</span>
+      </div>
+
+      <button type="button" class="b gm-manage" id="gmManage" hidden>키 관리 · 안내 다시 보기</button>
+      <button type="button" class="gq-btn send" id="gqSendBtn" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3z"/><path d="M14 14h3v3h-3zM18 18h3v3h-3zM14 19h2M19 14h2" /></svg><span><b>다른 기기로 보내기</b><small>QR로 이 키를 내 다른 기기에 옮김</small></span></button>
+      <div id="gmGuide">
+      <details class="gm-ac">
+        <summary><span class="n">1</span>API 키가 뭔가요?</summary>
+        <div class="gm-body">
+          <p><b>API 키는 ‘이 앱에서 내 구글 계정으로 제미나이(Gemini) AI를 쓰게 해 주는 출입증’</b>입니다. 길고 복잡한 영문·숫자 조합으로 되어 있습니다.</p>
+          <p>구글 계정(Gmail)만 있으면 <b>무료로</b> 받을 수 있고, 한 번 등록하면 이 기기에서 계속 쓸 수 있습니다.</p>
+          <p class="gm-tip">비밀번호처럼 다루세요. 남이 알면 내 무료 사용량을 대신 쓸 수 있습니다.</p>
+        </div>
+      </details>
+
+      <details class="gm-ac">
+        <summary><span class="n">2</span>API 키 받는 방법 (따라하기)</summary>
+        <div class="gm-body">
+          <p class="gm-tip">이 앱을 쓸 휴대폰·패드에서 직접 받아 붙여넣는 것이 가장 안전하고 쉽습니다.</p>
+          <ol class="gm-steps">
+            <li><b>아래 [Google AI Studio 열기] 버튼</b>을 누릅니다.</li>
+            <li><b>구글 계정(Gmail)으로 로그인</b>합니다.</li>
+            <li>처음이면 <b>이용약관 화면</b>이 나옵니다. 동의에 체크하고 계속 누릅니다. 이때 키가 자동으로 하나 만들어지기도 합니다.</li>
+            <li><b>API Keys</b>(API 키) 화면에 키가 보이면 그 키를 씁니다. 없으면 <b>Create API key</b>(API 키 만들기)를 누릅니다.</li>
+            <li>키 옆의 <b>복사 버튼</b>(겹친 네모 모양)을 누릅니다.</li>
+            <li>이 앱으로 돌아와 <b>아래 입력칸을 길게 눌러 붙여넣기</b>합니다.</li>
+            <li><b>[저장하고 연결 확인]</b>을 누르고, 위에 <b>‘연결됨’</b>이 나오면 끝입니다.</li>
+          </ol>
+          <p class="gm-tip"><b>결제(Billing) · 카드 등록 화면이 나오면 누르지 마세요.</b> 키를 받는 데 결제는 필요 없습니다.</p>
+        </div>
+      </details>
+
+      <details class="gm-ac warn">
+        <summary><span class="n">3</span>안전하게 쓰는 법 (꼭 읽어 주세요)</summary>
+        <div class="gm-body">
+          <ul class="gm-safe">
+            <li><b>무료로만 쓰세요.</b> AI Studio나 Google Cloud에 <b>결제 정보(카드)를 등록하지 마세요.</b> 결제를 등록하지 않으면 키가 새어 나가도 <b>요금이 나오지 않습니다.</b> 최악의 경우라도 그날 무료 사용량이 먼저 소진될 뿐입니다.</li>
+            <li><b>호텔 · 공항 · 카페 와이파이</b>처럼 여러 사람이 함께 쓰는 와이파이에서는 키가 노출될 가능성을 완전히 막을 수 없습니다. <b>키는 언제든 노출될 수 있다</b>고 생각하고, 그래서 꼭 무료로만 쓰세요.</li>
+            <li>키를 <b>카톡 · 문자 · 메일로 보내거나 화면을 찍어 공유하지 마세요.</b></li>
+            <li>키는 <b>이 기기 안에만 저장</b>됩니다. 앱 제작자를 포함해 어디에도 보내지 않고, AI 분석을 요청할 때만 구글로 직접 전달됩니다.</li>
+            <li><b>새어 나간 것 같으면:</b> AI Studio의 API Keys 화면에서 그 키를 삭제하고 새 키를 만든 뒤, 이 앱에서 [지우기]를 누르고 새 키를 등록하세요.</li>
+          </ul>
+        </div>
+      </details>
+
+      <a class="gm-open" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Google AI Studio 열기 ↗</a>
+
+      <div class="gm-in">
+        <div class="gm-lrow"><label for="gmKey">API 키</label><button type="button" class="gq-btn recv" id="gqRecvBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3z"/><path d="M14 14h3v3h-3zM18 18h3v3h-3zM14 19h2M19 14h2" /></svg><span><b>QR로 받기</b><small>다른 기기에서</small></span></button></div>
+        <div class="gm-row">
+          <input id="gmKey" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="여기에 붙여넣기">
+          <button type="button" id="gmShow" aria-label="키 보기">보기</button>
+        </div>
+        <div class="gm-btns">
+          <button type="button" class="b primary" id="gmSave">저장하고 연결 확인</button>
+          <button type="button" class="b" id="gmDel">지우기</button>
+        </div>
+        <div class="gm-msg" id="gmMsg" role="status"></div>
+      </div>
+      </div>
+    </div>
+
+    </div>
+    <div id="mnGuide" class="mn-cards" hidden>
+      <div class="sh-hd"><button type="button" class="mn-back" data-mv="mnMain">‹ 메뉴</button><button type="button" class="sh-x" data-mclose>닫기</button></div>
+      <h2 style="margin-top:8px">근무표 → 캘린더 안내</h2>
+    <div class="card pk-hero pk-feat">
+      <span class="pk-badge">시험판</span>
+      <h2>근무표 → 캘린더</h2>
+      <p>근무표(PDF 또는 화면 캡처 사진)를 읽어 이 앱의 월별 캘린더에 넣고, 원하면 구글 캘린더에도 넣어 드립니다. 대한항공부터 시작합니다.</p>
+      <ol class="pk-flow">
+        <li>근무표 넣기<small>PDF · 사진</small></li>
+        <li>읽은 일정 확인<small>날짜 · 편명 · 시각</small></li>
+        <li>캘린더에 넣기<small>앱 · 구글(선택)</small></li>
+      </ol>
+      <div class="pk-cal">
+        <div><b>앱 안 캘린더</b><span>기본 · 오프라인 가능</span></div>
+        <div><b>구글 캘린더</b><span>선택 · 휴대폰 알림</span></div>
+      </div>
+    </div>
+
+    </div>
+    <div id="mnGc" class="mn-cards" hidden>
+      <div class="sh-hd"><button type="button" class="mn-back" data-mv="mnMain">‹ 메뉴</button><button type="button" class="sh-x" data-mclose>닫기</button></div>
+      <h2 style="margin-top:8px">구글 캘린더 연결</h2>
+    <div class="card gm rs-gc" id="rsGc">
+      <div class="gm-hd">
+        <div><h2>구글 캘린더 연결 안내 <span class="pa-beta">시험판</span></h2><p>연결은 <b>선택</b>입니다. 연결하지 않아도 이 앱 안에서 월별로 볼 수 있습니다.</p></div>
+        <span class="gm-st" id="rsGcSt">준비 중</span>
+      </div>
+
+      <details class="gm-ac" open>
+        <summary><span class="n">1</span>연결하면 무엇이 달라지나요?</summary>
+        <div class="gm-body">
+          <p>내 구글 계정에 <b>‘FLT 근무표’라는 캘린더를 새로 만들고</b>, 근무표 일정을 그 캘린더에만 넣습니다.</p>
+          <ul class="gm-safe">
+            <li>앱은 <b>‘FLT 근무표’ 캘린더만</b> 다룹니다. 기존 개인 일정은 보지도 고치지도 못합니다.</li>
+            <li>일정은 <b>내 구글 계정에만</b> 들어갑니다. 앱 제작자도 볼 수 없습니다.</li>
+            <li>휴대폰 기본 캘린더 · 위젯 · 알림에서 근무표를 볼 수 있습니다.</li>
+          </ul>
+          <p class="gm-tip"><b>연결하지 않으면</b> 이렇게 됩니다: 휴대폰 캘린더 · 위젯 · 다른 캘린더 앱에는 안 보이고, 출근 전 알림을 쓸 수 없으며, 근무표는 이 앱을 열어야 볼 수 있습니다. 나중에 언제든 연결할 수 있습니다.</p>
+        </div>
+      </details>
+
+      <details class="gm-ac">
+        <summary><span class="n">2</span>준비물</summary>
+        <div class="gm-body">
+          <ol class="gm-steps">
+            <li><b>구글 계정(Gmail)</b> 하나 — 근무표를 넣을 계정입니다.</li>
+            <li>따로 신청할 필요 없이 <b>본인이 직접 연결</b>하면 됩니다. 연결이 안 되거나 어려우면 <b>☰ 메뉴 → 사용자 요청</b>에 ‘구글 캘린더 연결 안 됨’과 화면에 나온 문구를 적어 보내 주세요.</li>
+            <li>근무표 파일: 회사에서 받은 <b>원본 PDF</b>(가장 정확) 또는 <b>화면 캡처 사진</b>(Gemini 키 등록자만, 확인 필요).</li>
+          </ol>
+          <p class="gm-tip">이 앱이 쓰는 권한은 구글 분류상 <b>‘민감하지 않은 범위’</b>입니다. 그래서 구글 검토나 인원 제한 없이 누구나 자기 구글 계정으로 연결할 수 있습니다. 구글 계정이 없거나 연결이 안 되는 분은 <b>일정 파일(.ics)</b>로 넣는 방법을 함께 준비합니다.</p>
+        </div>
+      </details>
+
+      <details class="gm-ac">
+        <summary><span class="n">3</span>연결 순서 (따라하기)</summary>
+        <div class="gm-body">
+          <ol class="gm-steps">
+            <li>이 화면의 <b>[구글 캘린더 연결]</b> 버튼을 누릅니다. (시험판 준비가 끝나면 열립니다)</li>
+            <li><b>구글 계정 선택</b> 창에서 근무표를 넣을 계정을 고릅니다.</li>
+            <li>혹시 <b>‘Google에서 확인하지 않은 앱’</b> 화면이 나오면 왼쪽 아래 <b>[고급]</b> → <b>[FLT Assist(으)로 이동]</b>을 누릅니다. <b>‘액세스 차단됨’</b>이 나오면 ☰ 메뉴 → 사용자 요청으로 알려 주세요.</li>
+            <li>권한 화면에서 <b>‘이 앱이 만든 캘린더 보기·관리’</b> 항목만 있는지 확인하고 <b>체크</b>한 뒤 <b>[계속]</b>을 누릅니다. 다른 권한(메일 · 연락처 · 모든 캘린더 등)을 묻는다면 누르지 말고 알려 주세요.</li>
+            <li>앱으로 돌아와 위쪽이 <b>‘연결됨’</b>으로 바뀌면 끝입니다. 내 구글 캘린더에 <b>‘FLT 근무표’</b> 캘린더가 생깁니다.</li>
+          </ol>
+          <p class="gm-tip">창이 안 뜨면: 아이폰 Safari는 <b>설정 → 앱 → Safari → 팝업 차단</b>을 잠시 끄고 다시 누르세요. 홈 화면에 추가한 앱에서 안 되면 Safari에서 이 앱 주소를 열어 연결해 보세요.</p>
+        </div>
+      </details>
+
+      <details class="gm-ac">
+        <summary><span class="n">4</span>휴대폰 캘린더에서 보이게 하기</summary>
+        <div class="gm-body">
+          <p><b>안드로이드 · 구글 캘린더 앱</b></p>
+          <ol class="gm-steps"><li>구글 캘린더 앱 → 왼쪽 위 <b>☰</b></li><li>근무표를 넣은 계정 아래 <b>‘FLT 근무표’</b>에 체크</li></ol>
+          <p><b>아이폰 · 기본 캘린더 앱</b></p>
+          <ol class="gm-steps"><li><b>설정 → 앱 → 캘린더 → 캘린더 계정</b>에 그 Gmail 계정이 있고 ‘캘린더’가 켜져 있는지 확인 (없으면 계정 추가 → Google)</li>
+            <li>캘린더 앱 아래 <b>[캘린더]</b> → <b>‘FLT 근무표’</b> 체크</li>
+            <li>보이지 않으면 PC나 Safari에서 <b>calendar.google.com/calendar/syncselect</b> 를 열어 ‘FLT 근무표’에 체크하고 저장</li></ol>
+          <p class="gm-tip">구글 캘린더 앱(아이폰용)을 설치하면 위 과정 없이 바로 보입니다.</p>
+        </div>
+      </details>
+
+      <details class="gm-ac warn">
+        <summary><span class="n">5</span>안전하게 쓰는 법 (꼭 읽어 주세요)</summary>
+        <div class="gm-body">
+          <ul class="gm-safe">
+            <li><b>공용 기기(사무실 PC · 호텔 PC)에서는 연결하지 마세요.</b></li>
+            <li>로그인은 보안상 <b>약 1시간 뒤 자동으로 풀립니다.</b> 근무표를 넣을 때만 다시 로그인하면 되고, 이미 넣은 일정은 그대로 남습니다.</li>
+            <li><b>‘FLT 근무표’ 캘린더에는 직접 일정을 넣지 마세요.</b> 근무표를 다시 넣을 때 그 기간의 일정이 새 근무표로 바뀝니다. 개인 일정은 다른 캘린더에 넣으세요.</li>
+            <li>앱이 다루는 것은 ‘FLT 근무표’ 캘린더뿐이라, 이 캘린더를 지워도 <b>개인 일정에는 영향이 없습니다.</b></li>
+            <li><b>연결 끊기:</b> 구글 계정 관리 → <b>보안 → 서드파티 앱 및 서비스</b> → FLT Assist → <b>액세스 권한 삭제</b>. 이미 넣은 일정을 지우려면 구글 캘린더에서 ‘FLT 근무표’ 캘린더를 삭제하세요.</li>
+            <li>사진으로 읽은 근무표는 틀릴 수 있습니다. <b>넣기 전 미리 보기에서 꼭 확인</b>하고, 운항 판단은 회사 원본 근무표로 하세요.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="gm-ac">
+        <summary><span class="n">6</span>Apple 캘린더만 쓰는 경우</summary>
+        <div class="gm-body">
+          <p>구글 계정 없이 <b>일정 파일(.ics)</b>로 넣는 방법을 함께 준비합니다. 앱이 만든 파일을 열고 넣을 캘린더를 고른 뒤 <b>‘모두 추가’</b>를 누르면 됩니다.</p>
+          <p class="gm-tip">일정 파일 방식은 근무표가 바뀌면 이전에 넣은 일정을 직접 지워야 할 수 있습니다. 바뀐 것만 고쳐 주는 기능은 구글 캘린더 연결에서만 됩니다.</p>
+        </div>
+      </details>
+
+      <div class="rs-act">
+        <button type="button" class="b primary rs-go" id="rsGcGo">구글 캘린더 연결</button>
+        <div class="rs-more" id="rsGcMore" hidden>
+          <button type="button" class="b" id="rsGcTest">Test일정 넣기</button>
+          <button type="button" class="b" id="rsGcTestDel">Test일정 삭제</button>
+          <button type="button" class="b" id="rsGcOff">연결끊기</button>
+        </div>
+        <div class="gm-msg" id="rsGcMsg" role="status"></div>
+      </div>
+    </div>
+
     </div>
     <div id="mnNotice" hidden>
       <div class="sh-hd"><button type="button" class="mn-back" data-mv="mnMain">‹ 메뉴</button><button type="button" class="sh-x" data-mclose>닫기</button></div>
@@ -1199,80 +1394,15 @@ body[data-tab="oz"] #alTabs { display: none; }
     <div class="pk-sub" data-pks="pa" hidden>
     <p class="pk-intro"><b>FLT Package 분석</b>은 본인 <b>Gemini API 키</b>를 등록한 분만 쓸 수 있습니다. </p>
 
-    <div class="card gm" id="gmCard">
-      <div class="gm-hd">
-        <div><h2>Gemini AI 연결</h2><p>AI 분석 기능을 쓰려면 본인 Gemini API 키를 한 번 등록합니다.</p></div>
-        <span class="gm-st" id="gmSt">미연결</span>
-      </div>
-
-      <button type="button" class="b gm-manage" id="gmManage" hidden>키 관리 · 안내 다시 보기</button>
-      <button type="button" class="gq-btn send" id="gqSendBtn" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3z"/><path d="M14 14h3v3h-3zM18 18h3v3h-3zM14 19h2M19 14h2" /></svg><span><b>다른 기기로 보내기</b><small>QR로 이 키를 내 다른 기기에 옮김</small></span></button>
-      <div id="gmGuide">
-      <details class="gm-ac">
-        <summary><span class="n">1</span>API 키가 뭔가요?</summary>
-        <div class="gm-body">
-          <p><b>API 키는 ‘이 앱에서 내 구글 계정으로 제미나이(Gemini) AI를 쓰게 해 주는 출입증’</b>입니다. 길고 복잡한 영문·숫자 조합으로 되어 있습니다.</p>
-          <p>구글 계정(Gmail)만 있으면 <b>무료로</b> 받을 수 있고, 한 번 등록하면 이 기기에서 계속 쓸 수 있습니다.</p>
-          <p class="gm-tip">비밀번호처럼 다루세요. 남이 알면 내 무료 사용량을 대신 쓸 수 있습니다.</p>
-        </div>
-      </details>
-
-      <details class="gm-ac">
-        <summary><span class="n">2</span>API 키 받는 방법 (따라하기)</summary>
-        <div class="gm-body">
-          <p class="gm-tip">이 앱을 쓸 휴대폰·패드에서 직접 받아 붙여넣는 것이 가장 안전하고 쉽습니다.</p>
-          <ol class="gm-steps">
-            <li><b>아래 [Google AI Studio 열기] 버튼</b>을 누릅니다.</li>
-            <li><b>구글 계정(Gmail)으로 로그인</b>합니다.</li>
-            <li>처음이면 <b>이용약관 화면</b>이 나옵니다. 동의에 체크하고 계속 누릅니다. 이때 키가 자동으로 하나 만들어지기도 합니다.</li>
-            <li><b>API Keys</b>(API 키) 화면에 키가 보이면 그 키를 씁니다. 없으면 <b>Create API key</b>(API 키 만들기)를 누릅니다.</li>
-            <li>키 옆의 <b>복사 버튼</b>(겹친 네모 모양)을 누릅니다.</li>
-            <li>이 앱으로 돌아와 <b>아래 입력칸을 길게 눌러 붙여넣기</b>합니다.</li>
-            <li><b>[저장하고 연결 확인]</b>을 누르고, 위에 <b>‘연결됨’</b>이 나오면 끝입니다.</li>
-          </ol>
-          <p class="gm-tip"><b>결제(Billing) · 카드 등록 화면이 나오면 누르지 마세요.</b> 키를 받는 데 결제는 필요 없습니다.</p>
-        </div>
-      </details>
-
-      <details class="gm-ac warn">
-        <summary><span class="n">3</span>안전하게 쓰는 법 (꼭 읽어 주세요)</summary>
-        <div class="gm-body">
-          <ul class="gm-safe">
-            <li><b>무료로만 쓰세요.</b> AI Studio나 Google Cloud에 <b>결제 정보(카드)를 등록하지 마세요.</b> 결제를 등록하지 않으면 키가 새어 나가도 <b>요금이 나오지 않습니다.</b> 최악의 경우라도 그날 무료 사용량이 먼저 소진될 뿐입니다.</li>
-            <li><b>호텔 · 공항 · 카페 와이파이</b>처럼 여러 사람이 함께 쓰는 와이파이에서는 키가 노출될 가능성을 완전히 막을 수 없습니다. <b>키는 언제든 노출될 수 있다</b>고 생각하고, 그래서 꼭 무료로만 쓰세요.</li>
-            <li>키를 <b>카톡 · 문자 · 메일로 보내거나 화면을 찍어 공유하지 마세요.</b></li>
-            <li>키는 <b>이 기기 안에만 저장</b>됩니다. 앱 제작자를 포함해 어디에도 보내지 않고, AI 분석을 요청할 때만 구글로 직접 전달됩니다.</li>
-            <li><b>새어 나간 것 같으면:</b> AI Studio의 API Keys 화면에서 그 키를 삭제하고 새 키를 만든 뒤, 이 앱에서 [지우기]를 누르고 새 키를 등록하세요.</li>
-          </ul>
-        </div>
-      </details>
-
-      <a class="gm-open" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Google AI Studio 열기 ↗</a>
-
-      <div class="gm-in">
-        <div class="gm-lrow"><label for="gmKey">API 키</label><button type="button" class="gq-btn recv" id="gqRecvBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3z"/><path d="M14 14h3v3h-3zM18 18h3v3h-3zM14 19h2M19 14h2" /></svg><span><b>QR로 받기</b><small>다른 기기에서</small></span></button></div>
-        <div class="gm-row">
-          <input id="gmKey" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="여기에 붙여넣기">
-          <button type="button" id="gmShow" aria-label="키 보기">보기</button>
-        </div>
-        <div class="gm-btns">
-          <button type="button" class="b primary" id="gmSave">저장하고 연결 확인</button>
-          <button type="button" class="b" id="gmDel">지우기</button>
-        </div>
-        <div class="gm-msg" id="gmMsg" role="status"></div>
-      </div>
-      </div>
-    </div>
-
     <div class="card pa" id="paCard">
       <div class="gm-hd">
-        <div><h2>FLT Package 분석 <span class="pa-beta">시험판</span></h2><p>운항 패키지 PDF를 Gemini가 읽고 요약 PDF로 만들어 드립니다.<br><b class="pa-al">(KE, OZ 분석 가능)</b></p></div>
+        <div><h2>FLT Package 분석 <span class="pa-beta">시험판</span></h2><p>운항 패키지 PDF를 Gemini가 읽고 요약 PDF로 작성</p></div>
       </div>
-      <div class="pa-need" id="paNeed">🔒 <b>Gemini API 키를 등록한 분만</b> 쓸 수 있습니다. 위 <b>Gemini AI 연결</b>에서 키를 한 번 등록하면 열립니다.</div>
+      <div class="pa-need" id="paNeed">🔒 <b>Gemini API 키를 등록한 분만</b> 쓸 수 있습니다. <button type="button" class="pa-link" data-open-mn="mnGm">☰ 메뉴 → Gemini AI 연결</button>에서 키를 한 번 등록하면 열립니다.</div>
       <ol class="pa-steps" id="paSteps">
         <li>
           <div class="pa-lbl"><span class="n">1</span>패키지 PDF 고르기</div>
-          <label class="pa-file" for="paFile">PDF 파일 선택</label>
+          <label class="pa-file" for="paFile">PDF 파일 선택 <span id="paAl">(KE, OZ)</span></label>
           <input id="paFile" type="file" accept="application/pdf,.pdf" hidden>
           <div class="pa-fname" id="paFname">선택한 파일 없음</div>
         </li>
@@ -1290,32 +1420,17 @@ body[data-tab="oz"] #alTabs { display: none; }
         </li>
       </ol>
       <div id="paRes"></div>
-      <p class="pa-foot">AI가 만든 참고 자료입니다. 숫자와 NOTAM은 반드시 원본과 대조하세요. 마지막 결과는 이 기기에 남아 있어 인터넷이 없어도 PDF를 다시 받을 수 있습니다. <span id="paFmt"></span></p>
+      <p class="pa-foot">AI가 만든 참고 자료입니다. 숫자와 NOTAM은 반드시 원본과 대조하세요. 마지막 결과는 이 기기에 남아 있어 인터넷이 없어도 PDF를 다시 받을 수 있습니다. <span id="paFmt" hidden></span></p>
     </div>
 
     </div>
     <div class="pk-sub" data-pks="rs" hidden>
-    <div class="card pk-hero pk-feat">
-      <span class="pk-badge">시험판 · 안내 먼저</span>
-      <h2>근무표 → 캘린더</h2>
-      <p>근무표(PDF 또는 화면 캡처 사진)를 읽어 이 앱의 월별 캘린더에 넣고, 원하면 구글 캘린더에도 넣어 드립니다. 대한항공부터 시작합니다.</p>
-      <ol class="pk-flow">
-        <li>근무표 넣기<small>PDF · 사진</small></li>
-        <li>읽은 일정 확인<small>날짜 · 편명 · 시각</small></li>
-        <li>캘린더에 넣기<small>앱 · 구글(선택)</small></li>
-      </ol>
-      <div class="pk-cal">
-        <div><b>앱 안 캘린더</b><span>기본 · 오프라인 가능</span></div>
-        <div><b>구글 캘린더</b><span>선택 · 휴대폰 알림</span></div>
-      </div>
-    </div>
-
     <div class="card gm rs-in" id="rsIn">
       <div class="gm-hd">
-        <div><h2>근무표 넣기 <span class="pa-beta">개발 중</span></h2><p>대한항공 월간 스케줄 <b>PDF</b>를 넣으면 기기 안에서 읽습니다(파일은 밖으로 보내지 않음). UTC · SLT · BLT 어느 것으로 출력해도 되지만 <b>SLT 출력을 권합니다</b>(UTC 는 휴무·체류 날짜가 하루 어긋날 수 있음). <b>아시아나 MONTHLY SKD</b>는 글자가 든 PDF 면 키 없이 읽고, 그림 PDF·<b>화면 캡처 사진</b>은 Gemini 키 등록자만 쓸 수 있습니다.</p></div>
+        <div><h2>근무표 등록 <span class="pa-beta">시험판</span></h2><p><b>Station Local Time</b> PDF File 등록 추천. 그림 PDF, 화면캡쳐 사진은 Gemini key 등록자만 사용가능</p></div>
       </div>
       <div class="rs-btns">
-        <label class="b rs-file" for="rsPdf">근무표 PDF 선택<small>대한항공 월간 스케줄</small></label>
+        <label class="b rs-file" for="rsPdf">근무표 PDF 선택<small>KE · OZ</small></label>
         <input id="rsPdf" type="file" accept="application/pdf,.pdf" hidden>
         <label class="b rs-file" for="rsPhoto" id="rsPhotoBtn">캡처 사진 선택<small id="rsPhotoSub">Gemini · 여러 장 가능</small></label>
         <input id="rsPhoto" type="file" accept="image/*" multiple hidden>
@@ -1335,100 +1450,9 @@ body[data-tab="oz"] #alTabs { display: none; }
       <div class="gm-msg" id="rsMsg" role="status"></div>
     </div>
 
-    <div class="card gm rs-gc" id="rsGc">
-      <div class="gm-hd">
-        <div><h2>구글 캘린더 연결 안내 <span class="pa-beta">시험판</span></h2><p>연결은 <b>선택</b>입니다. 연결하지 않아도 이 앱 안에서 월별로 볼 수 있습니다.</p></div>
-        <span class="gm-st" id="rsGcSt">준비 중</span>
-      </div>
-
-      <details class="gm-ac" open>
-        <summary><span class="n">1</span>연결하면 무엇이 달라지나요?</summary>
-        <div class="gm-body">
-          <p>내 구글 계정에 <b>‘FLT 근무표’라는 캘린더를 새로 만들고</b>, 근무표 일정을 그 캘린더에만 넣습니다.</p>
-          <ul class="gm-safe">
-            <li>앱은 <b>‘FLT 근무표’ 캘린더만</b> 다룹니다. 기존 개인 일정은 보지도 고치지도 못합니다.</li>
-            <li>일정은 <b>내 구글 계정에만</b> 들어갑니다. 앱 제작자도 볼 수 없습니다.</li>
-            <li>휴대폰 기본 캘린더 · 위젯 · 알림에서 근무표를 볼 수 있습니다.</li>
-          </ul>
-          <p class="gm-tip"><b>연결하지 않으면</b> 이렇게 됩니다: 휴대폰 캘린더 · 위젯 · 다른 캘린더 앱에는 안 보이고, 출근 전 알림을 쓸 수 없으며, 근무표는 이 앱을 열어야 볼 수 있습니다. 나중에 언제든 연결할 수 있습니다.</p>
-        </div>
-      </details>
-
-      <details class="gm-ac">
-        <summary><span class="n">2</span>준비물</summary>
-        <div class="gm-body">
-          <ol class="gm-steps">
-            <li><b>구글 계정(Gmail)</b> 하나 — 근무표를 넣을 계정입니다.</li>
-            <li>따로 신청할 필요 없이 <b>본인이 직접 연결</b>하면 됩니다. 연결이 안 되거나 어려우면 <b>☰ 메뉴 → 사용자 요청</b>에 ‘구글 캘린더 연결 안 됨’과 화면에 나온 문구를 적어 보내 주세요.</li>
-            <li>근무표 파일: 회사에서 받은 <b>원본 PDF</b>(가장 정확) 또는 <b>화면 캡처 사진</b>(Gemini 키 등록자만, 확인 필요).</li>
-          </ol>
-          <p class="gm-tip">이 앱이 쓰는 권한은 구글 분류상 <b>‘민감하지 않은 범위’</b>입니다. 그래서 구글 검토나 인원 제한 없이 누구나 자기 구글 계정으로 연결할 수 있습니다. 구글 계정이 없거나 연결이 안 되는 분은 <b>일정 파일(.ics)</b>로 넣는 방법을 함께 준비합니다.</p>
-        </div>
-      </details>
-
-      <details class="gm-ac">
-        <summary><span class="n">3</span>연결 순서 (따라하기)</summary>
-        <div class="gm-body">
-          <ol class="gm-steps">
-            <li>이 화면의 <b>[구글 캘린더 연결]</b> 버튼을 누릅니다. (시험판 준비가 끝나면 열립니다)</li>
-            <li><b>구글 계정 선택</b> 창에서 근무표를 넣을 계정을 고릅니다.</li>
-            <li>혹시 <b>‘Google에서 확인하지 않은 앱’</b> 화면이 나오면 왼쪽 아래 <b>[고급]</b> → <b>[FLT Assist(으)로 이동]</b>을 누릅니다. <b>‘액세스 차단됨’</b>이 나오면 ☰ 메뉴 → 사용자 요청으로 알려 주세요.</li>
-            <li>권한 화면에서 <b>‘이 앱이 만든 캘린더 보기·관리’</b> 항목만 있는지 확인하고 <b>체크</b>한 뒤 <b>[계속]</b>을 누릅니다. 다른 권한(메일 · 연락처 · 모든 캘린더 등)을 묻는다면 누르지 말고 알려 주세요.</li>
-            <li>앱으로 돌아와 위쪽이 <b>‘연결됨’</b>으로 바뀌면 끝입니다. 내 구글 캘린더에 <b>‘FLT 근무표’</b> 캘린더가 생깁니다.</li>
-          </ol>
-          <p class="gm-tip">창이 안 뜨면: 아이폰 Safari는 <b>설정 → 앱 → Safari → 팝업 차단</b>을 잠시 끄고 다시 누르세요. 홈 화면에 추가한 앱에서 안 되면 Safari에서 이 앱 주소를 열어 연결해 보세요.</p>
-        </div>
-      </details>
-
-      <details class="gm-ac">
-        <summary><span class="n">4</span>휴대폰 캘린더에서 보이게 하기</summary>
-        <div class="gm-body">
-          <p><b>안드로이드 · 구글 캘린더 앱</b></p>
-          <ol class="gm-steps"><li>구글 캘린더 앱 → 왼쪽 위 <b>☰</b></li><li>근무표를 넣은 계정 아래 <b>‘FLT 근무표’</b>에 체크</li></ol>
-          <p><b>아이폰 · 기본 캘린더 앱</b></p>
-          <ol class="gm-steps"><li><b>설정 → 앱 → 캘린더 → 캘린더 계정</b>에 그 Gmail 계정이 있고 ‘캘린더’가 켜져 있는지 확인 (없으면 계정 추가 → Google)</li>
-            <li>캘린더 앱 아래 <b>[캘린더]</b> → <b>‘FLT 근무표’</b> 체크</li>
-            <li>보이지 않으면 PC나 Safari에서 <b>calendar.google.com/calendar/syncselect</b> 를 열어 ‘FLT 근무표’에 체크하고 저장</li></ol>
-          <p class="gm-tip">구글 캘린더 앱(아이폰용)을 설치하면 위 과정 없이 바로 보입니다.</p>
-        </div>
-      </details>
-
-      <details class="gm-ac warn">
-        <summary><span class="n">5</span>안전하게 쓰는 법 (꼭 읽어 주세요)</summary>
-        <div class="gm-body">
-          <ul class="gm-safe">
-            <li><b>공용 기기(사무실 PC · 호텔 PC)에서는 연결하지 마세요.</b></li>
-            <li>로그인은 보안상 <b>약 1시간 뒤 자동으로 풀립니다.</b> 근무표를 넣을 때만 다시 로그인하면 되고, 이미 넣은 일정은 그대로 남습니다.</li>
-            <li><b>‘FLT 근무표’ 캘린더에는 직접 일정을 넣지 마세요.</b> 근무표를 다시 넣을 때 그 기간의 일정이 새 근무표로 바뀝니다. 개인 일정은 다른 캘린더에 넣으세요.</li>
-            <li>앱이 다루는 것은 ‘FLT 근무표’ 캘린더뿐이라, 이 캘린더를 지워도 <b>개인 일정에는 영향이 없습니다.</b></li>
-            <li><b>연결 끊기:</b> 구글 계정 관리 → <b>보안 → 서드파티 앱 및 서비스</b> → FLT Assist → <b>액세스 권한 삭제</b>. 이미 넣은 일정을 지우려면 구글 캘린더에서 ‘FLT 근무표’ 캘린더를 삭제하세요.</li>
-            <li>사진으로 읽은 근무표는 틀릴 수 있습니다. <b>넣기 전 미리 보기에서 꼭 확인</b>하고, 운항 판단은 회사 원본 근무표로 하세요.</li>
-          </ul>
-        </div>
-      </details>
-
-      <details class="gm-ac">
-        <summary><span class="n">6</span>Apple 캘린더만 쓰는 경우</summary>
-        <div class="gm-body">
-          <p>구글 계정 없이 <b>일정 파일(.ics)</b>로 넣는 방법을 함께 준비합니다. 앱이 만든 파일을 열고 넣을 캘린더를 고른 뒤 <b>‘모두 추가’</b>를 누르면 됩니다.</p>
-          <p class="gm-tip">일정 파일 방식은 근무표가 바뀌면 이전에 넣은 일정을 직접 지워야 할 수 있습니다. 바뀐 것만 고쳐 주는 기능은 구글 캘린더 연결에서만 됩니다.</p>
-        </div>
-      </details>
-
-      <div class="rs-act">
-        <button type="button" class="b primary rs-go" id="rsGcGo">구글 캘린더 연결</button>
-        <div class="rs-more" id="rsGcMore" hidden>
-          <button type="button" class="b" id="rsGcTest">Test일정 넣기</button>
-          <button type="button" class="b" id="rsGcTestDel">Test일정 삭제</button>
-          <button type="button" class="b" id="rsGcOff">연결끊기</button>
-        </div>
-        <div class="gm-msg" id="rsGcMsg" role="status"></div>
-      </div>
-    </div>
-
     <div class="card gm rs-sy" id="rsSy">
       <div class="gm-hd">
-        <div><h2>내 기기 동기화 <span class="pa-beta">시험판</span></h2><p>같은 <b>내 아이디</b>를 쓰는 휴대폰·태블릿끼리 근무표를 맞춥니다. <b>선택</b>이며 언제든 켜고 끌 수 있습니다.</p></div>
+        <div><h2>내 기기 동기화 <span class="pa-beta">시험판</span></h2><p>같은 <b>내 아이디</b>를 쓰는 휴대폰·태블릿끼리 근무표를 동기화.</p></div>
         <span class="gm-st" id="rsSySt">꺼짐</span>
       </div>
       <details class="gm-ac">
@@ -1458,7 +1482,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 
     <div class="card gm rs-gr" id="rsGr">
       <div class="gm-hd">
-        <div><h2>근무표 공유 그룹 <span class="pa-beta">시험판</span></h2><p>동료·가족과 월 근무표를 함께 봅니다. 그룹당 <b>4명</b>, 한 사람 <b>5개 그룹</b>까지. 그룹마다 <b>공개 범위</b>(근무/휴무만 · 상세)를 고릅니다.</p></div>
+        <div><h2>근무표 공유 그룹 <span class="pa-beta">시험판</span></h2><p>동료·가족과 월 근무표를 공유. 그룹당 <b>4명</b>, 한 사람 <b>5개 그룹</b>까지. 그룹마다 <b>공개 범위</b>(근무/휴무만 · 상세) 선택.</p></div>
         <span class="gm-st" id="rsGrSt">꺼짐</span>
       </div>
       <details class="gm-ac">
@@ -1478,13 +1502,6 @@ body[data-tab="oz"] #alTabs { display: none; }
       <div class="gm-msg" id="rsGrMsg" role="status"></div>
     </div>
 
-    <div class="card pk-hero pk-feat" style="margin-top:14px">
-      <div class="pk-req" data-req="근무표-캘린더"><button type="button">근무표 → 캘린더 요청하기</button>
-          <div class="cm"><input maxlength="300" placeholder="의견 남기기 (선택)" aria-label="의견"><button type="button">보내기</button></div>
-          <div class="thx">고맙습니다. 의견이 전달됐습니다.</div></div>
-    </div>
-
-    <p class="pk-foot">요청과 의견은 이름 없이 전달되며, 개발 순서를 정하는 데만 씁니다. 개발이 끝나면 앱 업데이트만으로 이 화면에서 바로 쓸 수 있습니다.</p>
     </div>
   </section>
 
@@ -1916,7 +1933,7 @@ window.ROSTER = (() => {
     if (toGoogle && !(window.GCAL && window.GCAL.ready())) {
       $("rpMsg").innerHTML = "구글 로그인 창에서 계정을 고르고 허용해 주세요…";
       const ok = window.GCAL && await window.GCAL.connect().catch(() => false);
-      if (!ok) { $("rpMsg").innerHTML = `<b style="color:var(--warn)">구글 캘린더에 연결하지 못했습니다.</b> 앱에만 저장하려면 [앱에 저장]을 누르세요. (안내: 근무표 등록 → 구글 캘린더 연결 안내)`; $("rpSave").disabled = $("rpSaveG").disabled = false; btn.textContent = "앱 + 구글캘린더 저장"; return; }
+      if (!ok) { $("rpMsg").innerHTML = `<b style="color:var(--warn)">구글 캘린더에 연결하지 못했습니다.</b> 앱에만 저장하려면 [앱에 저장]을 누르세요. (안내: ☰ 메뉴 → 구글 캘린더 연결)`; $("rpSave").disabled = $("rpSaveG").disabled = false; btn.textContent = "앱 + 구글캘린더 저장"; return; }
     }
     const sel = P.events.filter((e) => e.on && e.d >= from && e.d <= to);
     const touched = new Set();                  // 기간 밖이지만 바뀐 날짜 (달 경계)
@@ -2272,7 +2289,7 @@ window.ROSTER = (() => {
   }
   const b64 = (buf) => { const b = new Uint8Array(buf); let s = ""; for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000)); return btoa(s); };
   async function readPhotos(files) {
-    const key = GKEY(); if (!key) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">Gemini 키를 먼저 등록해 주세요.</b> (FLT Package 분석 → Gemini AI 연결)`; return; }
+    const key = GKEY(); if (!key) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">Gemini 키를 먼저 등록해 주세요.</b> (☰ 메뉴 → Gemini AI 연결)`; return; }
     if (!navigator.onLine) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">사진 읽기는 인터넷이 필요합니다.</b>`; return; }
     $("rsMsg").innerHTML = `사진 ${files.length}장을 Gemini 로 읽는 중… (보통 20~60초)`;
     try {
@@ -2302,7 +2319,7 @@ window.ROSTER = (() => {
     paintPhoto(); addEventListener("storage", paintPhoto); document.addEventListener("visibilitychange", paintPhoto);
     $("rsPhotoBtn").addEventListener("click", (e) => {
       paintPhoto();
-      if (!GKEY()) { e.preventDefault(); $("rsMsg").innerHTML = `<b style="color:var(--warn)">사진 읽기는 Gemini 키를 등록한 분만 쓸 수 있습니다.</b> 위 ‘FLT Package 분석’ 메뉴의 Gemini AI 연결에서 키를 등록하세요. PDF 는 키 없이 됩니다.`; return; }
+      if (!GKEY()) { e.preventDefault(); $("rsMsg").innerHTML = `<b style="color:var(--warn)">사진 읽기는 Gemini 키를 등록한 분만 쓸 수 있습니다.</b> ☰ 메뉴 → Gemini AI 연결에서 키를 등록하세요. PDF 는 키 없이 됩니다.`; return; }
       if (ls.get(PHOTO_OK) !== "1") { e.preventDefault(); $("rsConsent").hidden = false; $("rsConsent").scrollIntoView({ block: "nearest", behavior: "smooth" }); }
     });
     $("rsConsentOk").addEventListener("click", () => { ls.set(PHOTO_OK, "1"); $("rsConsent").hidden = true; $("rsPhoto").click(); });
@@ -2529,7 +2546,7 @@ window.ROSTER = (() => {
       let h = "";
       if (!reg) {
         h = `<div class="rs-act"><button type="button" class="b primary rs-go" data-g="reg"${SYNC_SERVER ? "" : " disabled"}>공유 시작</button>
-          <div class="rs-last">내 아이디 <b>${esc(me())}</b>를 공유 서버에 등록합니다. 등록해야 다른 사람이 나를 초대할 수 있습니다. 근무표는 그룹에 들어가기 전까지 올라가지 않습니다.</div></div>`;
+          <div class="rs-last">내 아이디 <b>${esc(me())}</b>를 공유 서버에 등록. 등록해야 다른 사람이 초대 가능.</div></div>`;
       } else {
         h = `<p class="gr-me">내 아이디 <b>${esc(me())}</b> <small>초대받을 때 상대에게 알려 주세요</small></p>`;
         for (const g of L) {
@@ -2867,7 +2884,7 @@ window.FPREP = (() => {
     badge();
   }
   function view(id) {
-    ["mnMain", "mnNotice", "mnReq", "mnFaq"].forEach((v) => { $(v).hidden = v !== id; });
+    ["mnMain", "mnNotice", "mnReq", "mnFaq", "mnGm", "mnGuide", "mnGc"].forEach((v) => { $(v).hidden = v !== id; });
     if (id === "mnNotice") showNotice();
     if (id === "mnFaq") $("mnFaqList").innerHTML = FAQ && FAQ.items && FAQ.items.length
       ? FAQ.items.map((x) => `<details><summary>${esc(x.q)}</summary><p>${esc(x.a)}</p></details>`).join("")
@@ -2877,6 +2894,8 @@ window.FPREP = (() => {
   function paintTheme() { const m = window.csfTheme ? window.csfTheme.mode() : "auto"; $("mnTheme").querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.t === m)); }
   function open() { view("mnMain"); paintTheme(); $("mnVer").textContent = "FLT Assist " + (($("appVer") && $("appVer").textContent) || ""); $("menuSheet").hidden = false; }
   const close = () => { $("menuSheet").hidden = true; };
+  document.addEventListener("click", (e) => { const b = e.target.closest("[data-open-mn]"); if (b) window.MENU.open(b.dataset.openMn); });
+  window.MENU = { open: (v) => { open(); if (v) view(v); } };     // 다른 화면에서 메뉴의 특정 화면 열기
   $("menuBtn").addEventListener("click", open);
   $("mnCal").addEventListener("click", () => { close(); window.ROSTER && window.ROSTER.open(); });
   $("menuSheet").addEventListener("click", (e) => {
@@ -2905,7 +2924,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v52", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v53", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -4478,6 +4497,7 @@ window.csfStat = (() => {
     $("paShare").addEventListener("click", () => savePdf(true));
     try { result = JSON.parse(store.get(RK) || "null"); } catch (e) {}
     $("paFmt").textContent = `(출력 양식: ${PKG_FORMAT.name})`;
+    $("paAl").textContent = `(${PKG_FORMAT.airlines.map((a) => ({ KAL: "KE", AAR: "OZ", JJA: "7C", JNA: "LJ", TWB: "TW", ESR: "ZE" }[a] || a)).join(", ")})`;   // 분석 가능 항공사: PKG_FORMAT.airlines 에 추가하면 여기에 표시
     renderRes(); paint();
     return { paint };
   })();
