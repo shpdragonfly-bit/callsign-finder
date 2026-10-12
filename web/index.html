@@ -1293,7 +1293,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 
     <div class="card gm rs-in" id="rsIn">
       <div class="gm-hd">
-        <div><h2>근무표 넣기 <span class="pa-beta">개발 중</span></h2><p>대한항공 월간 스케줄 <b>PDF</b>를 넣으면 기기 안에서 읽습니다(파일은 밖으로 보내지 않음). UTC · SLT · BLT 어느 것으로 출력해도 되지만 <b>SLT 출력을 권합니다</b>(UTC 는 휴무·체류 날짜가 하루 어긋날 수 있음). <b>화면 캡처 사진</b>은 Gemini 키 등록자만 쓸 수 있고, 보이는 날짜만 바뀝니다.</p></div>
+        <div><h2>근무표 넣기 <span class="pa-beta">개발 중</span></h2><p>대한항공 월간 스케줄 <b>PDF</b>를 넣으면 기기 안에서 읽습니다(파일은 밖으로 보내지 않음). UTC · SLT · BLT 어느 것으로 출력해도 되지만 <b>SLT 출력을 권합니다</b>(UTC 는 휴무·체류 날짜가 하루 어긋날 수 있음). <b>아시아나 MONTHLY SKD</b>는 글자가 든 PDF 면 키 없이 읽고, 그림 PDF·<b>화면 캡처 사진</b>은 Gemini 키 등록자만 쓸 수 있습니다.</p></div>
       </div>
       <div class="rs-btns">
         <label class="b rs-file" for="rsPdf">근무표 PDF 선택<small>대한항공 월간 스케줄</small></label>
@@ -1680,7 +1680,7 @@ window.ROSTER = (() => {
   const prevD = (d) => { const t = new Date(d + "T00:00:00Z"); t.setUTCDate(t.getUTCDate() - 1); return t.toISOString().slice(0, 10); };
   function boundary(evs) {
     for (const e of evs) {
-      if (e.kind !== "FLT") continue;
+      if (e.kind !== "FLT" || e.noEt) continue;                // 제주항공: 도착 시각을 원래 모르는 편
       const same = (f) => f.kind === "FLT" && (f.code || f.flt) === e.code && f.dep === e.dep && f.arr === e.arr;
       if (!e.st && e.et) {                       // 도착만 (지난달 출발)
         const f = R.events.find((x) => same(x) && x.d === prevD(e.d) && x.st);
@@ -1715,7 +1715,7 @@ window.ROSTER = (() => {
       }
       if (e.stz !== "Asia/Seoul" || e.etz !== "Asia/Seoul") e.kst = `한국 ${kst(su)} → ${kst(eu)}`;
       if (e.kind === "FLT" && !e.warn) {         // 운항 자료와 대조 (Z: 시험용 아시아나 편)
-        const m = e.flt.match(/^([A-Z0-9]{2})(\d+)(Z?)$/); const al = m && (m[3] ? "AAR" : { KE: "KAL", OZ: "AAR" }[m[1]]);
+        const m = e.flt.match(/^([A-Z0-9]{2})(\d+)(Z?)$/); const al = m && (m[3] ? "AAR" : { KE: "KAL", OZ: "AAR", "7C": "JJA" }[m[1]]);
         const f = al && D[al + +m[2]], r = f && f.r, a = i2c[e.dep], b = i2c[e.arr];
         if (al && Object.keys(D).length && (!r || r.indexOf(a) < 0 || r.indexOf(b) < 0 || r.indexOf(a) > r.lastIndexOf(b))) e.warn = r ? "운항 자료의 노선과 다릅니다" : "운항 자료에 없는 편명입니다";
       }
@@ -1739,7 +1739,7 @@ window.ROSTER = (() => {
   const line = (e) => e.kind === "FLT"
     ? `${e.flt || ""} ${e.dep || ""}${e.st ? " " + e.st : ""} → ${e.arr || ""}${e.et ? " " + e.et : ""}${e.ed && e.ed !== e.d ? ` (${e.ed.slice(5).replace("-", "/")})` : ""}`
     : e.kind === "LO" ? `체류 ${e.dep || ""}${e.d2 && e.d2 !== e.d ? ` (~${e.d2.slice(5).replace("-", "/")})` : ""}`
-    : `${e.label || KIND[e.kind] || e.kind}${e.code && e.label && e.code !== e.label && !/^T_/.test(e.code) ? ` (${e.code})` : ""}${e.st ? " " + (e.dep && e.dep !== "ICN" ? e.dep + " " : "") + e.st + (e.et ? "~" + e.et : "") : ""}`;
+    : `${e.label || KIND[e.kind] || e.kind}${e.code && e.label && e.code !== e.label && !/^(T_|OZ_|7C_)/.test(e.code) ? ` (${e.code})` : ""}${e.st ? " " + (e.dep && e.dep !== "ICN" ? e.dep + " " : "") + e.st + (e.et ? "~" + e.et : "") : ""}`;
   function count() { const n = R.events.length; if ($("rsCount")) $("rsCount").textContent = n ? `${n}개 일정` : "저장된 일정 없음"; }
 
   // ---------- 기간 교체 저장 ----------
@@ -1893,10 +1893,24 @@ window.ROSTER = (() => {
   async function readPdf(file) {
     $("rsMsg").innerHTML = "근무표를 읽는 중…";
     try {
-      const lib = await pdfLib(), doc = await lib.getDocument({ data: new Uint8Array(await file.arrayBuffer()), isEvalSupported: false }).promise, L = [];
-      for (let i = 1; i <= doc.numPages; i++) { const tc = await (await doc.getPage(i)).getTextContent(); for (const it of tc.items) if (it.str && it.str.trim()) L.push(it.str); }
+      const lib = await pdfLib(), doc = await lib.getDocument({ data: new Uint8Array(await file.arrayBuffer()), isEvalSupported: false }).promise, L = [], IT = [];
+      for (let i = 1; i <= doc.numPages; i++) {
+        const tc = await (await doc.getPage(i)).getTextContent();
+        for (const it of tc.items) if (it.str && it.str.trim()) { L.push(it.str); IT.push({ str: it.str, width: it.width, transform: [0, 0, 0, 0, it.transform[4], it.transform[5] - (i - 1) * 2000] }); }
+      }
+      if (/MONTHLYSKD|MONTH:\d{6}/.test(L.join("").replace(/\s/g, ""))) {      // 아시아나 글자 PDF → 키 없이 기기 안에서
+        const z = ozFromText(IT);
+        if (z) return finishOZ(parseOZ(z), "PDF");
+      }
+      if (L.join("").replace(/\s/g, "").length < 20) {        // 글자 없는 그림 PDF (아시아나 MONTHLY SKD 등)
+        if (!GKEY()) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">글자가 없는 그림 PDF 입니다.</b> 그림 PDF 는 Gemini 키를 등록한 분만 읽을 수 있습니다. 아시아나는 시스템에서 <b>글자가 들어 있는 PDF</b>로 받으면 키 없이 읽을 수 있습니다.`; return; }
+        if (ls.get(PHOTO_OK) !== "1") { $("rsConsent").hidden = false; $("rsMsg").innerHTML = `그림 PDF 는 Gemini 로 읽습니다. 아래 안내에 동의한 뒤 다시 PDF 를 골라 주세요.`; return; }
+        $("rsMsg").innerHTML = "그림 PDF 를 Gemini 로 읽는 중… (이름 칸은 가리고 보냄 · 보통 20~60초)";
+        const text = await runGemini(await pdfImages(doc, true), OZ_PROMPT);
+        return finishOZ(parseOZ(text.split(/\r?\n/)), "그림 PDF");
+      }
       const r = parseKE(L);
-      if (!r.month || !r.events.length) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">대한항공 월간 스케줄 PDF 형식이 아닙니다.</b> 스케줄 화면에서 ‘인쇄/PDF’로 저장한 파일인지 확인해 주세요.`; return; }
+      if (!r.month || !r.events.length) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">지원하는 근무표 PDF 형식이 아닙니다.</b> 대한항공 월간 스케줄, 아시아나 MONTHLY SKD(PDF)를 지원합니다.`; return; }
       const basis = r.basis || "SLT";
       r.events.forEach((e) => { e.basis = basis; }); boundary(r.events); enrich(r.events, basis);
       if (r.fleet) ls.set("csf-fleet", r.fleet);
@@ -1909,11 +1923,45 @@ window.ROSTER = (() => {
         `<br><small>이름·사번은 읽지 않습니다. 노란 줄은 운항 자료와 달라 확인이 필요한 일정입니다.</small>`,
         [`${r.month}-01`, `${r.month}-${String(last).padStart(2, "0")}`]);
       $("rsMsg").innerHTML = "";
-    } catch (e) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">근무표를 읽지 못했습니다: ${esc(e.message)}</b>`; }
+    } catch (e) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">${e.status ? gemErr(e) : "근무표를 읽지 못했습니다: " + esc(e.message)}</b>`; }
+  }
+  function finishOZ(r, srcName, al) {
+    const jj = al === "7C", an = jj ? "제주항공" : "아시아나";
+    if (!r.month || !r.events.length) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">${an} 근무표를 읽지 못했습니다.</b> ${jj ? "달력 화면의 연도·월과 날짜 칸이 또렷하게 보이는지" : "표 전체가 또렷하게 보이는지"} 확인해 주세요.`; return; }
+    r.events.forEach((e) => { e.basis = "SLT"; }); boundary(r.events); enrich(r.events, "SLT");
+    if (r.fleet) ls.set("csf-fleet", r.fleet);
+    const [Y, M] = r.month.split("-").map(Number), last = new Date(Y, M, 0).getDate(), ds = r.days.slice().sort();
+    const full = jj || srcName !== "사진";
+    preview(r.events.map((e) => Object.assign({ src: jj ? "7c" : "oz" }, e)), jj ? "7c" : "oz",
+      `<b>${an} ${Y}년 ${M}월</b> 근무표 (${srcName}) · 시각 기준 <b>현지(SLT)</b> · 시작은 출발(STD) · ${r.events.length}개 일정` +
+      (jj ? `<br><span style="color:var(--warn)">달력 화면에는 시각·공항이 없어 <b>노선·시각은 운항 자료의 예정 시각</b>으로 채웠습니다. 해외 출발 시각은 자료에 없어 그 편은 하루 일정으로 넣습니다. 월간 화면은 칸마다 일부만 보이므로(+숫자) 빠진 일정이 없는지 확인하세요.</span>` : "") +
+      (srcName === "PDF" ? `<br><small>글자 PDF 를 기기 안에서 읽었습니다(인터넷·Gemini 불필요). 이름은 읽지 않고 본인 사번 줄의 편만 넣습니다.</small>`
+        : `<br><span style="color:var(--warn);font-weight:700">Gemini 판독은 틀릴 수 있습니다. 날짜·편명·시각을 원본과 꼭 대조하세요.</span>`) +
+      `<br><small>체류는 도착·다음 출발로 앱이 계산했습니다.${jj ? "" : " 출근 시각은 일정 설명에 들어갑니다."}</small>` +
+      (r.warn.length ? `<br><span style="color:var(--warn)">읽지 못한 줄 ${r.warn.length}개</span>` : ""),
+      full ? [`${r.month}-01`, `${r.month}-${String(last).padStart(2, "0")}`] : [ds[0], ds[ds.length - 1]]);
+    $("rsMsg").innerHTML = "";
   }
   // ---------- 화면 캡처 사진 읽기 (Gemini 키 등록자만). 사진을 PDF 와 같은 글자 줄로 옮겨 적게 한 뒤 같은 방식으로 읽음 ----------
   const GKEY = () => ls.get("csf-gemini-key") || "";
+  const OZ_PROMPT = [
+    "이 그림은 아시아나항공 승무원 월간 근무표(MONTHLY SKD) 표다. 보이는 글자를 아래 형식으로 '그대로 옮겨 적기'만 하라. 추측·보충·계산 금지.",
+    "1) 첫 줄: 'FORMAT OZ'",
+    "2) 둘째 줄: 위쪽 MONTH 값을 'MONTH 202411' 처럼.",
+    "3) 표의 날짜마다 한 줄. 위쪽 'EMPL:' 사번과 EMPL 칸이 같은 줄(본인)의 편만 쓴다. 한 편이 여러 승무원 줄로 나뉘어 있어도 한 번만 쓴다.",
+    "   비행: 'OZ|DATE|FLIGHT|SHOWUP|SECTOR|STD|STA|POSN TYP' 예) OZ|11/05|745|05 18:05|ICN/HKG|05 19:25|05 22:40|TL  (빈 칸은 비워 둠: OZ|11/07|746||HKG/ICN|07 00:40|07 05:00|TL)",
+    "   비행이 아닌 날: 'OZ|DATE|FLIGHT 칸 글자' 예) OZ|11/03|DAY OFF  /  OZ|11/10|B777 B-TYP  /  OZ|12/04|ANNUAL LE",
+    "4) 이름(NAME)·다른 사람 사번·합계(DUTY, DAFF, ANLV)는 쓰지 않는다. 설명 없이 줄만 답한다.",
+  ].join("\n");
   const PHOTO_PROMPT = [
+    "먼저 그림 종류를 판단하라. 아시아나항공 'MONTHLY SKD' 표라면 아래 [아시아나] 규칙만, 코드·편명 숫자만 있는 달력 앱 월간 화면이라면 [제주항공] 규칙만, 대한항공 월간 근무 달력 화면(편명 KE…, 공항·시각 표시)이라면 [대한항공] 규칙만 따른다.",
+    "[아시아나]", OZ_PROMPT,
+    "[제주항공] 달력 앱 월간 화면에 OFF, LAYOV, SA1, SB2, SIM1, RSV_F 같은 코드나 '6123/6124', 'AIR/8651' 같은 숫자 편명만 적혀 있으면 이 규칙을 따른다.",
+    "1) 첫 줄 'FORMAT 7C', 둘째 줄 화면 위 연도와 달을 'MONTH 202610' 처럼.",
+    "2) 날짜 칸의 일정 막대마다 한 줄: '7C|MM/DD|막대 글자' 예) 7C|10/01|6123/6  /  7C|10/02|OFF. 여러 날에 걸친 막대는 7C|10/12-10/13|SIM1 처럼 시작-끝.",
+    "3) 같은 글자의 막대가 색만 다르게 여러 줄 반복되면 한 번만 쓴다. 공휴일 막대(개천절·한글날 등 한글 글자)와 '+20' 같은 숫자는 쓰지 않는다. 앞뒤 달 날짜 칸도 보이면 쓴다.",
+    "4) 잘린 글자는 보이는 만큼만 그대로 쓴다(6123/6 → 6123/6). 추측·보충 금지. 설명 없이 줄만 답한다.",
+    "[대한항공] 첫 줄에 'FORMAT KE' 를 쓰고 다음 규칙을 따른다.",
     "이 사진은 항공사 승무원 월간 근무 달력 화면이다. 보이는 내용을 아래 형식의 글자 줄로 '그대로 옮겨 적기'만 하라. 추측·보충·계산 금지.",
     "1) 첫 줄: 화면 위쪽의 달과 연도를 영어로 (예: July 2026). 안 보이면 쓰지 않는다.",
     "2) 둘째 줄: 화면 오른쪽 위 UTC/SLT/BLT 중 선택(강조)된 것을 'ALL TIMINGS ARE IN SLT' 처럼. 모르면 쓰지 않는다.",
@@ -1922,7 +1970,8 @@ window.ROSTER = (() => {
     "5) 막대 색이 노란색(Flight TVL)이면 줄 끝에 ' #TVL', 연보라(Training FLT)면 ' #TRAINING', 진보라(Check FLT)면 ' #CHECK' 를 붙인다. 다른 색은 붙이지 않는다.",
     "6) 이름·사번·비행시간 합계 등 그 밖의 글자는 쓰지 않는다. 설명 없이 줄만 답한다.",
   ].join("\n");
-  async function gemText(key, model, parts) {
+  async function gemText(key, model, parts, prompt) {
+    const PHOTO_PROMPT = prompt;
     const API = "https://generativelanguage.googleapis.com/v1beta", h = { "x-goog-api-key": key, "Content-Type": "application/json" };
     let r = await fetch(API + "/interactions", { method: "POST", headers: h, body: JSON.stringify({ model, input: [...parts.map((p) => ({ type: "image", data: p.data, mime_type: p.mime })), { type: "text", text: PHOTO_PROMPT }] }) });
     if (r.status === 404) r = await fetch(`${API}/models/${model}:generateContent`, { method: "POST", headers: h, body: JSON.stringify({ contents: [{ role: "user", parts: [...parts.map((p) => ({ inline_data: { mime_type: p.mime, data: p.data } })), { text: PHOTO_PROMPT }] }] }) });
@@ -1931,18 +1980,204 @@ window.ROSTER = (() => {
     const T = []; (function w(x) { if (Array.isArray(x)) return x.forEach(w); if (x && typeof x === "object") { if (typeof x.text === "string") T.push(x.text); for (const k in x) if (k !== "text") w(x[k]); } })(o.outputs || o.candidates || o);
     return T.join("\n");
   }
+  async function runGemini(parts, prompt) {
+    const key = GKEY();
+    let have = []; try { have = JSON.parse(ls.get("csf-gemini-models") || "[]"); } catch (e) {}
+    const models = [...new Set([...["gemini-3.8-flash", "gemini-flash-latest", "gemini-3.7-flash", "gemini-3.6-flash", "gemini-3.5-flash"].filter((m) => have.includes(m)), "gemini-3.8-flash", "gemini-flash-latest"])].slice(0, 3);
+    let last = null;
+    for (const m of models) { try { return await gemText(key, m, parts, prompt); } catch (e) { last = e; if (e.status === 429 || e.status === 400 || e.status === 403) break; } }
+    throw last || new Error("Gemini");
+  }
+  const gemErr = (e) => e.status === 429 ? "오늘 Gemini 무료 사용량을 다 썼습니다. 한국시간 오후 4시(겨울 5시)쯤 다시 됩니다." : e.status === 400 || e.status === 403 ? "Gemini 키가 맞지 않거나 쓸 수 없습니다. 키를 다시 등록해 주세요." : "읽지 못했습니다: " + esc(e.message);
+  // ---------- 제주항공 (달력 앱 월간 화면 사진 → Gemini 가 옮겨 적은 '7C|10/01|6123/6' 줄) ----------
+  // 화면에는 코드·편명만 있음 → 노선·예정 시각은 앱의 운항 자료(JJA 편)에서 채움. 해외 쪽 시각은 자료에 없음
+  const C7CODE = [[/^OFF$/i, "OFF", "휴무"], [/^S([AB])(\d*)$/i, "STBY", (m) => `대기 S${m[1].toUpperCase()}${m[2]}`], [/^RSV/i, "STBY", (m, t) => `예비 ${t}`], [/^SIM/i, "TRN", (m, t) => `시뮬레이터 ${t}`]];
+  function sched7C(num, date) {
+    const D = (window.CALLSIGN_DATA && window.CALLSIGN_DATA.flights) || {}, A = (window.CALLSIGN_DATA && window.CALLSIGN_DATA.airports) || {};
+    const f = D["JJA" + num]; if (!f) return null;
+    const ia = (c) => (A[c] ? A[c][0] : c), r = (f.r || []).map(ia), sc = f.sch || {};
+    const o = { dep: r[0] || "", arr: r[r.length - 1] || "", st: "", ka: "", note: [] };
+    const wd = ((new Date(date + "T00:00:00").getDay() + 6) % 7) + 1, ymd8 = date.replace(/-/g, ""), hm = (x) => x ? x.slice(0, 2) + ":" + x.slice(2, 4) : "";
+    const ss = (sc.season || []).filter((x) => (!x.dep || x.dep === o.dep) && (!x.a || x.a === o.dep || x.a === o.arr));
+    const inS = ss.filter((x) => (!x.from || x.from <= ymd8) && (!x.to || x.to >= ymd8) && (!x.wd || x.wd.includes(wd)));
+    const use = inS.length ? inS : ss;
+    if (ss.length && !inS.length) o.note.push("운항 자료의 시즌·요일과 달라 시각은 참고용");
+    for (const x of use) {
+      if (x.kind === "dom") { o.st = o.st || hm(x.std); o.ka = o.ka || hm(x.sta); }
+      else if (x.io === "OUT" && x.a === o.dep) o.st = o.st || hm(x.time);
+      else if (x.io === "IN" && x.a === o.arr) o.ka = o.ka || hm(x.time);
+    }
+    // 인천 자료(날짜별, UTC): 한국 시각으로 바꿔 그날 것, 없으면 가장 최근 같은 종류 시각
+    const kstOf = (u) => { const t = new Date(Date.UTC(+u.slice(0, 4), +u.slice(4, 6) - 1, +u.slice(6, 8), +u.slice(8, 10) + 9, +u.slice(10, 12))); return [t.toISOString().slice(0, 10).replace(/-/g, ""), t.toISOString().slice(11, 16)]; };
+    const inst = (sc.inst || []).map((x) => [x[2], ...kstOf(x[0])]), pick = (k) => { const same = inst.filter((x) => x[0] === k); const t = same.find((x) => x[1] === ymd8) || same[same.length - 1]; return t ? t[2] : ""; };
+    if (inst.length) { if (o.dep === "ICN") o.st = pick("D") || o.st; if (o.arr === "ICN") o.ka = pick("A") || o.ka; }
+    if (!/^(ICN|GMP|PUS|CJU|CJJ|TAE|KWJ|MWX|RSU|USN|HIN|KPO|KUV|WJU|YNY)$/.test(o.dep)) o.st = "";      // 해외 출발 시각은 자료에 없음
+    return o;
+  }
+  function parse7C(lines) {
+    const out = { events: [], days: [], warn: [], month: "", basis: "SLT", fleet: "" };
+    let Y = 0, M = 0;
+    const dt = (mm, dd) => { let y = Y; if (M === 12 && mm === 1) y++; if (M === 1 && mm === 12) y--; return `${y}-${String(mm).padStart(2, "0")}-${String(dd).padStart(2, "0")}`; };
+    const raw = [];
+    for (const l of lines) {
+      const s = String(l).trim(); let m;
+      if ((m = s.match(/MONTH\s*:?\s*(\d{4})(\d{2})/i))) { Y = +m[1]; M = +m[2]; out.month = `${Y}-${m[2]}`; continue; }
+      if (!/^7C\|/i.test(s)) continue;
+      const c = s.split("|").map((x) => x.trim()), dm = (c[1] || "").match(/(\d{1,2})\/(\d{1,2})(?:\s*-\s*(\d{1,2})\/(\d{1,2}))?/);
+      const t = (c[2] || "").replace(/\s+/g, "").toUpperCase();
+      if (!dm || !Y || !t) { out.warn.push(s); continue; }
+      if (/[가-힣]/.test(t)) continue;                                // 공휴일 등
+      raw.push({ d: dt(+dm[1], +dm[2]), d2: dm[3] ? dt(+dm[3], +dm[4]) : "", t });
+    }
+    const seen = new Set(), lay = [];
+    for (const x of raw) {
+      const q = x.d + "|" + x.t; if (seen.has(q)) continue; seen.add(q); out.days.push(x.d);
+      if (/^LAYO/.test(x.t)) { lay.push(x.d); if (x.d2) for (let d = nextD(x.d); d <= x.d2; d = nextD(d)) lay.push(d); continue; }
+      const hit = C7CODE.find(([re]) => re.test(x.t));
+      if (hit) { const m = x.t.match(hit[0]); out.events.push({ d: x.d, d2: x.d2 && x.d2 !== x.d ? x.d2 : undefined, kind: hit[1], code: "7C_" + x.t, label: typeof hit[2] === "function" ? hit[2](m, x.t) : hit[2] }); continue; }
+      // 편명 묶음: 6123/6124, AIR/8651, 1407/14(잘림)
+      const parts = x.t.split("/"), pre = [];
+      let prev = 0;
+      parts.forEach((p, i) => {
+        if (!/^\d+$/.test(p)) { if (p) pre.push(p); return; }
+        let n = p, guess = false;
+        if (prev && p.length < String(prev).length && i === parts.length - 1) {          // 잘린 마지막 편명 → 앞 편 + 1 로 추정
+          const g = String(prev + 1); if (g.startsWith(p)) { n = g; guess = true; } else { out.warn.push(x.t); return; }
+        }
+        prev = +n;
+        const sc = sched7C(n, x.d), e = { d: x.d, kind: "FLT", code: "7C" + n, flt: "7C" + n, dep: sc ? sc.dep : "", arr: sc ? sc.arr : "", st: sc ? sc.st : "" };
+        const notes = [];
+        if (pre.length) notes.push(pre.join(" ") + " 표시");
+        if (sc && sc.st && sc.ka) e.et = sc.ka;
+        else if (sc && sc.st) { e.noEt = 1; notes.push("도착 시각은 자료에 없음 · 캘린더에는 1시간으로 표시"); }
+        else if (sc && sc.ka) notes.push(`${sc.arr} 도착 ${sc.ka} (예정 · 출발 시각은 자료에 없음)`);
+        if (sc && sc.st) notes.push("시각은 운항 자료의 예정 시각");
+        if (sc) notes.push(...sc.note);
+        if (!sc) e.warn = "운항 자료에 없는 편명 · 노선·시각 모름";
+        else if (guess) e.warn = `화면에서 잘린 편명을 ${e.flt} 로 추정`;
+        else if (pre.length) e.warn = `${pre.join(" ")} 의미 확인 필요`;
+        if (notes.length) e.note = notes.join(" · ");
+        out.events.push(e);
+      });
+    }
+    // 체류: 다음 날 이후 같은 공항에서 출발하는 편이 있으면 그 사이, 화면의 LAYOV 는 직전 편 도착 공항으로
+    const F = out.events.filter((e) => e.kind === "FLT" && e.arr).sort((a, b) => (a.d + (a.st || "99")).localeCompare(b.d + (b.st || "99")));
+    const covered = new Set();
+    for (let i = 0; i + 1 < F.length; i++) {
+      const a = F[i], b = F[i + 1];
+      if (b.dep !== a.arr || b.d <= a.d) continue;
+      out.events.push({ d: a.d, d2: b.d, kind: "LO", code: "LO", dep: a.arr, arr: a.arr, label: "체류" });
+      for (let d = a.d; d <= b.d; d = nextD(d)) covered.add(d);
+    }
+    const L = [...new Set(lay)].filter((d) => !covered.has(d)).sort();
+    for (let i = 0; i < L.length;) {
+      let j = i; while (j + 1 < L.length && L[j + 1] === nextD(L[j])) j++;
+      const pf = F.filter((f) => f.d < L[i]).pop();
+      out.events.push({ d: L[i], d2: j > i ? L[j] : undefined, kind: "LO", code: "LO", dep: pf ? pf.arr : "", arr: pf ? pf.arr : "", label: "체류" });
+      i = j + 1;
+    }
+    return out;
+  }
+  // ---------- 아시아나 MONTHLY SKD 글자 PDF (기기 안에서) → 'OZ|…' 줄 → parseOZ ----------
+  // 글자가 한 자씩 흩어져 있어 같은 높이끼리 모아 줄을 만들고, 편명 칸(가운데 정렬)은 가장 가까운 날짜·본인 줄과 짝지음
+  function ozTextLines(items) {
+    const ch = items.filter((x) => x.str && x.str.trim()).map((x) => ({ s: x.str, x: x.transform[4], y: x.transform[5], w: x.width || 0 }));
+    const rows = [];
+    for (const c of ch.sort((a, b) => b.y - a.y || a.x - b.x)) {
+      let r = rows.find((q) => Math.abs(q.y - c.y) <= 2); if (!r) rows.push(r = { y: c.y, c: [] }); r.c.push(c);
+    }
+    return rows.map((r) => {
+      r.c.sort((a, b) => a.x - b.x); let t = "", px = null;
+      for (const c of r.c) { if (px != null && c.x - px > 1.2) t += " "; t += c.s; px = c.x + (c.w || c.s.length * 4.4); }
+      return { y: r.y, t: t.replace(/\s+/g, " ").trim() };
+    }).sort((a, b) => b.y - a.y);
+  }
+  function ozFromText(items) {
+    const L = ozTextLines(items), out = [];
+    const all = L.map((l) => l.t).join("\n");
+    const em = all.match(/EMPL\s*:\s*(\d{5,7})/), mo = all.match(/MONTH\s*:\s*(\d{6})/);
+    if (!mo) return null;
+    out.push("FORMAT OZ", "MONTH " + mo[1]);
+    const me = em ? em[1] : "";
+    const dated = [], flights = [], mine = [];
+    const RX = /^(?:(\d{2}\/\d{2})\([^)]*\))?\s*(?:(\d{2,4})\s+(?:(\d{2} \d{2}:\d{2})\s+)?([A-Z]{3}\/[A-Z]{3})\s+(\d{2} \d{2}:\d{2})\s+(\d{2} \d{2}:\d{2}))?\s*(?:(\d{5,7})\s+\S+\s+(\S+)\s+(\S+)(?:\s+\S+)?)?\s*(.*)$/;
+    for (const l of L) {
+      const m = l.t.match(RX); if (!m) continue;
+      const [, date, flt, su, sec, std, sta, empl, , ptyp, rest] = m;
+      if (date) dated.push({ y: l.y, date });
+      if (flt) flights.push({ y: l.y, flt, su: su || "", sec, std, sta, date: date || "" });
+      if (empl && empl === me) mine.push({ y: l.y, date: date || "", ptyp });
+      if (date && !flt && !empl && rest && !/^(EMPL|MONTH|DUTY|PRINT)/.test(rest)) out.push(`OZ|${date}|${rest.trim()}`);
+    }
+    const near = (y, arr) => arr.reduce((b, x) => (!b || Math.abs(x.y - y) < Math.abs(b.y - y) ? x : b), null);
+    for (const f of flights) { if (!f.date) { const d = near(f.y, dated); f.date = d ? d.date : ""; } }
+    for (const m of mine) { if (!m.date) { const d = near(m.y, dated); m.date = d ? d.date : ""; } const f = near(m.y, flights.filter((x) => x.date === m.date)); if (f && !f.ptyp) f.ptyp = m.ptyp; }
+    for (const f of flights) if (!me || f.ptyp) out.push(`OZ|${f.date}|${f.flt}|${f.su}|${f.sec}|${f.std}|${f.sta}|${f.ptyp || ""}`);
+    return out;
+  }
+  // ---------- 아시아나 MONTHLY SKD (Gemini 가 옮겨 적은 줄) → 일정 ----------
+  // 'MONTH 202411' / 'OZ|11/05|745|05 18:05|ICN/HKG|05 19:25|05 22:40|TL' / 'OZ|11/03|DAY OFF'. 시각은 현지(SLT), 시작은 STD.
+  const OZCODE = [[/^DAY\s*OFF/i, "OFF", "휴무"], [/^ANNUAL/i, "LV", "연차휴가"], [/B-?TYP/i, "STBY", "B Type 대기"]];
+  function parseOZ(lines) {
+    const out = { events: [], days: [], warn: [], month: "", basis: "SLT", fleet: "" };
+    let Y = 0, M = 0;
+    const dd = (rowM, day, near) => { let y = Y, m = rowM; if (near && day < near - 20) m++; else if (near && day > near + 20) m--; if (m > 12) { m = 1; y++; } if (m < 1) { m = 12; y--; } if (!near && rowM < M - 6) y++; return `${y}-${String(m).padStart(2, "0")}-${String(day).padStart(2, "0")}`; };
+    for (const raw of lines) {
+      const s = String(raw).trim(); let mm;
+      if ((mm = s.match(/MONTH\s*:?\s*(\d{4})(\d{2})/i))) { Y = +mm[1]; M = +mm[2]; out.month = `${Y}-${mm[2]}`; continue; }
+      if ((mm = s.match(/B?777|A3\d\d|B7\d7/)) && !out.fleet && /B-?TYP/i.test(s)) out.fleet = mm[0].replace(/^B?/, "");
+      if (!/^OZ\|/.test(s)) continue;
+      const c = s.split("|").map((x) => x.trim());
+      const dm = (c[1] || "").match(/(\d{1,2})\/(\d{1,2})/); if (!dm || !Y) { out.warn.push(s); continue; }
+      const rowM = +dm[1], rowD = +dm[2], date = dd(rowM, rowD); out.days.push(date);
+      if (/^\d{2,4}$/.test(c[2] || "") && c[4]) {
+        const [dep, arr] = (c[4] || "").split("/"), sd = (c[5] || "").match(/(\d{1,2})\s+(\d{2}:\d{2})/), ad = (c[6] || "").match(/(\d{1,2})\s+(\d{2}:\d{2})/), su = (c[3] || "").match(/(\d{1,2})\s+(\d{2}:\d{2})/);
+        if (!dep || !arr || !sd) { out.warn.push(s); continue; }
+        const d = dd(rowM, +sd[1], rowD), e = { d, kind: "FLT", code: "OZ" + c[2], flt: "OZ" + c[2], dep, arr, st: sd[2], et: ad ? ad[2] : "" };
+        if (ad) { const ed = dd(+d.slice(5, 7), +ad[1], +sd[1]); if (ed !== d) e.ed = ed; }
+        const notes = []; if (su) notes.push(`출근 ${+su[1] !== +sd[1] ? su[1] + "일 " : ""}${su[2]}`);
+        if (/pax/i.test(c[7] || "")) { notes.push("편승(pax)"); e.warn = "편승(pax)"; }
+        if (notes.length) e.note = notes.join(" · ");
+        out.events.push(e); continue;
+      }
+      const t = c.slice(2).join(" ").trim(), hit = OZCODE.find(([re]) => re.test(t));
+      out.events.push({ d: date, kind: hit ? hit[1] : "ETC", code: "OZ_" + t.replace(/\s+/g, "_").toUpperCase(), label: hit ? hit[2] : t });
+    }
+    // 같은 편 중복 정리
+    const seen = new Set(); out.events = out.events.filter((e) => { const q = [e.d, e.code, e.dep || "", e.st || ""].join("|"); if (seen.has(q)) return false; seen.add(q); return true; });
+    // 체류: 해외 도착 뒤 같은 공항에서 다음 비행 출발까지
+    const F = out.events.filter((e) => e.kind === "FLT").sort((a, b) => (a.d + a.st).localeCompare(b.d + b.st));
+    for (let i = 0; i + 1 < F.length; i++) {
+      const a = F[i], b = F[i + 1];
+      if (/^(ICN|GMP)$/.test(a.arr) || b.dep !== a.arr) continue;
+      const s0 = a.ed || a.d; if (b.d <= s0) continue;          // 같은 날 돌아오면(퀵턴) 체류 아님
+      out.events.push({ d: s0, d2: b.d !== s0 ? b.d : undefined, kind: "LO", code: "LO", dep: a.arr, arr: a.arr, label: "체류" });
+    }
+    return out;
+  }
+  // PDF 쪽을 그림으로 (아시아나 표의 이름 칸은 흰색으로 가려서 보냄)
+  async function pdfImages(doc, maskName) {
+    const parts = [];
+    for (let i = 1; i <= Math.min(doc.numPages, 3); i++) {
+      const pg = await doc.getPage(i), vp = pg.getViewport({ scale: 2 }), cv = document.createElement("canvas");
+      cv.width = vp.width; cv.height = vp.height; const cx = cv.getContext("2d");
+      cx.fillStyle = "#fff"; cx.fillRect(0, 0, cv.width, cv.height);
+      await pg.render({ canvasContext: cx, viewport: vp }).promise;
+      if (maskName) { cx.fillStyle = "#fff"; cx.fillRect(cv.width * 0.652, cv.height * 0.15, cv.width * 0.108, cv.height * 0.85); }
+      parts.push({ mime: "image/jpeg", data: cv.toDataURL("image/jpeg", 0.85).split(",")[1] });
+    }
+    return parts;
+  }
   const b64 = (buf) => { const b = new Uint8Array(buf); let s = ""; for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000)); return btoa(s); };
   async function readPhotos(files) {
     const key = GKEY(); if (!key) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">Gemini 키를 먼저 등록해 주세요.</b> (FLT Package 분석 → Gemini AI 연결)`; return; }
     if (!navigator.onLine) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">사진 읽기는 인터넷이 필요합니다.</b>`; return; }
     $("rsMsg").innerHTML = `사진 ${files.length}장을 Gemini 로 읽는 중… (보통 20~60초)`;
-    let have = []; try { have = JSON.parse(ls.get("csf-gemini-models") || "[]"); } catch (e) {}
-    const models = [...new Set([...["gemini-3.8-flash", "gemini-flash-latest", "gemini-3.7-flash", "gemini-3.6-flash", "gemini-3.5-flash"].filter((m) => have.includes(m)), "gemini-3.8-flash", "gemini-flash-latest"])].slice(0, 3);
     try {
       const parts = []; for (const f of files) parts.push({ mime: f.type || "image/jpeg", data: b64(await f.arrayBuffer()) });
-      let text = "", last = null;
-      for (const m of models) { try { text = await gemText(key, m, parts); last = null; break; } catch (e) { last = e; if (e.status === 429 || e.status === 400 || e.status === 403) break; } }
-      if (last) throw last;
+      const text = await runGemini(parts, PHOTO_PROMPT);
+      if (/^\s*FORMAT\s*OZ/im.test(text)) return finishOZ(parseOZ(text.split(/\r?\n/)), "사진");
+      if (/^\s*FORMAT\s*7C/im.test(text)) return finishOZ(parse7C(text.split(/\r?\n/)), "사진", "7C");
       const r = parseKE(text.split(/\r?\n/));
       if (!r.days.length || !r.events.length) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">사진에서 근무 달력을 읽지 못했습니다.</b> 날짜와 일정이 또렷하게 보이게 다시 찍어 주세요.`; return; }
       const basis = r.basis || "SLT";
@@ -1956,7 +2191,7 @@ window.ROSTER = (() => {
         [ds[0], ds[ds.length - 1]]);
       $("rsMsg").innerHTML = "";
     } catch (e) {
-      $("rsMsg").innerHTML = `<b style="color:var(--warn)">${e.status === 429 ? "오늘 Gemini 무료 사용량을 다 썼습니다. 한국시간 오후 4시(겨울 5시)쯤 다시 됩니다." : e.status === 400 || e.status === 403 ? "Gemini 키가 맞지 않거나 쓸 수 없습니다. 키를 다시 등록해 주세요." : "사진을 읽지 못했습니다: " + esc(e.message)}</b>`;
+      $("rsMsg").innerHTML = `<b style="color:var(--warn)">${gemErr(e)}</b>`;
     }
   }
   const PHOTO_OK = "csf-rs-photo-ok";
@@ -2272,7 +2507,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v50", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v51", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
