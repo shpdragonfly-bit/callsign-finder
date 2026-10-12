@@ -381,7 +381,7 @@ button.b:disabled { opacity: .5; }
 .wx-t input:focus { border-color: var(--accent); }
 .wx-none { font-size: 12px; color: var(--muted); margin-top: 4px; }
 /* ---------- FLT Package 분석 (개발 예정 안내) ---------- */
-.tab .new { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #FFD166; margin-left: 4px; vertical-align: 3px; }
+.tab .new { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #2ECC71; box-shadow: 0 0 0 1.5px rgba(46, 204, 113, .28), 0 0 4px #2ECC71; margin-left: 3px; vertical-align: 3px; }   /* 개발중 녹색등 */
 @media (max-width: 400px) { .tab { font-size: 15px; letter-spacing: -0.3px; white-space: nowrap; padding-left: 0; padding-right: 0; } }
 /* 아시아나항공 탭: 꼬리날개 색동 줄무늬 + 탭 4개일 때 글자 크기 */
 :root[data-al="AAR"] .bar::after { content: ""; position: absolute; left: 0; right: 0; bottom: -5px; height: 5px;
@@ -391,7 +391,7 @@ button.b:disabled { opacity: .5; }
 body[data-tab="oz"] #alTabs { display: none; }
 .tabs .tab { white-space: nowrap; }
 .tabs.n4 .tab { font-size: 14.5px; letter-spacing: -0.5px; padding-left: 0; padding-right: 0; }
-@media (max-width: 430px) { .tabs .tab { font-size: 14px; letter-spacing: -0.5px; padding-left: 0; padding-right: 0; } .tabs.n4 .tab { font-size: 12.5px; letter-spacing: -0.7px; } .tab .oz-dot, .tab .new { display: none; } }
+@media (max-width: 430px) { .tabs .tab { font-size: 14px; letter-spacing: -0.5px; padding-left: 0; padding-right: 0; } .tabs.n4 .tab { font-size: 12.5px; letter-spacing: -0.7px; } .tab .oz-dot { display: none; } }
 .pk-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--accent); background: var(--accent-soft);
   border: 1px solid var(--line); border-radius: 99px; padding: 3px 10px; }
 .pk-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: pkPulse 1.8s ease-in-out infinite; }
@@ -863,6 +863,21 @@ body[data-tab="oz"] #alTabs { display: none; }
 .k-LV { background: #0F8A8A; } .k-LO { background: #3BA7D4; }
 .rs-file { display: block; text-align: center; cursor: pointer; border-radius: 10px; border: 1px solid var(--line); background: var(--panel-2); color: var(--text); }
 .rs-file.off { opacity: .55; }
+.tip-bar { margin: 12px 0 0; padding: 10px 12px; border-radius: 12px; background: #FFF4D6; color: #5B3A00; font-size: 13.5px; line-height: 1.5; display: flex; gap: 10px; align-items: flex-start; }
+.tip-bar[hidden] { display: none; }
+.tip-bar .t { flex: 1; } .tip-bar button { flex: 0 0 auto; border: 1px solid rgba(91, 58, 0, .3); background: #fff; color: #5B3A00; border-radius: 8px; padding: 5px 10px; font: inherit; font-weight: 700; cursor: pointer; }
+.tip-bar.upd { background: var(--accent-soft); color: var(--accent); } .tip-bar.upd button { color: var(--accent); border-color: var(--accent); }
+.code-tip { margin: 0 0 12px; padding: 12px 14px; border-radius: 12px; border: 1.5px solid #E0A100; background: #FFF8E5; color: #5B3A00; font-size: 14px; line-height: 1.55; }
+.code-tip .cd { display: block; margin: 6px 0; font: 700 20px var(--mono); letter-spacing: 1px; color: #3A2500; }
+.code-tip .bt { display: flex; gap: 8px; margin-top: 6px; } .code-tip button { border: 1px solid #C98A06; background: #fff; color: #5B3A00; border-radius: 8px; padding: 7px 12px; font: inherit; font-weight: 700; cursor: pointer; }
+.rc-go { display: flex; gap: 6px; margin-top: 5px; } .rc-go button { border: 1px solid var(--accent); background: var(--accent-soft); color: var(--accent); border-radius: 8px; padding: 4px 9px; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.rc-stat { margin: 8px 0 0; font-size: 13px; color: var(--muted); line-height: 1.7; } .rc-stat:empty { display: none; }
+.rc-grid .c.free { background: #E3F7E8; } [data-theme="dark"] .rc-grid .c.free { background: #12402A; }
+.free-k { display: inline-block; width: 11px; height: 11px; border-radius: 3px; background: #BFEACB; vertical-align: -1px; }
+i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px; margin-right: 2px; border-radius: 3px; background: var(--mc); color: #fff; font-weight: 800; text-align: center; }
+.rc-ev.gx i.gm { margin-right: 1px; padding: 0 1px; }
+.gc-alarm { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 14px; font-weight: 700; } .gc-alarm select { font-size: 15px; padding: 5px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--text); }
+.gc-alarm-t { display: block; color: var(--muted); font-size: 12.5px; margin-top: 4px; }
 .rs-last { margin-top: 8px; font-size: 12.5px; color: var(--muted); }
 .gr-me { margin: 10px 0 6px; font-size: 15px; } .gr-me b { font-family: var(--mono); font-size: 17px; letter-spacing: 1px; } .gr-me small { display: block; color: var(--muted); font-size: 12.5px; }
 .gr-it { margin-top: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel-2); }
@@ -939,7 +954,7 @@ body[data-tab="oz"] #alTabs { display: none; }
       <button class="tab" role="tab" id="tab-oz" aria-controls="panel-cs" aria-selected="false" data-tab="oz" hidden>아시아나</button>
       <button class="tab" role="tab" id="tab-ft" aria-controls="panel-ft" aria-selected="false" data-tab="ft">비행시간</button>
       <button class="tab" role="tab" id="tab-cm" aria-controls="panel-cm" aria-selected="false" data-tab="cm">출퇴근</button>
-      <button class="tab" role="tab" id="tab-pk" aria-controls="panel-pk" aria-selected="false" data-tab="pk">개발 예정<span class="new" aria-label="새 기능"></span></button>
+      <button class="tab" role="tab" id="tab-pk" aria-controls="panel-pk" aria-selected="false" data-tab="pk">개발중<span class="new" aria-label="개발 중 기능"></span></button>
     </div>
   </div>
 </div>
@@ -1027,6 +1042,7 @@ body[data-tab="oz"] #alTabs { display: none; }
     <div class="rc-who" id="rcWho" hidden></div>
     <div class="rc-grid" id="rcGrid"></div>
     <div class="rc-leg"><span class="k-FLT">비행</span><span class="k-STBY">대기</span><span class="k-TRN">훈련</span><span class="k-OFF">휴무</span><span class="k-LO">체류</span><span class="k-LV">휴가</span><span class="k-ETC">기타</span></div>
+    <p class="rc-stat" id="rcStat"></p>
     <div class="rc-day" id="rcDay"></div>
     <p class="rc-src" id="rcSrc"></p>
   </div>
@@ -1247,6 +1263,8 @@ body[data-tab="oz"] #alTabs { display: none; }
           <button type="button" class="b" id="rsGcTestDel">Test일정 삭제</button>
           <button type="button" class="b" id="rsGcOff">연결끊기</button>
         </div>
+        <label class="gc-alarm">비행 알림 <select id="rsAlarm"><option value="0">없음</option><option value="60">출발 1시간 전</option><option value="120">출발 2시간 전</option><option value="180">출발 3시간 전</option></select></label>
+        <small class="gc-alarm-t">구글 캘린더와 Apple용 일정 파일(.ics)의 비행 일정에 휴대폰 알림을 넣습니다.</small>
         <div class="gm-msg" id="rsGcMsg" role="status"></div>
       </div>
     </div>
@@ -1275,6 +1293,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 </div>
 
 <div class="wrap">
+  <div class="tip-bar" id="tipBar" hidden></div>
   <section class="panel" id="panel-cs" role="tabpanel" aria-labelledby="tab-cs">
     <div class="seg al-tabs" id="alTabs" role="tablist" aria-label="항공사"></div>
     <div class="search">
@@ -1370,7 +1389,7 @@ body[data-tab="oz"] #alTabs { display: none; }
     </div>
   </section>
   <section class="panel" id="panel-pk" role="tabpanel" aria-labelledby="tab-pk" hidden>
-    <div class="seg al-tabs" id="pkSub" role="tablist" aria-label="개발 예정 메뉴">
+    <div class="seg al-tabs" id="pkSub" role="tablist" aria-label="개발중 메뉴">
       <button type="button" role="tab" data-pks="fp" aria-pressed="true">비행준비</button>
       <button type="button" role="tab" data-pks="pa" aria-pressed="false">FLT Package 분석</button>
       <button type="button" role="tab" data-pks="rs" aria-pressed="false">근무표 등록</button>
@@ -1425,6 +1444,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 
     </div>
     <div class="pk-sub" data-pks="rs" hidden>
+    <div class="code-tip" id="codeTip" hidden></div>
     <div class="card gm rs-in" id="rsIn">
       <div class="gm-hd">
         <div><h2>근무표 등록 <span class="pa-beta">시험판</span></h2><p><b>Station Local Time</b> PDF File 등록 추천. 그림 PDF, 화면캡쳐 사진은 Gemini key 등록자만 사용가능</p></div>
@@ -1649,6 +1669,8 @@ body[data-tab="oz"] #alTabs { display: none; }
     const sum = e.kind === "FLT" ? `${e.flt || "비행"} ${e.dep || ""}-${e.arr || ""}`.trim() : e.kind === "LO" ? `${e.alert ? "⚠ " : ""}체류 ${e.dep || ""}` : e.label || KN[e.kind] || e.kind;
     const desc = [e.st ? `${e.dep || ""} ${e.st} → ${e.arr || ""} ${e.et || ""}`.trim() + " (근무표 표기 시각)" : "", e.kst || "", e.note || "", "FLT Assist 근무표 (이 캘린더에 직접 일정을 넣지 마세요)"].filter(Boolean).join("\n");
     const g = { summary: sum, description: desc };
+    const am = +(ls.get("csf-alarm") || 0);                     // 비행 알림 (출발 N분 전)
+    g.reminders = { useDefault: false, overrides: e.kind === "FLT" && e.st && am ? [{ method: "popup", minutes: am }] : [] };
     if (e.su) { g.start = { dateTime: e.su, timeZone: e.stz || "Asia/Seoul" }; g.end = { dateTime: e.eu, timeZone: e.etz || "Asia/Seoul" }; }
     else if (e.st) {
       // 비행은 도착일(ed)까지, 대기·교육은 그날. 끝이 시작보다 앞서면(시각 기준 미확정) 시작 + 1시간
@@ -1657,7 +1679,7 @@ body[data-tab="oz"] #alTabs { display: none; }
       g.start = { dateTime: s0, timeZone: "Asia/Seoul" }; g.end = { dateTime: e0, timeZone: "Asia/Seoul" };
     }
     else { g.start = { date: e.d }; g.end = { date: nextDay(e.d2 || e.d) }; }
-    const fh = JSON.stringify([g.summary, g.description, g.start, g.end]);
+    const fh = JSON.stringify([g.summary, g.description, g.start, g.end, g.reminders]);
     g.extendedProperties = { private: { flta: "roster", fk: e.k, fd: e.d, fh: String(fh.length) + ":" + [...fh].reduce((h, c) => (h * 31 + c.charCodeAt(0)) | 0, 7) } };
     return g;
   }
@@ -1675,6 +1697,18 @@ body[data-tab="oz"] #alTabs { display: none; }
     }
     for (const [k, w] of want) if (!seen.has(k)) { await api("POST", `/calendars/${cal}/events`, w); add++; }
     return { add, upd, del };
+  }
+  // 비행 알림 바꾸면 저장된 근무표 전체를 구글 캘린더에 다시 맞춤 (연결된 경우)
+  if ($("rsAlarm")) {
+    $("rsAlarm").value = ls.get("csf-alarm") || "0";
+    $("rsAlarm").addEventListener("change", async (e) => {
+      ls.set("csf-alarm", e.target.value);
+      const evs = window.ROSTER ? window.ROSTER.events() : [], txt = +e.target.value ? `출발 ${+e.target.value / 60}시간 전` : "없음";
+      if (ls.get(ON) !== "1" || !evs.length) { $("rsGcMsg").innerHTML = `비행 알림: <b>${txt}</b>. 다음에 구글 캘린더에 저장하거나 .ics 를 받을 때 들어갑니다.`; return; }
+      $("rsGcMsg").innerHTML = "구글 캘린더 알림을 바꾸는 중…";
+      try { await need(); const ds = evs.map((x) => x.d).sort(); const r = await syncRange(ds[0], ds[ds.length - 1], evs); $("rsGcMsg").innerHTML = `<span style="color:var(--ok)">비행 알림 <b>${txt}</b>로 바꿨습니다 (${r.upd + r.add}개 일정).</span>`; }
+      catch (x) { $("rsGcMsg").innerHTML = `<b style="color:var(--warn)">구글 캘린더에 반영하지 못했습니다: ${String(x.message || x).slice(0, 80)}</b>`; }
+    });
   }
   window.GCAL = { ready: () => !!(token && Date.now() < exp), linked: () => ls.get(ON) === "1", syncRange, connect: async () => { await connect(); return !!(token && Date.now() < exp); } };
 })();
@@ -1819,6 +1853,44 @@ window.ROSTER = (() => {
   let R = load();
   let syncSoon = () => {}, syncPull = () => {};            // 내 기기 동기화 (아래에서 채움)
   let groupSoon = () => {}, groupPull = () => {}, grpSync = { list: () => [], merge: () => {} }, grpView = null, gView = "";   // 공유 그룹 (아래에서 채움)
+  // 동기화·공유 서버 호출. 동시에 나간 근무표 받기(get)와 그룹 받기(gget)는 한 번(pull)으로 합침 (옛 서버면 따로)
+  async function srvRaw(body) {
+    if (!SYNC_SERVER) throw { err: "nosrv" };
+    let r; try { r = await fetch(SYNC_SERVER, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(Object.assign({ id: window.UID.id(), h: window.UID.proof() }, body)) }); } catch (e) { throw { err: "net" }; }
+    if (!r.ok) throw { err: "net" }; let o; try { o = await r.json(); } catch (e) { throw { err: "net" }; } if (!o.ok) throw o; return o;
+  }
+  let bq = null, noPull = false;
+  function srvCall(body) {
+    if (noPull || (body.a !== "get" && body.a !== "gget")) return srvRaw(body);
+    return new Promise((ok, no) => { if (!bq) { bq = []; setTimeout(flushBQ, 800); } bq.push({ body, ok, no }); });
+  }
+  async function flushBQ() {
+    const q = bq; bq = null;
+    const g = q.find((x) => x.body.a === "get"), gg = q.find((x) => x.body.a === "gget");
+    const each = () => q.forEach((x) => srvRaw(x.body).then(x.ok, x.no));
+    if (!g || !gg || q.length !== 2) return each();
+    try {
+      const r = await srvRaw({ a: "pull", since: g.body.since, gids: gg.body.gids, gsince: gg.body.since });
+      if (!r.sync) throw { err: "bad" };
+      r.sync.ok ? g.ok(r.sync) : g.no(r.sync);
+      gg.ok({ ok: true, groups: r.groups || {} });
+    } catch (e) { if (e && e.err === "bad") { noPull = true; return each(); } g.no(e); gg.no(e); }
+  }
+  // 연결 코드 보관 안내: 동기화를 켰거나 그룹에 들어가 있으면, '보관했어요'를 누를 때까지 근무표 화면 위에 표시
+  function codeTip() {
+    const box = $("codeTip"), U = window.UID; if (!box || !U) return;
+    const used = ls.get("csf-sync-on") === U.id() || grpSync.list().length > 0;
+    box.hidden = !used || ls.get("csf-code-saved") === U.id();
+    if (box.hidden) return;
+    box.innerHTML = `<b>연결 코드를 보관해 두세요</b><br>이 기기를 잃어버리거나 앱 자료가 지워지면, 동기화한 근무표와 공유 그룹은 <b>이 코드로만</b> 되찾을 수 있습니다. 암호화되어 있어 제작자도 복구해 드릴 수 없습니다.
+      <span class="cd">${U.code().replace(/(.{4})(?=.)/g, "$1-")}</span><small>메모 앱이나 사진으로 저장하세요. 다른 사람에게 보내지 마세요. (아이디 ${U.id()})</small>
+      <div class="bt"><button type="button" data-ct="copy">복사</button><button type="button" data-ct="ok">보관했어요</button></div>`;
+  }
+  if ($("codeTip")) $("codeTip").addEventListener("click", async (e) => {
+    const b = e.target.closest("[data-ct]"); if (!b) return;
+    if (b.dataset.ct === "ok") { ls.set("csf-code-saved", window.UID.id()); codeTip(); return; }
+    try { await navigator.clipboard.writeText(window.UID.code().replace(/(.{4})(?=.)/g, "$1-")); b.textContent = "복사됨 ✓"; } catch (x) { b.textContent = "길게 눌러 복사"; }
+  });
   const save = (fromSync) => { if (!fromSync) R.updated = new Date().toISOString(); ls.set(SK, JSON.stringify(R)); count(); if (!fromSync) { syncSoon(); groupSoon(); } };
   const pad = (n) => String(n).padStart(2, "0");
   const ymd = (t) => `${t.getFullYear()}-${pad(t.getMonth() + 1)}-${pad(t.getDate())}`;
@@ -1860,17 +1932,41 @@ window.ROSTER = (() => {
       const t = new Date(start); t.setDate(start.getDate() + i); const s = ymd(t), dw = t.getDay();
       const evs = onDay(s);
       const chips = GR ? GR.map((r) => gChip(r, s)).join("") : evs.slice(0, 3).map((e) => { const cont = e.d !== s; return `<span class="rc-ev k-${esc(e.kind)}${cont && e.kind !== "LO" ? " cont" : ""}">${esc(cont && e.kind === "FLT" ? "→" + (e.arr || "") : cont && e.kind !== "LO" ? (e.arr || label(e)) : e.kind === "LO" ? (e.alert && s === e.alertDay ? "⚠" : "") + e.dep : label(e))}</span>`; }).join("") + (evs.length > 3 ? `<span class="rc-ev k-ETC">+${evs.length - 3}</span>` : "");
-      h += `<div class="c${t.getMonth() !== m ? " out" : ""}${s === today ? " today" : ""}${s === sel ? " sel" : ""}${dw === 0 ? " sun" : dw === 6 ? " sat" : ""}" data-d="${s}"><span class="n">${t.getDate()}</span>${chips}</div>`;
+      h += `<div class="c${t.getMonth() !== m ? " out" : ""}${GR && allOff(GR, s) ? " free" : ""}${s === today ? " today" : ""}${s === sel ? " sel" : ""}${dw === 0 ? " sun" : dw === 6 ? " sat" : ""}" data-d="${s}"><span class="n">${t.getDate()}</span>${chips}</div>`;
     }
     $("rcGrid").innerHTML = h;
     paintDay();
-    if (GR) { $("rcSrc").textContent = grpView.info(gView) + " · 칸마다 멤버 이름 첫 글자 + 일정"; return; }
-    $("rcSrc").textContent = R.updated ? `이 기기에 저장된 근무표 · 마지막 저장 ${R.updated.slice(0, 16).replace("T", " ")}` + (R.events.some((e) => e.src === "sample") ? " · 시험 근무표 포함" : "") : "저장된 근무표가 없습니다. 개발 예정 → 근무표 등록에서 넣을 수 있습니다.";
+    $("rcStat").innerHTML = GR ? `<span class="free-k"></span> 초록 칸 = 모두 쉬는 날 · ${GR.map((r) => `<i class="gm" style="--mc:${r.col}">${esc(r.short)}</i>${esc(r.nick)}`).join(" ")}` : monthStat(y, m);
+    if (GR) { $("rcSrc").textContent = grpView.info(gView) + " · 칸마다 멤버 이름 + 그날 일정"; return; }
+    $("rcSrc").textContent = R.updated ? `이 기기에 저장된 근무표 · 마지막 저장 ${R.updated.slice(0, 16).replace("T", " ")}` + (R.events.some((e) => e.src === "sample") ? " · 시험 근무표 포함" : "") : "저장된 근무표가 없습니다. 개발중 → 근무표 등록에서 넣을 수 있습니다.";
   }
   // 그룹 보기: 멤버 한 줄 = 이름 첫 글자 + 그날 일정
   const evOn = (list, s) => (list || []).filter((e) => e.d === s || (e.d < s && (e.d2 || e.ed || "") >= s));
+  // 그날 쉬는지: 1 쉼(휴무·휴가만) · 0 근무 · null 모름(자료 없음)
+  function offOf(r, s) {
+    if (r.none || r.bad) return null;
+    if (r.w) return r.w[s] === undefined ? null : r.w[s] ? 0 : 1;
+    const ev = evOn(r.evs, s); if (!ev.length) return null;
+    return ev.every((e) => /^(OFF|LV)$/.test(e.kind)) ? 1 : 0;
+  }
+  const allOff = (GR, s) => GR.length > 1 && GR.every((r) => offOf(r, s) === 1);
+  // 이번 달 내 통계: 비행 횟수 · 블록 시간 · 휴무 · 체류 · 대기
+  function monthStat(y, m) {
+    const p = `${y}-${String(m + 1).padStart(2, "0")}`, last = new Date(y, m + 1, 0).getDate();
+    let fl = 0, blk = 0; const off = new Set(), lo = new Set(), sb = new Set(), lv = new Set();
+    for (const e of R.events) {
+      if (e.kind === "FLT" && e.d.startsWith(p)) { fl++; if (e.su && e.eu) blk += (Date.parse(e.eu) - Date.parse(e.su)) / 60000; }
+      for (let i = 1; i <= last; i++) {
+        const d = `${p}-${String(i).padStart(2, "0")}`; if (!(e.d === d || (e.d < d && (e.d2 || e.ed || "") >= d))) continue;
+        if (e.kind === "OFF") off.add(d); else if (e.kind === "LV") lv.add(d); else if (e.kind === "LO") lo.add(d); else if (e.kind === "STBY") sb.add(d);
+      }
+    }
+    if (!fl && !off.size && !lo.size && !sb.size && !lv.size) return "";
+    const hm = `${Math.floor(blk / 60)}:${String(Math.round(blk % 60)).padStart(2, "0")}`;
+    return `<b>${m + 1}월</b> 비행 ${fl}회${blk ? ` · 블록 ${hm}` : ""} · 휴무 ${off.size}일${lv.size ? ` · 휴가 ${lv.size}일` : ""} · 체류 ${lo.size}일 · 대기 ${sb.size}일`;
+  }
   function gChip(r, s) {
-    const nk = esc((r.nick || r.id || "").slice(0, 1));
+    const nk = `<i class="gm" style="--mc:${r.col || "#999"}">${esc(r.short || (r.nick || r.id || "").slice(0, 1))}</i>`;
     if (r.none || r.bad) return `<span class="rc-ev gx k-none">${nk}</span>`;
     if (r.w) { const v = r.w[s]; return v === undefined ? `<span class="rc-ev gx k-none">${nk}</span>` : `<span class="rc-ev gx ${v ? "k-FLT" : "k-OFF"}">${nk}${v ? "근무" : "휴무"}</span>`; }
     const ev = evOn(r.evs, s); if (!ev.length) return `<span class="rc-ev gx k-none">${nk}</span>`;
@@ -1883,7 +1979,7 @@ window.ROSTER = (() => {
     const w = ["일", "월", "화", "수", "목", "금", "토"][new Date(sel + "T00:00:00").getDay()];
     if (gView && grpView) {
       $("rcDay").innerHTML = `<h3>${+mo}월 ${+d}일 (${w})</h3>` + grpView.rows(gView).map((r) => {
-        const head = `<div class="gr-dn">${esc(r.nick)}${r.me ? " (나)" : ""} <small>${esc(r.id)}</small></div>`;
+        const head = `<div class="gr-dn"><i class="gm" style="--mc:${r.col}">${esc(r.short)}</i> ${esc(r.nick)}${r.me ? " (나)" : ""} <small>${esc(r.id)}</small></div>`;
         if (r.none || r.bad) return head + `<p class="rc-src">${r.bad ? "공유본을 열 수 없습니다" : "아직 올린 근무표가 없습니다"}</p>`;
         if (r.w) return head + `<p class="rc-src">${r.w[sel] === undefined ? "일정 없음" : r.w[sel] ? "근무" : "휴무"} <small>(근무/휴무만 공개)</small></p>`;
         const ev = evOn(r.evs, sel);
@@ -1891,10 +1987,28 @@ window.ROSTER = (() => {
       }).join("");
       return;
     }
-    $("rcDay").innerHTML = `<h3>${+mo}월 ${+d}일 (${w})</h3>` + (evs.length ? evs.map((e) => `<div class="rc-it"><span class="tag k-${esc(e.kind)}">${esc(KIND[e.kind] || e.kind)}</span><div>${esc(line(e))}${e.d !== sel ? `<small>${esc(e.d.slice(5).replace("-", "/"))} 시작 · 계속</small>` : ""}${e.kst ? `<small>${esc(e.kst)}</small>` : ""}${e.note ? `<small${e.alert ? ' style="color:var(--warn);font-weight:700"' : ""}>${e.alert ? "⚠ " : ""}${esc(e.note)}</small>` : ""}</div></div>`).join("") : `<p class="rc-src">일정 없음</p>`);
+    $("rcDay").innerHTML = `<h3>${+mo}월 ${+d}일 (${w})</h3>` + (evs.length ? evs.map((e) => `<div class="rc-it"><span class="tag k-${esc(e.kind)}">${esc(KIND[e.kind] || e.kind)}</span><div>${esc(line(e))}${e.d !== sel ? `<small>${esc(e.d.slice(5).replace("-", "/"))} 시작 · 계속</small>` : ""}${e.kst ? `<small>${esc(e.kst)}</small>` : ""}${e.note ? `<small${e.alert ? ' style="color:var(--warn);font-weight:700"' : ""}>${e.alert ? "⚠ " : ""}${esc(e.note)}</small>` : ""}${e.kind === "FLT" && e.flt ? `<span class="rc-go"><button type="button" data-go="cs" data-f="${esc(e.flt)}">편 정보 · 기상</button>${e.dep && e.arr ? `<button type="button" data-go="fp" data-dep="${esc(e.dep)}" data-arr="${esc(e.arr)}">비행준비</button>` : ""}</span>` : ""}</div></div>`).join("") : `<p class="rc-src">일정 없음</p>`);
   }
   function openMonth(d) { if (d) { sel = d; cur = new Date(d + "T00:00:00"); cur.setDate(1); } paintMonth(); $("rcSheet").hidden = false; }
   $("rcGrid").addEventListener("click", (e) => { const c = e.target.closest("[data-d]"); if (!c) return; sel = c.dataset.d; if (sel.slice(0, 7) !== ymd(cur).slice(0, 7)) { cur = new Date(sel + "T00:00:00"); cur.setDate(1); } paintMonth(); });
+  // 내 스케줄의 비행 → CallSign 조회(편 정보·TAF) / 비행준비(출발·도착 공항)
+  $("rcDay").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-go]"); if (!b) return;
+    $("rcSheet").hidden = true;
+    if (b.dataset.go === "cs") {
+      const m = b.dataset.f.match(/^([A-Z0-9]{2})(\d+)(Z?)$/); if (!m) return;
+      const al = m[3] ? "AAR" : ({ KE: "KAL", OZ: "AAR", "7C": "JJA", LJ: "JNA", TW: "TWB", ZE: "ESR" }[m[1]] || "KAL");
+      const ozTab = document.getElementById("tab-oz");
+      if (al === "AAR" && ozTab && !ozTab.hidden) ozTab.click();
+      else { document.getElementById("tab-cs").click(); const t = document.querySelector(`#alTabs [data-al="${al}"]`); if (t && t.getAttribute("aria-pressed") !== "true") t.click(); }
+      const q = document.getElementById("q"); q.value = String(+m[2]); q.dispatchEvent(new Event("input", { bubbles: true }));
+    } else {
+      document.getElementById("tab-pk").click(); const sb = document.querySelector('#pkSub [data-pks="fp"]'); if (sb) sb.click();
+      const d = document.getElementById("fpDep"), a = document.getElementById("fpArr");
+      if (d && a) { d.value = b.dataset.dep; a.value = b.dataset.arr; a.dispatchEvent(new Event("change")); }
+    }
+    scrollTo(0, 0);
+  });
   $("rcWho").addEventListener("click", (e) => { const b = e.target.closest("[data-gv]"); if (!b) return; gView = b.dataset.gv; if (gView) groupPull(); paintMonth(); });
   $("rcPrev").addEventListener("click", () => { cur.setMonth(cur.getMonth() - 1); paintMonth(); });
   $("rcNext").addEventListener("click", () => { cur.setMonth(cur.getMonth() + 1); paintMonth(); });
@@ -1973,7 +2087,10 @@ window.ROSTER = (() => {
       if (e.su) { const z = (x) => x.replace(/[-:]/g, "").replace(/\.\d+/, ""); L.push("DTSTART:" + z(e.su), "DTEND:" + z(e.eu)); }
       else if (e.st) { const a = zt(e.d, e.st); let z = zt(e.kind === "FLT" ? e.ed || e.d : e.ed || e.d2 || e.d, e.et || e.st); if (z <= a) z = new Date(Date.parse(`${e.d}T${e.st}:00+09:00`) + 3600e3).toISOString().replace(/[-:]/g, "").replace(/\.\d+/, ""); L.push("DTSTART:" + a, "DTEND:" + z); }
       else { L.push("DTSTART;VALUE=DATE:" + e.d.replace(/-/g, ""), "DTEND;VALUE=DATE:" + addDay(e.d2 || e.d, 1).replace(/-/g, "")); }
-      L.push("DESCRIPTION:" + icsEsc(line(e) + (e.kst ? "\n" + e.kst : "") + (e.note ? "\n" + e.note : "") + "\nFLT Assist 근무표"), "END:VEVENT");
+      L.push("DESCRIPTION:" + icsEsc(line(e) + (e.kst ? "\n" + e.kst : "") + (e.note ? "\n" + e.note : "") + "\nFLT Assist 근무표"));
+      const am = +(ls.get("csf-alarm") || 0);
+      if (am && e.kind === "FLT" && e.st) L.push("BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:" + icsEsc(`${e.flt || "비행"} 출발 ${am / 60}시간 전`), `TRIGGER:-PT${am}M`, "END:VALARM");
+      L.push("END:VEVENT");
     }
     L.push("END:VCALENDAR");
     return L.join("\r\n");
@@ -2362,14 +2479,7 @@ window.ROSTER = (() => {
       if (z === "1") { raw = await gz(raw, false); if (!raw) throw Object.assign(new Error("gz"), { err: "gz" }); }
       return JSON.parse(td.decode(raw));
     }
-    async function call(body) {
-      let r;
-      try { r = await fetch(SYNC_SERVER, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(Object.assign({ id: U().id(), h: U().proof() }, body)) }); }
-      catch (e) { throw { err: "net" }; }
-      if (!r.ok) throw { err: "net" };
-      let o; try { o = await r.json(); } catch (e) { throw { err: "net" }; }
-      if (!o.ok) throw o; return o;
-    }
+    const call = (body) => srvCall(body);
     const isOn = () => !!SYNC_SERVER && !!U() && ls.get(SON) === U().id();
     const win = () => { const t = new Date(); return [ymd(new Date(t.getFullYear(), t.getMonth() - 1, 1)), ymd(new Date(t.getFullYear(), t.getMonth() + 3, 0))]; };
     const when = (s) => { if (!s) return ""; const t = new Date(s); return `${t.getMonth() + 1}/${t.getDate()} ${pad(t.getHours())}:${pad(t.getMinutes())}`; };
@@ -2386,6 +2496,7 @@ window.ROSTER = (() => {
       const on = isOn(), st = $("rsSySt");
       st.textContent = !SYNC_SERVER ? "준비 중" : on ? "켜짐" : "꺼짐"; st.className = "gm-st" + (on ? " ok" : "");
       $("rsSyOn").hidden = on; $("rsSyOn").disabled = !SYNC_SERVER; $("rsSyMore").hidden = !on;
+      codeTip();
       $("rsSyLast").textContent = on ? (ls.get(STS) ? `마지막으로 맞춘 때 ${when(ls.get(STS))} · 아이디 ${U().id()}` : `아이디 ${U().id()}`) : !SYNC_SERVER ? "동기화 서버를 준비하고 있습니다." : "";
     }
     async function push() {
@@ -2464,11 +2575,7 @@ window.ROSTER = (() => {
       let raw = new Uint8Array(await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64d(iv) }, await gkey(g), b64d(ct)));
       if (z === "1") raw = await gz(raw, false); return raw ? JSON.parse(td.decode(raw)) : null;
     }
-    async function call(body) {
-      if (!SYNC_SERVER) throw { err: "nosrv" };
-      let r; try { r = await fetch(SYNC_SERVER, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(Object.assign({ id: U().id(), h: U().proof() }, body)) }); } catch (e) { throw { err: "net" }; }
-      if (!r.ok) throw { err: "net" }; let o; try { o = await r.json(); } catch (e) { throw { err: "net" }; } if (!o.ok) throw o; return o;
-    }
+    const call = (body) => srvCall(body);
     const ERR = { net: "서버에 연결하지 못했습니다. 인터넷 연결을 확인해 주세요.", nosrv: "공유 서버를 준비하고 있습니다.", auth: "이 아이디는 다른 연결 코드로 등록되어 있습니다. 아이디 화면에서 연결 코드를 확인해 주세요.",
       unreg: "그 아이디는 아직 공유를 시작하지 않았습니다. 상대에게 먼저 이 화면에서 ‘공유 시작’을 누르게 해 주세요.", full: "그룹이 가득 찼습니다(초대 중 포함 4명).", max: "그룹은 한 사람당 5개까지입니다.",
       already: "이미 그룹 멤버입니다.", notyou: "이 초대 코드는 다른 아이디용입니다. 초대한 사람에게 내 아이디를 정확히 알려 주세요.", invite: "초대 코드가 맞지 않거나 24시간이 지났습니다. 새 초대 코드를 받아 주세요.",
@@ -2532,8 +2639,12 @@ window.ROSTER = (() => {
       rows(gid) {     // [{id, nick, me, scope, evs | w}]
         const g = L.find((x) => x.gid === gid); if (!g) return [];
         const ids = (g.members && g.members.length ? g.members : [me()]).slice().sort((a, b) => (a === me() ? -1 : b === me() ? 1 : 0));
-        return ids.map((id) => { if (id === me()) return { id, nick: g.nick || "나", me: true, scope: "detail", evs: R.events };
+        const rows = ids.map((id) => { if (id === me()) return { id, nick: g.nick || "나", me: true, scope: "detail", evs: R.events };
           const d = ((C[gid] || {}).sh || {})[id]; return { id, nick: nickOf(g, id), scope: d && d.data.scope, evs: d && d.data.e, w: d && d.data.w, none: !d, bad: d && d.data.bad }; });
+        // 짧은 이름: 첫 글자가 겹치면 두 글자. 멤버마다 색
+        const COL = ["#E8590C", "#2F9E44", "#7048E8", "#C2255C"];
+        rows.forEach((r, i) => { const n = (r.nick || r.id || "?").trim(); r.col = COL[i % COL.length]; r.short = rows.filter((x) => (x.nick || x.id || "?").trim()[0] === n[0]).length > 1 ? n.slice(0, 2) : n[0]; });
+        return rows;
       },
       info(gid) { const g = L.find((x) => x.gid === gid), c = C[gid] || {}; return g ? `${g.name || "그룹"} · ${(g.members || []).length}명` + (c.at ? ` · 받은 때 ${(() => { const t = new Date(c.at); return `${t.getMonth() + 1}/${t.getDate()} ${pad(t.getHours())}:${pad(t.getMinutes())}`; })()}` : "") : ""; },
     };
@@ -2542,6 +2653,7 @@ window.ROSTER = (() => {
     let lastCode = null;
     function paint() {
       const reg = ls.get(GR) === me(), st = $("rsGrSt");
+      setTimeout(codeTip, 0);
       st.textContent = !SYNC_SERVER ? "준비 중" : reg ? (L.length ? `${L.length}개 그룹` : "시작함") : "꺼짐"; st.className = "gm-st" + (reg ? " ok" : "");
       let h = "";
       if (!reg) {
@@ -2599,7 +2711,7 @@ window.ROSTER = (() => {
         if (t === me()) { msg("내 아이디입니다. 초대할 사람의 아이디를 넣어 주세요.", true); return; }
         const tok = rs(12);
         await run(async () => { await call({ a: "ginvite", gid, target: t, tok }); g.pend = [...new Set([...(g.pend || []), t])]; saveL();
-          lastCode = { gid, target: t, text: `[FLT Assist 근무표 공유 초대]\n그룹: ${g.name || "그룹"}\n앱 → 개발 예정 → 근무표 등록 → 공유 그룹 → ‘초대 코드로 참가’에 이 메시지를 붙여 넣으세요. (${t} 전용 · 24시간)\nFLTG-${gid}-${tok}-${g.k}` }; }, true, "초대 코드를 만들었습니다.");
+          lastCode = { gid, target: t, text: `[FLT Assist 근무표 공유 초대]\n그룹: ${g.name || "그룹"}\n앱 → 개발중 → 근무표 등록 → 공유 그룹 → ‘초대 코드로 참가’에 이 메시지를 붙여 넣으세요. (${t} 전용 · 24시간)\nFLTG-${gid}-${tok}-${g.k}` }; }, true, "초대 코드를 만들었습니다.");
         return;
       }
       if (k === "copy" || k === "share") {
@@ -2625,7 +2737,7 @@ window.ROSTER = (() => {
         await run(async () => { try { await call({ a: "gleave", gid }); } catch (x) { if (!x || !/notmember|nogroup/.test(x.err)) throw x; } L = L.filter((x) => x.gid !== gid); delete C[gid]; saveL(); saveC(); form = ""; if (gView === gid) gView = ""; save(); }, true, "그룹에서 나왔습니다. 내 공유본은 서버에서 지웠습니다.");
       }
     });
-    const start = () => { L = loadL(); paint(); setTimeout(() => groupPull(), 3000); };
+    const start = () => { L = loadL(); paint(); setTimeout(() => groupPull(), 2500); };     // 근무표 동기화 받기와 같은 때 → 한 번 요청으로 합쳐짐
     if (window.UID) start(); else addEventListener("DOMContentLoaded", start);
     document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") groupPull(); });
   })();
@@ -2924,7 +3036,8 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v53", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v54", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -2958,6 +3071,18 @@ window.csfStat = (() => {
   }
   addEventListener("online", flush);
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") flush(); });
+  // 익명 오류 보고: 어느 파일·줄에서 어떤 오류인지만 (입력 내용·아이디 없음). 같은 오류는 한 번, 하루 10건까지
+  const seenErr = new Set();
+  function errLog(msg, where) {
+    msg = String(msg || "").replace(/\s+/g, " ").slice(0, 200);
+    if (!msg || /^Script error\.?$/.test(msg) || /ResizeObserver|extension:\/\//.test(msg + where)) return;
+    const k = msg + "|" + where; if (seenErr.has(k)) return; seenErr.add(k);
+    const day = new Date().toISOString().slice(0, 10), c = JSON.parse(ls.get("csf-errn") || "{}");
+    if (c.d !== day) { c.d = day; c.n = 0; } if (c.n >= 10) return; c.n++; ls.set("csf-errn", JSON.stringify(c));
+    log("오류", "", where.slice(0, 20), msg);
+  }
+  addEventListener("error", (e) => { if (e && e.message) errLog(e.message, (String(e.filename || "").split("/").pop() || "?") + ":" + (e.lineno || 0)); });
+  addEventListener("unhandledrejection", (e) => { const r = e && e.reason; errLog(r && (r.message || r.err || String(r)), "promise"); });
   try { document.getElementById("appVer").textContent = "Ver " + APP_VER + (/^(localhost|127\.)/.test(location.hostname) ? " · 개발 서버" : ""); } catch (e) {}      // 하단 제작자 옆 앱 버전 (PC 개발 서버면 표시)
   return log;
 })();
@@ -4626,6 +4751,44 @@ window.UID = (() => {
   // proof: 근무표 동기화 서버에 보내는 본인 확인값 (아이디를 만든 해시 전체 · 연결 코드는 여기서 거꾸로 알 수 없음)
   const proof = () => sha256("flt-assist-id-v1:" + me.code).map((x) => x.toString(16).padStart(8, "0")).join("");
   return { id: () => me.id, code: () => me.code, proof };   // code: 키 옮기기 QR·동기화 암호화에만 사용 (밖으로 보내지 않음)
+})();
+</script>
+<script>
+// ===================== 안내 띠: 새 버전 알림 · 아이폰 홈 화면 사용 안내 =====================
+(() => {
+  const $ = (id) => document.getElementById(id), bar = $("tipBar");
+  const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  const ua = navigator.userAgent, ios = /iPhone|iPod|iPad/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  let upd = false;
+  function show(cls, html, btn, act) {
+    bar.className = "tip-bar" + (cls ? " " + cls : ""); bar.innerHTML = `<span class="t">${html}</span><button type="button">${btn}</button>`; bar.hidden = false;
+    bar.querySelector("button").onclick = act;
+  }
+  function homeTip() {
+    if (upd || !ios || standalone) return;
+    const t = +(ls.get("csf-tip-a2hs") || 0); if (Date.now() - t < 14 * 864e5) return;
+    show("", "<b>아이폰은 홈 화면에 추가해서 쓰세요.</b> Safari 와 홈 화면 앱은 저장 공간이 따로라 아이디·근무표·키가 서로 다르고, Safari 는 오래 안 열면 자료를 지울 수 있습니다. (공유 버튼 → 홈 화면에 추가)", "닫기",
+      () => { ls.set("csf-tip-a2hs", String(Date.now())); bar.hidden = true; });
+  }
+  // 새 버전: sw.js 의 캐시 이름(callsign-vNN)이 지금 화면 버전과 다르면 알림
+  let last = 0;
+  async function checkVer() {
+    if (!navigator.onLine || Date.now() - last < 30 * 60000 || !window.csfVer) return; last = Date.now();
+    try {
+      const t = await (await fetch("sw.js", { cache: "no-store" })).text(), m = t.match(/callsign-(v\d+)/);
+      if (m && m[1] !== window.csfVer && +m[1].slice(1) > +window.csfVer.slice(1)) {
+        upd = true;
+        show("upd", "<b>새 버전이 있습니다.</b> 눌러서 바로 적용하세요.", "적용", async () => {
+          try { const r = await navigator.serviceWorker.getRegistration(); if (r) await r.update(); } catch (e) {}
+          location.reload();
+        });
+      }
+    } catch (e) {}
+  }
+  homeTip();
+  setTimeout(checkVer, 5000);
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") checkVer(); });
 })();
 </script>
 <script>

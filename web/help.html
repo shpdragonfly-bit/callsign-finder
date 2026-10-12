@@ -24,7 +24,7 @@ b { font-weight: 700; }
 .box { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; margin: 8px 0; break-inside: avoid; }
 .warn { border-color: #F0C4AE; background: #FFF6F1; }
 .warn b.t { color: var(--warn); }
-table { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 9.8pt; break-inside: avoid; }
+table { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 9.8pt; }
 th, td { border: 1px solid var(--line); padding: 4px 7px; text-align: left; vertical-align: top; }
 th { background: var(--soft); }
 .toc { columns: 2; column-gap: 24px; margin: 6px 0 4px; padding-left: 18px; }
@@ -46,9 +46,9 @@ th { background: var(--soft); }
   <li>CallSign 조회 · 아시아나</li>
   <li>비행시간</li>
   <li>출퇴근</li>
-  <li>개발 예정 ① 비행준비</li>
-  <li>개발 예정 ② FLT Package 분석</li>
-  <li>개발 예정 ③ 근무표 등록</li>
+  <li>개발중 ① 비행준비</li>
+  <li>개발중 ② FLT Package 분석</li>
+  <li>개발중 ③ 근무표 등록</li>
   <li>내 기기 동기화 · 공유 그룹</li>
   <li>☰ 메뉴</li>
   <li>개인정보 · 보안</li>
@@ -61,6 +61,7 @@ th { background: var(--soft); }
   <li><b>아이폰 · 아이패드</b>: Safari 로 열기 → 공유 버튼 → <b>홈 화면에 추가</b></li>
   <li><b>안드로이드</b>: Chrome 메뉴(⋮) → <b>홈 화면에 추가</b> 또는 <b>앱 설치</b></li>
 </ul>
+<div class="box warn"><b class="t">아이폰은 꼭 홈 화면 앱으로</b> Safari 와 홈 화면 앱은 저장 공간이 따로라 아이디 · 근무표 · Gemini 키가 서로 다릅니다. 또 Safari 는 오래 열지 않은 사이트 자료를 지울 수 있습니다. 홈 화면에 추가한 앱으로만 쓰세요.</div>
 <h3>오프라인(기내) 사용</h3>
 <ul>
   <li>출발 전 인터넷이 될 때 앱을 한 번 열어 두면 Call Sign 조회 · 비행시간 · 셔틀 시간표 · 저장한 근무표는 인터넷 없이도 됩니다.</li>
@@ -71,13 +72,14 @@ th { background: var(--soft); }
   <li>왼쪽 위 <span class="k">ID ABC234</span> 6자리가 이 앱의 내 아이디입니다. 처음 실행할 때 자동으로 만들어집니다.</li>
   <li>아이디를 누르면 <b>연결 코드</b>(12자리)를 볼 수 있습니다. 다른 기기에서 <b>다른 기기에서 쓰던 아이디로 바꾸기</b>에 이 코드를 넣으면 같은 아이디로 이어 씁니다.</li>
   <li>연결 코드는 비밀번호처럼 다루세요. 근무표 동기화 암호화와 Gemini 키 옮기기에 쓰입니다.</li>
+  <li><b>연결 코드는 메모해 두세요.</b> 휴대폰을 잃어버리면 동기화한 근무표와 공유 그룹은 이 코드로만 되찾을 수 있습니다(제작자도 복구 불가). 동기화를 켜거나 그룹에 들어가면 근무표 화면 위에 보관 안내가 나옵니다.</li>
 </ul>
 
 <h2>2. 화면 구성</h2>
 <table>
   <tr><th style="width:28%">위치</th><th>내용</th></tr>
   <tr><td>맨 위</td><td>FLT Assist · 내 아이디 · 온라인/오프라인 표시 · ☰ 메뉴(안 읽은 공지가 있으면 빨간 점)</td></tr>
-  <tr><td>탭</td><td>CallSign조회 · 아시아나 · 비행시간 · 출퇴근 · 개발 예정</td></tr>
+  <tr><td>탭</td><td>CallSign조회 · 아시아나 · 비행시간 · 출퇴근 · 개발중</td></tr>
   <tr><td>아래 떠 있는 버튼 4개</td><td>↑ 맨 위로 · ☾ 주/야간 · 📅 내 스케줄 · ☰ 메뉴</td></tr>
 </table>
 
@@ -120,7 +122,7 @@ th { background: var(--soft); }
   <li>T1 은 순환 셔틀(공항01), T2 는 장기주차장 셔틀 출발 시각과 내 차 위치가 함께 나옵니다.</li>
 </ul>
 
-<h2 class="pb">6. 개발 예정 ① 비행준비</h2>
+<h2>6. 개발중 ① 비행준비</h2>
 <ul>
   <li>출발 · 도착 공항 코드(ICAO 4자리 또는 IATA 3자리)를 넣으면 공항별 <b>이 · 착륙 유의사항</b> 중 중요 항목을 보여 줍니다. 자동 완성과 최근 구간을 쓸 수 있습니다.</li>
   <li>기기마다 하루 서로 다른 공항 <b>10곳</b>까지 조회됩니다(같은 공항 다시 보기는 횟수에 안 셈). 남은 횟수가 화면에 나옵니다.</li>
@@ -128,7 +130,7 @@ th { background: var(--soft); }
   <li>자료는 화면 보기와 FLT 요약 PDF 용입니다. 복사 · 수집은 막혀 있습니다.</li>
 </ul>
 
-<h2>7. 개발 예정 ② FLT Package 분석</h2>
+<h2>7. 개발중 ② FLT Package 분석</h2>
 <div class="box">본인 <b>Gemini API 키</b>를 등록한 분만 쓸 수 있습니다. 키 등록: ☰ 메뉴 → <b>Gemini AI 연결</b> (무료 키, 결제 정보 등록 금지)</div>
 <ol>
   <li><b>PDF 파일 선택 (KE, OZ)</b>: 운항 패키지 PDF 를 고릅니다.</li>
@@ -141,7 +143,7 @@ th { background: var(--soft); }
   <li>AI 가 만든 참고 자료입니다. 숫자와 NOTAM 은 반드시 원본과 대조하세요.</li>
 </ul>
 
-<h2>8. 개발 예정 ③ 근무표 등록</h2>
+<h2>8. 개발중 ③ 근무표 등록</h2>
 <h3>근무표 넣기</h3>
 <ul>
   <li><b>근무표 PDF 선택 (KE · OZ)</b>: 기기 안에서 읽고 파일은 밖으로 보내지 않습니다.
@@ -156,7 +158,9 @@ th { background: var(--soft); }
 </ul>
 <h3>보기 · 내보내기</h3>
 <ul>
-  <li><b>내 스케줄</b>(아래 📅 버튼 또는 ☰ 메뉴): 월별 달력, 날짜를 누르면 상세. 좌우로 밀어 달을 넘깁니다.</li>
+  <li><b>내 스케줄</b>(아래 📅 버튼 또는 ☰ 메뉴): 월별 달력, 날짜를 누르면 상세. 좌우로 밀어 달을 넘깁니다. 달력 아래에 그달 <b>비행 횟수 · 블록 시간 · 휴무 · 체류 · 대기</b> 일수가 나옵니다.</li>
+  <li>비행 일정을 누르면 <b>편 정보 · 기상</b>(CallSign 조회)과 <b>비행준비</b>(출발 · 도착 공항 유의사항)로 바로 갈 수 있습니다.</li>
+  <li><b>비행 알림</b>: ☰ 메뉴 → 구글 캘린더 연결에서 ‘출발 1 · 2 · 3시간 전’을 고르면 구글 캘린더와 .ics 일정에 휴대폰 알림이 들어갑니다.</li>
   <li><b>구글 캘린더</b>(선택): ☰ 메뉴 → 구글 캘린더 연결. 앱이 만든 ‘FLT 근무표’ 캘린더에만 넣습니다.</li>
   <li><b>Apple용 일정 파일(.ics)</b>: 아이폰 기본 캘린더로 가져올 수 있습니다.</li>
 </ul>
@@ -175,7 +179,7 @@ th { background: var(--soft); }
   <li><b>새 그룹 만들기</b>: 그룹 이름 · 내 표시 이름 · 공개 범위(근무/휴무만 또는 상세)를 정합니다.</li>
   <li><b>초대하기</b>: 상대의 아이디 6자리를 넣고 초대 메시지를 카카오톡 등으로 보냅니다. 그 아이디만, 24시간 안에 참가할 수 있습니다.</li>
   <li>받은 사람: <b>초대 코드로 참가</b>에 메시지를 통째로 붙여 넣고 참가합니다.</li>
-  <li><b>달력 보기</b>: 내 스케줄 위쪽 그룹 탭에서 멤버별 일정을 함께 봅니다(칸마다 이름 첫 글자 + 일정).</li>
+  <li><b>달력 보기</b>: 내 스케줄 위쪽 그룹 탭에서 멤버별 일정을 함께 봅니다. 칸마다 멤버 이름(색 구분, 같은 성이면 두 글자) + 그날 일정이 나오고, <b>모두 쉬는 날은 초록 칸</b>으로 표시됩니다.</li>
 </ol>
 <table>
   <tr><th style="width:30%">항목</th><th>내용</th></tr>
@@ -212,7 +216,8 @@ th { background: var(--soft); }
 <h2>12. 문제 해결</h2>
 <table>
   <tr><th style="width:36%">증상</th><th>해결</th></tr>
-  <tr><td>새 기능이 안 보여요</td><td>인터넷 연결 상태에서 앱을 완전히 닫았다가 다시 엽니다. 공지사항에 새 안내가 보이면 최신입니다.</td></tr>
+  <tr><td>새 기능이 안 보여요</td><td>위쪽에 ‘새 버전이 있습니다’ 안내가 나오면 [적용]을 누릅니다. 안 나오면 인터넷 연결 상태에서 앱을 완전히 닫았다가 다시 엽니다.</td></tr>
+  <tr><td>아이폰에서 아이디 · 근무표가 달라졌어요</td><td>Safari 와 홈 화면 앱은 자료가 따로입니다. 홈 화면 앱으로만 쓰고, 필요하면 연결 코드로 같은 아이디를 연결한 뒤 동기화를 켭니다.</td></tr>
   <tr><td>Gemini ‘사용량을 다 썼습니다’</td><td>무료 하루 한도입니다. 한국시간 16:00(서머타임이 아닐 때 17:00)에 다시 채워집니다. ‘붐빕니다(503)’는 1~2분 뒤 다시.</td></tr>
   <tr><td>근무표 PDF 를 못 읽어요</td><td>SLT 로 다시 출력하거나, 글자가 든 PDF 인지 확인하세요. 그림 PDF 는 Gemini 키가 필요합니다.</td></tr>
   <tr><td>구글 캘린더 저장이 안 돼요</td><td>☰ 메뉴 → 구글 캘린더 연결에서 연결끊기 후 다시 연결합니다.</td></tr>

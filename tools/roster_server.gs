@@ -29,6 +29,8 @@
  *   gleave  {gid[,target]}   → 나가기 (관리자는 target 으로 내보내기). 나간 사람 공유본 삭제
  *   gput    {gid,ts,blob}    → 그룹에 내 근무표(암호화) 올리기
  *   gget    {gids:[…],since:{gid:{id:ts}}} → 멤버들 공유본 (since 보다 새 것만 내용 포함)
+ *   pull    {since, gids, gsince}  → get + gget 를 한 번에 (앱을 열 때 요청 수 절반)
+ *   읽기(get·gget·glist·pull)는 이미 등록된 아이디면 잠금 없이 처리 → 동시에 많이 열어도 줄 서지 않음
  *   (그룹 시트는 처음 쓸 때 자동으로 만듦 — setup 다시 실행할 필요 없음)
  */
 var SHEET = "sync", HEAD = ["id", "vh", "ts", "size", "updated", "b1", "b2", "b3", "b4"];
@@ -37,6 +39,7 @@ var PUT_LIMIT = 150;                       // 아이디당 6시간 저장 횟수
 var MAX_ROWS = 5000, KEEP_DAYS = 120;
 var AB = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 var G_MAX = 4, G_PER_USER = 5, INVITE_H = 24;
+var NEW_ID_DAY = 500;                      // 하루 새로 등록되는 아이디 상한 (가짜 아이디 대량 등록 막기)
 var TABLES = {
   ids: ["id", "vh", "created", "seen"],
   groups: ["gid", "owner", "members", "created", "updated"],
@@ -92,18 +95,18 @@ function doPost(e) {
     if (!/^[A-Z2-9]{6}$/.test(id) || !/^[0-9a-f]{64}$/.test(h)) return json_({ ok: false, err: "bad" });
     if (idOfH_(h) !== id) return json_({ ok: false, err: "auth" });
     var vh = sha_("flt-assist-sync-v1:" + h);
+    if (/^(pull|get|gget|glist)$/.test(a)) {          // 읽기: 등록된 아이디면 잠금 없이
+      var me = tab_("ids").rows.filter(function (r) { return r.id === id; })[0];
+      if (me && me.vh !== vh) return json_({ ok: false, err: "auth" });
+      if (me) return json_(read_(a, q, id, vh));
+    }
     var lock = LockService.getScriptLock(); lock.waitLock(15000);
     try {
-      if (!reg_(id, vh)) return json_({ ok: false, err: "auth" });
-      if (a === "gget") return json_(gget_(q, id));
+      var rg = reg_(id, vh); if (rg !== "ok") return json_({ ok: false, err: rg });
+      if (/^(pull|get|gget|glist)$/.test(a)) return json_(read_(a, q, id, vh));
       if (/^(reg|gcreate|glist|ginvite|gcancel|gjoin|gleave|gput)$/.test(a)) { var res = group_(a, q, id); if (Math.random() < 0.02) gclean_(); return json_(res); }
       var sh = sheet_(), r = find_(sh, id), cur = r ? rowObj_(sh, r) : null;
       if (cur && cur.vh !== vh) return json_({ ok: false, err: "auth" });
-      if (a === "get") {
-        if (!cur) return json_({ ok: true, none: true });
-        if (q.since && String(q.since) >= cur.ts) return json_({ ok: true, ts: cur.ts, same: true });
-        return json_({ ok: true, ts: cur.ts, blob: cur.b1 + cur.b2 + cur.b3 + cur.b4 });
-      }
       if (a === "del") {
         if (r) sh.deleteRow(r);
         return json_({ ok: true, removed: !!r });
@@ -149,8 +152,23 @@ function tab_(name) {
 // 아이디 등록부: 처음 본 아이디는 본인 확인값으로 등록, 이후엔 같은 값만
 function reg_(id, vh) {
   var t = tab_("ids"), me = t.rows.filter(function (r) { return r.id === id; })[0], now = new Date().toISOString();
-  if (me) { if (me.vh !== vh) return false; if (me.seen.slice(0, 10) !== now.slice(0, 10)) { me.seen = now; t.put(me); } return true; }
-  t.put({ id: id, vh: vh, created: now, seen: now }); return true;
+  if (me) { if (me.vh !== vh) return "auth"; if (me.seen.slice(0, 10) !== now.slice(0, 10)) { me.seen = now; t.put(me); } return "ok"; }
+  if (t.rows.filter(function (r) { return r.created.slice(0, 10) === now.slice(0, 10); }).length >= NEW_ID_DAY) return "busy";
+  t.put({ id: id, vh: vh, created: now, seen: now }); return "ok";
+}
+// 읽기 전용 요청
+function syncGet_(id, vh, since) {
+  var sh = sheet_(), r = find_(sh, id), cur = r ? rowObj_(sh, r) : null;
+  if (cur && cur.vh !== vh) return { ok: false, err: "auth" };
+  if (!cur) return { ok: true, none: true };
+  if (since && String(since) >= cur.ts) return { ok: true, ts: cur.ts, same: true };
+  return { ok: true, ts: cur.ts, blob: cur.b1 + cur.b2 + cur.b3 + cur.b4 };
+}
+function read_(a, q, id, vh) {
+  if (a === "get") return syncGet_(id, vh, q.since);
+  if (a === "gget") return gget_(q, id);
+  if (a === "glist") return group_("glist", q, id);
+  return { ok: true, sync: q.nosync ? null : syncGet_(id, vh, q.since), groups: q.gids && q.gids.length ? gget_({ gids: q.gids, since: q.gsince || {} }, id).groups : {} };
 }
 function rnd_(n) { var s = ""; while (s.length < n) { var u = Utilities.getUuid().replace(/-/g, ""); for (var i = 0; i < u.length && s.length < n; i += 2) s += AB[parseInt(u.substr(i, 2), 16) % AB.length]; } return s; }
 function mem_(g) { return g.members ? g.members.split(",") : []; }
