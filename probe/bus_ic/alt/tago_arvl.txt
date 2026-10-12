@@ -1,10 +1,2 @@
-ERR HTTP Error 403: Forbidden
-{
-  "OpenAPI_ServiceResponse": {
-    "cmmMsgHeader": {
-      "errMsg": "SERVICE_KEY_IS_NOT_REGISTERED_ERROR",
-      "returnAuthMsg": "등록되지 않은 서비스키",
-      "returnReasonCode": "30"
-    }
-  }
-}
+200
+{"response":{"header":{"resultCode":99,"resultMsg":"가용한 세션이 존재하지 않습니다. (30\/30)"},"body":""}}

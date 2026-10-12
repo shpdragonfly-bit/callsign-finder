@@ -1,10 +1,2 @@
-ERR HTTP Error 403: Forbidden
-{
-  "OpenAPI_ServiceResponse": {
-    "cmmMsgHeader": {
-      "errMsg": "SERVICE_KEY_IS_NOT_REGISTERED_ERROR",
-      "returnAuthMsg": "등록되지 않은 서비스키",
-      "returnReasonCode": "30"
-    }
-  }
-}
+200
+{"response":{"header":{"resultCode":"00","resultMsg":"NORMAL SERVICE."},"body":{"items":{"item":[{"gpslati":37.439311,"gpslong":126.461573,"nodeid":"ICB161000026","nodenm":"국제업무단지(공항청사)","nodeno":35026},{"gpslati":37.493394,"gpslong":126.490305,"nodeid":"ICB161000109","nodenm":"KT인천공항지사","nodeno":35109},{"gpslati":37.497504,"gpslong":126.485277,"nodeid":"ICB161000116","nodenm":"공항고등학교","nodeno":35116},{"gpslati":37.497535,"gpslong":126.485024,"nodeid":"ICB161000117","nodenm":"공항중학교","nodeno":35117},{"gpslati":37.500699,"gpslong":"126.487550","nodeid":"ICB161000123","nodenm":"공항교회앞","nodeno":35123},{"gpslati":37.448975,"gpslong":126.451788,"nodeid":"ICB161000203","nodenm":"인천공항T1(3층7번)","nodeno":35203},{"gpslati":"37.495090","gpslong":126.491466,"nodeid":"ICB161000258","nodenm":"공항신도시(메디컬사거리)","nodeno":35258},{"gpslati":37.432595,"gpslong":126.426149,"nodeid":"ICB161000408","nodenm":"한국도심공항터미널","nodeno":35408},{"gpslati":37.433339,"gpslong":126.425522,"nodeid":"ICB161000417","nodenm":"한국도심공항터미널","nodeno":35417},{"gpslati":37.438295,"gpslong":"126.449060","nodeid":"ICB161000430","nodenm":"국립인천공항검역소","nodeno":35430}]},"numOfRows":10,"pageNo":1,"totalCount":61}}}

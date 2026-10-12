@@ -1,28 +1,28 @@
 {
  "tago_route_no": {
-  "status": "ERR HTTP Error 403: Forbidden",
-  "msg": "등록되지 않은 서비스키",
-  "head": "{ \"OpenAPI_ServiceResponse\": { \"cmmMsgHeader\": { \"errMsg\": \"SERVICE_KEY_IS_NOT_REGISTERED_ERROR\", \"returnAuthMsg\": \"등록되지 않은 서비스키\", \"returnReasonCode\": \"30\" } } } "
+  "status": "200",
+  "msg": "NORMAL SERVICE.",
+  "head": "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[{\"endnodenm\":\"왕산차고지\",\"endvehicletime\":2040,\"routeid\":\"ICB365000068\",\"routeno\":306,\"routetp\":\"좌석버스\",\"startnodenm\":\"십정동차고지\",\"startvehicletime\":\"0440\"},{\"endnodenm\":\"인천공항T1(3층13번)\",\"endvehicletime\":\"0540\",\"routeid\":\"ICB365000483\",\"routeno\":\"306A\",\"routetp\":\"좌석버스\",\"startnodenm\":\"서부공단입구\",\"startvehicletime\":\"0520\"}]},\"numOfRows\":10,\"pageNo\":1,\"totalCount\":2}}}"
  },
  "tago_city": {
-  "status": "ERR HTTP Error 403: Forbidden",
-  "msg": "등록되지 않은 서비스키",
-  "head": "{ \"OpenAPI_ServiceResponse\": { \"cmmMsgHeader\": { \"errMsg\": \"SERVICE_KEY_IS_NOT_REGISTERED_ERROR\", \"returnAuthMsg\": \"등록되지 않은 서비스키\", \"returnReasonCode\": \"30\" } } } "
+  "status": "ERR The read operation timed out",
+  "msg": "",
+  "head": ""
  },
  "tago_sttn_nm": {
-  "status": "ERR HTTP Error 403: Forbidden",
-  "msg": "등록되지 않은 서비스키",
-  "head": "{ \"OpenAPI_ServiceResponse\": { \"cmmMsgHeader\": { \"errMsg\": \"SERVICE_KEY_IS_NOT_REGISTERED_ERROR\", \"returnAuthMsg\": \"등록되지 않은 서비스키\", \"returnReasonCode\": \"30\" } } } "
+  "status": "200",
+  "msg": "NORMAL SERVICE.",
+  "head": "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[{\"gpslati\":37.439311,\"gpslong\":126.461573,\"nodeid\":\"ICB161000026\",\"nodenm\":\"국제업무단지(공항청사)\",\"nodeno\":35026},{\"gpslati\":37.493394,\"gpslong\":126.490305,\"nodeid\":\"ICB161000109\",\"nodenm\":\"KT인천공항지사\",\"nodeno\":35109},{\"gpslati\":37.497504,\"gpslong\":126.485277,\"nodeid\":\"ICB161000116\",\"nodenm\":\"공항고등학교\",\"nodeno\":35116},{\"gpslati\":37.497535,\"gpslong\":126.485024,\"nodeid\":\"ICB161000117\",\"nodenm\":\"공항중학교\",\"nodeno\":35117},{\"gpslati\":37.500699,\"gpslong\":\"126.487550\",\"nodeid\":\"ICB161000123\",\"nodenm\":\"공항교회앞\",\"nodeno\":35123},{\"gpslati\":37.448975,\"gpslong\":126.451788,\"nodeid\":\"ICB161000203\",\"nodenm\":\"인천공항T1(3층7번)\",\"node"
  },
  "tago_arvl": {
-  "status": "ERR HTTP Error 403: Forbidden",
-  "msg": "등록되지 않은 서비스키",
-  "head": "{ \"OpenAPI_ServiceResponse\": { \"cmmMsgHeader\": { \"errMsg\": \"SERVICE_KEY_IS_NOT_REGISTERED_ERROR\", \"returnAuthMsg\": \"등록되지 않은 서비스키\", \"returnReasonCode\": \"30\" } } } "
+  "status": "200",
+  "msg": "가용한 세션이 존재하지 않습니다. (30\\/30)",
+  "head": "{\"response\":{\"header\":{\"resultCode\":99,\"resultMsg\":\"가용한 세션이 존재하지 않습니다. (30\\/30)\"},\"body\":\"\"}}"
  },
  "tago_arvl_city": {
-  "status": "ERR HTTP Error 403: Forbidden",
-  "msg": "등록되지 않은 서비스키",
-  "head": "{ \"OpenAPI_ServiceResponse\": { \"cmmMsgHeader\": { \"errMsg\": \"SERVICE_KEY_IS_NOT_REGISTERED_ERROR\", \"returnAuthMsg\": \"등록되지 않은 서비스키\", \"returnReasonCode\": \"30\" } } } "
+  "status": "200",
+  "msg": "NORMAL SERVICE.",
+  "head": "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[{\"citycode\":12,\"cityname\":\"세종특별시\"},{\"citycode\":21,\"cityname\":\"부산광역시\"},{\"citycode\":22,\"cityname\":\"대구광역시\"},{\"citycode\":23,\"cityname\":\"인천광역시\"},{\"citycode\":24,\"cityname\":\"광주광역시\"},{\"citycode\":25,\"cityname\":\"대전광역시\\/계룡시\"},{\"citycode\":26,\"cityname\":\"울산광역시\"},{\"citycode\":39,\"cityname\":\"제주도\"},{\"citycode\":31010,\"cityname\":\"수원시\"},{\"citycode\":31020,\"cityname\":\"성남시\"},{\"citycode\":31030,\"cityname\":\"의정부시\"},{\"citycode\":31040,\"cityname\":\"안양시\"},{\"citycode\":31050,\"cityname\":\"부천시\"},{\"citycode\":31060,\"cityname\":\"광명시\"},{\"citycode\":31070,\"cityname\":\"평택시\"},{\"citycode\":31080,\"cityname\":\"동두천시\"},{\"citycode\":31090,\"cityname\":\""
  },
  "tago_loc": {
   "status": "ERR HTTP Error 403: Forbidden",
@@ -38,5 +38,10 @@
   "status": "200",
   "msg": "HTTP 에러",
   "head": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <OpenAPI_ServiceResponse> <cmmMsgHeader> <errMsg>HTTP_ERROR</errMsg> <returnAuthMsg>HTTP 에러</returnAuthMsg> <returnReasonCode>04</returnReasonCode> </cmmMsgHeader> </OpenAPI_ServiceResponse> "
+ },
+ "tago_route_stops": {
+  "status": "200",
+  "routeId": "ICB365000068",
+  "head": "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[{\"gpslati\":\"37.474300\",\"gpslong\":126.690602,\"nodeid\":\"ICB366000913\",\"nodenm\":\"십정동차고지\",\"nodeno\":40913,\"nodeord\":1,\"routeid\":\"ICB365000068\",\"updowncd\":0},{\"gpslati\":37.473685,\"gpslong\":126.687917,\"nodeid\":"
  }
 }
