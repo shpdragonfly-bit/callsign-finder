@@ -68,13 +68,13 @@
   ]
  ],
  "route_arvl": {
-  "status": "ERR <urlopen error timed out>",
-  "tries": 6,
-  "body": ""
+  "status": "200",
+  "tries": 1,
+  "body": "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":{\"arrprevstationcnt\":12,\"arrtime\":1471,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000068\",\"routeno\":306,\"routetp\":\"좌석버스\",\"vehicletp\":\"일반차량\"}},\"numOfRows\":10,\"pageNo\":1,\"totalCount\":1}}}"
  },
  "all_arvl": {
-  "status": "ERR <urlopen error timed out>",
-  "tries": 6,
-  "body": ""
+  "status": "200",
+  "tries": 1,
+  "body": "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[{\"arrprevstationcnt\":7,\"arrtime\":1182,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000028\",\"routeno\":\"24-1\",\"routetp\":\"간선버스\",\"vehicletp\":\"저상버스\"},{\"arrprevstationcnt\":5,\"arrtime\":981,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000057\",\"routeno\":111,\"routetp\":\"좌석버스\",\"vehicletp\":\"일반차량\"},{\"arrprevstationcnt\":18,\"arrtime\":2133,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000057\",\"routeno\":111,\"routetp\":\"좌석버스\",\"vehicletp\":\"일반차량\"},{\"arrprevstationcnt\":5,\"arrtime\":1014,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000067\",\"routeno\":302,\"routetp\":\"좌석버스\",\"vehicletp\":\"일반차량\"},{\"arrprevstationcnt\":1,\"arrtime\":293,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000067\",\"routeno\":302,\"routetp\":\"좌석버스\",\"vehicletp\":\"일반차량\"},{\"arrprevstationcnt\":12,\"arrtime\":1471,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000068\",\"routeno\":306,\"routetp\":\"좌석버스\",\"vehicletp\":\"일반차량\"},{\"arrprevstationcnt\":7,\"arrtime\":988,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000070\",\"routeno\":308,\"routetp\":\"좌석버스\",\"vehicletp\":\"일반차량\"},{\"arrprevstationcnt\":17,\"arrtime\":1447,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000130\",\"routeno\":591,\"routetp\":\"지선버스\",\"vehicletp\":\"일반차량\"},{\"arrprevstationcnt\":2,\"arrtime\":331,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000130\",\"routeno\":591,\"routetp\":\"지선버스\",\"vehicletp\":\"저상버스\"},{\"arrprevstationcnt\":9,\"arrtime\":1089,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000328\",\"routeno\":72,\"routetp\":\"간선버스\",\"vehicletp\":\"저상버스\"},{\"arrprevstationcnt\":1,\"arrtime\":292,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000328\",\"routeno\":72,\"routetp\":\"간선버스\",\"vehicletp\":\"저상버스\"},{\"arrprevstationcnt\":5,\"arrtime\":940,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000343\",\"routeno\":307,\"routetp\":\"좌석버스\",\"vehicletp\":\"일반차량\"},{\"arrprevstationcnt\":21,\"arrtime\":3554,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000343\",\"routeno\":307,\"routetp\":\"좌석버스\",\"vehicletp\":\"일반차량\"},{\"arrprevstationcnt\":11,\"arrtime\":1067,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000441\",\"routeno\":43,\"routetp\":\"간선버스\",\"vehicletp\":\"저상버스\"},{\"arrprevstationcnt\":5,\"arrtime\":1009,\"nodeid\":\"ICB368001264\",\"nodenm\":\"LG마그나\",\"routeid\":\"ICB365000508\",\"routeno\":310,\"routetp\":\"좌석버스\",\"vehicletp\":\"일반차량\"}]},\"numOfRows\":30,\"pageNo\":1,\"totalCount\":15}}}"
  }
 }
