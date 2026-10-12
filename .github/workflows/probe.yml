@@ -50,9 +50,14 @@ jobs:
         if: false
         run: python tools/probe_relay.py
       - name: 인천 버스 대안 API 점검
+        if: false
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python tools/probe_incheon_alt.py
+      - name: TAGO 도착정보 형식
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+        run: python tools/probe_tago_arvl.py
       - name: 인천 버스 API 명세
         if: false
         env:
