@@ -473,6 +473,12 @@ body[data-tab="oz"] #alTabs { display: none; }
 .gm-ac.warn .gm-tip { border-left-color: var(--warn); }
 .gm-steps { margin: 8px 0; padding-left: 26px; }
 .gm-steps li { margin: 8px 0; padding-left: 2px; }
+.rs-go { width: 100%; margin-top: 14px; }
+.rs-gc .gm-body { overflow-wrap: anywhere; }
+.rs-more { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 10px; }
+.rs-more .b { font-size: 14px; padding: 10px 4px; }
+#rsGcMsg { margin-top: 10px; font-size: 14px; line-height: 1.6; }
+.rs-gc .pa-beta { white-space: nowrap; }
 .gm-safe { margin: 4px 0 0; padding-left: 20px; }
 .gm-safe li { margin: 10px 0; }
 .gm-open { display: block; margin-top: 14px; text-align: center; text-decoration: none; font-size: 17px; font-weight: 700; padding: 14px; border-radius: 14px;
@@ -822,6 +828,8 @@ body[data-tab="oz"] #alTabs { display: none; }
 .fp-chg summary { cursor: pointer; font-weight: 700; color: var(--muted); }
 .fp-chg li { margin: 4px 0; line-height: 1.5; }
 .fp-empty { padding: 14px 16px; color: var(--muted); font-size: 14px; }
+.fp-err { color: #B42318; line-height: 1.6; }
+.fp-warn { margin: 8px 0 0; padding: 8px 10px; border-radius: 10px; background: #FEF3C7; color: #92400E; font-size: 13px; font-weight: 600; }
 </style>
 <script>
 // 화면 그리기 전에 주/야간 먼저 적용 (자세한 처리는 아래 '주/야간')
@@ -1065,9 +1073,9 @@ body[data-tab="oz"] #alTabs { display: none; }
     <div class="card fp-card">
       <div class="fp-hd"><h3>공항별 이·착륙 유의사항</h3><span class="fp-src" id="fpSrc"></span></div>
       <div class="fp-sel">
-        <label>출발 · 이륙<input id="fpDep" class="fp-in" list="fpList" maxlength="4" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="ICAO·IATA" aria-label="출발 공항 코드 (ICAO 4자리 또는 IATA 3자리)"><span class="fp-hint" id="fpDepH"></span></label>
+        <label>출발 · 이륙<input id="fpDep" class="fp-in" list="fpList" lang="en" inputmode="text" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="ICAO·IATA" aria-label="출발 공항 코드 (ICAO 4자리 또는 IATA 3자리)"><span class="fp-hint" id="fpDepH"></span></label>
         <button type="button" class="b fp-swap" id="fpSwap" aria-label="출발·도착 바꾸기">⇄</button>
-        <label>도착 · 착륙<input id="fpArr" class="fp-in" list="fpList" maxlength="4" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="ICAO·IATA" aria-label="도착 공항 코드 (ICAO 4자리 또는 IATA 3자리)"><span class="fp-hint" id="fpArrH"></span></label>
+        <label>도착 · 착륙<input id="fpArr" class="fp-in" list="fpList" lang="en" inputmode="text" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="ICAO·IATA" aria-label="도착 공항 코드 (ICAO 4자리 또는 IATA 3자리)"><span class="fp-hint" id="fpArrH"></span></label>
       </div>
       <datalist id="fpList"></datalist>
       <div class="fp-recent" id="fpRecent"></div>
@@ -1175,27 +1183,112 @@ body[data-tab="oz"] #alTabs { display: none; }
     </div>
     <div class="pk-sub" data-pks="rs" hidden>
     <div class="card pk-hero pk-feat">
-      <span class="pk-badge">개발 예정</span>
+      <span class="pk-badge">시험판 · 안내 먼저</span>
       <h2>근무표 → 캘린더</h2>
-      <p>근무표 PDF를 넣으면 비행 · 근무 일정을 읽어 휴대폰 캘린더에 한 번에 넣어 드립니다. 근무표가 바뀌면 다시 넣어 갱신합니다.</p>
+      <p>근무표(PDF 또는 화면 캡처 사진)를 읽어 이 앱의 월별 캘린더에 넣고, 원하면 구글 캘린더에도 넣어 드립니다. 대한항공부터 시작합니다.</p>
       <ol class="pk-flow">
-        <li>근무표 선택<small>PDF 파일</small></li>
-        <li>일정 확인<small>편명 · 시각</small></li>
-        <li>캘린더 추가<small>Google · Apple</small></li>
+        <li>근무표 넣기<small>PDF · 사진</small></li>
+        <li>읽은 일정 확인<small>날짜 · 편명 · 시각</small></li>
+        <li>캘린더에 넣기<small>앱 · 구글(선택)</small></li>
       </ol>
       <div class="pk-cal">
-        <div><b>Google 캘린더</b><span>Android · iPhone · PC</span></div>
-        <div><b>Apple 캘린더</b><span>iPhone · iPad · Mac</span></div>
+        <div><b>앱 안 캘린더</b><span>기본 · 오프라인 가능</span></div>
+        <div><b>구글 캘린더</b><span>선택 · 휴대폰 알림</span></div>
       </div>
-      <div class="pk-todo"><b>미리 할 일 (본인)</b>
-        <div class="sub">공통</div>
-        <ol><li>회사에서 받은 원본 근무표 PDF 준비 (사진 · 스캔본은 안 됨)</li>
-          <li>근무표 읽기는 기기 안에서 하고, 근무표 파일은 밖으로 보내지 않음</li></ol>
-        <div class="sub">Google 캘린더</div>
-        <ol><li>처음 한 번 본인 구글 계정으로 로그인</li><li>‘캘린더 접근 허용’ 누르기</li></ol>
-        <div class="sub">Apple 캘린더</div>
-        <ol><li>앱이 만든 일정 파일 열기</li><li>넣을 캘린더 고르고 ‘모두 추가’ 누르기</li></ol>
+    </div>
+
+    <div class="card gm rs-gc" id="rsGc">
+      <div class="gm-hd">
+        <div><h2>구글 캘린더 연결 안내 <span class="pa-beta">시험판</span></h2><p>연결은 <b>선택</b>입니다. 연결하지 않아도 이 앱 안에서 월별로 볼 수 있습니다.</p></div>
+        <span class="gm-st" id="rsGcSt">준비 중</span>
       </div>
+
+      <details class="gm-ac" open>
+        <summary><span class="n">1</span>연결하면 무엇이 달라지나요?</summary>
+        <div class="gm-body">
+          <p>내 구글 계정에 <b>‘FLT 근무표’라는 캘린더를 새로 만들고</b>, 근무표 일정을 그 캘린더에만 넣습니다.</p>
+          <ul class="gm-safe">
+            <li>앱은 <b>‘FLT 근무표’ 캘린더만</b> 다룹니다. 기존 개인 일정은 보지도 고치지도 못합니다.</li>
+            <li>일정은 <b>내 구글 계정에만</b> 들어갑니다. 앱 제작자도 볼 수 없습니다.</li>
+            <li>휴대폰 기본 캘린더 · 위젯 · 알림에서 근무표를 볼 수 있습니다.</li>
+          </ul>
+          <p class="gm-tip"><b>연결하지 않으면</b> 이렇게 됩니다: 휴대폰 캘린더 · 위젯 · 다른 캘린더 앱에는 안 보이고, 출근 전 알림을 쓸 수 없으며, 근무표는 이 앱을 열어야 볼 수 있습니다. 나중에 언제든 연결할 수 있습니다.</p>
+        </div>
+      </details>
+
+      <details class="gm-ac">
+        <summary><span class="n">2</span>준비물</summary>
+        <div class="gm-body">
+          <ol class="gm-steps">
+            <li><b>구글 계정(Gmail)</b> 하나 — 근무표를 넣을 계정입니다.</li>
+            <li>따로 신청할 필요 없이 <b>본인이 직접 연결</b>하면 됩니다. 연결이 안 되거나 어려우면 <b>☰ 메뉴 → 사용자 요청</b>에 ‘구글 캘린더 연결 안 됨’과 화면에 나온 문구를 적어 보내 주세요.</li>
+            <li>근무표 파일: 회사에서 받은 <b>원본 PDF</b>(가장 정확) 또는 <b>화면 캡처 사진</b>(Gemini 키 등록자만, 확인 필요).</li>
+          </ol>
+          <p class="gm-tip">이 앱이 쓰는 권한은 구글 분류상 <b>‘민감하지 않은 범위’</b>입니다. 그래서 구글 검토나 인원 제한 없이 누구나 자기 구글 계정으로 연결할 수 있습니다. 구글 계정이 없거나 연결이 안 되는 분은 <b>일정 파일(.ics)</b>로 넣는 방법을 함께 준비합니다.</p>
+        </div>
+      </details>
+
+      <details class="gm-ac">
+        <summary><span class="n">3</span>연결 순서 (따라하기)</summary>
+        <div class="gm-body">
+          <ol class="gm-steps">
+            <li>이 화면의 <b>[구글 캘린더 연결]</b> 버튼을 누릅니다. (시험판 준비가 끝나면 열립니다)</li>
+            <li><b>구글 계정 선택</b> 창에서 근무표를 넣을 계정을 고릅니다.</li>
+            <li>혹시 <b>‘Google에서 확인하지 않은 앱’</b> 화면이 나오면 왼쪽 아래 <b>[고급]</b> → <b>[FLT Assist(으)로 이동]</b>을 누릅니다. <b>‘액세스 차단됨’</b>이 나오면 ☰ 메뉴 → 사용자 요청으로 알려 주세요.</li>
+            <li>권한 화면에서 <b>‘이 앱이 만든 캘린더 보기·관리’</b> 항목만 있는지 확인하고 <b>체크</b>한 뒤 <b>[계속]</b>을 누릅니다. 다른 권한(메일 · 연락처 · 모든 캘린더 등)을 묻는다면 누르지 말고 알려 주세요.</li>
+            <li>앱으로 돌아와 위쪽이 <b>‘연결됨’</b>으로 바뀌면 끝입니다. 내 구글 캘린더에 <b>‘FLT 근무표’</b> 캘린더가 생깁니다.</li>
+          </ol>
+          <p class="gm-tip">창이 안 뜨면: 아이폰 Safari는 <b>설정 → 앱 → Safari → 팝업 차단</b>을 잠시 끄고 다시 누르세요. 홈 화면에 추가한 앱에서 안 되면 Safari에서 이 앱 주소를 열어 연결해 보세요.</p>
+        </div>
+      </details>
+
+      <details class="gm-ac">
+        <summary><span class="n">4</span>휴대폰 캘린더에서 보이게 하기</summary>
+        <div class="gm-body">
+          <p><b>안드로이드 · 구글 캘린더 앱</b></p>
+          <ol class="gm-steps"><li>구글 캘린더 앱 → 왼쪽 위 <b>☰</b></li><li>근무표를 넣은 계정 아래 <b>‘FLT 근무표’</b>에 체크</li></ol>
+          <p><b>아이폰 · 기본 캘린더 앱</b></p>
+          <ol class="gm-steps"><li><b>설정 → 앱 → 캘린더 → 캘린더 계정</b>에 그 Gmail 계정이 있고 ‘캘린더’가 켜져 있는지 확인 (없으면 계정 추가 → Google)</li>
+            <li>캘린더 앱 아래 <b>[캘린더]</b> → <b>‘FLT 근무표’</b> 체크</li>
+            <li>보이지 않으면 PC나 Safari에서 <b>calendar.google.com/calendar/syncselect</b> 를 열어 ‘FLT 근무표’에 체크하고 저장</li></ol>
+          <p class="gm-tip">구글 캘린더 앱(아이폰용)을 설치하면 위 과정 없이 바로 보입니다.</p>
+        </div>
+      </details>
+
+      <details class="gm-ac warn">
+        <summary><span class="n">5</span>안전하게 쓰는 법 (꼭 읽어 주세요)</summary>
+        <div class="gm-body">
+          <ul class="gm-safe">
+            <li><b>공용 기기(사무실 PC · 호텔 PC)에서는 연결하지 마세요.</b></li>
+            <li>로그인은 보안상 <b>약 1시간 뒤 자동으로 풀립니다.</b> 근무표를 넣을 때만 다시 로그인하면 되고, 이미 넣은 일정은 그대로 남습니다.</li>
+            <li><b>‘FLT 근무표’ 캘린더에는 직접 일정을 넣지 마세요.</b> 근무표를 다시 넣을 때 그 기간의 일정이 새 근무표로 바뀝니다. 개인 일정은 다른 캘린더에 넣으세요.</li>
+            <li>앱이 다루는 것은 ‘FLT 근무표’ 캘린더뿐이라, 이 캘린더를 지워도 <b>개인 일정에는 영향이 없습니다.</b></li>
+            <li><b>연결 끊기:</b> 구글 계정 관리 → <b>보안 → 서드파티 앱 및 서비스</b> → FLT Assist → <b>액세스 권한 삭제</b>. 이미 넣은 일정을 지우려면 구글 캘린더에서 ‘FLT 근무표’ 캘린더를 삭제하세요.</li>
+            <li>사진으로 읽은 근무표는 틀릴 수 있습니다. <b>넣기 전 미리 보기에서 꼭 확인</b>하고, 운항 판단은 회사 원본 근무표로 하세요.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="gm-ac">
+        <summary><span class="n">6</span>Apple 캘린더만 쓰는 경우</summary>
+        <div class="gm-body">
+          <p>구글 계정 없이 <b>일정 파일(.ics)</b>로 넣는 방법을 함께 준비합니다. 앱이 만든 파일을 열고 넣을 캘린더를 고른 뒤 <b>‘모두 추가’</b>를 누르면 됩니다.</p>
+          <p class="gm-tip">일정 파일 방식은 근무표가 바뀌면 이전에 넣은 일정을 직접 지워야 할 수 있습니다. 바뀐 것만 고쳐 주는 기능은 구글 캘린더 연결에서만 됩니다.</p>
+        </div>
+      </details>
+
+      <div class="rs-act">
+        <button type="button" class="b primary rs-go" id="rsGcGo">구글 캘린더 연결</button>
+        <div class="rs-more" id="rsGcMore" hidden>
+          <button type="button" class="b" id="rsGcTest">시험 넣기</button>
+          <button type="button" class="b" id="rsGcTestDel">시험 지우기</button>
+          <button type="button" class="b" id="rsGcOff">연결 끊기</button>
+        </div>
+        <div class="gm-msg" id="rsGcMsg" role="status"></div>
+      </div>
+    </div>
+
+    <div class="card pk-hero pk-feat" style="margin-top:14px">
       <div class="pk-req" data-req="근무표-캘린더"><button type="button">근무표 → 캘린더 요청하기</button>
           <div class="cm"><input maxlength="300" placeholder="의견 남기기 (선택)" aria-label="의견"><button type="button">보내기</button></div>
           <div class="thx">고맙습니다. 의견이 전달됐습니다.</div></div>
@@ -1215,7 +1308,7 @@ body[data-tab="oz"] #alTabs { display: none; }
     <div class="small cs-only">
       노선: VRS standing-data(사용자 제보 기반) · 기종: ADS-B 관측 누적값입니다. 실제 운항 기종·노선은 당일 운항 정보와 다를 수 있으니 참고용으로만 사용하세요.
     </div>
-    <div class="credit cs-only">© 2026 Made by aa717457 <span id="appVer"></span></div>
+    <div class="credit cs-only">© 2026 Made by DG Company. <span id="appVer"></span></div>
   </footer>
 </div>
 
@@ -1240,6 +1333,103 @@ body[data-tab="oz"] #alTabs { display: none; }
 })();
 </script>
 <script>
+// ===================== 근무표 → 구글 캘린더 연결 (시험판) =====================
+// 권한: calendar.app.created 하나 (이 앱이 만든 'FLT 근무표' 캘린더만 다룸, 구글 분류 '민감하지 않은 범위')
+// 로그인 표(토큰)는 기기 메모리에만 (약 1시간), 어디에도 보내지 않음. 캘린더 ID 만 기기에 저장.
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const CLIENT_ID = "808895228489-2sc1qiiuasmfpdnqfhbps4csjl57m6m4.apps.googleusercontent.com";
+  const SCOPE = "https://www.googleapis.com/auth/calendar.app.created";
+  const API = "https://www.googleapis.com/calendar/v3", CAL_NAME = "FLT 근무표", CK = "csf-gcal-id";
+  const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };
+  let token = null, exp = 0, tc = null;
+  const msg = (t, bad) => { $("rsGcMsg").innerHTML = t ? `<span style="color:${bad ? "var(--warn)" : "var(--ok)"};font-weight:700">${t}</span>` : ""; };
+  function paint() {
+    const on = !!(token && Date.now() < exp), cal = ls.get(CK);
+    const st = $("rsGcSt"); st.className = "gm-st" + (on ? " ok" : "");
+    st.textContent = on ? "연결됨" : cal ? "다시 로그인 필요" : "미연결";
+    $("rsGcGo").textContent = on ? "연결됨 · FLT 근무표 캘린더 준비됨" : cal ? "구글 캘린더 다시 로그인" : "구글 캘린더 연결";
+    $("rsGcGo").disabled = on;
+    $("rsGcMore").hidden = !on;
+  }
+  function loadGis() {
+    if (window.google && google.accounts && google.accounts.oauth2) return Promise.resolve();
+    return new Promise((ok, no) => { const s = document.createElement("script"); s.src = "https://accounts.google.com/gsi/client"; s.async = true; s.onload = ok; s.onerror = () => no(new Error("구글 로그인 도구를 불러오지 못했습니다. 인터넷 연결을 확인하세요.")); document.head.appendChild(s); });
+  }
+  async function api(method, path, body) {
+    const r = await fetch(API + path, { method, headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" }, body: body ? JSON.stringify(body) : undefined });
+    if (r.status === 204) return {};
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) { const e = new Error((j.error && j.error.message) || "HTTP " + r.status); e.status = r.status; throw e; }
+    return j;
+  }
+  // 'FLT 근무표' 캘린더 찾기 → 없으면 만들기 (다른 기기에서 이미 만들었으면 그것을 씀)
+  async function ensureCal() {
+    const saved = ls.get(CK);
+    if (saved) { try { await api("GET", "/calendars/" + encodeURIComponent(saved)); return saved; } catch (e) { if (e.status !== 404 && e.status !== 403 && e.status !== 410) throw e; } }
+    try {
+      const L = await api("GET", "/users/me/calendarList?minAccessRole=owner");
+      const hit = (L.items || []).find((c) => c.summary === CAL_NAME);
+      if (hit) { ls.set(CK, hit.id); return hit.id; }
+    } catch (e) { if (e.status !== 403) throw e; }
+    const c = await api("POST", "/calendars", { summary: CAL_NAME, description: "FLT Assist 가 근무표로 만든 캘린더입니다. 여기에 직접 일정을 넣지 마세요.", timeZone: "Asia/Seoul" });
+    ls.set(CK, c.id); return c.id;
+  }
+  async function connect() {
+    if (!navigator.onLine) return msg("인터넷에 연결된 상태에서 눌러 주세요.", true);
+    $("rsGcGo").disabled = true; msg("");
+    try {
+      await loadGis();
+      await new Promise((ok, no) => {
+        tc = google.accounts.oauth2.initTokenClient({
+          client_id: CLIENT_ID, scope: SCOPE,
+          callback: (r) => { if (r.error) return no(new Error(r.error)); if (!google.accounts.oauth2.hasGrantedAllScopes(r, SCOPE)) return no(new Error("noscope")); token = r.access_token; exp = Date.now() + (r.expires_in - 60) * 1000; ok(); },
+          error_callback: (e) => no(new Error(e && e.type || "popup")),
+        });
+        tc.requestAccessToken({ prompt: ls.get(CK) ? "" : "consent" });
+      });
+      msg("로그인됨 · 캘린더 준비 중…");
+      await ensureCal();
+      paint(); msg("연결됐습니다. 내 구글 캘린더에 ‘FLT 근무표’ 캘린더가 준비됐습니다. [시험 넣기]로 확인해 보세요.");
+    } catch (e) {
+      token = null; paint();
+      const m = e.message;
+      msg(m === "noscope" ? "권한 화면에서 ‘이 앱이 만든 캘린더 보기·관리’에 체크해야 합니다. 다시 눌러 주세요."
+        : /popup_closed|popup_failed_to_open|popup/.test(m) ? "로그인 창이 닫혔거나 열리지 않았습니다. 팝업 차단을 끄고 다시 눌러 주세요."
+        : /access_denied/.test(m) ? "연결을 허용하지 않았거나, 시험판에 등록되지 않은 계정입니다. 등록된 Gmail 로 다시 시도하세요."
+        : "연결하지 못했습니다: " + m, true);
+    }
+  }
+  const day = (n) => { const t = new Date(Date.now() + 9 * 3600e3 + n * 864e5); return t.toISOString().slice(0, 10); };
+  async function testAdd() {
+    try {
+      const cal = await ensureCal();
+      await api("POST", "/calendars/" + encodeURIComponent(cal) + "/events", { summary: "FLT Assist 연결 시험", description: "연결 시험용 일정입니다. 지워도 됩니다.", start: { date: day(1) }, end: { date: day(2) }, extendedProperties: { private: { flta: "test" } } });
+      msg(`내일(${day(1)}) ‘FLT Assist 연결 시험’ 일정을 넣었습니다. 휴대폰 캘린더에서 ‘FLT 근무표’를 켜고 확인해 보세요.`);
+    } catch (e) { msg("시험 일정을 넣지 못했습니다: " + e.message + (e.status === 401 ? " (로그인이 풀렸습니다. 다시 연결하세요)" : ""), true); if (e.status === 401) { token = null; paint(); } }
+  }
+  async function testDel() {
+    try {
+      const cal = await ensureCal();
+      const L = await api("GET", "/calendars/" + encodeURIComponent(cal) + "/events?privateExtendedProperty=flta%3Dtest&maxResults=50");
+      for (const ev of L.items || []) await api("DELETE", "/calendars/" + encodeURIComponent(cal) + "/events/" + encodeURIComponent(ev.id));
+      msg(`시험 일정 ${(L.items || []).length}개를 지웠습니다.`);
+    } catch (e) { msg("지우지 못했습니다: " + e.message, true); if (e.status === 401) { token = null; paint(); } }
+  }
+  function off() {
+    try { if (token && window.google) google.accounts.oauth2.revoke(token, () => {}); } catch (e) {}
+    token = null; paint();
+    msg("이 기기의 연결을 끊었습니다. 이미 넣은 일정과 ‘FLT 근무표’ 캘린더는 구글 캘린더에 그대로 있습니다. 완전히 지우려면 구글 캘린더에서 ‘FLT 근무표’ 캘린더를 삭제하세요.");
+  }
+  $("rsGcGo").addEventListener("click", connect);
+  $("rsGcTest").addEventListener("click", testAdd);
+  $("rsGcTestDel").addEventListener("click", testDel);
+  $("rsGcOff").addEventListener("click", off);
+  setInterval(() => { if (token && Date.now() >= exp) { token = null; paint(); } }, 60000);
+  paint();
+})();
+</script>
+<script>
 // ===================== 개발 예정 탭 서브 메뉴: 비행준비 · FLT Package 분석 · 근무표 등록 =====================
 (() => {
   const box = document.getElementById("pkSub"), K = "csf-pk-sub";
@@ -1254,53 +1444,75 @@ body[data-tab="oz"] #alTabs { display: none; }
 })();
 </script>
 <script>
-// ===================== 비행준비: 공항별 이·착륙 유의사항 (PC 개발 서버 전용) =====================
-// 자료: 같은 PC 의 개인 AI 비서 봇이 내보낸 공항별 요약 (index.json → 공항 파일). 개발 서버가 /fpdata/ 로 읽기 전용 전달.
-// 회사 내부 자료: GitHub·실제 앱 주소에는 없고, 캐시(SW)·통계·Gemini 로 보내지 않음. 기기에는 마지막 선택 공항 코드만 저장.
+// ===================== 비행준비: 공항별 이·착륙 유의사항 (서버에서 공항 하나씩) =====================
+// 서버: 구글 Apps Script (tools/fp_server.gs). 이 PC 의 업로드 스크립트가 공항별 '중요' 항목만 올려 둠.
+// 앱은 공항 하나 · 이륙/착륙 하나씩만 받음 (기기당 하루 서로 다른 공항 10곳). 전체를 한 번에 받는 기능 없음.
+// 기기 보관: 비행준비 화면은 마지막 출발·도착 한 쌍만, FLT 분석은 그 분석 결과 안에 출발·도착 것만 (비행 중 오프라인용).
+// 통계·Gemini 로 보내지 않음. 화면 글자 선택(복사) 막음.
 window.FPREP = (() => {
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
-  const ON = location.protocol.startsWith("http") && !/github\.io$/i.test(location.hostname);   // 실제 앱 주소에서는 아예 요청하지 않음
+  const FP_SERVER = "https://script.google.com/macros/s/AKfycbzx-6gtW8CG6D5tS1-CSRZ3s2yH4vTrf0hN7-uWkhCZ1BltD1d2YtQBQC62jwSefJia/exec";                                // 배포한 웹 앱 주소 (비어 있으면 '준비 중')
+  const SRV = (ls.get("csf-fp-server") || FP_SERVER).trim();
+  const ON = /^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(SRV);
   const SKIP = ["RKSI", "RKSS"];                       // FLT 요약 PDF 에서는 인천·김포 생략 (분량)
   const CO = { AAR: "아시아나항공", KAL: "대한항공" };   // 패키지 편명 → 자료의 회사
-  const PRI = { 1: "중요", 2: "보통", 3: "참고" };
-  let IDX = null, ready = null;
-  const cache = {};
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-  async function getJson(path) { const r = await fetch("fpdata/" + path.split("/").map(encodeURIComponent).join("/") + "?t=" + Date.now(), { cache: "no-store" }); if (!r.ok) throw Object.assign(new Error("HTTP " + r.status), { status: r.status }); return r.json(); }
-  // 안내대로: index.json → 공항 파일. 갱신 중이라 없거나 깨졌으면 1초 쉬고 index 부터 다시 (최대 3번)
-  async function loadIndex(force) {
-    if (!ON) return null;
-    if (IDX && !force) return IDX;
-    for (let i = 0; i < 3; i++) {
-      try { const d = await getJson("index.json"); if (d && Array.isArray(d.airports)) { IDX = d; return d; } return null; }
-      catch (e) { if (e.status === 404 || e.status === 403) return null; await sleep(1000); }
-    }
-    return null;
+  const LIMIT = 10;
+  const LK = "csf-fp-list", LAST = "csf-fp-last", RK = "csf-fp-recent";
+  const dev = (() => { let d = ls.get("csf-fp-dev"); if (!d || !/^[\w-]{16,64}$/.test(d)) { const a = new Uint8Array(18); crypto.getRandomValues(a); d = btoa(String.fromCharCode(...a)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); ls.set("csf-fp-dev", d); } return d; })();
+  const J = (k, def) => { try { return JSON.parse(ls.get(k) || "null") || def; } catch (e) { return def; } };
+  const md = (iso) => { const t = new Date(iso); return isNaN(t) ? "" : `${t.getMonth() + 1}/${t.getDate()} ${String(t.getHours()).padStart(2, "0")}:${String(t.getMinutes()).padStart(2, "0")}`; };
+  const label = (a) => `${a.icao}${a.iata ? " " + a.iata : ""}`;
+  // 서버 스프레드시트가 날짜·버전을 바꿔 저장한 경우(2026-09-10T15:00:00.000Z, 2)도 원래 모양(11 SEP 26, v2.0)으로
+  const MON = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  const fixDate = (x) => { x = String(x || ""); if (!/^\d{4}-\d{2}-\d{2}T/.test(x)) return x; const t = new Date(Date.parse(x) + 9 * 3600e3); return `${String(t.getUTCDate()).padStart(2, "0")} ${MON[t.getUTCMonth()]} ${String(t.getUTCFullYear()).slice(2)}`; };
+  const fixVer = (v) => { v = String(v == null ? "" : v); return /^\d+$/.test(v) ? v + ".0" : v; };
+  const verTxt = (d) => [fixDate(d.date_label || d.eff_date || ""), d.version ? "v" + fixVer(d.version) : ""].filter(Boolean).join(" ");
+
+  // ---------- 서버 ----------
+  async function call(q, ms = 15000) {
+    if (!navigator.onLine) return { ok: false, err: "offline" };
+    const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), ms);
+    try {
+      const r = await fetch(SRV + "?" + new URLSearchParams(q), { cache: "no-store", signal: ctl.signal });
+      if (!r.ok) return { ok: false, err: "server" };
+      return await r.json();
+    } catch (e) { return { ok: false, err: navigator.onLine ? "server" : "offline" }; }
+    finally { clearTimeout(t); }
   }
-  async function airport(icao, company) {
-    for (let i = 0; i < 3; i++) {
-      const idx = await loadIndex(i > 0); if (!idx) return null;
-      const a = idx.airports.find((x) => x.icao === icao && (!company || x.company === company));
-      if (!a) return null;
-      const k = a.file + "|" + idx.updated;
-      if (cache[k]) return cache[k];
-      try { const d = await getJson(a.file); cache[k] = d; return d; } catch (e) { await sleep(1000); }
-    }
-    return null;
+  let LIST = J(LK, null);                                 // 자료가 있는 공항 코드 목록 (내용 없음)
+  async function loadList() {
+    if (LIST && Date.now() - LIST.t < 3600e3) return LIST;
+    const r = await call({ a: "list" });
+    if (r.ok && Array.isArray(r.airports)) { LIST = { t: Date.now(), airports: r.airports }; ls.set(LK, JSON.stringify(LIST)); }
+    return LIST;
   }
+  // 공항 하나 · 역할 하나 받기. 결과: {ok, …자료} 또는 {ok:false, err: none|limit|busy|server|offline}
+  async function fetchOne(icao, role, company) {
+    const q = { a: "get", icao, role, d: dev }; if (company) q.co = company;
+    const r = await call(q);
+    if (r.ok) r.got = new Date().toISOString();
+    return r;
+  }
+  function errMsg(err, had) {
+    const tail = had ? ` ${md(had)} 받은 자료를 표시합니다.` : "";
+    return err === "offline" ? (had ? `오프라인 ·${tail}` : "인터넷에 연결되어 있지 않아 받을 수 없습니다.")
+      : err === "limit" ? `오늘 조회할 수 있는 공항 수(${LIMIT}곳)를 다 썼습니다. 내일 다시 이용하세요.${tail}`
+      : err === "busy" ? `서버 이용이 많아 잠시 쉬고 있습니다. 잠시 후 다시 시도하세요.${tail}`
+      : had ? `서버에 연결할 수 없어${tail}` : "비행준비 서버에 연결할 수 없습니다. 잠시 후 다시 시도하세요.";
+  }
+
   // 기종: 패키지 772/773/77W → B777, 359 → A350, 321 → A320 계열. 자료의 B777-300ER → B777. 계열이 같으면 해당
   function fam(x) {
     const m = String(x || "").toUpperCase().match(/([AB])?\s*-?\s*([37])(\d)(\d)?/);
     if (!m) return String(x || "").toUpperCase().trim();
     return m[2] === "7" ? `B7${m[3]}7` : `A3${m[3]}0`;
   }
-  const sortIt = (a) => a.slice().sort((x, y) => (x.priority || 3) - (y.priority || 3) || (x.order || 0) - (y.order || 0));
-  // 비행 기종에 맞는 항목만. 다른 세부 기종(예 B777-300) 항목은 그 표기를 붙여 남김
+  const sortIt = (a) => (a || []).slice().sort((x, y) => (x.order || 0) - (y.order || 0));
   function forType(items, type) {
     const f = type ? fam(type) : "";
-    return items.map((it) => {
+    return (items || []).map((it) => {
       const ac = (it.aircraft || []).filter(Boolean);
       if (!ac.length) return it;
       if (!f) return Object.assign({}, it, { tag: ac.join(", ") });
@@ -1310,91 +1522,129 @@ window.FPREP = (() => {
       return Object.assign({}, it, { tag: sub.length && sub.length === hit.length ? sub.join(", ") : "" });
     }).filter(Boolean);
   }
-  const label = (a) => `${a.icao}${a.iata ? " " + a.iata : ""}`;
-  const verTxt = (d) => [d.date_label || d.eff_date || "", d.version ? "v" + d.version : ""].filter(Boolean).join(" ");
 
-  // ---------- FLT 요약 PDF 용 ----------
-  async function forFlight(F) {
-    if (!(await loadIndex())) return null;
-    const company = CO[String(F.flt || "").slice(0, 3).toUpperCase()] || null;
-    const out = [];
+  // ---------- FLT Package 분석: 분석 결과 안에 출발(이륙)·도착(착륙) 것을 함께 보관 ----------
+  async function attach(R) {
+    if (!ON || !R || !R.flight) return R;
+    const F = R.flight, company = CO[String(F.flt || "").slice(0, 3).toUpperCase()] || "";
+    const fp = R.fp || {};
+    for (const [role, icao] of [["dep", F.dep], ["arr", F.arr]]) {
+      if (!icao || SKIP.includes(icao)) { delete fp[role]; continue; }
+      if (fp[role] && fp[role].icao === icao && (fp[role].ok || fp[role].err === "none")) continue;   // 이미 받음
+      const r = await fetchOne(icao, role, company);
+      fp[role] = r.ok ? { ok: true, icao: r.icao, iata: r.iata, ver: verTxt(r), items: r.items || [], got: r.got } : { ok: false, icao, err: r.err };
+    }
+    R.fp = fp;
+    return R;
+  }
+  // PDF 용: [{role, icao, ver, items | none | err}] (인천·김포 제외, 기종 맞춤)
+  async function forFlight(F, R) {
+    if (!ON) return null;
+    if (R) await attach(R);
+    const fp = (R && R.fp) || {}, out = [];
     for (const [role, icao] of [["dep", F.dep], ["arr", F.arr]]) {
       if (!icao || SKIP.includes(icao)) continue;
-      const d = await airport(icao, company);
-      if (!d) { out.push({ role, icao, none: true }); continue; }
-      out.push({ role, icao, ver: verTxt(d), items: sortIt(forType((d.items || []).filter((x) => x.role === role && (x.priority || 3) === 1), F.type)) });
+      const x = fp[role];
+      if (!x) continue;
+      if (!x.ok) { out.push(x.err === "none" ? { role, icao, none: true } : { role, icao, err: errMsg(x.err).replace(/ 잠시 후 다시 시도하세요\.| 내일 다시 이용하세요\./, "") }); continue; }
+      out.push({ role, icao, ver: x.ver, items: sortIt(forType(x.items, F.type)).map((it) => Object.assign({}, it, { priority: 1 })) });   // 서버는 중요 항목만 줌
     }
     return out;
   }
 
-  // ---------- 비행준비 탭 ----------
-  // 공항 코드 직접 입력 (ICAO 4자리·IATA 3자리, 대소문자 무관) + 자료에 있는 공항 자동 완성 + 최근 구간
+  // ---------- 비행준비 화면 ----------
+  // 한글 자판으로 쳐도 같은 자리 영문으로 바꿈 (예: 'ㄱㅓㅅㅅ'·'거ㅅㅅ' → RJTT)
+  const KI = "r R s e E f a q Q t T d w W c z x v g".split(" "), KV = "k o i O j p u P h hk ho hl y n nj np nl b m ml l".split(" "),
+    KF = ",r,R,rt,s,sw,sg,e,f,fr,fa,fq,ft,fx,fv,fg,a,q,qt,t,T,d,w,c,z,x,v,g".split(","),
+    KJ = { "ㄱ": "r", "ㄲ": "R", "ㄳ": "rt", "ㄴ": "s", "ㄵ": "sw", "ㄶ": "sg", "ㄷ": "e", "ㄸ": "E", "ㄹ": "f", "ㄺ": "fr", "ㄻ": "fa", "ㄼ": "fq", "ㄽ": "ft", "ㄾ": "fx", "ㄿ": "fv", "ㅀ": "fg", "ㅁ": "a", "ㅂ": "q", "ㅃ": "Q", "ㅄ": "qt", "ㅅ": "t", "ㅆ": "T", "ㅇ": "d", "ㅈ": "w", "ㅉ": "W", "ㅊ": "c", "ㅋ": "z", "ㅌ": "x", "ㅍ": "v", "ㅎ": "g" };
+  "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ".split("").forEach((c, i) => { KJ[c] = KV[i]; });
+  const ko2en = (s) => String(s).replace(/[\uAC00-\uD7A3\u3131-\u3163]/g, (c) => {
+    const n = c.charCodeAt(0) - 0xAC00;
+    if (n >= 0 && n < 11172) return KI[Math.floor(n / 588)] + KV[Math.floor((n % 588) / 28)] + KF[n % 28];
+    return KJ[c] || "";
+  });
+  const LEFT = "csf-fp-left", kday = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+  const showLeft = () => { const L = J(LEFT, null); $("fpSrc").textContent = L && L.d === kday() ? `오늘 남은 조회 ${L.n}곳` : `하루 ${LIMIT}곳까지 조회`; };
   function resolve(v) {
-    const u = String(v || "").trim().toUpperCase().split("|")[0];
-    if (u.length < 3 || !IDX) return null;
-    return (IDX.airports || []).find((a) => a.icao === u) || (IDX.airports || []).find((a) => a.iata === u) || null;
+    const u = String(v || "").trim().toUpperCase();
+    if (u.length < 3) return null;
+    const L = (LIST && LIST.airports) || [];
+    const a = L.find((x) => x.icao === u) || L.find((x) => x.iata === u);
+    if (a) return a;
+    if (!L.length && /^[A-Z]{4}$/.test(u)) return { icao: u };              // 목록을 아직 못 받았으면 ICAO 그대로 시도
+    return null;
   }
   function fillList() {
-    const list = (IDX.airports || []).slice().sort((a, b) => a.icao.localeCompare(b.icao));
-    $("fpList").innerHTML = list.map((a) => `<option value="${esc(a.icao)}">${esc(label(a))}</option>`).join("");
+    const L = ((LIST && LIST.airports) || []).slice().sort((a, b) => a.icao.localeCompare(b.icao));
+    $("fpList").innerHTML = L.map((a) => `<option value="${esc(a.icao)}">${esc(label(a))}</option>`).join("");
   }
-  const RK = "csf-fp-recent";
-  const recent = () => { try { return JSON.parse(ls.get(RK) || "[]"); } catch (e) { return []; } };
-  function paintRecent() {
-    $("fpRecent").innerHTML = recent().map((r) => `<button type="button" data-r="${esc(r)}">${esc(r.replace("|", " → ").replace(/^ → | → $/, ""))}</button>`).join("");
-  }
+  const recent = () => J(RK, []);
+  function paintRecent() { $("fpRecent").innerHTML = recent().map((r) => `<button type="button" data-r="${esc(r)}">${esc(r.replace("|", " → "))}</button>`).join(""); }
   function itemsHtml(items) {
     if (!items.length) return `<p class="fp-empty" style="padding:8px 0 0">중요 항목 없음</p>`;
-    return [1, 2, 3].map((p) => {
-      const g = items.filter((x) => (x.priority || 3) === p); if (!g.length) return "";
-      return `<div class="fp-grp p${p}"><b>${p === 1 ? "🔴 " : ""}${PRI[p]} ${g.length}</b>` + g.map((x) =>
-        `<p class="fp-it">${x.tag ? `<span class="t">[${esc(x.tag)}]</span>` : ""}${esc(x.text)}</p>`).join("") + `</div>`;
-    }).join("");
+    return `<div class="fp-grp p1"><b>🔴 중요 ${items.length}</b>` + items.map((x) =>
+      `<p class="fp-it">${x.tag ? `<span class="t">[${esc(x.tag)}]</span>` : ""}${esc(x.text)}</p>`).join("") + `</div>`;
   }
+  let seq = 0;
   async function paint() {
-    const out = $("fpOut"), A = {};
+    const my = ++seq, out = $("fpOut"), A = {};
     for (const [k, inp, hint] of [["dep", "fpDep", "fpDepH"], ["arr", "fpArr", "fpArrH"]]) {
-      const v = $(inp).value.trim().toUpperCase(), a = resolve(v), H = $(hint);
-      A[k] = a; $(inp).classList.toggle("bad", v.length >= 3 && !a);
-      H.className = "fp-hint" + (v.length >= 3 && !a ? " no" : "");
-      H.textContent = a ? label(a) : v.length >= 3 ? "자료 없음" : "";
+      const v = $(inp).value.trim().toUpperCase(), a = resolve(v), H = $(hint), bad = v.length >= 3 && !a;
+      A[k] = a; $(inp).classList.toggle("bad", bad);
+      H.className = "fp-hint" + (bad ? " no" : ""); H.textContent = a ? label(a) : bad ? "자료 없음" : "";
     }
     ls.set("csf-fp-dep", A.dep ? A.dep.icao : ""); ls.set("csf-fp-arr", A.arr ? A.arr.icao : "");
     if (!A.dep && !A.arr) { out.innerHTML = `<div class="card fp-empty">공항 코드를 입력하세요. ICAO 4자리(RJTT) 또는 IATA 3자리(HND)</div>`; return; }
-    const key = `${A.dep ? A.dep.icao : ""}|${A.arr ? A.arr.icao : ""}`;
-    if (A.dep && A.arr) { ls.set(RK, JSON.stringify([key, ...recent().filter((r) => r !== key)].slice(0, 6))); paintRecent(); }   // 최근 구간: 출발·도착 둘 다 있을 때만
-    let h = "";
+    if (A.dep && A.arr) { const key = `${A.dep.icao}|${A.arr.icao}`; ls.set(RK, JSON.stringify([key, ...recent().filter((r) => r !== key)].slice(0, 6))); paintRecent(); }
+    out.innerHTML = `<div class="card fp-empty">받는 중…</div>`;
+    const last = J(LAST, {}), html = [];
     for (const [role, a, ttl] of [["dep", A.dep, "이륙 시 유의사항"], ["arr", A.arr, "착륙 시 유의사항"]]) {
       if (!a) continue;
-      const icao = a.icao, d = await airport(icao, a.company);
-      if (!d) { h += `<div class="card fp-empty">${esc(icao)} 요약을 읽지 못했습니다. 잠시 후 다시 고르세요.</div>`; continue; }
-      const items = sortIt(forType((d.items || []).filter((x) => x.role === role && (x.priority || 3) === 1), ""));   // 중요만
-      const ch = (d.changes || []).filter((c) => !c.role || c.role === role || c.role === "general");
-      h += `<div class="card fp-ap"><h3>${esc(label(d))} ${ttl}<small>${esc(verTxt(d))}</small></h3>${itemsHtml(items)}` +
-        (ch.length ? `<details class="fp-chg"><summary>이전 버전과 달라진 점 ${ch.length}건</summary><ul>${ch.map((c) => `<li><b>${esc(c.type || "")}</b> ${esc(c.text)}</li>`).join("")}</ul></details>` : "") + `</div>`;
+      const had = last[role] && last[role].icao === a.icao ? last[role] : null;
+      let d = null, note = "";
+      if (had && Date.now() - Date.parse(had.got) < 3600e3) d = had;          // 1시간 안에 받은 것은 그대로 (서버 호출 줄이기)
+      else {
+        const r = await fetchOne(a.icao, role, a.company || "");
+        if (my !== seq) return;
+        if (r.ok) { d = r; last[role] = r; ls.set(LAST, JSON.stringify(last)); if (r.left != null) ls.set(LEFT, JSON.stringify({ d: kday(), n: r.left })); }
+        else if (r.err === "none") { html.push(`<div class="card fp-empty">${esc(a.icao)} ${ttl} · 자료 없음</div>`); continue; }
+        else { note = errMsg(r.err, had && had.got); d = had; if (!d) { html.push(`<div class="card fp-empty fp-err">${esc(label(a))} ${ttl}<br>${esc(note)}</div>`); continue; } }
+      }
+      html.push(`<div class="card fp-ap"><h3>${esc(label(d))} ${ttl}<small>${esc(verTxt(d))}</small></h3>` +
+        (note ? `<p class="fp-warn">${esc(note)}</p>` : "") + itemsHtml(sortIt(forType(d.items, ""))) +
+        ((d.changes || []).length ? `<details class="fp-chg"><summary>이전 버전과 달라진 점 ${d.changes.length}건</summary><ul>${d.changes.map((c) => `<li><b>${esc(c.type || "")}</b> ${esc(c.text)}</li>`).join("")}</ul></details>` : "") + `</div>`);
     }
-    out.innerHTML = h;
+    if (my !== seq) return;
+    out.innerHTML = html.join("");
+    showLeft();
   }
   async function init() {
-    const idx = await loadIndex(); if (!idx) return;
+    if (!ON) return;
     $("fpNone").hidden = true; $("fpWrap").hidden = false;
-    $("fpSrc").textContent = idx.updated ? "자료 " + String(idx.updated).replace("T", " ").slice(0, 16) : "";
-    fillList();
     $("fpDep").value = String(ls.get("csf-fp-dep") || "").split("|")[0]; $("fpArr").value = String(ls.get("csf-fp-arr") || "").split("|")[0];
     let tm = null;
-    const on = (e) => { e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ""); clearTimeout(tm); const n = e.target.value.length; if (n === 0 || n >= 3) tm = setTimeout(paint, n === 3 ? 600 : 50); };
+    const go = () => { clearTimeout(tm); paint(); };
+    const on = (e) => { e.target.value = ko2en(e.target.value).toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 4); clearTimeout(tm); const n = e.target.value.length, a = resolve(e.target.value); if (n === 0 || n === 4 || a) tm = setTimeout(paint, n === 3 ? 700 : 80); };
     for (const id of ["fpDep", "fpArr"]) {
       $(id).addEventListener("input", on);
-      $(id).addEventListener("change", () => { clearTimeout(tm); paint(); });
-      $(id).addEventListener("keydown", (e) => { if (e.key === "Enter") { clearTimeout(tm); paint(); e.target.blur(); } });
+      $(id).addEventListener("compositionend", on);
+      $(id).addEventListener("change", go);
+      $(id).addEventListener("keydown", (e) => { if (e.key === "Enter") { go(); e.target.blur(); } });
       $(id).addEventListener("focus", (e) => e.target.select());
     }
-    $("fpSwap").addEventListener("click", () => { const a = $("fpDep").value, b = $("fpArr").value; $("fpDep").value = b; $("fpArr").value = a; paint(); });
-    $("fpRecent").addEventListener("click", (e) => { const b = e.target.closest("[data-r]"); if (!b) return; const [x, y] = b.dataset.r.split("|"); $("fpDep").value = x; $("fpArr").value = y; paint(); });
-    paintRecent(); paint();
+    $("fpSwap").addEventListener("click", () => { const a = $("fpDep").value, b = $("fpArr").value; $("fpDep").value = b; $("fpArr").value = a; go(); });
+    $("fpRecent").addEventListener("click", (e) => { const b = e.target.closest("[data-r]"); if (!b) return; const [x, y] = b.dataset.r.split("|"); $("fpDep").value = x; $("fpArr").value = y; go(); });
+    paintRecent(); showLeft();
+    // 비행준비 화면을 처음 열 때만 서버에 묻기 (앱을 켤 때마다 묻지 않음)
+    let started = false;
+    const start = async () => { if (started) return; started = true; await loadList(); fillList(); paint(); };
+    const visible = () => document.body.dataset.tab === "pk" && !document.querySelector('.pk-sub[data-pks="fp"]').hidden;
+    if (visible()) start();
+    new MutationObserver(() => { if (visible()) start(); }).observe(document.body, { attributes: true, attributeFilter: ["data-tab"] });
+    document.getElementById("pkSub").addEventListener("click", () => setTimeout(() => { if (visible()) start(); }, 0));
   }
-  ready = init();
-  return { forFlight, ready: () => ready, fam, forType };
+  init();
+  return { forFlight, attach, fam, forType, on: ON };
 })();
 </script>
 <script>
@@ -1464,7 +1714,8 @@ window.FPREP = (() => {
 // 보내지 않는 것: 검색한 편명·공항, 이름, 위치. 오프라인이면 모아 두었다가 인터넷 연결 시 전송.
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
-  const VER = "v47", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
+  const VER = "v48", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -1498,7 +1749,7 @@ window.csfStat = (() => {
   }
   addEventListener("online", flush);
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") flush(); });
-  try { document.getElementById("appVer").textContent = VER + (/^(localhost|127\.)/.test(location.hostname) ? " · 개발 서버" : ""); } catch (e) {}      // 하단 제작자 옆 앱 버전 (PC 개발 서버면 표시)
+  try { document.getElementById("appVer").textContent = "Ver " + APP_VER + (/^(localhost|127\.)/.test(location.hostname) ? " · 개발 서버" : ""); } catch (e) {}      // 하단 제작자 옆 앱 버전 (PC 개발 서버면 표시)
   return log;
 })();
 </script>
@@ -2646,6 +2897,7 @@ window.csfStat = (() => {
         stage = 4; tick();
         $("paProg").innerHTML += `<br><span class="done">분석 완료</span> <small>${Math.round((Date.now() - t0) / 1000)}초 · 아래 내용을 확인하고 PDF를 받으세요.</small>`;
         renderRes();
+        if (window.FPREP && window.FPREP.on) window.FPREP.attach(result).then((r) => { if (r === result) store.set(RK, JSON.stringify(result)); }).catch(() => {});
       } catch (e) {
         const msg = e.name === "AbortError" ? "3분이 지나도 답이 없어 중단했습니다. 잠시 뒤 다시 해 주세요."
           : e instanceof SyntaxError ? "Gemini 답을 정리하지 못했습니다. 한 번 더 분석해 주세요."
@@ -2951,21 +3203,20 @@ window.csfStat = (() => {
       const C = col.R;
       bar(C, "Weather Briefing (STD/STA ±2H)", "패키지 TAF");
       kv(C, wxRows(R), 17.5); gap(C);
-      bar(C, "WELCOME ANNOUNCEMENT");
-      text(C, welcome(R).join("\n"), 7.4, 4.6); gap(C);
-      bar(C, "Turbulence PA 방송문구");
-      text(C, TURB_PA.join("\n"), 7.4, 4.6); gap(C);
-      for (const n of ["NOTAM Package 1", "NOTAM Package 2 (EDTO/ERA)", "NOTAM Package 3 (FIR)"]) { bar(C, n); text(C, `${n.split(" (")[0]} : 원문참조`); gap(C); }
-      // 이·착륙 유의사항 (PC 개발 서버에 자료가 있을 때만, 인천·김포 생략, 비행 기종에 맞는 항목만) → 오른쪽 남은 공간에 1쪽으로 맞춤
-      const AF = window.FPREP ? await window.FPREP.forFlight(F).catch(() => null) : null;
+      // 이·착륙 유의사항 (기상 아래 · WELCOME ANNOUNCEMENT 위). 인천·김포 생략, 비행 기종에 맞는 항목만. 아래 표들 자리를 남기고 1쪽에 맞춤
+      const AF = window.FPREP ? await window.FPREP.forFlight(F, R).catch(() => null) : null;
+      if (AF && R.fp) store.set(RK, JSON.stringify(R));                  // 새로 받은 유의사항을 분석 결과에 보관 (비행 중 오프라인 PDF)
       if (AF && AF.length) {
-        const LW = 17.5, room = BOT - C.y - 5.2 - 0.5;
+        const textH = (t, fs, lh) => { const L = wrap(t, C.w - 2.4, fs); let h = 0; for (let i = 0; i < L.length; i += 20) h += Math.min(20, L.length - i) * lh + 1.6 + (lh - LH); return h; };
+        const below = (5.2 + textH(welcome(R).join("\n"), 7.4, 4.6) + 2.2) + (5.2 + textH(TURB_PA.join("\n"), 7.4, 4.6) + 2.2);
+        const LW = 17.5, room = BOT - C.y - 5.2 - 2.2 - below - 0.5;
         const line = (x) => `- ${x.tag ? "[" + x.tag + "] " : ""}${sv(x.text)}`;
         const build = (maxP, cap) => {
           const rows = []; let cut = 0;
           for (const a of AF) {
             const head = `${a.icao}\n${a.role === "dep" ? "이륙" : "착륙"}`;
             if (a.none) { rows.push([head, "자료 없음", 0]); continue; }
+            if (a.err) { rows.push([head, a.err, 0]); continue; }
             const its = a.items.filter((x) => (x.priority || 3) <= maxP), shown = cap == null ? its : its.slice(0, cap);
             cut += a.items.length - shown.length;
             if (!a.items.length) { rows.push([head, "중요 항목 없음", 0]); continue; }
@@ -2979,11 +3230,19 @@ window.csfStat = (() => {
         let pick = null;
         for (const [maxP, fs] of [[3, 7.2], [2, 7.2], [2, 6.5], [1, 6.5], [1, 5.8]]) { RFS = fs; const b = build(maxP, null); if (H(b) <= room) { pick = b; break; } }
         if (!pick) { RFS = 5.8; for (let cap = 12; cap >= 1; cap--) { const b = build(1, cap); if (H(b) <= room || cap === 1) { pick = b; break; } } }
-        bar(C, "이·착륙 유의사항", [`기종 ${window.FPREP.fam(F.type) || "-"}`, AF.filter((a) => a.ver).map((a) => `${a.icao} ${a.ver}`).join(" · ")].filter(Boolean).join(" · "));
+        bar(C, "이·착륙 유의사항");
         for (const r of pick.rows) row(C, [{ w: LW, t: r[0], head: true }, { w: C.w - LW, t: r[1], bold: r[2] === 1 }]);
         if (pick.cut) row(C, [{ w: C.w, t: `분량 때문에 ${pick.cut}건 생략 · 전체는 비행준비 탭 참고` }]);
-        RFS = FS;
+        RFS = FS; gap(C);
       }
+      bar(C, "WELCOME ANNOUNCEMENT");
+      text(C, welcome(R).join("\n"), 7.4, 4.6); gap(C);
+      bar(C, "Turbulence PA 방송문구");
+      text(C, TURB_PA.join("\n"), 7.4, 4.6); gap(C);
+      // NOTAM Package 1~3 은 2쪽부터 (전체 폭)
+      const NP = { x: M, w: PW - M * 2, y: TOP, pg: Math.max(col.L.pg, C.pg) + 1 };     // 비행정보 다음 쪽 (보통 2쪽)
+      goto(NP); d.setTextColor(...NAVY); d.setFont("NG", "bold"); d.setFontSize(11); d.text(`NOTAM (${F.flt || ""} ${F.dep || ""}/${F.arr || ""} ${F.date || ""})`, M, 10.5);
+      for (const n of ["NOTAM Package 1", "NOTAM Package 2 (EDTO/ERA)", "NOTAM Package 3 (FIR)"]) { bar(NP, n); text(NP, `${n.split(" (")[0]} : 원문참조`); gap(NP); }
       // 쪽 번호
       const N = d.getNumberOfPages();
       for (let i = 1; i <= N; i++) { d.setPage(i); d.setFont("NG", "normal"); d.setFontSize(6.5); d.setTextColor(...MUT); d.text("운항 도우미 · 패키지에 있는 내용만 옮김 (추측 없음) · 계산값: FLT Time·SR 구간·FL 변화·±2H 기상", M, PH - 5); d.text(`${i}/${N}`, PW - M, PH - 5, { align: "right" }); }
