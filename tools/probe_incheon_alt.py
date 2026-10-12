@@ -23,6 +23,16 @@ C = [
  ("ic_route", f"https://apis.data.go.kr/6280000/busRouteService/getBusRouteSectionList?serviceKey={k}&pageNo=1&numOfRows=5&routeId=169000096"),
 ]
 res = {}
+# 공공데이터포털 검색: 버스 도착·위치 관련 API 이름과 번호
+def search(kw):
+    st, html = get("https://www.data.go.kr/tcs/dss/selectDataSetList.do?dType=API&currentPage=1&perPage=40&keyword=" + urllib.parse.quote(kw))
+    return sorted(set((m.group(1), re.sub(r"\s+", " ", m.group(2)).strip()) for m in re.finditer(r'/data/(\d{8})/openapi\.do[^>]*>\s*(?:<[^>]+>\s*)*([^<]{3,120})', html)))
+found = {}
+for kw in ["버스도착정보", "TAGO 버스", "국토교통부 버스도착", "국토교통부 버스위치", "국토교통부 버스노선", "국토교통부 버스정류"]:
+    try: found[kw] = search(kw)
+    except Exception as e: found[kw] = str(e)
+    time.sleep(1)
+json.dump(found, open(os.path.join(OUT, "search.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 for name, u in C:
     st, b = get(u)
     b = b.replace(k, "KEY").replace(KEY, "KEY")
