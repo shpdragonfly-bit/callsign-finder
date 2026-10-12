@@ -24,13 +24,14 @@ for did in ["15059084", "15058487", "15056529", "15059206"]:
     open(os.path.join(OUT, f"page_{did}.html"), "w", encoding="utf-8").write(b[:300000])
     time.sleep(1)
 json.dump(pages, open(os.path.join(OUT, "pages.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-# 주소 변형 시험 (노선번호 306)
+# 명세 샘플 값으로 시험 (승인 직후 '04 HTTP 에러'가 키 등록 지연인지 확인)
 tries = {}
-for base in ["https://apis.data.go.kr/6280000", "http://apis.data.go.kr/6280000"]:
-    for path in ["busRouteService/getBusRouteNo", "BusRouteService/getBusRouteNo", "busRouteService/getBusRouteNoList"]:
-        for q in ["routeNo=306", "routeNo=306&pageNo=1&numOfRows=10"]:
-            st, b = get(f"{base}/{path}?serviceKey={k}&{q}")
-            tries[f"{base.split(':')[0]} {path} {q}"] = [str(st), re.sub(r"\s+", " ", b.replace(k, "KEY").replace(KEY, "KEY"))[:300]]
-            time.sleep(0.3)
+B = "https://apis.data.go.kr/6280000"
+for path, q in [("busRouteService/getBusRouteSectionList", "routeId=169000096"), ("busRouteService/getBusRouteNo", "routeNo=306"),
+                ("busArrivalService/getAllRouteBusArrivalList", "bstopId=165000111"), ("busStationService/getBusStationNmList", "bstopNm=%EC%9D%B8%EC%B2%9C%EA%B3%B5%ED%95%AD"),
+                ("busLocationService/getBusRouteLocation", "routeId=165000111")]:
+    st, b = get(f"{B}/{path}?serviceKey={k}&pageNo=1&numOfRows=5&{q}")
+    tries[path] = [str(st), re.sub(r"\s+", " ", b.replace(k, "KEY").replace(KEY, "KEY"))[:600]]
+    time.sleep(0.5)
 json.dump(tries, open(os.path.join(OUT, "tries.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 print(json.dumps({d: {"urls": p["urls"], "ops": p["ops"]} for d, p in pages.items()}, ensure_ascii=False))
