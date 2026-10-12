@@ -33,6 +33,14 @@ for kw in ["버스도착정보", "TAGO 버스", "국토교통부 버스도착", 
     except Exception as e: found[kw] = str(e)
     time.sleep(1)
 json.dump(found, open(os.path.join(OUT, "search.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+names = {}
+ids = sorted(set(i for v in found.values() if isinstance(v, list) for i, t in v))
+for i in ids[:40]:
+    st, b = get(f"https://www.data.go.kr/catalog/{i}/openapi.json")
+    try: d = json.loads(b); names[i] = [d.get("name", ""), (d.get("description", "") or "")[:160]]
+    except Exception: names[i] = [st, ""]
+    time.sleep(0.4)
+json.dump(names, open(os.path.join(OUT, "names.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 for name, u in C:
     st, b = get(u)
     b = b.replace(k, "KEY").replace(KEY, "KEY")
