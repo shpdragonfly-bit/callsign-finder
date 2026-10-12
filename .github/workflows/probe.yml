@@ -47,7 +47,12 @@ jobs:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python updater/busstops.py probe/bus_rt/busstops.json --force
       - name: 실시간 도착 중계 점검
+        if: false
         run: python tools/probe_relay.py
+      - name: 인천 버스정보 API 점검
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+        run: python tools/probe_incheon.py
       - name: 통계 웹 앱 점검
         if: false
         run: python tools/probe_stats.py
