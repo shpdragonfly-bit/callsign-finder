@@ -831,6 +831,63 @@ body[data-tab="oz"] #alTabs { display: none; }
 .fp-empty { padding: 14px 16px; color: var(--muted); font-size: 14px; }
 .fp-err { color: #B42318; line-height: 1.6; }
 .fp-warn { margin: 8px 0 0; padding: 8px 10px; border-radius: 10px; background: #FEF3C7; color: #92400E; font-size: 13px; font-weight: 600; }
+/* 근무표: 내 스케줄(월별) · 미리 보기 */
+.rs-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.rs-btns .b { padding: 12px 6px; font-size: 15px; font-weight: 700; line-height: 1.3; }
+.rs-btns .b small { display: block; font-size: 12px; font-weight: 500; color: var(--muted); margin-top: 2px; }
+.rs-btns .b:disabled { opacity: .55; }
+#rsMsg, #rpMsg { margin-top: 10px; font-size: 14px; line-height: 1.6; }
+.rcv { padding-bottom: 20px; }
+.rc-nav { display: flex; align-items: center; gap: 8px; margin: 10px 0 8px; }
+.rc-nav b { flex: 1; text-align: center; font-size: 19px; }
+.rc-nav .b { padding: 8px 14px; font-size: 18px; font-weight: 700; }
+.rc-nav .rc-today { font-size: 14px; padding: 9px 10px; }
+.rc-grid { display: grid; grid-template-columns: repeat(7, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); -webkit-user-select: none; user-select: none; }
+.rc-grid .h { font-size: 12px; font-weight: 700; text-align: center; padding: 4px 0; color: var(--muted); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--panel-2); }
+.rc-grid .h.sun, .rc-grid .c.sun .n { color: #D93A3A; } .rc-grid .h.sat, .rc-grid .c.sat .n { color: #2F6BD9; }
+.rc-grid .c { min-height: 62px; padding: 2px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); cursor: pointer; overflow: hidden; background: var(--panel); }
+.rc-grid .c.out { background: var(--panel-2); opacity: .55; }
+.rc-grid .c.today .n { background: var(--accent); color: var(--accent-ink); border-radius: 50%; }
+.rc-grid .c.sel { outline: 2px solid var(--accent); outline-offset: -2px; }
+.rc-grid .n { display: inline-block; min-width: 20px; height: 20px; line-height: 20px; text-align: center; font-size: 12px; font-weight: 700; }
+.rc-ev { display: block; margin-top: 2px; padding: 1px 2px; border-radius: 4px; font: 700 10.5px/1.25 var(--mono); letter-spacing: -0.3px; white-space: nowrap; overflow: hidden; text-overflow: clip; color: #fff; }
+.rc-ev.cont { opacity: .55; font-weight: 600; }
+.k-LV { background: #0F8A8A; } .k-LO { background: #3BA7D4; }
+.rs-file { display: block; text-align: center; cursor: pointer; border-radius: 10px; border: 1px solid var(--line); background: var(--panel-2); color: var(--text); }
+.rs-file.off { opacity: .55; }
+.rs-consent { margin-top: 12px; padding: 12px 14px; border-radius: 12px; background: #FEF3C7; color: #5B3A00; font-size: 14px; line-height: 1.6; }
+.rs-consent ul { margin: 6px 0 10px; padding-left: 18px; }
+.rs-cbtn { display: grid; grid-template-columns: 2fr 1fr; gap: 8px; }
+.rs-cbtn .b { padding: 11px 6px; font-weight: 700; }
+.k-FLT { background: #1F5FBF; } .k-STBY { background: #C98A06; } .k-TRN { background: #7A4DC4; } .k-OFF { background: #5E8A6E; } .k-ETC { background: #6B7684; }
+.rc-leg { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.rc-leg span { font-size: 12px; font-weight: 700; color: #fff; padding: 2px 8px; border-radius: 99px; }
+.rc-day { margin-top: 12px; }
+.rc-day h3 { margin: 0 0 6px; font-size: 16px; }
+.rc-it { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.5; }
+.rc-it .tag { flex: 0 0 auto; font-size: 12px; font-weight: 700; color: #fff; padding: 2px 8px; border-radius: 6px; margin-top: 2px; }
+.rc-it small { display: block; color: var(--muted); font-size: 13px; }
+.rc-src { margin: 12px 0 0; font-size: 12px; color: var(--muted); }
+.rp-range { display: flex; align-items: flex-end; gap: 8px; margin-top: 8px; }
+.rp-range label { flex: 1; display: flex; flex-direction: column; font-size: 13px; font-weight: 700; color: var(--muted); gap: 4px; }
+.rp-range input { font: inherit; font-size: 15px; padding: 8px; border-radius: 10px; border: 2px solid var(--line); background: var(--panel-2); color: var(--text); min-width: 0; }
+.rp-range span { padding-bottom: 10px; }
+.rp-note { font-size: 13px; color: var(--muted); margin: 8px 0; }
+.rp-list { border-top: 1px solid var(--line); }
+.rp-row { display: flex; gap: 10px; align-items: flex-start; padding: 8px 2px; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.45; }
+.rp-row input { width: 20px; height: 20px; margin-top: 2px; flex: 0 0 auto; }
+.rp-row .d { flex: 0 0 64px; font-weight: 700; font-family: var(--mono); font-size: 13px; padding-top: 2px; }
+.rp-row small { display: block; color: var(--muted); font-size: 13px; }
+.rp-row.warn { background: #FEF3C7; color: #5B3A00; }
+.rp-row.off { opacity: .45; }
+.rpv { overflow-x: hidden; } .rp-row > span:last-child { flex: 1; min-width: 0; overflow-wrap: anywhere; } .rc-it > div { min-width: 0; overflow-wrap: anywhere; }
+.rp-bar { position: sticky; bottom: calc(-22px - env(safe-area-inset-bottom)); margin: 12px -18px calc(-22px - env(safe-area-inset-bottom)); padding: 10px 18px calc(14px + env(safe-area-inset-bottom)); background: var(--panel); border-top: 1px solid var(--line); box-shadow: 0 -6px 16px rgba(0,0,0,.08); }
+.rp-bar #rpMsg { margin: 0 0 8px; font-size: 14px; line-height: 1.5; }
+.rp-bar #rpMsg:empty { display: none; }
+.rp-act { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.rp-act #rpView { grid-column: 1 / -1; }
+.rp-act .b:disabled { opacity: .6; }
+.rp-act .b { padding: 12px 6px; font-size: 15px; font-weight: 700; line-height: 1.3; }
 </style>
 <script>
 // 화면 그리기 전에 주/야간 먼저 적용 (자세한 처리는 아래 '주/야간')
@@ -899,6 +956,7 @@ body[data-tab="oz"] #alTabs { display: none; }
 <nav class="fab" id="fab" aria-label="빠른 메뉴">
   <button type="button" data-fab="top" aria-label="맨 위로"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg><span>맨 위로</span></button>
   <button type="button" data-fab="theme" aria-label="주/야간 바꾸기"><svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><span>주/야간</span></button>
+  <button type="button" data-fab="cal" aria-label="내 스케줄"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>내 스케줄</span></button>
   <button type="button" data-fab="menu" aria-label="메뉴"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>메뉴</span></button>
 </nav>
 <div class="sheet-bg" id="gqSheet" hidden>
@@ -931,11 +989,46 @@ body[data-tab="oz"] #alTabs { display: none; }
     </div>
   </div>
 </div>
+<div class="sheet-bg" id="rcSheet" hidden>
+  <div class="sheet rcv" role="dialog" aria-modal="true" aria-labelledby="rcTitle">
+    <div class="sh-hd"><h2 id="rcTitle">내 스케줄</h2><button type="button" class="sh-x" data-rclose>닫기</button></div>
+    <div class="rc-nav">
+      <button type="button" class="b" id="rcPrev" aria-label="이전 달">‹</button>
+      <b id="rcMonth"></b>
+      <button type="button" class="b" id="rcNext" aria-label="다음 달">›</button>
+      <button type="button" class="b rc-today" id="rcToday">오늘</button>
+    </div>
+    <div class="rc-grid" id="rcGrid"></div>
+    <div class="rc-leg"><span class="k-FLT">비행</span><span class="k-STBY">대기</span><span class="k-TRN">훈련</span><span class="k-OFF">휴무</span><span class="k-LO">체류</span><span class="k-LV">휴가</span><span class="k-ETC">기타</span></div>
+    <div class="rc-day" id="rcDay"></div>
+    <p class="rc-src" id="rcSrc"></p>
+  </div>
+</div>
+<div class="sheet-bg" id="rpSheet" hidden>
+  <div class="sheet rpv" role="dialog" aria-modal="true" aria-labelledby="rpTitle">
+    <div class="sh-hd"><h2 id="rpTitle">읽은 근무표 확인</h2><button type="button" class="sh-x" data-rpclose>닫기</button></div>
+    <p class="sh-p" id="rpInfo"></p>
+    <div class="rp-range">
+      <label>시작<input type="date" id="rpFrom"></label><span>~</span><label>끝<input type="date" id="rpTo"></label>
+    </div>
+    <p class="rp-note">이 기간의 기존 근무표 일정만 새 내용으로 바뀝니다. 기간 밖 날짜는 그대로입니다.</p>
+    <div class="rp-list" id="rpList"></div>
+    <div class="rp-bar">
+      <div class="gm-msg" id="rpMsg" role="status"></div>
+      <div class="rp-act">
+        <button type="button" class="b primary" id="rpSave">앱에 저장</button>
+        <button type="button" class="b primary" id="rpSaveG">앱 + 구글캘린더 저장</button>
+        <button type="button" class="b" id="rpView" hidden>내 스케줄에서 보기</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="sheet-bg" id="menuSheet" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mnTitle">
     <div id="mnMain">
       <div class="sh-hd"><h2 id="mnTitle">메뉴</h2><button type="button" class="sh-x" data-mclose>닫기</button></div>
       <div class="mn-list">
+        <button type="button" class="mn-item" id="mnCal"><span class="ic">📅</span><span>내 스케줄<small>저장된 근무표를 월별로 보기</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnNotice"><span class="ic">📢</span><span>공지사항<span class="new" id="mnNew" hidden>NEW</span><small>새 기능·변경 안내</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnReq"><span class="ic">✉️</span><span>사용자 요청<small>기능 요청·오류 신고·의견 보내기</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnFaq"><span class="ic">❓</span><span>자주 묻는 질문<small>사용법·오프라인·자료 출처</small></span><span class="go">›</span></button>
@@ -1198,6 +1291,31 @@ body[data-tab="oz"] #alTabs { display: none; }
       </div>
     </div>
 
+    <div class="card gm rs-in" id="rsIn">
+      <div class="gm-hd">
+        <div><h2>근무표 넣기 <span class="pa-beta">개발 중</span></h2><p>대한항공 월간 스케줄 <b>PDF</b>를 넣으면 기기 안에서 읽습니다(파일은 밖으로 보내지 않음). UTC · SLT · BLT 어느 것으로 출력해도 되지만 <b>SLT 출력을 권합니다</b>(UTC 는 휴무·체류 날짜가 하루 어긋날 수 있음). <b>화면 캡처 사진</b>은 Gemini 키 등록자만 쓸 수 있고, 보이는 날짜만 바뀝니다.</p></div>
+      </div>
+      <div class="rs-btns">
+        <label class="b rs-file" for="rsPdf">근무표 PDF 선택<small>대한항공 월간 스케줄</small></label>
+        <input id="rsPdf" type="file" accept="application/pdf,.pdf" hidden>
+        <label class="b rs-file" for="rsPhoto" id="rsPhotoBtn">캡처 사진 선택<small id="rsPhotoSub">Gemini · 여러 장 가능</small></label>
+        <input id="rsPhoto" type="file" accept="image/*" multiple hidden>
+        <button type="button" class="b" id="rsSample">시험 근무표 넣기<small>이번 달 예시</small></button>
+        <button type="button" class="b" id="rsOpen">내 스케줄 보기<small id="rsCount">저장된 일정 없음</small></button>
+        <button type="button" class="b" id="rsIcs">Apple용 일정 파일<small>.ics 받기</small></button>
+        <button type="button" class="b" id="rsClear">저장된 근무표 지우기<small>이 기기에서만</small></button>
+      </div>
+      <div class="rs-consent" id="rsConsent" hidden>
+        <b>사진 읽기 전에 확인해 주세요</b>
+        <ul><li>사진은 내 Gemini 키로 <b>Google Gemini 에 전송</b>되어 읽힙니다. 무료 키는 Google 이 서비스 개선에 쓸 수 있습니다.</li>
+          <li>사진 판독은 <b>틀릴 수 있습니다.</b> 저장 전 확인 화면에서 날짜·편명·시각을 원본과 꼭 대조하세요.</li>
+          <li>이름·사번 부분은 가리고 찍어도 됩니다. 앱은 이름·사번을 읽지 않습니다.</li>
+          <li>정확한 등록은 <b>PDF</b>를 권합니다(기기 안에서 읽고 밖으로 보내지 않음).</li></ul>
+        <div class="rs-cbtn"><button type="button" class="b primary" id="rsConsentOk">동의하고 사진 고르기</button><button type="button" class="b" id="rsConsentNo">취소</button></div>
+      </div>
+      <div class="gm-msg" id="rsMsg" role="status"></div>
+    </div>
+
     <div class="card gm rs-gc" id="rsGc">
       <div class="gm-hd">
         <div><h2>구글 캘린더 연결 안내 <span class="pa-beta">시험판</span></h2><p>연결은 <b>선택</b>입니다. 연결하지 않아도 이 앱 안에서 월별로 볼 수 있습니다.</p></div>
@@ -1322,6 +1440,7 @@ body[data-tab="oz"] #alTabs { display: none; }
     top: () => window.scrollTo({ top: 0, behavior: "smooth" }),
     theme: () => document.getElementById("btnTheme").click(),
     menu: () => document.getElementById("menuBtn").click(),
+    cal: () => window.ROSTER && window.ROSTER.open(),
   };
   fab.addEventListener("click", (e) => { const b = e.target.closest("[data-fab]"); if (b && ACT[b.dataset.fab]) ACT[b.dataset.fab](); });
   // 글자 입력 중(키보드 올라옴)·창이 열렸을 때는 숨김
@@ -1344,14 +1463,18 @@ body[data-tab="oz"] #alTabs { display: none; }
   const API = "https://www.googleapis.com/calendar/v3", CAL_NAME = "FLT 근무표", CK = "csf-gcal-id";
   const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} } };
   let token = null, exp = 0, tc = null;
+  // 한 번 연결한 기기는 그대로: 로그인 표(약 1시간짜리)를 이 기기에 보관하고, 지나면 저장할 때 자동으로 다시 받음(계정 선택·동의 없이)
+  const TK = "csf-gcal-tok", ON = "csf-gcal-on";
+  try { const t = JSON.parse(ls.get(TK) || "null"); if (t && t.e > Date.now()) { token = t.t; exp = t.e; } } catch (e) {}
+  const keepTok = () => ls.set(TK, token ? JSON.stringify({ t: token, e: exp }) : null);
   const msg = (t, bad) => { $("rsGcMsg").innerHTML = t ? `<span style="color:${bad ? "var(--warn)" : "var(--ok)"};font-weight:700">${t}</span>` : ""; };
   function paint() {
-    const on = !!(token && Date.now() < exp), cal = ls.get(CK);
-    const st = $("rsGcSt"); st.className = "gm-st" + (on ? " ok" : "");
-    st.textContent = on ? "연결됨" : cal ? "다시 로그인 필요" : "미연결";
-    $("rsGcGo").textContent = on ? "연결됨 · FLT 근무표 캘린더 준비됨" : cal ? "구글 캘린더 다시 로그인" : "구글 캘린더 연결";
-    $("rsGcGo").disabled = on;
-    $("rsGcMore").hidden = !on;
+    const live = !!(token && Date.now() < exp), linked = ls.get(ON) === "1", cal = ls.get(CK);
+    const st = $("rsGcSt"); st.className = "gm-st" + (live || linked ? " ok" : "");
+    st.textContent = live || linked ? "연결됨" : cal ? "다시 연결 필요" : "미연결";
+    $("rsGcGo").textContent = live ? "연결됨 · FLT 근무표 캘린더 준비됨" : linked ? "연결됨 · 넣을 때 자동 로그인" : cal ? "구글 캘린더 다시 연결" : "구글 캘린더 연결";
+    $("rsGcGo").disabled = live;
+    $("rsGcMore").hidden = !(live || linked);
   }
   function loadGis() {
     if (window.google && google.accounts && google.accounts.oauth2) return Promise.resolve();
@@ -1384,10 +1507,10 @@ body[data-tab="oz"] #alTabs { display: none; }
       await new Promise((ok, no) => {
         tc = google.accounts.oauth2.initTokenClient({
           client_id: CLIENT_ID, scope: SCOPE,
-          callback: (r) => { if (r.error) return no(new Error(r.error)); if (!google.accounts.oauth2.hasGrantedAllScopes(r, SCOPE)) return no(new Error("noscope")); token = r.access_token; exp = Date.now() + (r.expires_in - 60) * 1000; ok(); },
+          callback: (r) => { if (r.error) return no(new Error(r.error)); if (!google.accounts.oauth2.hasGrantedAllScopes(r, SCOPE)) return no(new Error("noscope")); token = r.access_token; exp = Date.now() + (r.expires_in - 60) * 1000; keepTok(); ls.set(ON, "1"); ok(); },
           error_callback: (e) => no(new Error(e && e.type || "popup")),
         });
-        tc.requestAccessToken({ prompt: ls.get(CK) ? "" : "consent" });
+        tc.requestAccessToken({ prompt: ls.get(ON) === "1" || ls.get(CK) ? "" : "consent" });
       });
       msg("로그인됨 · 캘린더 준비 중…");
       await ensureCal();
@@ -1402,15 +1525,18 @@ body[data-tab="oz"] #alTabs { display: none; }
     }
   }
   const day = (n) => { const t = new Date(Date.now() + 9 * 3600e3 + n * 864e5); return t.toISOString().slice(0, 10); };
+  const need = async () => { if (!(token && Date.now() < exp)) { await connect(); if (!(token && Date.now() < exp)) throw new Error("구글 로그인이 필요합니다"); } };
   async function testAdd() {
     try {
+      await need();
       const cal = await ensureCal();
       await api("POST", "/calendars/" + encodeURIComponent(cal) + "/events", { summary: "FLT Assist 연결 시험", description: "연결 시험용 일정입니다. 지워도 됩니다.", start: { date: day(1) }, end: { date: day(2) }, extendedProperties: { private: { flta: "test" } } });
       msg(`내일(${day(1)}) ‘FLT Assist 연결 시험’ 일정을 넣었습니다. 휴대폰 캘린더에서 ‘FLT 근무표’를 켜고 확인해 보세요.`);
-    } catch (e) { msg("시험 일정을 넣지 못했습니다: " + e.message + (e.status === 401 ? " (로그인이 풀렸습니다. 다시 연결하세요)" : ""), true); if (e.status === 401) { token = null; paint(); } }
+    } catch (e) { msg("시험 일정을 넣지 못했습니다: " + e.message + (e.status === 401 ? " (로그인이 풀렸습니다. 다시 연결하세요)" : ""), true); if (e.status === 401) { token = null; keepTok(); paint(); } }
   }
   async function testDel() {
     try {
+      await need();
       const cal = await ensureCal();
       const L = await api("GET", "/calendars/" + encodeURIComponent(cal) + "/events?privateExtendedProperty=flta%3Dtest&maxResults=50");
       for (const ev of L.items || []) await api("DELETE", "/calendars/" + encodeURIComponent(cal) + "/events/" + encodeURIComponent(ev.id));
@@ -1419,7 +1545,7 @@ body[data-tab="oz"] #alTabs { display: none; }
   }
   function off() {
     try { if (token && window.google) google.accounts.oauth2.revoke(token, () => {}); } catch (e) {}
-    token = null; paint();
+    token = null; ls.set(ON, null); keepTok(); paint();
     msg("이 기기의 연결을 끊었습니다. 이미 넣은 일정과 ‘FLT 근무표’ 캘린더는 구글 캘린더에 그대로 있습니다. 완전히 지우려면 구글 캘린더에서 ‘FLT 근무표’ 캘린더를 삭제하세요.");
   }
   $("rsGcGo").addEventListener("click", connect);
@@ -1428,6 +1554,433 @@ body[data-tab="oz"] #alTabs { display: none; }
   $("rsGcOff").addEventListener("click", off);
   setInterval(() => { if (token && Date.now() >= exp) { token = null; paint(); } }, 60000);
   paint();
+  // ---- 근무표 일정을 'FLT 근무표' 캘린더에 넣기: 기간 안의 앱 일정만 추가·수정·삭제 (개인 일정·다른 기간은 건드리지 않음) ----
+  const KN = { FLT: "비행", STBY: "대기", TRN: "훈련", OFF: "휴무", LV: "휴가", LO: "체류", ETC: "기타" };
+  const nextDay = (d) => { const t = new Date(d + "T00:00:00Z"); t.setUTCDate(t.getUTCDate() + 1); return t.toISOString().slice(0, 10); };
+  function gEvent(e) {
+    const sum = e.kind === "FLT" ? `${e.flt || "비행"} ${e.dep || ""}-${e.arr || ""}`.trim() : e.kind === "LO" ? `${e.alert ? "⚠ " : ""}체류 ${e.dep || ""}` : e.label || KN[e.kind] || e.kind;
+    const desc = [e.st ? `${e.dep || ""} ${e.st} → ${e.arr || ""} ${e.et || ""}`.trim() + " (근무표 표기 시각)" : "", e.kst || "", e.note || "", "FLT Assist 근무표 (이 캘린더에 직접 일정을 넣지 마세요)"].filter(Boolean).join("\n");
+    const g = { summary: sum, description: desc };
+    if (e.su) { g.start = { dateTime: e.su, timeZone: e.stz || "Asia/Seoul" }; g.end = { dateTime: e.eu, timeZone: e.etz || "Asia/Seoul" }; }
+    else if (e.st) {
+      // 비행은 도착일(ed)까지, 대기·교육은 그날. 끝이 시작보다 앞서면(시각 기준 미확정) 시작 + 1시간
+      const s0 = `${e.d}T${e.st}:00`; let e0 = `${e.kind === "FLT" ? e.ed || e.d : e.ed || e.d2 || e.d}T${e.et || e.st}:00`;
+      if (e0 <= s0) { const t = new Date(s0 + "Z"); t.setUTCHours(t.getUTCHours() + 1); e0 = t.toISOString().slice(0, 19); }
+      g.start = { dateTime: s0, timeZone: "Asia/Seoul" }; g.end = { dateTime: e0, timeZone: "Asia/Seoul" };
+    }
+    else { g.start = { date: e.d }; g.end = { date: nextDay(e.d2 || e.d) }; }
+    const fh = JSON.stringify([g.summary, g.description, g.start, g.end]);
+    g.extendedProperties = { private: { flta: "roster", fk: e.k, fd: e.d, fh: String(fh.length) + ":" + [...fh].reduce((h, c) => (h * 31 + c.charCodeAt(0)) | 0, 7) } };
+    return g;
+  }
+  async function syncRange(from, to, evs) {
+    if (!(token && Date.now() < exp)) throw new Error("구글 로그인이 풀렸습니다");
+    const cal = encodeURIComponent(await ensureCal());
+    const q = new URLSearchParams({ privateExtendedProperty: "flta=roster", timeMin: from + "T00:00:00+09:00", timeMax: nextDay(nextDay(to)) + "T00:00:00+09:00", singleEvents: "true", maxResults: "2500" });
+    const have = ((await api("GET", `/calendars/${cal}/events?${q}`)).items || []).filter((x) => { const p = (x.extendedProperties || {}).private || {}; return p.fd >= from && p.fd <= to; });
+    const want = new Map(evs.map((e) => [e.k, gEvent(e)])), seen = new Set(); let add = 0, upd = 0, del = 0;
+    for (const x of have) {
+      const p = x.extendedProperties.private, w = want.get(p.fk);
+      if (!w || seen.has(p.fk)) { await api("DELETE", `/calendars/${cal}/events/${encodeURIComponent(x.id)}`); del++; continue; }
+      seen.add(p.fk);
+      if (p.fh !== w.extendedProperties.private.fh) { await api("PUT", `/calendars/${cal}/events/${encodeURIComponent(x.id)}`, w); upd++; }
+    }
+    for (const [k, w] of want) if (!seen.has(k)) { await api("POST", `/calendars/${cal}/events`, w); add++; }
+    return { add, upd, del };
+  }
+  window.GCAL = { ready: () => !!(token && Date.now() < exp), linked: () => ls.get(ON) === "1", syncRange, connect: async () => { await connect(); return !!(token && Date.now() < exp); } };
+})();
+</script>
+<script>
+// ===================== 근무표: 기기 저장 · 내 스케줄(월별) · 미리 보기 · .ics · 구글 캘린더 넣기 =====================
+// 일정 하나: { k: 고유키, d: 시작일 YYYY-MM-DD, d2: 끝일(여러 날 근무·체류, 없으면 d), kind: FLT|STBY|TRN|OFF|ETC,
+//             flt, dep, arr, st: 출발 'HH:MM', et: 도착 'HH:MM', ed: 도착일(다르면), note, src }
+// 저장: 이 기기 localStorage 'csf-roster'. 근무표를 다시 넣으면 확인한 기간 안의 일정만 바뀜.
+window.ROSTER = (() => {
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  const SK = "csf-roster";
+  const KIND = { FLT: "비행", STBY: "대기", TRN: "훈련", OFF: "휴무", LV: "휴가", LO: "체류", ETC: "기타" };
+  // ---------- 대한항공 월간 스케줄 PDF 읽기 (글자 순서대로) ----------
+  // 맨 위 'July 2026 | 이름 | 사번 | 777 | CAP |' 중 월·연도·기종만 씀 (이름·사번은 읽지 않음)
+  // 날짜 줄 'Jul 01' 아래 근무 줄들. 맨 아래 'ALL TIMINGS ARE IN SLT|BLT|UTC'
+  const MON3 = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const CODE = { T_DO: ["OFF", "휴무"], DO: ["OFF", "휴무"], T_STBY: ["STBY", "대기"], STBY: ["STBY", "대기"], T_TRG: ["TRN", "훈련"], COLV: ["LV", "청원휴가"], T_DUTY: ["ETC", "근무"] };
+  function parseKE(lines) {
+    const out = { events: [], basis: "", fleet: "", month: "", warn: [], days: [] };
+    let y = 0, m0 = -1, cur = null;
+    for (const raw of lines) {
+      let s = String(raw).replace(/\s+/g, " ").trim(); if (!s) continue;
+      let mm;
+      if (!out.month && (mm = s.match(/^(January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})\b/))) {
+        m0 = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].indexOf(mm[1]); y = +mm[2]; out.month = `${y}-${String(m0 + 1).padStart(2, "0")}`; continue;
+      }
+      if (/\|/.test(s) && !out.fleet) { const f = s.split("|").map((x) => x.trim()).find((x) => /^(\d{3}|[AB]\d{3}[A-Z0-9-]*)$/.test(x)); if (f) out.fleet = f; continue; }
+      if ((mm = s.match(/ALL TIMINGS ARE IN (SLT|BLT|UTC)/i))) { out.basis = mm[1].toUpperCase(); continue; }
+      if ((mm = s.match(/^([A-Z][a-z]{2}) (\d{1,2})$/)) && MON3.includes(mm[1])) {
+        const mi = MON3.indexOf(mm[1]); let yy = y;
+        if (m0 === 11 && mi === 0) yy++; else if (m0 === 0 && mi === 11) yy--;
+        cur = `${yy}-${String(mi + 1).padStart(2, "0")}-${String(+mm[2]).padStart(2, "0")}`; out.days.push(cur); continue;
+      }
+      if (!cur || /^(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday)$/.test(s)) continue;
+      let tag = ""; { const t = raw.toString().match(/\s#(TVL|TRAINING|CHECK)\s*$/i); if (t) tag = t[1].toUpperCase(); }
+      const s0 = s; s = s.replace(/\s#(TVL|TRAINING|CHECK)$/i, "");
+      // 'CODE DEP 07:30 - ARR 19:30' (시각은 한쪽이 빠질 수 있음: 밤 넘김 비행이 이틀로 나뉨)
+      if ((mm = s.match(/^(\S+) ([A-Z]{3})(?: (\d{2}:\d{2}))? - ([A-Z]{3})(?: (\d{2}:\d{2}))?$/))) {
+        const [, code, dep, st, arr, et] = mm, isF = /^[A-Z0-9]{2}\d{1,4}[A-Z]?$/.test(code) && !CODE[code];
+        const c = CODE[code];
+        out.events.push({ d: cur, kind: isF ? "FLT" : c ? c[0] : "ETC", code, flt: isF ? code : "", dep, arr, st: st || "", et: et || "", label: isF ? "" : c ? c[1] : code, note: { TVL: "편승(TVL)", TRAINING: "훈련 비행", CHECK: "체크 비행" }[tag] || undefined });
+        continue;
+      }
+      if ((mm = s.match(/^LO ([A-Z]{3})$/))) { out.events.push({ d: cur, kind: "LO", code: "LO", dep: mm[1], arr: mm[1], label: "체류" }); continue; }
+      if ((mm = s.match(/^([A-Z][A-Z0-9_]{1,12})$/))) { const c = CODE[mm[1]]; out.events.push({ d: cur, kind: c ? c[0] : "ETC", code: mm[1], label: c ? c[1] : mm[1] }); continue; }
+      out.warn.push(`${cur} 읽지 못한 줄: ${s0}`);
+    }
+    // 밤 넘김 비행: 같은 편명이 이어진 이틀에 (출발만)·(도착만)으로 나뉜 것을 하나로
+    const ev = out.events, used = new Set();
+    for (let i = 0; i < ev.length; i++) {
+      const a = ev[i]; if (!a.dep || !a.st || used.has(i) || a.et) continue;
+      const nd = nextD(a.d);
+      const j = ev.findIndex((b, k) => !used.has(k) && k !== i && b.code === a.code && b.d === nd && !b.st && b.et && b.dep === a.dep && b.arr === a.arr);
+      if (j >= 0) { a.et = ev[j].et; a.ed = nd; used.add(j); }
+    }
+    const seen = new Set();
+    out.events = ev.filter((e, k) => { if (used.has(k)) return false; const q = [e.d, e.code, e.dep || "", e.arr || "", e.st || "", e.et || ""].join("|"); if (seen.has(q)) return false; seen.add(q); return true; });
+    // 이어진 체류(LO) 날짜는 하나로 묶음 (d ~ d2)
+    const res = [];
+    for (const e of out.events) {
+      const p = res.length && [...res].reverse().find((x) => x.kind === "LO");
+      if (e.kind === "LO" && p && p.dep === e.dep && nextD(p.d2 || p.d) === e.d) { p.d2 = e.d; continue; }
+      res.push(e);
+    }
+    out.events = res;
+    return out;
+  }
+  function nextD(d) { const t = new Date(d + "T00:00:00Z"); t.setUTCDate(t.getUTCDate() + 1); return t.toISOString().slice(0, 10); }
+
+  // ---------- 시각: 공항 시간대(앱의 공항 자료, 서머타임 포함)로 정확한 시각(UTC) 계산 ----------
+  let TZ = null;
+  function tzOf(iata) {
+    if (!TZ) { TZ = {}; const A = (window.CALLSIGN_DATA && window.CALLSIGN_DATA.airports) || {}; for (const v of Object.values(A)) if (v && v[0] && v[7]) TZ[v[0]] = v[7]; }
+    return TZ[iata] || (/^(ICN|GMP|PUS|CJU|TAE|CJJ|KWJ|RSU|USN|MWX|YNY|HIN|KPO|WJU|KUV)$/.test(iata) ? "Asia/Seoul" : "");
+  }
+  function offMin(ms, tz) {
+    const p = new Intl.DateTimeFormat("en-US", { timeZone: tz, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).formatToParts(new Date(ms)).reduce((o, x) => (o[x.type] = x.value, o), {});
+    return (Date.UTC(+p.year, p.month - 1, +p.day, +p.hour % 24, +p.minute) - Math.floor(ms / 60000) * 60000) / 60000;
+  }
+  function toUtc(d, hm, tz) {             // 그 공항 현지 날짜·시각 → UTC ms
+    const [Y, M, D] = d.split("-").map(Number), [h, mi] = hm.split(":").map(Number), base = Date.UTC(Y, M - 1, D, h, mi);
+    if (tz === "UTC") return base;
+    let t = base - offMin(base, tz) * 60000; t = base - offMin(t, tz) * 60000; return t;
+  }
+  const kst = (ms) => { const t = new Date(ms + 9 * 3600e3); return `${t.toISOString().slice(5, 10).replace("-", "/")} ${t.toISOString().slice(11, 16)}`; };
+  // 달 경계: 1일의 '도착만' 줄은 지난달 마지막 날 출발편, 말일의 '출발만' 줄은 다음 달 1일 도착편.
+  // 이미 저장된 이웃 달 일정과 이어 붙이고(중복 일정 만들지 않음), 없으면 안내만 붙여 둠.
+  const prevD = (d) => { const t = new Date(d + "T00:00:00Z"); t.setUTCDate(t.getUTCDate() - 1); return t.toISOString().slice(0, 10); };
+  function boundary(evs) {
+    for (const e of evs) {
+      if (e.kind !== "FLT") continue;
+      const same = (f) => f.kind === "FLT" && (f.code || f.flt) === e.code && f.dep === e.dep && f.arr === e.arr;
+      if (!e.st && e.et) {                       // 도착만 (지난달 출발)
+        const f = R.events.find((x) => same(x) && x.d === prevD(e.d) && x.st);
+        if (f) { e.fill = f.k; e.note = `${prevD(e.d).slice(5).replace("-", "/")} 출발편의 도착 → 지난달 일정에 도착 시각을 채웁니다`; }
+        else e.note = "지난달 출발편의 도착 (출발 시각은 지난달 근무표에 있음)";
+      } else if (e.st && !e.et) {                // 출발만 (다음 달 도착)
+        const g = R.events.find((x) => same(x) && x.d === nextD(e.d) && !x.st && x.et);
+        if (g) { e.et = g.et; e.ed = g.d; e.drop = g.k; e.note = "다음 달 근무표의 도착 시각과 이어 붙임"; }
+        else e.note = "도착 시각은 다음 달 근무표를 넣으면 채워집니다";
+      }
+    }
+    return evs;
+  }
+  // 근무표 시각 기준(SLT 현지 / BLT 한국 / UTC)에 따라 시작·끝 UTC 계산, 편명·노선 대조, 체류 다음날 이른 출발 알림
+  function enrich(evs, basis) {
+    const D = (window.CALLSIGN_DATA && window.CALLSIGN_DATA.flights) || {}, A = (window.CALLSIGN_DATA && window.CALLSIGN_DATA.airports) || {};
+    const i2c = {}; for (const [k, v] of Object.entries(A)) if (v && v[0]) i2c[v[0]] = k;
+    for (const e of evs) {
+      if (!e.st) continue;
+      const tzS = basis === "UTC" ? "UTC" : basis === "BLT" ? "Asia/Seoul" : tzOf(e.dep), tzE = basis === "UTC" ? "UTC" : basis === "BLT" ? "Asia/Seoul" : tzOf(e.arr || e.dep);
+      if (!tzS || !tzE) { e.warn = `${!tzS ? e.dep : e.arr} 공항 시간대를 몰라 한국 시각으로 넣습니다`; }
+      const su = toUtc(e.d, e.st, tzS || "Asia/Seoul");
+      let eu = e.et ? toUtc(e.ed || e.d, e.et, tzE || "Asia/Seoul") : su + 3600e3;
+      if (eu <= su) { eu += 864e5; if (!e.ed && e.kind === "FLT") e.ed = nextD(e.d); }
+      e.su = new Date(su).toISOString(); e.eu = new Date(eu).toISOString();
+      e.stz = tzOf(e.dep) || (tzS === "UTC" ? "UTC" : tzS || "Asia/Seoul"); e.etz = tzOf(e.arr || e.dep) || e.stz;
+      if (basis !== "SLT") {                       // 현지 날짜·시각으로 다시 씀 → 어느 기준으로 출력해도 같은 일정
+        const loc = (ms, tz) => { const p = new Intl.DateTimeFormat("en-CA", { timeZone: tz, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).formatToParts(new Date(ms)).reduce((o, x) => (o[x.type] = x.value, o), {}); return [`${p.year}-${p.month}-${p.day}`, `${p.hour}:${p.minute}`]; };
+        const [d1, t1] = loc(su, e.stz), [d2, t2] = loc(eu, e.etz);
+        e.d = d1; e.st = t1; e.et = t2; if (d2 !== d1) e.ed = d2; else delete e.ed;
+        if (e.d2 && e.d2 < e.d) delete e.d2;
+      }
+      if (e.stz !== "Asia/Seoul" || e.etz !== "Asia/Seoul") e.kst = `한국 ${kst(su)} → ${kst(eu)}`;
+      if (e.kind === "FLT" && !e.warn) {         // 운항 자료와 대조 (Z: 시험용 아시아나 편)
+        const m = e.flt.match(/^([A-Z0-9]{2})(\d+)(Z?)$/); const al = m && (m[3] ? "AAR" : { KE: "KAL", OZ: "AAR" }[m[1]]);
+        const f = al && D[al + +m[2]], r = f && f.r, a = i2c[e.dep], b = i2c[e.arr];
+        if (al && Object.keys(D).length && (!r || r.indexOf(a) < 0 || r.indexOf(b) < 0 || r.indexOf(a) > r.lastIndexOf(b))) e.warn = r ? "운항 자료의 노선과 다릅니다" : "운항 자료에 없는 편명입니다";
+      }
+    }
+    // 체류 끝난 다음날 이른 시각(06시 전) 출발이면 체류 마지막 날 밤 출근 알림
+    for (const f of evs.filter((x) => x.kind === "FLT" && x.st && x.st < "06:00")) {
+      const pd = prevD(f.d), lo = evs.find((x) => x.kind === "LO" && x.dep === f.dep && x.d <= pd && (x.d2 || x.d) >= pd);
+      if (lo) { lo.alert = true; lo.alertDay = pd; lo.note = `${f.d.slice(5).replace("-", "/")} ${f.st} 출발 (${f.flt}) · ${pd.slice(5).replace("-", "/")} 밤 출근`; }
+    }
+    return evs;
+  }
+  const load = () => { try { const d = JSON.parse(ls.get(SK) || "null"); return d && Array.isArray(d.events) ? d : { events: [] }; } catch (e) { return { events: [] }; } };
+  let R = load();
+  const save = () => { R.updated = new Date().toISOString(); ls.set(SK, JSON.stringify(R)); count(); };
+  const pad = (n) => String(n).padStart(2, "0");
+  const ymd = (t) => `${t.getFullYear()}-${pad(t.getMonth() + 1)}-${pad(t.getDate())}`;
+  const addDay = (s, n) => { const t = new Date(s + "T00:00:00"); t.setDate(t.getDate() + n); return ymd(t); };
+  const key = (e) => [e.d, e.kind, e.code || e.flt || "", e.dep || "", e.arr || ""].join("|");
+  const sortEv = (a) => a.sort((x, y) => (x.d + (x.st || "99")).localeCompare(y.d + (y.st || "99")));
+  const label = (e) => e.kind === "FLT" ? (e.flt || "비행") : e.kind === "LO" ? (e.alert && e.alertDay === e.d ? "⚠" : "") + (e.dep || "체류") : e.label || KIND[e.kind] || e.kind;
+  const line = (e) => e.kind === "FLT"
+    ? `${e.flt || ""} ${e.dep || ""}${e.st ? " " + e.st : ""} → ${e.arr || ""}${e.et ? " " + e.et : ""}${e.ed && e.ed !== e.d ? ` (${e.ed.slice(5).replace("-", "/")})` : ""}`
+    : e.kind === "LO" ? `체류 ${e.dep || ""}${e.d2 && e.d2 !== e.d ? ` (~${e.d2.slice(5).replace("-", "/")})` : ""}`
+    : `${e.label || KIND[e.kind] || e.kind}${e.code && e.label && e.code !== e.label && !/^T_/.test(e.code) ? ` (${e.code})` : ""}${e.st ? " " + (e.dep && e.dep !== "ICN" ? e.dep + " " : "") + e.st + (e.et ? "~" + e.et : "") : ""}`;
+  function count() { const n = R.events.length; if ($("rsCount")) $("rsCount").textContent = n ? `${n}개 일정` : "저장된 일정 없음"; }
+
+  // ---------- 기간 교체 저장 ----------
+  function applyRange(from, to, evs, src) {
+    const keep = R.events.filter((e) => e.d < from || e.d > to);
+    const add = evs.filter((e) => e.d >= from && e.d <= to).map((e) => Object.assign({}, e, { k: key(e), src: src || e.src || "" }));
+    R.events = sortEv([...keep, ...add]); save();
+    return add;
+  }
+
+  // ---------- 내 스케줄 (월별) ----------
+  let cur = new Date(); cur.setDate(1); let sel = ymd(new Date());
+  function onDay(s) { return R.events.filter((e) => e.d === s || (e.d < s && (e.d2 || e.ed || "") >= s)); }
+  function paintMonth() {
+    const y = cur.getFullYear(), m = cur.getMonth();
+    $("rcMonth").textContent = `${y}년 ${m + 1}월`;
+    const first = new Date(y, m, 1), start = new Date(first); start.setDate(1 - first.getDay());
+    const today = ymd(new Date());
+    let h = ["일", "월", "화", "수", "목", "금", "토"].map((w, i) => `<div class="h${i === 0 ? " sun" : i === 6 ? " sat" : ""}">${w}</div>`).join("");
+    const weeks = Math.ceil((first.getDay() + new Date(y, m + 1, 0).getDate()) / 7);
+    for (let i = 0; i < weeks * 7; i++) {
+      const t = new Date(start); t.setDate(start.getDate() + i); const s = ymd(t), dw = t.getDay();
+      const evs = onDay(s);
+      const chips = evs.slice(0, 3).map((e) => { const cont = e.d !== s; return `<span class="rc-ev k-${esc(e.kind)}${cont && e.kind !== "LO" ? " cont" : ""}">${esc(cont && e.kind === "FLT" ? "→" + (e.arr || "") : cont && e.kind !== "LO" ? (e.arr || label(e)) : e.kind === "LO" ? (e.alert && s === e.alertDay ? "⚠" : "") + e.dep : label(e))}</span>`; }).join("") + (evs.length > 3 ? `<span class="rc-ev k-ETC">+${evs.length - 3}</span>` : "");
+      h += `<div class="c${t.getMonth() !== m ? " out" : ""}${s === today ? " today" : ""}${s === sel ? " sel" : ""}${dw === 0 ? " sun" : dw === 6 ? " sat" : ""}" data-d="${s}"><span class="n">${t.getDate()}</span>${chips}</div>`;
+    }
+    $("rcGrid").innerHTML = h;
+    paintDay();
+    $("rcSrc").textContent = R.updated ? `이 기기에 저장된 근무표 · 마지막 저장 ${R.updated.slice(0, 16).replace("T", " ")}` + (R.events.some((e) => e.src === "sample") ? " · 시험 근무표 포함" : "") : "저장된 근무표가 없습니다. 개발 예정 → 근무표 등록에서 넣을 수 있습니다.";
+  }
+  function paintDay() {
+    const evs = onDay(sel), [y, mo, d] = sel.split("-");
+    const w = ["일", "월", "화", "수", "목", "금", "토"][new Date(sel + "T00:00:00").getDay()];
+    $("rcDay").innerHTML = `<h3>${+mo}월 ${+d}일 (${w})</h3>` + (evs.length ? evs.map((e) => `<div class="rc-it"><span class="tag k-${esc(e.kind)}">${esc(KIND[e.kind] || e.kind)}</span><div>${esc(line(e))}${e.d !== sel ? `<small>${esc(e.d.slice(5).replace("-", "/"))} 시작 · 계속</small>` : ""}${e.kst ? `<small>${esc(e.kst)}</small>` : ""}${e.note ? `<small${e.alert ? ' style="color:var(--warn);font-weight:700"' : ""}>${e.alert ? "⚠ " : ""}${esc(e.note)}</small>` : ""}</div></div>`).join("") : `<p class="rc-src">일정 없음</p>`);
+  }
+  function openMonth(d) { if (d) { sel = d; cur = new Date(d + "T00:00:00"); cur.setDate(1); } paintMonth(); $("rcSheet").hidden = false; }
+  $("rcGrid").addEventListener("click", (e) => { const c = e.target.closest("[data-d]"); if (!c) return; sel = c.dataset.d; if (sel.slice(0, 7) !== ymd(cur).slice(0, 7)) { cur = new Date(sel + "T00:00:00"); cur.setDate(1); } paintMonth(); });
+  $("rcPrev").addEventListener("click", () => { cur.setMonth(cur.getMonth() - 1); paintMonth(); });
+  $("rcNext").addEventListener("click", () => { cur.setMonth(cur.getMonth() + 1); paintMonth(); });
+  $("rcToday").addEventListener("click", () => openMonth(ymd(new Date())));
+  $("rcSheet").addEventListener("click", (e) => { if (e.target === $("rcSheet") || e.target.closest("[data-rclose]")) $("rcSheet").hidden = true; });
+  // 좌우로 밀어 달 넘기기
+  let sx = null; $("rcGrid").addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; }, { passive: true });
+  $("rcGrid").addEventListener("touchend", (e) => { if (sx == null) return; const dx = e.changedTouches[0].clientX - sx; sx = null; if (Math.abs(dx) > 60) { cur.setMonth(cur.getMonth() + (dx < 0 ? 1 : -1)); paintMonth(); } });
+
+  // ---------- 미리 보기 (읽은 근무표 확인 → 저장) ----------
+  let P = null;   // { events, src, title }
+  function preview(evs, src, info, range) {
+    P = { events: sortEv(evs.map((e) => Object.assign({ on: true }, e))), src };
+    const ds = P.events.map((e) => e.d);
+    $("rpFrom").value = (range && range[0]) || ds[0] || ymd(new Date()); $("rpTo").value = (range && range[1]) || ds[ds.length - 1] || ymd(new Date());
+    $("rpInfo").innerHTML = info || "";
+    $("rpMsg").innerHTML = ""; $("rpView").hidden = true;
+    $("rpSave").disabled = $("rpSaveG").disabled = false; $("rpSave").textContent = "앱에 저장"; $("rpSaveG").textContent = "앱 + 구글캘린더 저장";
+    paintPreview(); $("rpSheet").hidden = false;
+  }
+  function paintPreview() {
+    const from = $("rpFrom").value, to = $("rpTo").value;
+    $("rpList").innerHTML = P.events.map((e, i) => {
+      const out = e.d < from || e.d > to;
+      return `<label class="rp-row${e.warn ? " warn" : ""}${!e.on || out ? " off" : ""}"><input type="checkbox" data-i="${i}"${e.on ? " checked" : ""}${out ? " disabled" : ""}><span class="d">${esc(e.d.slice(5).replace("-", "/"))}</span><span>${esc(line(e))}${e.d2 && e.d2 !== e.d ? `<small>~${esc(e.d2.slice(5).replace("-", "/"))} 까지</small>` : ""}${e.kst ? `<small>${esc(e.kst)}</small>` : ""}${e.alert ? `<small style="color:var(--warn);font-weight:700">⚠ ${esc(e.note)}</small>` : e.note ? `<small>${esc(e.note)}</small>` : ""}${e.warn ? `<small>확인 필요: ${esc(e.warn)}</small>` : ""}${out ? "<small>기간 밖(이웃 달) · 저장 안 함 — 그 달 근무표로 넣으세요</small>" : ""}</span></label>`;
+    }).join("") || `<p class="rc-src">읽은 일정이 없습니다.</p>`;
+  }
+  $("rpList").addEventListener("change", (e) => { const i = e.target.dataset.i; if (i != null) { P.events[i].on = e.target.checked; paintPreview(); } });
+  $("rpFrom").addEventListener("change", paintPreview); $("rpTo").addEventListener("change", paintPreview);
+  $("rpSheet").addEventListener("click", (e) => { if (e.target === $("rpSheet") || e.target.closest("[data-rpclose]")) $("rpSheet").hidden = true; });
+  async function commit(toGoogle) {
+    const from = $("rpFrom").value, to = $("rpTo").value;
+    if (!from || !to || from > to) { $("rpMsg").innerHTML = `<b style="color:var(--warn)">기간을 확인해 주세요.</b>`; return; }
+    const btn = toGoogle ? $("rpSaveG") : $("rpSave");
+    $("rpSave").disabled = $("rpSaveG").disabled = true; btn.textContent = "저장 중…";
+    if (toGoogle && !(window.GCAL && window.GCAL.ready())) {
+      $("rpMsg").innerHTML = "구글 로그인 창에서 계정을 고르고 허용해 주세요…";
+      const ok = window.GCAL && await window.GCAL.connect().catch(() => false);
+      if (!ok) { $("rpMsg").innerHTML = `<b style="color:var(--warn)">구글 캘린더에 연결하지 못했습니다.</b> 앱에만 저장하려면 [앱에 저장]을 누르세요. (안내: 근무표 등록 → 구글 캘린더 연결 안내)`; $("rpSave").disabled = $("rpSaveG").disabled = false; btn.textContent = "앱 + 구글캘린더 저장"; return; }
+    }
+    const sel = P.events.filter((e) => e.on && e.d >= from && e.d <= to);
+    const touched = new Set();                  // 기간 밖이지만 바뀐 날짜 (달 경계)
+    for (const e of sel) {
+      if (e.fill) { const f = R.events.find((x) => x.k === e.fill); if (f) { f.et = e.et; f.ed = e.d; delete f.su; enrich([f], f.basis || e.basis || "SLT"); f.note = ""; touched.add(f.d); } }
+      if (e.drop) { const g = R.events.find((x) => x.k === e.drop); if (g) { R.events = R.events.filter((x) => x !== g); touched.add(g.d); } }
+    }
+    const evs = sel.filter((e) => !e.fill).map((e) => { const x = Object.assign({}, e); delete x.on; delete x.warn; delete x.fill; delete x.drop; return x; });
+    const added = applyRange(from, to, evs, P.src);
+    let m = `앱에 저장했습니다: ${from.slice(5).replace("-", "/")} ~ ${to.slice(5).replace("-", "/")} · ${added.length}개 일정${touched.size ? ` · 이웃 달 ${touched.size}일 이어 붙임` : ""}`;
+    if (toGoogle) {
+      $("rpMsg").innerHTML = m + "<br>구글 캘린더에 넣는 중…";
+      try {
+        const r = await window.GCAL.syncRange(from, to, added);
+        for (const d of touched) { const x = await window.GCAL.syncRange(d, d, R.events.filter((e) => e.d === d)); r.add += x.add; r.upd += x.upd; r.del += x.del; }
+        m += `<br>구글 캘린더: 추가 ${r.add} · 수정 ${r.upd} · 삭제 ${r.del}`;
+      }
+      catch (e) { m += `<br><b style="color:var(--warn)">구글 캘린더에는 넣지 못했습니다: ${esc(e.message)}</b> (앱에는 저장됨. 구글 캘린더 다시 연결 후 다시 넣어 주세요)`; }
+    }
+    $("rpMsg").innerHTML = `<b style="color:var(--ok)">✓ ${m}</b>`;
+    $("rsMsg").innerHTML = `<b style="color:var(--ok)">✓ ${m}</b>`;
+    btn.textContent = "✓ 저장됨"; $("rpSave").disabled = $("rpSaveG").disabled = false;
+    $("rpView").hidden = false; P.from = from;
+  }
+  $("rpSave").addEventListener("click", () => commit(false));
+  $("rpSaveG").addEventListener("click", () => commit(true));
+  $("rpView").addEventListener("click", () => { $("rpSheet").hidden = true; openMonth(P && P.from); });
+
+  // ---------- 일정 파일(.ics) — Apple 캘린더 등 ----------
+  const zt = (d, t) => { const u = new Date(`${d}T${t}:00+09:00`); return u.toISOString().replace(/[-:]/g, "").replace(/\.\d+/, ""); };
+  const icsEsc = (s) => String(s).replace(/\\/g, "\\\\").replace(/;/g, "\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+  function ics(evs) {
+    const now = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d+/, "");
+    const L = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//DG Company//FLT Assist//KO", "CALSCALE:GREGORIAN", "X-WR-CALNAME:FLT 근무표"];
+    for (const e of evs) {
+      L.push("BEGIN:VEVENT", "UID:" + icsEsc(e.k || key(e)).replace(/\|/g, "-") + "@flt-assist", "DTSTAMP:" + now, "SUMMARY:" + icsEsc(e.kind === "FLT" ? `${e.flt || "비행"} ${e.dep || ""}-${e.arr || ""}` : e.kind === "LO" ? `체류 ${e.dep || ""}` : e.label || KIND[e.kind] || e.kind));
+      if (e.su) { const z = (x) => x.replace(/[-:]/g, "").replace(/\.\d+/, ""); L.push("DTSTART:" + z(e.su), "DTEND:" + z(e.eu)); }
+      else if (e.st) { const a = zt(e.d, e.st); let z = zt(e.kind === "FLT" ? e.ed || e.d : e.ed || e.d2 || e.d, e.et || e.st); if (z <= a) z = new Date(Date.parse(`${e.d}T${e.st}:00+09:00`) + 3600e3).toISOString().replace(/[-:]/g, "").replace(/\.\d+/, ""); L.push("DTSTART:" + a, "DTEND:" + z); }
+      else { L.push("DTSTART;VALUE=DATE:" + e.d.replace(/-/g, ""), "DTEND;VALUE=DATE:" + addDay(e.d2 || e.d, 1).replace(/-/g, "")); }
+      L.push("DESCRIPTION:" + icsEsc(line(e) + (e.kst ? "\n" + e.kst : "") + (e.note ? "\n" + e.note : "") + "\nFLT Assist 근무표"), "END:VEVENT");
+    }
+    L.push("END:VCALENDAR");
+    return L.join("\r\n");
+  }
+  function downloadIcs() {
+    if (!R.events.length) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">저장된 근무표가 없습니다.</b>`; return; }
+    const blob = new Blob([ics(R.events)], { type: "text/calendar" }), u = URL.createObjectURL(blob), a = document.createElement("a");
+    a.href = u; a.download = `FLT_근무표_${ymd(new Date()).replace(/-/g, "")}.ics`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 60000);
+    $("rsMsg").innerHTML = `<b style="color:var(--ok)">일정 파일을 만들었습니다.</b> 아이폰은 파일을 열고 넣을 캘린더를 고른 뒤 ‘모두 추가’를 누르세요. 근무표가 바뀌면 같은 일정은 덮어쓰지만, 빠진 일정은 직접 지워야 할 수 있습니다.`;
+  }
+
+  // ---------- 시험 근무표 (화면 확인용 예시, 이번 달) ----------
+  function sample() {
+    const t = new Date(), y = t.getFullYear(), m = t.getMonth(), D = (n) => ymd(new Date(y, m, n));
+    const ev = [
+      { d: D(2), kind: "OFF" }, { d: D(3), kind: "OFF" },
+      { d: D(4), d2: D(6), kind: "FLT", flt: "KE081", dep: "ICN", arr: "JFK", st: "10:00", et: "11:10", note: "시험 근무표 예시 · JFK 체류" },
+      { d: D(6), kind: "FLT", flt: "KE082", dep: "JFK", arr: "ICN", st: "13:30", et: "17:20", ed: D(7) },
+      { d: D(8), kind: "OFF" }, { d: D(9), kind: "OFF" },
+      { d: D(11), kind: "STBY", st: "06:00", et: "18:00" },
+      { d: D(13), kind: "TRN", st: "09:00", et: "17:00", note: "정기 훈련(SIM)" },
+      { d: D(15), kind: "FLT", flt: "KE703", dep: "ICN", arr: "NRT", st: "09:00", et: "11:25" },
+      { d: D(15), kind: "FLT", flt: "KE704", dep: "NRT", arr: "ICN", st: "13:00", et: "15:40" },
+      { d: D(16), kind: "OFF" },
+      { d: D(19), d2: D(21), kind: "FLT", flt: "KE407", dep: "ICN", arr: "SYD", st: "20:00", et: "07:30", ed: D(20), note: "SYD 체류" },
+      { d: D(21), kind: "FLT", flt: "KE408", dep: "SYD", arr: "ICN", st: "09:30", et: "17:50", warn: "시험: 노란색은 확인이 필요한 항목 표시 예시" },
+      { d: D(23), kind: "OFF" }, { d: D(24), kind: "OFF" }, { d: D(27), kind: "ETC", note: "건강검진" },
+    ];
+    preview(ev.map((e) => Object.assign({ src: "sample" }, e)), "sample", "<b>시험 근무표</b>(이번 달 예시)입니다. 실제 근무가 아닙니다. 확인 후 저장하면 내 스케줄에서 볼 수 있고, 나중에 ‘저장된 근무표 지우기’로 지울 수 있습니다.");
+  }
+  // ---------- 근무표 PDF 읽기 (기기 안에서, pdf.js 는 처음 쓸 때 한 번 받음) ----------
+  function pdfLib() {
+    if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+    return new Promise((ok, no) => { const s = document.createElement("script"); s.src = "vendor/pdfjs/pdf.js"; s.onload = () => { window.pdfjsLib.GlobalWorkerOptions.workerSrc = "vendor/pdfjs/pdf.worker.js"; ok(window.pdfjsLib); }; s.onerror = () => no(new Error("PDF 읽기 도구를 받지 못했습니다. 처음 한 번은 인터넷 연결이 필요합니다.")); document.head.appendChild(s); });
+  }
+  async function readPdf(file) {
+    $("rsMsg").innerHTML = "근무표를 읽는 중…";
+    try {
+      const lib = await pdfLib(), doc = await lib.getDocument({ data: new Uint8Array(await file.arrayBuffer()), isEvalSupported: false }).promise, L = [];
+      for (let i = 1; i <= doc.numPages; i++) { const tc = await (await doc.getPage(i)).getTextContent(); for (const it of tc.items) if (it.str && it.str.trim()) L.push(it.str); }
+      const r = parseKE(L);
+      if (!r.month || !r.events.length) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">대한항공 월간 스케줄 PDF 형식이 아닙니다.</b> 스케줄 화면에서 ‘인쇄/PDF’로 저장한 파일인지 확인해 주세요.`; return; }
+      const basis = r.basis || "SLT";
+      r.events.forEach((e) => { e.basis = basis; }); boundary(r.events); enrich(r.events, basis);
+      if (r.fleet) ls.set("csf-fleet", r.fleet);
+      const [Y, M] = r.month.split("-").map(Number), last = new Date(Y, M, 0).getDate();
+      const bn = { SLT: "SLT · 출발·도착 공항 현지 시각", BLT: "BLT · 한국 시각 → 현지 시각으로 바꿔 저장", UTC: "UTC → 현지 시각으로 바꿔 저장" }[basis];
+      preview(r.events.map((e) => Object.assign({ src: "pdf" }, e)), "pdf",
+        `<b>${Y}년 ${M}월</b> 근무표 · 시각 기준 <b>${bn}</b>${r.basis ? "" : " (표시가 없어 SLT 로 봄)"}${r.fleet ? ` · 기종 ${esc(r.fleet)}` : ""} · ${r.events.length}개 일정` +
+        (basis === "UTC" ? `<br><span style="color:var(--warn)">UTC 출력은 휴무·체류 같은 하루 단위 일정의 날짜가 하루 어긋날 수 있습니다. 가능하면 <b>SLT</b>로 출력해 넣어 주세요.</span>` : "") +
+        (r.warn.length ? `<br><span style="color:var(--warn)">읽지 못한 줄 ${r.warn.length}개: ${esc(r.warn.slice(0, 3).join(" / "))}</span>` : "") +
+        `<br><small>이름·사번은 읽지 않습니다. 노란 줄은 운항 자료와 달라 확인이 필요한 일정입니다.</small>`,
+        [`${r.month}-01`, `${r.month}-${String(last).padStart(2, "0")}`]);
+      $("rsMsg").innerHTML = "";
+    } catch (e) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">근무표를 읽지 못했습니다: ${esc(e.message)}</b>`; }
+  }
+  // ---------- 화면 캡처 사진 읽기 (Gemini 키 등록자만). 사진을 PDF 와 같은 글자 줄로 옮겨 적게 한 뒤 같은 방식으로 읽음 ----------
+  const GKEY = () => ls.get("csf-gemini-key") || "";
+  const PHOTO_PROMPT = [
+    "이 사진은 항공사 승무원 월간 근무 달력 화면이다. 보이는 내용을 아래 형식의 글자 줄로 '그대로 옮겨 적기'만 하라. 추측·보충·계산 금지.",
+    "1) 첫 줄: 화면 위쪽의 달과 연도를 영어로 (예: July 2026). 안 보이면 쓰지 않는다.",
+    "2) 둘째 줄: 화면 오른쪽 위 UTC/SLT/BLT 중 선택(강조)된 것을 'ALL TIMINGS ARE IN SLT' 처럼. 모르면 쓰지 않는다.",
+    "3) 그다음 날짜 칸마다: 날짜 줄 'Jul 01' (월 영어 3글자 + 날짜 2자리) 다음 줄부터 그 칸의 일정 막대를 위에서 아래로 한 줄씩, 화면 글자 그대로 (예: KE365Z ICN 14:06 - PVG 15:21 / T_STBY ICN 07:30 - ICN 19:30 / LO PRG / T_DO).",
+    "4) 회색으로 흐린 다른 달 날짜 칸은 쓰지 않는다. 일정이 없는 이번 달 날짜 칸도 날짜 줄은 쓴다. 칸이 잘려 일부만 보이면 그 날짜는 쓰지 않는다.",
+    "5) 막대 색이 노란색(Flight TVL)이면 줄 끝에 ' #TVL', 연보라(Training FLT)면 ' #TRAINING', 진보라(Check FLT)면 ' #CHECK' 를 붙인다. 다른 색은 붙이지 않는다.",
+    "6) 이름·사번·비행시간 합계 등 그 밖의 글자는 쓰지 않는다. 설명 없이 줄만 답한다.",
+  ].join("\n");
+  async function gemText(key, model, parts) {
+    const API = "https://generativelanguage.googleapis.com/v1beta", h = { "x-goog-api-key": key, "Content-Type": "application/json" };
+    let r = await fetch(API + "/interactions", { method: "POST", headers: h, body: JSON.stringify({ model, input: [...parts.map((p) => ({ type: "image", data: p.data, mime_type: p.mime })), { type: "text", text: PHOTO_PROMPT }] }) });
+    if (r.status === 404) r = await fetch(`${API}/models/${model}:generateContent`, { method: "POST", headers: h, body: JSON.stringify({ contents: [{ role: "user", parts: [...parts.map((p) => ({ inline_data: { mime_type: p.mime, data: p.data } })), { text: PHOTO_PROMPT }] }] }) });
+    if (!r.ok) { const e = new Error("HTTP " + r.status); e.status = r.status; throw e; }
+    const o = await r.json(); if (typeof o.output_text === "string") return o.output_text;
+    const T = []; (function w(x) { if (Array.isArray(x)) return x.forEach(w); if (x && typeof x === "object") { if (typeof x.text === "string") T.push(x.text); for (const k in x) if (k !== "text") w(x[k]); } })(o.outputs || o.candidates || o);
+    return T.join("\n");
+  }
+  const b64 = (buf) => { const b = new Uint8Array(buf); let s = ""; for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000)); return btoa(s); };
+  async function readPhotos(files) {
+    const key = GKEY(); if (!key) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">Gemini 키를 먼저 등록해 주세요.</b> (FLT Package 분석 → Gemini AI 연결)`; return; }
+    if (!navigator.onLine) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">사진 읽기는 인터넷이 필요합니다.</b>`; return; }
+    $("rsMsg").innerHTML = `사진 ${files.length}장을 Gemini 로 읽는 중… (보통 20~60초)`;
+    let have = []; try { have = JSON.parse(ls.get("csf-gemini-models") || "[]"); } catch (e) {}
+    const models = [...new Set([...["gemini-3.8-flash", "gemini-flash-latest", "gemini-3.7-flash", "gemini-3.6-flash", "gemini-3.5-flash"].filter((m) => have.includes(m)), "gemini-3.8-flash", "gemini-flash-latest"])].slice(0, 3);
+    try {
+      const parts = []; for (const f of files) parts.push({ mime: f.type || "image/jpeg", data: b64(await f.arrayBuffer()) });
+      let text = "", last = null;
+      for (const m of models) { try { text = await gemText(key, m, parts); last = null; break; } catch (e) { last = e; if (e.status === 429 || e.status === 400 || e.status === 403) break; } }
+      if (last) throw last;
+      const r = parseKE(text.split(/\r?\n/));
+      if (!r.days.length || !r.events.length) { $("rsMsg").innerHTML = `<b style="color:var(--warn)">사진에서 근무 달력을 읽지 못했습니다.</b> 날짜와 일정이 또렷하게 보이게 다시 찍어 주세요.`; return; }
+      const basis = r.basis || "SLT";
+      r.events.forEach((e) => { e.basis = basis; }); boundary(r.events); enrich(r.events, basis);
+      for (const e of r.events) if (e.kind === "FLT" && !e.warn && /편승|훈련 비행|체크 비행/.test(e.note || "")) e.warn = e.note;     // 편승·훈련·체크 비행은 확인 표시
+      const ds = r.days.slice().sort(), bn = { SLT: "SLT · 현지 시각", BLT: "BLT · 한국 시각", UTC: "UTC" }[basis];
+      preview(r.events.map((e) => Object.assign({ src: "photo" }, e)), "photo",
+        `<b>사진 ${files.length}장</b>에서 읽은 근무표 · 보인 날짜 <b>${ds[0].slice(5).replace("-", "/")} ~ ${ds[ds.length - 1].slice(5).replace("-", "/")}</b> · 시각 기준 <b>${bn}</b>${r.basis ? "" : " (화면에서 못 읽어 SLT 로 봄)"} · ${r.events.length}개 일정` +
+        `<br><span style="color:var(--warn);font-weight:700">사진 판독은 틀릴 수 있습니다. 날짜·편명·시각을 원본 화면과 꼭 대조하세요.</span>` +
+        (r.warn.length ? `<br><span style="color:var(--warn)">읽지 못한 줄 ${r.warn.length}개: ${esc(r.warn.slice(0, 3).join(" / "))}</span>` : ""),
+        [ds[0], ds[ds.length - 1]]);
+      $("rsMsg").innerHTML = "";
+    } catch (e) {
+      $("rsMsg").innerHTML = `<b style="color:var(--warn)">${e.status === 429 ? "오늘 Gemini 무료 사용량을 다 썼습니다. 한국시간 오후 4시(겨울 5시)쯤 다시 됩니다." : e.status === 400 || e.status === 403 ? "Gemini 키가 맞지 않거나 쓸 수 없습니다. 키를 다시 등록해 주세요." : "사진을 읽지 못했습니다: " + esc(e.message)}</b>`;
+    }
+  }
+  const PHOTO_OK = "csf-rs-photo-ok";
+  if ($("rsPhoto")) {
+    const paintPhoto = () => { const k = !!GKEY(); $("rsPhotoBtn").classList.toggle("off", !k); $("rsPhotoSub").textContent = k ? "Gemini · 여러 장 가능" : "Gemini 키 등록 후 사용"; };
+    paintPhoto(); addEventListener("storage", paintPhoto); document.addEventListener("visibilitychange", paintPhoto);
+    $("rsPhotoBtn").addEventListener("click", (e) => {
+      paintPhoto();
+      if (!GKEY()) { e.preventDefault(); $("rsMsg").innerHTML = `<b style="color:var(--warn)">사진 읽기는 Gemini 키를 등록한 분만 쓸 수 있습니다.</b> 위 ‘FLT Package 분석’ 메뉴의 Gemini AI 연결에서 키를 등록하세요. PDF 는 키 없이 됩니다.`; return; }
+      if (ls.get(PHOTO_OK) !== "1") { e.preventDefault(); $("rsConsent").hidden = false; $("rsConsent").scrollIntoView({ block: "nearest", behavior: "smooth" }); }
+    });
+    $("rsConsentOk").addEventListener("click", () => { ls.set(PHOTO_OK, "1"); $("rsConsent").hidden = true; $("rsPhoto").click(); });
+    $("rsConsentNo").addEventListener("click", () => { $("rsConsent").hidden = true; });
+    $("rsPhoto").addEventListener("change", (e) => { const fs = [...e.target.files].slice(0, 4); e.target.value = ""; if (fs.length) readPhotos(fs); });
+  }
+  if ($("rsPdf")) $("rsPdf").addEventListener("change", (e) => { const f = e.target.files[0]; e.target.value = ""; if (f) readPdf(f); });
+  if ($("rsSample")) {
+    $("rsSample").addEventListener("click", sample);
+    $("rsOpen").addEventListener("click", () => openMonth());
+    $("rsIcs").addEventListener("click", downloadIcs);
+    $("rsClear").addEventListener("click", () => { if (!R.events.length) return; R = { events: [] }; save(); $("rsMsg").innerHTML = `<b style="color:var(--ok)">이 기기에 저장된 근무표를 지웠습니다.</b> 구글 캘린더에 넣은 일정은 그대로입니다.`; });
+  }
+  count();
+  return { open: openMonth, preview, applyRange, events: () => R.events.slice(), ics };
 })();
 </script>
 <script>
@@ -1692,6 +2245,7 @@ window.FPREP = (() => {
   function open() { view("mnMain"); paintTheme(); $("mnVer").textContent = "FLT Assist " + (($("appVer") && $("appVer").textContent) || ""); $("menuSheet").hidden = false; }
   const close = () => { $("menuSheet").hidden = true; };
   $("menuBtn").addEventListener("click", open);
+  $("mnCal").addEventListener("click", () => { close(); window.ROSTER && window.ROSTER.open(); });
   $("menuSheet").addEventListener("click", (e) => {
     if (e.target === $("menuSheet") || e.target.closest("[data-mclose]")) return close();
     const v = e.target.closest("[data-mv]"); if (v) return view(v.dataset.mv);
@@ -1718,7 +2272,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v49", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v50", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
