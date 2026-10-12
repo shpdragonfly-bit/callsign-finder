@@ -20,6 +20,12 @@ function ReadConf { $c = @{}; if (Test-Path -LiteralPath $Conf) { foreach ($ln i
 function WriteConf($c) { $lines = @("# 비행준비 설정 (이 PC 전용, GitHub 에 올라가지 않음)"); foreach ($k in @("FP_DIR", "FP_URL", "FP_KEY")) { if ($c[$k]) { $lines += "$k=$($c[$k])" } }; [IO.File]::WriteAllLines($Conf, $lines, $Utf8) }
 # 봇 안내대로: 한 번에 읽고 바로 닫기, 없거나 깨졌으면 1초 뒤 다시
 function ReadJson($p) { for ($i = 0; $i -lt 3; $i++) { try { return ([IO.File]::ReadAllText($p, $Utf8) | ConvertFrom-Json) } catch { Start-Sleep -Seconds 1 } }; return $null }
+# 근거 규정 번호 표기(FCRM 1.7.6 등)는 '관련규정'으로 바꿔서 올림 (앱에서도 한 번 더 바꿈)
+function NoRef([string]$t) {
+  $t = $t -replace 'FCRM(?:\s*(?:Ch(?:apter)?\.?|Part|PT\.?)?\s*\d+(?:[.\-]\d+)*[A-Za-z]?)?(?:\s*(?:항|조|호)(?=[\s에의을를,.)]|$))?', '관련규정'
+  $t = $t -replace '관련규정\s*규정', '관련규정'
+  return ($t -replace '관련규정(?:\s*(?:[,·/]|및|와|과)\s*관련규정)+', '관련규정')
+}
 function Sha($p) { $s = [Security.Cryptography.SHA256]::Create(); try { return [BitConverter]::ToString($s.ComputeHash([IO.File]::ReadAllBytes($p))).Replace("-", "") } finally { $s.Dispose() } }
 
 $C = ReadConf
@@ -56,8 +62,8 @@ foreach ($a in @($idx.airports)) {
   $key = "$($a.company)|$($a.icao)"; $h = Sha $f; $now[$key] = $h
   if ($state[$key] -eq $h) { continue }
   $d = ReadJson $f; if ($null -eq $d) { Log "읽기 실패: $($a.icao)"; $now.Remove($key); continue }
-  $pick = { param($role) @(@($d.items) | Where-Object { $_.role -eq $role -and [int]$_.priority -eq 1 } | Sort-Object { [int]$_.order } | ForEach-Object { [ordered]@{ text = [string]$_.text; aircraft = @(@($_.aircraft) | Where-Object { $_ }); order = [int]$_.order; hazard = [bool]$_.hazard } }) }
-  $chg = { param($role) @(@($d.changes) | Where-Object { $_ -and ($_.role -eq $role -or $_.role -eq "general" -or -not $_.role) } | ForEach-Object { [ordered]@{ type = [string]$_.type; text = [string]$_.text } }) }
+  $pick = { param($role) @(@($d.items) | Where-Object { $_.role -eq $role -and [int]$_.priority -eq 1 } | Sort-Object { [int]$_.order } | ForEach-Object { [ordered]@{ text = (NoRef ([string]$_.text)); aircraft = @(@($_.aircraft) | Where-Object { $_ }); order = [int]$_.order; hazard = [bool]$_.hazard } }) }
+  $chg = { param($role) @(@($d.changes) | Where-Object { $_ -and ($_.role -eq $role -or $_.role -eq "general" -or -not $_.role) } | ForEach-Object { [ordered]@{ type = [string]$_.type; text = (NoRef ([string]$_.text)) } }) }
   $send += [ordered]@{ company = [string]$d.company; icao = [string]$d.icao; iata = [string]$d.iata; eff_date = [string]$d.eff_date; date_label = [string]$d.date_label; version = [string]$d.version
     dep = (& $pick "dep"); arr = (& $pick "arr"); chg_dep = (& $chg "dep"); chg_arr = (& $chg "arr") }
 }
