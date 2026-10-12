@@ -50,8 +50,11 @@ jobs:
         if: false
         run: python tools/probe_relay.py
       - name: 인천 버스 API 명세
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python tools/probe_incheon_spec.py
       - name: 인천 버스정보 API 점검
+        if: false
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python tools/probe_incheon.py

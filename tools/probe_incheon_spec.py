@@ -1,31 +1,36 @@
-"""인천 버스 API 명세(openapi.json) 받기: 공공데이터포털 검색 → 데이터셋 명세 저장 (키 불필요)."""
-import json, os, re, time, urllib.parse, urllib.request
+"""인천 버스 API: 데이터셋 페이지에서 요청 주소·오퍼레이션 뽑기 + 주소 변형 시험 (키 값은 저장 안 함)."""
+import json, os, re, time, urllib.parse, urllib.request, html as H
 OUT = "probe/bus_ic/spec"; os.makedirs(OUT, exist_ok=True)
 UA = "Mozilla/5.0 (callsign-finder probe)"
-def get(u):
-    with urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": UA}), timeout=30) as r:
-        return r.read().decode("utf-8", "replace")
-found = {}
-for kw in ["인천광역시_버스도착정보", "인천광역시_버스노선", "인천광역시_정류소", "인천광역시_버스위치정보", "인천광역시 버스"]:
+KEY = os.environ.get("DATA_GO_KR_KEY", ""); k = urllib.parse.quote(KEY, safe="")
+def get(u, t=30):
     try:
-        html = get("https://www.data.go.kr/tcs/dss/selectDataSetList.do?dType=API&currentPage=1&perPage=40&keyword=" + urllib.parse.quote(kw))
-        for m in re.finditer(r'/data/(\d{8})/openapi\.do[^>]*>\s*(?:<[^>]+>\s*)*([^<]{3,120})', html):
-            if "인천" in m.group(2): found.setdefault(m.group(1), m.group(2).strip())
+        with urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": UA}), timeout=t) as r:
+            return r.status, r.read().decode("utf-8", "replace")
     except Exception as e:
-        found["err_" + kw] = str(e)
+        b = ""
+        try: b = e.read().decode("utf-8", "replace")[:2000]
+        except Exception: pass
+        return "ERR %s" % e, b
+pages = {}
+for did in ["15059084", "15058487", "15056529", "15059206"]:
+    st, b = get(f"https://www.data.go.kr/data/{did}/openapi.do")
+    txt = H.unescape(re.sub(r"<script.*?</script>|<style.*?</style>", " ", b, flags=re.S))
+    urls = sorted(set(re.findall(r"https?://apis\.data\.go\.kr/6280000/[A-Za-z0-9_/]+", txt)))
+    ops = sorted(set(re.findall(r"\b(get[A-Z][A-Za-z0-9]+)\b", txt)))
+    plain = re.sub(r"<[^>]+>", " ", txt); plain = re.sub(r"\s+", " ", plain)
+    i = plain.find("요청주소")
+    pages[did] = {"status": str(st), "urls": urls, "ops": ops, "around": plain[max(0, i - 200): i + 1500] if i >= 0 else plain[:1500]}
+    open(os.path.join(OUT, f"page_{did}.html"), "w", encoding="utf-8").write(b[:300000])
     time.sleep(1)
-for k in ["15058487", "15056529", "15059206"]: found.setdefault(k, "")
-index = {}
-for did, title in found.items():
-    if not did.isdigit(): continue
-    try:
-        body = get(f"https://www.data.go.kr/catalog/{did}/openapi.json")
-        open(os.path.join(OUT, did + ".json"), "w", encoding="utf-8").write(body[:200000])
-        try:
-            d = json.loads(body); index[did] = {"title": title or d.get("name", ""), "paths": list((d.get("paths") or {}).keys())[:20], "host": d.get("host", ""), "base": d.get("basePath", ""), "servers": d.get("servers")}
-        except Exception: index[did] = {"title": title, "raw": body[:300]}
-    except Exception as e:
-        index[did] = {"title": title, "err": str(e)}
-    time.sleep(1)
-json.dump(index, open(os.path.join(OUT, "index.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-print(json.dumps(index, ensure_ascii=False)[:4000])
+json.dump(pages, open(os.path.join(OUT, "pages.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+# 주소 변형 시험 (노선번호 306)
+tries = {}
+for base in ["https://apis.data.go.kr/6280000", "http://apis.data.go.kr/6280000"]:
+    for path in ["busRouteService/getBusRouteNo", "BusRouteService/getBusRouteNo", "busRouteService/getBusRouteNoList"]:
+        for q in ["routeNo=306", "routeNo=306&pageNo=1&numOfRows=10"]:
+            st, b = get(f"{base}/{path}?serviceKey={k}&{q}")
+            tries[f"{base.split(':')[0]} {path} {q}"] = [str(st), re.sub(r"\s+", " ", b.replace(k, "KEY").replace(KEY, "KEY"))[:300]]
+            time.sleep(0.3)
+json.dump(tries, open(os.path.join(OUT, "tries.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+print(json.dumps({d: {"urls": p["urls"], "ops": p["ops"]} for d, p in pages.items()}, ensure_ascii=False))
