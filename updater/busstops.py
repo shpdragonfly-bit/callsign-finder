@@ -129,20 +129,16 @@ def tago(num, label):
     if not st:
         return None
     air = [bool(AIR.search(str(x.get("nodenm") or ""))) for x in st]
-    # 공항 정류장 묶음: 처음부터 공항이면(공항 출발) 그 묶음은 건너뛰고 다음 공항 묶음 앞까지
-    i = 0
-    while i < len(st) and air[i]:
-        i += 1
-    start = i
-    while i < len(st) and not air[i]:
-        i += 1
-    if i >= len(st) or i == start:
-        return None                                    # 공항으로 가는 구간 없음
-    stops = []
-    for x in st[start:i]:
+    # 이 정류장 뒤에 공항 정류장이 또 나오면 '공항 가는 방향' (공항에서 출발해 돌아오는 영종 노선·순환 노선 포함)
+    if True not in air:
+        return None
+    last = len(air) - 1 - air[::-1].index(True)
+    stops, seen = [], set()
+    for x, a in zip(st[:last], air[:last]):
         name = str(x.get("nodenm") or "").strip()
-        if "(경유)" in name or "차고지" in name:
+        if a or x["nodeid"] in seen or re.search(r"\(경유\)|미정차|차고지", name):
             continue
+        seen.add(x["nodeid"])
         stops.append([int(x["nodeord"]), x["nodeid"], name, str(x.get("nodeno") or "").strip()])
     return {"src": "t", "id": rid, "stops": stops} if stops else None
 
