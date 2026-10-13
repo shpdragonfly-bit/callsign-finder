@@ -55,10 +55,15 @@ jobs:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python tools/probe_incheon_alt.py
       - name: 인천 공항버스 정류장 (TAGO)
+        if: false
         timeout-minutes: 20
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python tools/probe_ic_stops.py
+      - name: 인천공항 편명 조회 점검
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+        run: python tools/probe_icn_flt.py
       - name: TAGO 도착정보 형식
         if: false
         env:
