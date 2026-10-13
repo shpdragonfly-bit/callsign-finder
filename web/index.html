@@ -141,9 +141,19 @@ body[data-tab="ft"] .cs-only, body[data-tab="pk"] .cs-only, body[data-tab="cm"] 
 .hint { color: var(--muted); font-size: 13px; margin: 8px 2px 0; }
 
 .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; margin-top: 14px; overflow: hidden; box-shadow: var(--shadow); }
-.card-hd { display: flex; align-items: baseline; justify-content: space-between; padding: 14px 16px 0; gap: 8px; }
+.card-hd { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 0; gap: 8px; }
 .cs { font: 700 22px var(--mono); letter-spacing: .04em; }
 .cs small { font: 500 13px system-ui, sans-serif; color: var(--muted); margin-left: 8px; letter-spacing: 0; }
+.card-hd .nx { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; font-size: 16px; font-weight: 700; white-space: nowrap; min-width: 0; }
+.card-hd .nx-l { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+.card-hd .nx-c { font-size: 14.5px; color: var(--text); line-height: 1.2; } .card-hd .nx-c b { font-size: 15.5px; font-weight: 700; letter-spacing: .02em; } .card-hd .nx .nx-c .g { margin-left: 0; font-size: 13px; }
+.card-hd .nx .k { font-size: 13px; font-weight: 700; padding: 2px 7px; border-radius: 6px; color: #fff; }
+.card-hd .nx .k.d { background: #1C7ED6; } .card-hd .nx .k.a { background: #2F9E44; } .card-hd .nx .g { color: var(--muted); font-size: 13px; font-weight: 600; margin-left: 3px; }
+.card-hd .nx .ns { font-size: 13px; padding: 2px 7px; border-radius: 6px; border: 1.5px solid currentColor; margin-left: 3px; }
+.card-hd .nx .ns.s-bad { color: var(--warn); } .card-hd .nx .ns.s-chk { color: #1C7ED6; } .card-hd .nx .ns.s-brd { color: #E8590C; } .card-hd .nx .ns.s-done { color: var(--ok); } .card-hd .nx .ns.s-plan { color: var(--muted); }
+:root[data-theme="dark"] .card-hd .nx .ns.s-chk { color: #74C0FC; } :root[data-theme="dark"] .card-hd .nx .ns.s-brd { color: #FFA94D; }
+@media (max-width: 380px) { .card-hd { padding: 14px 12px 0; gap: 6px; } .card-hd .cs { font-size: 20px; } .card-hd .nx { font-size: 15px; } .card-hd .nx-l { gap: 4px; } .card-hd .nx .k, .card-hd .nx .ns { font-size: 12.5px; padding: 2px 5px; } .card-hd .nx .g, .card-hd .nx .ns { margin-left: 1px; } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .card-hd .nx .ns.s-chk { color: #74C0FC; } :root:not([data-theme="light"]) .card-hd .nx .ns.s-brd { color: #FFA94D; } }
 .cs small.utz { color: var(--accent); font-weight: 700; border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; vertical-align: 3px; }
 .utz { display: inline-block; font: 700 12px system-ui, sans-serif; letter-spacing: 0; color: var(--accent); border: 1px solid var(--line); border-radius: 6px; padding: 0 5px; line-height: 1.5; vertical-align: 1px; white-space: nowrap; }
 
@@ -178,6 +188,12 @@ body[data-tab="ft"] .cs-only, body[data-tab="pk"] .cs-only, body[data-tab="cm"] 
 .si-m { font-size: 12px; color: var(--muted); margin-top: 2px; }
 .si-m b { color: var(--text); font-family: var(--mono); }
 .si-m.muted { padding-top: 4px; }
+.si-chg { font: 700 14px var(--mono); color: var(--warn); margin-top: 3px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.si-rot { font-size: 12.5px; word-break: keep-all; color: var(--text); margin-top: 4px; padding: 4px 8px; background: var(--panel-2); border-radius: 6px; } .si-rot b { font-family: var(--mono); } .si-rl { color: var(--warn); font-weight: 700; } .si-reg { color: var(--muted); font-size: 11.5px; }
+.sch-live { color: var(--ok); }
+@media (max-width: 380px) { .si-rot { font-size: 12px; padding: 4px 7px; } .si-chg { font-size: 13px; } .si-x { font-size: 12px; } }
+.si-x { font: 700 12.5px system-ui, sans-serif; color: var(--warn); border: 1.5px solid currentColor; padding: 0 6px; border-radius: 5px; }
+.si-cx .si-t { text-decoration: line-through; opacity: .6; }
 .chg { font: 700 11px system-ui, sans-serif; color: var(--accent); background: var(--accent-soft); padding: 1px 6px; border-radius: 5px; }
 .bad { font: 700 11px system-ui, sans-serif; color: #fff; background: var(--warn); padding: 1px 6px; border-radius: 5px; }
 .apx-hd { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
@@ -1306,7 +1322,7 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
       <span id="hPos"></span>
       <button type="button" id="hFwd" aria-label="다음 조회">다음 ▶</button>
     </div>
-    <p class="hint" id="hint">ICAO(KAL017), IATA(KE17), 무선호출부호(KOREANAIR 17), 숫자만 입력해도 됩니다. 공항 코드(LAX, KLAX)를 넣으면 해당 공항 편이 나옵니다.</p>
+    <p class="hint" id="hint" hidden></p>
     <div id="result"></div>
     <div id="sugg" class="list"></div>
     <div id="recent" class="list"></div>
@@ -1533,7 +1549,7 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
     </div>
     <div id="msg" class="cs-only"></div>
     <div class="small cs-only">
-      노선: VRS standing-data(사용자 제보 기반) · 기종: ADS-B 관측 누적값입니다. 실제 운항 기종·노선은 당일 운항 정보와 다를 수 있으니 참고용으로만 사용하세요.
+      노선: VRS standing-data(사용자 제보 기반) · 기종: ADS-B 관측 누적값. 실제 운항 기종·노선은 당일 운항 정보와 다를 수 있습니다.
     </div>
     <div class="credit cs-only">© 2026 Made by DG Company. <span id="appVer"></span></div>
   </footer>
@@ -3036,7 +3052,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v54", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v55", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -3151,7 +3167,7 @@ window.csfStat = (() => {
       `<button role="tab" data-al="${esc(k)}" aria-pressed="${k === AL}" aria-selected="${k === AL}">${esc(SHORT[k] || a.name)}</button>`).join("");
     const a = al[AL] || {};
     $("q").placeholder = `${a.iata || ""}17 / 17 / LAX`;
-    $("hint").textContent = `ICAO(${AL}017), IATA(${a.iata || ""}17), 무선호출부호(${a.telephony || ""} 17), 숫자만 입력해도 됩니다. 공항 코드(LAX, KLAX)를 넣으면 해당 공항 편이 나옵니다.`;
+    /* 안내 문구는 검색창 회색 예시(placeholder)로 대신함 */
   }
   function setAirline(k, keepQuery) {
     if (k === AL) return;
@@ -3227,24 +3243,125 @@ window.csfStat = (() => {
     const now = Date.now() - 6 * 3600e3;
     return ((sc && sc.inst) || []).find((i) => i[4] && utcOf(i[0]) >= now) || ((sc && sc.inst) || []).filter((i) => i[4]).pop();
   }
-  function renderSched(sc) {
+  // ---------- 다음 인천공항 편 (카드 오른쪽): 운항 자료(6시간마다) → 온라인이면 그 편만 실시간으로 다시 물어 바꿈 ----------
+  const TERM = { P01: "T1", P02: "탑승동", P03: "T2", C01: "화물T", C02: "화물T" };
+  const FLT_RELAY = (() => { try { return localStorage.getItem("csf-relay"); } catch (e) { return null; } })() || "https://script.google.com/macros/s/AKfycbzTAeL3aNCqJmxqog74kBSE5nhEfoeXI3xEFBwj4bY6nDm9XsfW-4dtoy0q4qRvxbNP/exec";
+  const liveFlt = {}, schOf = {};   // schOf: 실시간 도착 시 목록 다시 그리려고 보관          // { KE017: { at, list:[[t,e,io,ap,term,gate,chk,st]] } }
+  const icnId = (cs) => { const al = DB.airlines[cs.slice(0, 3)] || {}, n = cs.slice(3); return al.iata ? al.iata + (/^\d+$/.test(n) ? n.padStart(3, "0") : n) : ""; };
+  function nextOf(list) {        // 지금 기준 가장 가까운 편 (출발·도착 15분 지난 것까지)
+    const now = Date.now() - 15 * 60e3;
+    return (list || []).map((i) => ({ i, at: utcOf(i[1] || i[0]) || utcOf(i[0]) })).filter((x) => x.at && x.at >= now).sort((a, b) => a.at - b.at)[0];
+  }
+  const kd = (d) => new Date(d.getTime() + 9 * 3600e3), khm = (d) => { const k = kd(d); return `${p2(k.getUTCHours())}:${p2(k.getUTCMinutes())}`; };
+  const kdt = (d) => { const k = kd(d); return `${k.getUTCMonth() + 1}/${k.getUTCDate()}(${WD[k.getUTCDay() || 7]}) ${khm(d)}`; };   // 한국 날짜·시각
+  // 한 줄: [출발] T2 Gate 232 [탑승중]  — 상태 색: 지연·결항·회항 / 수속 / 탑승·마감 / 출발·도착
+  // 인천공항 문구 → 정해진 몇 가지로만 (마감예정 = 곧 탑승 마감 → 탑승중). 그 밖·미표시는 예정
+  function stOf(st, io) {
+    st = (st || "").replace(/\s+/g, "");
+    if (/결항|취소/.test(st)) return ["결항", "s-bad"];
+    if (/회항/.test(st)) return ["회항", "s-bad"];
+    if (/지연/.test(st)) return ["지연", "s-bad"];
+    if (/탑승마감/.test(st)) return ["탑승마감", "s-brd"];
+    if (/탑승|마감/.test(st)) return ["탑승중", "s-brd"];
+    if (/수속|체크인/.test(st)) return ["수속중", "s-chk"];
+    if (/도착|착륙/.test(st)) return ["도착", "s-done"];
+    if (/출발/.test(st) && io === "D") return ["출발", "s-done"];
+    return ["예정", "s-plan"];
+  }
+  // "A B C D" → "A–D", "F G H" → "F–H", 띄엄띄엄이면 "A, C"
+  function chkOf(c) {
+    const a = (c || "").toUpperCase().split(/[\s,~\-–]+/).filter(Boolean); if (!a.length) return "";
+    const one = a.every((x) => /^[A-Z]$/.test(x)), seq = one && a.every((x, k) => !k || x.charCodeAt(0) === a[k - 1].charCodeAt(0) + 1);
+    return seq && a.length > 1 ? `${a[0]}–${a[a.length - 1]}` : a.join(", ");
+  }
+  function icnBox(x, live) {
+    const i = x.i, t = utcOf(i[0]), e = utcOf(i[1]) || t, D = i[2] === "D";
+    const term = TERM[i[8]] || i[8] || "", s = stOf(i[7] || "", i[2]);
+    const tip = `${kdt(e)}${e - t >= 5 * 60e3 ? ` (예정 ${khm(t)})` : ""} · ${live ? "실시간 " + live : "운항 자료"}`;
+    const ck = i[2] === "D" ? chkOf(i[9]) : "";
+    return `<div class="nx${live ? " live" : ""}" title="${esc(tip)}"><div class="nx-l"><span class="k ${D ? "d" : "a"}">${D ? "출발" : "도착"}</span>${term ? `<span>${esc(term)}</span>` : ""}${i[6] ? `<span class="g">Gate</span><span>${esc(i[6])}</span>` : ""}${s ? `<span class="ns ${s[1]}">${esc(s[0])}</span>` : ""}</div>${ck ? `<div class="nx-c"><span class="g">체크인</span> <b>${esc(ck)}</b></div>` : ""}</div>`;
+  }
+  function icnNext(cs, f) {
+    const id = icnId(cs), lv = liveFlt[id];
+    const x = lv && lv.list.length ? nextOf(lv.list) : nextOf(f.sch && f.sch.inst);
+    setTimeout(() => icnLive(cs), 0);
+    if (!x) return `<div class="nx" data-nx="${esc(id)}"></div>`;
+    return icnBox(x, lv && lv.list.length ? lv.hm : "").replace('<div class="nx', `<div data-nx="${esc(id)}" class="nx`);
+  }
+  // 그 편만 인천공항 운항현황에 실시간으로 (중계 Apps Script, 60초 캐시). 오프라인이면 운항 자료 그대로
+  function icnLive(cs) {
+    const id = icnId(cs); if (!id || !FLT_RELAY || !navigator.onLine) return;
+    const lv = liveFlt[id]; if (lv && Date.now() - lv.t < 60000) return;
+    liveFlt[id] = Object.assign(lv || { list: [] }, { t: Date.now() });
+    fetch(`${FLT_RELAY}?s=f&fl=${encodeURIComponent(id)}`, { cache: "no-store" }).then((r) => r.json()).then((d) => {
+      if (!d || !d.ok || !Array.isArray(d.f)) return;
+      const k = new Date(Date.now() + 9 * 3600e3);
+      liveFlt[id] = { t: Date.now(), hm: `${p2(k.getUTCHours())}:${p2(k.getUTCMinutes())}`, list: d.f.map((x) => [x.t, x.e, x.io, x.ap, "", "", x.gate, x.st, x.term, x.chk]) };
+      const el = document.querySelector(`[data-nx="${CSS.escape(id)}"]`), x = nextOf(liveFlt[id].list);
+      if (el && x) el.outerHTML = icnBox(x, liveFlt[id].hm).replace('<div class="nx', `<div data-nx="${esc(id)}" class="nx`);
+      const se = document.querySelector(`[data-sch="${CSS.escape(id)}"]`);
+      if (se && schOf[id]) se.outerHTML = renderSched(schOf[id], cs);
+    }).catch(() => {});
+  }
+  // 실시간 조회가 있으면 같은 편(예정 시각 같음)에 변경 시각·상태·게이트를 덮어씀. 자료에 없던 편은 추가
+  const genAt = () => { const g = new Date(DB.generated); return isNaN(g) ? "" : `${kd(g).getUTCMonth() + 1}/${kd(g).getUTCDate()} ${khm(g)}`; };   // 운항 자료 받은 시각 (KST)
+  function schRows(sc, id) {
+    const m = new Map((sc.inst || []).map((i) => [i[0], i.slice()])), lv = id && liveFlt[id];
+    if (lv && lv.list.length) for (const x of lv.list) {
+      const o = m.get(x[0]);
+      if (o) { o[1] = x[1] || o[1]; o[7] = x[7]; if (x[6]) o[6] = x[6]; if (x[8]) o[8] = x[8]; o.live = 1; }
+      else { const n = x.slice(0, 9); n.live = 1; m.set(x[0], n); }
+    }
+    return [...m.values()].sort((p, q) => (p[0] < q[0] ? -1 : 1));
+  }
+  // 같은 등록번호로 이어지는 앞뒤 편 (인천공항 자료: 오늘·내일 편만 등록번호 있음)
+  let regIdx = null, regGen = "";
+  function rotOf(cs, i) {
+    if (!i[5] || !DB.flights) return null;
+    if (regGen !== DB.generated) {
+      regIdx = {}; regGen = DB.generated;
+      for (const [c, f] of Object.entries(DB.flights)) for (const x of (f && f.sch && f.sch.inst) || []) if (x[5]) (regIdx[x[5]] = regIdx[x[5]] || []).push([c, x]);
+    }
+    const me = utcOf(i[0]), D = i[2] === "D", W = 48 * 3600e3;
+    let best = null;
+    for (const [c, x] of regIdx[i[5]] || []) {
+      if (c === cs && x[0] === i[0]) continue;
+      const at = utcOf(x[0]); if (!at) continue;
+      if (D ? x[2] === "A" && at < me && me - at < W && (!best || at > best.at) : x[2] === "D" && at > me && at - me < W && (!best || at < best.at)) best = { c, x, at };
+    }
+    return best ? { ...best, prev: D } : null;
+  }
+  function rotLine(cs, i) {
+    const r = rotOf(cs, i); if (!r) return "";
+    const x = r.x, t = utcOf(x[0]), e = utcOf(x[1]) || t, dm = Math.round((e - t) / 60e3), when = Math.abs(dm) >= 5 ? e : t;
+    const fl = icnId(r.c) || r.c, leg = r.prev ? `${esc(x[3])}→ICN` : `ICN→${esc(x[3])}`;
+    const mv = Math.abs(dm) >= 5, cx = /결항/.test(x[7] || "");   // 시각이 바뀌었으면 바뀐 시각을 빨갛게
+    return `<div class="si-rot">${r.prev ? "이전편" : "다음편"} <b>${esc(fl)}</b> ${leg} <span class="${mv || cx ? "si-rl" : ""}">${kd(when).getUTCMonth() + 1}/${kd(when).getUTCDate()} ${fz(when)}${cx ? " 결항" : " " + khm(when)}</span></div>`;
+  }
+  function renderSched(sc, cs) {
     if (!sc) return "";
+    const id = cs ? icnId(cs) : "";
+    if (id) schOf[id] = sc;
     const wd = sc.wd || "";
-    let h = `<div class="sch"><div class="apx-hd"><span>운항 스케줄</span><span class="sch-src">${sc.cargo ? "화물" : ""}</span></div>`;
+    let h = `<div class="sch"${id ? ` data-sch="${esc(id)}"` : ""}><div class="apx-hd"><span>운항 스케줄</span><span class="sch-src">${sc.cargo ? "화물 · " : ""}${id && liveFlt[id] && liveFlt[id].hm ? `<b class="sch-live">실시간 ${liveFlt[id].hm}</b>` : `${genAt()} 자료`}</span></div>`;
     if (wd) {
       h += `<div class="wd">${[1, 2, 3, 4, 5, 6, 7].map((d) => `<span class="${wd.includes(d) ? "on" : ""}">${WD[d]}</span>`).join("")}
         <b>${wd.length === 7 ? "매일" : "주 " + wd.length + "회"}</b></div>`;
     }
     const now = Date.now() - 6 * 3600e3;
-    const up = (sc.inst || []).filter((i) => utcOf(i[0]) >= now).slice(0, 4);
+    const up = schRows(sc, id).filter((i) => utcOf(i[0]) >= now).slice(0, 4);
+    const near = nextOf(up), nearI = near && near.i;
     for (const i of up) {
       const t = utcOf(i[0]), e = utcOf(i[1]);
-      const moved = e && Math.abs(e - t) >= 5 * 60e3;
+      const dm = e ? Math.round((e - t) / 60e3) : 0, moved = Math.abs(dm) >= 5;
       const what = i[2] === "D" ? `ICN 출발 → ${esc(i[3])}` : `${esc(i[3])} → ICN 도착`;
-      const bad = /결항|지연|회항/.test(i[7] || "");
-      h += `<div class="si"><div class="si-t"><small>${fdate(t)}</small> <b>${fz(t)}</b> <small>${fkst(t)}</small>
-          ${moved ? `<span class="chg">변경 ${fz(e)}</span>` : ""}${bad ? `<span class="bad">${esc(i[7])}</span>` : ""}</div>
-        <div class="si-m">${what}${i[4] ? ` · <b>${esc(i[4])}</b>` : ""}${i[5] ? ` ${esc(i[5])}` : ""}${i[6] ? ` · 게이트 ${esc(i[6])}` : ""}</div></div>`;
+      const st = i[7] || "", cx = /결항|취소/.test(st), io = i[2] === "D" ? "출발" : "도착";
+      const ad = Math.abs(dm), dt = ad >= 60 ? `${Math.floor(ad / 60)}시간 ${ad % 60}분` : ad + "분";
+      // 아래 줄(빨강): [출발지연 +25분] 0555Z 14:55 KST · [조기도착 −10분] … · [결항] · [회항]
+      const tag = cx ? "결항" : /회항/.test(st) ? "회항" : moved ? (dm > 0 ? `${io}지연 +${dt}` : `조기${io} −${dt}`) : /지연/.test(st) ? `${io}지연` : "";
+      h += `<div class="si${cx ? " si-cx" : ""}"><div class="si-t"><small>${fdate(t)}</small> <b class="si-o">${fz(t)}</b> <small>${fkst(t)}</small></div>
+        ${tag ? `<div class="si-chg"><span class="si-x">${tag}</span>${moved && !cx ? ` ${fz(e)} ${fkst(e)}` : ""}</div>` : ""}
+        <div class="si-m">${what}${i[4] ? ` · <b>${esc(i[4])}</b>` : ""}${i[5] ? ` ${esc(i[5])}` : ""}${i[8] ? ` · ${esc(TERM[i[8]] || i[8])}` : ""}${i[6] ? ` · 게이트 ${esc(i[6])}` : ""}</div>${i === nearI && cs ? rotLine(cs, i) : ""}</div>`;
     }
     if (!up.length && (sc.inst || []).length) h += `<div class="si-m muted">앞으로 6일 안에 인천공항 운항 예정이 없습니다.</div>`;
     for (const x of sc.season || []) {
@@ -3321,7 +3438,7 @@ window.csfStat = (() => {
 
   function renderFlight(cs, f) {
     const al = DB.airlines[cs.slice(0, 3)] || {};
-    let h = `<div class="card"><div class="card-hd"><div class="cs">${esc(cs)}<small>${esc(al.name || "")} ${esc(al.iata ? al.iata + cs.slice(3) : "")}</small></div></div>`;
+    let h = `<div class="card"><div class="card-hd"><div class="cs">${esc(cs)}</div>${icnNext(cs, f)}</div>`;
     const r = f.r && f.r.length >= 2 ? f.r : schedRoute(f.sch);
     if (r) {
       h += `<div class="route">${apBlock(r[0], "org")}<div class="arrow">→</div>${apBlock(r[r.length - 1], "dst")}</div>`;
@@ -3344,7 +3461,7 @@ window.csfStat = (() => {
     } else {
       h += `<div class="type"><div class="tcode">—</div><div><div class="tname">기종 미확인</div><div class="tmeta">업데이트 시 ADS-B 관측으로 누적됩니다</div></div></div>`;
     }
-    h += renderSched(f.sch);
+    h += renderSched(f.sch, cs);
     if (r) {
       h += `<div class="apx"><div class="apx-hd"><span>표고 · 일출·일몰 (UTC)</span>
         <span class="apx-day"><button data-sunday="0" aria-pressed="${sunDay === 0}">오늘</button><button data-sunday="1" aria-pressed="${sunDay === 1}">내일</button></span></div>
@@ -5161,7 +5278,7 @@ window.UID = (() => {
       const one = q() ? hits.find((r) => split(r.n)[0].toUpperCase() === q()) || (hits.length === 1 ? hits[0] : null) : null;
       const bs = one && BS && BS.routes[one.n];
       rtRoute = one;
-      if (bs) {                                         // 정류장 ID 가 있는 노선 (서울·경기): 실시간 도착 가능
+      if (bs) {                                         // 정류장 ID 가 있는 노선 (서울·경기·인천): 실시간 도착 가능
         const cur = (st.gs || {})[one.n] || "";
         $("cmStop").innerHTML = `<option value="">탑승 정류장 (공항 방향)</option>` + bs.stops.map((x) => `<option value="${esc(x[1])}"${String(x[1]) === String(cur) ? " selected" : ""}>${esc(x[2])}${x[3] ? ` (${esc(x[3])})` : ""}</option>`).join("");
       } else {
@@ -5170,7 +5287,7 @@ window.UID = (() => {
         $("cmStop").innerHTML = `<option value="">${one ? "탑승 정류장" : "버스 번호 먼저"}</option>` + stops.map((x) => `<option${x === cur ? " selected" : ""}>${esc(x)}</option>`).join("");
       }
       $("cmStop").disabled = !one;
-      $("cmBusNote").textContent = one ? (bs ? "" : "이 노선은 실시간 도착 정보가 없습니다 (서울·경기 노선만 지원). 노선 정보와 첫차·막차를 보여 줍니다.") : q() ? (hits.length ? `일치하는 노선 ${hits.length}개 — 번호를 정확히 넣어 주세요: ${hits.slice(0, 8).map((r) => split(r.n)[0]).join(", ")}` : "일치하는 공항버스 노선이 없습니다.") : "타는 공항버스 번호를 넣어 주세요 (예: 6001).";
+      $("cmBusNote").textContent = one ? (bs ? "" : "이 노선은 실시간 도착 정보가 없습니다 (서울·경기·인천 노선만 지원). 노선 정보와 첫차·막차를 보여 줍니다.") : q() ? (hits.length ? `일치하는 노선 ${hits.length}개 — 번호를 정확히 넣어 주세요: ${hits.slice(0, 8).map((r) => split(r.n)[0]).join(", ")}` : "일치하는 공항버스 노선이 없습니다.") : "타는 공항버스 번호를 넣어 주세요 (예: 6001).";
       $("cmBusList").innerHTML = one ? (bs ? `<div class="cm-rt rt" id="cmRt">${rtHtml()}</div>` : "") + routeCard(one, "go") : "";
       if (bs) rtFetch();
       return;

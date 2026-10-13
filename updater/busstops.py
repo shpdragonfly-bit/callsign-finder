@@ -37,16 +37,16 @@ CALLS = 0
 
 def get(url):
     global CALLS
-    for attempt in range(3):
+    for attempt in range(2):
         try:
             CALLS += 1
             req = urllib.request.Request(url, headers={"User-Agent": "callsign-finder"})
-            with urllib.request.urlopen(req, timeout=40) as r:
+            with urllib.request.urlopen(req, timeout=20) as r:
                 return json.loads(r.read().decode("utf-8"))
         except Exception:
-            if attempt == 2:
+            if attempt == 1:
                 return None
-            time.sleep(2 * (attempt + 1))
+            time.sleep(3)
 
 
 def split(n):
@@ -156,7 +156,17 @@ def main():
             pass
     bus = json.load(open(os.path.join(ROOT, "web", "bus.json"), encoding="utf-8"))
     out, miss = {}, []
+    old_routes = {}
+    try:
+        old_routes = json.load(open(os.path.join(ROOT, "web", "busstops.json"), encoding="utf-8")).get("routes", {})
+    except Exception:
+        pass
+    t0 = time.time()
     for r in bus["routes"]:
+        if time.time() - t0 > 900:                     # 15분 넘으면 남은 노선은 이전 자료 그대로 (배포가 오래 멈추지 않게)
+            if r["n"] in old_routes:
+                out[r["n"]] = old_routes[r["n"]]
+            continue
         if r.get("a") not in ("서울", "경기", "인천"):
             continue
         num, label = split(r["n"])

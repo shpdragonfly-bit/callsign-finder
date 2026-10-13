@@ -128,6 +128,8 @@ def fetch_icn(key, iata_map):
                     "reg": (x.get("aircraftRegNo") or "").strip().upper(),
                     "gate": (x.get("gateNumber") or "").strip(),
                     "st": (x.get("remark") or "").strip(),
+                    "term": (x.get("terminalId") or "").strip(),         # P01=T1 · P02=탑승동 · P03=T2
+                    "chk": (x.get("chkinRange") or "").strip() if io == "D" else "",   # 체크인 카운터 (출발편)
                     "pc": "C" if pc == "C" else "P",
                 })
             log("  인천공항 %s/%s: %d건" % ("출발" if io == "D" else "도착", "화물" if pc == "C" else "여객", len(items)))
@@ -222,7 +224,7 @@ def build(cache, now):
             if i["t"]:
                 kst = dt.datetime.strptime(i["t"], "%Y%m%d%H%M").replace(tzinfo=dt.timezone.utc).astimezone(KST)
                 days.add(kst.isoweekday())
-        keep = [[i["t"], i["e"], i["io"], i["ap"], i["ty"], i["reg"], i["gate"], i["st"]] for i in inst if i["t"] >= cutoff]
+        keep = [[i["t"], i["e"], i["io"], i["ap"], i["ty"], i["reg"], i["gate"], i["st"], i.get("term", ""), i.get("chk", "")] for i in inst if i["t"] >= cutoff]
         out[cs] = {"wd": "".join(str(d) for d in sorted(days)), "src": "ICN", "inst": keep,
                    "cargo": any(i.get("pc") == "C" for i in inst)}
     for cs, seasons in (cache.get("kac") or {}).items():
