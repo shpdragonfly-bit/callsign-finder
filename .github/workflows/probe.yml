@@ -42,7 +42,6 @@ jobs:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python tools/probe_bus_rt.py
       - name: 공항버스 정류장 ID 수집 시험
-        if: false
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python updater/busstops.py probe/bus_rt/busstops.json --force
@@ -55,6 +54,7 @@ jobs:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python tools/probe_incheon_alt.py
       - name: TAGO 도착정보 형식
+        if: false
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python tools/probe_tago_arvl.py

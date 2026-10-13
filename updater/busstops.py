@@ -4,7 +4,7 @@
 
   python3 updater/busstops.py [출력경로] [--force]
 
-- web/bus.json 의 서울·경기 노선을 서울 버스정보(ws.bus.go.kr)·경기 버스정보(GBIS v2)에서 찾아
+- web/bus.json 의 서울·경기·인천 노선을 서울 버스정보(ws.bus.go.kr)·경기 버스정보(GBIS v2)·국토교통부 TAGO(인천)에서 찾아
   노선 ID 와 정류장 ID·순번을 저장합니다. 앱은 이 ID 로 실시간 도착 중계(Apps Script)에 묻습니다.
 - 정류장은 거의 바뀌지 않으므로 파일이 7일 이내면 건너뜁니다 (--force 로 강제).
 - 인증키: 환경변수 DATA_GO_KR_KEY (또는 config/local.env)
@@ -111,6 +111,42 @@ def gbis(num, label):
     return {"src": "g", "id": rid, "stops": stops} if stops else None
 
 
+def tago(num, label):
+    """인천: 국토교통부 TAGO (인천시 API 는 해외 서버에서 응답하지 않아 TAGO 사용). 정류장 순서대로 첫 인천공항 정류장 앞까지 = 공항 가는 방향"""
+    T = "https://apis.data.go.kr/1613000/BusRouteInfoInqireService"
+    def items(d):
+        it = ((((d or {}).get("response") or {}).get("body") or {}).get("items") or {})
+        it = it.get("item", []) if isinstance(it, dict) else []
+        return it if isinstance(it, list) else [it]
+    cands = [i for i in items(get(f"{T}/getRouteNoList?serviceKey={KEY}&_type=json&cityCode=23&numOfRows=50&pageNo=1&routeNo={urllib.parse.quote(num)}"))
+             if str(i.get("routeno")).strip() == num]
+    if not cands:
+        return None
+    best = max(cands, key=lambda i: (bool(AIR.search(str(i.get("endnodenm")) + str(i.get("startnodenm")))), lab_score(label, i.get("startnodenm"), i.get("endnodenm"))))
+    rid = best["routeid"]
+    st = sorted(items(get(f"{T}/getRouteAcctoThrghSttnList?serviceKey={KEY}&_type=json&cityCode=23&numOfRows=400&pageNo=1&routeId={rid}")),
+                key=lambda x: int(x.get("nodeord") or 0))
+    if not st:
+        return None
+    air = [bool(AIR.search(str(x.get("nodenm") or ""))) for x in st]
+    # 공항 정류장 묶음: 처음부터 공항이면(공항 출발) 그 묶음은 건너뛰고 다음 공항 묶음 앞까지
+    i = 0
+    while i < len(st) and air[i]:
+        i += 1
+    start = i
+    while i < len(st) and not air[i]:
+        i += 1
+    if i >= len(st) or i == start:
+        return None                                    # 공항으로 가는 구간 없음
+    stops = []
+    for x in st[start:i]:
+        name = str(x.get("nodenm") or "").strip()
+        if "(경유)" in name or "차고지" in name:
+            continue
+        stops.append([int(x["nodeord"]), x["nodeid"], name, str(x.get("nodeno") or "").strip()])
+    return {"src": "t", "id": rid, "stops": stops} if stops else None
+
+
 def main():
     if not KEY:
         print("DATA_GO_KR_KEY 없음 - 건너뜀"); return
@@ -125,10 +161,10 @@ def main():
     bus = json.load(open(os.path.join(ROOT, "web", "bus.json"), encoding="utf-8"))
     out, miss = {}, []
     for r in bus["routes"]:
-        if r.get("a") not in ("서울", "경기"):
+        if r.get("a") not in ("서울", "경기", "인천"):
             continue
         num, label = split(r["n"])
-        order = (seoul, gbis) if r["a"] == "서울" else (gbis, seoul)
+        order = (tago,) if r["a"] == "인천" else (seoul, gbis) if r["a"] == "서울" else (gbis, seoul)
         got = None
         for f in order:
             got = f(num, label)
@@ -139,7 +175,7 @@ def main():
         else:
             miss.append(r["n"])
     data = {"generated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-            "source": "서울 버스정보(ws.bus.go.kr), 경기 버스정보(GBIS)", "routes": out, "missing": miss}
+            "source": "서울 버스정보(ws.bus.go.kr), 경기 버스정보(GBIS), 국토교통부 TAGO(인천)", "routes": out, "missing": miss}
     os.makedirs(os.path.dirname(OUT) or ".", exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, separators=(",", ":"))
