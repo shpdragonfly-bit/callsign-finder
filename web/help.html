@@ -89,6 +89,8 @@ th { background: var(--soft); }
   <li>입력 예: <span class="k">KE17</span> <span class="k">17</span> <span class="k">KAL017</span> <span class="k">KOREANAIR 17</span> — 숫자만 넣어도 됩니다.</li>
   <li>공항 코드(<span class="k">LAX</span> 또는 <span class="k">KLAX</span>)를 넣으면 그 공항을 오가는 편이 나옵니다.</li>
   <li>결과: 노선(출발 → 도착), 최근 관측 기종 · 등록부호, 운항 스케줄, 공항 시차, 출발 · 도착 공항 TAF(스케줄 시각 기준).</li>
+  <li>오른쪽 위: 가장 가까운 인천공항 편의 출발/도착 · 터미널 · 게이트 · 상태, 출발편은 체크인 카운터. 시간이 바뀐 편은 운항 스케줄에 빨간 줄로 표시되고, 가장 가까운 편은 같은 항공기의 이전편/다음편이 나옵니다.</li>
+  <li><b>🔔 편명 알림</b>: 편명 옆 🔔을 누르면 그 편(한 편만)의 게이트 · 시각 · 상태 · 체크인 변화를 앱이 열려 있는 동안 5분마다, 앱을 다시 열 때 바로 확인해 위쪽 띠와 알림음으로 알려 줍니다. 켜져 있으면 제목 줄 '온라인' 칸이 '🔔 편명'으로 바뀌고, 출발/도착 30분 뒤 자동으로 꺼집니다. 앱이 닫혀 있거나 화면이 꺼져 있을 때는 알리지 못합니다(아이폰 무음 모드에서는 소리 없음).</li>
   <li><b>◀ 이전 / 다음 ▶</b>으로 앞서 조회한 편을 다시 볼 수 있습니다.</li>
   <li><b>아시아나 탭</b>은 한시 운영입니다(2026년 12월 초 종료 예정). 사용법은 CallSign 조회와 같습니다.</li>
 </ul>
@@ -133,7 +135,7 @@ th { background: var(--soft); }
 <h2>7. 개발중 ② FLT Package 분석</h2>
 <div class="box">본인 <b>Gemini API 키</b>를 등록한 분만 쓸 수 있습니다. 키 등록: ☰ 메뉴 → <b>Gemini AI 연결</b> (무료 키, 결제 정보 등록 금지)</div>
 <ol>
-  <li><b>PDF 파일 선택 (KE, OZ)</b>: 운항 패키지 PDF 를 고릅니다.</li>
+  <li><b>PDF 파일 선택 (KE, OZ, ZE)</b>: 운항 패키지 PDF 를 고릅니다. 이스타항공 패키지에 TAF 가 없으면 앱이 받아 둔 NOAA TAF 로 보충하고 출처를 표시합니다.</li>
   <li><b>분석 시작</b>: Gemini 가 패키지를 읽고 앱이 계산 · 검증합니다. 진행 상황이 화면에 나옵니다.</li>
   <li><b>PDF 저장</b>: 요약 PDF(Flight · Fuel · Route · Cruise · Alternate · EDTO · Dispatch Release · Weather · 이 · 착륙 유의사항 · WELCOME/Turbulence PA · NOTAM)를 받습니다.</li>
 </ol>

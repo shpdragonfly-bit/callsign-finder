@@ -85,6 +85,12 @@ body { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
 .mn-seg button { flex: 1; font: inherit; font-size: 15px; font-weight: 700; padding: 10px 4px; border: 0; background: var(--panel-2); color: var(--muted); cursor: pointer; }
 .mn-seg button + button { border-left: 1.5px solid var(--line); }
 .mn-seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.mn-item[hidden] { display: none; }
+.use-t table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+.use-t th { font-size: 11.5px; color: var(--muted); font-weight: 600; text-align: right; padding: 6px 3px; border-bottom: 1px solid var(--line); }
+.use-t td { text-align: right; padding: 7px 3px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.use-t th:first-child, .use-t td:first-child { text-align: left; }
+.use-t td b { display: block; font: 700 15px var(--mono); } .use-t td small { display: block; font-size: 11px; color: var(--muted); } .use-t .w { color: var(--warn); }
 .mn-note { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
 .mn-back { font: inherit; font-size: 15px; font-weight: 600; border: 0; background: none; color: var(--accent); padding: 4px 0; cursor: pointer; }
 .nt { padding: 12px 0; border-bottom: 1px solid var(--line); }
@@ -109,6 +115,18 @@ body { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
 .uid::before { content: "ID "; font-weight: 500; opacity: .7; letter-spacing: .04em; }
 .pill { font-size: 12px; padding: 3px 10px; border-radius: 99px; border: 1px solid currentColor; color: var(--bar-sub); white-space: nowrap; }
 .pill.off { color: #FFD166; }
+.cs-w { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.cs-bell { flex: none; width: 34px; height: 34px; border-radius: 9px; border: 1.5px solid var(--line); background: var(--panel); font-size: 16px; line-height: 1; padding: 0; cursor: pointer; filter: grayscale(1); opacity: .75; }
+.cs-bell.on { background: #FFF4D6; border-color: #F0B429; filter: none; opacity: 1; }
+:root[data-theme="dark"] .cs-bell.on { background: #3A2F0B; }
+@media (max-width: 400px) { .cs-bell { width: 30px; height: 30px; font-size: 14px; } }
+.pill.watch { background: #FFD43B; color: #0B2545; border-color: #FFD43B; font-weight: 700; cursor: pointer; }
+.pill.watch.woff { background: #ADB5BD; border-color: #ADB5BD; color: #0B2545; }
+.wban { position: fixed; left: 10px; right: 10px; top: calc(env(safe-area-inset-top, 0px) + 8px); z-index: 60; max-width: 560px; margin: 0 auto; background: #0B2545; color: #fff; border-radius: 12px; padding: 11px 10px 11px 12px; display: flex; gap: 8px; align-items: center; font-size: 14px; line-height: 1.4; box-shadow: 0 6px 20px rgba(0,0,0,.3); cursor: pointer; }
+.wban[hidden] { display: none; }
+.wban b { color: #FFD43B; } .wban.end { background: #495057; }
+.wban div { flex: 1; } .wban .wx-x { background: none; border: 0; color: #fff; font-size: 20px; padding: 0 4px; cursor: pointer; }
+
 .tabs { display: flex; gap: 4px; }
 .tab { flex: 1; appearance: none; border: 0; background: none; color: var(--bar-sub); font: 600 16px inherit; font-family: inherit;
   padding: 10px 4px 12px; position: relative; cursor: pointer; }
@@ -152,7 +170,7 @@ body[data-tab="ft"] .cs-only, body[data-tab="pk"] .cs-only, body[data-tab="cm"] 
 .card-hd .nx .ns { font-size: 13px; padding: 2px 7px; border-radius: 6px; border: 1.5px solid currentColor; margin-left: 3px; }
 .card-hd .nx .ns.s-bad { color: var(--warn); } .card-hd .nx .ns.s-chk { color: #1C7ED6; } .card-hd .nx .ns.s-brd { color: #E8590C; } .card-hd .nx .ns.s-done { color: var(--ok); } .card-hd .nx .ns.s-plan { color: var(--muted); }
 :root[data-theme="dark"] .card-hd .nx .ns.s-chk { color: #74C0FC; } :root[data-theme="dark"] .card-hd .nx .ns.s-brd { color: #FFA94D; }
-@media (max-width: 380px) { .card-hd { padding: 14px 12px 0; gap: 6px; } .card-hd .cs { font-size: 20px; } .card-hd .nx { font-size: 15px; } .card-hd .nx-l { gap: 4px; } .card-hd .nx .k, .card-hd .nx .ns { font-size: 12.5px; padding: 2px 5px; } .card-hd .nx .g, .card-hd .nx .ns { margin-left: 1px; } }
+@media (max-width: 400px) { .card-hd { padding: 14px 12px 0; gap: 6px; } .card-hd .cs { font-size: 20px; } .card-hd .nx { font-size: 15px; } .card-hd .nx-l { gap: 4px; } .card-hd .nx .k, .card-hd .nx .ns { font-size: 12.5px; padding: 2px 5px; } .card-hd .nx .g, .card-hd .nx .ns { margin-left: 1px; } }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .card-hd .nx .ns.s-chk { color: #74C0FC; } :root:not([data-theme="light"]) .card-hd .nx .ns.s-brd { color: #FFA94D; } }
 .cs small.utz { color: var(--accent); font-weight: 700; border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; vertical-align: 3px; }
 .utz { display: inline-block; font: 700 12px system-ui, sans-serif; letter-spacing: 0; color: var(--accent); border: 1px solid var(--line); border-radius: 6px; padding: 0 5px; line-height: 1.5; vertical-align: 1px; white-space: nowrap; }
@@ -1094,6 +1112,7 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
         <button type="button" class="mn-item" data-mv="mnNotice"><span class="ic">📢</span><span>공지사항<span class="new" id="mnNew" hidden>NEW</span><small>새 기능·변경 안내</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnReq"><span class="ic">✉️</span><span>사용자 요청<small>기능 요청·오류 신고·의견 보내기</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnFaq"><span class="ic">❓</span><span>자주 묻는 질문<small>사용법·오프라인·자료 출처</small></span><span class="go">›</span></button>
+        <button type="button" class="mn-item" data-mv="mnUse" id="mnUseBtn" hidden><span class="ic">🛠️</span><span>사용량 (관리자)<small>중계 서버 공공데이터 API 호출 수</small></span><span class="go">›</span></button>
       </div>
       <div class="mn-sub">주/야간</div>
       <div class="mn-seg" id="mnTheme"><button type="button" data-t="auto">자동</button><button type="button" data-t="light">항상 주간</button><button type="button" data-t="dark">항상 야간</button></div>
@@ -1300,6 +1319,13 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
       <button type="button" class="sh-big primary" id="rqSend" disabled>보내기</button>
       <div class="mn-note" id="rqMsg">이름·아이디·위치 없이 내용만 전달됩니다. 오프라인이면 저장해 두었다가 인터넷이 연결될 때 보냅니다. 답장이 필요하면 연락처를 같이 적어 주세요.</div>
     </div>
+    <div id="mnUse" hidden>
+      <div class="sh-hd"><button type="button" class="mn-back" data-mv="mnMain">‹ 메뉴</button><button type="button" class="sh-x" data-mclose>닫기</button></div>
+      <h2 style="margin-top:8px">사용량 (관리자)</h2>
+      <div class="mn-note">숫자 = 실제 공공데이터 API 호출 수(한도에 포함) · 괄호 = 캐시 재사용(한도 제외) · ⚠ = 오류. 인천공항 운항은 조회 1번에 2회. 한국 날짜 기준, 최근 30일.</div>
+      <div id="mnUseBody" class="use-t"></div>
+      <button type="button" class="sh-big" id="mnUseRe" style="margin-top:12px">새로고침</button>
+    </div>
     <div id="mnFaq" hidden>
       <div class="sh-hd"><button type="button" class="mn-back" data-mv="mnMain">‹ 메뉴</button><button type="button" class="sh-x" data-mclose>닫기</button></div>
       <h2 style="margin-top:8px">자주 묻는 질문</h2>
@@ -1437,7 +1463,7 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
       <ol class="pa-steps" id="paSteps">
         <li>
           <div class="pa-lbl"><span class="n">1</span>패키지 PDF 고르기</div>
-          <label class="pa-file" for="paFile">PDF 파일 선택 <span id="paAl">(KE, OZ)</span></label>
+          <label class="pa-file" for="paFile">PDF 파일 선택 <span id="paAl">(KE, OZ, ZE)</span></label>
           <input id="paFile" type="file" accept="application/pdf,.pdf" hidden>
           <div class="pa-fname" id="paFname">선택한 파일 없음</div>
         </li>
@@ -3012,13 +3038,34 @@ window.FPREP = (() => {
     badge();
   }
   function view(id) {
-    ["mnMain", "mnNotice", "mnReq", "mnFaq", "mnGm", "mnGuide", "mnGc"].forEach((v) => { $(v).hidden = v !== id; });
+    ["mnMain", "mnNotice", "mnReq", "mnFaq", "mnGm", "mnGuide", "mnGc", "mnUse"].forEach((v) => { $(v).hidden = v !== id; });
     if (id === "mnNotice") showNotice();
     if (id === "mnFaq") $("mnFaqList").innerHTML = FAQ && FAQ.items && FAQ.items.length
       ? FAQ.items.map((x) => `<details><summary>${esc(x.q)}</summary><p>${esc(x.a)}</p></details>`).join("")
       : `<p class="mn-note">자주 묻는 질문을 아직 받지 못했습니다. 인터넷에 연결된 상태에서 다시 열어 보세요.</p>`;
+    if (id === "mnUse") useLoad();
     $("menuSheet").querySelector(".sheet").scrollTop = 0;
   }
+  // 관리자: 앱 주소 끝에 #admin 을 붙여 한 번 열면 이 기기에서만 '사용량' 메뉴가 보임 (#admin-off 로 끔). 숫자만 보여 주므로 비밀 정보 없음
+  if (location.hash === "#admin") ls.set("csf-admin", "1");
+  if (location.hash === "#admin-off") { try { localStorage.removeItem("csf-admin"); } catch (e) {} }
+  $("mnUseBtn").hidden = ls.get("csf-admin") !== "1";
+  const USE_SVC = [["t", "인천(TAGO)"], ["s", "서울"], ["g", "경기"], ["f", "공항운항"]];
+  function useLoad() {
+    const box = $("mnUseBody"), relay = ls.get("csf-relay") || "https://script.google.com/macros/s/AKfycbzTAeL3aNCqJmxqog74kBSE5nhEfoeXI3xEFBwj4bY6nDm9XsfW-4dtoy0q4qRvxbNP/exec";
+    if (!navigator.onLine) { box.innerHTML = `<p class="mn-note">인터넷 연결이 필요합니다.</p>`; return; }
+    box.innerHTML = `<p class="mn-note">불러오는 중…</p>`;
+    fetch(relay + "?s=u&fmt=json", { cache: "no-store" }).then((r) => r.json()).then((d) => {
+      if (!d || !d.ok || !Array.isArray(d.days)) throw 0;
+      if (!d.days.length) { box.innerHTML = `<p class="mn-note">아직 기록이 없습니다.</p>`; return; }
+      const lim = d.limit || {};
+      box.innerHTML = `<table><tr><th>날짜</th>${USE_SVC.map((x) => `<th>${x[1]}</th>`).join("")}</tr>` + d.days.map((r) => `<tr><td>${+r.day.slice(4, 6)}/${+r.day.slice(6)}</td>${USE_SVC.map(([k]) => {
+        const x = r.d[k] || {}, a = x.a || 0, l = lim[k], pc = l ? Math.round(a * 100 / l) : null;
+        return `<td><b class="${l && a >= l * 0.8 ? "w" : ""}">${a}</b>${pc != null ? `<small class="${a >= l * 0.8 ? "w" : ""}">${pc}%</small>` : ""}<small>(${x.c || 0})</small>${x.e ? `<small class="w">⚠${x.e}</small>` : ""}</td>`;
+      }).join("")}</tr>`).join("") + `</table>`;
+    }).catch(() => { box.innerHTML = `<p class="mn-note">불러오지 못했습니다. 중계 서버에 사용량 기능(?s=u)이 배포됐는지 확인하세요.</p>`; });
+  }
+  $("mnUseRe").addEventListener("click", useLoad);
   function paintTheme() { const m = window.csfTheme ? window.csfTheme.mode() : "auto"; $("mnTheme").querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.t === m)); }
   function open() { view("mnMain"); paintTheme(); $("mnVer").textContent = "FLT Assist " + (($("appVer") && $("appVer").textContent) || ""); $("menuSheet").hidden = false; }
   const close = () => { $("menuSheet").hidden = true; };
@@ -3052,7 +3099,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v55", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v56", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -3289,11 +3336,11 @@ window.csfStat = (() => {
     return icnBox(x, lv && lv.list.length ? lv.hm : "").replace('<div class="nx', `<div data-nx="${esc(id)}" class="nx`);
   }
   // 그 편만 인천공항 운항현황에 실시간으로 (중계 Apps Script, 60초 캐시). 오프라인이면 운항 자료 그대로
-  function icnLive(cs) {
-    const id = icnId(cs); if (!id || !FLT_RELAY || !navigator.onLine) return;
-    const lv = liveFlt[id]; if (lv && Date.now() - lv.t < 60000) return;
+  function icnLive(cs, force) {          // force: 알림 확인용 (60초 제한 무시). 받은 목록을 Promise 로 돌려줌
+    const id = icnId(cs); if (!id || !FLT_RELAY || !navigator.onLine) return Promise.resolve(null);
+    const lv = liveFlt[id]; if (!force && lv && Date.now() - lv.t < 60000) return Promise.resolve(null);
     liveFlt[id] = Object.assign(lv || { list: [] }, { t: Date.now() });
-    fetch(`${FLT_RELAY}?s=f&fl=${encodeURIComponent(id)}`, { cache: "no-store" }).then((r) => r.json()).then((d) => {
+    return fetch(`${FLT_RELAY}?s=f&fl=${encodeURIComponent(id)}`, { cache: "no-store" }).then((r) => r.json()).then((d) => {
       if (!d || !d.ok || !Array.isArray(d.f)) return;
       const k = new Date(Date.now() + 9 * 3600e3);
       liveFlt[id] = { t: Date.now(), hm: `${p2(k.getUTCHours())}:${p2(k.getUTCMinutes())}`, list: d.f.map((x) => [x.t, x.e, x.io, x.ap, "", "", x.gate, x.st, x.term, x.chk]) };
@@ -3301,8 +3348,100 @@ window.csfStat = (() => {
       if (el && x) el.outerHTML = icnBox(x, liveFlt[id].hm).replace('<div class="nx', `<div data-nx="${esc(id)}" class="nx`);
       const se = document.querySelector(`[data-sch="${CSS.escape(id)}"]`);
       if (se && schOf[id]) se.outerHTML = renderSched(schOf[id], cs);
-    }).catch(() => {});
+      return liveFlt[id].list;
+    }).catch(() => null);
   }
+
+  // ---------- 편명 알림 (🔔): 한 편만, 앱이 열려 있을 때 5분마다 + 화면으로 돌아올 때 확인. 바뀌면 띠 + 딩동 ----------
+  const WATCH = (() => {
+    const K = "csf-watch", EVERY = 5 * 60e3, AFTER = 30 * 60e3;
+    const ls = { get() { try { return JSON.parse(localStorage.getItem(K) || "null"); } catch (e) { return null; } },
+      set(v) { try { v ? localStorage.setItem(K, JSON.stringify(v)) : localStorage.removeItem(K); } catch (e) {} } };
+    let w = ls.get(), timer = null, actx = null;
+    const snap = (i) => ({ e: i[1] || i[0], gate: i[6] || "", st: i[7] || "", term: i[8] || "", chk: i[9] || "" });
+    const endAt = (s) => (utcOf(s.e) || utcOf(w.t)).getTime() + AFTER;
+    // 소리: 아이폰은 사용자가 누를 때 한 번 열어 둬야 나중에 낼 수 있음 → 🔔 누를 때 준비
+    function unlock() { try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); if (actx.state === "suspended") actx.resume(); } catch (e) {} }
+    function ding() {
+      try { navigator.vibrate && navigator.vibrate([120, 80, 120]); } catch (e) {}
+      if (!actx || document.hidden) return;
+      try {
+        if (actx.state === "suspended") actx.resume();
+        const t0 = actx.currentTime;
+        [[988, 0], [784, 0.22]].forEach(([f, d]) => {
+          const o = actx.createOscillator(), g = actx.createGain();
+          o.type = "sine"; o.frequency.value = f; o.connect(g); g.connect(actx.destination);
+          g.gain.setValueAtTime(0.0001, t0 + d); g.gain.exponentialRampToValueAtTime(0.35, t0 + d + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t0 + d + 0.5);
+          o.start(t0 + d); o.stop(t0 + d + 0.55);
+        });
+      } catch (e) {}
+    }
+    function chip() {
+      const n = $("net"); if (!n) return;
+      const on = navigator.onLine;
+      if (!w) { n.textContent = on ? "온라인" : "오프라인"; n.className = "pill" + (on ? "" : " off"); n.onclick = null; n.removeAttribute("role"); return; }
+      n.textContent = `🔔 ${w.fl}${on ? "" : " 오프라인"}`; n.className = "pill watch" + (on ? "" : " woff");
+      n.setAttribute("role", "button"); n.onclick = go;
+    }
+    function go() {
+      if (!w) return;
+      const al = w.cs.slice(0, 3), ozTab = document.getElementById("tab-oz");
+      if (al === "AAR" && ozTab && !ozTab.hidden) ozTab.click();
+      else { document.getElementById("tab-cs").click(); const t = document.querySelector(`#alTabs [data-al="${al}"]`); if (t && t.getAttribute("aria-pressed") !== "true") t.click(); }
+      const q = $("q"); q.value = w.cs; q.dispatchEvent(new Event("input", { bubbles: true })); scrollTo(0, 0);
+    }
+    function banner(text, end) {
+      let b = $("wBan");
+      if (!b) { b = document.createElement("div"); b.id = "wBan"; b.className = "wban"; document.body.appendChild(b);
+        b.addEventListener("click", (e) => { if (e.target.closest(".wx-x")) { b.hidden = true; return; } b.hidden = true; go(); }); }
+      b.innerHTML = `<span class="wb-i">🔔</span><div>${text}</div><button type="button" class="wx-x" aria-label="닫기">×</button>`;
+      b.classList.toggle("end", !!end); b.hidden = false;
+    }
+    // 무엇이 바뀌었나 (켤 때 값은 기준으로만)
+    function diff(a, b, io) {
+      const out = [], D = io === "D" ? "출발" : "도착";
+      if (a.term !== b.term && b.term) out.push(`터미널 ${esc(TERM[b.term] || b.term)}`);
+      if (a.gate !== b.gate && b.gate) out.push(a.gate ? `게이트 ${esc(a.gate)} → <b>${esc(b.gate)}</b>` : `게이트 <b>${esc(b.gate)}</b> 배정`);
+      const ea = utcOf(a.e), eb = utcOf(b.e), t = utcOf(w.t);
+      if (ea && eb && Math.abs(eb - ea) >= 5 * 60e3) { const dm = Math.round((eb - t) / 60e3); out.push(`${D} <b>${khm(eb)}</b>${Math.abs(dm) >= 5 ? ` (${dm > 0 ? "+" : "−"}${Math.abs(dm)}분)` : ""}`); }
+      if (a.st !== b.st && b.st) { const s2 = stOf(b.st, io); if (s2 && s2[1] !== "s-plan") out.push(`<b>${esc(s2[0])}</b>`); }
+      if (a.chk !== b.chk && b.chk && io === "D") out.push(`체크인 ${esc(chkOf(b.chk))}`);
+      return out;
+    }
+    function off(silent) { w = null; ls.set(null); clearInterval(timer); timer = null; chip(); paintBells(); if (!silent) {} }
+    function check() {
+      if (!w || !DB || !navigator.onLine || document.hidden) { chip(); return; }
+      icnLive(w.cs, true).then((list) => {
+        if (!w || !list) return;
+        const i = list.find((x) => x[0] === w.t);
+        if (!i) { if (Date.now() > utcOf(w.t).getTime() + AFTER) { banner(`<b>${esc(w.fl)}</b> 알림 종료`, true); off(); } return; }
+        const b = snap(i), ch = diff(w.last, b, w.io);
+        w.last = b; w.at = Date.now(); ls.set(w);
+        if (ch.length) { banner(`<b>${esc(w.fl)}</b> ` + ch.join(" · ")); ding(); }
+        if (Date.now() > endAt(b) && /출발|도착|착륙|결항/.test(b.st || "") || Date.now() > endAt(b) + 3 * 3600e3) {
+          banner(`<b>${esc(w.fl)}</b> 알림 종료 (${w.io === "D" ? "출발" : "도착"} 후 30분)`, true); off();
+        }
+      });
+    }
+    function loop() { clearInterval(timer); timer = w ? setInterval(check, EVERY) : null; }
+    function toggle(cs) {
+      unlock(); if (!DB) return;
+      if (w && w.cs === cs) { off(true); return; }
+      const id = icnId(cs), f = DB.flights[cs] || {}, lv = liveFlt[id];
+      const x = lv && lv.list.length ? nextOf(lv.list) : nextOf(f.sch && f.sch.inst);
+      if (!x) return;
+      const i = x.i;
+      w = { cs, fl: id, t: i[0], io: i[2], base: snap(i), last: snap(i), at: Date.now() };
+      ls.set(w); chip(); paintBells(); loop(); check();
+    }
+    function paintBells() { document.querySelectorAll("[data-bell]").forEach((b) => { const on = !!w && w.cs === b.dataset.bell; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); }); }
+    document.addEventListener("click", (e) => { const b = e.target.closest("[data-bell]"); if (b) { e.preventDefault(); toggle(b.dataset.bell); } });
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) check(); });
+    addEventListener("online", () => { chip(); check(); }); addEventListener("offline", chip);
+    addEventListener("pageshow", () => check());
+    setTimeout(() => { chip(); loop(); check(); }, 0);
+    return { on: (cs) => !!w && w.cs === cs, chip, paintBells };
+  })();
   // 실시간 조회가 있으면 같은 편(예정 시각 같음)에 변경 시각·상태·게이트를 덮어씀. 자료에 없던 편은 추가
   const genAt = () => { const g = new Date(DB.generated); return isNaN(g) ? "" : `${kd(g).getUTCMonth() + 1}/${kd(g).getUTCDate()} ${khm(g)}`; };   // 운항 자료 받은 시각 (KST)
   function schRows(sc, id) {
@@ -3438,7 +3577,7 @@ window.csfStat = (() => {
 
   function renderFlight(cs, f) {
     const al = DB.airlines[cs.slice(0, 3)] || {};
-    let h = `<div class="card"><div class="card-hd"><div class="cs">${esc(cs)}</div>${icnNext(cs, f)}</div>`;
+    let h = `<div class="card"><div class="card-hd"><div class="cs-w"><div class="cs">${esc(cs)}</div>${icnId(cs) && f.sch && (f.sch.inst || []).length ? `<button type="button" class="cs-bell${WATCH.on(cs) ? " on" : ""}" data-bell="${esc(cs)}" aria-pressed="${WATCH.on(cs)}" aria-label="이 편 알림">🔔</button>` : ""}</div>${icnNext(cs, f)}</div>`;
     const r = f.r && f.r.length >= 2 ? f.r : schedRoute(f.sch);
     if (r) {
       h += `<div class="route">${apBlock(r[0], "org")}<div class="arrow">→</div>${apBlock(r[r.length - 1], "dst")}</div>`;
@@ -3790,6 +3929,7 @@ window.csfStat = (() => {
   function msg(t, cls) { $("msg").textContent = t; $("msg").className = "cs-only" + (cls ? " " + cls : ""); }
 
   function renderNet() {
+    if (typeof WATCH !== "undefined" && WATCH) return WATCH.chip();      // 🔔 켜져 있으면 '온라인' 칸이 알림 칩
     const on = navigator.onLine;
     $("net").textContent = on ? "온라인" : "오프라인";
     $("net").className = "pill" + (on ? "" : " off");
@@ -4193,28 +4333,29 @@ window.csfStat = (() => {
 
   // ---------- FLT Package 분석 (Gemini) ----------
   // 출력 양식(임시). 사용자가 만든 실제 양식이 오면 이 블록만 바꾸면 화면·PDF·Gemini 지시문이 함께 바뀜
-  // ===== FLT Package 양식 v1 : 대한항공·아시아나 공용 (OFP + DISPATCH RELEASE + WEATHER BRIEFING + NOTAM PACKAGE 1~3) =====
+  // ===== FLT Package 양식 v1 : 대한항공·아시아나 (OFP + DISPATCH RELEASE + WEATHER BRIEFING + NOTAM PACKAGE 1~3) · 이스타항공 (Jeppesen Briefing Pack) =====
+  // 이스타: 연료 칸 이름이 다름(REQD/DISCRET/TKOF/RAMP/L-RSV/T-RSV), OFP 사본·부록(다른 날 참고 OFP) 반복, TAF 쪽 없음 → 앱 기상 자료로 보충
   // 원칙: Gemini 는 패키지에 적힌 값만 '옮겨 적기'. 계산(시간 차이·합계 검증·FL 변화·SR 구간·±2H 기상 고르기·방송 시간)은 앱 코드가 함.
-  const PKG_FORMAT = { name: "대한항공·아시아나 공용 v1", airlines: ["KAL", "AAR"] };
+  const PKG_FORMAT = { name: "항공사 공용 v1", airlines: ["KAL", "AAR", "ESR"] };
   const PKG_S = (t) => ({ type: "string", description: t });
   const PKG_OBJ = (props, d) => ({ type: "object", description: d, properties: props, required: Object.keys(props) });
   const PKG_ARR = (props, d) => ({ type: "array", description: d, items: PKG_OBJ(props) });
   const PKG_SCHEMA = PKG_OBJ({
     flight: PKG_OBJ({
-      cfp_plan: PKG_S("CFP 첫 줄 'CFP PLAN 5410' 의 번호"), flt: PKG_S("FLIGHT RELEASE 줄의 편명 (예 AAR601)"), dep: PKG_S("출발 ICAO"), arr: PKG_S("도착 ICAO"),
-      date: PKG_S("FLIGHT RELEASE 줄의 날짜 원문 (예 03/OCT/26)"), type: PKG_S("A/C 칸 (예 772)"), reg: PKG_S("REG. 칸 (예 HL7732)"), engine: PKG_S("ENGINE 칸"),
-      nonstop: PKG_S("FLIGHT RELEASE 줄에 NONSTOP 이 있으면 'NONSTOP', 없으면 ''"), etd: PKG_S("'ETD RKSI 2240Z' 의 시각 4자리"), eta: PKG_S("'ETA YSSY 0816Z' 의 시각 4자리"),
+      cfp_plan: PKG_S("CFP 첫 줄 'CFP PLAN 5410' 의 번호"), flt: PKG_S("FLIGHT RELEASE 줄의 편명 (예 AAR601, 이스타 ESR871)"), dep: PKG_S("출발 ICAO"), arr: PKG_S("도착 ICAO"),
+      date: PKG_S("FLIGHT RELEASE 줄의 날짜 원문 (예 03/OCT/26). 이스타는 CFP 첫 줄 'COMPUTED ON 28/SEP/26' 이 아니라 둘째 줄 'ESR871  28/SEP/26' 의 날짜"), type: PKG_S("A/C 칸 (예 772). 이스타는 CFP 둘째 줄의 기종 (예 737-800W)"), reg: PKG_S("REG. 칸 (예 HL7732). 이스타는 ATS FPL 의 'REG/' 값 (예 HL8374)"), engine: PKG_S("ENGINE 칸. 이스타는 CFP 둘째 줄 기종 다음 값의 '/' 앞 (예 CFM56-7B26)"),
+      nonstop: PKG_S("FLIGHT RELEASE 줄에 NONSTOP 이 있으면 'NONSTOP', 없으면 ''"), etd: PKG_S("'ETD RKSI 2240Z' 의 시각 4자리 (이스타: 'ETD/ 1330Z')"), eta: PKG_S("'ETA YSSY 0816Z' 의 시각 4자리 (이스타: 'ETA/ 1504Z')"),
       trip_time: PKG_S("연료표 TRIP 줄의 TIME (예 09.36)"), page: { type: "integer" } }, "CFP 첫 쪽"),
     fuel: PKG_OBJ({
-      unit: PKG_S("AVG WIND/TEMP UNIT 칸의 단위 원문 (예 100LBS)"),
-      trip: PKG_S("TRIP 줄 FUEL"), reserve: PKG_S("RESERVE 줄 FUEL"), rqd_takeoff: PKG_S("RQD TAKEOFF 줄 FUEL"), disc: PKG_S("DISC 줄 FUEL"),
-      pln_takeoff: PKG_S("PLN TAKEOFF 줄 FUEL"), taxi: PKG_S("TAXI 줄 FUEL"), ramp_out: PKG_S("RAMP OUT 줄 FUEL"), fod: PKG_S("FOD 줄 FUEL"),
-      agtow: PKG_S("AGTOW 값"), zfw: PKG_S("ZFW 값 (PLAN 칸)"), mzfw: PKG_S("MZFW 값"), tow: PKG_S("TOW 값 (PLAN 칸)"), mtow: PKG_S("MTOW 값"),
+      unit: PKG_S("AVG WIND/TEMP UNIT 칸의 단위 원문 (예 100LBS). 이스타는 연료표 머리 'UNIT : 100KGS' 의 100KGS"),
+      trip: PKG_S("TRIP 줄 FUEL"), reserve: PKG_S("RESERVE 줄 FUEL (이스타: 'L - RSV' 줄)"), rqd_takeoff: PKG_S("RQD TAKEOFF 줄 FUEL (이스타: 'REQD' 줄)"), disc: PKG_S("DISC 줄 FUEL (이스타: 'DISCRET' 줄)"),
+      pln_takeoff: PKG_S("PLN TAKEOFF 줄 FUEL (이스타: 'TKOF' 줄)"), taxi: PKG_S("TAXI 줄 FUEL"), ramp_out: PKG_S("RAMP OUT 줄 FUEL (이스타: 'RAMP' 줄)"), fod: PKG_S("FOD 줄 FUEL (이스타: 'T - RSV' 줄)"),
+      agtow: PKG_S("AGTOW 값"), zfw: PKG_S("ZFW 값 (PLAN 칸). 이스타 중량표는 SOW/PLD/ZFW/TOF/TOW/TIF/LDW 옆에 바로 숫자"), mzfw: PKG_S("MZFW 값"), tow: PKG_S("TOW 값 (PLAN 칸)"), mtow: PKG_S("MTOW 값"),
       ldw: PKG_S("LDW 값 (PLAN 칸)"), mldw: PKG_S("MLDW 값"), page: { type: "integer" } }, "CFP 첫 쪽 연료·중량 표. 원문 숫자 그대로(앞자리 0 포함)"),
-    route: PKG_OBJ({ cfp: PKG_S("CFP 첫 쪽의 항로 문단 원문 (RKSI.. 로 시작해 ..YSSY 로 끝남)"), atc: PKG_S("ATS FPL 의 항로 부분 원문: '-RKSI2240' 줄부터 '-YSSY0936 YBBN' 줄까지"), page: { type: "integer" } }, "항로"),
-    navlog: PKG_ARR({ wpt: PKG_S("웨이포인트 이름 (둘째 줄 첫 칸)"), fl: PKG_S("FL 칸 원문: CLB / DSC / 숫자"), sr: PKG_S("SR 칸 숫자 2자리, '..' 이면 ''"), time: PKG_S("누적 시간 HH.MM (둘째 줄의 ZT/ACTM, 예 00.33)") },
+    route: PKG_OBJ({ cfp: PKG_S("CFP 첫 쪽의 항로 문단 원문 (RKSI.. 로 시작해 ..YSSY 로 끝남. 이스타는 'ROUTE:' 다음 줄부터 'RKSI RWY 34L … RWY 16B ZSPD')"), atc: PKG_S("ATS FPL 의 항로 부분 원문: '-RKSI2240' 줄부터 '-YSSY0936 YBBN' 줄까지"), page: { type: "integer" } }, "항로"),
+    navlog: PKG_ARR({ wpt: PKG_S("웨이포인트 이름 (둘째 줄 첫 칸)"), fl: PKG_S("FL 칸 원문: CLB / DSC / 숫자"), sr: PKG_S("SR 칸 숫자 2자리, '..' 이면 ''. 이스타 표는 첫 줄이 'R/F OT WIND/COMP SR TAS' 순서라 R/F 바로 뒤 숫자는 OT(기온)이지 SR 이 아님 — WIND/COMP 다음 칸만 SR"), time: PKG_S("누적 시간 HH.MM (둘째 줄의 ZT/ACTM, 예 00.33. 이스타는 둘째 줄 'DTGO ACTM ACBO' 의 ACTM)") },
       "CFP 항법 기록표의 모든 웨이포인트를 순서대로 한 번씩 (출발~도착). 반복 인쇄된 쪽과 'REFILE FLT PLAN' 쪽의 재출항 구간 항법 기록표는 제외"),
-    alt: PKG_OBJ({ dest_altn: PKG_S("목적지 교체공항 ICAO (연료표 'ALTN/YBBN')"), era3: PKG_S("'3% CONTINGENCY ERA VALIDATION' 표의 ERA ICAO, 없으면 ''"),
+    alt: PKG_OBJ({ dest_altn: PKG_S("목적지 교체공항 ICAO (연료표 'ALTN/YBBN', 이스타 'ALTN/ZSSS')"), era3: PKG_S("'3% CONTINGENCY ERA VALIDATION' 표의 ERA ICAO, 없으면 ''"),
       refile: PKG_S("항상 '' (아래 refile 항목 사용)"), page: { type: "integer" } }, "교체공항"),
     refile: PKG_OBJ({
       point: PKG_S("'REFILE FLT PLAN' 쪽의 재출항 지점 (예 '- SDE TO RKSI' 의 SDE). 그 쪽이 없으면 ''"),
@@ -4231,15 +4372,15 @@ window.csfStat = (() => {
       "EDTO EQUAL TIME POINT DATA 요약표 (ETP1, ETP2 …)"),
     equip: PKG_OBJ({ equip: PKG_S("ATS FPL 의 장비 줄 원문 (예 B772/H-SDE1E2E3FGHIJ3J5M1P2RWXYZ/LB1D1)"), pbn: PKG_S("ATS FPL 의 '-PBN/' 부터 'DOF/' 앞까지 원문 (PBN/ DAT/ SUR/ 등)") }, "장비·PBN"),
     dispatch: PKG_OBJ({
-      first: PKG_S("PASSENGERS 의 FIRST 원문 (예 0/0)"), business: PKG_S("BUSINESS 원문 (예 21/22)"), economy: PKG_S("ECONOMY 원문 (예 275/278)"),
-      pax_wt: PKG_S("PAX: 값 원문 (단위 포함, 예 59376LBS)"), cargo_wt: PKG_S("CARGO: 값 원문"), others_wt: PKG_S("OTHERS : 값 원문"),
-      mel: { type: "array", items: PKG_S("'MEL / CDL ITEMS' 의 각 줄 원문 (앞의 '- ' 제외)") },
-      fuel_adj: { type: "array", items: PKG_S("'FUEL BURN ADJUSTMENT' 의 각 줄 원문") },
-      notes: { type: "array", items: PKG_S("'DISPATCH NOTES' 의 각 줄 원문 (들여쓴 '*' 줄도 한 줄씩, 다음 쪽까지 이어진 줄 포함)") },
+      first: PKG_S("PASSENGERS 의 FIRST 원문 (예 0/0). 이스타는 ''"), business: PKG_S("BUSINESS 원문 (예 21/22). 이스타는 ''"), economy: PKG_S("ECONOMY 원문 (예 275/278). 이스타는 'PAX TTL: 126' 의 숫자"),
+      pax_wt: PKG_S("PAX: 값 원문 (단위 포함, 예 59376LBS). 이스타는 ''"), cargo_wt: PKG_S("CARGO: 값 원문. 이스타는 첫 쪽 요약의 'Cargo 864' 숫자"), others_wt: PKG_S("OTHERS : 값 원문"),
+      mel: { type: "array", items: PKG_S("'MEL / CDL ITEMS' 의 각 줄 원문 (앞의 '- ' 제외). 이스타는 Notices 쪽 'MEL / CDL DETAIL INFORMATION' 표의 각 항목을 'MEL 26-02-02 C 설명 (보류 내용)' 한 줄로") },
+      fuel_adj: { type: "array", items: PKG_S("'FUEL BURN ADJUSTMENT' 의 각 줄 원문. 이스타는 'TIF ADJ 0038/PLD 1000KGS' 줄") },
+      notes: { type: "array", items: PKG_S("'DISPATCH NOTES' 의 각 줄 원문 (들여쓴 '*' 줄도 한 줄씩, 다음 쪽까지 이어진 줄 포함). 이스타는 []") },
       page: { type: "integer" } }, "DISPATCH RELEASE INFORMATION"),
     wx: PKG_ARR({ role: { type: "string", enum: ["DEP", "ARR", "ALTN", "REF", "REF_ALTN"] }, icao: PKG_S("공항 ICAO"), taf: PKG_S("TAF 원문 전체 (줄바꿈 유지, 'TAF' 부터 마지막 변화군까지)") },
       "WEATHER BRIEFING 의 DEPARTURE / ARRIVAL / ALTERNATE WEATHER 에 있는 TAF. DEP=출발, ARR=최종 목적지, ALTN=목적지 교체공항(DEST ALTN). REFILE FLT PLAN 이 있으면 REF=처음 목적지(예 RJTT), REF_ALTN=처음 목적지의 ALTN(예 RJBB) 도 넣음. EDTO 교체공항·ENROUTE WEATHER 는 제외"),
-    names: PKG_OBJ({ dest_en: PKG_S("NOTAM PACKAGE 1 의 '[DEST]YSSY/ SYD/ 이름, 도시, 국가' 에서 이름 부분 원문"),
+    names: PKG_OBJ({ dest_en: PKG_S("NOTAM PACKAGE 1 의 '[DEST]YSSY/ SYD/ 이름, 도시, 국가' 에서 이름 부분 원문. 이스타는 NOTAM 쪽 'ZSPD [PVG] PUDONG' 의 PUDONG"),
       dest_ko: PKG_S("기내 안내방송 문구용 도착 공항 한국어 이름만 (예 '시드니 국제공항'). 운항 자료가 아님") }, "공항 이름"),
   }, "운항 패키지에서 옮겨 적은 값");
   const PKG_PROMPT = [
@@ -4260,6 +4401,13 @@ window.csfStat = (() => {
     "- DISPATCH RELEASE INFORMATION: 1. PAX/CARGO RESERVATION, 3. MEL / CDL ITEMS, 4. FUEL BURN ADJUSTMENT, 5. DISPATCH NOTES",
     "- WEATHER BRIEFING: DEPARTURE / ARRIVAL / ALTERNATE / ENROUTE WEATHER 의 TAF",
     "- NOTAM PACKAGE 1 (DEP/DEST/ALTN), 2 (EDTO/ERA), 3 (FIR)",
+    "",
+    "[이스타항공(ESR) 패키지 — 첫 쪽이 'Briefing Pack', 'Flight/CSN 871 / ESR871']",
+    "- 'OFP' 쪽 다음에 'OFP (Copy)' 쪽들이 같은 내용으로 반복된다. 처음 'OFP' 쪽만 쓴다.",
+    "- 맨 뒤 'Appendices' 의 CFP(다른 날짜·다른 편명 예 ESR872M, 참고용 복편 계획)는 이번 비행이 아니다. 그 쪽의 값은 절대 쓰지 않는다.",
+    "- 연료표 이름: TRIP, ALTN/xxxx, FNL RSV, CONT., REQD, TANKER, DISCRET, TKOF, TAXI, RAMP, L - RSV, T - RSV (단위 100KGS). 각 항목 설명에 적힌 이스타 이름을 따른다.",
+    "- 'FLIGHT RELEASE MESSAGE' 와 ATS FPL '(FPL-ESR871-' 이 있다. DISPATCH RELEASE INFORMATION·DISPATCH NOTES 는 없다.",
+    "- TAF 원문 쪽이 없을 수 있다. 없으면 wx 는 [] 로 둔다 (차트 그림에서 기상을 만들어 내지 않는다).",
     "",
     "각 항목의 설명(description)에 적힌 위치에서 값을 찾아라.",
   ].join("\n");
@@ -4411,6 +4559,7 @@ window.csfStat = (() => {
     const AIRLINE = {
       AAR: { ko: "스타얼라이언스 아시아나항공", en: "Asiana Airlines, a member of Star Alliance", en2: "Asiana Airlines" },
       KAL: { ko: "스카이팀 대한항공", en: "Korean Air, a member of SkyTeam", en2: "Korean Air" },
+      ESR: { ko: "이스타항공", en: "Eastar Jet", en2: "Eastar Jet" },
     };
     // 난기류 지속 시 고정 방송 문구 (패키지와 무관)
     const TURB_PA = [
@@ -4447,7 +4596,7 @@ window.csfStat = (() => {
     // ---- 기상: 패키지 TAF 중 STD/STA ±2시간에 해당하는 줄만 (계산은 앱, 원문은 그대로) ----
     const MON = { JAN: 0, FEB: 1, MAR: 2, APR: 3, MAY: 4, JUN: 5, JUL: 6, AUG: 7, SEP: 8, OCT: 9, NOV: 10, DEC: 11 };
     function fltTimes(R) {
-      const m = sv(R.flight.date).match(/(\d{1,2})\/?([A-Z]{3})\/?(\d{2})/i);
+      const m = sv(R.flight.date).match(/(\d{1,2})\s*\/?\s*([A-Z]{3})\s*\/?\s*(\d{2})/i);
       const etd = sv(R.flight.etd).match(/^(\d{2})(\d{2})/), eta = sv(R.flight.eta).match(/^(\d{2})(\d{2})/);
       if (!m || !etd || MON[m[2].toUpperCase()] == null) return null;
       const d0 = Date.UTC(2000 + +m[3], MON[m[2].toUpperCase()], +m[1]);
@@ -4492,7 +4641,14 @@ window.csfStat = (() => {
       if (F.point) list.push(["REF", "Refile 도착", refEta, F.init_dest], ["REF_ALTN", "Refile 교체", refEta, F.init_altn]);
       for (const [role, lbl, center, icao] of list) {
         const w = pick(role, icao);
-        if (!w) { rows.push([icao ? `${lbl}\n${icao}` : lbl, "패키지에 없음"]); continue; }
+        if (!w) {                                   // 패키지에 TAF 가 없으면 앱이 받아 둔 NOAA TAF 로 보충 (출처 표시)
+          const aw = icao && WX && WX.wx && WX.wx[icao];
+          if (aw && aw.t) {
+            const f = tafWindow(aw.t, center), g0 = new Date(WX.generated), gen = isNaN(g0) ? "" : `${p2(g0.getUTCDate())} ${p2(g0.getUTCHours())}${p2(g0.getUTCMinutes())}Z 수신`;
+            rows.push([`${lbl}\n${icao}`, `[패키지에 없음 → 앱 기상 자료(NOAA${gen ? " " + gen : ""})]\n` + (f.none ? `${icao} TAF 유효시간이 STD/STA ±2시간을 덮지 않음` : f.lines.join("\n"))]);
+          } else rows.push([icao ? `${lbl}\n${icao}` : lbl, "패키지에 없음"]);
+          continue;
+        }
         const f = tafWindow(w.taf, center);
         rows.push([`${lbl}\n${w.icao}`, f.none ? `${w.icao} TAF 유효시간이 STD/STA ±2시간을 덮지 않음 (패키지 TAF 기준)` : f.lines.join("\n")]);
       }
@@ -4550,7 +4706,7 @@ window.csfStat = (() => {
         grid: R.etp.length ? [["ETP", "교체공항", "CFR", "FOB", "Different"], ...R.etp.map((e) => [e.name, e.apts, `${e.cfr}${e.time ? "(" + e.time + ")" : ""}`, e.fob, e.exc])] : null });
       T.push({ t: "Equipment / PBN Codes", type: "kv", rows: [["장비코드", sv(R.equip.equip).replace(/^-\s*/, "")], ["PBN", sv(R.equip.pbn).replace(/^-\s*/, "")]] });
       T.push({ t: "Dispatch Release", type: "kv", p: D.page, rows: [
-        ["PAX", D.first || D.business || D.economy ? `F ${pf[0]} / C ${pc[0]} / Y ${py[0]}${pf[1] || pc[1] || py[1] ? ` (F${pf[1]}/C${pc[1]}/Y${py[1]})` : ""}` : ""],
+        ["PAX", !D.first && !D.business && D.economy ? `TTL ${D.economy}` : D.first || D.business || D.economy ? `F ${pf[0]} / C ${pc[0]} / Y ${py[0]}${pf[1] || pc[1] || py[1] ? ` (F${pf[1]}/C${pc[1]}/Y${py[1]})` : ""}` : ""],
         ["Weight", [D.pax_wt && "PAX " + D.pax_wt, D.cargo_wt && "CARGO " + D.cargo_wt, D.others_wt && "OTHERS " + D.others_wt].filter(Boolean).join(" / ")],
         ["MEL/CDL", (D.mel || []).join("\n") || "-", (D.mel || []).some((x) => !/^(NIL|NONE|N\/A|-)$/i.test(x)) ? "red" : ""], ["연료조정", (D.fuel_adj || []).map((x) => "- " + x).join("\n") || "-"], ["Dispatch Notes", (D.notes || []).map((x) => (/^[*]/.test(x) ? "  " : "- ") + x).join("\n") || "-"]] });
       return T;
@@ -4572,7 +4728,7 @@ window.csfStat = (() => {
         if (T.checks) for (const c of T.checks.filter((x) => !x.ok)) h += `<div class="pr-chk ${c.ok ? "ok" : "bad"}">${c.ok ? "✓" : "!"} ${esc(c.t)}</div>`;
         h += `</div>`;
       }
-      h += `<div class="pr-sec"><small class="pr-more">기상 · 안내방송 · NOTAM 은 요약 PDF 에 들어 있습니다.</small></div>`;
+      h += `<div class="pr-sec"><small class="pr-more">기상 · 안내방송${/^ESR/i.test(sv(R.flight.flt)) ? "" : " · NOTAM"} 은 요약 PDF 에 들어 있습니다.</small></div>`;
       $("paRes").innerHTML = h + `</div>`;
     }
     // ---- 요약 PDF (jsPDF + 나눔고딕, 처음 한 번 받으면 오프라인에서도 생성) ----
@@ -4652,7 +4808,7 @@ window.csfStat = (() => {
       }
       // 오른쪽: 기상 → 안내방송 → NOTAM (요약 기준이 정해질 때까지 원문 참조)
       const C = col.R;
-      bar(C, "Weather Briefing (STD/STA ±2H)", "패키지 TAF");
+      bar(C, "Weather Briefing (STD/STA ±2H)", "패키지 TAF · 없으면 앱 NOAA");
       kv(C, wxRows(R), 17.5); gap(C);
       // 이·착륙 유의사항 (기상 아래 · WELCOME ANNOUNCEMENT 위). 인천·김포 생략, 비행 기종에 맞는 항목만. 아래 표들 자리를 남기고 1쪽에 맞춤
       const AF = window.FPREP ? await window.FPREP.forFlight(F, R).catch(() => null) : null;
@@ -4691,9 +4847,12 @@ window.csfStat = (() => {
       bar(C, "Turbulence PA 방송문구");
       text(C, TURB_PA.join("\n"), 7.4, 4.6); gap(C);
       // NOTAM Package 1~3 은 2쪽부터 (전체 폭)
+      // 이스타항공(ESR)은 비행정보 1쪽만 (NOTAM 쪽 생략)
+      if (!/^ESR/i.test(sv(F.flt))) {
       const NP = { x: M, w: PW - M * 2, y: TOP, pg: Math.max(col.L.pg, C.pg) + 1 };     // 비행정보 다음 쪽 (보통 2쪽)
       goto(NP); d.setTextColor(...NAVY); d.setFont("NG", "bold"); d.setFontSize(11); d.text(`NOTAM (${F.flt || ""} ${F.dep || ""}/${F.arr || ""} ${F.date || ""})`, M, 10.5);
       for (const n of ["NOTAM Package 1", "NOTAM Package 2 (EDTO/ERA)", "NOTAM Package 3 (FIR)"]) { bar(NP, n); text(NP, `${n.split(" (")[0]} : 원문참조`); gap(NP); }
+      }
       // 쪽 번호
       const N = d.getNumberOfPages();
       for (let i = 1; i <= N; i++) { d.setPage(i); d.setFont("NG", "normal"); d.setFontSize(6.5); d.setTextColor(...MUT); d.text("운항 도우미 · 패키지에 있는 내용만 옮김 (추측 없음) · 계산값: FLT Time·SR 구간·FL 변화·±2H 기상", M, PH - 5); d.text(`${i}/${N}`, PW - M, PH - 5, { align: "right" }); }
