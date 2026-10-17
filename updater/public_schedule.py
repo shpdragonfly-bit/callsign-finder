@@ -299,7 +299,15 @@ def build(cache, now):
     hist = _load_hist().get("h", {})
     for cs, tys in hist.items():                        # 기종별 처음 보인 날 (신규 투입 판단)
         out.setdefault(cs, {})["tf"] = {t: r[0] for t, r in tys.items()}
+    # 다음 시즌 운항표가 실제로 올라왔을 때만 사용: 그 시즌에 새로 시작하는(from ≥ 시작일) 편이 지금 시즌 편의 30% 이상
+    # (아직 등록 전이면 API 가 지금 시즌 중 기간이 걸친 편만 돌려줘서, 나머지가 모두 '종료'로 잘못 보임)
+    nxt_ok = False
     if cache.get("kac_next_start"):
+        ns0 = cache["kac_next_start"].replace("-", "")
+        fresh = sum(1 for se in (cache.get("kac_next") or {}).values() if any((x.get("from") or "") >= ns0 for x in se))
+        nxt_ok = fresh >= 0.3 * max(1, len(cache.get("kac") or {}))
+        log("  다음 시즌(%s) 운항표: %d편 중 새 시즌 등록 %d편 → %s" % (ns0, len(cache.get("kac_next") or {}), fresh, "사용" if nxt_ok else "아직 미등록 · 표시 안 함"))
+    if nxt_ok:
         ns = cache["kac_next_start"].replace("-", "")
         for cs, seasons in (cache.get("kac_next") or {}).items():
             uniq = []
