@@ -165,6 +165,11 @@ def fetch_kac(key, iata_map, today):
                 "wd": _wd(x, "domestic"), "from": _date(x.get("domesticStdate")), "to": _date(x.get("domesticEddate")),
             })
         intl = _paged(KAC_URL.format(op="int"), {"schAirLine": iata, "schDate": ymd}, key, rows=100)
+        if intl and not getattr(fetch_kac, "_logged", False):          # 응답 칸 이름 기록 (기종 칸이 있는지 확인용)
+            fetch_kac._logged = True
+            log("  한국공항공사 국제선 응답 칸: %s" % ",".join(sorted(intl[0].keys())))
+            if dom:
+                log("  한국공항공사 국내선 응답 칸: %s" % ",".join(sorted(dom[0].keys())))
         for x in intl:
             cs = flight_to_callsign(x.get("internationalNum"), iata_map)
             if not cs or not (_date(x.get("internationalStdate")) <= ymd <= _date(x.get("internationalEddate"))):
@@ -178,6 +183,57 @@ def fetch_kac(key, iata_map, today):
             })
         log("  한국공항공사 %s: 국내선 %d건, 국제선 %d건 (오늘 유효 %d편)" % (iata, len(dom), len(intl), len(out)))
     return out
+
+
+HIST_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "type_history.json")
+HIST_KEEP_DAYS = 120
+
+
+def _load_hist():
+    try:
+        return json.load(open(HIST_FILE, encoding="utf-8"))
+    except (FileNotFoundError, ValueError):
+        return {"since": "", "h": {}}
+
+
+def history_since():
+    return _load_hist().get("since", "")
+
+
+def update_history(icn, today_kst):
+    """편별 기종이 처음·마지막으로 보인 날짜 (인천공항 스케줄, 한국 날짜) → 신규 투입 판단용"""
+    hist = _load_hist()
+    h = hist.setdefault("h", {})
+    for cs, inst in (icn or {}).items():
+        for i in inst:
+            ty = (i.get("ty") or "").strip()
+            if not ty or not i.get("t"):
+                continue
+            d = dt.datetime.strptime(i["t"], "%Y%m%d%H%M").replace(tzinfo=dt.timezone.utc).astimezone(KST).strftime("%Y%m%d")
+            r = h.setdefault(cs, {}).setdefault(ty, [d, d])
+            r[0], r[1] = min(r[0], d), max(r[1], d)
+            if not hist.get("since") or d < hist["since"]:
+                hist["since"] = d
+    cut = (today_kst - dt.timedelta(days=HIST_KEEP_DAYS)).strftime("%Y%m%d")
+    for cs in list(h):
+        for ty in list(h[cs]):
+            if h[cs][ty][1] < cut:
+                del h[cs][ty]
+        if not h[cs]:
+            del h[cs]
+    os.makedirs(os.path.dirname(HIST_FILE), exist_ok=True)
+    with open(HIST_FILE, "w", encoding="utf-8") as f:
+        json.dump(hist, f, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
+    return hist
+
+
+def next_season_start(today):
+    """IATA 시즌 시작일: 3월 마지막 일요일(하계) / 10월 마지막 일요일(동계) 중 오늘 이후 가장 가까운 날"""
+    def last_sun(y, m):
+        d = dt.date(y, m, 31)
+        return d - dt.timedelta(days=(d.weekday() + 1) % 7)
+    c = sorted(x for y in (today.year, today.year + 1) for x in (last_sun(y, 3), last_sun(y, 10)) if x > today)
+    return c[0]
 
 
 def collect(airlines, cache_path, now):
@@ -195,6 +251,7 @@ def collect(airlines, cache_path, now):
     try:
         cache["icn"] = fetch_icn(key, iata_map)
         cache["icn_at"] = now.strftime("%Y-%m-%dT%H:%MZ")
+        update_history(cache["icn"], today_kst)
     except Exception as e:
         log("  ! 인천공항 수집 실패: %s (이전 값 유지)" % e)
         cache.setdefault("errors", {})["icn"] = "%s %s" % (now.strftime("%Y-%m-%dT%H:%MZ"), e)
@@ -208,6 +265,18 @@ def collect(airlines, cache_path, now):
         except Exception as e:
             log("  ! 한국공항공사 수집 실패: %s (이전 값 유지)" % e)
             cache.setdefault("errors", {})["kac"] = "%s %s" % (now.strftime("%Y-%m-%dT%H:%MZ"), e)
+    # 다음 시즌 운항표 (시작 45일 전부터, 하루 한 번) → 신규 취항 · 종료 판단
+    ns = next_season_start(today_kst)
+    if (ns - today_kst).days <= 45:
+        if cache.get("kac_next_date") != today_kst.isoformat() or cache.get("kac_next_start") != ns.isoformat():
+            try:
+                cache["kac_next"] = fetch_kac(key, iata_map, ns)
+                cache["kac_next_date"] = today_kst.isoformat()
+                cache["kac_next_start"] = ns.isoformat()
+            except Exception as e:
+                log("  ! 한국공항공사 다음 시즌 수집 실패: %s (이전 값 유지)" % e)
+    else:
+        cache.pop("kac_next", None); cache.pop("kac_next_start", None)
     os.makedirs(os.path.dirname(cache_path), exist_ok=True)
     with open(cache_path, "w", encoding="utf-8") as f:
         json.dump(cache, f, ensure_ascii=False, separators=(",", ":"))
@@ -227,6 +296,18 @@ def build(cache, now):
         keep = [[i["t"], i["e"], i["io"], i["ap"], i["ty"], i["reg"], i["gate"], i["st"], i.get("term", ""), i.get("chk", "")] for i in inst if i["t"] >= cutoff]
         out[cs] = {"wd": "".join(str(d) for d in sorted(days)), "src": "ICN", "inst": keep,
                    "cargo": any(i.get("pc") == "C" for i in inst)}
+    hist = _load_hist().get("h", {})
+    for cs, tys in hist.items():                        # 기종별 처음 보인 날 (신규 투입 판단)
+        out.setdefault(cs, {})["tf"] = {t: r[0] for t, r in tys.items()}
+    if cache.get("kac_next_start"):
+        ns = cache["kac_next_start"].replace("-", "")
+        for cs, seasons in (cache.get("kac_next") or {}).items():
+            uniq = []
+            for x in seasons:
+                if x not in uniq:
+                    uniq.append(x)
+            out.setdefault(cs, {})["next"] = uniq[:4]
+        out["_next_start"] = ns
     for cs, seasons in (cache.get("kac") or {}).items():
         e = out.setdefault(cs, {})
         uniq = []

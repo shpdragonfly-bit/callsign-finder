@@ -115,6 +115,32 @@ body { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
 .uid::before { content: "ID "; font-weight: 500; opacity: .7; letter-spacing: .04em; }
 .pill { font-size: 12px; padding: 3px 10px; border-radius: 99px; border: 1px solid currentColor; color: var(--bar-sub); white-space: nowrap; }
 .pill.off { color: #FFD166; }
+.si-ns { font-size: 12px; font-weight: 700; color: var(--accent); margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); }
+.si-ns.end { color: var(--muted); font-weight: 600; }
+.tyl { padding: 0; overflow: hidden; }
+.tyl-hd { padding: 12px 14px; border-bottom: 1px solid var(--line); }
+.tyl-hd .t { font-size: 16px; font-weight: 800; } .tyl-hd .t small { font-weight: 500; color: var(--muted); font-size: 12.5px; margin-left: 6px; }
+.tyl-hd .p { font-size: 11.5px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+.tyl-f { display: flex; gap: 6px; margin-top: 9px; flex-wrap: wrap; }
+.tyl-f button { font-size: 12.5px; border: 1px solid var(--line); border-radius: 99px; padding: 4px 11px; color: var(--muted); background: var(--panel); cursor: pointer; }
+.tyl-f button.n { color: #C2410C; border-color: #F4B183; } .tyl-f button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.tyl-it { display: block; width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px dashed var(--line); padding: 10px 14px; color: var(--text); font: inherit; cursor: pointer; }
+.tyl-it:last-of-type { border-bottom: 0; } .tyl-it.faint { opacity: .5; }
+.tyl-it .l1 { display: flex; align-items: baseline; gap: 8px; }
+.tyl-it .fl { font: 700 15.5px var(--mono); min-width: 92px; } .tyl-it .rt { font: 600 14px var(--mono); }
+.tyl-it .vd { margin-left: auto; font: 600 11.5px var(--mono); color: var(--muted); border: 1px solid var(--line); border-radius: 5px; padding: 0 5px; white-space: nowrap; }
+.tyl-it .go { color: var(--muted); font-size: 18px; } .tyl-it .vd + .go { margin-left: 0; } .tyl-it .rt + .go { margin-left: auto; }
+.tyl-b { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 5px; }
+.tyl-b span { font-size: 12px; font-weight: 700; border-radius: 6px; padding: 2px 7px; }
+.tyl-b .new { background: #FFF0E0; color: #C2410C; } .tyl-b .open { background: #E3F6EA; color: #138A4C; } .tyl-b .end { background: var(--panel-2); color: var(--muted); }
+.tyl-w { display: flex; gap: 3px; margin-top: 6px; align-items: center; }
+.tyl-w i { font-style: normal; font-size: 11.5px; width: 21px; height: 21px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; background: var(--panel-2); color: var(--muted); opacity: .6; }
+.tyl-w i.on { background: var(--accent); color: var(--accent-ink); font-weight: 700; opacity: 1; } .tyl-w b { font-size: 12.5px; margin-left: 6px; }
+.tyl-w.tyl-w0 { font-size: 11.5px; color: var(--muted); }
+.tyl-o { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.tyl-tm { display: flex; gap: 12px; align-items: baseline; margin-top: 5px; font-size: 12.5px; color: var(--muted); } .tyl-tm b { font: 700 14px var(--mono); color: var(--text); margin-left: 2px; } .tyl-tm small { font-size: 10.5px; }
+.tyl-s { margin-top: 5px; display: flex; gap: 4px; flex-wrap: wrap; } .tyl-s span { font-size: 10.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 5px; padding: 0 5px; }
+.tyl-none { font-size: 12.5px; color: var(--muted); padding: 12px 14px; }
 .cs-w { display: flex; align-items: center; gap: 7px; min-width: 0; }
 .cs-bell { flex: none; width: 34px; height: 34px; border-radius: 9px; border: 1.5px solid var(--line); background: var(--panel); font-size: 16px; line-height: 1; padding: 0; cursor: pointer; filter: grayscale(1); opacity: .75; }
 .cs-bell.on { background: #FFF4D6; border-color: #F0B429; filter: none; opacity: 1; }
@@ -153,7 +179,9 @@ body[data-tab="ft"] .cs-only, body[data-tab="pk"] .cs-only, body[data-tab="cm"] 
   padding: 16px 52px 16px 16px; outline: none; box-shadow: var(--shadow);
 }
 .search input:focus { border-color: var(--accent); }
-.search input::placeholder { color: var(--muted); opacity: .5; letter-spacing: .02em; font-size: 26px; }
+.search input::placeholder { color: var(--muted); opacity: .5; letter-spacing: -.04em; word-spacing: -.12em; font-size: 20px; }
+@media (min-width: 400px) { .search input::placeholder { font-size: 22px; } }
+@media (max-width: 340px) { .search input::placeholder { font-size: 17px; } }
 .clear { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 36px; height: 36px;
   border: 0; border-radius: 10px; background: var(--panel-2); color: var(--muted); font-size: 20px; display: none; }
 .hint { color: var(--muted); font-size: 13px; margin: 8px 2px 0; }
@@ -1340,7 +1368,7 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
     <div class="seg al-tabs" id="alTabs" role="tablist" aria-label="항공사"></div>
     <div class="search">
       <input id="q" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false"
-             placeholder="KE17 / 17 / LAX" aria-label="Call Sign 입력">
+             placeholder="KE17 / 17 / LAX / B789" aria-label="Call Sign · 공항 · 기종 입력">
       <button class="clear" id="clear" aria-label="지우기">×</button>
     </div>
     <div class="hnav" id="hnav" hidden>
@@ -3099,7 +3127,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v56", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v57", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -3213,7 +3241,7 @@ window.csfStat = (() => {
     $("alTabs").innerHTML = Object.entries(al).filter(([k]) => !isSep(k)).map(([k, a]) =>
       `<button role="tab" data-al="${esc(k)}" aria-pressed="${k === AL}" aria-selected="${k === AL}">${esc(SHORT[k] || a.name)}</button>`).join("");
     const a = al[AL] || {};
-    $("q").placeholder = `${a.iata || ""}17 / 17 / LAX`;
+    $("q").placeholder = `${a.iata || ""}17 / 17 / LAX / ${{ KAL: "B789", AAR: "A359", JNA: "B738", JJA: "B738", TWB: "A333", ESR: "B38M" }[AL] || "B738"}`;   // 편명 / 숫자 / 공항 / 기종
     /* 안내 문구는 검색창 회색 예시(placeholder)로 대신함 */
   }
   function setAirline(k, keepQuery) {
@@ -3478,7 +3506,7 @@ window.csfStat = (() => {
     return `<div class="si-rot">${r.prev ? "이전편" : "다음편"} <b>${esc(fl)}</b> ${leg} <span class="${mv || cx ? "si-rl" : ""}">${kd(when).getUTCMonth() + 1}/${kd(when).getUTCDate()} ${fz(when)}${cx ? " 결항" : " " + khm(when)}</span></div>`;
   }
   function renderSched(sc, cs) {
-    if (!sc) return "";
+    if (!sc || !((sc.inst || []).length || (sc.season || []).length || (sc.next || []).length || sc.wd)) return "";
     const id = cs ? icnId(cs) : "";
     if (id) schOf[id] = sc;
     const wd = sc.wd || "";
@@ -3503,7 +3531,7 @@ window.csfStat = (() => {
         <div class="si-m">${what}${i[4] ? ` · <b>${esc(i[4])}</b>` : ""}${i[5] ? ` ${esc(i[5])}` : ""}${i[8] ? ` · ${esc(TERM[i[8]] || i[8])}` : ""}${i[6] ? ` · 게이트 ${esc(i[6])}` : ""}</div>${i === nearI && cs ? rotLine(cs, i) : ""}</div>`;
     }
     if (!up.length && (sc.inst || []).length) h += `<div class="si-m muted">앞으로 6일 안에 인천공항 운항 예정이 없습니다.</div>`;
-    for (const x of sc.season || []) {
+    const seasonRows = (list) => { for (const x of list) {
       const per = `${+x.from.slice(4, 6)}/${+x.from.slice(6)}–${+x.to.slice(4, 6)}/${+x.to.slice(6)}`;
       if (x.kind === "dom") {
         h += `<div class="si"><div class="si-t"><b>${esc(x.dep)} ${kstToZ(x.std)} → ${esc(x.arr)} ${kstToZ(x.sta)}</b></div>
@@ -3516,6 +3544,15 @@ window.csfStat = (() => {
         h += `<div class="si"><div class="si-t"><b>${line}</b></div>
           <div class="si-m">${KR.has(apt) ? "한국시각" : esc(apt) + " 현지시각"}${z} · ${[...x.wd].map((d) => WD[d]).join("")} · ${per}</div></div>`;
       }
+    } };
+    seasonRows(sc.season || []);
+    // 다음 시즌 운항표 (시즌 시작 45일 전부터 받음)
+    const ns = DB.next_season || "";
+    if ((sc.next || []).length) {
+      h += `<div class="si-ns">다음 시즌 ${+ns.slice(4, 6) || ""}${ns ? "/" + +ns.slice(6) : ""}~</div>`;
+      seasonRows(sc.next);
+    } else if (ns && (sc.season || []).length) {
+      h += `<div class="si-ns end">다음 시즌(${+ns.slice(4, 6)}/${+ns.slice(6)}~) 운항표에 없음</div>`;
     }
     return h + `</div>`;
   }
@@ -3873,6 +3910,130 @@ window.csfStat = (() => {
   });
   document.addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.closest(".wx-t input")) e.target.blur(); });
 
+
+  // ---------- 기종 검색 (B789 · A333 · B787 처럼 기종 코드를 넣으면 그 기종이 다니는 노선) ----------
+  const TYF = { B787: ["B788", "B789", "B78X", "787"], B777: ["B772", "B773", "B77W", "B77L", "777"], A330: ["A332", "A333", "A339", "330"],
+    A350: ["A359", "A35K", "350"], B737: ["B737", "B738", "B739", "B38M", "B39M", "737"], B747: ["B744", "B748", "747"], A321: ["A321", "A21N"],
+    A320: ["A320", "A20N"], A380: ["A388", "380"], A220: ["BCS1", "BCS3"],
+    B777F: ["B77L"], "777F": ["B77L"], B77F: ["B77L"], B744F: ["B744"], B748F: ["B748"], B747F: ["B744", "B748"], A330F: ["A332"] };   // 화물기: 777F 는 ICAO 로 B77L
+  let tySet = null, tyGen = "", tyFilter = "all";
+  function knownTypes() {
+    if (tyGen === DB.generated && tySet) return tySet;
+    tySet = new Set(Object.keys(DB.type_names || {}));
+    for (const f of Object.values(DB.flights)) {
+      (f.ty || []).forEach((t) => tySet.add(t.t));
+      ((f.sch && f.sch.inst) || []).forEach((i) => i[4] && tySet.add(i[4]));
+    }
+    tyGen = DB.generated; return tySet;
+  }
+  function typeQuery(raw) {
+    const q = String(raw || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+    if (TYF[q]) return { q, set: new Set(TYF[q]), name: TYF[q].length === 1 ? `${TYF[q][0]} · ${(DB.type_names || {})[TYF[q][0]] || ""}` : "" };
+    if (/^[A-Z][A-Z0-9]{2,3}$/.test(q) && /\d/.test(q) && knownTypes().has(q) && !DB.flights[q]) return { q, set: new Set([q]), name: (DB.type_names || {})[q] || "" };
+    return null;
+  }
+  const kstDay = (s) => { const d = utcOf(s); return d ? kd(d) : null; };                   // 한국 날짜 Date (UTC 필드로 읽음)
+  const ymdK = (d) => `${d.getUTCFullYear()}${p2(d.getUTCMonth() + 1)}${p2(d.getUTCDate())}`;
+  const md = (y) => y ? `${+y.slice(4, 6)}/${+y.slice(6, 8)}` : "";
+  const flNum = (cs) => +(cs.slice(3).match(/^\d+/) || [0])[0];
+  function typeRows(T) {
+    const now = kd(new Date()), today = ymdK(now), d7 = ymdK(new Date(now.getTime() + 7 * 864e5)), d14 = ymdK(new Date(now.getTime() - 13 * 864e5));
+    const since = DB.type_hist_since || "", nextS = DB.next_season || "";
+    const iata = (DB.airlines[AL] || {}).iata || AL.slice(0, 2);
+    const isICN = (f) => { const r = f && (f.r && f.r.length >= 2 ? f.r : schedRoute(f.sch)); return !!r && (ap(r[0]).iata || r[0]) === "ICN"; };
+    // 편 하나의 기종 정보: 앞으로 7일 인천 스케줄 (요일별) + 최근 14일 관측
+    function info(cs) {
+      const f = DB.flights[cs] || {}, inst = ((f.sch && f.sch.inst) || []).filter((i) => i[4] && i[0]);
+      const byW = {}, hitW = new Set(); let first = null;
+      for (const i of inst) {
+        const k = kstDay(i[0]); if (!k) continue;
+        const y = ymdK(k); if (y < today || y >= d7) continue;
+        const w = k.getUTCDay() || 7;
+        (byW[i[4]] = byW[i[4]] || new Set()).add(w);
+        if (T.set.has(i[4])) { hitW.add(w); if (!first || i[0] < first[0]) first = i; }
+      }
+      const ob = (f.ty || []).filter((t) => T.set.has(t.t) && (t.d14 != null ? t.d14 > 0 : (t.last || "").replace(/-/g, "") >= d14));
+      const od = ob.reduce((a, t) => a + (t.d14 != null ? t.d14 : t.n || 0), 0);
+      const ow = new Set(); ob.forEach((t) => String(t.w || "").split("").forEach((x) => x && ow.add(+x)));
+      return { f, byW, hitW, first, ob, od, ow, sch: hitW.size > 0, obs: ob.length > 0 };
+    }
+    const seen = new Set(), rows = [];
+    const list = Object.keys(DB.flights).filter((cs) => cs.slice(0, 3) === AL).sort((a, b) => flNum(a) - flNum(b) || collator.compare(a, b));
+    for (const cs of list) {
+      if (seen.has(cs)) continue;
+      const a = info(cs); if (!a.sch && !a.obs) continue;
+      // 왕복 짝: 번호가 이웃하고 노선이 반대인 편
+      const n = flNum(cs), pcs = AL + (n % 2 ? n + 1 : n - 1), pf = DB.flights[pcs];
+      const R = (f) => ((f && f.r && f.r.length >= 2 ? f.r : f && schedRoute(f.sch)) || []).map((c) => ap(c).iata || c);
+      const ra = R(a.f), rb = R(pf);
+      const rev = pf && ra.length && rb.length && ra[0] === rb[rb.length - 1] && ra[ra.length - 1] === rb[0];
+      let out = cs, ret = rev ? pcs : null;
+      if (rev && (isICN(pf) && !isICN(a.f) || (!isICN(pf) && !isICN(a.f) && flNum(pcs) < n))) { out = pcs; ret = cs; }
+      seen.add(cs); if (ret) seen.add(ret);
+      const A = out === cs ? a : info(out), B = ret ? (ret === cs ? a : info(ret)) : null;
+      const sch = A.sch || (B && B.sch), obs = A.obs || (B && B.obs);
+      const days = A.hitW.size ? A.hitW : B && B.hitW.size ? new Set() : new Set([...A.ow, ...(B ? B.ow : [])]);
+      const other = []; for (const [t, ws] of Object.entries(A.byW)) if (!T.set.has(t)) { const only = [...ws].filter((w) => !days.has(w)).sort(); if (only.length) other.push(`${only.map((w) => WD[w]).join("·")} ${t}`); }
+      // 시각: 인천 출발 (가는 편) · 인천 도착 (오는 편)
+      const fi = A.first || ((A.f.sch && A.f.sch.inst) || []).find((i) => i[2] === "D" && i[0] >= today);
+      let dep = "", arr = "", dom = null;
+      if (fi && fi[2] === "D") dep = khm(utcOf(fi[0]));
+      const ri = B && ((B.f.sch && B.f.sch.inst) || []).filter((i) => i[2] === "A" && (!fi || i[0] > fi[0])).sort((x, y) => (x[0] < y[0] ? -1 : 1))[0];
+      if (ri) { arr = khm(utcOf(ri[0])); if (fi) { const dd = Math.round((Date.parse(ymdK(kstDay(ri[0])).replace(/(\d{4})(\d\d)(\d\d)/, "$1-$2-$3")) - Date.parse(ymdK(kstDay(fi[0])).replace(/(\d{4})(\d\d)(\d\d)/, "$1-$2-$3"))) / 864e5); if (dd > 0) arr += "+" + dd; } }
+      if (!dep && !arr) dom = ((A.f.sch && A.f.sch.season) || []).find((x) => x.kind === "dom");
+      // 시즌 유효기간 · 신규 취항 · 종료
+      const seas = [...((A.f.sch && A.f.sch.season) || []), ...((B && B.f.sch && B.f.sch.season) || [])];
+      const nxt = [...((A.f.sch && A.f.sch.next) || []), ...((B && B.f.sch && B.f.sch.next) || [])];
+      const own = (A.f.sch && A.f.sch.season) || [], to = (own.length ? own : seas).map((x) => x.to).filter(Boolean).sort().pop() || "", nfrom = nxt.map((x) => x.from).filter(Boolean).sort()[0] || "";
+      const badges = [];
+      const nto = nxt.map((x) => x.to).filter(Boolean).sort().pop() || "";
+      let valid = seas.length && nto ? `~${md(nto)}` : to ? `~${md(to)}` : "";   // 다음 시즌에도 있으면 그 시즌 끝까지
+      if (!seas.length && nxt.length && nfrom >= today) { badges.push(["open", `신규 취항 ${md(nfrom)}~`]); valid = `${md(nfrom)}~${md(nxt.map((x) => x.to).sort().pop())}`; }
+      if (nextS && seas.length && !nxt.length && to && to < nextS) badges.push(["end", `${md(to)} 종료 · 다음 시즌 운항표에 없음`]);
+      // 기종 변경: 이 편에 이 기종이 처음 보인 날이 최근 14일 안 (기록이 그보다 3주 이상 먼저 시작했을 때만)
+      const tf = (A.f.sch && A.f.sch.tf) || {};
+      const fd = Object.entries(tf).filter(([t]) => T.set.has(t)).map(([, d]) => d).sort()[0];
+      const obsF = A.ob.map((t) => (t.f || "").replace(/-/g, "")).filter(Boolean).sort()[0];
+      if (fd && fd >= d14 && since && ymdK(new Date(Date.UTC(+fd.slice(0, 4), +fd.slice(4, 6) - 1, +fd.slice(6, 8)) - 21 * 864e5)) >= since && !(obsF && obsF < fd)) {
+        const prev = Object.entries(tf).filter(([t, d]) => !T.set.has(t) && d < fd).sort((x, y) => (x[1] < y[1] ? -1 : 1)).map(([t]) => t)[0];
+        badges.push(["new", `기종 변경 ${md(fd)}~${prev ? " · 이전 " + prev : ""}`]);
+      }
+      const src = []; if (sch) src.push("스케줄"); if (obs) src.push(`관측 ${A.od + (B ? B.od : 0)}일`);
+      const faint = !sch && (A.od + (B ? B.od : 0)) <= 2;
+      const pad = (x) => String(flNum(x)).padStart(3, "0");
+      const rr = A.f.r && A.f.r.length >= 2 ? A.f.r : schedRoute(A.f.sch) || [], r0 = rr.length ? ap(rr[0]).iata || rr[0] : "", r1 = rr.length ? ap(rr[rr.length - 1]).iata || rr[rr.length - 1] : "";
+      rows.push({ out, label: `${iata}${pad(out)}${ret ? "/" + pad(ret) : ""}`, route: `${r0} ${ret ? "⇄" : "→"} ${r1}`, days, other, dep, arr, dom, valid, badges, src, faint,
+        k: flNum(out) });
+    }
+    rows.sort((x, y) => x.k - y.k);
+    return { rows, today, d7, d14 };
+  }
+  function renderTypes(T) {
+    const { rows, today, d7, d14 } = typeRows(T);
+    const name = T.name || (T.set.size > 1 ? [...T.set].filter((t) => /^[AB]/.test(t)).join(" · ") : "");
+    const nNew = rows.filter((r) => r.badges.some((b) => b[0] !== "end")).length, nEnd = rows.filter((r) => r.badges.some((b) => b[0] === "end")).length;
+    const shown = rows.filter((r) => tyFilter === "new" ? r.badges.some((b) => b[0] !== "end") : tyFilter === "end" ? r.badges.some((b) => b[0] === "end") : true);
+    const d = (y) => `${+y.slice(4, 6)}/${+y.slice(6)}`;
+    let h = `<div class="card tyl"><div class="tyl-hd"><div class="t">${esc(T.q)} 노선 ${rows.length}${name ? `<small>${esc(name)}</small>` : ""}</div>
+      <div class="p">기준: 인천 스케줄 ${d(today)}~${d(ymdK(new Date(Date.UTC(+d7.slice(0, 4), +d7.slice(4, 6) - 1, +d7.slice(6)) - 864e5)))} · 시즌 운항표 · 관측 ${d(d14)} 이후<br>편명 순 · 요일·시각은 인천 출발편 기준 · 누르면 인천 출발편 정보</div>
+      <div class="tyl-f"><button type="button" data-tyf="all" aria-pressed="${tyFilter === "all"}">전체 ${rows.length}</button><button type="button" class="n" data-tyf="new" aria-pressed="${tyFilter === "new"}">신규·변경 ${nNew}</button><button type="button" class="e" data-tyf="end" aria-pressed="${tyFilter === "end"}">곧 종료 ${nEnd}</button></div></div>`;
+    if (!rows.length) h += `<div class="tyl-none">${esc((DB.airlines[AL] || {}).name || "")}의 ${esc(T.q)} 운항 자료가 없습니다 (앞으로 7일 인천 스케줄 · 최근 14일 관측 기준).</div>`;
+    else if (!shown.length) h += `<div class="tyl-none">해당하는 노선이 없습니다.</div>`;
+    for (const r of shown) {
+      const chips = r.days.size ? `<div class="tyl-w">${[1, 2, 3, 4, 5, 6, 7].map((w) => `<i class="${r.days.has(w) ? "on" : ""}">${WD[w]}</i>`).join("")}${r.days.size === 7 ? "<b>매일</b>" : ""}</div>` : `<div class="tyl-w tyl-w0">요일 정보 쌓는 중</div>`;
+      const tm = r.dep || r.arr ? `<div class="tyl-tm">${r.dep ? `<span>ICN 출발 <b>${r.dep}</b></span>` : ""}${r.arr ? `<span>ICN 도착 <b>${r.arr}</b></span>` : ""}<small>KST</small></div>`
+        : r.dom ? `<div class="tyl-tm"><span>${esc(r.dom.dep)} <b>${esc(String(r.dom.std).replace(/(\d\d)(\d\d)/, "$1:$2"))}</b></span><span>→ ${esc(r.dom.arr)} <b>${esc(String(r.dom.sta).replace(/(\d\d)(\d\d)/, "$1:$2"))}</b></span><small>KST</small></div>` : "";
+      h += `<button type="button" class="tyl-it${r.faint ? " faint" : ""}" data-tycs="${esc(r.out)}"><div class="l1"><span class="fl">${esc(r.label)}</span><span class="rt">${esc(r.route)}</span>${r.valid ? `<span class="vd">${esc(r.valid)}</span>` : ""}<span class="go">›</span></div>
+        ${r.badges.length ? `<div class="tyl-b">${r.badges.map(([k, t]) => `<span class="${k}">${esc(t)}</span>`).join("")}</div>` : ""}${chips}
+        ${r.other.length ? `<div class="tyl-o">${esc(r.other.join(" · "))}</div>` : ""}${tm}<div class="tyl-s">${r.src.map((x) => `<span>${esc(x)}</span>`).join("")}</div></button>`;
+    }
+    if (rows.some((r) => r.faint)) h += `<div class="tyl-none">흐린 줄: 관측 1~2일뿐 (임시 투입 가능)</div>`;
+    return h + `</div>`;
+  }
+  document.addEventListener("click", (e) => {
+    const f = e.target.closest("[data-tyf]"); if (f) { tyFilter = f.dataset.tyf; search(); return; }
+    const b = e.target.closest("[data-tycs]"); if (b) { $("q").value = b.dataset.tycs; store.set(QKEY, b.dataset.tycs); search(); window.scrollTo(0, 0); }
+  });
   function search() {
     const raw = $("q").value;
     $("clear").style.display = raw ? "block" : "none";
@@ -3882,6 +4043,9 @@ window.csfStat = (() => {
     $("recent").innerHTML = "";
     const apt = airportCode(raw);
     if (apt) { $("result").innerHTML = renderAirport(apt); H?.seen(ap(apt).iata || apt); clearTimeout(aptTimer); aptTimer = setTimeout(() => csfStat("공항검색", AL), 1500); return; }
+    const tq = typeQuery(raw);
+    if (tq) { $("result").innerHTML = renderTypes(tq); H?.seen(null); return; }
+    tyFilter = "all";
     const cands = candidates(raw);
     const hit = cands.find((c) => DB.flights[c]);
     if (hit && !ofAL(hit) && DB.airlines[hit.slice(0, 3)]) setAirline(hit.slice(0, 3), true);   // 다른 항공사 편명을 직접 입력하면 탭도 전환

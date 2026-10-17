@@ -222,6 +222,7 @@ def sweep_adsb(type_list, prefixes, obs, today):
             rec = obs.setdefault(cs, {}).setdefault(typ, {"count": 0, "first": today, "last": ""})
             if rec["last"] != today:  # 하루 1회만 카운트
                 rec["count"] += 1
+                rec["days"] = (rec.get("days") or [])[-20:] + [today]   # 최근 관측일 (요일·14일 관측 수 계산용)
             rec["last"] = today
             if reg:
                 rec["reg"] = reg
@@ -248,7 +249,12 @@ def rank_types(type_obs, today):
     for t, r in type_obs.items():
         items.append((r["last"] >= recent, r["count"], r["last"], t, r))
     items.sort(reverse=True)
-    return [{"t": t, "n": r["count"], "last": r["last"], "reg": r.get("reg", "")}
+    d14 = (dt.date.fromisoformat(today) - dt.timedelta(days=13)).isoformat()
+    def recent_days(r):
+        return [d for d in (r.get("days") or []) if d >= d14]
+    return [dict({"t": t, "n": r["count"], "last": r["last"], "reg": r.get("reg", ""), "f": r.get("first", "")},
+                 **({"d14": len(recent_days(r)),
+                     "w": "".join(sorted({str(dt.date.fromisoformat(d).isoweekday()) for d in recent_days(r)}))} if r.get("days") else {}))
             for _, _, _, t, r in items]
 
 
@@ -304,6 +310,7 @@ def main():
     log("[3/5] 운항 스케줄 수집 (공공데이터포털)")
     now = dt.datetime.now(dt.timezone.utc)
     sched = public_schedule.build(public_schedule.collect(airlines, SCHED_CACHE, now), now)
+    next_start = sched.pop("_next_start", "")
     sched = {k: v for k, v in sched.items() if k.startswith(prefixes)}
     log("  스케줄 확보 %d편" % len(sched))
 
@@ -344,6 +351,8 @@ def main():
                                      **({"tab": a["tab"]} if a.get("tab") else {}))   # tab: 별도 상단 탭으로 보여 줄 항공사
                      for a in airlines},
         "type_names": TYPE_NAMES,
+        "type_hist_since": public_schedule.history_since(),
+        "next_season": next_start,                              # 다음 시즌 시작일 (그 시즌 운항표를 받았을 때만)   # 날짜별 기종 기록 시작일 (이전 신규 투입 판단 불가)
         "stats": {"flights": len(flights), "with_type": with_type, "adsb_updated": adsb_ok,
                   "with_sched": sum(1 for f in flights.values() if f.get("sch"))},
         "sources": ["VRS standing-data (routes, airports)", "adsb.lol / airplanes.live (aircraft types)",
