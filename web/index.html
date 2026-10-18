@@ -252,6 +252,63 @@ body[data-tab="ft"] .cs-only, body[data-tab="pk"] .cs-only, body[data-tab="cm"] 
 .apx-c b { font: 700 13px var(--mono); white-space: nowrap; }
 .apx-c b small { font-weight: 500; color: var(--muted); }
 .apx-k { font: 700 14px var(--mono); color: var(--accent); margin-bottom: 2px; }
+.apx-fx { display: flex; align-items: center; gap: 6px; width: 100%; margin: 0 0 10px; padding: 7px 12px 7px 10px; border: 1.5px solid var(--accent); border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent); font: 600 13px inherit; font-family: inherit; color: var(--text); cursor: pointer; text-align: left; white-space: nowrap; overflow: hidden; }
+.apx-fx:active { background: color-mix(in srgb, var(--accent) 20%, transparent); }
+.apx-fx .ic { display: flex; flex-shrink: 0; color: var(--accent); }
+.apx-fx .ic svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.apx-fx b { font: 700 13px var(--mono); color: var(--accent); }
+.apx-fx i { font-style: normal; color: var(--muted); min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.apx-fx em { font: 700 13px var(--mono); font-style: normal; flex-shrink: 0; }
+.apx-fx.one em { margin-left: auto; }
+.apx-fx em.old { color: var(--warn); }
+.apx-fx s { text-decoration: none; color: var(--muted); }
+.apx-fx .go { flex-shrink: 0; margin-left: auto; color: var(--accent); font-weight: 700; font-size: 17px; line-height: 1; }
+.apx-fx.one .go { margin-left: 2px; }
+.apx-day { flex-shrink: 0; }
+/* 공항 도시 7일 날씨 */
+.fc { margin-top: 10px; border-top: 1px dashed var(--line); padding-top: 8px; }
+.fc summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; cursor: pointer; list-style: none; font-size: 13px; font-weight: 600; color: var(--muted); padding: 2px 0; }
+.fc summary::-webkit-details-marker { display: none; }
+.fc summary::after { content: "▾"; color: var(--accent); font-size: 14px; transition: transform .15s; }
+.fc[open] summary::after { transform: rotate(180deg); }
+.fc-t b { font: 700 13px var(--mono); color: var(--accent); margin-left: 2px; }
+.fc-sum { margin-left: auto; font: 700 13px var(--mono); color: var(--text); }
+.fc-g { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px; margin-top: 6px; }
+.fc-d { display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 5px 0 6px; border-radius: 8px; font-size: 12px; min-width: 0; }
+.fc-d.now { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.fc-wk { font-weight: 700; color: var(--text); }
+.fc-d.sun .fc-wk { color: #D14343; }
+.fc-d.sat .fc-wk { color: #2F6FD6; }
+.fc-d.now .fc-wk { color: var(--accent); }
+.fc-dt { font: 500 10px var(--mono); color: var(--muted); }
+.fc-ic { font-size: 18px; line-height: 1.25; margin: 1px 0; }
+.fc-hi { font: 700 13px var(--mono); }
+.fc-lo { font: 500 12px var(--mono); color: var(--muted); }
+.fc-p { font: 600 11px var(--mono); color: var(--muted); margin-top: 2px; }
+.fc-p.hi { color: var(--accent); }
+.fc-w { display: flex; flex-direction: column; align-items: center; font: 600 11px var(--mono); color: var(--text); line-height: 1.15; margin-top: 1px; }
+.fc-w.hi { color: var(--warn); }
+.fc-w small { font: 600 9.5px var(--mono); color: var(--warn); }
+.fc-ar { display: inline-block; font-size: 12px; font-weight: 700; line-height: 1; margin-bottom: 1px; color: var(--accent); }
+.fc-src { margin: 6px 0 0; font-size: 10.5px; line-height: 1.4; color: var(--muted); }
+.fc-src.old { color: var(--warn); }
+.fc-src a { color: var(--muted); }
+.fc-none { margin: 6px 0 0; font-size: 12px; color: var(--muted); }
+/* 환율 계산기 */
+.fx-sel { width: 100%; margin-top: 14px; font: inherit; font-size: 17px; font-weight: 700; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--panel-2); color: var(--text); }
+.fx-rate { margin: 10px 2px 6px; font-size: 15px; }
+.fx-rate b { font-family: var(--mono); }
+.fx-rate small { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; }
+.fx-rate small.old { color: var(--warn); }
+.fx-row { display: flex; align-items: center; gap: 10px; margin-top: 12px; padding: 10px 12px; border: 2px solid var(--line); border-radius: 14px; background: var(--panel-2); }
+.fx-row:focus-within { border-color: var(--accent); }
+.fx-row span { flex: 0 0 auto; max-width: 45%; font-weight: 700; font-size: 14px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fx-row input { flex: 1; min-width: 0; border: 0; background: none; color: var(--text); font: 700 24px var(--mono); text-align: right; outline: none; }
+.fx-q { display: flex; gap: 6px; margin-top: 8px; }
+.fx-q button { flex: 1; font: 600 13px var(--mono); padding: 8px 4px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--text); cursor: pointer; }
+.fx-src { margin: 16px 2px 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+.fx-src a { color: var(--muted); }
 .via b { color: var(--text); font-family: var(--mono); }
 
 .type { border-top: 1px solid var(--line); padding: 14px 16px; display: flex; gap: 14px; align-items: center; background: var(--accent-soft); }
@@ -1109,6 +1166,18 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
     <p class="rc-src" id="rcSrc"></p>
   </div>
 </div>
+<div class="sheet-bg" id="fxSheet" hidden>
+  <div class="sheet fxv" role="dialog" aria-modal="true" aria-labelledby="fxTitle">
+    <div class="sh-hd"><h2 id="fxTitle">환율 계산기</h2><button type="button" class="sh-x" id="fxClose">닫기</button></div>
+    <select id="fxSel" class="fx-sel" aria-label="통화 고르기"></select>
+    <div class="fx-rate" id="fxRate"></div>
+    <label class="fx-row"><span id="fxFl">외화</span><input id="fxF" inputmode="decimal" autocomplete="off" placeholder="0"></label>
+    <div class="fx-q" id="fxQF"></div>
+    <label class="fx-row"><span>KRW 원</span><input id="fxK" inputmode="numeric" autocomplete="off" placeholder="0"></label>
+    <div class="fx-q" id="fxQK"></div>
+    <p class="fx-src">기준 환율(매매기준율)로 계산한 값이며, 실제 환전·카드 결제는 수수료가 붙어 달라집니다.<br>출처: 한국수출입은행 · <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">Rates By Exchange Rate API</a></p>
+  </div>
+</div>
 <div class="sheet-bg" id="rpSheet" hidden>
   <div class="sheet rpv" role="dialog" aria-modal="true" aria-labelledby="rpTitle">
     <div class="sh-hd"><h2 id="rpTitle">읽은 근무표 확인</h2><button type="button" class="sh-x" data-rpclose>닫기</button></div>
@@ -1134,6 +1203,7 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
       <div class="sh-hd"><h2 id="mnTitle">메뉴</h2><button type="button" class="sh-x" data-mclose>닫기</button></div>
       <div class="mn-list">
         <button type="button" class="mn-item" id="mnCal"><span class="ic">📅</span><span>내 스케줄<small>저장된 근무표를 월별로 보기</small></span><span class="go">›</span></button>
+        <button type="button" class="mn-item" id="mnFx"><span class="ic">💱</span><span>환율 계산기<small>외화 ↔ 원 · 오프라인에서도 마지막 환율로</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnGm"><span class="ic">🤖</span><span>Gemini AI 연결<small>FLT Package 분석 · 사진 읽기용 키 등록</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnGuide"><span class="ic">🗓️</span><span>근무표 → 캘린더 안내<small>근무표 등록 방법 · 앱/구글 캘린더</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnGc"><span class="ic">🔗</span><span>구글 캘린더 연결<small>휴대폰 캘린더 · 알림으로 보기 (선택)</small></span><span class="go">›</span></button>
@@ -3101,6 +3171,7 @@ window.FPREP = (() => {
   window.MENU = { open: (v) => { open(); if (v) view(v); } };     // 다른 화면에서 메뉴의 특정 화면 열기
   $("menuBtn").addEventListener("click", open);
   $("mnCal").addEventListener("click", () => { close(); window.ROSTER && window.ROSTER.open(); });
+  $("mnFx").addEventListener("click", () => { close(); window.FXCALC && window.FXCALC.open(); });
   $("menuSheet").addEventListener("click", (e) => {
     if (e.target === $("menuSheet") || e.target.closest("[data-mclose]")) return close();
     const v = e.target.closest("[data-mv]"); if (v) return view(v.dataset.mv);
@@ -3127,7 +3198,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v58", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v59", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -3603,6 +3674,270 @@ window.csfStat = (() => {
     }
     return h + `</div>`;
   }
+
+  // ---------- 환율 · 현지 통화 ----------
+  // fx.json: 서버(GitHub Actions)가 매시간 수출입은행 매매기준율 + Exchange Rate API 로 만듦 (외화 1단위 = 몇 원)
+  // 받은 값은 기기에 저장 → 비행 중(오프라인)에도 마지막 값과 기준일을 표시
+  const CC_CUR = {
+    KR: "KRW", JP: "JPY", CN: "CNY", HK: "HKD", MO: "MOP", TW: "TWD", MN: "MNT",
+    US: "USD", GU: "USD", MP: "USD", PW: "USD", PR: "USD", AS: "USD", FM: "USD", MH: "USD", TL: "USD", EC: "USD",
+    VN: "VND", TH: "THB", PH: "PHP", ID: "IDR", MY: "MYR", SG: "SGD", KH: "KHR", LA: "LAK", MM: "MMK", BN: "BND",
+    IN: "INR", NP: "NPR", LK: "LKR", BD: "BDT", MV: "MVR", PK: "PKR", BT: "BTN",
+    KZ: "KZT", UZ: "UZS", KG: "KGS", TJ: "TJS", TM: "TMT", AZ: "AZN", GE: "GEL", AM: "AMD", RU: "RUB",
+    TR: "TRY", AE: "AED", SA: "SAR", QA: "QAR", KW: "KWD", BH: "BHD", OM: "OMR", IL: "ILS", JO: "JOD", IR: "IRR",
+    EG: "EGP", KE: "KES", ET: "ETB", ZA: "ZAR", MA: "MAD", NG: "NGN", TZ: "TZS", MU: "MUR",
+    GB: "GBP", CH: "CHF", SE: "SEK", NO: "NOK", DK: "DKK", IS: "ISK", CZ: "CZK", HU: "HUF", PL: "PLN", RO: "RON",
+    BG: "BGN", RS: "RSD", UA: "UAH", BY: "BYN",
+    IE: "EUR", FR: "EUR", DE: "EUR", IT: "EUR", ES: "EUR", PT: "EUR", NL: "EUR", BE: "EUR", AT: "EUR", GR: "EUR", FI: "EUR",
+    LU: "EUR", HR: "EUR", SK: "EUR", SI: "EUR", EE: "EUR", LV: "EUR", LT: "EUR", MT: "EUR", CY: "EUR", MC: "EUR",
+    CA: "CAD", MX: "MXN", BR: "BRL", CL: "CLP", PE: "PEN", AR: "ARS", CO: "COP", PA: "PAB",
+    AU: "AUD", NZ: "NZD", FJ: "FJD", PG: "PGK", NC: "XPF", PF: "XPF",
+  };
+  const CUR_NM = {
+    KRW: "대한민국 원", JPY: "일본 엔", CNY: "중국 위안", HKD: "홍콩 달러", MOP: "마카오 파타카", TWD: "대만 달러", MNT: "몽골 투그릭",
+    USD: "미국 달러", VND: "베트남 동", THB: "태국 바트", PHP: "필리핀 페소", IDR: "인도네시아 루피아", MYR: "말레이시아 링깃",
+    SGD: "싱가포르 달러", KHR: "캄보디아 리엘", LAK: "라오스 킵", MMK: "미얀마 짯", BND: "브루나이 달러",
+    INR: "인도 루피", NPR: "네팔 루피", LKR: "스리랑카 루피", BDT: "방글라데시 타카", MVR: "몰디브 루피야", PKR: "파키스탄 루피", BTN: "부탄 눌트럼",
+    KZT: "카자흐스탄 텡게", UZS: "우즈베키스탄 숨", KGS: "키르기스스탄 솜", TJS: "타지키스탄 소모니", TMT: "투르크메니스탄 마나트",
+    AZN: "아제르바이잔 마나트", GEL: "조지아 라리", AMD: "아르메니아 드람", RUB: "러시아 루블",
+    TRY: "튀르키예 리라", AED: "아랍에미리트 디르함", SAR: "사우디 리얄", QAR: "카타르 리얄", KWD: "쿠웨이트 디나르", BHD: "바레인 디나르",
+    OMR: "오만 리알", ILS: "이스라엘 셰켈", JOD: "요르단 디나르", IRR: "이란 리알",
+    EGP: "이집트 파운드", KES: "케냐 실링", ETB: "에티오피아 비르", ZAR: "남아공 랜드", MAD: "모로코 디르함", NGN: "나이지리아 나이라",
+    TZS: "탄자니아 실링", MUR: "모리셔스 루피",
+    EUR: "유로", GBP: "영국 파운드", CHF: "스위스 프랑", SEK: "스웨덴 크로나", NOK: "노르웨이 크로네", DKK: "덴마크 크로네",
+    ISK: "아이슬란드 크로나", CZK: "체코 코루나", HUF: "헝가리 포린트", PLN: "폴란드 즈워티", RON: "루마니아 레우", BGN: "불가리아 레프",
+    RSD: "세르비아 디나르", UAH: "우크라이나 흐리우냐", BYN: "벨라루스 루블",
+    CAD: "캐나다 달러", MXN: "멕시코 페소", BRL: "브라질 헤알", CLP: "칠레 페소", PEN: "페루 솔", ARS: "아르헨티나 페소", COP: "콜롬비아 페소", PAB: "파나마 발보아",
+    AUD: "호주 달러", NZD: "뉴질랜드 달러", FJD: "피지 달러", PGK: "파푸아뉴기니 키나", XPF: "CFP 프랑",
+  };
+  const curNm = (k) => (CUR_NM[k] || "").split(" ").pop();      // 화면 표시용: 나라 이름 빼고 화폐 이름만 (달러, 엔, 리라)
+  const FXKEY = "csf-fx";
+  let FX = null;
+  try { FX = JSON.parse(store.get(FXKEY) || "null"); } catch (e) {}
+  function loadFx() {
+    if (!location.protocol.startsWith("http")) return;
+    const use = (w) => {
+      if (!w || !w.r) return;
+      if (!FX || (FX.b && !w.b) || (w.b === FX.b && w.generated > FX.generated)) {
+        FX = w; store.set(FXKEY, JSON.stringify(w));
+        if ($("result").querySelector(".apx-fx")) search();
+        if (window.FXCALC) window.FXCALC.refresh();
+      }
+    };
+    fetch("fx.json?t=" + Date.now(), { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).catch(() => null).then((w) => {
+      if (w && w.r) return use(w);
+      // 서버 자료를 못 받으면(개발 서버 등) Exchange Rate API 를 직접 (공개 자료 · 보내는 정보 없음)
+      if (FX && !FX.b) return;
+      return fetch("https://open.er-api.com/v6/latest/KRW").then((r) => r.json()).then((j) => {
+        if (!j || j.result !== "success") return;
+        const r = {};
+        for (const [c, v] of Object.entries(j.rates || {})) if (c !== "KRW" && v) r[c] = 1 / v;
+        const d = new Date(j.time_last_update_unix * 1000 + 9 * 3600e3).toISOString().slice(0, 10);
+        use({ generated: new Date().toISOString(), exim: "", er: d, x: [], r, b: 1 });
+      }).catch(() => {});
+    });
+  }
+  const fxUnit = (k, v) => { if (k === "JPY") return 100; if (v >= 1) return 1; let u = 1; while (u * v < 100 && u < 1e6) u *= 10; return u; };
+  const fxW = (v) => v.toLocaleString("en-US", { maximumFractionDigits: v >= 100 ? 0 : 2 });
+  const fxDate = (k) => (FX && FX.x && FX.x.includes(k) ? FX.exim : FX ? FX.er : "") || "";
+  const fxOld = (k) => { const d = fxDate(k); return !d || Date.now() - new Date(d + "T00:00:00+09:00") > 7 * 864e5; };
+  function fxCurs(codes) {
+    const s = [];
+    for (const c of codes) { const k = c && CC_CUR[ap(c).cc]; if (k && k !== "KRW" && !s.includes(k)) s.push(k); }
+    return s;
+  }
+  const FX_IC = `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8 7h8M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h3.5"/></svg>`;
+  function fxRow(codes) {                                   // 정보창 맨 위 한 줄: 현지 화폐 · 환율 (누르면 계산기)
+    const cs = fxCurs(codes);
+    if (!cs.length) return "";
+    const one = cs.length === 1;
+    const parts = cs.map((k) => {
+      const v = FX && FX.r && FX.r[k];
+      const rate = v ? `<em${fxOld(k) ? ' class="old"' : ""}>${fxUnit(k, v).toLocaleString("en-US")}=${fxW(fxUnit(k, v) * v)}원</em>` : `<em class="old">환율 없음</em>`;
+      return `<b>${k}</b>${one ? `<i>${esc(curNm(k))}</i>` : ""}${rate}`;
+    });
+    return `<button type="button" class="apx-fx${one ? " one" : ""}" data-fx="${cs.join(",")}" aria-label="환율 계산기 열기"><span class="ic">${FX_IC}</span>${parts.join('<s aria-hidden="true">·</s>')}<span class="go" aria-hidden="true">›</span></button>`;
+  }
+
+  // 환율 계산기 (외화 ↔ 원, 오프라인 가능)
+  window.FXCALC = (() => {
+    const CURKEY = "csf-fxcur";
+    let cur = store.get(CURKEY) || "USD", route = [], last = "F";
+    const sel = () => $("fxSel"), inF = () => $("fxF"), inK = () => $("fxK");
+    const val = (el) => { const n = parseFloat(String(el.value).replace(/[^\d.]/g, "")); return isFinite(n) ? n : null; };
+    const fmtF = (v) => v.toLocaleString("en-US", { maximumFractionDigits: v >= 1000 ? 0 : 2 });
+    function fillSel() {
+      const r = (FX && FX.r) || {};
+      const has = (k) => r[k] && CUR_NM[k];
+      const opt = (k) => `<option value="${k}"${k === cur ? " selected" : ""}>${k} ${esc(CUR_NM[k])}</option>`;
+      const top = route.filter(has);
+      const rest = Object.keys(CUR_NM).filter((k) => k !== "KRW" && has(k) && !top.includes(k))
+        .sort((a, b) => CUR_NM[a].localeCompare(CUR_NM[b], "ko"));
+      sel().innerHTML = (top.length ? `<optgroup label="이번 노선">${top.map(opt).join("")}</optgroup><optgroup label="전체">` : "")
+        + rest.map(opt).join("") + (top.length ? "</optgroup>" : "");
+      if (!has(cur)) { cur = top[0] || (has("USD") ? "USD" : rest[0] || ""); if (cur) sel().value = cur; }
+    }
+    function quick() {
+      const v = FX && FX.r && FX.r[cur];
+      if (!v) { $("fxQF").innerHTML = $("fxQK").innerHTML = ""; return; }
+      const u = fxUnit(cur, v);
+      $("fxQF").innerHTML = [1, 10, 100, 1000].map((m) => u * m).map((n) => `<button type="button" data-fxf="${n}">${n.toLocaleString("en-US")}</button>`).join("");
+      $("fxQK").innerHTML = [[1e4, "1만"], [5e4, "5만"], [1e5, "10만"], [5e5, "50만"]].map(([n, t]) => `<button type="button" data-fxk="${n}">${t}원</button>`).join("");
+    }
+    function calc() {
+      const v = FX && FX.r && FX.r[cur];
+      if (!v) return;
+      if (last === "F") { const a = val(inF()); inK().value = a == null ? "" : Math.round(a * v).toLocaleString("en-US"); }
+      else { const a = val(inK()); inF().value = a == null ? "" : fmtF(a / v); }
+    }
+    function head() {
+      const v = FX && FX.r && FX.r[cur];
+      $("fxFl").textContent = cur ? `${cur} ${curNm(cur)}` : "외화";
+      if (!v) { $("fxRate").innerHTML = FX ? "이 통화의 환율 자료가 없습니다." : "환율 자료가 아직 없습니다. 인터넷에 연결된 상태에서 앱을 한 번 열어 주세요."; return; }
+      const u = fxUnit(cur, v), d = fxDate(cur), ex = FX.x && FX.x.includes(cur);
+      $("fxRate").innerHTML = `<b>${u.toLocaleString("en-US")} ${cur} = ${(u * v).toLocaleString("en-US", { maximumFractionDigits: 2 })}원</b>`
+        + `<small${fxOld(cur) ? ' class="old"' : ""}>${d ? `기준일 ${+d.slice(5, 7)}/${+d.slice(8, 10)} · ` : ""}${ex ? "수출입은행 매매기준율" : "Exchange Rate API"}</small>`;
+    }
+    function refresh() { if ($("fxSheet").hidden) return; fillSel(); head(); quick(); calc(); }
+    function open(list) {
+      route = (list || []).filter(Boolean);
+      if (route.length) cur = route[0];
+      fillSel(); head(); quick();
+      inF().value = ""; inK().value = ""; last = "F";
+      $("fxSheet").hidden = false;
+    }
+    function close() { $("fxSheet").hidden = true; }
+    const wire = () => {
+      if (!$("fxSheet")) return;
+      sel().addEventListener("change", () => { cur = sel().value; store.set(CURKEY, cur); head(); quick(); calc(); });
+      inF().addEventListener("input", () => { last = "F"; calc(); });
+      inK().addEventListener("input", () => { last = "K"; calc(); });
+      $("fxSheet").addEventListener("click", (e) => {
+        if (e.target === $("fxSheet") || e.target.id === "fxClose") return close();
+        const f = e.target.closest("[data-fxf]"), k = e.target.closest("[data-fxk]");
+        if (f) { inF().value = (+f.dataset.fxf).toLocaleString("en-US"); last = "F"; calc(); }
+        if (k) { inK().value = (+k.dataset.fxk).toLocaleString("en-US"); last = "K"; calc(); }
+      });
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("fxSheet").hidden) close(); });
+    };
+    wire();
+    return { open: (l) => open(l), refresh, close };
+  })();
+  document.addEventListener("click", (e) => { const b = e.target.closest("[data-fx]"); if (b) window.FXCALC.open(b.dataset.fx.split(",")); });
+  // ---------- 공항 도시 일반 날씨 7일 (Open-Meteo) ----------
+  // fcst.json: 서버가 6시간마다 전체 공항 예보를 받아 배포. 기기에 저장 → 오프라인에서도 마지막 예보 표시
+  const FCKEY = "csf-fcst", FC_OPEN = "csf-fc-open";
+  let FC = null;
+  try { FC = JSON.parse(store.get(FCKEY) || "null"); } catch (e) {}
+  let fcOpen = {};
+  try { fcOpen = JSON.parse(store.get(FC_OPEN) || "{}") || {}; } catch (e) {}
+  const FC_API = "https://api.open-meteo.com/v1/forecast?daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant&timezone=auto&forecast_days=8&wind_speed_unit=kn";
+  function loadFc() {
+    if (!location.protocol.startsWith("http")) return;
+    const use = (w) => {
+      if (!w || !w.d || !Object.keys(w.d).length) return;
+      if (!FC || (FC.b && !w.b) || (!!w.b === !!FC.b && w.generated > FC.generated)) {
+        FC = w; store.set(FCKEY, JSON.stringify(w));
+        if ($("result").querySelector(".fc")) search();
+      }
+    };
+    fetch("fcst.json?t=" + Date.now(), { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).catch(() => null).then(async (w) => {
+      if (w && w.d) return use(w);
+      // 서버 자료를 못 받으면(개발 서버 등) Open-Meteo 를 직접 (공항 좌표만 보냄 · 검색 내용은 보내지 않음)
+      if (FC && !FC.b && Date.now() - new Date(FC.generated) < 12 * 3600e3) return;
+      const pts = Object.entries(DB.airports).filter(([k, v]) => /^[A-Z]{4}$/.test(k) && v[4] != null && v[5] != null);
+      const d = {};
+      for (let i = 0; i < pts.length; i += 50) {
+        const part = pts.slice(i, i + 50);
+        try {
+          let res = await (await fetch(`${FC_API}&latitude=${part.map((p) => (+p[1][4]).toFixed(3)).join(",")}&longitude=${part.map((p) => (+p[1][5]).toFixed(3)).join(",")}`)).json();
+          if (!Array.isArray(res)) res = [res];
+          part.forEach(([k], j) => { const x = res[j] && res[j].daily; if (x && x.time) d[k] = fcPack(x); });
+        } catch (e) { break; }
+      }
+      use({ generated: new Date().toISOString().slice(0, 19) + "Z", d, b: 1 });
+    });
+  }
+  function fcPack(x) {
+    const r = (a) => (a || []).map((v) => (v == null ? null : Math.round(v)));
+    return { t: x.time[0], c: r(x.weather_code), hi: r(x.temperature_2m_max), lo: r(x.temperature_2m_min), p: r(x.precipitation_probability_max),
+      w: r(x.wind_speed_10m_max), g: r(x.wind_gusts_10m_max), wd: r(x.wind_direction_10m_dominant) };
+  }
+  // WMO 날씨 코드 → 그림 · 설명
+  function wmo(c) {
+    if (c == null) return ["·", "자료 없음"];
+    if (c === 0) return ["☀️", "맑음"];
+    if (c === 1) return ["🌤️", "대체로 맑음"];
+    if (c === 2) return ["⛅", "구름 조금"];
+    if (c === 3) return ["☁️", "흐림"];
+    if (c === 45 || c === 48) return ["🌫️", "안개"];
+    if (c >= 51 && c <= 57) return ["🌦️", "이슬비"];
+    if (c === 66 || c === 67) return ["🌧️", "어는 비"];
+    if (c >= 61 && c <= 65) return ["🌧️", "비"];
+    if (c >= 71 && c <= 77) return ["🌨️", "눈"];
+    if (c >= 80 && c <= 82) return ["🌦️", "소나기"];
+    if (c === 85 || c === 86) return ["🌨️", "눈 소나기"];
+    if (c === 95) return ["⛈️", "뇌우"];
+    if (c === 96 || c === 99) return ["⛈️", "우박 동반 뇌우"];
+    return ["·", "—"];
+  }
+  function localYmd(code) {                                 // 공항 현지 오늘 날짜 'YYYY-MM-DD'
+    const tz = tzOfCode(code);
+    try { return new Intl.DateTimeFormat("en-CA", { timeZone: tz || "UTC", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date()); }
+    catch (e) { return new Date().toISOString().slice(0, 10); }
+  }
+  function fcTable(code) {
+    const k = icaoOf(code), e = FC && FC.d && FC.d[k];
+    if (!e || !e.t) return `<p class="fc-none">예보 자료가 아직 없습니다. 인터넷에 연결된 상태에서 앱을 열면 받아 둡니다.</p>`;
+    const base = new Date(e.t + "T00:00:00Z"), today = localYmd(code);
+    const days = [];
+    for (let i = 0; i < (e.c || []).length; i++) {
+      const d = new Date(base.getTime() + i * 864e5), ymd = d.toISOString().slice(0, 10);
+      if (ymd < today) continue;
+      days.push({ i, d, ymd });
+      if (days.length === 7) break;
+    }
+    if (!days.length) return `<p class="fc-none">예보가 오래되어 표시할 날짜가 없습니다. 인터넷 연결 후 다시 받아 주세요.</p>`;
+    const WK = ["일", "월", "화", "수", "목", "금", "토"];
+    const col = ({ i, d, ymd }) => {
+      const [ic, nm] = wmo(e.c[i]), w = e.w[i], g = e.g && e.g[i], wd = e.wd && e.wd[i], p = e.p && e.p[i];
+      const arrow = wd == null ? "" : `<span class="fc-ar" style="transform:rotate(${(wd + 180) % 360}deg)" aria-hidden="true">↑</span>`;
+      return `<div class="fc-d${ymd === today ? " now" : ""}${d.getUTCDay() === 0 ? " sun" : d.getUTCDay() === 6 ? " sat" : ""}" title="${nm}">
+        <span class="fc-wk">${ymd === today ? "오늘" : WK[d.getUTCDay()]}</span><span class="fc-dt">${d.getUTCMonth() + 1}/${d.getUTCDate()}</span>
+        <span class="fc-ic" role="img" aria-label="${nm}">${ic}</span>
+        <b class="fc-hi">${e.hi[i] ?? "—"}°</b><span class="fc-lo">${e.lo[i] ?? "—"}°</span>
+        <span class="fc-p${p >= 60 ? " hi" : ""}">${p == null ? "—" : p + "%"}</span>
+        <span class="fc-w${w >= 25 || g >= 35 ? " hi" : ""}">${arrow}${w ?? "—"}${g != null && g >= 25 && g > w ? `<small>G${g}</small>` : ""}</span></div>`;
+    };
+    const gen = FC.generated ? new Date(FC.generated) : null;
+    const old = gen && Date.now() - gen > 24 * 3600e3;
+    return `<div class="fc-g">${days.map(col).join("")}</div>
+      <p class="fc-src${old ? " old" : ""}">${gen ? `${gen.getMonth() + 1}/${gen.getDate()} ${p2(gen.getHours())}:${p2(gen.getMinutes())} 받은 예보 · ` : ""}현지 날짜 · 기온 °C · 바람 kt (화살표 = 바람이 불어 가는 방향, G 돌풍) · Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a></p>`;
+  }
+  function fcBlock(codes) {                                 // 일출·일몰 아래: 공항별 7일 날씨 (접기/펼치기)
+    const list = [...new Set(codes.filter(Boolean))];
+    return list.map((c, n) => {
+      const a = ap(c), k = icaoOf(c);
+      const domestic = KR.has(a.iata || c) || /^RK/.test(k);
+      // 처음 상태: 목적지(마지막 공항)는 펼침, 국내 출발 공항은 접힘. 사용자가 바꾸면 공항별로 기억
+      const open = fcOpen[k] != null ? fcOpen[k] : (list.length === 1 || (n === list.length - 1) || !domestic);
+      const e = FC && FC.d && FC.d[k];
+      let sum = "";
+      if (e && e.t) {
+        const today = localYmd(c), i = Math.round((new Date(today + "T00:00:00Z") - new Date(e.t + "T00:00:00Z")) / 864e5);
+        if (i >= 0 && i < (e.c || []).length) sum = `<span class="fc-sum">${wmo(e.c[i])[0]} ${e.hi[i] ?? "—"}°/${e.lo[i] ?? "—"}°</span>`;
+      }
+      return `<details class="fc" data-fc="${esc(k)}"${open ? " open" : ""}><summary><span class="fc-t">7일 날씨 <b>${esc(a.iata || c)}</b></span>${sum}</summary>${open ? fcTable(c) : ""}</details>`;
+    }).join("");
+  }
+  // 사용자가 직접 접거나 펼친 것만 공항별로 기억 (화면을 새로 그릴 때 생기는 toggle 은 무시)
+  document.addEventListener("click", (e) => { const sm = e.target.closest("details.fc > summary"); if (sm) sm.parentElement.dataset.u = "1"; });
+  document.addEventListener("toggle", (e) => {
+    const el = e.target;
+    if (!el.matches || !el.matches("details.fc")) return;
+    if (el.dataset.u) { delete el.dataset.u; fcOpen[el.dataset.fc] = el.open; store.set(FC_OPEN, JSON.stringify(fcOpen)); }
+    if (el.open && !el.querySelector(".fc-g, .fc-none")) el.insertAdjacentHTML("beforeend", fcTable(el.dataset.fc));
+  }, true);
   const tname = (t) => (DB.type_names || {})[t] || "";
 
   function apBlock(code, cls) {
@@ -3639,9 +3974,9 @@ window.csfStat = (() => {
     }
     h += renderSched(f.sch, cs);
     if (r) {
-      h += `<div class="apx"><div class="apx-hd"><span>표고 · 일출·일몰 (UTC)</span>
+      h += `<div class="apx">${fxRow([r[0], r[r.length - 1]])}<div class="apx-hd"><span>일출·일몰</span>
         <span class="apx-day"><button data-sunday="0" aria-pressed="${sunDay === 0}">오늘</button><button data-sunday="1" aria-pressed="${sunDay === 1}">내일</button></span></div>
-        <div class="apx-g">${apInfo(r[0], "org")}${apInfo(r[r.length - 1], "dst")}</div></div>`;
+        <div class="apx-g">${apInfo(r[0], "org")}${apInfo(r[r.length - 1], "dst")}</div>${fcBlock([r[0], r[r.length - 1]])}</div>`;
       h += renderWx(cs, f, r);
     }
     if (f.memo) h += `<div class="memo">메모: ${esc(f.memo)}</div>`;
@@ -3724,9 +4059,9 @@ window.csfStat = (() => {
     const e = { dep: e0.dep.filter(ofAL), arr: e0.arr.filter(ofAL), via: e0.via.filter(ofAL) };   // 선택한 항공사만
     let h = `<div class="card"><div class="card-hd"><div class="cs">${esc(a.iata || code)}<small>${esc(code)}</small>${utcLabel(code) ? `<small class="utz">${utcLabel(code)}</small>` : ""}</div></div>
       <div class="apt-name">${esc(a.name)}<span>${esc([a.city, a.cc].filter(Boolean).join(", "))}</span></div>
-      <div class="apx"><div class="apx-hd"><span>표고 · 일출·일몰 (UTC)</span>
+      <div class="apx">${fxRow([code])}<div class="apx-hd"><span>일출·일몰</span>
         <span class="apx-day"><button data-sunday="0" aria-pressed="${sunDay === 0}">오늘</button><button data-sunday="1" aria-pressed="${sunDay === 1}">내일</button></span></div>
-        <div class="apx-g">${apInfo(code, "org")}<div></div></div></div></div>`;
+        <div class="apx-g">${apInfo(code, "org")}<div></div></div>${fcBlock([code])}</div></div>`;
     const sec = (title, list, io) => list.length
       ? `<details class="aptsec" open><summary>${title} <b>${list.length}</b></summary>${aptRows(list, code, io)}</details>` : "";
     h += `<div class="list">${sec(`${esc(a.iata || code)} 출발`, e.dep, "D")}${sec(`${esc(a.iata || code)} 도착`, e.arr, "A")}${sec("경유", e.via, "D")}</div>`;
@@ -4109,7 +4444,7 @@ window.csfStat = (() => {
       const r = await fetch("data.json?t=" + Date.now(), { cache: "no-store" });
       if (!r.ok) throw new Error("HTTP " + r.status);
       const d = await r.json();
-      loadWx();
+      loadWx(); loadFx(); loadFc();
       if (DB && d.generated === DB.generated) msg(`이미 최신입니다 (${fmtDate(d.generated)}).`, "ok");
       else useData(d, "서버");
       if (navigator.serviceWorker && navigator.serviceWorker.controller) navigator.serviceWorker.controller.postMessage("refresh");
@@ -5090,7 +5425,7 @@ window.csfStat = (() => {
   search();
   showTab(["ft", "pk", "oz", "cm"].includes(store.get(TABKEY)) ? store.get(TABKEY) : (isSep(AL) ? "oz" : "cs"));
 
-  if (navigator.onLine) loadWx();
+  if (navigator.onLine) { loadWx(); loadFx(); loadFc(); }
   // 온라인이면 조용히 최신 데이터 확인 (오프라인/파일 모드에서는 생략)
   if (navigator.onLine && location.protocol.startsWith("http")) {
     fetch("data.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null)

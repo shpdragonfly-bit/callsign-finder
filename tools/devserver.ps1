@@ -1,7 +1,7 @@
 ﻿# 운항 도우미 개발 서버 (설치 필요 없음 · Windows PowerShell 기본 기능만 사용)
 # 개발서버_시작.bat 으로 실행합니다. web 폴더를 http://localhost:8000 으로 띄우고 브라우저를 엽니다.
 # - 파일을 고친 뒤 브라우저에서 새로고침하면 바로 반영 (캐시 안 함)
-# - 기상(wx.json)·공항버스 시간표(bus.json)가 폴더에 없으면 실제 앱 주소에서 받아와 그대로 전달
+# - 기상(wx.json)·환율(fx.json)·7일 날씨(fcst.json)·공항버스 시간표(bus.json)가 폴더에 없으면 실제 앱 주소에서 받아와 그대로 전달
 # - localhost 에서는 앱이 사용 통계를 보내지 않음
 # - /fpdata/… 는 이 PC 의 공항별 유의사항 내보내기 폴더(개인 AI 비서 봇이 씀)를 읽기 전용으로 전달 → '비행준비'·FLT 요약 PDF
 #   (회사 내부 자료: 이 PC 밖으로 나가지 않음. GitHub·실제 앱 주소에는 없음)
@@ -54,7 +54,7 @@ while ($L.IsListening) {
       if (Test-Path -LiteralPath $full -PathType Leaf) { $bytes = [IO.File]::ReadAllBytes($full) }
     }
     if ($null -ne $bytes) { }
-    elseif ($path -eq "wx.json" -or $path -eq "bus.json") {
+    elseif ($path -eq "wx.json" -or $path -eq "bus.json" -or $path -eq "fx.json" -or $path -eq "fcst.json") {
       try { $bytes = (New-Object Net.WebClient).DownloadData($Live + $path) } catch { }
     }
     if ($null -eq $bytes) { $res.StatusCode = 404; Write-Host ("404  " + $path) -ForegroundColor DarkYellow; continue }
