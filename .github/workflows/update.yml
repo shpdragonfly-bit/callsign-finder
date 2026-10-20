@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
   pages: write
   id-token: write
 
@@ -39,6 +40,29 @@ jobs:
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python updater/busgo.py || true
+      - name: 공항행 시간표 재확인 알림 (경기공항리무진·경기고속/대원고속 — 바뀐 것 같으면 이슈로 알림)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY' > /tmp/stale.txt || true
+          import json
+          s = json.load(open("web/busgo.json")).get("stale", {})
+          nm = {"ggairport": "경기공항리무진", "kd": "경기고속·대원고속"}
+          print("; ".join("%s %s" % (nm.get(k, k), ", ".join(v)) for k, v in s.items() if v))
+          PY
+          S=$(cat /tmp/stale.txt)
+          if [ -n "$S" ]; then
+            OPEN=$(gh issue list --label busgo-recheck --state open --json number -q '.[].number' 2>/dev/null || true)
+            if [ -z "$OPEN" ]; then
+              gh label create busgo-recheck --color FBCA04 --description "공항행 시간표 재확인" --force || true
+              gh issue create --label busgo-recheck --title "공항행 시간표 재확인 필요: $S" --body "자동 점검에서 운영사 시간표가 바뀌었을 수 있는 노선이 나왔습니다: $S
+
+          - 경기공항리무진: 인천공항 공공데이터의 운행 정보(공항 출발 시각·첫차/막차·정류장)가 기준과 다름
+          - 경기고속·대원고속: 버스피아 홈페이지의 시간표 이미지가 바뀜
+
+          할 일: Claude 에게 '공항행 시간표 다시 확인해줘' 라고 말하면 새 시간표를 읽어 data/busgo_ggairport.json · data/busgo_kd.json 을 고칩니다. 확인 전까지 앱에는 '재확인 중' 표시와 이전 시간표가 나옵니다. 처리 후 이 이슈를 닫아 주세요." || true
+            fi
+          fi
       - name: 공항버스 정류장 ID 갱신 (7일마다)
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}

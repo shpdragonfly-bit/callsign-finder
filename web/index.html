@@ -3203,7 +3203,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v60", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v61", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -5677,7 +5677,7 @@ window.UID = (() => {
   const nrm = (s) => String(s || "").replace(/[\s.,·()\-]/g, "");
   function goSched(r) { return BG && BG.routes && (BG.routes[r.n] || BG.routes[split(r.n)[0]]); }
   const GO_SRC = { seoulairbus: "서울공항리무진 홈페이지 시간표", klimousine: "한국공항리무진 홈페이지 시간표",
-    tago_exp: "고속버스 배차 (국토교통부 TAGO)", tago_sub: "시외버스 배차 (국토교통부 TAGO)", ggairport: "경기공항리무진 홈페이지 시간표 (직접 확인)" };
+    tago_exp: "고속버스 배차 (국토교통부 TAGO)", tago_sub: "시외버스 배차 (국토교통부 TAGO)", ggairport: "경기공항리무진 홈페이지 시간표 (직접 확인)", kd: "경기고속·대원고속 홈페이지 시간표 (직접 확인)" };
   function goCol(g, name, idx) {                          // 고른 정류장 → 시간표 열 (이름이 조금 달라도: 앞부분 일치, 순서 참고)
     const n = nrm(name);
     if (!n) return -1;
@@ -5713,7 +5713,9 @@ window.UID = (() => {
       return `<div class="rt-row go${past && isNow() ? " past" : ""}"><span class="t">${fmt(x.m)}</span><span class="m">${when}</span><span class="sub">${x.t1 ? `T1 ${fmt(hm(x.t1))}` : ""}${x.t1 && x.t2 ? " · " : ""}${x.t2 ? `T2 ${fmt(hm(x.t2))}` : ""} 도착 예정</span></div>`;
     }).join("");
     const gs = (BG.src || {})[g.src] || BG.generated, gen = gs ? new Date(gs) : null;
-    return h + `${mix ? `<div class="cm-src2">이 정류장 시각은 ${esc(mix)}번이 함께 섞인 표입니다.</div>` : ""}<div class="cm-src2">${GO_SRC[g.src] || "운영사 홈페이지 시간표"}${gen ? ` · ${gen.getMonth() + 1}/${gen.getDate()} ${g.src === "ggairport" ? "확인" : "받음"}` : ""} · 도로 사정에 따라 달라질 수 있음</div>`;
+    const stale = g.src && ((BG.stale || {})[g.src] || []).some((k) => BG.routes[k] === g);
+    if (stale) h += `<div class="cm-note" style="margin-top:4px">⚠ 공항 쪽 운행 정보가 바뀌어 이 시간표가 달라졌을 수 있습니다 (운영사 시간표 재확인 중). 확인 전까지는 이전 시간표입니다.</div>`;
+    return h + `${mix ? `<div class="cm-src2">이 정류장 시각은 ${esc(mix)}번이 함께 섞인 표입니다.</div>` : ""}<div class="cm-src2">${GO_SRC[g.src] || "운영사 홈페이지 시간표"}${gen ? ` · ${gen.getMonth() + 1}/${gen.getDate()} ${g.src === "ggairport" || g.src === "kd" ? "확인" : "받음"}` : ""} · 도로 사정에 따라 달라질 수 있음</div>`;
   }
   function routeCard(r, term) {
     const [num, lab] = split(r.n), T = r[term];

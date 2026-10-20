@@ -1,0 +1,2530 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>버스피아</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon" href="../../images/common/kdgroup.ico" />
+<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+<link rel="stylesheet" type="text/css" href="../../css/header.css" />
+<link rel="stylesheet" type="text/css" href="../../css/sub.css" />
+<link rel="stylesheet" type="text/css" href="../../css/footer.css" /> 
+<link rel="stylesheet" type="text/css" href="../../css/bus/bus.css" /> 
+<script type="text/javascript" src="../../js/jquery-1.9.1.js"></script>
+<link href="../../css/accordion.css" rel="stylesheet">
+<script src="../../js/accordion.js"></script>
+<script src="../../js/bus.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=291e496dcf45894386392fd1c7c81dc5"></script>
+<script language="JavaScript">
+<!--
+	//실시간 노선 안내
+	function StationView(BusStation,BusRealCd) {
+		 var top  = screen.height/2 - 600/2 //600
+		 var left = screen.width/2 - 950/2  //400
+		 var sFeatures = "top=" + top + ",left=" + left + ",width=950,height=600,scrollbars=no,menubar=no,status=no,resizable=no"
+
+		 window.open("http://www.gbis.go.kr/gbis2014/schBusRealtime.action?srchType=byBunNo&cmd=seeBusPos&fixedAreaVal=&routeId=" + BusStation + "&turnSeq=" + BusRealCd,"BusStation",sFeatures);
+	}
+
+	//전체시간표보기
+	function AllService(Seq){
+		var top  = screen.height/2 - 650/2 //600
+		var left  = screen.width/2 - 1250/2  //400
+		var sFeatures = "top=" + top + ",left=" + left + ",width=1250,height=650,scrollbars=yes,menubar=no,status=no,resizable=yes"
+		
+		//var today = "";
+		//var stday = "";
+		//if(today >= stday){
+			//window.open("/subpage/airport/air_allTimePop_new.php?seq=" + Seq ,"AllService",sFeatures);
+		//}else{
+		if(Seq == "5" || Seq == "6") { // 20200207 7200번 7300번만 팝업공지
+			//window.open('/popup/popup_20200207.html',20200207,'width=480,height=300, left=100, top=240');
+		}
+		//window.open("/subpage/bus/air_allTimePop.php?seq=" + Seq ,"AllService",sFeatures);	
+		window.open("/subpage/bus/air_allTimePop.php?seq=" + Seq ,"_blank",sFeatures);	
+		//location.href ="/subpage/bus/air_allTimePop.php?seq=" + Seq;
+		//}
+	}
+
+	//노선정보안내
+	function RouteView(RouteNo,RealBusCd) {
+		if(RealBusCd != "" ) {
+			window.open("http://www.gbis.go.kr/gbis2014/schBus.action?cmd=mainSearchText&gubun=busInfo&searchText=" + RouteNo + "&routeId=" + RealBusCd);
+		}
+	}
+//-->
+</script>
+<style type="text/css">
+body{
+	position: fixed; 
+	overflow-y: scroll;
+	width: 100%;
+}
+</style>
+</head>
+<body>
+<!-- header -->
+<!-- header -->
+<header>
+<script>
+  $(document).ready(function() {
+    $(".mainMenu").hover(
+      function() {
+		$(".bgBlack").slideDown(200);
+        $(".snb3").slideDown(200);
+		return false;
+      },
+		 function() {
+		$(".bgBlack").stop().slideUp(200);
+	    $(".snb3").stop().slideUp(200);
+		return false;
+      }
+    );
+  });
+</script>
+</header>
+<style type="text/css">
+.mainMenu {float:left; width:100%; height:72px;position:relative;border-bottom:0px solid #4e4e4e;z-index:100;border-top:1px solid #000;border-bottom:1px solid #6d6d6d; box-shadow : 0 0 7px #6d6d6d;}
+.toph{background:white;}
+.gnb {width:1370px; height:72px; margin:0 auto; background:white; }
+.gnb p.logos {float:left; margin:19px 0 0; }
+.gnb ul {float:left; margin:26px 0 0 70px; padding:0; list-style:none;}
+.gnb ul li {float:left;}
+.gnb ul li a{font-size:18px;color:#505050;font-weight:bold; padding:0 85px 0 40px; background: url('/images/common/bar.jpg') right center no-repeat;} /* 대메뉴 간격 */
+.gnb ul li.last a{ background:none;}
+.gnb ul li a:hover {color:#c80067;}
+
+.gnb ul li a {
+    padding: 0 63px 0 62px;
+}
+
+div.snb2 {position:relative; width:1270px; height:0px; margin:0 auto;background:red;}
+ul.snb3 {display:none;position:absolute;float:left;  width:1035px; height:316px; list-style:none;letter-spacing:-0.07em; text-align:left; left:305px; } 
+li.snb4 {float:left; width:160px; height:316px;padding:8px 0 6px 40px;border-right:1px solid #cdcdcd;background-color: rgba(0, 0, 0, 0.5); text-align:left;}
+li.snb4.first {border-left:1px solid #cdcdcd;}
+li.snb4.last {}
+li.snb4:hover { background-color:#fff;}
+li.snb4:hover a{color:black; }
+ul.snb5 { margin:0; padding:0; list-style:none;}
+ul.snb5 > li {margin:0 0 9px;}
+ul.snb5 > li.titles {font-size:14px; text-align:left;margin-left:0; padding-left:0; font-weight:bold;}
+ul.snb5 > li a {color:white;}
+ul.snb5 > li a:hover {color:#c80067;}
+ul.snb5 > li ul.sMenu01 li, ul.snb5 > li ul.sMenu02 li {padding-bottom:5px;}
+ul.snb5 > li ul.sMenu01, ul.snb5 > li ul.sMenu02 {padding-top:5px;}
+ul.snb5 > li ul.sMenu01 a, ul.snb5 > li ul.sMenu02 a{padding-left:10px;font-size:15px}
+ul.snb5 > li.bMenu01 > a:hover, ul.snb5 > li.bMenu02 > a:hover {color:black;}
+</style>
+<div  class="mainMenu"> 
+	<div class="toph">
+		<div class="gnb">
+			<p class="logos"><a href="/index.php"><img src="/images/common/logos.png" alt="KD운송그룹 메인으로"  width="285px"/></a></p>
+			<ul>
+				<li><a href="/subpage/bus/in_info.php">운행 안내</a></li>
+				<li><a href="/subpage/cus/cusCen.php">고객 센터</a></li>
+				<li><a href="/subpage/intro/ceo.php">그룹 소개</a></li>
+				<li><a href="/subpage/work/transport.php">사업 분야</a></li>
+				<li class="last"><a href="/subpage/other/recruit01.php">채용/웹진</a></li>
+			</ul>
+		</div>
+	</div>
+	<!--서브메뉴-->
+	<div class="snb2">
+		<ul class="snb3">
+			<li class="snb4 first">
+				<ul class="snb5">
+					<li><a href="/subpage/bus/in_info.php">시내버스</a></li>
+					<li><a href="/subpage/bus/ex_info.php">시외·고속버스</a></li>
+					<li><a href="/subpage/bus/air_info.php">공항리무진</a></li>
+					<li><a href="/subpage/bus/bagg_info.php">시외·공항버스 수하물</a></li><!--20260209 시외.공항버스 수하물 안내 메뉴 생성 -->
+					<li><a href="http://www.kdtour.co.kr/bus/sub_main.html" target="_blank">전세버스</a></li>
+					<li><a href="/subpage/cus/notice.php">노선 신설 및 변경</a></li>
+					<li><a href="/subpage/bus/knock_info.php">똑버스</a></li>
+					<!--<li><a href="/subpage/bus/mdrt_info.php">M-DRT(광역콜버스)</a></li>-->
+				</ul>
+			</li>
+			<li class="snb4" >
+				<ul class="snb5"> 
+					<li><a href="/subpage/cus/cusCen.php">고객 문의</a></li>
+					<li><a href="/subpage/cus/lostCen.php">분실물 문의</a></li>
+					<!--<li><a href="javascript:alert('서비스점검중입니다.')">고객 문의</a></li>
+					<li><a href="javascript:alert('서비스점검중입니다.')">분실물 문의</a></li>-->
+				</ul>
+			</li>
+			<li class="snb4">
+				<ul class="snb5">
+					<li><a href="/subpage/intro/ceo.php">CEO 인사말</a></li>
+					<li><a href="/subpage/intro/philosophy.php">그룹 이념</a></li>
+					<li><a href="/subpage/intro/culture.php">그룹 문화</a></li>
+					<li><a href="/subpage/intro/ci.php">CI 및 상징물</a></li>
+					<li><a href="/subpage/intro/company.php">계열사</a></li>
+					<li><a href="/subpage/intro/history.php">연혁</a></li>
+					<li><a href="/subpage/intro/prize.php">상훈</a></li>
+					<li class="bMenu01"><a href="#" style="cursor:text; onclick="return false;">본사 및 사업본부 현황</a>
+						<ul class="sMenu01">
+							<li><a href="/subpage/intro/facility03.php"><span style="font-size:10px">└</span> 본사 및 지원본부</a></li>
+							<li><a href="/subpage/intro/facility01.php"><span style="font-size:10px">└</span> 시내사업본부</a></li>
+							<li><a href="/subpage/intro/facility02.php"><span style="font-size:10px">└</span> 시외사업본부</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li class="snb4" >
+				<ul class="snb5">
+					<li class="bMenu02"><a href="/subpage/work/transport.php" >여객운송사업</a>
+					<li class="bMenu01"><a href="#" style="cursor:text; onclick="return false;">KD투어</a>
+						<ul class="sMenu01">
+							<li><a href="http://www.kdtour.co.kr/bus/sub_main.html" target="_blank"><span style="font-size:10px">└</span> 전세버스</a></li>
+							<li><a href="http://www.kdtour.co.kr/hotel/sub_main.html"  target="_blank"><span style="font-size:10px">└</span> 국내여행</a></li>
+						</ul>
+					</li>
+					<li><a href="/subpage/work/terTic.php">터미널/매표소</a></li>
+					<!--<li><a href="/subpage/bus/deliveryUse.php">수하물</a></li>-->
+					<li><a href="/subpage/work/recycle.php">KD오토리사이클링</a></li>
+					<!-- <li><a href="/subpage/work/clean.php">KD청정피아</a></li> -->
+					<!-- <li><a href="/subpage/work/software.php">소프트웨어개발사업</a></li> -->
+				</ul>
+			</li>
+			<!-- <li class="snb4 last" >
+				<ul class="snb5">
+					<li><a href="/subpage/other/webzine.php">사보</a></li>
+				</ul>
+			</li> -->
+			<li class="snb4" >
+				<ul class="snb5">
+					<li class="bMenu02"><a href="#" style="cursor:text; onclick="return false;">채용</a>
+						<ul class="sMenu02">
+							<li><a href="/subpage/other/recruit01.php"><span style="font-size:10px">└</span> KD인재상</a></li>
+							<li><a href="/subpage/other/recruit02.php"><span style="font-size:10px">└</span> 자격요건</a></li>
+							<li><a href="/subpage/other/recruit03.php"><span style="font-size:10px">└</span> 지원절차</a></li>
+							<!--<li><a href="/subpage/other/recruit04.php"><span style="font-size:10px">└</span> 채용공고</a></li> 잠시막음 -->
+							<!-- <li><a href="/subpage/other/recruit05.php"><span style="font-size:10px">└</span> 입사지원</a></li> -->
+						</ul>
+					</li>
+					<li class="bMenu01"><a href="#" style="cursor:text; onclick="return false;">웹진</a>
+						<ul class="sMenu01">
+							<li><a href="/subpage/other/webzine.php"><span style="font-size:10px">└</span> 사보</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li> 
+		</ul>
+		<div class="menu">
+			<span class="n1"></span>
+			<span class="n2"></span>
+			<span class="n3"></span>
+		</div>
+	</div>
+	<!--서브메뉴-->
+</div>
+
+<script type="text/javascript">
+ /*document.oncontextmenu = function (e) {
+	return false;
+}*/
+</script><!-- /header -->
+<div class="bgBlackStop"></div>
+	<!-- content start -->
+	<!-- conBox -->
+	<!-- left Menu -->
+	<div id="closeBtnOpen"><img src="../../images/sub/bus/arrow02.png" /></div>
+	<div class="busLeft">
+		<div id="closeBtnClose"><img src="../../images/sub/bus/arrow01.png" /></div>
+		<div class="cloBox">
+			<p class="busTitle">노선정보(공항리무진)</p>
+			<!-- <ul class="menu">
+				<li><a href="in_info.php"><img src="../../images/sub/bus/busicon01.png" /><br />시내버스</a></li>
+				<li><a href="ex_info.php"><img src="../../images/sub/bus/busicon02.png" /><br />시외·고속버스</a></li>
+				<li class="noRightLine on"><a href="air_info.php"><img src="../../images/sub/bus/busicon03.png" /><br />공항리무진</a></li>
+			</ul> -->
+			<!--<div class="bushelp">
+				공항버스에 부여된 번호 순으로 전 공항노선이 나열되어 있습니다. 오른쪽 지도에서 출발지역의 A표시를 누르시면 관련된 노선만 검색됩니다.<br/>
+				<span>※ 첫차/막차 시간은 교통상황에 따라 조정될 수 있음</span>
+			</div>-->
+			<!-- 노선박스 -->
+			<div class="businfoStart" style="border-top:1px solid #d0d0d0;">
+				<div  class="scrollBox03">
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">3200</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('27');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('3200','241007265');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241007265','53');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					원당 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>원당</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:00</td>
+								<td>06:00</td>
+								<td>06:20</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>20:20</td>
+								<td>22:50</td>
+								<td>23:10</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">인천공항영업소 ☎ 032)743-4051</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">4800</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('10');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('4800','241003000');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241003000','33');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					덕소 ↔ 인천공항																				</span>
+																			<a href="https://www.bustago.or.kr/newweb/kr/index.do" target="_blank"><span class="reserBtn01">버스타고</span></a>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항 -->
+							<tr>
+								<td>구분</td>
+								<td>덕소</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:30</td>
+								<td>07:45</td>
+								<td>08:05</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>18:00</td>
+								<td>21:30</td>
+								<td>21:50</td>
+							</tr>
+														<tr class="colGray">
+																<!-- 인천공항 -->
+								<td class="lt"  colspan="4">
+									<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+									<span class="telr">덕소영업소 ☎ 031)521-4037</span>
+								</td>
+															</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">5000</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('29');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('5000','241006811');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241006811','27');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					판교 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>판교</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>05:00</td>
+								<td>07:40</td>
+								<td>08:00</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>18:30</td>
+								<td>21:30</td>
+								<td>21:50</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">사송동영업소 ☎ 031)751-1552</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">5100</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('13');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/5100_5300.pdf" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('5100','241005910');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241005910','22');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 김포공항여부 Y일떄-->
+							<col style="width:30%">
+							<col style="width:35%">
+							<col style="width:35%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					성남 ↔ 김포공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 김포공항 -->
+							<tr>
+								<td>구분</td>
+								<td>성남</td>
+																<td>김포공항</td>
+															</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:25</td>
+								<td>06:00</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>19:35</td>
+								<td>22:20</td>
+							</tr>
+														<tr class="colGray">
+																<!-- 김포공항 -->
+								<td class="lt"  colspan="3">
+									<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+																		<span class="telr">사송동영업소 ☎ 031)751-1552</span>
+																	</td>
+															</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">5200</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('15');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/5100_5300.pdf" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('5200','241005940');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241005940','27');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 김포공항여부 Y일떄-->
+							<col style="width:30%">
+							<col style="width:35%">
+							<col style="width:35%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					단국대 ↔ 김포공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 김포공항 -->
+							<tr>
+								<td>구분</td>
+								<td>단국대</td>
+																<td>김포공항</td>
+															</tr>
+							<tr>
+								<td>첫차</td>
+								<td>05:15</td>
+								<td>06:30</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>20:35</td>
+								<td>22:50</td>
+							</tr>
+														<tr class="colGray">
+																<!-- 김포공항 -->
+								<td class="lt"  colspan="3">
+									<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+																		<span class="telr">분당영업소 ☎ 031)716-7111~3</span>
+																	</td>
+															</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">5300</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('14');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/5100_5300.pdf" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('5300','241005920');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241005920','20');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					서현역 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>서현역</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:00</td>
+								<td>06:10</td>
+								<td>06:30</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>19:00</td>
+								<td>21:40</td>
+								<td>22:00</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">사송동영업소 ☎ 031)751-1552</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">5400</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('16');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/5400.pdf" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('5400','241005990');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241005990','25');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					단국대 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>단국대</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:40</td>
+								<td>06:30</td>
+								<td>06:50</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>15:40</td>
+								<td>22:00</td>
+								<td>22:20</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">분당영업소 ☎ 031)716-7111~3</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">5500</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('32');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('5500','241007069');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241007069','28');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					위례 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항 -->
+							<tr>
+								<td>구분</td>
+								<td>위례</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:30 </td>
+								<td>08:25</td>
+								<td>08:45</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>14:00</td>
+								<td>18:30</td>
+								<td>18:50</td>
+							</tr>
+														<tr class="colGray">
+																<!-- 인천공항 -->
+								<td class="lt"  colspan="4">
+									<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+									<span class="telr">하남영업소 ☎ 031)8027-3910</span>
+								</td>
+															</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">5600</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('2');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/5600.pdf" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('5600','241006050');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241006050','21');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					문산 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>문산</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:30</td>
+								<td>07:35</td>
+								<td>07:55</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>14:30</td>
+								<td>18:20</td>
+								<td>18:40</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">문산영업소 ☎ 031)937-8206</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">7100</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('4');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('7100','241005900');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241005900','31');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					연천 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항 -->
+							<tr>
+								<td>구분</td>
+								<td>연천</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:30</td>
+								<td>08:30</td>
+								<td>08:50</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>16:30</td>
+								<td>20:30</td>
+								<td>20:50</td>
+							</tr>
+														<tr class="colGray">
+																<!-- 인천공항 -->
+								<td class="lt"  colspan="4">
+									<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+									<span class="telr">동두천영업소 ☎ 031)865-3547</span>
+								</td>
+															</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">7200</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('5');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/7200.pdf" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('7200','241005970');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241005970','25');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					의정부 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>의정부</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:10</td>
+								<td>06:40</td>
+								<td>07:00</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>21:40</td>
+								<td>23:50</td>
+								<td>00:10</td>
+							</tr>
+
+														<tr class="colGray">
+																      <!-- 20220510 의정부 영업소 핸드폰 전화 추가 -->
+										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<!--<span class="telr">의정부영업소 ☎ 031)851-1419<br> 핸드폰 : 010-2754-6114</span>-->
+											<span class="telr">송산동영업소 ☎ 031)851-1419</span>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">7400</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('9');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/7400.pdf" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('7400','241005950');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241005950','19');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					위시티 ↔ 인천공항
+																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>위시티</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>05:20</td>
+								<td>07:10</td>
+								<td>07:30</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>22:20</td>
+								<td>00:30</td>
+								<td>00:50</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">인천공항영업소 ☎ 032)743-4051</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">7500</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('37');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('7500','241003070');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241003070','27');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					지축 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>지축</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>05:30</td>
+								<td>07:35</td>
+								<td>07:55</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>17:55</td>
+								<td>20:00</td>
+								<td>20:20</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">인천공항영업소 ☎ 032)743-4051</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">7600</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('44');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('7600','241007164');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241007164','31');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					동송 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>동송</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:30</td>
+								<td>08:40</td>
+								<td>09:00</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>16:00</td>
+								<td>20:20</td>
+								<td>20:40</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">동송영업소 ☎ 033)455-2327</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">8822</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('28');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('8822','241003980');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241003980','23');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					향남 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항 -->
+							<tr>
+								<td>구분</td>
+								<td>향남</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:50</td>
+								<td>08:50</td>
+								<td>09:10</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>19:20</td>
+								<td>22:40</td>
+								<td>23:00</td>
+							</tr>
+														<tr class="colGray">
+																<!-- 인천공항 -->
+								<td class="lt"  colspan="4">
+									<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+									<span class="telr">평택영업소 ☎ 031)656-5928</span>
+								</td>
+															</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">8829</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('19');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/8829.pdf" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('8829','241005980');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241005980','43');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					이천 ↔ 김포,인천공항
+																				</span>
+																			<a href="https://www.bustago.or.kr/newweb/kr/index.do" target="_blank"><span class="reserBtn01">버스타고</span></a>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>이천</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:40</td>
+								<td>07:00</td>
+								<td>07:20</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>19:30</td>
+								<td>22:40</td>
+								<td>23:00</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">이천영업소 ☎ 031)637-5114~5</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">8834</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('17');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/8834.pdf" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('8834','241006010');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241006010','34');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					안성 ↔ 인천공항
+																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>안성</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:20</td>
+								<td>07:40</td>
+								<td>08:00</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>19:50</td>
+								<td>23:00</td>
+								<td>23:20</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">안성영업소 ☎ 031)675-5483</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">8837</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('30');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/8837.pdf" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('8837','241006889');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241006889','29');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					동탄(라마다) ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>동탄(라마다)</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:00</td>
+								<td>07:05</td>
+								<td>07:25</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>19:00</td>
+								<td>22:00</td>
+								<td>22:20</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">동탄영업소 ☎ 031)374-3407</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">8840</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('43');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('8840','241007242');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241007242','31');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					동탄 ↔ 김포공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<tr>
+								<td>구분</td>
+								<td>동탄</td>
+								<td>국제선</td>
+								<td>국내선</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:30</td>
+								<td>06:30</td>
+								<td>06:35</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>19:40</td>
+								<td>21:40</td>
+								<td>21:45</td>
+							</tr>
+														<tr class="colGray">
+								 <!-- 20240102 동탄->신동탄 명칭 변경 -->
+								<td class="lt"  colspan="4">
+									<span class="telr">신동탄 영업소 ☎ 070)4117-1217</span>
+								</td>
+															</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">8842</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('1');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/8842.pdf" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('8842','241005870');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241005870','33');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					광주 ↔ 김포,인천공항
+																				</span>
+																			<a href="https://www.bustago.or.kr/newweb/kr/index.do" target="_blank"><span class="reserBtn01">버스타고</span></a>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>광주</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:00</td>
+								<td>06:50</td>
+								<td>07:10</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>20:30</td>
+								<td>23:40</td>
+								<td>00:00</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">광주시외영업소 ☎ 031)799-7901</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">8843</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('8');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/8843.pdf" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('8843','241006777');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241006777','40');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					마석 ↔ 김포,인천공항
+																				</span>
+																			<a href="https://www.bustago.or.kr/newweb/kr/index.do" target="_blank"><span class="reserBtn01">버스타고</span></a>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>마석</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>02:00</td>
+								<td>00:10</td>
+								<td>00:30</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>21:00</td>
+								<td>23:10</td>
+								<td>23:30</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">차산리영업소 ☎ 031)593-9635</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">8844</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('7');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('8844','241005890');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241005890','28');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					광릉내 ↔ 김포,인천공항
+																				</span>
+																			<a href="https://www.bustago.or.kr/newweb/kr/index.do" target="_blank"><span class="reserBtn01">버스타고</span></a>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>광릉내</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:30</td>
+								<td>08:00</td>
+								<td>08:20</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>19:00</td>
+								<td>22:30</td>
+								<td>22:50</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">광릉내영업소 ☎ 031)575-0839</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">8848</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('46');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('8848','241007261');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241007261','33');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 김포공항여부 Y일떄-->
+							<col style="width:30%">
+							<col style="width:35%">
+							<col style="width:35%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					오산역 ↔ 김포공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 김포공항 -->
+							<tr>
+								<td>구분</td>
+								<td>오산역</td>
+																<td>김포공항</td>
+															</tr>
+							<tr>
+								<td>첫차</td>
+								<td>05:10</td>
+								<td>07:40</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>17:00</td>
+								<td>19:50</td>
+							</tr>
+														<tr class="colGray">
+																<!-- 김포공항 -->
+								<td class="lt"  colspan="3">
+									<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+									 <!-- 오산역-김포공항 -->
+									<span class="telr">신동탄 영업소 ☎ 070)4117-1217</span>
+																	</td>
+															</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">8849</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('31');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('8849','241005840');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241005840','35');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					하남 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>하남</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:30</td>
+								<td>07:25</td>
+								<td>07:45</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>17:00</td>
+								<td>20:35</td>
+								<td>20:55</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">하남영업소 ☎ 031)8027-3910</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">8864</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('45');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('8864','241006894');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241006894','31');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					평택 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>평택</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:20</td>
+								<td>07:50</td>
+								<td>08:10</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>19:50</td>
+								<td>23:10</td>
+								<td>23:30</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">평택영업소 ☎ 031)656-5928</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항<br></span><span class="num"></span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('47');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																						</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 김포공항여부 Y일떄-->
+							<col style="width:30%">
+							<col style="width:35%">
+							<col style="width:35%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					부여 ↔ 청주공항																				</span>
+																			<a href="https://txbus.t-money.co.kr/main.do" target="_blank"><span class="reserBtn01">티머니</span></a>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 김포공항 -->
+							<tr>
+								<td>구분</td>
+								<td>부여</td>
+																<td>청주공항</td>
+															</tr>
+							<tr>
+								<td>첫차</td>
+								<td>05:10</td>
+								<td>08:10</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>11:10</td>
+								<td>14:10</td>
+							</tr>
+														<tr class="colGray">
+																<!-- 인천공항 -->
+								<td class="lt"  colspan="4">
+									<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+									<span class="telr">부여영업소 ☎ 070)4771-7204</span>
+								</td>
+															</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num"></span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('3');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																						</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					안동 ↔ 인천공항																				</span>
+																			<a href="https://www.bustago.or.kr/newweb/kr/index.do" target="_blank"><span class="reserBtn01">버스타고</span></a>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항 -->
+							<tr>
+								<td>구분</td>
+								<td>안동</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>04:40</td>
+								<td>10:30</td>
+								<td>10:50</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>11:30</td>
+								<td>14:50</td>
+								<td>18:40</td>
+							</tr>
+														<tr class="colGray">
+																<!-- 인천공항 -->
+								<td class="lt"  colspan="4">
+									<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+									<span class="telr">안동영업소 ☎ 054)857-8295~6</span>
+								</td>
+															</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num"></span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('18');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/8829.pdf" target="_blank"><span></span>운행시간</a></li>-->
+																						</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					여주 ↔ 김포,인천공항
+																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>여주</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>05:30</td>
+								<td>12:25</td>
+								<td>12:45</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>16:30</td>
+								<td>18:45</td>
+								<td>19:05</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">여주영업소 ☎ 031)884-4081</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num"></span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('24');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/cheongju.pdf" target="_blank"><span></span>운행시간</a></li>-->
+																						</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					청주 ↔ 인천공항																				</span>
+																			<a href="https://www.bustago.or.kr/newweb/kr/index.do" target="_blank"><span class="reserBtn01">버스타고</span></a>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>청주</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>05:00</td>
+								<td>06:05</td>
+								<td>06:30</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>19:10</td>
+								<td>20:15</td>
+								<td>20:40</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">청주영업소 ☎ 043)232-8892</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num"></span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('26');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																						</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					충주 ↔ 인천공항																				</span>
+																			<a href="https://www.bustago.or.kr/newweb/kr/index.do" target="_blank"><span class="reserBtn01">버스타고</span></a>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항 -->
+							<tr>
+								<td>구분</td>
+								<td>충주</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>05:00</td>
+								<td>07:20</td>
+								<td>07:40</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>18:30</td>
+								<td>20:30</td>
+								<td>20:50</td>
+							</tr>
+														<tr class="colGray">
+																<!-- 인천공항 -->
+								<td class="lt"  colspan="4">
+									<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+									<span class="telr">충주영업소 ☎ 043)848-2747~9</span>
+								</td>
+															</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">A8835</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('12');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																						</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					안녕동 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항 -->
+							<tr>
+								<td>구분</td>
+								<td>안녕동</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>05:30</td>
+								<td>09:35</td>
+								<td>09:55</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>20:20</td>
+								<td>23:30</td>
+								<td>23:50</td>
+							</tr>
+														<tr class="colGray">
+																<!-- 인천공항 -->
+								<td class="lt"  colspan="4">
+									<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+									<span class="telr">평택영업소 ☎ 031)656-5928</span>
+								</td>
+															</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">N5700</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('48');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('N5700','241007274');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241007274','53');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					문산 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>문산</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>22:00</td>
+								<td>00:10</td>
+								<td>00:30</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>02:00</td>
+								<td>03:50</td>
+								<td>04:10</td>
+							</tr>
+
+														<tr class="colGray">
+																     										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<span class="telr">문산영업소 ☎ 031)937-8206</span>
+										</td>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+					<!-- 반복구간 -->
+					<div  class="busLineTit">
+						<p><span class="sbus colorPurple">공항</span><span class="num">N7200</span></p>
+						<ul class="sbox">
+																<li class="s3"><a href="#" onClick="AllService('40');" onFocus="this.blur();"><span></span>운행시간</a></li>
+								<!--<li class="s3"><a href="/images/airpdf/" target="_blank"><span></span>운행시간</a></li>-->
+																								<li class="s2"><a href="#" onClick="RouteView('N7200','241007212');"onFocus="this.blur();"><span></span>노선정보</a></li>
+								<li class="s1"><a href="#" onClick="StationView('241007212','28');" onFocus="this.blur();"><span></span>실시간 위치</a></li>
+														</ul>
+					</div>
+
+					<!-- 노선테이블 -->
+					<table class="basicTableG">
+						<colgroup>
+														<!-- 인천공항여부 S일떄 -->
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+							<col style="width:25%">
+													</colgroup>
+						<thead>
+							<tr>
+								<th colspan="4">
+									<span class="tit">
+																					의정부 ↔ 인천공항																				</span>
+																			<span class="reserBtn02">현장/모바일<!-- [버스타고] --> 발권</span>
+																	</th>
+							</tr>
+						</thead>
+						<tbody>
+														<!-- 인천공항여부 S일떄 -->
+							<tr>
+								<td>구분</td>
+								<td>의정부</td>
+								<td>T2</td>
+								<td>T1</td>
+							</tr>
+							<tr>
+								<td>첫차</td>
+								<td>22:00</td>
+								<td>00:10</td>
+								<td>00:30</td>
+							</tr>
+							<tr>
+								<td>막차</td>
+								<td>02:00</td>
+								<td>03:50</td>
+								<td>04:10</td>
+							</tr>
+
+														<tr class="colGray">
+																      <!-- 20220510 의정부 영업소 핸드폰 전화 추가 -->
+										<!-- 인천공항여부 S일떄 -->
+										<td class="lt"  colspan="4">
+											<!--<span class="officeInfo"></span> <span class="bbox"><a href="">위치·시설</a></span>-->
+											<!--<span class="telr">의정부영업소 ☎ 031)851-1419<br> 핸드폰 : 010-2754-6114</span>-->
+											<span class="telr">송산동영업소 ☎ 031)851-1419</span>
+																								</tr>
+						</tbody>
+					</table>
+					<!-- 노선테이블 -->
+					<!-- /반복구간 -->
+				</div>
+					<!-- <p class="lstCon">※ 첫차/막차 시간은 교통상황에 따라 조정될 수 있습니다.</p> -->
+			</div>
+			<!-- /노선박스 -->
+		</div>
+	</div>
+
+	<!-- left Menu -->
+	<div class="busRight">
+		<div id="map3">
+			<!--// 지도시작 -->
+			<div id="container">
+				<div id="rvWrapper">
+					<div id="roadview" style="overflow:hidden;height:1070px;"></div> <!-- 로드뷰를 표시할 div 입니다 -->
+				   <div id="mapControl" onclick="closeRoadview()"><span>지도보기</span></div>
+				</div>
+				<div id="mapWrapper">
+					<div id="map" style="overflow:hidden;height:1070px"></div> <!-- 지도를 표시할 div 입니다 -->
+					<div id="roadviewControl" onclick="setRoadviewRoad()"><span>로드뷰</span></div>
+					<div id="roadstatusControl" onclick="setRoadstatusRoad()"><span>교통정보</span></div>
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">
+		var overlayOn = false, // 지도 위에 로드뷰 오버레이가 추가된 상태를 가지고 있을 변수
+		container = document.getElementById('container'), // 지도와 로드뷰를 감싸고 있는 div 입니다
+		mapWrapper = document.getElementById('mapWrapper'), // 지도를 감싸고 있는 div 입니다
+		mapContainer = document.getElementById('map'), // 지도를 표시할 div 입니다 
+		rvContainer = document.getElementById('roadview'); //로드뷰를 표시할 div 입니다
+
+		//var mapCenter = new kakao.maps.LatLng(37.1980264, 127.721956), // 지도의 중심좌표
+
+		var mapCenter = new kakao.maps.LatLng(37.031252, 127.462465), // 지도의 중심좌표
+		mapOption = {   
+			center: mapCenter, // 지도의 중심좌표
+			level: 11 // 지도의 확대 레벨
+		};
+
+		// 지도를 표시할 div와 지도 옵션으로 지도를 생성합니다
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+
+		// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성
+		var mapTypeControl = new kakao.maps.MapTypeControl();
+
+		// 지도 타입 컨트롤을 지도에 표시합
+		map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+		// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성
+		var zoomControl = new kakao.maps.ZoomControl();
+		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+		var deptnm_1 = "0/강릉/광릉내/광주시외/김포공항/남원/논산/덕소/동서울/동송/동탄/문산/부여/분당/사송동/안동/안성/여주/원주/의정부/이천/인천공항/일산/정읍/차산리/청주/충주/태백/평택/하남/향남/";
+		var latitude_1 = "0/37.7543387/37.745824/37.409566/37.559429/35.4096709/36.2026134/37.573301/37.534156/38.2163789/37.185517/37.8495663/36.280569/37.342329/37.414300/36.5746487/37.012161/37.2899698/37.344842/37.754137/37.2771047/37.447982/37.7016587/35.572425 /37.634534/36.6250449/36.9817378/37.176674/36.9903153/37.5391544/37.1329157/";
+		var longitude_1 ="0/128.8787645/127.205268/127.261333/126.802904/127.3878985/127.0868494/127.226382/127.0922275/127.2132312/127.079316/126.7912824/126.910212/127.104951/127.116297/128.6760797/127.2936803/127.6351895/127.9309672/127.043851/127.4471598/126.450736/126.7943685/126.8455996/127.304693/127.4324066/127.9146462/128.985594/127.0877559/127.2302906/126.9221987/";
+		//20200528 추가 
+		var vdeptnm = "";
+		//20200602 추가 
+		var	 tel_1 = "0/033)647-3621/031)575-0839/031)799-7901/02)2064-0508/032)422-6421/041)735-3644/031)521-4037/02)3436-2114~5/033)455-2327/031)374-3407/031)937-8206/070)4771-7204/031)716-7111~3/031)751-1552/054)857-8295~6/031)675-5483/031)884-4081/033)738-9151~2/031)851-1419/031)637-5114~5/032)743-4051/032)743-4051/063)534-6941/031)593-9635/043)232-8892/043)848-2747~9/033)552-3526/031)656-5928/031)8027-3911/031)291-6657/"; //전화번호
+
+		var last = deptnm_1.lastIndexOf('/');
+		deptnm_1 = deptnm_1.substr(0,last);
+		
+		last = latitude_1.lastIndexOf('/');
+		latitude_1 = latitude_1.substr(0,last);
+		
+		last = longitude_1.lastIndexOf('/');
+		longitude_1 = longitude_1.substr(0,last);
+
+		last = tel_1.lastIndexOf('/');
+		tel_1 = tel_1.substr(0,last);
+
+		deptnm_array_1 = deptnm_1.split("/"); //영업소
+		latitude_array_1 = latitude_1.split("/"); // 위도
+		longitude_array_1 = longitude_1.split("/"); //경도
+		tel_array_1 = tel_1.split("/"); //전화번호
+
+		array_location_1 = new Array(deptnm_array_1.length);
+		//20200528 추가 
+		for(var i =0; i < deptnm_array_1.length; i++){
+			array_location_1[i] = new daum.maps.LatLng(latitude_array_1[i], longitude_array_1[i]);
+		}
+
+		for (var i = 0; i < array_location_1.length; i ++) {
+			var deptNm = "";
+			deptNm = deptnm_array_1[i] 
+			// 마커 이미지의 이미지 주소
+			if (deptNm == ""  ){
+				var icon = new kakao.maps.MarkerImage(
+				 //'/images/intracitybus/in_information/iconPink.png',
+				'/images/common/busStop/ibus5.png',
+				new kakao.maps.Size(20, 20));
+			}else{
+				var icon = new kakao.maps.MarkerImage(
+				 // '/images/airport/air_information/iconStart.png',
+				 '/images/common/busStop/ibus6.png',
+				new kakao.maps.Size(20, 20));
+			}
+
+			// 마커를 생성합니다
+			//for (var i = 0; i < array_location_1.length; i ++) {
+			var marker = new kakao.maps.Marker({
+				map: map,
+				position: new kakao.maps.LatLng(latitude_array_1[i], longitude_array_1[i]),
+				image: icon,
+				title: deptnm_array_1[i] + ' ☎ ' + tel_array_1[i]
+			});
+
+			//var content = '<div class="memo" style="border-radius:10px;"><a href="/subpage/bus/air_info.php?txt_dept_keywd='+ encodeURIComponent(deptnm_array_1[i]) +'">'+ deptnm_array_1[i]+'</a></div>'
+			//20200528 추가 
+			var content = '<div class="memo" style="font-weight:bold; border-radius:10px;border:1px solid #000;"><a href="/subpage/bus/air_info.php?txt_dept_keywd='+ encodeURIComponent(deptnm_array_1[i]) + "&txt_Latitude_cd=" + latitude_array_1[i]   +  "&txt_longitude_cd=" + longitude_array_1[i] +'">'+ deptnm_array_1[i]+'</a></div>'
+			var customOverlay = new kakao.maps.CustomOverlay({
+				position: new kakao.maps.LatLng(latitude_array_1[i], longitude_array_1[i]),
+				content: content,
+				xAnchor: 0.5,
+				yAnchor: 2.0,
+				zIndex: 3.
+			});
+
+			(function(i){ //선택된 마커값 받아서 이동
+				kakao.maps.event.addListener(marker, 'click', function() {
+					//alert(deptnm_array_1[i]);
+					//location.href = "/subpage/bus/air_info.php?txt_dept_keywd=" + encodeURIComponent(deptnm_array_1[i]);
+					//20200528 추가 
+					location.href = "/subpage/bus/air_info.php?txt_dept_keywd=" + encodeURIComponent(deptnm_array_1[i]) + "&txt_Latitude_cd=" + latitude_array_1[i]   +  "&txt_longitude_cd=" + longitude_array_1[i];
+
+				});
+			})(i);
+
+			// 마커가 지도 위에 표시되도록 설정합니다
+			marker.setMap(map);
+			customOverlay.setMap(map);
+		}
+
+
+		// 지도 위의 교통상황 버튼을 눌렀을 때 호출되는 함수입니다
+		function setRoadstatusRoad() {
+			var control = document.getElementById('roadstatusControl');
+			// 버튼이 눌린 상태가 아니면
+			if (control.className.indexOf('active') === -1) {
+				control.className = 'active';
+				// 로드뷰 도로 오버레이가 보이게 합니다
+				map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);  
+			} else {
+				control.className = '';
+				// 로드뷰 도로 오버레이를 제거합니다
+				map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);    
+			}
+		}      
+
+		// 로드뷰 객체를 생성합니다 
+		var rv = new kakao.maps.Roadview(rvContainer); 
+
+		// 좌표로부터 로드뷰 파노라마 ID를 가져올 로드뷰 클라이언트 객체를 생성합니다 
+		var rvClient = new kakao.maps.RoadviewClient(); 
+
+		// 로드뷰에 좌표가 바뀌었을 때 발생하는 이벤트를 등록합니다 
+		kakao.maps.event.addListener(rv, 'position_changed', function() {
+			// 현재 로드뷰의 위치 좌표를 얻어옵니다 
+			var rvPosition = rv.getPosition();
+			// 지도의 중심을 현재 로드뷰의 위치로 설정합니다
+			map.setCenter(rvPosition);
+			// 지도 위에 로드뷰 도로 오버레이가 추가된 상태이면
+			if(overlayOn) {
+				// 마커의 위치를 현재 로드뷰의 위치로 설정합니다
+				marker.setPosition(rvPosition);
+			}
+		});
+
+		// 마커 이미지를 생성합니다
+		var markImage = new kakao.maps.MarkerImage(
+			'http://t1.kakaocdn.net/localimg/localimages/07/mapapidoc/roadview_wk.png',
+			new kakao.maps.Size(35,39), {
+			//마커의 좌표에 해당하는 이미지의 위치를 설정합니다.
+			//이미지의 모양에 따라 값은 다를 수 있으나, 보통 width/2, height를 주면 좌표에 이미지의 하단 중앙이 올라가게 됩니다.
+			offset: new kakao.maps.Point(14, 39)
+		});
+
+		// 드래그가 가능한 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+			image : markImage,
+			position: mapCenter,
+			draggable: true
+		});
+
+		// 마커에 dragend 이벤트를 등록합니다
+		kakao.maps.event.addListener(marker, 'dragend', function(mouseEvent) {
+			// 현재 마커가 놓인 자리의 좌표입니다 
+			var position = marker.getPosition();
+			// 마커가 놓인 위치를 기준으로 로드뷰를 설정합니다
+			toggleRoadview(position);
+		});
+
+		//지도에 클릭 이벤트를 등록합니다
+		kakao.maps.event.addListener(map, 'click', function(mouseEvent){
+			// 지도 위에 로드뷰 도로 오버레이가 추가된 상태가 아니면 클릭이벤트를 무시합니다 
+			if(!overlayOn) {
+				return;
+			}
+			// 클릭한 위치의 좌표입니다 
+			var position = mouseEvent.latLng;
+			// 마커를 클릭한 위치로 옮깁니다
+			marker.setPosition(position);
+			// 클락한 위치를 기준으로 로드뷰를 설정합니다
+			toggleRoadview(position);
+		});
+
+		// 전달받은 좌표(position)에 가까운 로드뷰의 파노라마 ID를 추출하여
+		// 로드뷰를 설정하는 함수입니다
+		function toggleRoadview(position){
+			rvClient.getNearestPanoId(position, 50, function(panoId) {
+				// 파노라마 ID가 null 이면 로드뷰를 숨깁니다
+				if (panoId === null) {
+					toggleMapWrapper(true, position);
+				} else {
+				 toggleMapWrapper(false, position);
+					// panoId로 로드뷰를 설정합니다
+					rv.setPanoId(panoId, position);
+				}
+			});
+		}
+
+		// 지도를 감싸고 있는 div의 크기를 조정하는 함수입니다
+		function toggleMapWrapper(active, position) {
+			if (active) {
+				// 지도를 감싸고 있는 div의 너비가 100%가 되도록 class를 변경합니다 
+				container.className = '';
+				// 지도의 크기가 변경되었기 때문에 relayout 함수를 호출합니다
+				map.relayout();
+				// 지도의 너비가 변경될 때 지도중심을 입력받은 위치(position)로 설정합니다
+				map.setCenter(position);
+			} else {
+				// 지도만 보여지고 있는 상태이면 지도의 너비가 50%가 되도록 class를 변경하여
+				// 로드뷰가 함께 표시되게 합니다
+				if (container.className.indexOf('view_roadview') === -1) {
+					container.className = 'view_roadview';
+					// 지도의 크기가 변경되었기 때문에 relayout 함수를 호출합니다
+					map.relayout();
+					// 지도의 너비가 변경될 때 지도중심을 입력받은 위치(position)로 설정합니다
+					map.setCenter(position);
+				}
+			}
+		}
+
+		// 지도 위의 로드뷰 도로 오버레이를 추가,제거하는 함수입니다
+		function toggleOverlay(active) {
+			if (active) {
+				overlayOn = true;
+				// 지도 위에 로드뷰 도로 오버레이를 추가합니다
+				map.addOverlayMapTypeId(kakao.maps.MapTypeId.ROADVIEW);
+				// 지도 위에 마커를 표시합니다
+				marker.setMap(map);
+				// 마커의 위치를 지도 중심으로 설정합니다 
+				marker.setPosition(map.getCenter());
+				// 로드뷰의 위치를 지도 중심으로 설정합니다
+				toggleRoadview(map.getCenter());
+			} else {
+				overlayOn = false;
+				// 지도 위의 로드뷰 도로 오버레이를 제거합니다
+				map.removeOverlayMapTypeId(kakao.maps.MapTypeId.ROADVIEW);
+				// 지도 위의 마커를 제거합니다
+				marker.setMap(null);
+			}
+		}
+
+		// 지도 위의 로드뷰 버튼을 눌렀을 때 호출되는 함수입니다
+		function setRoadviewRoad() {
+			var control = document.getElementById('roadviewControl');
+			// 버튼이 눌린 상태가 아니면
+			if (control.className.indexOf('active') === -1) {
+				control.className = 'active';
+				// 로드뷰 도로 오버레이가 보이게 합니다
+				toggleOverlay(true);
+			} else {
+				control.className = '';
+				// 로드뷰 도로 오버레이를 제거합니다
+				toggleOverlay(false);
+			}
+		}
+
+		// 로드뷰에서 X버튼을 눌렀을 때 로드뷰를 지도 뒤로 숨기는 함수입니다
+		function closeRoadview() {
+			var position = marker.getPosition();
+			toggleMapWrapper(true, position);
+		}
+	</script>
+<!-- /conBox -->
+<!-- content start -->
+<!-- footer -->
+<!-- /footer -->
+</body>
+</html>
+
+
+ 
+
+
+
+
+
+

@@ -91,6 +91,11 @@ jobs:
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: cp web/busgo.json probe/bg/busgo.json && python updater/busgo.py probe/bg/busgo.json --force 2>&1 | tee probe/bg/log.txt
+      - name: KD 공항버스 시간표 이미지
+        if: false
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+        run: cp web/busgo.json probe/kd/busgo.json && python updater/busgo.py probe/kd/busgo.json --force 2>&1 | tee probe/kd/log.txt
       - name: API 호출 샘플 수집
         if: hashFiles('probe/calls.json') != ''
         env:

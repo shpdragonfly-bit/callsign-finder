@@ -281,11 +281,67 @@ def ggairport():
                 rows.append(r)
         rows.sort(key=lambda x: next(v for v in x if v))
         res[key] = {"stops": e["stops"], "wd": rows, "we": rows, "mix": e["mix"]}
-    return res, j.get("fetched", "")
+    return res, j.get("fetched", ""), gg_changed(j, res)
+
+
+def gg_fp(keys):
+    """bus.json(인천공항 공공데이터)에서 이 번호들의 운행 정보 지문: 공항 출발 시각 · 공항행 첫차/막차 · 정류장"""
+    import hashlib
+    fp = {}
+    for r in json.load(open(BUS, encoding="utf-8"))["routes"]:
+        k = re.split(r"[(\s]", r["n"])[0]
+        if k in keys:
+            part = json.dumps([r.get("t1"), r.get("t2"), r.get("toaw"), r.get("s")], ensure_ascii=False, sort_keys=True)
+            fp[k] = hashlib.sha1(((fp.get(k) or "") + part).encode()).hexdigest()[:12]
+    return fp
+
+
+def gg_changed(j, res):
+    """직접 확인한 날의 지문(ref)과 지금 bus.json 이 다르면 → 시간표가 바뀌었을 수 있음 (재확인 필요)"""
+    try:
+        now = gg_fp(set(res))
+    except Exception as e:
+        print("ggairport: 변경 감지 실패 %s" % e)
+        return []
+    ref = j.get("ref") or {}
+    return sorted(k for k, v in now.items() if k in ref and ref[k] != v)
+
+
+# ---------------------------------------------------------------- KD운송그룹 (경기고속·대원고속, 고정 자료)
+# 버스피아 홈페이지의 시간표가 이미지라서, 사람이 보고 옮긴 값을 data/busgo_kd.json 에 둠.
+# 7일마다 이미지 파일만 받아 sha1 을 비교 → 바뀐 노선은 '재확인 필요' (앱 표시 + 이슈 알림)
+KDF = os.path.join(ROOT, "data", "busgo_kd.json")
+BUSPIA = "https://www.buspia.co.kr"
+
+
+def kd_check(j):
+    import hashlib
+    page = get(BUSPIA + "/subpage/bus/air_info.php")
+    imgs = {}
+    for seq in sorted(set(re.findall(r"AllService\('(\d+)'\)", page)), key=int):
+        pop = get(BUSPIA + "/subpage/bus/air_allTimePop.php?seq=" + seq)
+        for src_ in re.findall(r'<img[^>]+src="([^"]+)"', pop):
+            if src_ in imgs:
+                continue
+            url = urllib.parse.urljoin(BUSPIA + "/subpage/bus/", urllib.parse.quote(src_, safe="/:%"))
+            req = urllib.request.Request(url, headers={"User-Agent": UA})
+            with urllib.request.urlopen(req, timeout=40) as r:
+                imgs[src_] = hashlib.sha1(r.read()).hexdigest()[:12]
+            time.sleep(0.5)
+    stale = sorted(k for k, v in j["routes"].items() if imgs.get(v["img"]) != v["sha1"])
+    print("kd: 이미지 %d장 확인, 바뀌었거나 없어진 노선 %d개" % (len(imgs), len(stale)))
+    return stale
 
 
 # ---------------------------------------------------------------- 모으기
 def main():
+    if "--gg-ref" in sys.argv:                                # 경기공항리무진 시간표를 새로 확인해 넣은 뒤: 지금 지문을 기준으로 저장
+        j = json.load(open(GGA, encoding="utf-8"))
+        res, _, _ = ggairport()
+        j["ref"] = gg_fp(set(res))
+        json.dump(j, open(GGA, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
+        print("ggairport 기준 지문 저장:", j["ref"])
+        return 0
     try:
         old = json.load(open(OUT, encoding="utf-8"))
     except Exception:
@@ -295,6 +351,7 @@ def main():
     for k, v in routes.items():                                # 예전 형식(출처 기록 없음) 호환
         src.setdefault(v.get("src", ""), old.get("generated", ""))
     changed = False
+    stale_all = {}
     kst_today = dt.datetime.now(KST)
     holiday = kst_today.weekday() >= 5                         # 공휴일은 bus.json 기준과 같이 주말만 구분
 
@@ -318,7 +375,7 @@ def main():
         changed = True
 
     try:                                                       # 경기공항리무진 고정 자료 (매번 반영, 가벼움)
-        got, fetched = ggairport()
+        got, fetched, stale = ggairport()
         routes = {k: v for k, v in routes.items() if v.get("src") != "ggairport"}
         for k, v in got.items():
             routes[k] = dict(v, src="ggairport", arr=["T1", "T2"])
@@ -327,6 +384,12 @@ def main():
             changed = True
         src["ggairport"] = stamp
         print("ggairport: 노선 %d개 (%s 확인 자료)" % (len(got), fetched))
+        if stale:
+            print("ggairport: 재확인 필요 — 공항 쪽 운행 정보가 바뀐 번호: %s" % ", ".join(stale))
+        if (old.get("stale") or {}).get("ggairport") != stale:
+            changed = True
+        if stale:
+            stale_all["ggairport"] = stale
     except Exception as e:
         print("ggairport: 실패 %s" % e)
 
@@ -354,6 +417,8 @@ def main():
             continue
         slot = "we" if holiday else "wd"
         for k, v in got.items():
+            if (routes.get(k) or {}).get("src") in ("kd", "ggairport"):   # 사람이 확인한 정류장별 표가 있으면 그쪽 우선
+                continue
             prev = routes.get(k) if (routes.get(k) or {}).get("src") == name else None
             ent = {"src": name, "stops": v["stops"], "arr": ["T1", "T2"],
                    "wd": (prev or {}).get("wd") or v["rows"], "we": (prev or {}).get("we") or v["rows"]}
@@ -364,12 +429,39 @@ def main():
         src[name] = tstamp(NOW)
         changed = True
 
+    try:                                                       # KD운송그룹(경기고속·대원고속) 고정 자료 + 이미지 변경 감지
+        j = json.load(open(KDF, encoding="utf-8"))
+        for k, v in j["routes"].items():
+            routes[k] = {"src": "kd", "stops": v["stops"], "wd": v["rows"], "we": v["rows"], "arr": ["T1", "T2"]}
+        stamp = j.get("fetched", "") + "T00:00:00Z"
+        if src.get("kd") != stamp:
+            changed = True
+        src["kd"] = stamp
+        stale = (old.get("stale") or {}).get("kd") or []
+        if FORCE or age_days(src.get("kd_check", "")) >= 7:   # 7일마다 이미지가 바뀌었는지만 확인 (내용은 사람이 옮김)
+            try:
+                stale = kd_check(j)
+                src["kd_check"] = tstamp(NOW)
+                changed = True
+            except Exception as e:
+                print("kd: 이미지 확인 실패 %s" % e)
+        if stale:
+            stale_all["kd"] = stale
+            print("kd: 재확인 필요 — 시간표 이미지가 바뀐 번호: %s" % ", ".join(stale))
+        if (old.get("stale") or {}).get("kd", []) != stale:
+            changed = True
+        print("kd: 노선 %d개 (%s 확인 자료)" % (len(j["routes"]), j.get("fetched")))
+    except Exception as e:
+        print("kd: 실패 %s" % e)
+
     if not changed and os.path.exists(OUT):
         return 0
     if not routes:
         print("공항행 시간표: 자료 없음")
         return 1
     out = {"generated": tstamp(NOW), "src": src, "routes": routes}
+    if stale_all:
+        out["stale"] = stale_all
     os.makedirs(os.path.dirname(OUT) or ".", exist_ok=True)
     json.dump(out, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     print("공항행 시간표: 노선 %d개, %d bytes → %s" % (len(routes), os.path.getsize(OUT), OUT))
