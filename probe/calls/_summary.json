@@ -1,37 +1,22 @@
 {
- "molit_route_11_small": {
+ "molit_route_sample": {
+  "status": 200,
+  "length": 1123,
+  "head": "{\"Response\":{\"header\":{\"resultCode\":\"200\",\"resultMsg\":\"SUCCESS\"},\"body\":{\"items\":{\"item\":[{\"opr_ymd\":\"20250801\",\"ctpv_cd\":\"29\",\"sgg_cd\":\"29000\",\"rte_id\":\"00000112\",\"rte_no\":\"순환01(운천저수지)\",\"rte_nm\":\"순환01(운천저수지)\",\"dptre_sttn_id\":null,\"dptre_sttn_nm\":null,\"arvl_sttn_id\":null,\"arvl_sttn_nm\":null},{\"opr_y"
+ },
+ "molit_route_11_2025": {
+  "status": 200,
+  "length": 1265,
+  "head": "{\"Response\":{\"header\":{\"resultCode\":\"200\",\"resultMsg\":\"SUCCESS\"},\"body\":{\"items\":{\"item\":[{\"opr_ymd\":\"20250801\",\"ctpv_cd\":\"11\",\"sgg_cd\":\"11000\",\"rte_id\":\"11110897\",\"rte_no\":\"0017\",\"rte_nm\":\"0017번(용산차고지신용산역3번출구)\",\"dptre_sttn_id\":\"8503228\",\"dptre_sttn_nm\":\"용산차고지(가상)\",\"arvl_sttn_id\":\"8502895\",\"arvl_stt"
+ },
+ "molit_route_11_sep": {
+  "status": 200,
+  "length": 1252,
+  "head": "{\"Response\":{\"header\":{\"resultCode\":\"200\",\"resultMsg\":\"SUCCESS\"},\"body\":{\"items\":{\"item\":[{\"opr_ymd\":\"20260901\",\"ctpv_cd\":\"11\",\"sgg_cd\":\"11000\",\"rte_id\":\"11110897\",\"rte_no\":\"0017\",\"rte_nm\":\"0017번(용산차고지신용산역3번출구)\",\"dptre_sttn_id\":\"8503228\",\"dptre_sttn_nm\":\"용산차고지(가상)\",\"arvl_sttn_id\":\"8502895\",\"arvl_stt"
+ },
+ "molit_route_29_now": {
   "status": 200,
   "length": 49,
   "head": "{\"Error\":{\"code\":\"50\",\"message\":\"NO_DATA_FOUND\"}}"
- },
- "molit_route_11_big": {
-  "status": 200,
-  "length": 49,
-  "head": "{\"Error\":{\"code\":\"50\",\"message\":\"NO_DATA_FOUND\"}}"
- },
- "molit_route_28_small": {
-  "status": 200,
-  "length": 49,
-  "head": "{\"Error\":{\"code\":\"50\",\"message\":\"NO_DATA_FOUND\"}}"
- },
- "molit_route_41_small": {
-  "status": 200,
-  "length": 49,
-  "head": "{\"Error\":{\"code\":\"50\",\"message\":\"NO_DATA_FOUND\"}}"
- },
- "molit_sttn_11_small": {
-  "status": 400,
-  "length": 190,
-  "head": "{\n  \"OpenAPI_ServiceResponse\": {\n    \"cmmMsgHeader\": {\n      \"errMsg\": \"NO_OPENAPI_SERVICE_ERROR\",\n      \"returnAuthMsg\": \"해당 오픈API 서비스가 없거나 폐기됨\",\n      \"returnReasonCode\": \"12\"\n    }\n  }\n}\n"
- },
- "seoul_routeinfo_6300": {
-  "status": 200,
-  "length": 557,
-  "head": "{\"comMsgHeader\":{\"successYN\":null,\"errMsg\":null,\"returnCode\":null,\"responseTime\":null,\"requestMsgID\":null,\"responseMsgID\":null},\"msgHeader\":{\"headerMsg\":\"정상적으로 처리되었습니다.\",\"headerCd\":\"0\",\"itemCount\":0},\"msgBody\":{\"itemList\":[{\"busRouteId\":\"100100508\",\"busRouteNm\":\"6300\",\"busRouteAbrv\":\"6300\",\"length\":"
- },
- "seoul_stations_6300": {
-  "status": 200,
-  "length": 36229,
-  "head": "{\"comMsgHeader\":{\"successYN\":null,\"errMsg\":null,\"returnCode\":null,\"responseTime\":null,\"requestMsgID\":null,\"responseMsgID\":null},\"msgHeader\":{\"headerMsg\":\"정상적으로 처리되었습니다.\",\"headerCd\":\"0\",\"itemCount\":0},\"msgBody\":{\"itemList\":[{\"busRouteId\":\"100100508\",\"busRouteNm\":\"6300\",\"busRouteAbrv\":\"6300\",\"seq\":\"1\""
  }
 }
