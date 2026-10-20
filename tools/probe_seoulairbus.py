@@ -2,9 +2,7 @@
 import os, urllib.request
 OUT = "probe/sab"; os.makedirs(OUT, exist_ok=True)
 UA = "callsign-finder/1.0 (offline flight assist; timetable check)"
-PAGES = {"robots.txt": "https://www.seoulairbus.com/robots.txt", "bus.html": "https://www.seoulairbus.com/bus",
-         "bus_6300.html": "https://www.seoulairbus.com/bus/6300", "tt_5_0.html": "https://www.seoulairbus.com/timetableAll/5/0",
-         "tt_5_1.html": "https://www.seoulairbus.com/timetableAll/5/1", "terms.html": "https://www.seoulairbus.com/terms"}
+PAGES = {"robots.txt": "https://www.seoulairbus.com/robots.txt", "term.html": "https://www.seoulairbus.com/guide/term"}
 for name, url in PAGES.items():
     try:
         req = urllib.request.Request(url, headers={"User-Agent": UA})

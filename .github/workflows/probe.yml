@@ -84,7 +84,7 @@ jobs:
         if: false
         run: python tools/probe_stats.py
       - name: 서울공항리무진 시간표 점검
-        run: python tools/probe_seoulairbus.py
+        run: python tools/probe_seoulairbus.py && python updater/busgo.py probe/sab/busgo.json --force
       - name: API 호출 샘플 수집
         if: hashFiles('probe/calls.json') != ''
         env:
