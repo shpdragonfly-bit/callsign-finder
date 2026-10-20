@@ -1,0 +1,238 @@
+200 http://www.kgbus.co.kr text/html
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=euc-kr">
+<META name="description" content="�߰�����,����Ư������ȸ��,Ư�����,����Ư��,��������,������,ķ�ι���,ķ��ī,ī��Ƽķ��ī,Ǫ�����,��������,�Ƿ����,��������">
+<META name="keywords" content=" �߰�����,����Ư������ȸ��,Ư�����,����Ư��,��������,������,ķ�ι���,ķ��ī,ī��Ƽķ��ī,Ǫ�����,��������,�Ƿ����,��������">
+<meta property="og:type" content="website">
+ <meta property="og:title" content="��� ���">
+ <meta property="og:description" content="�߰�����,����Ư������ȸ��,Ư�����,����Ư��,��������,������,ķ�ι���,ķ��ī,ī��Ƽķ��ī,Ǫ�����,��������,�Ƿ����,��������">
+ <meta property="og:image" content="http://www.kgbus.co.kr/img/logo.png">
+ <meta property="og:url" content="http://www.kgbus.co.kr/">
+<title>(��)�����</title>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="purple" alink="red" topmargin=0 leftmargin=0>
+<table cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td width="100%" align="center" background="62p.jpg" height="661" valign="top">
+            <table align="center" cellpadding="0" cellspacing="0" width="1052" bgcolor="white">
+                <tr>
+                    <td width="1052" height="32" align="left" valign="top" colspan="2"><table align="center" cellpadding="0" cellspacing="0" width="1052" bgcolor="white"><tr><td width="800"><a href="index.htm"><img src="img/kg_logo.png" width="950" height="87" border="0"></a></td></tr></table></td>
+                </tr>
+                <tr>
+                    <td width="1052" height="21" align="left" valign="top" colspan="2"><img src="img/mn.png" width="1052" height="35" border="0" usemap="#ImageMap1">
+                    <map name="ImageMap1">
+                        <area shape="rect" coords="41, 1, 176, 31" href="./sub4-1.htm" onfocus='blur()'>
+                        <area shape="rect" coords="224, 4, 374, 29" href="./sub1-1.htm?large_number=1" onfocus='blur()'>
+                        <area shape="rect" coords="407, 5, 586, 30" href="./sub2-1.htm?large_number=2" onfocus='blur()'>
+                        <area shape="rect" coords="648, 4, 801, 28" href="./kgs/poto_list.php?DB=foto1" onfocus='blur()'>
+                        <area shape="rect" coords="839, 4, 995, 30" href="./kgs/Board_List.php?DB=bbs1" onfocus='blur()'>
+                        </map></td>
+                </tr>
+ <link href="./css/skitter.css" type="text/css" media="all" rel="stylesheet" />
+ <link href="css/styles201.css" type="text/css" media="all" rel="stylesheet" />
+<link href="./css/busstyle.css" rel="stylesheet" type="text/css">
+<link href="./css/inc.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<script type='text/javascript' src='./js/jquery-2.1.1.min.js'></script>
+  <script type="text/javascript" language="javascript" src="js/jquery.easing.1.3.js"></script>
+  <script type="text/javascript" language="javascript" src="js/jquery.skitter.min.js"></script>
+<script type='text/javascript' src='./js/jquery.touchwipe.1.1.1.js'></script>
+
+                <tr>
+                    <td width="1052" height="82" align="left" valign="top"><img src="img/mf.png" width="1052" height="430" border="0"></td>
+                </tr>
+                <tr>
+                    <td width="1052" height="159" align="left" valign="top">
+                        <table cellpadding="0" cellspacing="0" width="1051">
+                            <tr>
+                                <td width="232" align="left" valign="top"><img src="img/tel.png" width="232" height="184" border="0"></td>
+                                <td width="279" align="left" valign="top">
+                                    <table cellpadding="0" cellspacing="0" width="280">
+                                        <tr>
+                                            <td width="280"><a href="kgs/Board_List.php?DB=bbs1"><img src="img/gong1.png" width="264" height="73" border="0"></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="280" height="109" align="center" valign="top">
+                                               <STYLE type=text/css>
+td.underline {  background-color: #e1e1e1}
+a {  font-size: 12px; color: #5C5C5C}
+td {  font-size: 12px; color: #5C5C5C}
+body{FONT-SIZE: 9pt; COLOR: #40605F; FONT-FAMILY: "����"
+}
+TD {
+	FONT-SIZE: 9pt; COLOR: #000000; LINE-HEIGHT: 14pt; FONT-FAMILY: "����"
+}
+A:link {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #999999; TEXT-DECORATION: none
+}
+
+</STYLE>
+<table border='0' cellspacing='0' cellpadding='0' width='280' valign='top'>
+	<tr>
+		<td align=left width="21"><img src='kgs/img/ic.gif' valign=middle border=0 ></td>
+		<td width="169" align=left><div class='textcut'><a href="/kgs/Board_View.php?DB=bbs1&Mode=View&Num=55">Ʃ��.������ü ������...</a></div></td><td width="90" align=center><font color=4B9CC0>[2021-05-11]</font></td>
+	</tr>
+	<tr><td></td><td colspan=2><img src='kgs/img/gline.gif' valign=middle border=0 ></td></tr>
+</table>
+		<table border='0' cellspacing='0' cellpadding='0' width='280' valign='top'>
+	<tr>
+		<td align=left width="21"><img src='kgs/img/ic.gif' valign=middle border=0 ></td>
+		<td width="169" align=left><div class='textcut'><a href="/kgs/Board_View.php?DB=bbs1&Mode=View&Num=54">������ ķ��ī ������...</a></div></td><td width="90" align=center><font color=4B9CC0>[2020-03-16]</font></td>
+	</tr>
+	<tr><td></td><td colspan=2><img src='kgs/img/gline.gif' valign=middle border=0 ></td></tr>
+</table>
+		<table border='0' cellspacing='0' cellpadding='0' width='280' valign='top'>
+	<tr>
+		<td align=left width="21"><img src='kgs/img/ic.gif' valign=middle border=0 ></td>
+		<td width="169" align=left><div class='textcut'><a href="/kgs/Board_View.php?DB=bbs1&Mode=View&Num=53">�������� �Ǹ�</a></div></td><td width="90" align=center><font color=4B9CC0>[2020-03-16]</font></td>
+	</tr>
+	<tr><td></td><td colspan=2><img src='kgs/img/gline.gif' valign=middle border=0 ></td></tr>
+</table>
+		<table width="265"><tr><td align="right"><font color="#cccccc" size="2">-TRANSOK-</font></td></tr></table>
+</td>
+                                        </tr>
+                                    </table>
+</td>
+                                <td width="540" align="center" valign="middle">
+                                    <table cellpadding="0" cellspacing="0" width="488">
+                                        <tr>
+                                            <td width="228" align="left" valign="top"><img src="img/im1.png" width="235" height="144" border="0"></td>
+                                            <td width="24">&nbsp;</td>
+                                            <td width="236" align="right" valign="top"><a href="kgs/poto_list.php?DB=foto1"><img src="img/im2.png" width="236" height="144" border="0"></a></td>
+                                        </tr>
+                                    </table>
+</td>
+                            </tr>
+                        </table>
+</td>
+                </tr>
+                <tr>
+                    <td width="1052" height="26" align="center" valign="middle">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="1052" height="378" align="center" valign="middle"><table  cellpadding="0" cellspacing="0" align="center" bgcolor="#EBEBEB">
+        <tr bgcolor="#FFFFFF">
+          <td><table>
+          
+														<td width='140' valign='top' align='center'>
+														  <table border='0' cellpadding='10' cellspacing=7>
+														    <tr>
+														      <td width='140' height='120' align=center ><div align=center><table cellspacing=1 bgcolor=cccccc cellpadding=0 align=center width='140' height='110' border=0><tr bgcolor=ffffff><td align=center>
+																<a href="sub1-2.htm?Good_no=421&large_number=1&middle_number=1"><img src=kgs/ubox/1/1/kg1001-100-342_E_.jpg width="220" height='150' align="absbottom" border="0" alt=''></a></div></td></tr></table>
+																<a href="sub1-2.htm?Good_no=421&large_number=1&middle_number=1"><font size='2' color='4A4A4A'><b></b></font></a>
+																</td>
+															</tr>
+														  </table>
+													    </td>
+													    
+														<td width='140' valign='top' align='center'>
+														  <table border='0' cellpadding='10' cellspacing=7>
+														    <tr>
+														      <td width='140' height='120' align=center ><div align=center><table cellspacing=1 bgcolor=cccccc cellpadding=0 align=center width='140' height='110' border=0><tr bgcolor=ffffff><td align=center>
+																<a href="sub1-2.htm?Good_no=164&large_number=1&middle_number=9"><img src=kgs/ubox/1/9/kg1001-101-108_E_.jpg width="220" height='150' align="absbottom" border="0" alt=''></a></div></td></tr></table>
+																<a href="sub1-2.htm?Good_no=164&large_number=1&middle_number=9"><font size='2' color='4A4A4A'><b></b></font></a>
+																</td>
+															</tr>
+														  </table>
+													    </td>
+													    
+														<td width='140' valign='top' align='center'>
+														  <table border='0' cellpadding='10' cellspacing=7>
+														    <tr>
+														      <td width='140' height='120' align=center ><div align=center><table cellspacing=1 bgcolor=cccccc cellpadding=0 align=center width='140' height='110' border=0><tr bgcolor=ffffff><td align=center>
+																<a href="sub2-2.htm?Good_no=671&large_number=2&middle_number=3&middle_name=����û(����.���δ�)"><img src=kgs/ubox/2/3/kg1002-3002-490_E_.jpg width="220" height='150' align="absbottom" border="0" alt=''></a></div></td></tr></table>
+																<a href="sub2-2.htm?Good_no=671&large_number=2&middle_number=3&middle_name=����û(����.���δ�)"><font size='2' color='4A4A4A'><b></b></font></a>
+																</td>
+															</tr>
+														  </table>
+													    </td>
+
+
+													
+														<td width='140' valign='top' align='center'>
+														  <table border='0' cellpadding='10' cellspacing=7>
+														    <tr>
+														      <td width='140' height='120' align=center ><div align=center><table cellspacing=1 bgcolor=cccccc cellpadding=0 align=center width='140' height='110' border=0><tr bgcolor=ffffff><td align=center>
+																<a href="sub2-2.htm?Good_no=374&large_number=2&middle_number=11&middle_name=����û(����.���δ�)"><img src=kgs/ubox/2/11/kg1002-kg1002-103-295_E_.jpg width="220" height='150' align="absbottom" border="0" alt=''></a></div></td></tr></table>
+																<a href="sub2-2.htm?Good_no=374&large_number=2&middle_number=11&middle_name=����û(����.���δ�)"><font size='2' color='4A4A4A'><b></b></font></a>
+																</td>
+															</tr>
+														  </table>
+													    </td>
+
+
+													
+															</tr><tr>
+														
+														<td width='140' valign='top' align='center'>
+														  <table border='0' cellpadding='10' cellspacing=7>
+														    <tr>
+														      <td width='140' height='120' align=center ><div align=center><table cellspacing=1 bgcolor=cccccc cellpadding=0 align=center width='140' height='110' border=0><tr bgcolor=ffffff><td align=center>
+																<a href="sub2-2.htm?Good_no=751&large_number=2&middle_number=12&middle_name=����û(����.���δ�)"><img src=kgs/ubox/2/12/kg1002-kg1002-kg1002-104-563_E_.jpg width="220" height='150' align="absbottom" border="0" alt=''></a></div></td></tr></table>
+																<a href="sub2-2.htm?Good_no=751&large_number=2&middle_number=12&middle_name=����û(����.���δ�)"><font size='2' color='4A4A4A'><b></b></font></a>
+																</td>
+															</tr>
+														  </table>
+													    </td>
+
+
+																		</table></td>
+                </tr>
+                <tr>
+                    <td width="800" height="100" align="center" valign="middle" bgcolor="#FFFFFF"><div class="box9">
+    <script src="jquery.jcarousellite.js"></script>
+<div id="jcl-cmd ">
+    <div class="custom-container auto">
+        <div class="carousel">
+            <ul>
+<li><img  title='�����ڵ���' src='img/rk02.gif'></li>
+<li><img  title='����ڵ���' src='img/rk03.gif'></li>
+<li><img  title='�ֿ��ڵ���' src='img/rk04.gif'></li>
+<li><img  title='�ѱ������������' src='img/rk05.gif'></li>
+<li><img  title='���Ǻ�����' src='img/rk06.gif'></li>
+
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+ </div></td>
+                </tr>
+                                <tr>
+				                    <td width="1052" height="20" align="center" valign="middle">&nbsp;</td>
+                </tr>
+    <script type="text/javascript">
+        $(function() {
+            $(".auto .carousel").jCarouselLite({
+                auto: 800,
+               speed: 1000,
+pauseOnHover: true //
+
+            });
+        });
+    </script>
+
+                <tr>
+
+          <td width="1052" height="63" align="left" valign="top"><img src="img/m-bottom.gif" width="1052" height="110" border="0" usemap="#Map"></td>
+                </tr>
+            </table>
+</td>
+    </tr>
+</table>
+<map name="Map">
+  <area shape="rect" coords="996,33,1042,65" href="kgs">
+</map>
+</body>
+
+</html>
+ 	          

@@ -1,0 +1,394 @@
+200 https://www.buspia.co.kr// text/html; charset=utf-8
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>버스피아</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon" href="images/common/kdgroup.ico" />
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<link rel="stylesheet" type="text/css" href="css/header.css" />
+<link rel="stylesheet" type="text/css" href="css/footer.css" />
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/Backstretch.js"></script>
+<script>
+	var userAgent = navigator.userAgent.toLowerCase();
+	if(userAgent.match('iphone')) {
+		document.write('<link rel="apple-touch-icon" href="/images/common/buspia.ico" />')
+	} else if(userAgent.match('ipad')) {
+		document.write('<link rel="apple-touch-icon" sizes="72*72" href="/images/common/buspia.ico" />')
+	} else if(userAgent.match('ipod')) {
+		document.write('<link rel="apple-touch-icon" href="/images/common/buspia.ico" />')
+	} else if(userAgent.match('android')) {
+		document.write('<link rel="shortcut icon" href="/images/common/buspia.ico" />')
+	}
+</script>
+
+<style>
+	html, body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+
+	/* ===== 레이어 팝업 공통 ===== */
+	.layer-popup-wrap {
+		display: none;            /* JS로 flex 전환 */
+		position: fixed;
+		z-index: 9999;
+		box-shadow: 3px 3px 12px rgba(0,0,0,0.55);
+		flex-direction: column;
+		background: #000;         /* 로드 전 배경 */
+	}
+
+	/* iframe : 하단 바 30px 제외한 전체 */
+	.layer-popup-wrap iframe {
+		display: block;
+		border: none;
+		width: 100%;
+		flex: 1;                  /* 남은 높이 자동 채움 */
+		min-height: 0;            /* flex 자식 축소 허용 */
+	}
+
+	/* 우상단 닫기 버튼 */
+	.layer-popup-close {
+		position: absolute;
+		top: 6px;
+		right: 6px;
+		z-index: 10000;
+		width: 26px;
+		height: 26px;
+		background: rgba(0,0,0,0.65);
+		color: #fff;
+		border: 1px solid #888;
+		font-size: 15px;
+		line-height: 24px;
+		text-align: center;
+		cursor: pointer;
+		font-family: gulim, sans-serif;
+		padding: 0;
+	}
+	.layer-popup-close:hover { background: rgba(200,0,0,0.8); }
+
+	/* 하단 닫기 바 */
+	.layer-popup-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 10px;
+		height: 30px;
+		flex-shrink: 0;
+		background: #222;
+		color: #fff;
+		font-size: 11px;
+		font-family: gulim, sans-serif;
+		white-space: nowrap;
+	}
+	.layer-popup-footer label {
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		gap: 5px;
+	}
+	.layer-popup-footer input[type=checkbox] {
+		cursor: pointer;
+		margin: 0;
+		width: 12px;
+		height: 14px;
+	}
+	.layer-popup-footer button {
+		background: #555;
+		color: #fff;
+		border: none;
+		padding: 2px 12px;
+		cursor: pointer;
+		font-size: 12px;
+		font-family: gulim, sans-serif;
+		height: 22px;
+	}
+	.layer-popup-footer button:hover { background: #888; }
+</style>
+</head>
+<body style="overflow-y: scroll;">
+
+<!-- header -->
+<!-- header -->
+<header>
+<script>
+  $(document).ready(function() {
+    $(".mainMenu").hover(
+      function() {
+		$(".bgBlack").slideDown(200);
+        $(".snb3").slideDown(200);
+		return false;
+      },
+		 function() {
+		$(".bgBlack").stop().slideUp(200);
+	    $(".snb3").stop().slideUp(200);
+		return false;
+      }
+    );
+  });
+</script>
+</header>
+<style type="text/css">
+.mainMenu {float:left; width:100%; height:72px;position:relative;border-bottom:0px solid #4e4e4e;z-index:100;border-top:1px solid #000;border-bottom:1px solid #6d6d6d; box-shadow : 0 0 7px #6d6d6d;}
+.toph{background:white;}
+.gnb {width:1370px; height:72px; margin:0 auto; background:white; }
+.gnb p.logos {float:left; margin:19px 0 0; }
+.gnb ul {float:left; margin:26px 0 0 70px; padding:0; list-style:none;}
+.gnb ul li {float:left;}
+.gnb ul li a{font-size:18px;color:#505050;font-weight:bold; padding:0 85px 0 40px; background: url('/images/common/bar.jpg') right center no-repeat;} /* 대메뉴 간격 */
+.gnb ul li.last a{ background:none;}
+.gnb ul li a:hover {color:#c80067;}
+
+.gnb ul li a {
+    padding: 0 63px 0 62px;
+}
+
+div.snb2 {position:relative; width:1270px; height:0px; margin:0 auto;background:red;}
+ul.snb3 {display:none;position:absolute;float:left;  width:1035px; height:316px; list-style:none;letter-spacing:-0.07em; text-align:left; left:305px; } 
+li.snb4 {float:left; width:160px; height:316px;padding:8px 0 6px 40px;border-right:1px solid #cdcdcd;background-color: rgba(0, 0, 0, 0.5); text-align:left;}
+li.snb4.first {border-left:1px solid #cdcdcd;}
+li.snb4.last {}
+li.snb4:hover { background-color:#fff;}
+li.snb4:hover a{color:black; }
+ul.snb5 { margin:0; padding:0; list-style:none;}
+ul.snb5 > li {margin:0 0 9px;}
+ul.snb5 > li.titles {font-size:14px; text-align:left;margin-left:0; padding-left:0; font-weight:bold;}
+ul.snb5 > li a {color:white;}
+ul.snb5 > li a:hover {color:#c80067;}
+ul.snb5 > li ul.sMenu01 li, ul.snb5 > li ul.sMenu02 li {padding-bottom:5px;}
+ul.snb5 > li ul.sMenu01, ul.snb5 > li ul.sMenu02 {padding-top:5px;}
+ul.snb5 > li ul.sMenu01 a, ul.snb5 > li ul.sMenu02 a{padding-left:10px;font-size:15px}
+ul.snb5 > li.bMenu01 > a:hover, ul.snb5 > li.bMenu02 > a:hover {color:black;}
+</style>
+<div  class="mainMenu"> 
+	<div class="toph">
+		<div class="gnb">
+			<p class="logos"><a href="/index.php"><img src="/images/common/logos.png" alt="KD운송그룹 메인으로"  width="285px"/></a></p>
+			<ul>
+				<li><a href="/subpage/bus/in_info.php">운행 안내</a></li>
+				<li><a href="/subpage/cus/cusCen.php">고객 센터</a></li>
+				<li><a href="/subpage/intro/ceo.php">그룹 소개</a></li>
+				<li><a href="/subpage/work/transport.php">사업 분야</a></li>
+				<li class="last"><a href="/subpage/other/recruit01.php">채용/웹진</a></li>
+			</ul>
+		</div>
+	</div>
+	<!--서브메뉴-->
+	<div class="snb2">
+		<ul class="snb3">
+			<li class="snb4 first">
+				<ul class="snb5">
+					<li><a href="/subpage/bus/in_info.php">시내버스</a></li>
+					<li><a href="/subpage/bus/ex_info.php">시외·고속버스</a></li>
+					<li><a href="/subpage/bus/air_info.php">공항리무진</a></li>
+					<li><a href="/subpage/bus/bagg_info.php">시외·공항버스 수하물</a></li><!--20260209 시외.공항버스 수하물 안내 메뉴 생성 -->
+					<li><a href="http://www.kdtour.co.kr/bus/sub_main.html" target="_blank">전세버스</a></li>
+					<li><a href="/subpage/cus/notice.php">노선 신설 및 변경</a></li>
+					<li><a href="/subpage/bus/knock_info.php">똑버스</a></li>
+					<!--<li><a href="/subpage/bus/mdrt_info.php">M-DRT(광역콜버스)</a></li>-->
+				</ul>
+			</li>
+			<li class="snb4" >
+				<ul class="snb5"> 
+					<li><a href="/subpage/cus/cusCen.php">고객 문의</a></li>
+					<li><a href="/subpage/cus/lostCen.php">분실물 문의</a></li>
+					<!--<li><a href="javascript:alert('서비스점검중입니다.')">고객 문의</a></li>
+					<li><a href="javascript:alert('서비스점검중입니다.')">분실물 문의</a></li>-->
+				</ul>
+			</li>
+			<li class="snb4">
+				<ul class="snb5">
+					<li><a href="/subpage/intro/ceo.php">CEO 인사말</a></li>
+					<li><a href="/subpage/intro/philosophy.php">그룹 이념</a></li>
+					<li><a href="/subpage/intro/culture.php">그룹 문화</a></li>
+					<li><a href="/subpage/intro/ci.php">CI 및 상징물</a></li>
+					<li><a href="/subpage/intro/company.php">계열사</a></li>
+					<li><a href="/subpage/intro/history.php">연혁</a></li>
+					<li><a href="/subpage/intro/prize.php">상훈</a></li>
+					<li class="bMenu01"><a href="#" style="cursor:text; onclick="return false;">본사 및 사업본부 현황</a>
+						<ul class="sMenu01">
+							<li><a href="/subpage/intro/facility03.php"><span style="font-size:10px">└</span> 본사 및 지원본부</a></li>
+							<li><a href="/subpage/intro/facility01.php"><span style="font-size:10px">└</span> 시내사업본부</a></li>
+							<li><a href="/subpage/intro/facility02.php"><span style="font-size:10px">└</span> 시외사업본부</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li class="snb4" >
+				<ul class="snb5">
+					<li class="bMenu02"><a href="/subpage/work/transport.php" >여객운송사업</a>
+					<li class="bMenu01"><a href="#" style="cursor:text; onclick="return false;">KD투어</a>
+						<ul class="sMenu01">
+							<li><a href="http://www.kdtour.co.kr/bus/sub_main.html" target="_blank"><span style="font-size:10px">└</span> 전세버스</a></li>
+							<li><a href="http://www.kdtour.co.kr/hotel/sub_main.html"  target="_blank"><span style="font-size:10px">└</span> 국내여행</a></li>
+						</ul>
+					</li>
+					<li><a href="/subpage/work/terTic.php">터미널/매표소</a></li>
+					<!--<li><a href="/subpage/bus/deliveryUse.php">수하물</a></li>-->
+					<li><a href="/subpage/work/recycle.php">KD오토리사이클링</a></li>
+					<!-- <li><a href="/subpage/work/clean.php">KD청정피아</a></li> -->
+					<!-- <li><a href="/subpage/work/software.php">소프트웨어개발사업</a></li> -->
+				</ul>
+			</li>
+			<!-- <li class="snb4 last" >
+				<ul class="snb5">
+					<li><a href="/subpage/other/webzine.php">사보</a></li>
+				</ul>
+			</li> -->
+			<li class="snb4" >
+				<ul class="snb5">
+					<li class="bMenu02"><a href="#" style="cursor:text; onclick="return false;">채용</a>
+						<ul class="sMenu02">
+							<li><a href="/subpage/other/recruit01.php"><span style="font-size:10px">└</span> KD인재상</a></li>
+							<li><a href="/subpage/other/recruit02.php"><span style="font-size:10px">└</span> 자격요건</a></li>
+							<li><a href="/subpage/other/recruit03.php"><span style="font-size:10px">└</span> 지원절차</a></li>
+							<!--<li><a href="/subpage/other/recruit04.php"><span style="font-size:10px">└</span> 채용공고</a></li> 잠시막음 -->
+							<!-- <li><a href="/subpage/other/recruit05.php"><span style="font-size:10px">└</span> 입사지원</a></li> -->
+						</ul>
+					</li>
+					<li class="bMenu01"><a href="#" style="cursor:text; onclick="return false;">웹진</a>
+						<ul class="sMenu01">
+							<li><a href="/subpage/other/webzine.php"><span style="font-size:10px">└</span> 사보</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li> 
+		</ul>
+		<div class="menu">
+			<span class="n1"></span>
+			<span class="n2"></span>
+			<span class="n3"></span>
+		</div>
+	</div>
+	<!--서브메뉴-->
+</div>
+
+<script type="text/javascript">
+ /*document.oncontextmenu = function (e) {
+	return false;
+}*/
+</script><!-- header -->
+
+<script>
+	$.backstretch([
+		"/images/main/nbg06.jpg"
+	], {duration:5000, fade:1000});
+</script>
+
+<!-- content -->
+<form id="headerform" name="headerform">
+<input type="hidden" name="hid_mode" value="">
+<input type="hidden" name="hid_typ" value="">
+<input type="hidden" name="hid_access" value="">
+	<div class="botFooter" style="background-color: rgba(0, 0, 0, 0.5);">
+		<ul>
+			<li class="point"><a href="/intranet/login/login.php" target="_blank" rel="noreferrer noopener" title="새창열림">사우가족</a></li>
+			<li class="point"><a href="https://kdgr.kotec21.net/" target="_blank" rel="noreferrer noopener" title="새창열림">통신교육</a></li>
+			<li class="point">
+				<a href="http://buspia.esafetykorea.or.kr/" target="_blank" rel="noreferrer noopener" title="새창열림">산업안전교육</a>
+			</li>
+			<li class="first"><a href="/subpage/other/treatment.php" title="정보취급방침" style="color:#ccffff; font-weight:600">정보취급방침</a> <span class="bar">|</span> </li>
+			<li><a href="/subpage/other/disposal.php" title="정보처리방침" style="font-weight:600">정보처리방침</a> <span class="bar">|</span> </li>
+			<li><a href="/subpage/other/refusal.php" title="이메일수집거부" style="font-weight:600">이메일수집거부</a> <span class="bar">|</span> </li>
+			<li><a href="/subpage/other/map.php" title="찾아오시는 길" style="font-weight:600">찾아오시는 길</a> <span class="bar">|</span> </li>
+			<li><span onclick="window.location.href='/dispatch.php'" style="font-weight:600;">D&T</span> <span class="bar">|</span> </li>
+			<li>04766 서울특별시 성동구 왕십리로 125  KD타워</li>
+			<li class="end">대표전화 (02) 455-2114(ARS)</li>
+		</ul>
+	</div>
+</form>
+
+<!--
+	레이어 팝업 구조
+	- 전체 높이 = 이미지 영역(620px) + 하단 바(30px) = 650px
+	- iframe height는 CSS flex로 자동 계산 (하드코딩 금지)
+	- 팝업 HTML 파일(popup_*.html)은 이미지만 출력, JS/닫기 없음
+-->
+
+<!-- 팝업1 : 20260126 / 위치 left:0 -->
+<!--<div id="popup_20260126" class="layer-popup-wrap"
+     style="width:485px; height:650px; top:50px; left:0;">
+	<button class="layer-popup-close" onclick="closeLayerPopup('20260126')">✕</button>
+	<iframe src="/popup/pop1.html"
+	        width="485" scrolling="no"></iframe>
+	<div class="layer-popup-footer">
+		<label>
+			<input type="checkbox" id="chk_20260126">
+			오늘 하루 이 창을 열지 않음
+		</label>
+		<button onclick="closeLayerPopup('20260126')">닫기</button>
+	</div>
+</div>-->
+
+<div id="popup_20260602" class="layer-popup-wrap" style="width:485px; height:650px; top:75px; left:10px;">
+	<button class="layer-popup-close" onclick="closeLayerPopup('20260602')">✕</button>
+	<iframe src="/popup/pop2.html"
+	        width="485" scrolling="no"></iframe>
+	<div class="layer-popup-footer">
+		<label style="font-size:11px;">
+			<input type="checkbox" id="chk_20260602" style="width:11px; height:11px;">
+			오늘 하루 이 창을 열지 않음
+		</label>
+		<button onclick="closeLayerPopup('20260602')">닫기</button>
+	</div>
+</div>
+
+<!-- 팝업2 : 20260602 / 위치 left:490 (팝업1 width 485 + 여백 5) -->
+<!--<div id="popup_20260602" class="layer-popup-wrap" style="width:485px; height:650px; top:50px; left:490px;">-->
+<script>
+	/* 쿠키 읽기 */
+	function getCookie(name) {
+		var nameOfCookie = name + "=";
+		var x = 0;
+		while (x <= document.cookie.length) {
+			var y = x + nameOfCookie.length;
+			if (document.cookie.substring(x, y) == nameOfCookie) {
+				var endOfCookie = document.cookie.indexOf(";", y);
+				if (endOfCookie == -1) endOfCookie = document.cookie.length;
+				return unescape(document.cookie.substring(y, endOfCookie));
+			}
+			x = document.cookie.indexOf(" ", x) + 1;
+			if (x == 0) break;
+		}
+		return "";
+	}
+
+	/* 오늘 자정 만료 쿠키 */
+	function setCookieToday(name) {
+		var expire = new Date();
+		expire.setHours(23, 59, 59, 0);
+		document.cookie = name + "=no; expires=" + expire.toUTCString() + "; path=/";
+	}
+
+	/* 닫기 버튼 */
+	function closeLayerPopup(id) {
+		var chk = document.getElementById('chk_' + id);
+		if (chk && chk.checked) {
+			setCookieToday(id);
+		}
+		var el = document.getElementById('popup_' + id);
+		if (el) el.style.display = 'none';
+	}
+
+	/* 페이지 로드 후 쿠키 확인하여 표시 */
+	$(document).ready(function () {
+		if (getCookie("20260126") != "no") {
+			$('#popup_20260126').css('display', 'flex');
+		}
+		if (getCookie("20260602") != "no") {
+			$('#popup_20260602').css('display', 'flex');
+		}
+	});
+</script>
+
+</body>
+</html>

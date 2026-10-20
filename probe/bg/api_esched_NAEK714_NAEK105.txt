@@ -1,0 +1,2 @@
+200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK714&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8
+{"response":{"header":{"resultCode":"00","resultMsg":"NORMAL SERVICE."},"body":{"items":{"item":[]},"numOfRows":200,"pageNo":1,"totalCount":0}}}

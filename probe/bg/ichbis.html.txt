@@ -1,0 +1,5 @@
+200 https://bus.incheon.go.kr text/html; charset=utf-8
+
+<script>
+	window.location = "/bis/main.view";
+</script>

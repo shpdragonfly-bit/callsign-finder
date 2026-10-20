@@ -1,0 +1,20 @@
+200 http://www.knbus.co.kr text/html
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=euc-kr'>
+
+
+            <script type="text/javascript">
+            var JsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+            var sTime = new Date().getTime();
+            document.write(unescape("%3Cscript id='log_script' src='" + JsHost + "blg-jsk.cafe24.com/weblog.js?uid=knbus1&t=" + sTime + "' type='text/javascript'%3E%3C/script%3E"));
+            </script>
+        
+<title>�泲������ ���Ű� ȯ���մϴ�!</title>
+<!--favicon_s--><link rel="Shortcut Icon" href="" /><!--favicon_e-->
+
+<frameset cols="*" border="0">
+    <frame src="default/index.php" name="builder_frame_content">
+</frameset>
+</head>
+</html>

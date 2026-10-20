@@ -84,7 +84,13 @@ jobs:
         if: false
         run: python tools/probe_stats.py
       - name: 서울공항리무진 시간표 점검
+        if: false
         run: python tools/probe_seoulairbus.py && python updater/busgo.py probe/sab/busgo.json --force
+      - name: 공항행 시간표 수집 시험
+        if: false
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+        run: cp web/busgo.json probe/bg/busgo.json && python updater/busgo.py probe/bg/busgo.json --force 2>&1 | tee probe/bg/log.txt
       - name: API 호출 샘플 수집
         if: hashFiles('probe/calls.json') != ''
         env:

@@ -1,0 +1,10 @@
+HTTP 403 https://apis.data.go.kr/1613000/SuburbsBusInfo/GetSuberbsBusTrminlList?pageNo=1&numOfRows=1000&serviceKey=***&_type=json
+{
+  "OpenAPI_ServiceResponse": {
+    "cmmMsgHeader": {
+      "errMsg": "SERVICE_KEY_IS_NOT_REGISTERED_ERROR",
+      "returnAuthMsg": "등록되지 않은 서비스키",
+      "returnReasonCode": "30"
+    }
+  }
+}

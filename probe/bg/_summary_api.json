@@ -1,0 +1,389 @@
+{
+ "api_SuburbsBusInfo_term_p1": "HTTP 403 https://apis.data.go.kr/1613000/SuburbsBusInfo/GetSuberbsBusTrminlList?pageNo=1&numOfRows=1000&serviceKey=***&_type=json\n{\n  \"OpenAPI_ServiceResponse\": {\n    \"cmmMsgHeader\": {\n      \"errMsg\": \"SERVICE_KEY_IS_NOT_REGISTERED_ERROR\",\n      \"returnAuthMsg\": \"등록되지 않은 서비스키\",\n      \"returnReasonCode\": \"30\"\n    }\n  }\n}\n",
+ "SuburbsBusInfo_terms": 0,
+ "SuburbsBusInfo_air": [],
+ "api_ExpBusInfo_term_p1": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetExpBusTrminlList?pageNo=1&numOfRows=1000&serviceKey=***&_type=json application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[{\"terminalId\":\"NAEK010\",\"terminalNm\":\"서울경부\"},{\"terminalId\":\"NAEK020\",\"terminalNm\":\"센트럴시티(서울)\"},{\"terminalId\":\"NAEK021\",\"terminalNm\":\"센트럴시티(서울)\"},{\"terminal",
+ "ExpBusInfo_terms": 453,
+ "ExpBusInfo_air": [
+  {
+   "terminalId": "NAEK060",
+   "terminalNm": "김포공항"
+  },
+  {
+   "terminalId": "NAEK104",
+   "terminalNm": "김포공항"
+  },
+  {
+   "terminalId": "NAEK105",
+   "terminalNm": "인천공항T1"
+  },
+  {
+   "terminalId": "NAEK117",
+   "terminalNm": "인천공항T2"
+  },
+  {
+   "terminalId": "NAEK124",
+   "terminalNm": "공항왕복"
+  },
+  {
+   "terminalId": "NAEK407",
+   "terminalNm": "청주공항"
+  },
+  {
+   "terminalId": "NAEK740",
+   "terminalNm": "김해공항"
+  },
+  {
+   "terminalId": "NAEK861",
+   "terminalNm": "대구공항"
+  }
+ ],
+ "api_esched_NAEK200_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK200&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK200_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK200&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK800_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK800&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK800_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK800&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK801_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK801&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK801_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK801&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK802_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK802&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK802_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK802&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK700_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK700&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK700_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK700&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK701_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK701&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK701_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK701&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK703_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK703&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK703_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK703&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK500_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK500&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[{\"routeId\":\"NAEK500105\",\"depPlaceNm\":\"광주(유·스퀘어)\",\"arrPlaceNm\":\"인천공항T1\",\"depPlandTime\":20261",
+ "esched_광주(유·스퀘어)_인천공항T1": [
+  41,
+  [
+   {
+    "routeId": "NAEK500105",
+    "depPlaceNm": "광주(유·스퀘어)",
+    "arrPlaceNm": "인천공항T1",
+    "depPlandTime": 202610200001,
+    "arrPlandTime": 202610200401,
+    "charge": 65200,
+    "gradeNm": "심야프리미엄"
+   },
+   {
+    "routeId": "NAEK500105",
+    "depPlaceNm": "광주(유·스퀘어)",
+    "arrPlaceNm": "인천공항T1",
+    "depPlandTime": 202610200010,
+    "arrPlandTime": 202610200410,
+    "charge": 65200,
+    "gradeNm": "심야프리미엄"
+   },
+   {
+    "routeId": "NAEK500105",
+    "depPlaceNm": "광주(유·스퀘어)",
+    "arrPlaceNm": "인천공항T1",
+    "depPlandTime": 202610200020,
+    "arrPlandTime": 202610200420,
+    "charge": 52200,
+    "gradeNm": "심야우등"
+   }
+  ]
+ ],
+ "api_esched_NAEK500_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK500&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[{\"routeId\":\"NAEK500117\",\"depPlaceNm\":\"광주(유·스퀘어)\",\"arrPlaceNm\":\"인천공항T2\",\"depPlandTime\":20261",
+ "esched_광주(유·스퀘어)_인천공항T2": [
+  41,
+  [
+   {
+    "routeId": "NAEK500117",
+    "depPlaceNm": "광주(유·스퀘어)",
+    "arrPlaceNm": "인천공항T2",
+    "depPlandTime": 202610200001,
+    "arrPlandTime": 202610200421,
+    "charge": 65200,
+    "gradeNm": "심야프리미엄"
+   },
+   {
+    "routeId": "NAEK500117",
+    "depPlaceNm": "광주(유·스퀘어)",
+    "arrPlaceNm": "인천공항T2",
+    "depPlandTime": 202610200010,
+    "arrPlandTime": 202610200430,
+    "charge": 65200,
+    "gradeNm": "심야프리미엄"
+   },
+   {
+    "routeId": "NAEK500117",
+    "depPlaceNm": "광주(유·스퀘어)",
+    "arrPlaceNm": "인천공항T2",
+    "depPlandTime": 202610200020,
+    "arrPlandTime": 202610200440,
+    "charge": 52200,
+    "gradeNm": "심야우등"
+   }
+  ]
+ ],
+ "api_esched_NAEK503_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK503&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK503_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK503&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK504_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK504&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK504_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK504&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK600_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK600&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK600_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK600&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK601_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK601&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK601_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK601&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK602_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK602&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK602_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK602&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK300_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK300&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK300_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK300&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK301_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK301&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK301_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK301&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK302_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK302&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK302_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK302&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK400_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK400&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK400_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK400&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK401_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK401&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK401_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK401&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK403_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK403&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK403_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK403&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK309_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK309&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK309_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK309&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK310_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK310&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK310_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK310&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK335_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK335&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK335_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK335&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK828_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK828&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK828_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK828&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK830_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK830&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK830_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK830&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK831_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK831&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK831_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK831&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK714_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK714&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK714_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK714&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK715_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK715&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK715_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK715&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK716_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK716&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK716_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK716&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK710_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK710&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK710_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK710&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK711_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK711&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK711_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK711&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK720_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK720&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK720_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK720&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK721_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK721&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK721_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK721&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK722_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK722&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK722_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK722&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK505_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK505&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[{\"routeId\":\"NAEK505105\",\"depPlaceNm\":\"목포\",\"arrPlaceNm\":\"인천공항T1\",\"depPlandTime\":202610200030",
+ "esched_목포_인천공항T1": [
+  6,
+  [
+   {
+    "routeId": "NAEK505105",
+    "depPlaceNm": "목포",
+    "arrPlaceNm": "인천공항T1",
+    "depPlandTime": 202610200030,
+    "arrPlandTime": 202610200445,
+    "charge": 75300,
+    "gradeNm": "심야프리미엄"
+   },
+   {
+    "routeId": "NAEK505105",
+    "depPlaceNm": "목포",
+    "arrPlaceNm": "인천공항T1",
+    "depPlandTime": 202610200200,
+    "arrPlandTime": 202610200615,
+    "charge": 57900,
+    "gradeNm": "심야우등"
+   },
+   {
+    "routeId": "NAEK505105",
+    "depPlaceNm": "목포",
+    "arrPlaceNm": "인천공항T1",
+    "depPlandTime": 202610200530,
+    "arrPlandTime": 202610200945,
+    "charge": 62800,
+    "gradeNm": "프리미엄"
+   }
+  ]
+ ],
+ "api_esched_NAEK505_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK505&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[{\"routeId\":\"NAEK505117\",\"depPlaceNm\":\"목포\",\"arrPlaceNm\":\"인천공항T2\",\"depPlandTime\":202610200030",
+ "esched_목포_인천공항T2": [
+  6,
+  [
+   {
+    "routeId": "NAEK505117",
+    "depPlaceNm": "목포",
+    "arrPlaceNm": "인천공항T2",
+    "depPlandTime": 202610200030,
+    "arrPlandTime": 202610200510,
+    "charge": 75300,
+    "gradeNm": "심야프리미엄"
+   },
+   {
+    "routeId": "NAEK505117",
+    "depPlaceNm": "목포",
+    "arrPlaceNm": "인천공항T2",
+    "depPlandTime": 202610200200,
+    "arrPlandTime": 202610200640,
+    "charge": 57900,
+    "gradeNm": "심야우등"
+   },
+   {
+    "routeId": "NAEK505117",
+    "depPlaceNm": "목포",
+    "arrPlaceNm": "인천공항T2",
+    "depPlandTime": 202610200530,
+    "arrPlandTime": 202610201010,
+    "charge": 62800,
+    "gradeNm": "프리미엄"
+   }
+  ]
+ ],
+ "api_esched_NAEK513_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK513&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK513_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK513&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK514_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK514&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK514_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK514&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK515_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK515&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[{\"routeId\":\"NAEK515105\",\"depPlaceNm\":\"순천\",\"arrPlaceNm\":\"인천공항T1\",\"depPlandTime\":202610200051",
+ "esched_순천_인천공항T1": [
+  5,
+  [
+   {
+    "routeId": "NAEK515105",
+    "depPlaceNm": "순천",
+    "arrPlaceNm": "인천공항T1",
+    "depPlandTime": 202610200051,
+    "arrPlandTime": 202610200521,
+    "charge": 55500,
+    "gradeNm": "심야우등"
+   },
+   {
+    "routeId": "NAEK515105",
+    "depPlaceNm": "순천",
+    "arrPlaceNm": "인천공항T1",
+    "depPlandTime": 202610200140,
+    "arrPlandTime": 202610200610,
+    "charge": 72200,
+    "gradeNm": "심야프리미엄"
+   },
+   {
+    "routeId": "NAEK515105",
+    "depPlaceNm": "순천",
+    "arrPlaceNm": "인천공항T1",
+    "depPlandTime": 202610200630,
+    "arrPlandTime": 202610201100,
+    "charge": 46300,
+    "gradeNm": "우등"
+   }
+  ]
+ ],
+ "api_esched_NAEK515_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK515&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[{\"routeId\":\"NAEK515117\",\"depPlaceNm\":\"순천\",\"arrPlaceNm\":\"인천공항T2\",\"depPlandTime\":202610200051",
+ "esched_순천_인천공항T2": [
+  5,
+  [
+   {
+    "routeId": "NAEK515117",
+    "depPlaceNm": "순천",
+    "arrPlaceNm": "인천공항T2",
+    "depPlandTime": 202610200051,
+    "arrPlandTime": 202610200541,
+    "charge": 55500,
+    "gradeNm": "심야우등"
+   },
+   {
+    "routeId": "NAEK515117",
+    "depPlaceNm": "순천",
+    "arrPlaceNm": "인천공항T2",
+    "depPlandTime": 202610200140,
+    "arrPlandTime": 202610200630,
+    "charge": 72200,
+    "gradeNm": "심야프리미엄"
+   },
+   {
+    "routeId": "NAEK515117",
+    "depPlaceNm": "순천",
+    "arrPlaceNm": "인천공항T2",
+    "depPlandTime": 202610200630,
+    "arrPlandTime": 202610201120,
+    "charge": 46300,
+    "gradeNm": "우등"
+   }
+  ]
+ ],
+ "api_esched_NAEK510_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK510&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[{\"routeId\":\"NAEK510105\",\"depPlaceNm\":\"여수\",\"arrPlaceNm\":\"인천공항T1\",\"depPlandTime\":202610200001",
+ "esched_여수_인천공항T1": [
+  4,
+  [
+   {
+    "routeId": "NAEK510105",
+    "depPlaceNm": "여수",
+    "arrPlaceNm": "인천공항T1",
+    "depPlandTime": 202610200001,
+    "arrPlandTime": 202610200551,
+    "charge": 65400,
+    "gradeNm": "심야우등"
+   },
+   {
+    "routeId": "NAEK510105",
+    "depPlaceNm": "여수",
+    "arrPlaceNm": "인천공항T1",
+    "depPlandTime": 202610200050,
+    "arrPlandTime": 202610200640,
+    "charge": 85000,
+    "gradeNm": "심야프리미엄"
+   },
+   {
+    "routeId": "NAEK510105",
+    "depPlaceNm": "여수",
+    "arrPlaceNm": "인천공항T1",
+    "depPlandTime": 202610200540,
+    "arrPlandTime": 202610201130,
+    "charge": 54500,
+    "gradeNm": "우등"
+   }
+  ]
+ ],
+ "api_esched_NAEK510_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK510&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[{\"routeId\":\"NAEK510117\",\"depPlaceNm\":\"여수\",\"arrPlaceNm\":\"인천공항T2\",\"depPlandTime\":202610200001",
+ "esched_여수_인천공항T2": [
+  4,
+  [
+   {
+    "routeId": "NAEK510117",
+    "depPlaceNm": "여수",
+    "arrPlaceNm": "인천공항T2",
+    "depPlandTime": 202610200001,
+    "arrPlandTime": 202610200611,
+    "charge": 65400,
+    "gradeNm": "심야우등"
+   },
+   {
+    "routeId": "NAEK510117",
+    "depPlaceNm": "여수",
+    "arrPlaceNm": "인천공항T2",
+    "depPlandTime": 202610200050,
+    "arrPlandTime": 202610200700,
+    "charge": 85000,
+    "gradeNm": "심야프리미엄"
+   },
+   {
+    "routeId": "NAEK510117",
+    "depPlaceNm": "여수",
+    "arrPlaceNm": "인천공항T2",
+    "depPlandTime": 202610200540,
+    "arrPlandTime": 202610201150,
+    "charge": 54500,
+    "gradeNm": "우등"
+   }
+  ]
+ ],
+ "api_esched_NAEK250_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK250&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK250_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK250&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK240_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK240&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK240_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK240&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK244_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK244&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK244_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK244&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK245_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK245&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK245_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK245&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK230_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK230&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK230_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK230&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK840_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK840&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK840_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK840&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK841_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK841&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK841_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK841&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK360_NAEK105": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK360&arrTerminalId=NAEK105&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}",
+ "api_esched_NAEK360_NAEK117": "200 https://apis.data.go.kr/1613000/ExpBusInfo/GetStrtpntAlocFndExpbusInfo?depTerminalId=NAEK360&arrTerminalId=NAEK117&depPlandTime=20261020&serviceKey=***&_type=json&numOfRows=200 application/json;charset=UTF-8\n{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":{\"item\":[]},\"numOfRows\":200,\"pageNo\":1,\"totalCount\":0}}}"
+}

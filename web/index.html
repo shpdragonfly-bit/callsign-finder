@@ -309,6 +309,11 @@ body[data-tab="ft"] .cs-only, body[data-tab="pk"] .cs-only, body[data-tab="cm"] 
 .fx-q button { flex: 1; font: 600 13px var(--mono); padding: 8px 4px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); color: var(--text); cursor: pointer; }
 .fx-src { margin: 16px 2px 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
 .fx-src a { color: var(--muted); }
+/* 출근: 공항행 시간표 */
+.rt-row.go .t { font: 700 17px var(--mono); min-width: 52px; }
+.rt-row.go .m, .rt-row.go + .rt-row.go .m { font: 700 14px var(--mono); color: var(--accent); min-width: 56px; }
+.rt-row.go.past { opacity: .45; }
+.cm-src2 { margin-top: 6px; font-size: 11px; color: var(--muted); }
 .via b { color: var(--text); font-family: var(--mono); }
 
 .type { border-top: 1px solid var(--line); padding: 14px 16px; display: flex; gap: 14px; align-items: center; background: var(--accent-soft); }
@@ -3198,7 +3203,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v59", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v60", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -5581,6 +5586,7 @@ window.UID = (() => {
   const save = () => ls.set(K, JSON.stringify(st));
   let BUS = null; try { BUS = JSON.parse(ls.get(BK) || "null"); } catch (e) {}
   let BS = null; try { BS = JSON.parse(ls.get(SK) || "null"); } catch (e) {}   // 노선별 공항 방향 정류장 ID (busstops.json)
+  let BG = null; try { BG = JSON.parse(ls.get("csf-busgo") || "null"); } catch (e) {}   // 공항행 정류장별 시간표 (busgo.json, 운영사 홈페이지)
   const p2 = (n) => String(n).padStart(2, "0");
   // 한국 시각 기준 (기기 시간대와 무관)
   const kst = () => new Date(Date.now() + 9 * 3600e3);
@@ -5604,6 +5610,9 @@ window.UID = (() => {
     }).catch(() => {});
     fetch("busstops.json?t=" + Date.now(), { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).then((d) => {
       if (d && d.routes && (!BS || d.generated > BS.generated)) { BS = d; ls.set(SK, JSON.stringify(d)); paint(); }
+    }).catch(() => {});
+    fetch("busgo.json?t=" + Date.now(), { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).then((d) => {
+      if (d && d.routes && (!BG || d.generated > BG.generated)) { BG = d; ls.set("csf-busgo", JSON.stringify(d)); paint(); }
     }).catch(() => {});
   }
   // 기준 시각부터 60분 안의 출발 (자정 넘어가면 다음 날 시간표)
@@ -5663,6 +5672,48 @@ window.UID = (() => {
       const k = kst();
       rtData = { key: sel.key, t: Date.now(), at: `${p2(k.getUTCHours())}:${p2(k.getUTCMinutes())}:${p2(k.getUTCSeconds())}`, b: d && d.ok ? d.b || [] : [], msg: d && d.msg, err: !(d && d.ok) };
     }).catch(() => { rtData = { key: sel.key, t: Date.now(), err: true }; }).finally(() => { rtBusy = false; rtPaint(); });
+  }
+  // ----- 출근: 공항행 정류장별 시간표 (기준 시각 앞뒤 30분) -----
+  const nrm = (s) => String(s || "").replace(/[\s.,·()\-]/g, "");
+  function goSched(r) { return BG && BG.routes && (BG.routes[r.n] || BG.routes[split(r.n)[0]]); }
+  const GO_SRC = { seoulairbus: "서울공항리무진 홈페이지 시간표", klimousine: "한국공항리무진 홈페이지 시간표",
+    tago_exp: "고속버스 배차 (국토교통부 TAGO)", tago_sub: "시외버스 배차 (국토교통부 TAGO)", ggairport: "경기공항리무진 홈페이지 시간표 (직접 확인)" };
+  function goCol(g, name, idx) {                          // 고른 정류장 → 시간표 열 (이름이 조금 달라도: 앞부분 일치, 순서 참고)
+    const n = nrm(name);
+    if (!n) return -1;
+    const S = g.stops.map(nrm);
+    let i = S.indexOf(n);
+    if (i < 0) i = S.findIndex((x) => x.length >= 2 && (n.startsWith(x) || x.startsWith(n)));
+    if (i < 0) i = S.findIndex((x) => x.slice(0, 3) === n.slice(0, 3));
+    if (i < 0 && idx != null && idx < S.length) i = idx;
+    return i;
+  }
+  function goStopName() {                                 // 지금 고른 탑승 정류장 이름과 순서
+    if (!rtRoute) return null;
+    const b = BS && BS.routes[rtRoute.n], v = $("cmStop").value || (st.gs || {})[rtRoute.n] || "";
+    if (b) { const k = b.stops.findIndex((s) => String(s[1]) === String(v)); return k < 0 ? null : { name: b.stops[k][2], idx: k }; }
+    return v ? { name: v, idx: null } : null;
+  }
+  function goHtml(g) {
+    const sel = goStopName() || (g.stops.length === 1 ? { name: g.stops[0], idx: 0 } : null);
+    if (!sel) return `<div class="cm-note">위에서 <b>탑승 정류장</b>을 고르면 기준 시각 앞뒤 30분의 공항행 시간표를 보여 줍니다.</div>`;
+    const c = goCol(g, sel.name, sel.idx);
+    if (c < 0) return `<div class="cm-note">이 정류장은 시간표에서 찾지 못했습니다. 다른 정류장을 골라 보세요 (시간표가 있는 곳: ${g.stops.map(esc).join(", ")}).</div>`;
+    const dtp = dayType(base.y, base.m, base.d), rows = (dtp === "we" ? g.we : g.wd) || g.wd, ns = g.stops.length;
+    const list = rows.map((r) => ({ m: r[c] ? hm(r[c]) : null, t1: r[ns], t2: r[ns + 1] })).filter((x) => x.m != null);
+    const near = list.filter((x) => Math.abs(x.m - base.min) <= 30);
+    const mix = g.mix && g.mix[g.stops[c]];
+    let h = `<div class="rt-hd"><b>${esc(g.stops[c])}</b> 공항행 시간표<small>${fmt((base.min + 1410) % 1440)} ~ ${fmt((base.min + 30) % 1440)} · ${dtp === "we" ? "휴일" : "평일"}</small></div>`;
+    if (!near.length) {
+      const nx = list.find((x) => x.m > base.min + 30), pv = [...list].reverse().find((x) => x.m < base.min - 30);
+      h += `<div class="cm-note" style="margin-top:4px">앞뒤 30분 안에 출발하는 버스가 없습니다.${pv ? ` 이전 <b>${fmt(pv.m)}</b>` : ""}${nx ? ` · 다음 <b>${fmt(nx.m)}</b>` : list.length ? ` · 다음 날 첫차 <b>${fmt(list[0].m)}</b>` : ""}</div>`;
+    } else h += near.map((x) => {
+      const w = x.m - base.min, past = w < 0;
+      const when = isNow() ? (past ? "지나감" : w === 0 ? "곧 출발" : `${w}분 후`) : (w === 0 ? "기준" : (w > 0 ? "+" : "−") + Math.abs(w) + "분");
+      return `<div class="rt-row go${past && isNow() ? " past" : ""}"><span class="t">${fmt(x.m)}</span><span class="m">${when}</span><span class="sub">${x.t1 ? `T1 ${fmt(hm(x.t1))}` : ""}${x.t1 && x.t2 ? " · " : ""}${x.t2 ? `T2 ${fmt(hm(x.t2))}` : ""} 도착 예정</span></div>`;
+    }).join("");
+    const gs = (BG.src || {})[g.src] || BG.generated, gen = gs ? new Date(gs) : null;
+    return h + `${mix ? `<div class="cm-src2">이 정류장 시각은 ${esc(mix)}번이 함께 섞인 표입니다.</div>` : ""}<div class="cm-src2">${GO_SRC[g.src] || "운영사 홈페이지 시간표"}${gen ? ` · ${gen.getMonth() + 1}/${gen.getDate()} ${g.src === "ggairport" ? "확인" : "받음"}` : ""} · 도로 사정에 따라 달라질 수 있음</div>`;
   }
   function routeCard(r, term) {
     const [num, lab] = split(r.n), T = r[term];
@@ -5906,7 +5957,9 @@ window.UID = (() => {
   function paint() {
     document.querySelectorAll("#cmMode button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.cm === st.mode));
     $("cmTime").value = fmt(base.min);
-    $("cmRange").textContent = `${fmt(base.min)} ~ ${fmt((base.min + 60) % 1440)}`;
+    const kd = kst(), dd = Math.round((Date.UTC(base.y, base.m, base.d) - Date.UTC(kd.getUTCFullYear(), kd.getUTCMonth(), kd.getUTCDate())) / 864e5);
+    const dayLbl = dd === 1 ? "내일 " : dd === -1 ? "어제 " : dd ? `${base.m + 1}/${base.d} ` : "";
+    $("cmRange").textContent = dayLbl + (st.mode === "go" ? `${fmt((base.min + 1410) % 1440)} ~ ${fmt((base.min + 30) % 1440)}` : `${fmt(base.min)} ~ ${fmt((base.min + 60) % 1440)}`);
     $("cmFollow").textContent = follow ? "지금" : "직접";
     $("cmFollow").className = "cm-mode-t" + (follow ? "" : " set");
     $("cmRefresh").hidden = follow;
@@ -5946,8 +5999,13 @@ window.UID = (() => {
       }
       $("cmStop").disabled = !one;
       $("cmBusNote").textContent = one ? (bs ? "" : "이 노선은 실시간 도착 정보가 없습니다 (서울·경기·인천 노선만 지원). 노선 정보와 첫차·막차를 보여 줍니다.") : q() ? (hits.length ? `일치하는 노선 ${hits.length}개 — 번호를 정확히 넣어 주세요: ${hits.slice(0, 8).map((r) => split(r.n)[0]).join(", ")}` : "일치하는 공항버스 노선이 없습니다.") : "타는 공항버스 번호를 넣어 주세요 (예: 6001).";
-      $("cmBusList").innerHTML = one ? (bs ? `<div class="cm-rt rt" id="cmRt">${rtHtml()}</div>` : "") + routeCard(one, "go") : "";
-      if (bs) rtFetch();
+      const g = one && goSched(one);
+      let gh = "";
+      if (g) gh = `<div class="cm-rt rt go" id="cmGo">${goHtml(g)}</div>`;
+      else if (one && !isNow()) gh = `<div class="cm-rt rt"><div class="cm-note">이 노선은 공항행 정류장별 시간표가 없어, 실시간 도착('지금' 기준)과 첫차·막차만 볼 수 있습니다.${one.toaw ? ` 공항행 첫차 <b>${fmt(hm(one.toaw[0]))}</b> · 막차 <b>${fmt(hm(one.toaw[1]))}</b>` : ""}</div></div>`;
+      const rt = bs && isNow();                          // 실시간 도착은 '지금' 기준일 때만 (시각을 바꾸면 시간표만)
+      $("cmBusList").innerHTML = one ? gh + (rt ? `<div class="cm-rt rt" id="cmRt">${rtHtml()}</div>` : "") + routeCard(one, "go") : "";
+      if (rt) rtFetch();
       return;
     }
     const term = st.mode, deps = departures(term);
@@ -5959,13 +6017,19 @@ window.UID = (() => {
     $("cmBusList").innerHTML = h;
   }
   $("cmMode").addEventListener("click", (e) => { const b = e.target.closest("button[data-cm]"); if (!b) return; st.mode = b.dataset.cm; showAll = false; save(); paint(); });
-  $("cmStop").addEventListener("change", () => { if (st.mode !== "go" || !rtRoute) return; st.gs = Object.assign(st.gs || {}, { [rtRoute.n]: $("cmStop").value }); save(); rtData = null; rtFetch(true); });
+  $("cmStop").addEventListener("change", () => { if (st.mode !== "go" || !rtRoute) return; st.gs = Object.assign(st.gs || {}, { [rtRoute.n]: $("cmStop").value }); save(); rtData = null; paint(); });
   setInterval(() => { if (document.body.dataset.tab === "cm" && st.mode === "go" && !document.hidden && rtSel()) rtFetch(); }, 30000);   // 실시간 도착 30초마다
   window.addEventListener("online", () => rtFetch(true)); window.addEventListener("offline", rtPaint);
   $("cmArea").addEventListener("click", (e) => { const b = e.target.closest("button[data-a]"); if (!b) return; st.area = b.dataset.a; showAll = false; save(); paint(); });
   $("cmBus").addEventListener("input", () => { st.bus = $("cmBus").value; showAll = false; save(); paint(); });
   $("cmBusList").addEventListener("click", (e) => { if (e.target.id === "cmMore") { showAll = true; paint(); } });
-  $("cmTime").addEventListener("change", () => { const v = $("cmTime").value; if (/^\d{2}:\d{2}$/.test(v)) { base.min = +v.slice(0, 2) * 60 + +v.slice(3); follow = false; paint(); } });
+  // 시각을 직접 넣을 때: 지금보다 30분 넘게 앞선 시각이면 내일로 봄 (예: 밤 21:30에 08:00 → 내일 아침)
+  $("cmTime").addEventListener("change", () => {
+    const v = $("cmTime").value; if (!/^\d{2}:\d{2}$/.test(v)) return;
+    const k = kst(), nowMin = k.getUTCHours() * 60 + k.getUTCMinutes(), m = +v.slice(0, 2) * 60 + +v.slice(3);
+    const d = new Date(Date.UTC(k.getUTCFullYear(), k.getUTCMonth(), k.getUTCDate() + (m < nowMin - 30 ? 1 : 0)));
+    base = { y: d.getUTCFullYear(), m: d.getUTCMonth(), d: d.getUTCDate(), min: m }; follow = false; paint();
+  });
   $("cmDay").addEventListener("click", () => { const auto = isWeekend(base.y, base.m, base.d) ? "we" : "wd"; st.day = st.day ? "" : (auto === "we" ? "wd" : "we"); save(); paint(); });   // 공휴일이면 눌러서 주말 시간표로
   $("cmRefresh").addEventListener("click", () => { setNow(); paint(); });
   document.querySelectorAll("#panel-cm [data-shift]").forEach((b) => b.addEventListener("click", () => {

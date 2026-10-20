@@ -1,0 +1,1156 @@
+200 https://www.sunjinexpress.com text/html; charset=UTF-8
+<!DOCTYPE html>
+<html lang="ko" id="no-fouc">
+<head>
+<title>선진고속 주식회사</title>
+
+<!-- creatorlink-gabia : gcp-creatorlink  -->
+<link rel="dns-prefetch" href="//www.sunjinexpress.com">
+
+<link rel="preconnect" href="//fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://ajax.googleapis.com">
+<link rel="preconnect" href="https://lh3.googleusercontent.com" crossorigin>
+<link rel="preconnect" href="https://storage.googleapis.com" crossorigin>
+<link rel="preload" as="script" href="https://ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js" crossorigin="anonymous">
+
+<link rel="dns-prefetch" href="//storage.googleapis.com">
+<link rel="dns-prefetch" href="//connect.facebook.net">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+<link rel="dns-prefetch" href="//googleads.g.doubleclick.net">
+
+
+<meta charset="utf-8">
+<!-- user meta tag start -->
+<META name='author' content='선진고속(주)'/><META name='title' content='선진고속 주식회사'/><META name='description' content='선진고속 주식회사에 오신것을 환영합니다. 회사소개, 공항버스 및 시외버스 운행정보, 고객의소리 등 안내.'/><META name='keywords' content='공항버스,시외버스,선진고속,7000번,7001번,7002번,700번,700-1번,8467번,8414번,8851번,8821번,737번,운행정보,고객의소리'/><META name='google-site-verification' content='idj_KSe-F2YndwzhQZjXREYb2i-R25gBpbw6F6QE8TI'/><META name='google' content=''/><META name='naver-site-verification' content='33323fc23ed8fe1a2baa51ff0154b3b767bcb8bd'/><!-- user meta tag end -->
+
+<meta property="og:type" content="website" data-dynamic="true"/>
+<meta property="og:title" content="선진고속 주식회사" data-dynamic="true"/>
+<meta property="og:description" content="선진고속 주식회사에 오신것을 환영합니다. 회사소개, 공항버스 및 시외버스 운행정보, 고객의소리 등 안내." data-dynamic="true"/>
+<meta property="og:url" content="https://sunjinexpress.com" data-dynamic="true"/>
+<meta property="og:image" content="//storage.googleapis.com/cr-resource/image/c939d3102c0eb3fa89386cd42b7fff3d/1153404/1153404-screen-thumb.png?_1792458936" data-dynamic="true"/>
+
+
+<meta property="twitter:card" content="summary_large_image" data-dynamic="true"/>
+<meta property="twitter:domain" content="www.sunjinexpress.com" data-dynamic="true"/>
+<meta property="twitter:url" content="https://sunjinexpress.com" data-dynamic="true"/>
+<meta property="twitter:title" content="선진고속 주식회사" data-dynamic="true"/>
+<meta property="twitter:description" content="선진고속 주식회사에 오신것을 환영합니다. 회사소개, 공항버스 및 시외버스 운행정보, 고객의소리 등 안내." data-dynamic="true"/>
+<meta property="twitter:image" content="//storage.googleapis.com/cr-resource/image/c939d3102c0eb3fa89386cd42b7fff3d/1153404/1153404-screen-thumb.png?_1792458936" data-dynamic="true"/>
+
+<meta name="googlebot" content="archive" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<META http-equiv="Expires" content="-1" />
+<META http-equiv="Pragma" content="no-cache" />
+<META http-equiv="Cache-Control" content="No-Cache" />
+<META http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<META name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="canonical" href="https://sunjinexpress.com/">
+<link rel="icon" href="//storage.googleapis.com/cr-resource/image/c939d3102c0eb3fa89386cd42b7fff3d/1153404/1153404-favicon.ico?_1606700459" id="dynamic-favicon" type="image/x-icon" />
+<link rel="shortcut icon" href="//storage.googleapis.com/cr-resource/image/c939d3102c0eb3fa89386cd42b7fff3d/1153404/1153404-favicon.ico?_1606700459" id="user-favicon" type="image/x-icon" />
+<link rel="apple-touch-icon" href="//storage.googleapis.com/cr-resource/image/c939d3102c0eb3fa89386cd42b7fff3d/1153404/1153404-favicon.ico?_1606700459"/>
+<link rel="apple-touch-icon-precomposed" sizes="128x128" href="//storage.googleapis.com/cr-resource/image/c939d3102c0eb3fa89386cd42b7fff3d/1153404/1153404-favicon.ico?_1606700459">
+<meta name="mobile-web-app-capable" content="yes">
+
+ 
+
+<link rel="stylesheet" href="/css/coloris.1791261837.css" type="text/css"/>
+<link rel="stylesheet" href="/css/bootstrap.1784510472.css" type="text/css"/>
+<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css"/>
+<link rel="stylesheet" href="/css/cl_icons.css?_20211022" type="text/css"/>
+ 
+<link rel="stylesheet" href="/css/blueimp-gallery.1772002964.css" type="text/css"/>
+<link rel="stylesheet" href="/css/keyframe.1692755590.css" type="text/css"/>
+<link rel="stylesheet" href="/css/forum.1792455545.css" type="text/css"/>
+<link rel="stylesheet" href="/css/common.1792370890.css" type="text/css"/> 
+<link rel="stylesheet" href="/css/bootstrap-select.1661918750.css" type="text/css"/>
+
+<!--[if IE 6]>
+<style type="text/css">
+html { filter: expression(document.execCommand('BackgroundImageCache', false, true)); }
+</style>
+<![endif]-->
+
+
+
+
+<script type="text/javascript">
+	
+	var this_page = '홈';
+	if(this_page == '' || this_page == 'dashboard' || this_page == 'shoppingevent' || this_page == 'shoppingevent2') {
+		var abtest = ('' == '1')  ? 'true' : 'false';
+	}
+</script>
+<script type="text/javascript">
+//<![CDATA[
+var rt_path = '';
+var rt_charset = 'UTF-8';
+var rt_admin = '';
+var rt_service = 'cr';
+//]]>
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery-1.11.2.min.1783320595.js"><\/script>');</script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script>window.jQuery && window.jQuery.ui || document.write('<script src="/js/jquery-ui-1.10.4.min.1783320595.js"><\/script>');</script>
+<script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+<script type="text/javascript" src="/js/block/index.global.min.1772002964.js"></script>
+<script type="text/javascript" src="/js/coloris.1792038708.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@6.1.11/index.global.min.js"></script>
+<script type="text/javascript" src="/js/output.1772002964.js"></script>
+<script type="text/javascript" src="/js/block/common.1792383761.js"></script>
+<script type="text/javascript" src="/js/common.1791879907.js"></script>
+<script type="text/javascript" src="/js/module/ModalPlugin.1792376635.js"></script>
+<script type="text/javascript" src="/js/lang.1792455545.js" ></script>
+<script type="text/javascript" src="/js/jquery.ui.touch-punch-0.2.3.min.1622184802.js" ></script>
+<script type="text/javascript" src="/js/robots.1785394937.js"></script>
+
+
+
+ 
+
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js" integrity="sha384-6MFdIr0zOira1CHQkedUqJVql0YtcZA1P0nbPrQYJXVJZUkTk/oX4U9GhUIs3/z8" crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript" src="/js/bootstrap-select.1631076146.js"></script>
+
+<!-- use for contact block -->
+<link rel="stylesheet" href="/css/bootstrap.slider.css" type="text/css"/>
+<script type="text/javascript" src="/js/bootstrap.slider.js?2"></script>
+
+
+<link rel="stylesheet" href="/css/bootstrap-override.1792038708.css">
+
+
+<script>
+</script>
+
+
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/js/html5shiv.js"></script>
+<![endif]-->
+
+<script type="text/javascript">
+  //<![CDATA[
+			var LANG = 'ko';
+	
+	var WebFontConfig = {
+		google: {
+			families: ['Lato:400,400i','Lora:400,400i','Nanum+Gothic','Noto+Sans+KR:100,300,400,500,700,900','Noto+Sans:400,400i','Open+Sans:100,400,400i','Oswald:400','Playfair+Display:400,400i','Raleway:400,400i'],
+			display: 'swap'
+		}
+	};
+
+	(function() {
+		var wf = document.createElement('script');
+		wf.src = (document.location.protocol === 'https:' ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js';
+		wf.type = 'text/javascript';
+		wf.async = true;
+		wf.crossOrigin = 'anonymous';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(wf, s);
+	})();
+    //]]>
+</script>
+
+
+ 
+
+
+</head>
+
+<body class="pace-disable ">
+ 
+<!--  -->
+<style id="loadfonts">@font-face{font-family:'Noto Sans KR';font-style: normal;font-weight: 100;src: url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-100.woff2) format('woff2'),url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-100.woff) format('woff'),url(//cdn.jsdelivr.net/npm/@noonnu/noto-sans-kr@0.1.0/fonts/noto-sans-kr-100.otf) format('opentype');}@font-face{font-family:'Noto Sans KR';font-style: normal;font-weight: 300;src: url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-300.woff2) format('woff2'),rl(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-300.woff) format('woff'),rl(//cdn.jsdelivr.net/npm/@noonnu/noto-sans-kr@0.1.0/fonts/noto-sans-kr-300.otf) format('opentype');}@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 400; src: url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-400.woff2) format('woff2'),url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-400.woff) format('woff'),url(//cdn.jsdelivr.net/npm/@noonnu/noto-sans-kr@0.1.0/fonts/noto-sans-kr-400.otf) format('opentype');}@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 500; src: url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-500.woff2) format('woff2'),url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-500.woff) format('woff'),url(//cdn.jsdelivr.net/npm/@noonnu/noto-sans-kr@0.1.0/fonts/noto-sans-kr-500.otf) format('opentype');}@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 700; src: url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-700.woff) format('woff2'),url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-700.woff) format('woff'),url(//cdn.jsdelivr.net/npm/@noonnu/noto-sans-kr@0.1.0/fonts/noto-sans-kr-700.otf) format('opentype'); }@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 900; src: url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-900.woff2) format('woff2'),url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-900.woff) format('woff'),url(//cdn.jsdelivr.net/npm/@noonnu/noto-sans-kr@0.1.0/fonts/noto-sans-kr-900.otf) format('opentype'); }@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr6DRAW_0.woff2') format('woff2');unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr4TRAW_0.woff2') format('woff2');unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr5DRAW_0.woff2') format('woff2');unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr6TRAW_0.woff2') format('woff2');unicode-range: U+1F00-1FFF;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr5jRAW_0.woff2') format('woff2');unicode-range: U+0370-03FF;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr6jRAW_0.woff2') format('woff2');unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr6zRAW_0.woff2') format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr5TRA.woff2') format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face {font-family:'Raleway';font-style: normal;font-weight: 400;src: local('Raleway'), local('Raleway-Regular'), url('https://fonts.gstatic.com/s/raleway/v12/1Ptug8zYS_SKggPNyCMIT5lu.woff2') format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face {font-family:'Raleway';font-style: normal;font-weight: 400;src: local('Raleway'), local('Raleway-Regular'), url('https://fonts.gstatic.com/s/raleway/v12/1Ptug8zYS_SKggPNyC0ITw.woff2') format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face {font-family:'Open Sans';font-style: normal;font-weight: 400;src: local('Open Sans Regular'), local('OpenSans-Regular'), url('https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFWJ0bbck.woff2') format('woff2');unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}@font-face {font-family:'Open Sans';font-style: normal;font-weight: 400;src: local('Open Sans Regular'), local('OpenSans-Regular'), url('https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFUZ0bbck.woff2') format('woff2');unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face {font-family:'Open Sans';font-style: normal;font-weight: 400;src: local('Open Sans Regular'), local('OpenSans-Regular'), url('https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFWZ0bbck.woff2') format('woff2');unicode-range: U+1F00-1FFF;}@font-face {font-family:'Open Sans';font-style: normal;font-weight: 400;src: local('Open Sans Regular'), local('OpenSans-Regular'), url('https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFVp0bbck.woff2') format('woff2');unicode-range: U+0370-03FF;}@font-face {font-family:'Open Sans';font-style: normal;font-weight: 400;src: local('Open Sans Regular'), local('OpenSans-Regular'), url('https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFWp0bbck.woff2') format('woff2');unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;}@font-face {font-family:'Open Sans';font-style: normal;font-weight: 400;src: local('Open Sans Regular'), local('OpenSans-Regular'), url('https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFW50bbck.woff2') format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face {font-family:'Open Sans';font-style: normal;font-weight: 400;src: local('Open Sans Regular'), local('OpenSans-Regular'), url('https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFVZ0b.woff2') format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face {font-family:'Lora';font-style: normal;font-weight: 400;src: local('Lora Regular'), local('Lora-Regular'), url('https://fonts.gstatic.com/s/lora/v12/0QIvMX1D_JOuMwf7I-NP.woff2') format('woff2');unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}@font-face {font-family:'Lora';font-style: normal;font-weight: 400;src: local('Lora Regular'), local('Lora-Regular'), url('https://fonts.gstatic.com/s/lora/v12/0QIvMX1D_JOuMw77I-NP.woff2') format('woff2');unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face {font-family:'Lora';font-style: normal;font-weight: 400;src: local('Lora Regular'), local('Lora-Regular'), url('https://fonts.gstatic.com/s/lora/v12/0QIvMX1D_JOuMwX7I-NP.woff2') format('woff2');unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;}@font-face {font-family:'Lora';font-style: normal;font-weight: 400;src: local('Lora Regular'), local('Lora-Regular'), url('https://fonts.gstatic.com/s/lora/v12/0QIvMX1D_JOuMwT7I-NP.woff2') format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face {font-family:'Lora';font-style: normal;font-weight: 400;src: local('Lora Regular'), local('Lora-Regular'), url('https://fonts.gstatic.com/s/lora/v12/0QIvMX1D_JOuMwr7Iw.woff2') format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face {font-family:'Lato';font-style: normal;font-weight: 400;src: local('Lato Regular'), local('Lato-Regular'), url('https://fonts.gstatic.com/s/lato/v14/S6uyw4BMUTPHjxAwXjeu.woff2') format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face {font-family:'Lato';font-style: normal;font-weight: 400;src: local('Lato Regular'), local('Lato-Regular'), url('https://fonts.gstatic.com/s/lato/v14/S6uyw4BMUTPHjx4wXg.woff2') format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face {font-family:'Nanum Square Round';src:url('//storage.googleapis.com/cr-resource/fonts/NanumSquareRoundR.eot?#iefix') format('embedded-opentype'),url('//storage.googleapis.com/cr-resource/fonts/NanumSquareRoundR.woff2') format('woff2'),url('//storage.googleapis.com/cr-resource/fonts/NanumSquareRoundR.woff') format('woff'),url('//storage.googleapis.com/cr-resource/fonts/NanumSquareRoundR.ttf') format('truetype');font-style: normal;font-weight: normal;}@font-face {font-family:'Playfair Display';font-style: normal;font-weight: 400;src: local('Playfair Display Regular'), local('PlayfairDisplay-Regular'), url('https://fonts.gstatic.com/s/playfairdisplay/v13/nuFiD-vYSZviVYUb_rj3ij__anPXDTjYgFE_.woff2') format('woff2');unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face {font-family:'Playfair Display';font-style: normal;font-weight: 400;src: local('Playfair Display Regular'), local('PlayfairDisplay-Regular'), url('https://fonts.gstatic.com/s/playfairdisplay/v13/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2') format('woff2');unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;}@font-face {font-family:'Playfair Display';font-style: normal;font-weight: 400;src: local('Playfair Display Regular'), local('PlayfairDisplay-Regular'), url('https://fonts.gstatic.com/s/playfairdisplay/v13/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2') format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face {font-family:'Playfair Display';font-style: normal;font-weight: 400;src: local('Playfair Display Regular'), local('PlayfairDisplay-Regular'), url('https://fonts.gstatic.com/s/playfairdisplay/v13/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2') format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face {font-family:'Iropke Batang';src:url('//storage.googleapis.com/cr-resource/fonts/IropkeBatangM.eot?#iefix') format('embedded-opentype'),url('//storage.googleapis.com/cr-resource/fonts/IropkeBatangM.woff') format('woff'),url('//storage.googleapis.com/cr-resource/fonts/IropkeBatangM.ttf') format('truetype');font-style: normal;font-weight: normal;}@font-face{font-family:'Nanum Barun Gothic';font-style:normal;font-weight:700;src:url(//storage.googleapis.com/cr-resource/fonts/NanumBarunGothic-Bold.eot?#iefix) format('embedded-opentype'),url(//storage.googleapis.com/cr-resource/fonts/NanumBarunGothic-Bold.woff) format('woff'),url(//storage.googleapis.com/cr-resource/fonts/NanumBarunGothic-Bold.ttf) format('truetype')}@font-face{font-family:'Nanum Barun Gothic';font-style:normal;font-weight:400;src:url(//storage.googleapis.com/cr-resource/fonts/NanumBarunGothic-Regular.eot?#iefix) format('embedded-opentype'),url(//storage.googleapis.com/cr-resource/fonts/NanumBarunGothic-Regular.woff) format('woff'),url(//storage.googleapis.com/cr-resource/fonts/NanumBarunGothic-Regular.ttf) format('truetype');}@font-face{font-family:'Nanum Barun Gothic';font-style:normal;font-weight:100;src:url(//storage.googleapis.com/cr-resource/fonts/NanumBarunGothic-Light.eot?#iefix) format('embedded-opentype'),url(//storage.googleapis.com/cr-resource/fonts/NanumBarunGothic-Light.woff) format('woff'),url(//storage.googleapis.com/cr-resource/fonts/NanumBarunGothic-Light.ttf) format('truetype');}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr6DRAW_0.woff2') format('woff2');unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr4TRAW_0.woff2') format('woff2');unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr5DRAW_0.woff2') format('woff2');unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr6TRAW_0.woff2') format('woff2');unicode-range: U+1F00-1FFF;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr5jRAW_0.woff2') format('woff2');unicode-range: U+0370-03FF;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr6jRAW_0.woff2') format('woff2');unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr6zRAW_0.woff2') format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https://fonts.gstatic.com/s/notosans/v7/o-0IIpQlx3QUlC5A4PNr5TRA.woff2') format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Noto Sans KR';font-style: normal;font-weight: 100;src: url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-100.woff2) format('woff2'),url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-100.woff) format('woff'),url(//cdn.jsdelivr.net/npm/@noonnu/noto-sans-kr@0.1.0/fonts/noto-sans-kr-100.otf) format('opentype');}@font-face{font-family:'Noto Sans KR';font-style: normal;font-weight: 300;src: url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-300.woff2) format('woff2'),rl(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-300.woff) format('woff'),rl(//cdn.jsdelivr.net/npm/@noonnu/noto-sans-kr@0.1.0/fonts/noto-sans-kr-300.otf) format('opentype');}@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 400; src: url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-400.woff2) format('woff2'),url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-400.woff) format('woff'),url(//cdn.jsdelivr.net/npm/@noonnu/noto-sans-kr@0.1.0/fonts/noto-sans-kr-400.otf) format('opentype');}@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 500; src: url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-500.woff2) format('woff2'),url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-500.woff) format('woff'),url(//cdn.jsdelivr.net/npm/@noonnu/noto-sans-kr@0.1.0/fonts/noto-sans-kr-500.otf) format('opentype');}@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 700; src: url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-700.woff) format('woff2'),url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-700.woff) format('woff'),url(//cdn.jsdelivr.net/npm/@noonnu/noto-sans-kr@0.1.0/fonts/noto-sans-kr-700.otf) format('opentype'); }@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 900; src: url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-900.woff2) format('woff2'),url(//cdn.jsdelivr.net/npm/@openfonts/noto-sans-kr_korean@1.44.1/files/noto-sans-kr-korean-900.woff) format('woff'),url(//cdn.jsdelivr.net/npm/@noonnu/noto-sans-kr@0.1.0/fonts/noto-sans-kr-900.otf) format('opentype'); }@font-face {font-family: 'Oswald'; font-style: normal; font-weight: 400; src: local('Oswald Regular'), local('Oswald-Regular'), url('https://fonts.gstatic.com/s/oswald/v16/TK3iWkUHHAIjg752HT8Ghe4.woff2') format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face { font-family: 'Oswald'; font-style: normal; font-weight: 400; src: local('Oswald Regular'), local('Oswald-Regular'), url('https://fonts.gstatic.com/s/oswald/v16/TK3iWkUHHAIjg752Fj8Ghe4.woff2') format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;}@font-face { font-family: 'Oswald'; font-style: normal; font-weight: 400; src: local('Oswald Regular'), local('Oswald-Regular'), url('https://fonts.gstatic.com/s/oswald/v16/TK3iWkUHHAIjg752Fz8Ghe4.woff2') format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face { font-family: 'Oswald'; font-style: normal; font-weight: 400; src: local('Oswald Regular'), local('Oswald-Regular'), url('https://fonts.gstatic.com/s/oswald/v16/TK3iWkUHHAIjg752GT8G.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}</style>
+<style>
+	html:not(._scroll) body:not(.modal-open) { overflow: auto; }
+	html:not(._scroll) .dsgn-body { height:100%; }
+	.fixed { right:0; }
+	.flat-modal .modal { overflow-y:auto; }
+	</style>
+<style id="dsgn-body">body{background-color:#ffffff;font-family:'Lora';color:#8a8b8e;}</style>
+<link id="cl_shopping" rel="stylesheet" href="/css/cl_shopping.1791261837.css" type="text/css"/>
+<link class="loadCss-aos" rel="stylesheet" href="/css/aos.1622184802.css" type="text/css"/>
+<link rel="stylesheet" href="/css/block/menu.1786583443.css" type="text/css"/>
+<link rel="stylesheet" href="/css/block/tabmenu.1791855006.css" type="text/css"/>
+<link rel="stylesheet" href="/css/block_gallery.1791855006.css" type="text/css"/>
+<link rel="stylesheet" href="/css/block/gallery.1772002964.css" type="text/css"/>
+<link rel="stylesheet" href="/js/swiper/css/swiper.min.css" type="text/css"/>
+<link rel="stylesheet" href="/css/calendar.1772002964.css" type="text/css"/>
+<link rel="stylesheet" href="/css/bootstrap-datetimepicker.css">
+
+
+<script>var UFONTS = ["en","ko"];</script>
+<script type="text/javascript" class="loadScript-aos" src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script type="text/javascript">
+	$('input[class^="loadScript-"]').remove();
+	var script_preloading = loadingScript(JSON.parse('[]'));
+	// script_preloading.done(function() {
+	// 	console.log('site script END');
+	// });
+</script>
+
+<script type="text/javascript" src="/js/history.1622184802.js"></script>
+<script type="text/javascript" src="/js/pace.1622184802.js"></script>
+<script type="text/javascript" src="/js/flickity-2.3.0.pkgd.min.1663115097.js"></script>
+<script type="text/javascript" src="/js/jquery.fileupload.js"></script>
+	<script type="text/javascript" src="/js/jplayer.1692755590.js"></script>
+<script type="text/javascript" src="/js/playlists.1622184802.js"></script>
+	
+<script type="text/javascript" src="/js/jquery_fitvids.1772002964.js"></script>
+<script type="text/javascript" src="/js/jquery.scrollto.js"></script>
+<script type="text/javascript" src="/js/imagesloaded.pkgd.min.js"></script>
+<script type="text/javascript" src="/js/masonry.pkgd.min.js"></script>
+<script type="text/javascript" src="/js/jquery.cssjson.js"></script>
+<script type="text/javascript" src="/js/jquery-blueimp-gallery-min.1780554494.js"></script>
+<script type="text/javascript" src="/js/render.1792376635.js"></script>
+<script type="text/javascript" src="/js/style.1782969919.js"></script>
+<script type="text/javascript" src="/js/member_config.1791261837.js"></script>
+<script type="text/javascript" src="/js/block/menu.1792376634.js"></script>
+<script type="text/javascript" src="/js/block/tabmenu.1791855006.js"></script>
+<script type="text/javascript" src="/js/block/textcount.1791261837.js"></script>
+<script type="text/javascript" src="/js/block/gallery.1791261837.js"></script>
+<script type="text/javascript" src="/js/block/gallery_fixedscroll.1772002964.js"></script>
+<script type="text/javascript" src="/js/block/swiper-bundle.min.1692755590.js"></script>
+<script type="text/javascript" src="/js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="/js/slick.1.8.1.min.js"></script>
+<script type="text/javascript" src="/js/block/slick.1780554494.js"></script>
+<script type="text/javascript" src="/js/block/TweenMax.min.js"></script>
+<script type="text/javascript" src="/js/block/draggabilly.pkgd.min.js"></script>
+<script type="text/javascript" src="/js/block/gallery_touchslider.1772002964.js"></script>
+
+<script type="text/javascript" src="/js/block/gsap.min.js"></script>
+<script type="text/javascript" src="/js/block/ScrollTrigger.min.js"></script>
+
+<link rel="stylesheet" href="/js/swiper/css/swiper.min.css">
+
+<script type="text/javascript" src="/js/jquery.fileupload.js" class="loadScript-jqueryFileupload"></script>
+<script id='forms_js' src="/js/module/forms.1787212715.js"></script>
+<script id='datepicker_js' src='/js/module/datepicker.js'></script>
+<link href='/css/datepicker.css' rel='stylesheet' />
+<script id='datepickk_js' src='/js/datepickk/datepickk.js'></script>
+<link href='/css/datepickk.css' rel='stylesheet' />
+<style id="dsgn-body">
+	:root { --site-theme-color: ; }
+</style>
+<style id="page-loading-css">
+	.dsgn-body header,
+	.dsgn-body .header.el-menu,
+	.dsgn-body header,
+	.dsgn-body #mobile-nav,
+	.dsgn-body #mobile-nav * { opacity: 0; } 
+</style>
+
+
+<div class="dsgn-body ">
+    <style id="menu-1153404">.menu-1153404{--menu-fname:Nanum Square Round;--menu-fsize:17px;--menu-flineheight:320;--menu-color:#979797;--menu-color-hover:#000;--menu-color-active:#000;--menu-bgcolor:#fff;--menu-bgcolor-hover:#fff;--menu-bgcolor-active:#fff;--menu-toggle-color:#000;--menu-toggle-bgcolor:transparent;--sub-menu-fname:Nanum Square Round;--sub-menu-fsize:17px;--sub-menu-flineheight:140;--sub-menu-color:#979797;--sub-menu-color-hover:#000;--sub-menu-color-active:#000;--sub-menu-bgcolor:#fff;--sub-menu-bgcolor-hover:#fff;--sub-menu-bgcolor-active:#fff;--fixed-menu-color:#979797;--fixed-menu-color2:rgba(151,151,151, 0.2);--fixed-menu-color-alpha:0.2;--fixed-menu-color-hover:#000;--fixed-menu-color-hover2:rgba(0,0,0,0.2);--fixed-menu-color-hover-alpha:0.2;--fixed-menu-point:#ee445f;--block-bgcolor:#fff;background-color:#fff;padding:24px 0px 24px 0px;background-image:none;background-repeat:no-repeat;background-position:center center;background-size:cover;color:#000000;font-family:Lora,"Noto sans","Noto sans kr";font-size:13px;}.menu-1153404 .container.full-width{padding:0 30px;}.menu-1153404 #tpl-logo-img{height:37px;}.menu-1153404 #tpl-logo-text{font-family:'Lato', 'Nanum Gothic';color:#000000;font-size:22px;line-height:160%;}.menu-1153404 ul.navbar-nav > li > a{padding:0 25px;}.menu-1153404 ul.dropdown-menu > li > a{padding:10px 25px;}.menu-1153404 ul.navbar-nav > li  > a:after{content:'';position:absolute;bottom:0;left:50%;width:12px;height:2px;display:inline-block;background-clip:content-box;background-color:transparent;-webkit-transform:translateX(-50%);-moz-transform:translateX(-50%);-ms-transform:translateX(-50%);-o-transform:translateX(-50%);transform:translateX(-50%);-webkit-transition:all 0.3s;-moz-transition:all 0.3s;-ms-transition:all 0.3s;-o-transition:all 0.3s;transition:all 0.3s;}.menu-1153404 ul.navbar-nav > li > a:hover:after, 
+.menu-1153404 ul.navbar-nav > li:hover > a:after{background-color:var(--menu-color-hover);}.menu-1153404 ul.navbar-nav > li.active > a:after{background-color:var(--menu-color-active);}.menu-1153404 #fixed-menu > li > a:after{display:none;}.menu-1153404 .fh-line{border-color:transparent;}.menu-1153404[data-fixtype][data-fixtextalign="left"] .container #tpl-menu{justify-content:flex-start;}.menu-1153404[data-fixtype][data-fixtextalign="center"] .container #tpl-menu{justify-content:center;}.menu-1153404[data-fixtype][data-fixtextalign="right"] .container #tpl-menu{justify-content:flex-end;}@media (min-width: 769px){.menu-1153404[data-fixtype] #tpl-menu{display:flex !important;flex-wrap:wrap;-moz-flex-wrap:wrap;-ms-flex-wrap:wrap;}.menu-1153404 ul.dropdown-menu > li > a{text-align:left;}}@media (min-width: 1200px){.menu-1153404[data-fixtype][data-fh-type="top"] .container.fh-container{padding:0 55px 15px;}.menu-1153404[data-fixtype][data-fh-type="top"] .container.full-width.fh-container{padding:0 70px 15px;}}@media (max-width: 768px){.menu-1153404{min-height:70px;}.menu-1153404 ul.navbar-nav > li > a,
+    .menu-1153404 > .container .navbar-brand{line-height:70px;}.menu-1153404 .navbar-brand img{max-height:60px;}.menu-1153404 ul.navbar-nav > li  > a:after{display:none;}}</style><div class="header el-menu _ready" data-el="el-menu" data-id="menu" data-name="menu"><header role="navigation" data-fh-type="top" data-fixtype="top_08" data-fixlangtype="lang_02" data-fixsize="sm" data-fixtextalign="center" data-fixon="um" class="menu-1153404 navbar navbar-fheader navbar-fixed-top navbar-li">
+    <input type="hidden" class="cl-menu-normal">																																																																	
+    <div class="container" data-fh-align="center">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-target="#mobile-nav">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/config" id="site-home" data-recommend="200 X 90">
+                <img src="https://lh3.googleusercontent.com/2JaIZuAitx8fr3LTNjJBmxeokDq21mJKX1kHFSITp8Yzb4MF9kRoCMivxxb3llq-1J6gEiU8OtOGuGUWDAmDDyrED-LwefmdGCQpU0Io" data-attach="true" id="tpl-logo-img" class="" alt="">
+                <span id="tpl-logo-text" class="hide" data-selector="#tpl-logo-text">선진고속(주)</span>
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-menu-1153404">
+            <ul class="nav navbar-nav hide preloading" id="tpl-menu">
+<li class="active"><a href="/%ED%99%88">홈</a></li>
+<li><a href="/%ED%9A%8C%EC%82%AC-%EC%86%8C%EA%B0%9C">회사 소개</a></li>
+<li><a href="/%EC%B1%84%EC%9A%A9-%EC%A0%95%EB%B3%B4" target="_blank">채용 정보</a></li>
+<li class="dropdown">
+<a href="@2069447" class="dropdown-toggle" attr-bookmark="2069447">운행 정보 <i class="fa fa-caret-down fa-1" aria-hidden="true"></i></a><ul class="dropdown-menu">
+<li><a href="/%EC%9A%B4%ED%96%89%EC%8B%9C%EA%B0%84">운행시간</a></li>
+<li><a href="/%EC%9A%B4%ED%96%89%EC%9A%94%EA%B8%88">운행요금</a></li>
+<li><a href="/%EC%9A%B4%EC%86%A1%EC%95%BD%EA%B4%80">운송약관</a></li>
+</ul>
+</li>
+<li class="dropdown">
+<a href="/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD" class="dropdown-toggle">고객의 소리 <i class="fa fa-caret-down fa-1" aria-hidden="true"></i></a><ul class="dropdown-menu">
+<li><a href="/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD">공지사항</a></li>
+<li><a href="/%EB%B6%84%EC%8B%A4%EB%AC%BC-%EA%B4%80%EB%A6%AC">분실물 관리</a></li>
+<li><a href="/%EC%86%8C%EC%A4%91%ED%95%9C-%EC%9D%98%EA%B2%AC">소중한 의견</a></li>
+</ul>
+</li>
+</ul>
+        </div>
+
+    </div>
+</header></div><style id="el_0css">.userEL1770119 {
+ position: relative;
+}
+.userEL1770119 .text {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ max-width: 1140px;
+ width: 100%;
+ text-align: center;
+ -ms-transform: translate(-50%,-50%);
+ -moz-transform: translate(-50%,-50%);
+ -o-transform: translate(-50%,-50%);
+ -webkit-transform: translate(-50%,-50%);
+ transform: translate(-50%,-50%);
+}
+.userEL1770119 h1.head_title {
+ font-family: 'Playfair Display';
+ font-size: inherit;
+ font-weight: normal;
+ color: #fff;
+ margin-top: 0;
+ margin-bottom: 20px;
+ white-space: normal;
+ word-wrap: break-word;
+}
+.userEL1770119 .bar {
+ width: 60px;
+ height: 1px;
+ margin: 30px auto 25px;
+ border: none;
+ border-top: 2px solid #c6aa94;
+}
+.userEL1770119 .carousel {
+ height: 870px;
+}
+.userEL1770119 .carousel-fade .fill {
+ width: 100%;
+ height: 870px;
+ background-size: cover;
+ background-position: center center;
+}
+.userEL1770119 .carousel .item {
+ background-color: #000;
+}
+.userEL1770119 .carousel .slides-filter {
+ position: absolute;
+ width: 100%;
+ height: 100%;
+}
+.userEL1770119 .carousel-indicators {
+ display: none;
+}
+.userEL1770119 .userEL1770119-bg1 {
+ background-image: url(https://lh3.googleusercontent.com/rDR2OEZFZ0jmmlX9WB1pcloKemTtxB3T13nR1YcX8iplSR-tDTF79KPJ-sIj6z3oH39M3157uni1otVFUHzeFahK6eKTQYgqt0rzeaBwj_gghKW9dd7KTA=w1920-h1440-n);
+}
+.userEL1770119 .userEL1770119-bg2 {
+ background-image: url(https://lh3.googleusercontent.com/h7qpFjQWkhexjxH0F8mAgmZYaB3W_rnUO4j_5ZVnVgWCJP_nzHjQk8ObJgyJaLuv1z6O3-GXLR3CFGCMBLBcVgqu1hNrbi39LDITV0b-Ig=w1920-h1407-n);
+}
+.userEL1770119 .userEL1770119-bg3 {
+ background-image: url('https://lh3.googleusercontent.com/Nc2kDl_Yyix18n8RAliX7fakxHfaHONH9CIHFiVdUnrxNAfFy8b2JXp-_6x7D0P1H3YsewKSD7y9gDuLvZuRAtazv2vNBfMewU5px-M=s0');
+}
+.userEL1770119 .carousel-fade .carousel-inner .item {
+ opacity: 0;
+ -webkit-transition-property: opacity;
+ -moz-transition-property: opacity;
+ -o-transition-property: opacity;
+ transition-property: opacity;
+}
+.userEL1770119 .carousel-fade .carousel-inner .active {
+ opacity: 1;
+}
+.userEL1770119 .carousel-fade .carousel-inner .active.left,
+.userEL1770119 .carousel-fade .carousel-inner .active.right {
+ left: 0;
+ opacity: 0;
+ z-index: 1;
+}
+.userEL1770119 .carousel-fade .carousel-inner .next.left,
+.userEL1770119 .carousel-fade .carousel-inner .prev.right {
+ opacity: 1;
+}
+.userEL1770119 .carousel-fade .carousel-control {
+ width: 50px;
+ z-index: 1;
+ text-shadow: none;
+ opacity: 1;
+}
+.userEL1770119 .carousel-fade,
+.userEL1770119 .carousel-fade .carousel-inner,
+.userEL1770119 .carousel-fade .item {
+ height: 870px;
+}
+.userEL1770119 .carousel-control i {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 50px;
+ line-height: 50px;
+ font-size: 22px;
+ color: #444;
+}
+.userEL1770119 .carousel-control.left,
+.userEL1770119 .carousel-control.right {
+ background: rgba(255, 255, 255, 0.4);
+}
+.userEL1770119 .carousel-control.right {
+ left: 50%;
+ right: auto;
+ background: rgba(255, 255, 255, 0.6);
+}
+.userEL1770119. control-box-wrap {
+ position: relative;
+ max-width: 1170px;
+ width: 100%;
+}
+.userEL1770119 .control-box {
+ position: absolute;
+ bottom: 0;
+ right: 0;
+ width: 100px;
+ display: inline-block;
+ height: 50px;
+ z-index: 3;
+ background-repeat: no-repeat;
+ background-size: cover;
+ background-position: center center;
+}
+@media only screen and (max-width: 1199px) {
+ .userEL1770119 .text {
+  max-width: 940px;
+ }
+}
+@media only screen and (max-width: 991px) {
+ .userEL1770119 .text {
+  max-width: 720px;
+ }
+ .userEL1770119 .carousel-fade,
+    .userEL1770119 .carousel-fade .carousel-inner,
+    .userEL1770119 .carousel-fade .fill,
+    .userEL1770119 .carousel-fade .item {
+  height: 500px;
+ }
+ .userEL1770119 .carousel-control {
+  width: 100px;
+ }
+ .userEL1770119 .carousel-control.right {
+  left: 50%;
+ }
+ .userEL1770119 h1.head_title {
+  margin-bottom: 16px;
+ }
+ .userEL1770119 .bar {
+  margin: 24px auto 20px;
+  width: 56px;
+ }
+ .userEL1770119 div.newtemp {
+  margin-top: 16px;
+ }
+}
+@media only screen and (max-width:767px) {
+ .userEL1770119 .text {
+  padding: 0 15px;
+ }
+ .userEL1770119 .carousel-fade,
+    .userEL1770119 .carousel-fade .carousel-inner,
+    .userEL1770119 .carousel-fade .fill,
+    .userEL1770119 .carousel-fade .item {
+  height: 500px;
+ }
+ .userEL1770119 .control-box {
+  height: 40px;
+  width: 80px;
+ }
+ .userEL1770119 .carousel-indicators {
+  bottom: 0;
+ }
+ .userEL1770119 .carousel-fade .carousel-control {
+  width: 40px;
+ }
+ .userEL1770119 .carousel-control i {
+  width: 40px;
+  line-height: 40px;
+ }
+ .userEL1770119 h1.head_title {
+  margin-bottom: 10px;
+ }
+ .userEL1770119 .bar {
+  margin: 15px auto 12.5px;
+  width: 40px;
+ }
+ .userEL1770119 div.newtemp {
+  margin-top: 10px;
+ }
+}
+@media only screen and (max-width: 480px) {
+ .userEL1770119 .carousel-fade,
+    .userEL1770119 .carousel-fade .carousel-inner,
+    .userEL1770119 .carousel-fade .fill,
+    .userEL1770119 .carousel-fade .item {
+  height: 500px;
+ }
+ .userEL1770119 .control-box {
+  width: 80px;
+ }
+}
+.userEL1770119 div.newtemp {
+ overflow: hidden;
+ color: #aaa;
+ margin-top: 20px;
+ margin-bottom: 0;
+ white-space: normal;
+ word-wrap: break-word;
+ display: -webkit-box;
+ -webkit-line-clamp: 4;
+ -webkit-box-orient: vertical;
+}
+</style><style id="el_1css">.userEL1847017 {
+ --gallery-figure-title-fname: Nanum Gothic;
+ --gallery-figure-title-color-alpha: rgba(69, 69, 69, 0.15);
+ --gallery-figure-title-color-alpha2: rgba(69, 69, 69, 0.5);
+ --gallery-figure-title-color: #454545;
+ padding: 20px 0px 20px 0px;
+ background-color: #fff;
+ background-image: none;
+ background-repeat: no-repeat;
+ background-position: center center;
+ background-size: cover;
+ color: ;
+ --btn-color: #454545;
+ --btn-bgcolor: #fff;
+ --btn-line: transparent;
+ --btn-color-hover: #454545;
+ --btn-bgcolor-hover: #fff;
+ --btn-line-hover: transparent;
+}
+.userEL1847017 .grid {
+ background-color: #ffffff;
+ background-image: none;
+ background-repeat: no-repeat;
+ background-position: center center;
+ background-size: cover;
+ background-clip: content-box;
+}
+.userEL1847017 figure:hover .g-img,
+.userEL1847017 figure:hover img {
+ -webkit-transition: all .3s ease-in-out;
+ -moz-transition: all .3s ease-in-out;
+ -ms-transition: all .3s ease-in-out;
+ -o-transition: all .3s ease-in-out;
+ transition: all .3s ease-in-out;
+ opacity: 0.4;
+}
+.userEL1847017 figcaption {
+ text-align: center;
+ padding: 11px 15px 9px;
+}
+.userEL1847017 .full-width figcaption {
+ padding: 13px 15px 11px;
+}
+.userEL1847017 figcaption .sh-pcolor {
+ color: #ee445f;
+}
+.userEL1847017 h5.figure {
+ font-family: Nanum Barun Gothic;
+ font-size: 12px;
+ color: #454545;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+ overflow: hidden;
+ display: block;
+ padding-bottom: 1px;
+ margin-top: 3px;
+ margin-bottom: 0;
+}
+.userEL1847017 figure:hover h5.figure {
+ text-decoration: underline;
+}
+.userEL1847017 .figure.price {
+ font-family: 'Noto Sans', 'Noto Sans KR';
+ font-size: 11px;
+ color: #5c5c5c;
+ margin-top: 3px;
+}
+.userEL1847017 p.figure {
+ font-family: 'Oswald', 'Nanum Gothic';
+ font-size: 11px;
+ color: #454545;
+ fill: #454545;
+ text-overflow: ellipsis;
+ overflow: hidden;
+ -webkit-line-clamp: 3;
+ -webkit-box-orient: vertical;
+ display: block;
+ display: -webkit-box;
+ word-wrap: break-word;
+ margin-top: 3px;
+ margin-bottom: 0;
+}
+.userEL1847017 .figure.review {
+ font-family: 'Noto Sans KR';
+ font-size: 13px;
+ text-align: left;
+ color: #454545;
+ float: left;
+ width: 70%;
+ margin-top: 3px;
+}
+.userEL1847017 .figure.like .figure-like-cnt {
+ color: #454545;
+}
+.userEL1847017 .figure.like > svg {
+ fill: #454545;
+}
+.userEL1847017 .figure.like.active .figure-like-cnt {
+ color: #ee445f;
+}
+.userEL1847017 .figure.like.active > svg,
+.userEL1847017 .figure.like.active > svg > path:first-child {
+ fill: #ee445f;
+}
+.userEL1847017 .figure.basket:not(.hide) {
+ padding-top: 25px!important;
+ padding-bottom: 0px!important;
+}
+.userEL1847017 .gallery-loadmore {
+ margin-top: 45px;
+ padding: 20px 15px;
+ min-width: 220px;
+ font-family: 'Oswald', 'Nanum Gothic';
+ font-size: 11px;
+ letter-spacing: 0.1em;
+ color: var(--btn-color);
+ background-color: var(--btn-bgcolor);
+ border: 1px solid transparent;
+ transition: ease-in-out 0.3s;
+ -o-transition: ease-in-out 0.3s;
+ -ms-transition: ease-in-out 0.3s;
+ -moz-transition: ease-in-out 0.3s;
+ -webkit-transition: ease-in-out 0.3s;
+ border-color: var(--btn-line);
+}
+.userEL1847017 .gallery-loadmore:hover {
+ color: var(--btn-color-hover);
+ background-color: var(--btn-bgcolor-hover);
+ border-color: var(--btn-line-hover);
+}
+.userEL1847017[data-mode="shopping"] figcaption {
+ text-align: left;
+}
+.userEL1847017[data-mode="shopping"] figcaption:before,
+.userEL1847017[data-mode="shopping"] figcaption:after {
+ content: ' ';
+ display: table;
+ clear: both;
+}
+.userEL1847017[data-mode="shopping"] h5.figure {
+ text-align: left;
+}
+.userEL1847017[data-mode="shopping"] p.figure {
+ text-align: left;
+ float: none;
+ clear: both;
+}
+.userEL1847017[data-mode="shopping"] .figure.price:not(.hide) + p.figure:not(.hide) {
+ width: 70%;
+ float: left;
+ clear: none;
+}
+@media only screen and (max-width:991px) {
+ .userEL1847017 .figure.basket:not(.hide) {
+  padding-top: 20px!important;
+ }
+ .userEL1847017 .gallery-loadmore {
+  margin-top: 36px;
+  padding: 16px 15px;
+ }
+}
+@media only screen and (max-width:768px) {
+ .userEL1847017 figcaption,
+  .userEL1847017 .full-width figcaption {
+  padding: 8px 0 11px;
+ }
+ .userEL1847017 .figure.basket:not(.hide) {
+  padding-top: 13px!important;
+ }
+ .userEL1847017 .gallery-loadmore {
+  margin-top: 22.5px;
+  padding: 10px 15px;
+ }
+}
+</style><style id="el_2css">.userEL1847912 {
+ background-image: url("https://lh3.googleusercontent.com/5k76ohF8WnpXO9JPPEKsN_UgbPaFp8R3BGbD-8sWYOSI6UEfMB3v1e5LAO16vT40mBBnYdlvCbbL-Jn8KhqOFCEuPm4GqlHospSMXyvu=w1920-h1278-n");
+ background-size: cover;
+ background-position: 50% 50%;
+ background-attachment: fixed;
+ background-color: ;
+ background-repeat: no-repeat;
+ padding: 20px 0px 20px 0px;
+ color: ;
+ font-family: Lora;
+ font-size: 13px;
+}
+.element-content .userEL1847912 {
+ background-attachment: scroll;
+}
+.userEL1847912 .bg-box {
+ padding: 130px 0;
+ color: #fff;
+ text-align: center;
+}
+.userEL1847912 h1.head_title {
+ font-family: 'Lato', 'Nanum Gothic';
+ font-weight: normal;
+ font-size: inherit;
+ color: #fff;
+ margin: 0;
+}
+.userEL1847912 h4.sub_text {
+ font-family: 'Lato', 'Nanum Gothic';
+ font-weight: normal;
+ font-size: inherit;
+ color: #b4b0b0;
+ margin: 0;
+}
+@media only screen and (max-width: 480px) {
+ .userEL1847912  h1.head_title {
+  margin-bottom: 10px;
+ }
+}
+</style><style id="el_3css"></style><div data-case="showcase35" class="userEL1770119 hide">
+    <div class="container full-width">
+        <div class="carousel slide carousel-fade" id="userEL1770119-carousel" data-ride="carousel" data-interval="10000">
+            <ol class="carousel-indicators" data-nav="true">
+<li class="active" data-target="#userEL1770119-carousel" data-slide-to="0"></li>
+                <li data-target="#userEL1770119-carousel" data-slide-to="1" class=""></li></ol>
+            <!-- Carousel items -->
+            <div class="carousel-inner" data-loop="true">
+
+                <div class="item active">
+                    <div class="slides-filter"></div>
+                    <div class="fill userEL1770119-bg1" data-target=".userEL1770119-bg1" data-attach="true"></div>
+                    <div class="text">
+                        <h1 class="head_title" data-edit="true" data-selector="h1.head_title"><span class="fsize52">SUNJIN EXPRESS</span></h1>
+                        <hr class="bar" data-border="true" data-selector=".bar" data-title="선 색상">
+                        <div data-edit="true" class="newtemp" data-selector="div.newtemp" ><div><span style="font-family: 'Iropke Batang'; color: rgb(239, 239, 239);" class="fsize15">선진고속은 승객의 안전을 가장 중요하게 생각합니다.</span></div><div><span style="font-family: 'Iropke Batang'; color: rgb(239, 239, 239);" class="fsize15">도착지까지 안전하게 모실 수 있도록 최선의 노력을 다하겠습니다.</span></div></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="slides-filter"></div>
+                    <div class="fill userEL1770119-bg2" data-target=".userEL1770119-bg2" data-attach="true"></div>
+                    <div class="text">
+                        <h1 class="head_title" data-edit="true" data-selector="h1.head_title" ><div><span  class="fsize52">safety</span></div></h1>
+                        <hr class="bar" data-border="true" data-selector=".bar" data-title="선 색상">
+                        <div data-edit="true" class="newtemp" data-selector="div.newtemp" ><div><span style="font-family: 'Iropke Batang'; color: rgb(239, 239, 239);" class="fsize15">안전은 운의 문제가 아니라 예방의 문제입니다.</span></div><div><span style="font-family: 'Iropke Batang'; color: rgb(239, 239, 239);" class="fsize15">세심한 주의를 기울여 안전을 바탕으로 신뢰를 쌓아가겠습니다.&nbsp;</span></div></div>
+                    </div>
+                </div>
+                
+
+            </div>
+
+            <!-- Carousel nav -->
+            <div class-="control-box-wrap">
+                <div class="control-box" data-title="컨텐츠 박스 배경" data-selector=".control-box" data-background="true">
+                    <a class="carousel-control left" href="#userEL1770119-carousel" data-slide="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                    <a class="carousel-control right" href="#userEL1770119-carousel" data-slide="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div><div class="userEL1847017 hide preloading">
+ <input class="goption full-width" type="hidden" value="1" data-gcol="4" data-gcol-t="2" data-gcol-m="2" data-gpd="8" data-gh="1" data-gsort="n">
+ <div class="container full-width">
+        <div class="row multi-columns-row gflex" data-loop="true" data-view="32">
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+        
+
+
+
+<div class="grid gallery-item" data-selector=".grid" data-tbackground="true" data-title="text background" data-index="0" data-seq="188829">
+                <a href="/%ED%99%88/view/188829" data-title="운행노선 및 시간표">
+                    <figure>
+                        <div class="img-wrapper">
+                            <div class="g-img" style="background-image:url(https://lh3.googleusercontent.com/-F6tD91VCXwa_F8hmkJocyhyS7DFEIrm5zgPh3g-fAAHYBZ5oaEp731rQWf4DfbPUhKLYKo1igUDTPrf6pZzBRN67dfVgAbD1AxNT0r6iZE5PMZqpFB8scM=w800);"></div>
+                            <img src="https://lh3.googleusercontent.com/-F6tD91VCXwa_F8hmkJocyhyS7DFEIrm5zgPh3g-fAAHYBZ5oaEp731rQWf4DfbPUhKLYKo1igUDTPrf6pZzBRN67dfVgAbD1AxNT0r6iZE5PMZqpFB8scM=w800" class="img-responsive" alt="운행노선 및 시간표">
+                        </div>
+                        <figcaption data-selector="figcaption .sh-pcolor" data-font="true" data-title="shopping point color">
+                            <h5 class="figure title" data-selector="h5.figure" data-font="true" data-title="title font">운행노선 및 시간표</h5>
+                            
+                            
+                            
+                            
+                            
+                            
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+<div class="grid gallery-item" data-index="1" data-seq="188831">
+                <a href="/%ED%99%88/view/188831" data-title="공지사항">
+                    <figure>
+                        <div class="img-wrapper">
+                            <div class="g-img" style="background-image:url(https://lh3.googleusercontent.com/i4rz8C7Wip7yTV5qGsyCG17XlpI-u4kheA10oyZA4mkivW-T3M1lvQ7GD28yptyQ1WPhnKgOsf5WAYDqJFMe0fuX0SwrGGNHp3rxs5GxXVsf61AgSvkqIVw=w800);"></div>
+                            <img src="https://lh3.googleusercontent.com/i4rz8C7Wip7yTV5qGsyCG17XlpI-u4kheA10oyZA4mkivW-T3M1lvQ7GD28yptyQ1WPhnKgOsf5WAYDqJFMe0fuX0SwrGGNHp3rxs5GxXVsf61AgSvkqIVw=w800" class="img-responsive" alt="공지사항">
+                        </div>
+                        <figcaption>
+                            <h5 class="figure title">공지사항</h5>
+                            
+                            
+                            
+                            
+                            
+                            
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+<div class="grid gallery-item" data-index="2" data-seq="188830">
+                <a href="/%ED%99%88/view/188830" data-title="소중한 의견">
+                    <figure>
+                        <div class="img-wrapper">
+                            <div class="g-img" style="background-image:url(https://lh3.googleusercontent.com/B0MvrWcIBCcJ1i76O1CmYpIYTXa1ghGN2Y9TqMbKCJdskVhP-jli-URH-tbsc5b7tMoY_SomVMdMFpj-NQKPcLVbNVHUWZV3Ahpd8oMTCxWUizqBVHvOtw=w800);"></div>
+                            <img src="https://lh3.googleusercontent.com/B0MvrWcIBCcJ1i76O1CmYpIYTXa1ghGN2Y9TqMbKCJdskVhP-jli-URH-tbsc5b7tMoY_SomVMdMFpj-NQKPcLVbNVHUWZV3Ahpd8oMTCxWUizqBVHvOtw=w800" class="img-responsive" alt="소중한 의견">
+                        </div>
+                        <figcaption>
+                            <h5 class="figure title">소중한 의견</h5>
+                            
+                            
+                            
+                            
+                            
+                            
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+<div class="grid gallery-item" data-index="3" data-seq="188832">
+                <a href="/%ED%99%88/view/188832" data-title="사업장 소재지">
+                    <figure>
+                        <div class="img-wrapper">
+                            <div class="g-img" style="background-image:url(https://lh3.googleusercontent.com/8NqF2nJKWe5n0xGTyHXP4MG-jzGqMUO7prtHO-Z7ouapAp5Iay_T7jAKDfdB4VpOXQKeET5-5kwp9qwc5NYXYbhViWHOYCU4hgj0B7gYJbO2bO7CXjXjOp8=w800);"></div>
+                            <img src="https://lh3.googleusercontent.com/8NqF2nJKWe5n0xGTyHXP4MG-jzGqMUO7prtHO-Z7ouapAp5Iay_T7jAKDfdB4VpOXQKeET5-5kwp9qwc5NYXYbhViWHOYCU4hgj0B7gYJbO2bO7CXjXjOp8=w800" class="img-responsive" alt="사업장 소재지">
+                        </div>
+                        <figcaption>
+                            <h5 class="figure title">사업장 소재지</h5>
+                            
+                            
+                            
+                            
+                            
+                            
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+</div>
+    </div>
+</div><div data-parallax="true" data-case="content-text1" class="userEL1847912 hide text-center">
+    <div class="container full-width bg-box">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                 <h1 class="head_title" data-edit="true" data-selector="h1.head_title" ><div><span  class="fsize60">‌<span style="font-family: 'Iropke Batang';">소중한 의견</span></span></div><div><span  class="fsize20"><span style="font-family: 'Iropke Batang';">‌</span></span></div><div><span  class="fsize18"><span style="font-family: 'Iropke Batang';"><strong>‌선진고속은 고객님의 말씀에 귀 기울이고 개선하도록 노력하겠습니다.</strong></span></span></div><div><span  class="fsize18"><span style="font-family: 'Iropke Batang';">‌</span></span></div></h1>
+                <br>
+                 <h4 class="sub_text" data-edit="true" data-selector="h4.sub_text"><span style="color: rgb(255, 255, 255);"><span class="fsize25"><strong><span style="font-family: 'Iropke Batang';">‌<a data-user-link="/소중한-의견" href="/소중한-의견">&nbsp;남기러 가기▷</a></span></strong></span></span></h4>
+            </div>
+        </div>
+    </div>
+</div><script id="js_0"></script><script id="js_1"></script><script id="js_2"></script><script id="js_3"></script></div>
+
+<div id="goto-top" class="goto-top"><i class="fa fa-angle-up"></i></div>
+<div class="gallery-frame"></div>
+<div class="video-frame"></div>
+<div id="el-empty"></div>
+
+<script>
+var F_PARENT, F_ONE, F_SID, F_VIEW, F_PAGE, PAGE_MODE = 's', LANGLINK = false;
+var property = {
+	SMENU : [{"page":"INTRO","id":0,"name":"INTRO","menu_uid":"m_mv7r6639y2qbp5h9","page_auto":"","display":"off","lock":"","children":[]},{"tabmenu":"false","page":"\ud648","id":1,"name":"\ud648","menu_uid":"m_mv7r663906jr6o4j","page_auto":"","display":"on","link":"","ltarget":"","lock":"","children":[]},{"tabmenu":"false","page":"\ud68c\uc0ac-\uc18c\uac1c","id":2,"name":"\ud68c\uc0ac \uc18c\uac1c","menu_uid":"m_mv7r6639b8we4u8z","page_auto":"","display":"on","link":"","ltarget":"","lock":"","children":[]},{"tabmenu":"false","page":"\ucc44\uc6a9-\uc815\ubcf4","id":3,"name":"\ucc44\uc6a9 \uc815\ubcf4","menu_uid":"m_mv7r6639d9h4mqn1","page_auto":"","display":"on","link":"","ltarget":"_blank","lock":"","children":[]},{"tabmenu":"false","page":"\uc6b4\ud589-\uc815\ubcf4","id":4,"name":"\uc6b4\ud589 \uc815\ubcf4","menu_uid":"m_mv7r6639ec9pqhpj","page_auto":"","display":"on","link":"@2069447","ltarget":"","lock":"","children":[{"page":"\uc6b4\ud589\uc2dc\uac04","id":0,"name":"\uc6b4\ud589\uc2dc\uac04","menu_uid":"m_mv7r6639hr8w19uu","page_auto":"","display":"on","link":"","ltarget":"","lock":"","children":""},{"page":"\uc6b4\ud589\uc694\uae08","id":1,"name":"\uc6b4\ud589\uc694\uae08","menu_uid":"m_mv7r6639mxk6uf2g","page_auto":"","display":"on","link":"","ltarget":"","lock":"","children":""},{"page":"\uc6b4\uc1a1\uc57d\uad00","id":2,"name":"\uc6b4\uc1a1\uc57d\uad00","menu_uid":"m_mv7r6639q6hq41pu","page_auto":"","display":"on","link":"","ltarget":"","lock":"","children":""},{"page":"\ub178\uc120-\uc815\ubcf4","id":3,"name":"\ub178\uc120 \uc815\ubcf4","menu_uid":"m_mv7r6639le5fxlrm","page_auto":"","display":"off","link":"","ltarget":"","lock":"","children":""},{"page":"\uc694\uae08-\uc815\ubcf4","id":4,"name":"\uc694\uae08 \uc815\ubcf4","menu_uid":"m_mv7r66392xrbg2mq","page_auto":"","display":"off","link":"","ltarget":"","lock":"","children":""}],"tabmenu_default_uid":"m_mv7r6639hr8w19uu"},{"tabmenu":"false","page":"\uace0\uac1d\uc758-\uc18c\ub9ac","id":5,"name":"\uace0\uac1d\uc758 \uc18c\ub9ac","menu_uid":"m_mv7r6639e3gl6b0x","page_auto":"","display":"on","link":"\uacf5\uc9c0\uc0ac\ud56d","ltarget":"","lock":"","children":[{"page":"\uacf5\uc9c0\uc0ac\ud56d","id":0,"name":"\uacf5\uc9c0\uc0ac\ud56d","menu_uid":"m_mv7r66393s6vaqy3","page_auto":"","display":"on","link":"","ltarget":"","lock":"","children":""},{"page":"\ubd84\uc2e4\ubb3c-\uad00\ub9ac","id":1,"name":"\ubd84\uc2e4\ubb3c \uad00\ub9ac","menu_uid":"m_mv7r6639qnbrj32m","page_auto":"","display":"on","link":"","ltarget":"","lock":"","children":""},{"page":"\uc18c\uc911\ud55c-\uc758\uacac","id":2,"name":"\uc18c\uc911\ud55c \uc758\uacac","menu_uid":"m_mv7r66399asjj30e","page_auto":"","display":"on","link":"","ltarget":"","lock":"","children":""}],"tabmenu_default_uid":"m_mv7r66393s6vaqy3"}],
+	ONE : "",
+	LOGINOUT : "",
+	VIEW : "",
+	MENULINK : [],
+	MENUCHECK : {'main':false, 'sub':false, 'intro':false},
+	MENUOPTION : [],
+	SID : "1153404",
+	TITLE : "선진고속 주식회사",
+	PAGE : (this.ONE && !this.VIEW) ? "index" : "홈",
+	PLAN : "1",
+	VALIDPLAN : "1",
+	VALIDTYPE : "BN",
+	ISLOCK : "false",
+	MCSS : {"children":{".menu-1153404":{"children":{},"attributes":{"--menu-fname":"Nanum Square Round","--menu-fsize":"17px","--menu-flineheight":"320","--menu-color":"#979797","--menu-color-hover":"#000","--menu-color-active":"#000","--menu-bgcolor":"#fff","--menu-bgcolor-hover":"#fff","--menu-bgcolor-active":"#fff","--menu-toggle-color":"#000","--menu-toggle-bgcolor":"transparent","--sub-menu-fname":"Nanum Square Round","--sub-menu-fsize":"17px","--sub-menu-flineheight":"140","--sub-menu-color":"#979797","--sub-menu-color-hover":"#000","--sub-menu-color-active":"#000","--sub-menu-bgcolor":"#fff","--sub-menu-bgcolor-hover":"#fff","--sub-menu-bgcolor-active":"#fff","--fixed-menu-color":"#979797","--fixed-menu-color2":"rgba(151,151,151, 0.2)","--fixed-menu-color-alpha":"0.2","--fixed-menu-color-hover":"#000","--fixed-menu-color-hover2":"rgba(0,0,0,0.2)","--fixed-menu-color-hover-alpha":"0.2","--fixed-menu-point":"#ee445f","--block-bgcolor":"#fff","background-color":"#fff","padding":"24px 0px 24px 0px","background-image":"none","background-repeat":"no-repeat","background-position":"center center","background-size":"cover","color":"#000000","font-family":"Lora,\"Noto sans\",\"Noto sans kr\"","font-size":"13px"}},".menu-1153404 .container.full-width":{"children":{},"attributes":{"padding":"0 30px"}},".menu-1153404 #tpl-logo-img":{"children":{},"attributes":{"height":"37px"}},".menu-1153404 #tpl-logo-text":{"children":{},"attributes":{"font-family":"'Lato', 'Nanum Gothic'","color":"#000000","font-size":"22px","line-height":"160%"}},".menu-1153404 ul.navbar-nav > li > a":{"children":{},"attributes":{"padding":"0 25px"}},".menu-1153404 ul.dropdown-menu > li > a":{"children":{},"attributes":{"padding":"10px 25px"}},".menu-1153404 ul.navbar-nav > li  > a:after":{"children":{},"attributes":{"content":"''","position":"absolute","bottom":"0","left":"50%","width":"12px","height":"2px","display":"inline-block","background-clip":"content-box","background-color":"transparent","-webkit-transform":"translateX(-50%)","-moz-transform":"translateX(-50%)","-ms-transform":"translateX(-50%)","-o-transform":"translateX(-50%)","transform":"translateX(-50%)","-webkit-transition":"all 0.3s","-moz-transition":"all 0.3s","-ms-transition":"all 0.3s","-o-transition":"all 0.3s","transition":"all 0.3s"}},".menu-1153404 ul.navbar-nav > li > a:hover:after, \n.menu-1153404 ul.navbar-nav > li:hover > a:after":{"children":{},"attributes":{"background-color":"var(--menu-color-hover)"}},".menu-1153404 ul.navbar-nav > li.active > a:after":{"children":{},"attributes":{"background-color":"var(--menu-color-active)"}},".menu-1153404 #fixed-menu > li > a:after":{"children":{},"attributes":{"display":"none"}},".menu-1153404 .fh-line":{"children":{},"attributes":{"border-color":"transparent"}},".menu-1153404[data-fixtype][data-fixtextalign=\"left\"] .container #tpl-menu":{"children":{},"attributes":{"justify-content":"flex-start"}},".menu-1153404[data-fixtype][data-fixtextalign=\"center\"] .container #tpl-menu":{"children":{},"attributes":{"justify-content":"center"}},".menu-1153404[data-fixtype][data-fixtextalign=\"right\"] .container #tpl-menu":{"children":{},"attributes":{"justify-content":"flex-end"}},"@media (min-width: 769px)":{"children":{".menu-1153404[data-fixtype] #tpl-menu":{"children":{},"attributes":{"display":"flex !important","flex-wrap":"wrap","-moz-flex-wrap":"wrap","-ms-flex-wrap":"wrap"}},".menu-1153404 ul.dropdown-menu > li > a":{"children":{},"attributes":{"text-align":"left"}}},"attributes":{}},"@media (min-width: 1200px)":{"children":{".menu-1153404[data-fixtype][data-fh-type=\"top\"] .container.fh-container":{"children":{},"attributes":{"padding":"0 55px 15px"}},".menu-1153404[data-fixtype][data-fh-type=\"top\"] .container.full-width.fh-container":{"children":{},"attributes":{"padding":"0 70px 15px"}}},"attributes":{}},"@media (max-width: 768px)":{"children":{".menu-1153404":{"children":{},"attributes":{"min-height":"70px"}},".menu-1153404 ul.navbar-nav > li > a,\n    .menu-1153404 > .container .navbar-brand":{"children":{},"attributes":{"line-height":"70px"}},".menu-1153404 .navbar-brand img":{"children":{},"attributes":{"max-height":"60px"}},".menu-1153404 ul.navbar-nav > li  > a:after":{"children":{},"attributes":{"display":"none"}}},"attributes":{}}},"attributes":{}},
+	MSTYLE : {"children":{".dsgn-body":{"children":{},"attributes":{"background-color":"#ffffff","font-family":"'Lora'","color":"#8a8b8e"}}},"attributes":{}},
+	RESOURCE : "https://storage.googleapis.com/cr-resource/image/c939d3102c0eb3fa89386cd42b7fff3d",
+	RPATH : "https://storage.googleapis.com/cr-resource/image/c939d3102c0eb3fa89386cd42b7fff3d" + "/1153404/",
+	MTAG : "<header role=\"navigation\" data-fh-type=\"top\" data-fixtype=\"top_08\" data-fixlangtype=\"lang_02\" data-fixsize=\"sm\" data-fixtextalign=\"center\" data-fixon=\"um\" class=\"menu-1153404 navbar navbar-fheader navbar-fixed-top navbar-li\">\n    <input type=\"hidden\" class=\"cl-menu-normal\">\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n    <div class=\"container\" data-fh-align=\"center\">\n\n        <div class=\"navbar-header\">\n            <button type=\"button\" class=\"navbar-toggle\" data-target=\"#mobile-nav\">\n                <span class=\"sr-only\">Toggle navigation<\/span>\n                <span class=\"icon-bar\"><\/span>\n                <span class=\"icon-bar\"><\/span>\n                <span class=\"icon-bar\"><\/span>\n            <\/button>\n            <a class=\"navbar-brand\" href=\"\/config\" id=\"site-home\" data-recommend=\"200 X 90\">\n                <img src=\"https:\/\/lh3.googleusercontent.com\/2JaIZuAitx8fr3LTNjJBmxeokDq21mJKX1kHFSITp8Yzb4MF9kRoCMivxxb3llq-1J6gEiU8OtOGuGUWDAmDDyrED-LwefmdGCQpU0Io\" data-attach=\"true\" id=\"tpl-logo-img\" class=\"\" alt=\"\">\n                <span id=\"tpl-logo-text\" class=\"hide\" data-selector=\"#tpl-logo-text\">\uc120\uc9c4\uace0\uc18d(\uc8fc)<\/span>\n            <\/a>\n        <\/div>\n\n        <div class=\"collapse navbar-collapse navbar-menu-1153404\">\n            <ul class=\"nav navbar-nav\" id=\"tpl-menu\">\n<li class=\"active\"><a href=\"\/%ED%99%88\">\ud648<\/a><\/li>\n<li><a href=\"\/%ED%9A%8C%EC%82%AC-%EC%86%8C%EA%B0%9C\">\ud68c\uc0ac \uc18c\uac1c<\/a><\/li>\n<li><a href=\"\/%EC%B1%84%EC%9A%A9-%EC%A0%95%EB%B3%B4\" target=\"_blank\">\ucc44\uc6a9 \uc815\ubcf4<\/a><\/li>\n<li class=\"dropdown\">\n<a href=\"@2069447\" class=\"dropdown-toggle\" attr-bookmark=\"2069447\">\uc6b4\ud589 \uc815\ubcf4 <i class=\"fa fa-caret-down fa-1\" aria-hidden=\"true\"><\/i><\/a><ul class=\"dropdown-menu\">\n<li><a href=\"\/%EC%9A%B4%ED%96%89%EC%8B%9C%EA%B0%84\">\uc6b4\ud589\uc2dc\uac04<\/a><\/li>\n<li><a href=\"\/%EC%9A%B4%ED%96%89%EC%9A%94%EA%B8%88\">\uc6b4\ud589\uc694\uae08<\/a><\/li>\n<li><a href=\"\/%EC%9A%B4%EC%86%A1%EC%95%BD%EA%B4%80\">\uc6b4\uc1a1\uc57d\uad00<\/a><\/li>\n<\/ul>\n<\/li>\n<li class=\"dropdown\">\n<a href=\"\/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD\" class=\"dropdown-toggle\">\uace0\uac1d\uc758 \uc18c\ub9ac <i class=\"fa fa-caret-down fa-1\" aria-hidden=\"true\"><\/i><\/a><ul class=\"dropdown-menu\">\n<li><a href=\"\/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD\">\uacf5\uc9c0\uc0ac\ud56d<\/a><\/li>\n<li><a href=\"\/%EB%B6%84%EC%8B%A4%EB%AC%BC-%EA%B4%80%EB%A6%AC\">\ubd84\uc2e4\ubb3c \uad00\ub9ac<\/a><\/li>\n<li><a href=\"\/%EC%86%8C%EC%A4%91%ED%95%9C-%EC%9D%98%EA%B2%AC\">\uc18c\uc911\ud55c \uc758\uacac<\/a><\/li>\n<\/ul>\n<\/li>\n<\/ul>\n        <\/div>\n\n    <\/div>\n<\/header>",
+	HEADER : false,
+	FOOTER : false,
+	MODE : "publish",
+	WRAP : "b",
+	PARENT : {"page":null},
+	FTAG : "<div class=\"footer-1153404 el-footer\">\n    <div class=\"container\">\n       <div class=\"row\">\n    \n            <div class=\"col-md-12 col-sm-12 col-xs-12 cl-footer-site-element\">\n                <p class=\"text cl-footer-company-info\" data-edit=\"true\" data-selector=\".text\" style=\"\"><span style=\"font-family: &#039;Iropke Batang&#039;;\">\u200c<span class=\"fsize11\" style=\"\">\uacbd\uae30\ub3c4 \uc548\uc0b0\uc2dc \uc0c1\ub85d\uad6c \uc21c\ud658\ub85c577 \u2502 TEL: 032-886-7700 \u2502 FAX: 032-886-7701<\/span><br><span class=\"fsize11\" style=\"\">COPYRIGHT\u200c \u00a9 20\u200c20 Sunjin Express inc. ALL RIGHTS RESERVED.\u200c<\/span><\/span><\/p>\n            <\/div>\n\n        <\/div>\n    <\/div>\n<\/div>",
+	FCSS : ".footer-1153404 { \r\n padding: 20px 0;\r\n background-color: #ffffff;\r\n}\r\n.footer-1153404 .text { \r\n color: #979797;\r\n line-height: 1.6;\r\n letter-spacing: 0.1em;\r\n margin-bottom: 0;\r\n}",
+	COUNT : 4,
+	HOST : "www.sunjinexpress.com",
+	REFERER : "",
+	PUBLISH : true,
+	SETTINGS : {"menuPolicyNotice":1,"naver-site-verification":"33323fc23ed8fe1a2baa51ff0154b3b767bcb8bd","screenOption":"auto","site_nick":"","sitePopup":[],"blockBookmarkList":{"bookmark1771346":"userEL1771346","bookmark1968301":"공지 사항","bookmark2069447":"userEL2069447"},"blocknameList":{"blockname1968301":"공지 사항"},"admEasyLogin":true,"google":"G-29HGSEP6S5","zoom":true,"viewportMode":"mobile_web","vpMode_onoff":true,"naver_log":"67e62935088f18","showInfo":"none","user_disk":"30000","showGuide":"none","languages":["en","ko"],"sitePopupBanner":{"close_time":"always","close_today":"ON","position":"center top","slide_arrow":"ON","slide_auto":"ON","view_type":"slide"},"siteBandBanner":{"close_time":"always","close_today":"ON","interval":3000},"blockorg_menu":"menu-top11","favfont":["Playfair Display","Libre Baskerville","Lora","Iropke Batang"],"block_search_onoff":"off","favcolor":["#EFEFEF"],"menuPolicy":1,"gtag_event":[]},
+	CHECKTEMP : '',
+	POINGSETTINGS : [],
+	SMSETTINGS : {},
+	SOCIAL : {},
+	PROFILEIMG : "//storage.googleapis.com/i.addblock.net/member/profile_default.jpg?_1020",
+	TRAFFICLIMIT : "",
+	MUSIC : [],
+	CONTENTS : {"el1770119":{"element":{"seq":"1770119","sid":"1153404","page":"\ud648","orgpage":"\ud648","type":"showcase","type2":"","overlap":"0","feature":"","pos":"1","orgpos":"1","mode":"","folder":"1920","linkto":"","name":"showcase35","elname":"userEL1770119","eltag":"&lt;div data-case=&quot;showcase35&quot; class=&quot;userEL1770119 hide&quot;&gt;\n    &lt;div class=&quot;container full-width&quot;&gt;\n        &lt;div class=&quot;carousel slide carousel-fade&quot; id=&quot;userEL1770119-carousel&quot; data-ride=&quot;carousel&quot; data-interval=&quot;10000&quot;&gt;\n            &lt;ol class=&quot;carousel-indicators&quot; data-nav=&quot;true&quot;&gt;\n&lt;li class=&quot;active&quot; data-target=&quot;#userEL1770119-carousel&quot; data-slide-to=&quot;0&quot;&gt;&lt;\/li&gt;\n                &lt;li data-target=&quot;#userEL1770119-carousel&quot; data-slide-to=&quot;1&quot; class=&quot;&quot;&gt;&lt;\/li&gt;&lt;\/ol&gt;\n            &lt;!-- Carousel items --&gt;\n            &lt;div class=&quot;carousel-inner&quot; data-loop=&quot;true&quot;&gt;\n\n                &lt;div class=&quot;item active&quot;&gt;\n                    &lt;div class=&quot;slides-filter&quot;&gt;&lt;\/div&gt;\n                    &lt;div class=&quot;fill userEL1770119-bg1&quot; data-target=&quot;.userEL1770119-bg1&quot; data-attach=&quot;true&quot;&gt;&lt;\/div&gt;\n                    &lt;div class=&quot;text&quot;&gt;\n                        &lt;h1 class=&quot;head_title&quot; data-edit=&quot;true&quot; data-selector=&quot;h1.head_title&quot;&gt;&lt;span class=&quot;fsize52&quot;&gt;SUNJIN EXPRESS&lt;\/span&gt;&lt;\/h1&gt;\n                        &lt;hr class=&quot;bar&quot; data-border=&quot;true&quot; data-selector=&quot;.bar&quot; data-title=&quot;\uc120 \uc0c9\uc0c1&quot;&gt;\n                        &lt;div data-edit=&quot;true&quot; class=&quot;newtemp&quot; data-selector=&quot;div.newtemp&quot; &gt;&lt;div&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;; color: rgb(239, 239, 239);&quot; class=&quot;fsize15&quot;&gt;\uc120\uc9c4\uace0\uc18d\uc740 \uc2b9\uac1d\uc758 \uc548\uc804\uc744 \uac00\uc7a5 \uc911\uc694\ud558\uac8c \uc0dd\uac01\ud569\ub2c8\ub2e4.&lt;\/span&gt;&lt;\/div&gt;&lt;div&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;; color: rgb(239, 239, 239);&quot; class=&quot;fsize15&quot;&gt;\ub3c4\ucc29\uc9c0\uae4c\uc9c0 \uc548\uc804\ud558\uac8c \ubaa8\uc2e4 \uc218 \uc788\ub3c4\ub85d \ucd5c\uc120\uc758 \ub178\ub825\uc744 \ub2e4\ud558\uaca0\uc2b5\ub2c8\ub2e4.&lt;\/span&gt;&lt;\/div&gt;&lt;\/div&gt;\n                    &lt;\/div&gt;\n                &lt;\/div&gt;\n                &lt;div class=&quot;item&quot;&gt;\n                    &lt;div class=&quot;slides-filter&quot;&gt;&lt;\/div&gt;\n                    &lt;div class=&quot;fill userEL1770119-bg2&quot; data-target=&quot;.userEL1770119-bg2&quot; data-attach=&quot;true&quot;&gt;&lt;\/div&gt;\n                    &lt;div class=&quot;text&quot;&gt;\n                        &lt;h1 class=&quot;head_title&quot; data-edit=&quot;true&quot; data-selector=&quot;h1.head_title&quot; &gt;&lt;div&gt;&lt;span  class=&quot;fsize52&quot;&gt;safety&lt;\/span&gt;&lt;\/div&gt;&lt;\/h1&gt;\n                        &lt;hr class=&quot;bar&quot; data-border=&quot;true&quot; data-selector=&quot;.bar&quot; data-title=&quot;\uc120 \uc0c9\uc0c1&quot;&gt;\n                        &lt;div data-edit=&quot;true&quot; class=&quot;newtemp&quot; data-selector=&quot;div.newtemp&quot; &gt;&lt;div&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;; color: rgb(239, 239, 239);&quot; class=&quot;fsize15&quot;&gt;\uc548\uc804\uc740 \uc6b4\uc758 \ubb38\uc81c\uac00 \uc544\ub2c8\ub77c \uc608\ubc29\uc758 \ubb38\uc81c\uc785\ub2c8\ub2e4.&lt;\/span&gt;&lt;\/div&gt;&lt;div&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;; color: rgb(239, 239, 239);&quot; class=&quot;fsize15&quot;&gt;\uc138\uc2ec\ud55c \uc8fc\uc758\ub97c \uae30\uc6b8\uc5ec \uc548\uc804\uc744 \ubc14\ud0d5\uc73c\ub85c \uc2e0\ub8b0\ub97c \uc313\uc544\uac00\uaca0\uc2b5\ub2c8\ub2e4.&amp;nbsp;&lt;\/span&gt;&lt;\/div&gt;&lt;\/div&gt;\n                    &lt;\/div&gt;\n                &lt;\/div&gt;\n                \n\n            &lt;\/div&gt;\n\n            &lt;!-- Carousel nav --&gt;\n            &lt;div class-=&quot;control-box-wrap&quot;&gt;\n                &lt;div class=&quot;control-box&quot; data-title=&quot;\ucee8\ud150\uce20 \ubc15\uc2a4 \ubc30\uacbd&quot; data-selector=&quot;.control-box&quot; data-background=&quot;true&quot;&gt;\n                    &lt;a class=&quot;carousel-control left&quot; href=&quot;#userEL1770119-carousel&quot; data-slide=&quot;prev&quot;&gt;&lt;i class=&quot;fa fa-angle-left&quot; aria-hidden=&quot;true&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;\n                    &lt;a class=&quot;carousel-control right&quot; href=&quot;#userEL1770119-carousel&quot; data-slide=&quot;next&quot;&gt;&lt;i class=&quot;fa fa-angle-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;\n                &lt;\/div&gt;\n            &lt;\/div&gt;\n        &lt;\/div&gt;\n\n    &lt;\/div&gt;\n&lt;\/div&gt;","elcss":".userEL1770119 {\n position: relative;\n}\n.userEL1770119 .text {\n position: absolute;\n top: 50%;\n left: 50%;\n max-width: 1140px;\n width: 100%;\n text-align: center;\n -ms-transform: translate(-50%,-50%);\n -moz-transform: translate(-50%,-50%);\n -o-transform: translate(-50%,-50%);\n -webkit-transform: translate(-50%,-50%);\n transform: translate(-50%,-50%);\n}\n.userEL1770119 h1.head_title {\n font-family: 'Playfair Display';\n font-size: inherit;\n font-weight: normal;\n color: #fff;\n margin-top: 0;\n margin-bottom: 20px;\n white-space: normal;\n word-wrap: break-word;\n}\n.userEL1770119 .bar {\n width: 60px;\n height: 1px;\n margin: 30px auto 25px;\n border: none;\n border-top: 2px solid #c6aa94;\n}\n.userEL1770119 .carousel {\n height: 870px;\n}\n.userEL1770119 .carousel-fade .fill {\n width: 100%;\n height: 870px;\n background-size: cover;\n background-position: center center;\n}\n.userEL1770119 .carousel .item {\n background-color: #000;\n}\n.userEL1770119 .carousel .slides-filter {\n position: absolute;\n width: 100%;\n height: 100%;\n}\n.userEL1770119 .carousel-indicators {\n display: none;\n}\n.userEL1770119 .userEL1770119-bg1 {\n background-image: url(https:\/\/lh3.googleusercontent.com\/rDR2OEZFZ0jmmlX9WB1pcloKemTtxB3T13nR1YcX8iplSR-tDTF79KPJ-sIj6z3oH39M3157uni1otVFUHzeFahK6eKTQYgqt0rzeaBwj_gghKW9dd7KTA=w1920-h1440-n);\n}\n.userEL1770119 .userEL1770119-bg2 {\n background-image: url(https:\/\/lh3.googleusercontent.com\/h7qpFjQWkhexjxH0F8mAgmZYaB3W_rnUO4j_5ZVnVgWCJP_nzHjQk8ObJgyJaLuv1z6O3-GXLR3CFGCMBLBcVgqu1hNrbi39LDITV0b-Ig=w1920-h1407-n);\n}\n.userEL1770119 .userEL1770119-bg3 {\n background-image: url('https:\/\/lh3.googleusercontent.com\/Nc2kDl_Yyix18n8RAliX7fakxHfaHONH9CIHFiVdUnrxNAfFy8b2JXp-_6x7D0P1H3YsewKSD7y9gDuLvZuRAtazv2vNBfMewU5px-M=s0');\n}\n.userEL1770119 .carousel-fade .carousel-inner .item {\n opacity: 0;\n -webkit-transition-property: opacity;\n -moz-transition-property: opacity;\n -o-transition-property: opacity;\n transition-property: opacity;\n}\n.userEL1770119 .carousel-fade .carousel-inner .active {\n opacity: 1;\n}\n.userEL1770119 .carousel-fade .carousel-inner .active.left,\n.userEL1770119 .carousel-fade .carousel-inner .active.right {\n left: 0;\n opacity: 0;\n z-index: 1;\n}\n.userEL1770119 .carousel-fade .carousel-inner .next.left,\n.userEL1770119 .carousel-fade .carousel-inner .prev.right {\n opacity: 1;\n}\n.userEL1770119 .carousel-fade .carousel-control {\n width: 50px;\n z-index: 1;\n text-shadow: none;\n opacity: 1;\n}\n.userEL1770119 .carousel-fade,\n.userEL1770119 .carousel-fade .carousel-inner,\n.userEL1770119 .carousel-fade .item {\n height: 870px;\n}\n.userEL1770119 .carousel-control i {\n position: absolute;\n top: 0;\n left: 0;\n width: 50px;\n line-height: 50px;\n font-size: 22px;\n color: #444;\n}\n.userEL1770119 .carousel-control.left,\n.userEL1770119 .carousel-control.right {\n background: rgba(255, 255, 255, 0.4);\n}\n.userEL1770119 .carousel-control.right {\n left: 50%;\n right: auto;\n background: rgba(255, 255, 255, 0.6);\n}\n.userEL1770119. control-box-wrap {\n position: relative;\n max-width: 1170px;\n width: 100%;\n}\n.userEL1770119 .control-box {\n position: absolute;\n bottom: 0;\n right: 0;\n width: 100px;\n display: inline-block;\n height: 50px;\n z-index: 3;\n background-repeat: no-repeat;\n background-size: cover;\n background-position: center center;\n}\n@media only screen and (max-width: 1199px) {\n .userEL1770119 .text {\n  max-width: 940px;\n }\n}\n@media only screen and (max-width: 991px) {\n .userEL1770119 .text {\n  max-width: 720px;\n }\n .userEL1770119 .carousel-fade,\n    .userEL1770119 .carousel-fade .carousel-inner,\n    .userEL1770119 .carousel-fade .fill,\n    .userEL1770119 .carousel-fade .item {\n  height: 500px;\n }\n .userEL1770119 .carousel-control {\n  width: 100px;\n }\n .userEL1770119 .carousel-control.right {\n  left: 50%;\n }\n .userEL1770119 h1.head_title {\n  margin-bottom: 16px;\n }\n .userEL1770119 .bar {\n  margin: 24px auto 20px;\n  width: 56px;\n }\n .userEL1770119 div.newtemp {\n  margin-top: 16px;\n }\n}\n@media only screen and (max-width:767px) {\n .userEL1770119 .text {\n  padding: 0 15px;\n }\n .userEL1770119 .carousel-fade,\n    .userEL1770119 .carousel-fade .carousel-inner,\n    .userEL1770119 .carousel-fade .fill,\n    .userEL1770119 .carousel-fade .item {\n  height: 500px;\n }\n .userEL1770119 .control-box {\n  height: 40px;\n  width: 80px;\n }\n .userEL1770119 .carousel-indicators {\n  bottom: 0;\n }\n .userEL1770119 .carousel-fade .carousel-control {\n  width: 40px;\n }\n .userEL1770119 .carousel-control i {\n  width: 40px;\n  line-height: 40px;\n }\n .userEL1770119 h1.head_title {\n  margin-bottom: 10px;\n }\n .userEL1770119 .bar {\n  margin: 15px auto 12.5px;\n  width: 40px;\n }\n .userEL1770119 div.newtemp {\n  margin-top: 10px;\n }\n}\n@media only screen and (max-width: 480px) {\n .userEL1770119 .carousel-fade,\n    .userEL1770119 .carousel-fade .carousel-inner,\n    .userEL1770119 .carousel-fade .fill,\n    .userEL1770119 .carousel-fade .item {\n  height: 500px;\n }\n .userEL1770119 .control-box {\n  width: 80px;\n }\n}\n.userEL1770119 div.newtemp {\n overflow: hidden;\n color: #aaa;\n margin-top: 20px;\n margin-bottom: 0;\n white-space: normal;\n word-wrap: break-word;\n display: -webkit-box;\n -webkit-line-clamp: 4;\n -webkit-box-orient: vertical;\n}\n","eljs":"","elnew":"","elsettings":"{}","blockname":"","fonts":{"Playfair Display":"@font-face {font-family:'Playfair Display';font-style: normal;font-weight: 400;src: local('Playfair Display Regular'), local('PlayfairDisplay-Regular'), url('https:\/\/fonts.gstatic.com\/s\/playfairdisplay\/v13\/nuFiD-vYSZviVYUb_rj3ij__anPXDTjYgFE_.woff2') format('woff2');unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face {font-family:'Playfair Display';font-style: normal;font-weight: 400;src: local('Playfair Display Regular'), local('PlayfairDisplay-Regular'), url('https:\/\/fonts.gstatic.com\/s\/playfairdisplay\/v13\/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2') format('woff2');unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;}@font-face {font-family:'Playfair Display';font-style: normal;font-weight: 400;src: local('Playfair Display Regular'), local('PlayfairDisplay-Regular'), url('https:\/\/fonts.gstatic.com\/s\/playfairdisplay\/v13\/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2') format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face {font-family:'Playfair Display';font-style: normal;font-weight: 400;src: local('Playfair Display Regular'), local('PlayfairDisplay-Regular'), url('https:\/\/fonts.gstatic.com\/s\/playfairdisplay\/v13\/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2') format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}","Iropke Batang":"@font-face {font-family:'Iropke Batang';src:url('\/\/storage.googleapis.com\/cr-resource\/fonts\/IropkeBatangM.eot?#iefix') format('embedded-opentype'),url('\/\/storage.googleapis.com\/cr-resource\/fonts\/IropkeBatangM.woff') format('woff'),url('\/\/storage.googleapis.com\/cr-resource\/fonts\/IropkeBatangM.ttf') format('truetype');font-style: normal;font-weight: normal;}"},"price_hidden":"OFF"},"view":0},"el1847017":{"element":{"seq":"1847017","sid":"1153404","page":"\ud648","orgpage":"\ud648","type":"gallery","type2":"","overlap":"0","feature":"","pos":"2","orgpos":"2","mode":"project","folder":"800","linkto":"","name":"gallery23","elname":"userEL1847017","eltag":"&lt;div class=&quot;userEL1847017&quot;&gt;\n &lt;input class=&quot;goption full-width&quot; type=&quot;hidden&quot; value=&quot;1&quot; data-gcol=&quot;4&quot; data-gcol-t=&quot;2&quot; data-gcol-m=&quot;2&quot; data-gpd=&quot;8&quot; data-gh=&quot;1&quot; data-gsort=&quot;n&quot;&gt;\n &lt;div class=&quot;container full-width&quot;&gt;\n        &lt;div class=&quot;row multi-columns-row gflex&quot; data-loop=&quot;true&quot; data-view=&quot;32&quot;&gt;\n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n        &lt;div class=&quot;grid gallery-item&quot; data-selector=&quot;.grid&quot; data-tbackground=&quot;true&quot; data-title=&quot;text background&quot; data-index=&quot;0&quot; data-seq=&quot;188829&quot;&gt;\n                &lt;a href=&quot;\/%ED%99%88\/view\/188829&quot; data-title=&quot;\uc6b4\ud589\ub178\uc120 \ubc0f \uc2dc\uac04\ud45c&quot;&gt;\n                    &lt;figure&gt;\n                        &lt;div class=&quot;img-wrapper&quot;&gt;\n                            &lt;div class=&quot;g-img&quot; style=&quot;background-image:url(https:\/\/lh3.googleusercontent.com\/-F6tD91VCXwa_F8hmkJocyhyS7DFEIrm5zgPh3g-fAAHYBZ5oaEp731rQWf4DfbPUhKLYKo1igUDTPrf6pZzBRN67dfVgAbD1AxNT0r6iZE5PMZqpFB8scM=w800);&quot;&gt;&lt;\/div&gt;\n                            &lt;img src=&quot;https:\/\/lh3.googleusercontent.com\/-F6tD91VCXwa_F8hmkJocyhyS7DFEIrm5zgPh3g-fAAHYBZ5oaEp731rQWf4DfbPUhKLYKo1igUDTPrf6pZzBRN67dfVgAbD1AxNT0r6iZE5PMZqpFB8scM=w800&quot; class=&quot;img-responsive&quot; alt=&quot;\uc6b4\ud589\ub178\uc120 \ubc0f \uc2dc\uac04\ud45c&quot;&gt;\n                        &lt;\/div&gt;\n                        &lt;figcaption data-selector=&quot;figcaption .sh-pcolor&quot; data-font=&quot;true&quot; data-title=&quot;shopping point color&quot;&gt;\n                            &lt;h5 class=&quot;figure title&quot; data-selector=&quot;h5.figure&quot; data-font=&quot;true&quot; data-title=&quot;title font&quot;&gt;\uc6b4\ud589\ub178\uc120 \ubc0f \uc2dc\uac04\ud45c&lt;\/h5&gt;\n                            \n                            \n                            \n                            \n                            \n                            \n                        &lt;\/figcaption&gt;\n                    &lt;\/figure&gt;\n                &lt;\/a&gt;\n            &lt;\/div&gt;\n&lt;div class=&quot;grid gallery-item&quot; data-index=&quot;1&quot; data-seq=&quot;188831&quot;&gt;\n                &lt;a href=&quot;\/%ED%99%88\/view\/188831&quot; data-title=&quot;\uacf5\uc9c0\uc0ac\ud56d&quot;&gt;\n                    &lt;figure&gt;\n                        &lt;div class=&quot;img-wrapper&quot;&gt;\n                            &lt;div class=&quot;g-img&quot; style=&quot;background-image:url(https:\/\/lh3.googleusercontent.com\/i4rz8C7Wip7yTV5qGsyCG17XlpI-u4kheA10oyZA4mkivW-T3M1lvQ7GD28yptyQ1WPhnKgOsf5WAYDqJFMe0fuX0SwrGGNHp3rxs5GxXVsf61AgSvkqIVw=w800);&quot;&gt;&lt;\/div&gt;\n                            &lt;img src=&quot;https:\/\/lh3.googleusercontent.com\/i4rz8C7Wip7yTV5qGsyCG17XlpI-u4kheA10oyZA4mkivW-T3M1lvQ7GD28yptyQ1WPhnKgOsf5WAYDqJFMe0fuX0SwrGGNHp3rxs5GxXVsf61AgSvkqIVw=w800&quot; class=&quot;img-responsive&quot; alt=&quot;\uacf5\uc9c0\uc0ac\ud56d&quot;&gt;\n                        &lt;\/div&gt;\n                        &lt;figcaption&gt;\n                            &lt;h5 class=&quot;figure title&quot;&gt;\uacf5\uc9c0\uc0ac\ud56d&lt;\/h5&gt;\n                            \n                            \n                            \n                            \n                            \n                            \n                        &lt;\/figcaption&gt;\n                    &lt;\/figure&gt;\n                &lt;\/a&gt;\n            &lt;\/div&gt;\n&lt;div class=&quot;grid gallery-item&quot; data-index=&quot;2&quot; data-seq=&quot;188830&quot;&gt;\n                &lt;a href=&quot;\/%ED%99%88\/view\/188830&quot; data-title=&quot;\uc18c\uc911\ud55c \uc758\uacac&quot;&gt;\n                    &lt;figure&gt;\n                        &lt;div class=&quot;img-wrapper&quot;&gt;\n                            &lt;div class=&quot;g-img&quot; style=&quot;background-image:url(https:\/\/lh3.googleusercontent.com\/B0MvrWcIBCcJ1i76O1CmYpIYTXa1ghGN2Y9TqMbKCJdskVhP-jli-URH-tbsc5b7tMoY_SomVMdMFpj-NQKPcLVbNVHUWZV3Ahpd8oMTCxWUizqBVHvOtw=w800);&quot;&gt;&lt;\/div&gt;\n                            &lt;img src=&quot;https:\/\/lh3.googleusercontent.com\/B0MvrWcIBCcJ1i76O1CmYpIYTXa1ghGN2Y9TqMbKCJdskVhP-jli-URH-tbsc5b7tMoY_SomVMdMFpj-NQKPcLVbNVHUWZV3Ahpd8oMTCxWUizqBVHvOtw=w800&quot; class=&quot;img-responsive&quot; alt=&quot;\uc18c\uc911\ud55c \uc758\uacac&quot;&gt;\n                        &lt;\/div&gt;\n                        &lt;figcaption&gt;\n                            &lt;h5 class=&quot;figure title&quot;&gt;\uc18c\uc911\ud55c \uc758\uacac&lt;\/h5&gt;\n                            \n                            \n                            \n                            \n                            \n                            \n                        &lt;\/figcaption&gt;\n                    &lt;\/figure&gt;\n                &lt;\/a&gt;\n            &lt;\/div&gt;\n&lt;div class=&quot;grid gallery-item&quot; data-index=&quot;3&quot; data-seq=&quot;188832&quot;&gt;\n                &lt;a href=&quot;\/%ED%99%88\/view\/188832&quot; data-title=&quot;\uc0ac\uc5c5\uc7a5 \uc18c\uc7ac\uc9c0&quot;&gt;\n                    &lt;figure&gt;\n                        &lt;div class=&quot;img-wrapper&quot;&gt;\n                            &lt;div class=&quot;g-img&quot; style=&quot;background-image:url(https:\/\/lh3.googleusercontent.com\/8NqF2nJKWe5n0xGTyHXP4MG-jzGqMUO7prtHO-Z7ouapAp5Iay_T7jAKDfdB4VpOXQKeET5-5kwp9qwc5NYXYbhViWHOYCU4hgj0B7gYJbO2bO7CXjXjOp8=w800);&quot;&gt;&lt;\/div&gt;\n                            &lt;img src=&quot;https:\/\/lh3.googleusercontent.com\/8NqF2nJKWe5n0xGTyHXP4MG-jzGqMUO7prtHO-Z7ouapAp5Iay_T7jAKDfdB4VpOXQKeET5-5kwp9qwc5NYXYbhViWHOYCU4hgj0B7gYJbO2bO7CXjXjOp8=w800&quot; class=&quot;img-responsive&quot; alt=&quot;\uc0ac\uc5c5\uc7a5 \uc18c\uc7ac\uc9c0&quot;&gt;\n                        &lt;\/div&gt;\n                        &lt;figcaption&gt;\n                            &lt;h5 class=&quot;figure title&quot;&gt;\uc0ac\uc5c5\uc7a5 \uc18c\uc7ac\uc9c0&lt;\/h5&gt;\n                            \n                            \n                            \n                            \n                            \n                            \n                        &lt;\/figcaption&gt;\n                    &lt;\/figure&gt;\n                &lt;\/a&gt;\n            &lt;\/div&gt;\n&lt;\/div&gt;\n    &lt;\/div&gt;\n&lt;\/div&gt;","elcss":".userEL1847017 {\n --gallery-figure-title-fname: Nanum Gothic;\n --gallery-figure-title-color-alpha: rgba(69, 69, 69, 0.15);\n --gallery-figure-title-color-alpha2: rgba(69, 69, 69, 0.5);\n --gallery-figure-title-color: #454545;\n padding: 20px 0px 20px 0px;\n background-color: #fff;\n background-image: none;\n background-repeat: no-repeat;\n background-position: center center;\n background-size: cover;\n color: ;\n --btn-color: #454545;\n --btn-bgcolor: #fff;\n --btn-line: transparent;\n --btn-color-hover: #454545;\n --btn-bgcolor-hover: #fff;\n --btn-line-hover: transparent;\n}\n.userEL1847017 .grid {\n background-color: #ffffff;\n background-image: none;\n background-repeat: no-repeat;\n background-position: center center;\n background-size: cover;\n background-clip: content-box;\n}\n.userEL1847017 figure:hover .g-img,\n.userEL1847017 figure:hover img {\n -webkit-transition: all .3s ease-in-out;\n -moz-transition: all .3s ease-in-out;\n -ms-transition: all .3s ease-in-out;\n -o-transition: all .3s ease-in-out;\n transition: all .3s ease-in-out;\n opacity: 0.4;\n}\n.userEL1847017 figcaption {\n text-align: center;\n padding: 11px 15px 9px;\n}\n.userEL1847017 .full-width figcaption {\n padding: 13px 15px 11px;\n}\n.userEL1847017 figcaption .sh-pcolor {\n color: #ee445f;\n}\n.userEL1847017 h5.figure {\n font-family: Nanum Barun Gothic;\n font-size: 12px;\n color: #454545;\n text-overflow: ellipsis;\n white-space: nowrap;\n overflow: hidden;\n display: block;\n padding-bottom: 1px;\n margin-top: 3px;\n margin-bottom: 0;\n}\n.userEL1847017 figure:hover h5.figure {\n text-decoration: underline;\n}\n.userEL1847017 .figure.price {\n font-family: 'Noto Sans', 'Noto Sans KR';\n font-size: 11px;\n color: #5c5c5c;\n margin-top: 3px;\n}\n.userEL1847017 p.figure {\n font-family: 'Oswald', 'Nanum Gothic';\n font-size: 11px;\n color: #454545;\n fill: #454545;\n text-overflow: ellipsis;\n overflow: hidden;\n -webkit-line-clamp: 3;\n -webkit-box-orient: vertical;\n display: block;\n display: -webkit-box;\n word-wrap: break-word;\n margin-top: 3px;\n margin-bottom: 0;\n}\n.userEL1847017 .figure.review {\n font-family: 'Noto Sans KR';\n font-size: 13px;\n text-align: left;\n color: #454545;\n float: left;\n width: 70%;\n margin-top: 3px;\n}\n.userEL1847017 .figure.like .figure-like-cnt {\n color: #454545;\n}\n.userEL1847017 .figure.like > svg {\n fill: #454545;\n}\n.userEL1847017 .figure.like.active .figure-like-cnt {\n color: #ee445f;\n}\n.userEL1847017 .figure.like.active > svg,\n.userEL1847017 .figure.like.active > svg > path:first-child {\n fill: #ee445f;\n}\n.userEL1847017 .figure.basket:not(.hide) {\n padding-top: 25px!important;\n padding-bottom: 0px!important;\n}\n.userEL1847017 .gallery-loadmore {\n margin-top: 45px;\n padding: 20px 15px;\n min-width: 220px;\n font-family: 'Oswald', 'Nanum Gothic';\n font-size: 11px;\n letter-spacing: 0.1em;\n color: var(--btn-color);\n background-color: var(--btn-bgcolor);\n border: 1px solid transparent;\n transition: ease-in-out 0.3s;\n -o-transition: ease-in-out 0.3s;\n -ms-transition: ease-in-out 0.3s;\n -moz-transition: ease-in-out 0.3s;\n -webkit-transition: ease-in-out 0.3s;\n border-color: var(--btn-line);\n}\n.userEL1847017 .gallery-loadmore:hover {\n color: var(--btn-color-hover);\n background-color: var(--btn-bgcolor-hover);\n border-color: var(--btn-line-hover);\n}\n.userEL1847017[data-mode=\"shopping\"] figcaption {\n text-align: left;\n}\n.userEL1847017[data-mode=\"shopping\"] figcaption:before,\n.userEL1847017[data-mode=\"shopping\"] figcaption:after {\n content: ' ';\n display: table;\n clear: both;\n}\n.userEL1847017[data-mode=\"shopping\"] h5.figure {\n text-align: left;\n}\n.userEL1847017[data-mode=\"shopping\"] p.figure {\n text-align: left;\n float: none;\n clear: both;\n}\n.userEL1847017[data-mode=\"shopping\"] .figure.price:not(.hide) + p.figure:not(.hide) {\n width: 70%;\n float: left;\n clear: none;\n}\n@media only screen and (max-width:991px) {\n .userEL1847017 .figure.basket:not(.hide) {\n  padding-top: 20px!important;\n }\n .userEL1847017 .gallery-loadmore {\n  margin-top: 36px;\n  padding: 16px 15px;\n }\n}\n@media only screen and (max-width:768px) {\n .userEL1847017 figcaption,\n  .userEL1847017 .full-width figcaption {\n  padding: 8px 0 11px;\n }\n .userEL1847017 .figure.basket:not(.hide) {\n  padding-top: 13px!important;\n }\n .userEL1847017 .gallery-loadmore {\n  margin-top: 22.5px;\n  padding: 10px 15px;\n }\n}\n","eljs":"","elnew":"","elsettings":"{\"category_color_type\":\"\",\"field_disable\":[\"caption\",\"comment\",\"like\"],\"blocklang\":\"ko\",\"blockorg\":\"gallery23\"}","blockname":"","fonts":{"Nanum Barun Gothic":"@font-face{font-family:'Nanum Barun Gothic';font-style:normal;font-weight:700;src:url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Bold.eot?#iefix) format('embedded-opentype'),url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Bold.woff) format('woff'),url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Bold.ttf) format('truetype')}@font-face{font-family:'Nanum Barun Gothic';font-style:normal;font-weight:400;src:url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Regular.eot?#iefix) format('embedded-opentype'),url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Regular.woff) format('woff'),url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Regular.ttf) format('truetype');}@font-face{font-family:'Nanum Barun Gothic';font-style:normal;font-weight:100;src:url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Light.eot?#iefix) format('embedded-opentype'),url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Light.woff) format('woff'),url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Light.ttf) format('truetype');}","Noto Sans":"@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr6DRAW_0.woff2') format('woff2');unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr4TRAW_0.woff2') format('woff2');unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr5DRAW_0.woff2') format('woff2');unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr6TRAW_0.woff2') format('woff2');unicode-range: U+1F00-1FFF;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr5jRAW_0.woff2') format('woff2');unicode-range: U+0370-03FF;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr6jRAW_0.woff2') format('woff2');unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr6zRAW_0.woff2') format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr5TRA.woff2') format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}","Noto Sans KR":"@font-face{font-family:'Noto Sans KR';font-style: normal;font-weight: 100;src: url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-100.woff2) format('woff2'),url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-100.woff) format('woff'),url(\/\/cdn.jsdelivr.net\/npm\/@noonnu\/noto-sans-kr@0.1.0\/fonts\/noto-sans-kr-100.otf) format('opentype');}@font-face{font-family:'Noto Sans KR';font-style: normal;font-weight: 300;src: url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-300.woff2) format('woff2'),rl(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-300.woff) format('woff'),rl(\/\/cdn.jsdelivr.net\/npm\/@noonnu\/noto-sans-kr@0.1.0\/fonts\/noto-sans-kr-300.otf) format('opentype');}@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 400; src: url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-400.woff2) format('woff2'),url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-400.woff) format('woff'),url(\/\/cdn.jsdelivr.net\/npm\/@noonnu\/noto-sans-kr@0.1.0\/fonts\/noto-sans-kr-400.otf) format('opentype');}@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 500; src: url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-500.woff2) format('woff2'),url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-500.woff) format('woff'),url(\/\/cdn.jsdelivr.net\/npm\/@noonnu\/noto-sans-kr@0.1.0\/fonts\/noto-sans-kr-500.otf) format('opentype');}@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 700; src: url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-700.woff) format('woff2'),url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-700.woff) format('woff'),url(\/\/cdn.jsdelivr.net\/npm\/@noonnu\/noto-sans-kr@0.1.0\/fonts\/noto-sans-kr-700.otf) format('opentype'); }@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 900; src: url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-900.woff2) format('woff2'),url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-900.woff) format('woff'),url(\/\/cdn.jsdelivr.net\/npm\/@noonnu\/noto-sans-kr@0.1.0\/fonts\/noto-sans-kr-900.otf) format('opentype'); }","Oswald":"@font-face {font-family: 'Oswald'; font-style: normal; font-weight: 400; src: local('Oswald Regular'), local('Oswald-Regular'), url('https:\/\/fonts.gstatic.com\/s\/oswald\/v16\/TK3iWkUHHAIjg752HT8Ghe4.woff2') format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face { font-family: 'Oswald'; font-style: normal; font-weight: 400; src: local('Oswald Regular'), local('Oswald-Regular'), url('https:\/\/fonts.gstatic.com\/s\/oswald\/v16\/TK3iWkUHHAIjg752Fj8Ghe4.woff2') format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;}@font-face { font-family: 'Oswald'; font-style: normal; font-weight: 400; src: local('Oswald Regular'), local('Oswald-Regular'), url('https:\/\/fonts.gstatic.com\/s\/oswald\/v16\/TK3iWkUHHAIjg752Fz8Ghe4.woff2') format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face { font-family: 'Oswald'; font-style: normal; font-weight: 400; src: local('Oswald Regular'), local('Oswald-Regular'), url('https:\/\/fonts.gstatic.com\/s\/oswald\/v16\/TK3iWkUHHAIjg752GT8G.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}","Nanum Gothic":""},"price_hidden":"OFF"},"view":"32","total":4,"list":[{"seq":"188829","sid":"1153404","page":"\ud648","pid":"1847017","pos":"1.0000","folder":"0","title":"\uc6b4\ud589\ub178\uc120 \ubc0f \uc2dc\uac04\ud45c","caption":"","content":"","hashtag":"","category":"||","image":"https:\/\/lh3.googleusercontent.com\/-F6tD91VCXwa_F8hmkJocyhyS7DFEIrm5zgPh3g-fAAHYBZ5oaEp731rQWf4DfbPUhKLYKo1igUDTPrf6pZzBRN67dfVgAbD1AxNT0r6iZE5PMZqpFB8scM=w600-h600-n","alt":"KakaoTalk_20250221_161030071_01.jpg","url":"","hit":"1491","visible":"0","datetime":"Nov 25,2020","gsettings":"{\"glink\":\"7Jq07ZaJ7Iuc6rCE\",\"glink_target\":\"\",\"grade_onoff\":\"OFF\"}","comment_cnt":"0","like_ids":"","pf_gsettings":"{\"glink\":\"7Jq07ZaJ7Iuc6rCE\",\"glink_target\":\"\"}","gallery_page":"\ud648","parent_page":"\ud648","parent_orgpage":"\ud648","grade_onoff":"OFF","price_hidden":"OFF","like":{"cnt":0,"own":false,"l_mb_id":"20.127.238.80"}},{"seq":"188831","sid":"1153404","page":"\ud648","pid":"1847017","pos":"1.0001","folder":"0","title":"\uacf5\uc9c0\uc0ac\ud56d","caption":"","content":"","hashtag":"","category":"||","image":"https:\/\/lh3.googleusercontent.com\/i4rz8C7Wip7yTV5qGsyCG17XlpI-u4kheA10oyZA4mkivW-T3M1lvQ7GD28yptyQ1WPhnKgOsf5WAYDqJFMe0fuX0SwrGGNHp3rxs5GxXVsf61AgSvkqIVw=w600-h600-n","alt":"KakaoTalk_20250221_161030071.jpg","url":"","hit":"3398","visible":"0","datetime":"Nov 25,2020","gsettings":"{\"glink\":\"6rO17KeA7IKs7ZWt\",\"glink_target\":\"\",\"grade_onoff\":\"OFF\"}","comment_cnt":"0","like_ids":"","pf_gsettings":"{\"glink\":\"6rO17KeA7IKs7ZWt\",\"glink_target\":\"\"}","gallery_page":"\ud648","parent_page":"\ud648","parent_orgpage":"\ud648","grade_onoff":"OFF","price_hidden":"OFF","like":{"cnt":0,"own":false,"l_mb_id":"20.127.238.80"}},{"seq":"188830","sid":"1153404","page":"\ud648","pid":"1847017","pos":"1.0002","folder":"0","title":"\uc18c\uc911\ud55c \uc758\uacac","caption":"","content":"","hashtag":"","category":"||","image":"https:\/\/lh3.googleusercontent.com\/B0MvrWcIBCcJ1i76O1CmYpIYTXa1ghGN2Y9TqMbKCJdskVhP-jli-URH-tbsc5b7tMoY_SomVMdMFpj-NQKPcLVbNVHUWZV3Ahpd8oMTCxWUizqBVHvOtw=w600-h600-n","alt":"KakaoTalk_20250221_161030071_02.jpg","url":"","hit":"1847","visible":"0","datetime":"Nov 25,2020","gsettings":"{\"glink\":\"7IaM7KSR7ZWcIOydmOqyrA==\",\"glink_target\":\"\",\"grade_onoff\":\"OFF\"}","comment_cnt":"0","like_ids":"","pf_gsettings":"{\"glink\":\"7IaM7KSR7ZWcIOydmOqyrA==\",\"glink_target\":\"\"}","gallery_page":"\ud648","parent_page":"\ud648","parent_orgpage":"\ud648","grade_onoff":"OFF","price_hidden":"OFF","like":{"cnt":0,"own":false,"l_mb_id":"20.127.238.80"}},{"seq":"188832","sid":"1153404","page":"\ud648","pid":"1847017","pos":"1.0004","folder":"0","title":"\uc0ac\uc5c5\uc7a5 \uc18c\uc7ac\uc9c0","caption":"","content":"","hashtag":"","category":"||","image":"https:\/\/lh3.googleusercontent.com\/8NqF2nJKWe5n0xGTyHXP4MG-jzGqMUO7prtHO-Z7ouapAp5Iay_T7jAKDfdB4VpOXQKeET5-5kwp9qwc5NYXYbhViWHOYCU4hgj0B7gYJbO2bO7CXjXjOp8=w600-h600-n","alt":"KakaoTalk_20250221_161032831.jpg","url":"","hit":"2942","visible":"0","datetime":"Nov 25,2020","gsettings":"{\"glink\":\"7ZqM7IKsIOyGjOqwnA==\",\"glink_target\":\"\",\"grade_onoff\":\"OFF\"}","comment_cnt":"0","like_ids":"","pf_gsettings":"{\"glink\":\"7ZqM7IKsIOyGjOqwnA==\",\"glink_target\":\"\"}","gallery_page":"\ud648","parent_page":"\ud648","parent_orgpage":"\ud648","grade_onoff":"OFF","price_hidden":"OFF","like":{"cnt":0,"own":false,"l_mb_id":"20.127.238.80"}}],"badge_settings":[],"source":"<div class=\"userEL1847017 hide preloading\">\n <input class=\"goption full-width\" type=\"hidden\" value=\"1\" data-gcol=\"4\" data-gcol-t=\"2\" data-gcol-m=\"2\" data-gpd=\"8\" data-gh=\"1\" data-gsort=\"n\">\n <div class=\"container full-width\">\n        <div class=\"row multi-columns-row gflex\" data-loop=\"true\" data-view=\"32\">\n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n        \n\n\n\n<div class=\"grid gallery-item\" data-selector=\".grid\" data-tbackground=\"true\" data-title=\"text background\" data-index=\"0\" data-seq=\"188829\">\n                <a href=\"\/%ED%99%88\/view\/188829\" data-title=\"\uc6b4\ud589\ub178\uc120 \ubc0f \uc2dc\uac04\ud45c\">\n                    <figure>\n                        <div class=\"img-wrapper\">\n                            <div class=\"g-img\" style=\"background-image:url(https:\/\/lh3.googleusercontent.com\/-F6tD91VCXwa_F8hmkJocyhyS7DFEIrm5zgPh3g-fAAHYBZ5oaEp731rQWf4DfbPUhKLYKo1igUDTPrf6pZzBRN67dfVgAbD1AxNT0r6iZE5PMZqpFB8scM=w800);\"><\/div>\n                            <img src=\"https:\/\/lh3.googleusercontent.com\/-F6tD91VCXwa_F8hmkJocyhyS7DFEIrm5zgPh3g-fAAHYBZ5oaEp731rQWf4DfbPUhKLYKo1igUDTPrf6pZzBRN67dfVgAbD1AxNT0r6iZE5PMZqpFB8scM=w800\" class=\"img-responsive\" alt=\"\uc6b4\ud589\ub178\uc120 \ubc0f \uc2dc\uac04\ud45c\">\n                        <\/div>\n                        <figcaption data-selector=\"figcaption .sh-pcolor\" data-font=\"true\" data-title=\"shopping point color\">\n                            <h5 class=\"figure title\" data-selector=\"h5.figure\" data-font=\"true\" data-title=\"title font\">\uc6b4\ud589\ub178\uc120 \ubc0f \uc2dc\uac04\ud45c<\/h5>\n                            \n                            \n                            \n                            \n                            \n                            \n                        <\/figcaption>\n                    <\/figure>\n                <\/a>\n            <\/div>\n<div class=\"grid gallery-item\" data-index=\"1\" data-seq=\"188831\">\n                <a href=\"\/%ED%99%88\/view\/188831\" data-title=\"\uacf5\uc9c0\uc0ac\ud56d\">\n                    <figure>\n                        <div class=\"img-wrapper\">\n                            <div class=\"g-img\" style=\"background-image:url(https:\/\/lh3.googleusercontent.com\/i4rz8C7Wip7yTV5qGsyCG17XlpI-u4kheA10oyZA4mkivW-T3M1lvQ7GD28yptyQ1WPhnKgOsf5WAYDqJFMe0fuX0SwrGGNHp3rxs5GxXVsf61AgSvkqIVw=w800);\"><\/div>\n                            <img src=\"https:\/\/lh3.googleusercontent.com\/i4rz8C7Wip7yTV5qGsyCG17XlpI-u4kheA10oyZA4mkivW-T3M1lvQ7GD28yptyQ1WPhnKgOsf5WAYDqJFMe0fuX0SwrGGNHp3rxs5GxXVsf61AgSvkqIVw=w800\" class=\"img-responsive\" alt=\"\uacf5\uc9c0\uc0ac\ud56d\">\n                        <\/div>\n                        <figcaption>\n                            <h5 class=\"figure title\">\uacf5\uc9c0\uc0ac\ud56d<\/h5>\n                            \n                            \n                            \n                            \n                            \n                            \n                        <\/figcaption>\n                    <\/figure>\n                <\/a>\n            <\/div>\n<div class=\"grid gallery-item\" data-index=\"2\" data-seq=\"188830\">\n                <a href=\"\/%ED%99%88\/view\/188830\" data-title=\"\uc18c\uc911\ud55c \uc758\uacac\">\n                    <figure>\n                        <div class=\"img-wrapper\">\n                            <div class=\"g-img\" style=\"background-image:url(https:\/\/lh3.googleusercontent.com\/B0MvrWcIBCcJ1i76O1CmYpIYTXa1ghGN2Y9TqMbKCJdskVhP-jli-URH-tbsc5b7tMoY_SomVMdMFpj-NQKPcLVbNVHUWZV3Ahpd8oMTCxWUizqBVHvOtw=w800);\"><\/div>\n                            <img src=\"https:\/\/lh3.googleusercontent.com\/B0MvrWcIBCcJ1i76O1CmYpIYTXa1ghGN2Y9TqMbKCJdskVhP-jli-URH-tbsc5b7tMoY_SomVMdMFpj-NQKPcLVbNVHUWZV3Ahpd8oMTCxWUizqBVHvOtw=w800\" class=\"img-responsive\" alt=\"\uc18c\uc911\ud55c \uc758\uacac\">\n                        <\/div>\n                        <figcaption>\n                            <h5 class=\"figure title\">\uc18c\uc911\ud55c \uc758\uacac<\/h5>\n                            \n                            \n                            \n                            \n                            \n                            \n                        <\/figcaption>\n                    <\/figure>\n                <\/a>\n            <\/div>\n<div class=\"grid gallery-item\" data-index=\"3\" data-seq=\"188832\">\n                <a href=\"\/%ED%99%88\/view\/188832\" data-title=\"\uc0ac\uc5c5\uc7a5 \uc18c\uc7ac\uc9c0\">\n                    <figure>\n                        <div class=\"img-wrapper\">\n                            <div class=\"g-img\" style=\"background-image:url(https:\/\/lh3.googleusercontent.com\/8NqF2nJKWe5n0xGTyHXP4MG-jzGqMUO7prtHO-Z7ouapAp5Iay_T7jAKDfdB4VpOXQKeET5-5kwp9qwc5NYXYbhViWHOYCU4hgj0B7gYJbO2bO7CXjXjOp8=w800);\"><\/div>\n                            <img src=\"https:\/\/lh3.googleusercontent.com\/8NqF2nJKWe5n0xGTyHXP4MG-jzGqMUO7prtHO-Z7ouapAp5Iay_T7jAKDfdB4VpOXQKeET5-5kwp9qwc5NYXYbhViWHOYCU4hgj0B7gYJbO2bO7CXjXjOp8=w800\" class=\"img-responsive\" alt=\"\uc0ac\uc5c5\uc7a5 \uc18c\uc7ac\uc9c0\">\n                        <\/div>\n                        <figcaption>\n                            <h5 class=\"figure title\">\uc0ac\uc5c5\uc7a5 \uc18c\uc7ac\uc9c0<\/h5>\n                            \n                            \n                            \n                            \n                            \n                            \n                        <\/figcaption>\n                    <\/figure>\n                <\/a>\n            <\/div>\n<\/div>\n    <\/div>\n<\/div>"},"el1847912":{"element":{"seq":"1847912","sid":"1153404","page":"\ud648","orgpage":"\ud648","type":"contents","type2":"","overlap":"1","feature":"parallax","pos":"3","orgpos":"3","mode":"","folder":"1920","linkto":"","name":"content-text1","elname":"userEL1847912","eltag":"&lt;div data-parallax=&quot;true&quot; data-case=&quot;content-text1&quot; class=&quot;userEL1847912 hide text-center&quot;&gt;\n    &lt;div class=&quot;container full-width bg-box&quot;&gt;\n        &lt;div class=&quot;row&quot;&gt;\n            &lt;div class=&quot;col-xs-12 col-sm-12 col-md-12&quot;&gt;\n                 &lt;h1 class=&quot;head_title&quot; data-edit=&quot;true&quot; data-selector=&quot;h1.head_title&quot; &gt;&lt;div&gt;&lt;span  class=&quot;fsize60&quot;&gt;&zwnj;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;;&quot;&gt;\uc18c\uc911\ud55c \uc758\uacac&lt;\/span&gt;&lt;\/span&gt;&lt;\/div&gt;&lt;div&gt;&lt;span  class=&quot;fsize20&quot;&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;;&quot;&gt;&zwnj;&lt;\/span&gt;&lt;\/span&gt;&lt;\/div&gt;&lt;div&gt;&lt;span  class=&quot;fsize18&quot;&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;;&quot;&gt;&lt;strong&gt;&zwnj;\uc120\uc9c4\uace0\uc18d\uc740 \uace0\uac1d\ub2d8\uc758 \ub9d0\uc500\uc5d0 \uadc0 \uae30\uc6b8\uc774\uace0 \uac1c\uc120\ud558\ub3c4\ub85d \ub178\ub825\ud558\uaca0\uc2b5\ub2c8\ub2e4.&lt;\/strong&gt;&lt;\/span&gt;&lt;\/span&gt;&lt;\/div&gt;&lt;div&gt;&lt;span  class=&quot;fsize18&quot;&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;;&quot;&gt;&zwnj;&lt;\/span&gt;&lt;\/span&gt;&lt;\/div&gt;&lt;\/h1&gt;\n                &lt;br&gt;\n                 &lt;h4 class=&quot;sub_text&quot; data-edit=&quot;true&quot; data-selector=&quot;h4.sub_text&quot;&gt;&lt;span style=&quot;color: rgb(255, 255, 255);&quot;&gt;&lt;span class=&quot;fsize25&quot;&gt;&lt;strong&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;;&quot;&gt;&zwnj;&lt;a data-user-link=&quot;\/\uc18c\uc911\ud55c-\uc758\uacac&quot; href=&quot;\/\uc18c\uc911\ud55c-\uc758\uacac&quot;&gt;&amp;nbsp;\ub0a8\uae30\ub7ec \uac00\uae30\u25b7&lt;\/a&gt;&lt;\/span&gt;&lt;\/strong&gt;&lt;\/span&gt;&lt;\/span&gt;&lt;\/h4&gt;\n            &lt;\/div&gt;\n        &lt;\/div&gt;\n    &lt;\/div&gt;\n&lt;\/div&gt;","elcss":".userEL1847912 {\n background-image: url(\"https:\/\/lh3.googleusercontent.com\/5k76ohF8WnpXO9JPPEKsN_UgbPaFp8R3BGbD-8sWYOSI6UEfMB3v1e5LAO16vT40mBBnYdlvCbbL-Jn8KhqOFCEuPm4GqlHospSMXyvu=w1920-h1278-n\");\n background-size: cover;\n background-position: 50% 50%;\n background-attachment: fixed;\n background-color: ;\n background-repeat: no-repeat;\n padding: 20px 0px 20px 0px;\n color: ;\n font-family: Lora;\n font-size: 13px;\n}\n.element-content .userEL1847912 {\n background-attachment: scroll;\n}\n.userEL1847912 .bg-box {\n padding: 130px 0;\n color: #fff;\n text-align: center;\n}\n.userEL1847912 h1.head_title {\n font-family: 'Lato', 'Nanum Gothic';\n font-weight: normal;\n font-size: inherit;\n color: #fff;\n margin: 0;\n}\n.userEL1847912 h4.sub_text {\n font-family: 'Lato', 'Nanum Gothic';\n font-weight: normal;\n font-size: inherit;\n color: #b4b0b0;\n margin: 0;\n}\n@media only screen and (max-width: 480px) {\n .userEL1847912  h1.head_title {\n  margin-bottom: 10px;\n }\n}\n","eljs":"","elnew":"","elsettings":"{}","blockname":"","fonts":{"Lora":"@font-face {font-family:'Lora';font-style: normal;font-weight: 400;src: local('Lora Regular'), local('Lora-Regular'), url('https:\/\/fonts.gstatic.com\/s\/lora\/v12\/0QIvMX1D_JOuMwf7I-NP.woff2') format('woff2');unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}@font-face {font-family:'Lora';font-style: normal;font-weight: 400;src: local('Lora Regular'), local('Lora-Regular'), url('https:\/\/fonts.gstatic.com\/s\/lora\/v12\/0QIvMX1D_JOuMw77I-NP.woff2') format('woff2');unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face {font-family:'Lora';font-style: normal;font-weight: 400;src: local('Lora Regular'), local('Lora-Regular'), url('https:\/\/fonts.gstatic.com\/s\/lora\/v12\/0QIvMX1D_JOuMwX7I-NP.woff2') format('woff2');unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;}@font-face {font-family:'Lora';font-style: normal;font-weight: 400;src: local('Lora Regular'), local('Lora-Regular'), url('https:\/\/fonts.gstatic.com\/s\/lora\/v12\/0QIvMX1D_JOuMwT7I-NP.woff2') format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face {font-family:'Lora';font-style: normal;font-weight: 400;src: local('Lora Regular'), local('Lora-Regular'), url('https:\/\/fonts.gstatic.com\/s\/lora\/v12\/0QIvMX1D_JOuMwr7Iw.woff2') format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}","Lato":"@font-face {font-family:'Lato';font-style: normal;font-weight: 400;src: local('Lato Regular'), local('Lato-Regular'), url('https:\/\/fonts.gstatic.com\/s\/lato\/v14\/S6uyw4BMUTPHjxAwXjeu.woff2') format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face {font-family:'Lato';font-style: normal;font-weight: 400;src: local('Lato Regular'), local('Lato-Regular'), url('https:\/\/fonts.gstatic.com\/s\/lato\/v14\/S6uyw4BMUTPHjx4wXg.woff2') format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}","Nanum Gothic":"","Iropke Batang":"@font-face {font-family:'Iropke Batang';src:url('\/\/storage.googleapis.com\/cr-resource\/fonts\/IropkeBatangM.eot?#iefix') format('embedded-opentype'),url('\/\/storage.googleapis.com\/cr-resource\/fonts\/IropkeBatangM.woff') format('woff'),url('\/\/storage.googleapis.com\/cr-resource\/fonts\/IropkeBatangM.ttf') format('truetype');font-style: normal;font-weight: normal;}"},"price_hidden":"OFF"},"view":0},"el":{"element":{"eltag":""},"view":0}},
+	ELFONTS : ['Nanum gothic','Noto sans kr','Noto sans','Raleway','Open sans','Lora','Lato','Nanum Gothic','Nanum Square Round','Playfair Display','Iropke Batang','Nanum Barun Gothic','Noto Sans','Noto Sans KR','Oswald'],
+	LOAD : 'PUBLISH',
+	INITPAGE : [{"seq":"1770119","sid":"1153404","page":"\ud648","orgpage":"\ud648","type":"showcase","type2":"","overlap":"0","feature":"","pos":"1","orgpos":"1","mode":"","folder":"1920","linkto":"","name":"showcase35","elname":"userEL1770119","eltag":"&lt;div data-case=&quot;showcase35&quot; class=&quot;userEL1770119&quot;&gt;\n    &lt;div class=&quot;container full-width&quot;&gt;\n        &lt;div class=&quot;carousel slide carousel-fade&quot; id=&quot;userEL1770119-carousel&quot; data-ride=&quot;carousel&quot; data-interval=&quot;10000&quot;&gt;\n            &lt;ol class=&quot;carousel-indicators&quot; data-nav=&quot;true&quot;&gt;\n&lt;li class=&quot;active&quot; data-target=&quot;#userEL1770119-carousel&quot; data-slide-to=&quot;0&quot;&gt;&lt;\/li&gt;\n                &lt;li data-target=&quot;#userEL1770119-carousel&quot; data-slide-to=&quot;1&quot; class=&quot;&quot;&gt;&lt;\/li&gt;&lt;\/ol&gt;\n            &lt;!-- Carousel items --&gt;\n            &lt;div class=&quot;carousel-inner&quot; data-loop=&quot;true&quot;&gt;\n\n                &lt;div class=&quot;item active&quot;&gt;\n                    &lt;div class=&quot;slides-filter&quot;&gt;&lt;\/div&gt;\n                    &lt;div class=&quot;fill userEL1770119-bg1&quot; data-target=&quot;.userEL1770119-bg1&quot; data-attach=&quot;true&quot;&gt;&lt;\/div&gt;\n                    &lt;div class=&quot;text&quot;&gt;\n                        &lt;h1 class=&quot;head_title&quot; data-edit=&quot;true&quot; data-selector=&quot;h1.head_title&quot;&gt;&lt;span class=&quot;fsize52&quot;&gt;SUNJIN EXPRESS&lt;\/span&gt;&lt;\/h1&gt;\n                        &lt;hr class=&quot;bar&quot; data-border=&quot;true&quot; data-selector=&quot;.bar&quot; data-title=&quot;\uc120 \uc0c9\uc0c1&quot;&gt;\n                        &lt;div data-edit=&quot;true&quot; class=&quot;newtemp&quot; data-selector=&quot;div.newtemp&quot; &gt;&lt;div&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;; color: rgb(239, 239, 239);&quot; class=&quot;fsize15&quot;&gt;\uc120\uc9c4\uace0\uc18d\uc740 \uc2b9\uac1d\uc758 \uc548\uc804\uc744 \uac00\uc7a5 \uc911\uc694\ud558\uac8c \uc0dd\uac01\ud569\ub2c8\ub2e4.&lt;\/span&gt;&lt;\/div&gt;&lt;div&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;; color: rgb(239, 239, 239);&quot; class=&quot;fsize15&quot;&gt;\ub3c4\ucc29\uc9c0\uae4c\uc9c0 \uc548\uc804\ud558\uac8c \ubaa8\uc2e4 \uc218 \uc788\ub3c4\ub85d \ucd5c\uc120\uc758 \ub178\ub825\uc744 \ub2e4\ud558\uaca0\uc2b5\ub2c8\ub2e4.&lt;\/span&gt;&lt;\/div&gt;&lt;\/div&gt;\n                    &lt;\/div&gt;\n                &lt;\/div&gt;\n                &lt;div class=&quot;item&quot;&gt;\n                    &lt;div class=&quot;slides-filter&quot;&gt;&lt;\/div&gt;\n                    &lt;div class=&quot;fill userEL1770119-bg2&quot; data-target=&quot;.userEL1770119-bg2&quot; data-attach=&quot;true&quot;&gt;&lt;\/div&gt;\n                    &lt;div class=&quot;text&quot;&gt;\n                        &lt;h1 class=&quot;head_title&quot; data-edit=&quot;true&quot; data-selector=&quot;h1.head_title&quot; &gt;&lt;div&gt;&lt;span  class=&quot;fsize52&quot;&gt;safety&lt;\/span&gt;&lt;\/div&gt;&lt;\/h1&gt;\n                        &lt;hr class=&quot;bar&quot; data-border=&quot;true&quot; data-selector=&quot;.bar&quot; data-title=&quot;\uc120 \uc0c9\uc0c1&quot;&gt;\n                        &lt;div data-edit=&quot;true&quot; class=&quot;newtemp&quot; data-selector=&quot;div.newtemp&quot; &gt;&lt;div&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;; color: rgb(239, 239, 239);&quot; class=&quot;fsize15&quot;&gt;\uc548\uc804\uc740 \uc6b4\uc758 \ubb38\uc81c\uac00 \uc544\ub2c8\ub77c \uc608\ubc29\uc758 \ubb38\uc81c\uc785\ub2c8\ub2e4.&lt;\/span&gt;&lt;\/div&gt;&lt;div&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;; color: rgb(239, 239, 239);&quot; class=&quot;fsize15&quot;&gt;\uc138\uc2ec\ud55c \uc8fc\uc758\ub97c \uae30\uc6b8\uc5ec \uc548\uc804\uc744 \ubc14\ud0d5\uc73c\ub85c \uc2e0\ub8b0\ub97c \uc313\uc544\uac00\uaca0\uc2b5\ub2c8\ub2e4.&amp;nbsp;&lt;\/span&gt;&lt;\/div&gt;&lt;\/div&gt;\n                    &lt;\/div&gt;\n                &lt;\/div&gt;\n                \n\n            &lt;\/div&gt;\n\n            &lt;!-- Carousel nav --&gt;\n            &lt;div class-=&quot;control-box-wrap&quot;&gt;\n                &lt;div class=&quot;control-box&quot; data-title=&quot;\ucee8\ud150\uce20 \ubc15\uc2a4 \ubc30\uacbd&quot; data-selector=&quot;.control-box&quot; data-background=&quot;true&quot;&gt;\n                    &lt;a class=&quot;carousel-control left&quot; href=&quot;#userEL1770119-carousel&quot; data-slide=&quot;prev&quot;&gt;&lt;i class=&quot;fa fa-angle-left&quot; aria-hidden=&quot;true&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;\n                    &lt;a class=&quot;carousel-control right&quot; href=&quot;#userEL1770119-carousel&quot; data-slide=&quot;next&quot;&gt;&lt;i class=&quot;fa fa-angle-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;\/i&gt;&lt;\/a&gt;\n                &lt;\/div&gt;\n            &lt;\/div&gt;\n        &lt;\/div&gt;\n\n    &lt;\/div&gt;\n&lt;\/div&gt;","elcss":".userEL1770119 {\n position: relative;\n}\n.userEL1770119 .text {\n position: absolute;\n top: 50%;\n left: 50%;\n max-width: 1140px;\n width: 100%;\n text-align: center;\n -ms-transform: translate(-50%,-50%);\n -moz-transform: translate(-50%,-50%);\n -o-transform: translate(-50%,-50%);\n -webkit-transform: translate(-50%,-50%);\n transform: translate(-50%,-50%);\n}\n.userEL1770119 h1.head_title {\n font-family: 'Playfair Display';\n font-size: inherit;\n font-weight: normal;\n color: #fff;\n margin-top: 0;\n margin-bottom: 20px;\n white-space: normal;\n word-wrap: break-word;\n}\n.userEL1770119 .bar {\n width: 60px;\n height: 1px;\n margin: 30px auto 25px;\n border: none;\n border-top: 2px solid #c6aa94;\n}\n.userEL1770119 .carousel {\n height: 870px;\n}\n.userEL1770119 .carousel-fade .fill {\n width: 100%;\n height: 870px;\n background-size: cover;\n background-position: center center;\n}\n.userEL1770119 .carousel .item {\n background-color: #000;\n}\n.userEL1770119 .carousel .slides-filter {\n position: absolute;\n width: 100%;\n height: 100%;\n}\n.userEL1770119 .carousel-indicators {\n display: none;\n}\n.userEL1770119 .userEL1770119-bg1 {\n background-image: url(https:\/\/lh3.googleusercontent.com\/rDR2OEZFZ0jmmlX9WB1pcloKemTtxB3T13nR1YcX8iplSR-tDTF79KPJ-sIj6z3oH39M3157uni1otVFUHzeFahK6eKTQYgqt0rzeaBwj_gghKW9dd7KTA=w1920-h1440-n);\n}\n.userEL1770119 .userEL1770119-bg2 {\n background-image: url(https:\/\/lh3.googleusercontent.com\/h7qpFjQWkhexjxH0F8mAgmZYaB3W_rnUO4j_5ZVnVgWCJP_nzHjQk8ObJgyJaLuv1z6O3-GXLR3CFGCMBLBcVgqu1hNrbi39LDITV0b-Ig=w1920-h1407-n);\n}\n.userEL1770119 .userEL1770119-bg3 {\n background-image: url('https:\/\/lh3.googleusercontent.com\/Nc2kDl_Yyix18n8RAliX7fakxHfaHONH9CIHFiVdUnrxNAfFy8b2JXp-_6x7D0P1H3YsewKSD7y9gDuLvZuRAtazv2vNBfMewU5px-M=s0');\n}\n.userEL1770119 .carousel-fade .carousel-inner .item {\n opacity: 0;\n -webkit-transition-property: opacity;\n -moz-transition-property: opacity;\n -o-transition-property: opacity;\n transition-property: opacity;\n}\n.userEL1770119 .carousel-fade .carousel-inner .active {\n opacity: 1;\n}\n.userEL1770119 .carousel-fade .carousel-inner .active.left,\n.userEL1770119 .carousel-fade .carousel-inner .active.right {\n left: 0;\n opacity: 0;\n z-index: 1;\n}\n.userEL1770119 .carousel-fade .carousel-inner .next.left,\n.userEL1770119 .carousel-fade .carousel-inner .prev.right {\n opacity: 1;\n}\n.userEL1770119 .carousel-fade .carousel-control {\n width: 50px;\n z-index: 1;\n text-shadow: none;\n opacity: 1;\n}\n.userEL1770119 .carousel-fade,\n.userEL1770119 .carousel-fade .carousel-inner,\n.userEL1770119 .carousel-fade .item {\n height: 870px;\n}\n.userEL1770119 .carousel-control i {\n position: absolute;\n top: 0;\n left: 0;\n width: 50px;\n line-height: 50px;\n font-size: 22px;\n color: #444;\n}\n.userEL1770119 .carousel-control.left,\n.userEL1770119 .carousel-control.right {\n background: rgba(255, 255, 255, 0.4);\n}\n.userEL1770119 .carousel-control.right {\n left: 50%;\n right: auto;\n background: rgba(255, 255, 255, 0.6);\n}\n.userEL1770119. control-box-wrap {\n position: relative;\n max-width: 1170px;\n width: 100%;\n}\n.userEL1770119 .control-box {\n position: absolute;\n bottom: 0;\n right: 0;\n width: 100px;\n display: inline-block;\n height: 50px;\n z-index: 3;\n background-repeat: no-repeat;\n background-size: cover;\n background-position: center center;\n}\n@media only screen and (max-width: 1199px) {\n .userEL1770119 .text {\n  max-width: 940px;\n }\n}\n@media only screen and (max-width: 991px) {\n .userEL1770119 .text {\n  max-width: 720px;\n }\n .userEL1770119 .carousel-fade,\n    .userEL1770119 .carousel-fade .carousel-inner,\n    .userEL1770119 .carousel-fade .fill,\n    .userEL1770119 .carousel-fade .item {\n  height: 500px;\n }\n .userEL1770119 .carousel-control {\n  width: 100px;\n }\n .userEL1770119 .carousel-control.right {\n  left: 50%;\n }\n .userEL1770119 h1.head_title {\n  margin-bottom: 16px;\n }\n .userEL1770119 .bar {\n  margin: 24px auto 20px;\n  width: 56px;\n }\n .userEL1770119 div.newtemp {\n  margin-top: 16px;\n }\n}\n@media only screen and (max-width:767px) {\n .userEL1770119 .text {\n  padding: 0 15px;\n }\n .userEL1770119 .carousel-fade,\n    .userEL1770119 .carousel-fade .carousel-inner,\n    .userEL1770119 .carousel-fade .fill,\n    .userEL1770119 .carousel-fade .item {\n  height: 500px;\n }\n .userEL1770119 .control-box {\n  height: 40px;\n  width: 80px;\n }\n .userEL1770119 .carousel-indicators {\n  bottom: 0;\n }\n .userEL1770119 .carousel-fade .carousel-control {\n  width: 40px;\n }\n .userEL1770119 .carousel-control i {\n  width: 40px;\n  line-height: 40px;\n }\n .userEL1770119 h1.head_title {\n  margin-bottom: 10px;\n }\n .userEL1770119 .bar {\n  margin: 15px auto 12.5px;\n  width: 40px;\n }\n .userEL1770119 div.newtemp {\n  margin-top: 10px;\n }\n}\n@media only screen and (max-width: 480px) {\n .userEL1770119 .carousel-fade,\n    .userEL1770119 .carousel-fade .carousel-inner,\n    .userEL1770119 .carousel-fade .fill,\n    .userEL1770119 .carousel-fade .item {\n  height: 500px;\n }\n .userEL1770119 .control-box {\n  width: 80px;\n }\n}\n.userEL1770119 div.newtemp {\n overflow: hidden;\n color: #aaa;\n margin-top: 20px;\n margin-bottom: 0;\n white-space: normal;\n word-wrap: break-word;\n display: -webkit-box;\n -webkit-line-clamp: 4;\n -webkit-box-orient: vertical;\n}\n","eljs":"","elnew":"","elsettings":"{}","blockname":"","fonts":{"Playfair Display":"@font-face {font-family:'Playfair Display';font-style: normal;font-weight: 400;src: local('Playfair Display Regular'), local('PlayfairDisplay-Regular'), url('https:\/\/fonts.gstatic.com\/s\/playfairdisplay\/v13\/nuFiD-vYSZviVYUb_rj3ij__anPXDTjYgFE_.woff2') format('woff2');unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face {font-family:'Playfair Display';font-style: normal;font-weight: 400;src: local('Playfair Display Regular'), local('PlayfairDisplay-Regular'), url('https:\/\/fonts.gstatic.com\/s\/playfairdisplay\/v13\/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2') format('woff2');unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;}@font-face {font-family:'Playfair Display';font-style: normal;font-weight: 400;src: local('Playfair Display Regular'), local('PlayfairDisplay-Regular'), url('https:\/\/fonts.gstatic.com\/s\/playfairdisplay\/v13\/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2') format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face {font-family:'Playfair Display';font-style: normal;font-weight: 400;src: local('Playfair Display Regular'), local('PlayfairDisplay-Regular'), url('https:\/\/fonts.gstatic.com\/s\/playfairdisplay\/v13\/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2') format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}","Iropke Batang":"@font-face {font-family:'Iropke Batang';src:url('\/\/storage.googleapis.com\/cr-resource\/fonts\/IropkeBatangM.eot?#iefix') format('embedded-opentype'),url('\/\/storage.googleapis.com\/cr-resource\/fonts\/IropkeBatangM.woff') format('woff'),url('\/\/storage.googleapis.com\/cr-resource\/fonts\/IropkeBatangM.ttf') format('truetype');font-style: normal;font-weight: normal;}"},"price_hidden":"OFF"},{"seq":"1847017","sid":"1153404","page":"\ud648","orgpage":"\ud648","type":"gallery","type2":"","overlap":"0","feature":"","pos":"2","orgpos":"2","mode":"project","folder":"800","linkto":"","name":"gallery23","elname":"userEL1847017","eltag":"&lt;div class=&quot;userEL1847017&quot;&gt;\n &lt;input class=&quot;goption full-width&quot; type=&quot;hidden&quot; value=&quot;1&quot; data-gcol=&quot;4&quot; data-gcol-t=&quot;2&quot; data-gcol-m=&quot;2&quot; data-gpd=&quot;8&quot; data-gh=&quot;1&quot; data-gsort=&quot;n&quot;&gt;\n &lt;div class=&quot;container full-width&quot;&gt;\n        &lt;div class=&quot;row multi-columns-row gflex&quot; data-loop=&quot;true&quot; data-view=&quot;32&quot;&gt;\n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n            \n\n        &lt;div class=&quot;grid gallery-item&quot; data-selector=&quot;.grid&quot; data-tbackground=&quot;true&quot; data-title=&quot;text background&quot; data-index=&quot;0&quot; data-seq=&quot;188829&quot;&gt;\n                &lt;a href=&quot;\/%ED%99%88\/view\/188829&quot; data-title=&quot;\uc6b4\ud589\ub178\uc120 \ubc0f \uc2dc\uac04\ud45c&quot;&gt;\n                    &lt;figure&gt;\n                        &lt;div class=&quot;img-wrapper&quot;&gt;\n                            &lt;div class=&quot;g-img&quot; style=&quot;background-image:url(https:\/\/lh3.googleusercontent.com\/-F6tD91VCXwa_F8hmkJocyhyS7DFEIrm5zgPh3g-fAAHYBZ5oaEp731rQWf4DfbPUhKLYKo1igUDTPrf6pZzBRN67dfVgAbD1AxNT0r6iZE5PMZqpFB8scM=w800);&quot;&gt;&lt;\/div&gt;\n                            &lt;img src=&quot;https:\/\/lh3.googleusercontent.com\/-F6tD91VCXwa_F8hmkJocyhyS7DFEIrm5zgPh3g-fAAHYBZ5oaEp731rQWf4DfbPUhKLYKo1igUDTPrf6pZzBRN67dfVgAbD1AxNT0r6iZE5PMZqpFB8scM=w800&quot; class=&quot;img-responsive&quot; alt=&quot;\uc6b4\ud589\ub178\uc120 \ubc0f \uc2dc\uac04\ud45c&quot;&gt;\n                        &lt;\/div&gt;\n                        &lt;figcaption data-selector=&quot;figcaption .sh-pcolor&quot; data-font=&quot;true&quot; data-title=&quot;shopping point color&quot;&gt;\n                            &lt;h5 class=&quot;figure title&quot; data-selector=&quot;h5.figure&quot; data-font=&quot;true&quot; data-title=&quot;title font&quot;&gt;\uc6b4\ud589\ub178\uc120 \ubc0f \uc2dc\uac04\ud45c&lt;\/h5&gt;\n                            \n                            \n                            \n                            \n                            \n                            \n                        &lt;\/figcaption&gt;\n                    &lt;\/figure&gt;\n                &lt;\/a&gt;\n            &lt;\/div&gt;\n&lt;div class=&quot;grid gallery-item&quot; data-index=&quot;1&quot; data-seq=&quot;188831&quot;&gt;\n                &lt;a href=&quot;\/%ED%99%88\/view\/188831&quot; data-title=&quot;\uacf5\uc9c0\uc0ac\ud56d&quot;&gt;\n                    &lt;figure&gt;\n                        &lt;div class=&quot;img-wrapper&quot;&gt;\n                            &lt;div class=&quot;g-img&quot; style=&quot;background-image:url(https:\/\/lh3.googleusercontent.com\/i4rz8C7Wip7yTV5qGsyCG17XlpI-u4kheA10oyZA4mkivW-T3M1lvQ7GD28yptyQ1WPhnKgOsf5WAYDqJFMe0fuX0SwrGGNHp3rxs5GxXVsf61AgSvkqIVw=w800);&quot;&gt;&lt;\/div&gt;\n                            &lt;img src=&quot;https:\/\/lh3.googleusercontent.com\/i4rz8C7Wip7yTV5qGsyCG17XlpI-u4kheA10oyZA4mkivW-T3M1lvQ7GD28yptyQ1WPhnKgOsf5WAYDqJFMe0fuX0SwrGGNHp3rxs5GxXVsf61AgSvkqIVw=w800&quot; class=&quot;img-responsive&quot; alt=&quot;\uacf5\uc9c0\uc0ac\ud56d&quot;&gt;\n                        &lt;\/div&gt;\n                        &lt;figcaption&gt;\n                            &lt;h5 class=&quot;figure title&quot;&gt;\uacf5\uc9c0\uc0ac\ud56d&lt;\/h5&gt;\n                            \n                            \n                            \n                            \n                            \n                            \n                        &lt;\/figcaption&gt;\n                    &lt;\/figure&gt;\n                &lt;\/a&gt;\n            &lt;\/div&gt;\n&lt;div class=&quot;grid gallery-item&quot; data-index=&quot;2&quot; data-seq=&quot;188830&quot;&gt;\n                &lt;a href=&quot;\/%ED%99%88\/view\/188830&quot; data-title=&quot;\uc18c\uc911\ud55c \uc758\uacac&quot;&gt;\n                    &lt;figure&gt;\n                        &lt;div class=&quot;img-wrapper&quot;&gt;\n                            &lt;div class=&quot;g-img&quot; style=&quot;background-image:url(https:\/\/lh3.googleusercontent.com\/B0MvrWcIBCcJ1i76O1CmYpIYTXa1ghGN2Y9TqMbKCJdskVhP-jli-URH-tbsc5b7tMoY_SomVMdMFpj-NQKPcLVbNVHUWZV3Ahpd8oMTCxWUizqBVHvOtw=w800);&quot;&gt;&lt;\/div&gt;\n                            &lt;img src=&quot;https:\/\/lh3.googleusercontent.com\/B0MvrWcIBCcJ1i76O1CmYpIYTXa1ghGN2Y9TqMbKCJdskVhP-jli-URH-tbsc5b7tMoY_SomVMdMFpj-NQKPcLVbNVHUWZV3Ahpd8oMTCxWUizqBVHvOtw=w800&quot; class=&quot;img-responsive&quot; alt=&quot;\uc18c\uc911\ud55c \uc758\uacac&quot;&gt;\n                        &lt;\/div&gt;\n                        &lt;figcaption&gt;\n                            &lt;h5 class=&quot;figure title&quot;&gt;\uc18c\uc911\ud55c \uc758\uacac&lt;\/h5&gt;\n                            \n                            \n                            \n                            \n                            \n                            \n                        &lt;\/figcaption&gt;\n                    &lt;\/figure&gt;\n                &lt;\/a&gt;\n            &lt;\/div&gt;\n&lt;div class=&quot;grid gallery-item&quot; data-index=&quot;3&quot; data-seq=&quot;188832&quot;&gt;\n                &lt;a href=&quot;\/%ED%99%88\/view\/188832&quot; data-title=&quot;\uc0ac\uc5c5\uc7a5 \uc18c\uc7ac\uc9c0&quot;&gt;\n                    &lt;figure&gt;\n                        &lt;div class=&quot;img-wrapper&quot;&gt;\n                            &lt;div class=&quot;g-img&quot; style=&quot;background-image:url(https:\/\/lh3.googleusercontent.com\/8NqF2nJKWe5n0xGTyHXP4MG-jzGqMUO7prtHO-Z7ouapAp5Iay_T7jAKDfdB4VpOXQKeET5-5kwp9qwc5NYXYbhViWHOYCU4hgj0B7gYJbO2bO7CXjXjOp8=w800);&quot;&gt;&lt;\/div&gt;\n                            &lt;img src=&quot;https:\/\/lh3.googleusercontent.com\/8NqF2nJKWe5n0xGTyHXP4MG-jzGqMUO7prtHO-Z7ouapAp5Iay_T7jAKDfdB4VpOXQKeET5-5kwp9qwc5NYXYbhViWHOYCU4hgj0B7gYJbO2bO7CXjXjOp8=w800&quot; class=&quot;img-responsive&quot; alt=&quot;\uc0ac\uc5c5\uc7a5 \uc18c\uc7ac\uc9c0&quot;&gt;\n                        &lt;\/div&gt;\n                        &lt;figcaption&gt;\n                            &lt;h5 class=&quot;figure title&quot;&gt;\uc0ac\uc5c5\uc7a5 \uc18c\uc7ac\uc9c0&lt;\/h5&gt;\n                            \n                            \n                            \n                            \n                            \n                            \n                        &lt;\/figcaption&gt;\n                    &lt;\/figure&gt;\n                &lt;\/a&gt;\n            &lt;\/div&gt;\n&lt;\/div&gt;\n    &lt;\/div&gt;\n&lt;\/div&gt;","elcss":".userEL1847017 {\n --gallery-figure-title-fname: Nanum Gothic;\n --gallery-figure-title-color-alpha: rgba(69, 69, 69, 0.15);\n --gallery-figure-title-color-alpha2: rgba(69, 69, 69, 0.5);\n --gallery-figure-title-color: #454545;\n padding: 20px 0px 20px 0px;\n background-color: #fff;\n background-image: none;\n background-repeat: no-repeat;\n background-position: center center;\n background-size: cover;\n color: ;\n --btn-color: #454545;\n --btn-bgcolor: #fff;\n --btn-line: transparent;\n --btn-color-hover: #454545;\n --btn-bgcolor-hover: #fff;\n --btn-line-hover: transparent;\n}\n.userEL1847017 .grid {\n background-color: #ffffff;\n background-image: none;\n background-repeat: no-repeat;\n background-position: center center;\n background-size: cover;\n background-clip: content-box;\n}\n.userEL1847017 figure:hover .g-img,\n.userEL1847017 figure:hover img {\n -webkit-transition: all .3s ease-in-out;\n -moz-transition: all .3s ease-in-out;\n -ms-transition: all .3s ease-in-out;\n -o-transition: all .3s ease-in-out;\n transition: all .3s ease-in-out;\n opacity: 0.4;\n}\n.userEL1847017 figcaption {\n text-align: center;\n padding: 11px 15px 9px;\n}\n.userEL1847017 .full-width figcaption {\n padding: 13px 15px 11px;\n}\n.userEL1847017 figcaption .sh-pcolor {\n color: #ee445f;\n}\n.userEL1847017 h5.figure {\n font-family: Nanum Barun Gothic;\n font-size: 12px;\n color: #454545;\n text-overflow: ellipsis;\n white-space: nowrap;\n overflow: hidden;\n display: block;\n padding-bottom: 1px;\n margin-top: 3px;\n margin-bottom: 0;\n}\n.userEL1847017 figure:hover h5.figure {\n text-decoration: underline;\n}\n.userEL1847017 .figure.price {\n font-family: 'Noto Sans', 'Noto Sans KR';\n font-size: 11px;\n color: #5c5c5c;\n margin-top: 3px;\n}\n.userEL1847017 p.figure {\n font-family: 'Oswald', 'Nanum Gothic';\n font-size: 11px;\n color: #454545;\n fill: #454545;\n text-overflow: ellipsis;\n overflow: hidden;\n -webkit-line-clamp: 3;\n -webkit-box-orient: vertical;\n display: block;\n display: -webkit-box;\n word-wrap: break-word;\n margin-top: 3px;\n margin-bottom: 0;\n}\n.userEL1847017 .figure.review {\n font-family: 'Noto Sans KR';\n font-size: 13px;\n text-align: left;\n color: #454545;\n float: left;\n width: 70%;\n margin-top: 3px;\n}\n.userEL1847017 .figure.like .figure-like-cnt {\n color: #454545;\n}\n.userEL1847017 .figure.like > svg {\n fill: #454545;\n}\n.userEL1847017 .figure.like.active .figure-like-cnt {\n color: #ee445f;\n}\n.userEL1847017 .figure.like.active > svg,\n.userEL1847017 .figure.like.active > svg > path:first-child {\n fill: #ee445f;\n}\n.userEL1847017 .figure.basket:not(.hide) {\n padding-top: 25px!important;\n padding-bottom: 0px!important;\n}\n.userEL1847017 .gallery-loadmore {\n margin-top: 45px;\n padding: 20px 15px;\n min-width: 220px;\n font-family: 'Oswald', 'Nanum Gothic';\n font-size: 11px;\n letter-spacing: 0.1em;\n color: var(--btn-color);\n background-color: var(--btn-bgcolor);\n border: 1px solid transparent;\n transition: ease-in-out 0.3s;\n -o-transition: ease-in-out 0.3s;\n -ms-transition: ease-in-out 0.3s;\n -moz-transition: ease-in-out 0.3s;\n -webkit-transition: ease-in-out 0.3s;\n border-color: var(--btn-line);\n}\n.userEL1847017 .gallery-loadmore:hover {\n color: var(--btn-color-hover);\n background-color: var(--btn-bgcolor-hover);\n border-color: var(--btn-line-hover);\n}\n.userEL1847017[data-mode=\"shopping\"] figcaption {\n text-align: left;\n}\n.userEL1847017[data-mode=\"shopping\"] figcaption:before,\n.userEL1847017[data-mode=\"shopping\"] figcaption:after {\n content: ' ';\n display: table;\n clear: both;\n}\n.userEL1847017[data-mode=\"shopping\"] h5.figure {\n text-align: left;\n}\n.userEL1847017[data-mode=\"shopping\"] p.figure {\n text-align: left;\n float: none;\n clear: both;\n}\n.userEL1847017[data-mode=\"shopping\"] .figure.price:not(.hide) + p.figure:not(.hide) {\n width: 70%;\n float: left;\n clear: none;\n}\n@media only screen and (max-width:991px) {\n .userEL1847017 .figure.basket:not(.hide) {\n  padding-top: 20px!important;\n }\n .userEL1847017 .gallery-loadmore {\n  margin-top: 36px;\n  padding: 16px 15px;\n }\n}\n@media only screen and (max-width:768px) {\n .userEL1847017 figcaption,\n  .userEL1847017 .full-width figcaption {\n  padding: 8px 0 11px;\n }\n .userEL1847017 .figure.basket:not(.hide) {\n  padding-top: 13px!important;\n }\n .userEL1847017 .gallery-loadmore {\n  margin-top: 22.5px;\n  padding: 10px 15px;\n }\n}\n","eljs":"","elnew":"","elsettings":"{\"category_color_type\":\"\",\"field_disable\":[\"caption\",\"comment\",\"like\"],\"blocklang\":\"ko\",\"blockorg\":\"gallery23\"}","blockname":"","fonts":{"Nanum Barun Gothic":"@font-face{font-family:'Nanum Barun Gothic';font-style:normal;font-weight:700;src:url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Bold.eot?#iefix) format('embedded-opentype'),url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Bold.woff) format('woff'),url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Bold.ttf) format('truetype')}@font-face{font-family:'Nanum Barun Gothic';font-style:normal;font-weight:400;src:url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Regular.eot?#iefix) format('embedded-opentype'),url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Regular.woff) format('woff'),url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Regular.ttf) format('truetype');}@font-face{font-family:'Nanum Barun Gothic';font-style:normal;font-weight:100;src:url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Light.eot?#iefix) format('embedded-opentype'),url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Light.woff) format('woff'),url(\/\/storage.googleapis.com\/cr-resource\/fonts\/NanumBarunGothic-Light.ttf) format('truetype');}","Noto Sans":"@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr6DRAW_0.woff2') format('woff2');unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr4TRAW_0.woff2') format('woff2');unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr5DRAW_0.woff2') format('woff2');unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr6TRAW_0.woff2') format('woff2');unicode-range: U+1F00-1FFF;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr5jRAW_0.woff2') format('woff2');unicode-range: U+0370-03FF;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr6jRAW_0.woff2') format('woff2');unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr6zRAW_0.woff2') format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face {font-family:'Noto Sans';font-style: normal;font-weight: 400;src: local('Noto Sans'), local('NotoSans'), url('https:\/\/fonts.gstatic.com\/s\/notosans\/v7\/o-0IIpQlx3QUlC5A4PNr5TRA.woff2') format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}","Noto Sans KR":"@font-face{font-family:'Noto Sans KR';font-style: normal;font-weight: 100;src: url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-100.woff2) format('woff2'),url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-100.woff) format('woff'),url(\/\/cdn.jsdelivr.net\/npm\/@noonnu\/noto-sans-kr@0.1.0\/fonts\/noto-sans-kr-100.otf) format('opentype');}@font-face{font-family:'Noto Sans KR';font-style: normal;font-weight: 300;src: url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-300.woff2) format('woff2'),rl(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-300.woff) format('woff'),rl(\/\/cdn.jsdelivr.net\/npm\/@noonnu\/noto-sans-kr@0.1.0\/fonts\/noto-sans-kr-300.otf) format('opentype');}@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 400; src: url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-400.woff2) format('woff2'),url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-400.woff) format('woff'),url(\/\/cdn.jsdelivr.net\/npm\/@noonnu\/noto-sans-kr@0.1.0\/fonts\/noto-sans-kr-400.otf) format('opentype');}@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 500; src: url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-500.woff2) format('woff2'),url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-500.woff) format('woff'),url(\/\/cdn.jsdelivr.net\/npm\/@noonnu\/noto-sans-kr@0.1.0\/fonts\/noto-sans-kr-500.otf) format('opentype');}@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 700; src: url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-700.woff) format('woff2'),url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-700.woff) format('woff'),url(\/\/cdn.jsdelivr.net\/npm\/@noonnu\/noto-sans-kr@0.1.0\/fonts\/noto-sans-kr-700.otf) format('opentype'); }@font-face{font-family:'Noto Sans KR'; font-style: normal; font-weight: 900; src: url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-900.woff2) format('woff2'),url(\/\/cdn.jsdelivr.net\/npm\/@openfonts\/noto-sans-kr_korean@1.44.1\/files\/noto-sans-kr-korean-900.woff) format('woff'),url(\/\/cdn.jsdelivr.net\/npm\/@noonnu\/noto-sans-kr@0.1.0\/fonts\/noto-sans-kr-900.otf) format('opentype'); }","Oswald":"@font-face {font-family: 'Oswald'; font-style: normal; font-weight: 400; src: local('Oswald Regular'), local('Oswald-Regular'), url('https:\/\/fonts.gstatic.com\/s\/oswald\/v16\/TK3iWkUHHAIjg752HT8Ghe4.woff2') format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face { font-family: 'Oswald'; font-style: normal; font-weight: 400; src: local('Oswald Regular'), local('Oswald-Regular'), url('https:\/\/fonts.gstatic.com\/s\/oswald\/v16\/TK3iWkUHHAIjg752Fj8Ghe4.woff2') format('woff2'); unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;}@font-face { font-family: 'Oswald'; font-style: normal; font-weight: 400; src: local('Oswald Regular'), local('Oswald-Regular'), url('https:\/\/fonts.gstatic.com\/s\/oswald\/v16\/TK3iWkUHHAIjg752Fz8Ghe4.woff2') format('woff2'); unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face { font-family: 'Oswald'; font-style: normal; font-weight: 400; src: local('Oswald Regular'), local('Oswald-Regular'), url('https:\/\/fonts.gstatic.com\/s\/oswald\/v16\/TK3iWkUHHAIjg752GT8G.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}","Nanum Gothic":""},"price_hidden":"OFF"},{"seq":"1847912","sid":"1153404","page":"\ud648","orgpage":"\ud648","type":"contents","type2":"","overlap":"1","feature":"parallax","pos":"3","orgpos":"3","mode":"","folder":"1920","linkto":"","name":"content-text1","elname":"userEL1847912","eltag":"&lt;div data-parallax=&quot;true&quot; data-case=&quot;content-text1&quot; class=&quot;userEL1847912 text-center&quot;&gt;\n    &lt;div class=&quot;container full-width bg-box&quot;&gt;\n        &lt;div class=&quot;row&quot;&gt;\n            &lt;div class=&quot;col-xs-12 col-sm-12 col-md-12&quot;&gt;\n                 &lt;h1 class=&quot;head_title&quot; data-edit=&quot;true&quot; data-selector=&quot;h1.head_title&quot; &gt;&lt;div&gt;&lt;span  class=&quot;fsize60&quot;&gt;\u200c&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;;&quot;&gt;\uc18c\uc911\ud55c \uc758\uacac&lt;\/span&gt;&lt;\/span&gt;&lt;\/div&gt;&lt;div&gt;&lt;span  class=&quot;fsize20&quot;&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;;&quot;&gt;\u200c&lt;\/span&gt;&lt;\/span&gt;&lt;\/div&gt;&lt;div&gt;&lt;span  class=&quot;fsize18&quot;&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;;&quot;&gt;&lt;strong&gt;\u200c\uc120\uc9c4\uace0\uc18d\uc740 \uace0\uac1d\ub2d8\uc758 \ub9d0\uc500\uc5d0 \uadc0 \uae30\uc6b8\uc774\uace0 \uac1c\uc120\ud558\ub3c4\ub85d \ub178\ub825\ud558\uaca0\uc2b5\ub2c8\ub2e4.&lt;\/strong&gt;&lt;\/span&gt;&lt;\/span&gt;&lt;\/div&gt;&lt;div&gt;&lt;span  class=&quot;fsize18&quot;&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;;&quot;&gt;\u200c&lt;\/span&gt;&lt;\/span&gt;&lt;\/div&gt;&lt;\/h1&gt;\n                &lt;br&gt;\n                 &lt;h4 class=&quot;sub_text&quot; data-edit=&quot;true&quot; data-selector=&quot;h4.sub_text&quot;&gt;&lt;span style=&quot;color: rgb(255, 255, 255);&quot;&gt;&lt;span class=&quot;fsize25&quot;&gt;&lt;strong&gt;&lt;span style=&quot;font-family: &#039;Iropke Batang&#039;;&quot;&gt;\u200c&lt;a data-user-link=&quot;\/\uc18c\uc911\ud55c-\uc758\uacac&quot; href=&quot;\/\uc18c\uc911\ud55c-\uc758\uacac&quot;&gt;&amp;nbsp;\ub0a8\uae30\ub7ec \uac00\uae30\u25b7&lt;\/a&gt;&lt;\/span&gt;&lt;\/strong&gt;&lt;\/span&gt;&lt;\/span&gt;&lt;\/h4&gt;\n            &lt;\/div&gt;\n        &lt;\/div&gt;\n    &lt;\/div&gt;\n&lt;\/div&gt;","elcss":".userEL1847912 {\n background-image: url(\"https:\/\/lh3.googleusercontent.com\/5k76ohF8WnpXO9JPPEKsN_UgbPaFp8R3BGbD-8sWYOSI6UEfMB3v1e5LAO16vT40mBBnYdlvCbbL-Jn8KhqOFCEuPm4GqlHospSMXyvu=w1920-h1278-n\");\n background-size: cover;\n background-position: 50% 50%;\n background-attachment: fixed;\n background-color: ;\n background-repeat: no-repeat;\n padding: 20px 0px 20px 0px;\n color: ;\n font-family: Lora;\n font-size: 13px;\n}\n.element-content .userEL1847912 {\n background-attachment: scroll;\n}\n.userEL1847912 .bg-box {\n padding: 130px 0;\n color: #fff;\n text-align: center;\n}\n.userEL1847912 h1.head_title {\n font-family: 'Lato', 'Nanum Gothic';\n font-weight: normal;\n font-size: inherit;\n color: #fff;\n margin: 0;\n}\n.userEL1847912 h4.sub_text {\n font-family: 'Lato', 'Nanum Gothic';\n font-weight: normal;\n font-size: inherit;\n color: #b4b0b0;\n margin: 0;\n}\n@media only screen and (max-width: 480px) {\n .userEL1847912  h1.head_title {\n  margin-bottom: 10px;\n }\n}\n","eljs":"","elnew":"","elsettings":"{}","blockname":"","fonts":{"Lora":"@font-face {font-family:'Lora';font-style: normal;font-weight: 400;src: local('Lora Regular'), local('Lora-Regular'), url('https:\/\/fonts.gstatic.com\/s\/lora\/v12\/0QIvMX1D_JOuMwf7I-NP.woff2') format('woff2');unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;}@font-face {font-family:'Lora';font-style: normal;font-weight: 400;src: local('Lora Regular'), local('Lora-Regular'), url('https:\/\/fonts.gstatic.com\/s\/lora\/v12\/0QIvMX1D_JOuMw77I-NP.woff2') format('woff2');unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}@font-face {font-family:'Lora';font-style: normal;font-weight: 400;src: local('Lora Regular'), local('Lora-Regular'), url('https:\/\/fonts.gstatic.com\/s\/lora\/v12\/0QIvMX1D_JOuMwX7I-NP.woff2') format('woff2');unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;}@font-face {font-family:'Lora';font-style: normal;font-weight: 400;src: local('Lora Regular'), local('Lora-Regular'), url('https:\/\/fonts.gstatic.com\/s\/lora\/v12\/0QIvMX1D_JOuMwT7I-NP.woff2') format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face {font-family:'Lora';font-style: normal;font-weight: 400;src: local('Lora Regular'), local('Lora-Regular'), url('https:\/\/fonts.gstatic.com\/s\/lora\/v12\/0QIvMX1D_JOuMwr7Iw.woff2') format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}","Lato":"@font-face {font-family:'Lato';font-style: normal;font-weight: 400;src: local('Lato Regular'), local('Lato-Regular'), url('https:\/\/fonts.gstatic.com\/s\/lato\/v14\/S6uyw4BMUTPHjxAwXjeu.woff2') format('woff2');unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face {font-family:'Lato';font-style: normal;font-weight: 400;src: local('Lato Regular'), local('Lato-Regular'), url('https:\/\/fonts.gstatic.com\/s\/lato\/v14\/S6uyw4BMUTPHjx4wXg.woff2') format('woff2');unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}","Nanum Gothic":"","Iropke Batang":"@font-face {font-family:'Iropke Batang';src:url('\/\/storage.googleapis.com\/cr-resource\/fonts\/IropkeBatangM.eot?#iefix') format('embedded-opentype'),url('\/\/storage.googleapis.com\/cr-resource\/fonts\/IropkeBatangM.woff') format('woff'),url('\/\/storage.googleapis.com\/cr-resource\/fonts\/IropkeBatangM.ttf') format('truetype');font-style: normal;font-weight: normal;}"},"price_hidden":"OFF"},[]],
+	PAGECONF : {"islock":"false","overlay":false,"pageScript":null,"meta":{"author":"선진고속(주)","title":"선진고속 주식회사","description":"선진고속 주식회사에 오신것을 환영합니다. 회사소개, 공항버스 및 시외버스 운행정보, 고객의소리 등 안내.","keywords":"공항버스,시외버스,선진고속,7000번,7001번,7002번,700번,700-1번,8467번,8414번,8851번,8821번,737번,운행정보,고객의소리","google-site-verification":"idj_KSe-F2YndwzhQZjXREYb2i-R25gBpbw6F6QE8TI","google":""},"og_others":{"og__type":"website","og__title":"선진고속 주식회사","og__description":"선진고속 주식회사에 오신것을 환영합니다. 회사소개, 공항버스 및 시외버스 운행정보, 고객의소리 등 안내.","og__url":"https:\/\/sunjinexpress.com","og__image":"\/\/storage.googleapis.com\/cr-resource\/image\/c939d3102c0eb3fa89386cd42b7fff3d\/1153404\/1153404-screen-thumb.png?_1792458936"}},
+	SLANG : [],
+	DEFONTS : '"Lora","Nanum gothic","Noto sans","Noto sans kr"',
+	SITEUM : '1',
+	SITEUMLANG : 'ko',
+	SITEUMDISPLAY : 'login',
+	SITEFIXEDLANG : '',
+	SERVICE : 'gcp-creatorlink',
+	RE : '',
+	SCRIPTLOAD : '1',
+	VIREFER : "",
+	DISK_SPACE : '30000',
+	USED_DISK : '414571.94',
+	MB_LEVEL : "2",
+	LANGSTEP : "",
+	CHANGEID : "",
+	PRODINFO : "",
+	SITELOCK : 'false',
+	CERT_USE : 'N',
+	UMEMBER : {"check_login":false,"check_adm":false,"check_uadm":false,"check_sns":false,"uadm_type":"","check_easylogin":false,"id":false,"id_type":"um","nick":"","profile":"","coupon_count":0,"point":0},
+	UMEMBER_ACTIVATE : '1',
+	UMGRADE : "",
+	CART : '',
+	DEBUG : [],
+	LUX : "",
+	SITE_DESC : '',
+	MODOO : false,
+	MPAGE : '홈',
+	BAND : {"sort":[],"list":[],"used":false,"close_time":"always","close_today":"ON","close_onoff":"ON","interval":3000},
+	POPUP : {"sort":["12746","13980","14416","15320","15445"],"list":{"12746":{"pos":"1","visible":"OFF","period":{"set":false,"visible":true,"label":"","start":"0000-00-00 00:00:00","end":"0000-00-00 00:00:00","chk":"1"},"img":{"pc":{"path":"https:\/\/lh3.googleusercontent.com\/SMulgGAT0l2vlz1apTwsMRd0GO8waqEBkzVSSwpWhCAB9h17dBADzjMZwk83FluTtDaPbrp6klX937pNszM--5w-4XObHuVQHMbJhS-vAFA2r3DPlJu6A5Y=s0","thumb":"https:\/\/lh3.googleusercontent.com\/SMulgGAT0l2vlz1apTwsMRd0GO8waqEBkzVSSwpWhCAB9h17dBADzjMZwk83FluTtDaPbrp6klX937pNszM--5w-4XObHuVQHMbJhS-vAFA2r3DPlJu6A5Y=w60-h60-n","name":"260126_8851\uacf5\uc9c0(0001).png","width":"485","height":"500"},"mobile":{"isCustom":false,"path":"https:\/\/lh3.googleusercontent.com\/SMulgGAT0l2vlz1apTwsMRd0GO8waqEBkzVSSwpWhCAB9h17dBADzjMZwk83FluTtDaPbrp6klX937pNszM--5w-4XObHuVQHMbJhS-vAFA2r3DPlJu6A5Y=s0","thumb":"https:\/\/lh3.googleusercontent.com\/SMulgGAT0l2vlz1apTwsMRd0GO8waqEBkzVSSwpWhCAB9h17dBADzjMZwk83FluTtDaPbrp6klX937pNszM--5w-4XObHuVQHMbJhS-vAFA2r3DPlJu6A5Y=w60-h60-n","name":"260126_8851\uacf5\uc9c0(0001).png","width":"485","height":"500","chk":"0"},"bgcolor":"#ffffff"},"link":{"val":"","target":"OFF"},"close":{"color":"#000000"},"size":{"origin":"ON","width":"485","original_width":"485"}},"13980":{"pos":"2","visible":"OFF","period":{"set":false,"visible":true,"label":"","start":"0000-00-00 00:00:00","end":"0000-00-00 00:00:00","chk":"1"},"img":{"pc":{"path":"https:\/\/lh3.googleusercontent.com\/j_wCpgwy54MvguQgUYTOn3TK6mLMok9oZ-F6N7IKTuG4HKXA1Ow2NhV7D0Ywc0jX2rFlQYbYzRxwIozGpceJLhAMW_xrGz3WRZOmu19xQNFWRSlqchr5ZA=s0","thumb":"https:\/\/lh3.googleusercontent.com\/j_wCpgwy54MvguQgUYTOn3TK6mLMok9oZ-F6N7IKTuG4HKXA1Ow2NhV7D0Ywc0jX2rFlQYbYzRxwIozGpceJLhAMW_xrGz3WRZOmu19xQNFWRSlqchr5ZA=w60-h60-n","name":"\ucc44\uc6a9\uacf5\uace0_\ubc30\ub108.png","width":"1254","height":"1254"},"mobile":{"isCustom":false,"path":"https:\/\/lh3.googleusercontent.com\/j_wCpgwy54MvguQgUYTOn3TK6mLMok9oZ-F6N7IKTuG4HKXA1Ow2NhV7D0Ywc0jX2rFlQYbYzRxwIozGpceJLhAMW_xrGz3WRZOmu19xQNFWRSlqchr5ZA=s0","thumb":"https:\/\/lh3.googleusercontent.com\/j_wCpgwy54MvguQgUYTOn3TK6mLMok9oZ-F6N7IKTuG4HKXA1Ow2NhV7D0Ywc0jX2rFlQYbYzRxwIozGpceJLhAMW_xrGz3WRZOmu19xQNFWRSlqchr5ZA=w60-h60-n","name":"\ucc44\uc6a9\uacf5\uace0_\ubc30\ub108.png","width":"1254","height":"1254","chk":"0"},"bgcolor":"#ffffff"},"link":{"val":"","target":"OFF"},"close":{"color":"#000000"},"size":{"origin":"ON","width":"1254","original_width":"1254"}},"14416":{"pos":"3","visible":"OFF","period":{"set":false,"visible":true,"label":"","start":"0000-00-00 00:00:00","end":"0000-00-00 00:00:00","chk":"1"},"img":{"pc":{"path":"https:\/\/lh3.googleusercontent.com\/fAImn9VbI419YnXYzVyzg5DQS9KH9u45N-1Gu6DVn397zMhkJ46X02wDIppHooSYzWwuNkVLIiZYROfJQNGoEauUpeNTKUd4H_e_NdZroQJhcIp9jVhAhA=s0","thumb":"https:\/\/lh3.googleusercontent.com\/fAImn9VbI419YnXYzVyzg5DQS9KH9u45N-1Gu6DVn397zMhkJ46X02wDIppHooSYzWwuNkVLIiZYROfJQNGoEauUpeNTKUd4H_e_NdZroQJhcIp9jVhAhA=w60-h60-n","name":"\uc804\uc790\uc2b9\ucc28\uad8c.png","width":"10401","height":"10401"},"mobile":{"isCustom":false,"path":"https:\/\/lh3.googleusercontent.com\/fAImn9VbI419YnXYzVyzg5DQS9KH9u45N-1Gu6DVn397zMhkJ46X02wDIppHooSYzWwuNkVLIiZYROfJQNGoEauUpeNTKUd4H_e_NdZroQJhcIp9jVhAhA=s0","thumb":"https:\/\/lh3.googleusercontent.com\/fAImn9VbI419YnXYzVyzg5DQS9KH9u45N-1Gu6DVn397zMhkJ46X02wDIppHooSYzWwuNkVLIiZYROfJQNGoEauUpeNTKUd4H_e_NdZroQJhcIp9jVhAhA=w60-h60-n","name":"\uc804\uc790\uc2b9\ucc28\uad8c.png","width":"10401","height":"10401","chk":"0"},"bgcolor":"#ffffff"},"link":{"val":"","target":"OFF"},"close":{"color":"#000000"},"size":{"origin":"ON","width":"10401","original_width":"10401"}},"15320":{"pos":"4","visible":"ON","period":{"set":false,"visible":true,"label":"","start":"0000-00-00 00:00:00","end":"0000-00-00 00:00:00","chk":"1"},"img":{"pc":{"path":"https:\/\/lh3.googleusercontent.com\/OTkAjoHh8Y0c1Bsly0G_LF1QRZa0zCzajiOSl_KdbSGssirs8n9_hO0A092dBZWD5J9soQg5EGexEEo8wDSar3NBDneFxeyALtGan0CgWT8lUXJWpWAYYIU=s0","thumb":"https:\/\/lh3.googleusercontent.com\/OTkAjoHh8Y0c1Bsly0G_LF1QRZa0zCzajiOSl_KdbSGssirs8n9_hO0A092dBZWD5J9soQg5EGexEEo8wDSar3NBDneFxeyALtGan0CgWT8lUXJWpWAYYIU=w60-h60-n","name":"\uc6b4\uc784\uc778\uc0c1\uc548\ub0b4_\ud31d\uc5c5.png","width":"1254","height":"1254"},"mobile":{"isCustom":false,"path":"https:\/\/lh3.googleusercontent.com\/OTkAjoHh8Y0c1Bsly0G_LF1QRZa0zCzajiOSl_KdbSGssirs8n9_hO0A092dBZWD5J9soQg5EGexEEo8wDSar3NBDneFxeyALtGan0CgWT8lUXJWpWAYYIU=s0","thumb":"https:\/\/lh3.googleusercontent.com\/OTkAjoHh8Y0c1Bsly0G_LF1QRZa0zCzajiOSl_KdbSGssirs8n9_hO0A092dBZWD5J9soQg5EGexEEo8wDSar3NBDneFxeyALtGan0CgWT8lUXJWpWAYYIU=w60-h60-n","name":"\uc6b4\uc784\uc778\uc0c1\uc548\ub0b4_\ud31d\uc5c5.png","width":"1254","height":"1254","chk":"0"},"bgcolor":"#ffffff"},"link":{"val":"","target":"OFF"},"close":{"color":"#000000"},"size":{"origin":"ON","width":"1254","original_width":"1254"}},"15445":{"pos":"5","visible":"ON","period":{"set":false,"visible":true,"label":"","start":"0000-00-00 00:00:00","end":"0000-00-00 00:00:00","chk":"1"},"img":{"pc":{"path":"https:\/\/lh3.googleusercontent.com\/hJov8PbF17EAjw3ZPRGcQ-2T1dmHFItN71PnYmZiLNwMyG83vnWXvEUClrSx-OQt-FK54qv-pJV82TXsEAPWpQQmT2xAj3KAvdV_qVO8poXIUkTUVRR5=s0","thumb":"https:\/\/lh3.googleusercontent.com\/hJov8PbF17EAjw3ZPRGcQ-2T1dmHFItN71PnYmZiLNwMyG83vnWXvEUClrSx-OQt-FK54qv-pJV82TXsEAPWpQQmT2xAj3KAvdV_qVO8poXIUkTUVRR5=w60-h60-n","name":"7001\ubc88_\uc608\ub9e4_\uc2b9\ucc28\uad8c_\uc774\uc6a9_\uc548\ub0b4.png","width":"1254","height":"1254"},"mobile":{"isCustom":false,"path":"https:\/\/lh3.googleusercontent.com\/hJov8PbF17EAjw3ZPRGcQ-2T1dmHFItN71PnYmZiLNwMyG83vnWXvEUClrSx-OQt-FK54qv-pJV82TXsEAPWpQQmT2xAj3KAvdV_qVO8poXIUkTUVRR5=s0","thumb":"https:\/\/lh3.googleusercontent.com\/hJov8PbF17EAjw3ZPRGcQ-2T1dmHFItN71PnYmZiLNwMyG83vnWXvEUClrSx-OQt-FK54qv-pJV82TXsEAPWpQQmT2xAj3KAvdV_qVO8poXIUkTUVRR5=w60-h60-n","name":"7001\ubc88_\uc608\ub9e4_\uc2b9\ucc28\uad8c_\uc774\uc6a9_\uc548\ub0b4.png","width":"1254","height":"1254","chk":"0"},"bgcolor":"#ffffff"},"link":{"val":"","target":"OFF"},"close":{"color":"#000000"},"size":{"origin":"ON","width":"1254","original_width":"1254"}}},"used":true,"close_time":"always","close_today":"ON","position":"center top","radius":"0","close_btn":"3","btn_style":"1","btn_color":"#696c71","bg_layer":"OFF","bg_color":"rgba(0, 0, 0, 0.6)","view_type":"slide","slide_auto":"ON","slide_speed":"3","slide_move_time":"1","slide_stop_time":"3","slide_size_origin":"ON","slide_size_width":"500","slide_arrow":"ON","slide_arrow_style":"1","slide_arrow_size":"64","slide_arrow_color":"#ffffff","slide_arrow_bg_color":"#000000","slide_pagination_display":"ON","slide_pagination":"number","slide_pagination_style":"11","slide_pagination_align":"right","slide_pagination_size":"52","slide_pagination_color":"#ffffff","slide_pagination_active_color":"#000000"},
+	TEL_LINK : '',
+	QUICKMENU : {"sid":"1153404","sample":{"pc":{"default":{"0":{"name":"call","text":"전화","img":{"default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;m3.77 3.84 4.54.4.37.03 1.57 4.77-1 .59a2.18 2.18 0 0 0-.83 2.88c.79 1.52 1.8 2.9 2.99 4.09 1.19 1.19 2.57 2.2 4.09 2.99.31.16.65.25 1 .25.77 0 1.49-.41 1.88-1.07l.59-1 4.77 1.57.03.37.4 4.54c-.33 0-.68-.01-1.02-.03-5.15-.26-9.93-2.34-13.47-5.88C6.14 14.8 4.06 10.02 3.8 4.87c-.02-.34-.03-.68-.03-1.02M3.01 2c-.54 0-.98.44-1 .99-.02.65-.01 1.31.02 1.96.27 5.4 2.39 10.62 6.4 14.63 4.01 4.01 9.23 6.13 14.63 6.4.41.02.82.03 1.23.03.24 0 .48 0 .73-.01.58-.02 1.03-.51.98-1.09l-.47-5.37-.08-.88c-.03-.4-.3-.74-.68-.86l-5.84-1.92a.99.99 0 0 0-1.17.44l-.9 1.53a.406.406 0 0 1-.53.16 15.07 15.07 0 0 1-3.65-2.67 14.81 14.81 0 0 1-2.67-3.65c-.1-.19-.03-.43.16-.53l1.53-.9a1 1 0 0 0 .44-1.17l-1.92-5.84a.978.978 0 0 0-.86-.68l-.88-.08-5.37-.47h-.09Z&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"24px","--icon-bgcolor":"#f27d1680","--icon-color":"#ffffff","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"12px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#ffffff"}},"1":{"name":"blog","text":"블로그","img":{"default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;M21.64 2.09H6.36C3.95 2.09 2 4.04 2 6.45v15.09c0 2.41 1.95 4.36 4.36 4.36h15.28c2.41 0 4.36-1.95 4.36-4.36V6.45c0-2.41-1.95-4.36-4.36-4.36M24 14.93c0 1.78-1.44 3.22-3.22 3.23h-4.8l-1.64 2.67s-.03.06-.06.08c-.15.26-.49.35-.75.2a.636.636 0 0 1-.2-.2.218.218 0 0 1-.05-.08l-1.63-2.67h-4.8c-1.78 0-3.22-1.44-3.21-3.22V7.28a3.23 3.23 0 0 1 3.21-3.23h13.93C22.56 4.05 24 5.5 24 7.28v7.66Z&quot;\/&gt;&lt;path d=&quot;M8.16 9.66c-.4.03-.78.2-1.06.49V8.17H5.86v5.19h1.26v-.41c.23.35.63.55 1.05.54 1.01-.04 1.8-.9 1.76-1.92v-.02s-.06-1.9-1.76-1.9m-.28 2.74c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8M10.32 8.05v1.2s.57-.03.57 1.03v3.07h1.2V10s.05-1.95-1.77-1.95M15.03 9.67s-2.06 0-2.06 1.92c-.03 1.03.79 1.88 1.81 1.91h.25s2.11 0 2.11-1.9c.02-1.04-.8-1.91-1.85-1.93-.09 0-.17 0-.26.01m0 2.71c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8M20.57 9.79v.35a1.37 1.37 0 0 0-1.05-.48c-.95-.03-1.74.71-1.77 1.66v.25s-.02 1.85 1.71 1.85c.42 0 .82-.16 1.1-.48v.29s.09.91-.79.91h-.3v1.1h.49c1 0 1.81-.8 1.82-1.8V9.77h-1.21Zm-.74 2.6c-.44 0-.8-.36-.8-.8s.36-.8.8-.8c.44 0 .8.36.8.8 0 .44-.36.8-.8.8&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"24px","--icon-bgcolor":"#f27d1680","--icon-color":"#ffffff","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"12px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#ffffff"}},"2":{"name":"map","text":"약도","img":{"default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;m25.4 6.85-5.54-2.08c-.1-.04-.2-.05-.3-.05h-.04c-.1 0-.2.02-.3.05l-5.21 1.96L8.8 4.77c-.1-.04-.2-.05-.3-.05h-.04c-.1 0-.2.02-.3.05L2.62 6.85c-.36.14-.6.48-.6.86v14.64a.917.917 0 0 0 1.25.86l5.21-1.96 5.21 1.96c.1.04.2.05.3.05h.04c.1 0 .2-.02.3-.05l5.21-1.96 5.21 1.96a.924.924 0 0 0 1.25-.86V7.72c0-.38-.24-.73-.6-.86ZM3.85 8.36l3.69-1.38v12.67l-3.69 1.38V8.36Zm5.53-1.39 3.69 1.38v12.67l-3.69-1.38V6.97Zm5.54 1.39 3.69-1.38v12.67l-3.69 1.38V8.36Zm9.23 12.67-3.69-1.38V6.97l3.69 1.38v12.67Z&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"24px","--icon-bgcolor":"#f27d1680","--icon-color":"#ffffff","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"12px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#ffffff"}},"quick_settings":{"--quick-roundedge-per":"0.5","--quick-size":"72px","--quick-space":"20px"}},"image":{"0":{"img":{"image":"&lt;svg class=&quot;quickmenu-noimage&quot; viewBox=&quot;0 0 20 20&quot;&gt;&lt;path d=&quot;M0 0v20h20V0H0zM19 1v11.3l-3-3 -4 4 -6-6 -5 5V1H19zM1 19v-5.3l5-5 6 6 4-4 3 3V19H1z&quot;\/&gt;&lt;circle cx=&quot;14.5&quot; cy=&quot;5.5&quot; r=&quot;1.5&quot;\/&gt;&lt;\/svg&gt;"}},"1":{"img":{"image":"&lt;svg class=&quot;quickmenu-noimage&quot; viewBox=&quot;0 0 20 20&quot;&gt;&lt;path d=&quot;M0 0v20h20V0H0zM19 1v11.3l-3-3 -4 4 -6-6 -5 5V1H19zM1 19v-5.3l5-5 6 6 4-4 3 3V19H1z&quot;\/&gt;&lt;circle cx=&quot;14.5&quot; cy=&quot;5.5&quot; r=&quot;1.5&quot;\/&gt;&lt;\/svg&gt;"}},"2":{"img":{"image":"&lt;svg class=&quot;quickmenu-noimage&quot; viewBox=&quot;0 0 20 20&quot;&gt;&lt;path d=&quot;M0 0v20h20V0H0zM19 1v11.3l-3-3 -4 4 -6-6 -5 5V1H19zM1 19v-5.3l5-5 6 6 4-4 3 3V19H1z&quot;\/&gt;&lt;circle cx=&quot;14.5&quot; cy=&quot;5.5&quot; r=&quot;1.5&quot;\/&gt;&lt;\/svg&gt;"}},"quick_settings":{"--quick-roundedge-per":"0.5","--quick-size":"72px","--quick-space":"20px"}}},"mobile":{"bottom_default":{"0":{"name":"call","text":"전화","img":{"bottom_default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;m3.77 3.84 4.54.4.37.03 1.57 4.77-1 .59a2.18 2.18 0 0 0-.83 2.88c.79 1.52 1.8 2.9 2.99 4.09 1.19 1.19 2.57 2.2 4.09 2.99.31.16.65.25 1 .25.77 0 1.49-.41 1.88-1.07l.59-1 4.77 1.57.03.37.4 4.54c-.33 0-.68-.01-1.02-.03-5.15-.26-9.93-2.34-13.47-5.88C6.14 14.8 4.06 10.02 3.8 4.87c-.02-.34-.03-.68-.03-1.02M3.01 2c-.54 0-.98.44-1 .99-.02.65-.01 1.31.02 1.96.27 5.4 2.39 10.62 6.4 14.63 4.01 4.01 9.23 6.13 14.63 6.4.41.02.82.03 1.23.03.24 0 .48 0 .73-.01.58-.02 1.03-.51.98-1.09l-.47-5.37-.08-.88c-.03-.4-.3-.74-.68-.86l-5.84-1.92a.99.99 0 0 0-1.17.44l-.9 1.53a.406.406 0 0 1-.53.16 15.07 15.07 0 0 1-3.65-2.67 14.81 14.81 0 0 1-2.67-3.65c-.1-.19-.03-.43.16-.53l1.53-.9a1 1 0 0 0 .44-1.17l-1.92-5.84a.978.978 0 0 0-.86-.68l-.88-.08-5.37-.47h-.09Z&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"16px","--icon-bgcolor":"#c7d1c5","--icon-color":"#171717","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"15px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#171717"}},"1":{"name":"blog","text":"블로그","img":{"bottom_default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;M21.64 2.09H6.36C3.95 2.09 2 4.04 2 6.45v15.09c0 2.41 1.95 4.36 4.36 4.36h15.28c2.41 0 4.36-1.95 4.36-4.36V6.45c0-2.41-1.95-4.36-4.36-4.36M24 14.93c0 1.78-1.44 3.22-3.22 3.23h-4.8l-1.64 2.67s-.03.06-.06.08c-.15.26-.49.35-.75.2a.636.636 0 0 1-.2-.2.218.218 0 0 1-.05-.08l-1.63-2.67h-4.8c-1.78 0-3.22-1.44-3.21-3.22V7.28a3.23 3.23 0 0 1 3.21-3.23h13.93C22.56 4.05 24 5.5 24 7.28v7.66Z&quot;\/&gt;&lt;path d=&quot;M8.16 9.66c-.4.03-.78.2-1.06.49V8.17H5.86v5.19h1.26v-.41c.23.35.63.55 1.05.54 1.01-.04 1.8-.9 1.76-1.92v-.02s-.06-1.9-1.76-1.9m-.28 2.74c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8M10.32 8.05v1.2s.57-.03.57 1.03v3.07h1.2V10s.05-1.95-1.77-1.95M15.03 9.67s-2.06 0-2.06 1.92c-.03 1.03.79 1.88 1.81 1.91h.25s2.11 0 2.11-1.9c.02-1.04-.8-1.91-1.85-1.93-.09 0-.17 0-.26.01m0 2.71c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8M20.57 9.79v.35a1.37 1.37 0 0 0-1.05-.48c-.95-.03-1.74.71-1.77 1.66v.25s-.02 1.85 1.71 1.85c.42 0 .82-.16 1.1-.48v.29s.09.91-.79.91h-.3v1.1h.49c1 0 1.81-.8 1.82-1.8V9.77h-1.21Zm-.74 2.6c-.44 0-.8-.36-.8-.8s.36-.8.8-.8c.44 0 .8.36.8.8 0 .44-.36.8-.8.8&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"16px","--icon-bgcolor":"#c7d1c5","--icon-color":"#171717","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"15px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#171717"}},"2":{"name":"map","text":"약도","img":{"bottom_default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;m25.4 6.85-5.54-2.08c-.1-.04-.2-.05-.3-.05h-.04c-.1 0-.2.02-.3.05l-5.21 1.96L8.8 4.77c-.1-.04-.2-.05-.3-.05h-.04c-.1 0-.2.02-.3.05L2.62 6.85c-.36.14-.6.48-.6.86v14.64a.917.917 0 0 0 1.25.86l5.21-1.96 5.21 1.96c.1.04.2.05.3.05h.04c.1 0 .2-.02.3-.05l5.21-1.96 5.21 1.96a.924.924 0 0 0 1.25-.86V7.72c0-.38-.24-.73-.6-.86ZM3.85 8.36l3.69-1.38v12.67l-3.69 1.38V8.36Zm5.53-1.39 3.69 1.38v12.67l-3.69-1.38V6.97Zm5.54 1.39 3.69-1.38v12.67l-3.69 1.38V8.36Zm9.23 12.67-3.69-1.38V6.97l3.69 1.38v12.67Z&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"16px","--icon-bgcolor":"#c7d1c5","--icon-color":"#171717","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"15px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#171717"}},"quick_settings":{"--quick-pdupdown":"15px"}},"right_default":{"0":{"name":"call","text":"전화","img":{"right_default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;m3.77 3.84 4.54.4.37.03 1.57 4.77-1 .59a2.18 2.18 0 0 0-.83 2.88c.79 1.52 1.8 2.9 2.99 4.09 1.19 1.19 2.57 2.2 4.09 2.99.31.16.65.25 1 .25.77 0 1.49-.41 1.88-1.07l.59-1 4.77 1.57.03.37.4 4.54c-.33 0-.68-.01-1.02-.03-5.15-.26-9.93-2.34-13.47-5.88C6.14 14.8 4.06 10.02 3.8 4.87c-.02-.34-.03-.68-.03-1.02M3.01 2c-.54 0-.98.44-1 .99-.02.65-.01 1.31.02 1.96.27 5.4 2.39 10.62 6.4 14.63 4.01 4.01 9.23 6.13 14.63 6.4.41.02.82.03 1.23.03.24 0 .48 0 .73-.01.58-.02 1.03-.51.98-1.09l-.47-5.37-.08-.88c-.03-.4-.3-.74-.68-.86l-5.84-1.92a.99.99 0 0 0-1.17.44l-.9 1.53a.406.406 0 0 1-.53.16 15.07 15.07 0 0 1-3.65-2.67 14.81 14.81 0 0 1-2.67-3.65c-.1-.19-.03-.43.16-.53l1.53-.9a1 1 0 0 0 .44-1.17l-1.92-5.84a.978.978 0 0 0-.86-.68l-.88-.08-5.37-.47h-.09Z&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"16px","--icon-bgcolor":"#171717","--icon-color":"#ffffff","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"13px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#ffffff"}},"1":{"name":"blog","text":"블로그","img":{"right_default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;M21.64 2.09H6.36C3.95 2.09 2 4.04 2 6.45v15.09c0 2.41 1.95 4.36 4.36 4.36h15.28c2.41 0 4.36-1.95 4.36-4.36V6.45c0-2.41-1.95-4.36-4.36-4.36M24 14.93c0 1.78-1.44 3.22-3.22 3.23h-4.8l-1.64 2.67s-.03.06-.06.08c-.15.26-.49.35-.75.2a.636.636 0 0 1-.2-.2.218.218 0 0 1-.05-.08l-1.63-2.67h-4.8c-1.78 0-3.22-1.44-3.21-3.22V7.28a3.23 3.23 0 0 1 3.21-3.23h13.93C22.56 4.05 24 5.5 24 7.28v7.66Z&quot;\/&gt;&lt;path d=&quot;M8.16 9.66c-.4.03-.78.2-1.06.49V8.17H5.86v5.19h1.26v-.41c.23.35.63.55 1.05.54 1.01-.04 1.8-.9 1.76-1.92v-.02s-.06-1.9-1.76-1.9m-.28 2.74c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8M10.32 8.05v1.2s.57-.03.57 1.03v3.07h1.2V10s.05-1.95-1.77-1.95M15.03 9.67s-2.06 0-2.06 1.92c-.03 1.03.79 1.88 1.81 1.91h.25s2.11 0 2.11-1.9c.02-1.04-.8-1.91-1.85-1.93-.09 0-.17 0-.26.01m0 2.71c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8M20.57 9.79v.35a1.37 1.37 0 0 0-1.05-.48c-.95-.03-1.74.71-1.77 1.66v.25s-.02 1.85 1.71 1.85c.42 0 .82-.16 1.1-.48v.29s.09.91-.79.91h-.3v1.1h.49c1 0 1.81-.8 1.82-1.8V9.77h-1.21Zm-.74 2.6c-.44 0-.8-.36-.8-.8s.36-.8.8-.8c.44 0 .8.36.8.8 0 .44-.36.8-.8.8&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"16px","--icon-bgcolor":"#171717","--icon-color":"#ffffff","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"13px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#ffffff"}},"2":{"name":"map","text":"약도","img":{"right_default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;m25.4 6.85-5.54-2.08c-.1-.04-.2-.05-.3-.05h-.04c-.1 0-.2.02-.3.05l-5.21 1.96L8.8 4.77c-.1-.04-.2-.05-.3-.05h-.04c-.1 0-.2.02-.3.05L2.62 6.85c-.36.14-.6.48-.6.86v14.64a.917.917 0 0 0 1.25.86l5.21-1.96 5.21 1.96c.1.04.2.05.3.05h.04c.1 0 .2-.02.3-.05l5.21-1.96 5.21 1.96a.924.924 0 0 0 1.25-.86V7.72c0-.38-.24-.73-.6-.86ZM3.85 8.36l3.69-1.38v12.67l-3.69 1.38V8.36Zm5.53-1.39 3.69 1.38v12.67l-3.69-1.38V6.97Zm5.54 1.39 3.69-1.38v12.67l-3.69 1.38V8.36Zm9.23 12.67-3.69-1.38V6.97l3.69 1.38v12.67Z&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"16px","--icon-bgcolor":"#171717","--icon-color":"#ffffff","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"13px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#ffffff"}},"quick_settings":{"--quick-roundedge-per":"0.5","--quick-size":"64px","--quick-space":"10px"}},"right_image":{"0":{"img":{"right_image":"&lt;svg class=&quot;quickmenu-noimage&quot; viewBox=&quot;0 0 20 20&quot;&gt;&lt;path d=&quot;M0 0v20h20V0H0zM19 1v11.3l-3-3 -4 4 -6-6 -5 5V1H19zM1 19v-5.3l5-5 6 6 4-4 3 3V19H1z&quot;\/&gt;&lt;circle cx=&quot;14.5&quot; cy=&quot;5.5&quot; r=&quot;1.5&quot;\/&gt;&lt;\/svg&gt;"}},"1":{"img":{"right_image":"&lt;svg class=&quot;quickmenu-noimage&quot; viewBox=&quot;0 0 20 20&quot;&gt;&lt;path d=&quot;M0 0v20h20V0H0zM19 1v11.3l-3-3 -4 4 -6-6 -5 5V1H19zM1 19v-5.3l5-5 6 6 4-4 3 3V19H1z&quot;\/&gt;&lt;circle cx=&quot;14.5&quot; cy=&quot;5.5&quot; r=&quot;1.5&quot;\/&gt;&lt;\/svg&gt;"}},"2":{"img":{"right_image":"&lt;svg class=&quot;quickmenu-noimage&quot; viewBox=&quot;0 0 20 20&quot;&gt;&lt;path d=&quot;M0 0v20h20V0H0zM19 1v11.3l-3-3 -4 4 -6-6 -5 5V1H19zM1 19v-5.3l5-5 6 6 4-4 3 3V19H1z&quot;\/&gt;&lt;circle cx=&quot;14.5&quot; cy=&quot;5.5&quot; r=&quot;1.5&quot;\/&gt;&lt;\/svg&gt;"}},"quick_settings":{"--quick-roundedge-per":"0.5","--quick-size":"64px","--quick-space":"10px"}}}},"list":{"pc":{"default":{"0":{"name":"call","text":"전화","img":{"default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;m3.77 3.84 4.54.4.37.03 1.57 4.77-1 .59a2.18 2.18 0 0 0-.83 2.88c.79 1.52 1.8 2.9 2.99 4.09 1.19 1.19 2.57 2.2 4.09 2.99.31.16.65.25 1 .25.77 0 1.49-.41 1.88-1.07l.59-1 4.77 1.57.03.37.4 4.54c-.33 0-.68-.01-1.02-.03-5.15-.26-9.93-2.34-13.47-5.88C6.14 14.8 4.06 10.02 3.8 4.87c-.02-.34-.03-.68-.03-1.02M3.01 2c-.54 0-.98.44-1 .99-.02.65-.01 1.31.02 1.96.27 5.4 2.39 10.62 6.4 14.63 4.01 4.01 9.23 6.13 14.63 6.4.41.02.82.03 1.23.03.24 0 .48 0 .73-.01.58-.02 1.03-.51.98-1.09l-.47-5.37-.08-.88c-.03-.4-.3-.74-.68-.86l-5.84-1.92a.99.99 0 0 0-1.17.44l-.9 1.53a.406.406 0 0 1-.53.16 15.07 15.07 0 0 1-3.65-2.67 14.81 14.81 0 0 1-2.67-3.65c-.1-.19-.03-.43.16-.53l1.53-.9a1 1 0 0 0 .44-1.17l-1.92-5.84a.978.978 0 0 0-.86-.68l-.88-.08-5.37-.47h-.09Z&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"24px","--icon-bgcolor":"#f27d1680","--icon-color":"#ffffff","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"12px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#ffffff"}},"1":{"name":"blog","text":"블로그","img":{"default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;M21.64 2.09H6.36C3.95 2.09 2 4.04 2 6.45v15.09c0 2.41 1.95 4.36 4.36 4.36h15.28c2.41 0 4.36-1.95 4.36-4.36V6.45c0-2.41-1.95-4.36-4.36-4.36M24 14.93c0 1.78-1.44 3.22-3.22 3.23h-4.8l-1.64 2.67s-.03.06-.06.08c-.15.26-.49.35-.75.2a.636.636 0 0 1-.2-.2.218.218 0 0 1-.05-.08l-1.63-2.67h-4.8c-1.78 0-3.22-1.44-3.21-3.22V7.28a3.23 3.23 0 0 1 3.21-3.23h13.93C22.56 4.05 24 5.5 24 7.28v7.66Z&quot;\/&gt;&lt;path d=&quot;M8.16 9.66c-.4.03-.78.2-1.06.49V8.17H5.86v5.19h1.26v-.41c.23.35.63.55 1.05.54 1.01-.04 1.8-.9 1.76-1.92v-.02s-.06-1.9-1.76-1.9m-.28 2.74c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8M10.32 8.05v1.2s.57-.03.57 1.03v3.07h1.2V10s.05-1.95-1.77-1.95M15.03 9.67s-2.06 0-2.06 1.92c-.03 1.03.79 1.88 1.81 1.91h.25s2.11 0 2.11-1.9c.02-1.04-.8-1.91-1.85-1.93-.09 0-.17 0-.26.01m0 2.71c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8M20.57 9.79v.35a1.37 1.37 0 0 0-1.05-.48c-.95-.03-1.74.71-1.77 1.66v.25s-.02 1.85 1.71 1.85c.42 0 .82-.16 1.1-.48v.29s.09.91-.79.91h-.3v1.1h.49c1 0 1.81-.8 1.82-1.8V9.77h-1.21Zm-.74 2.6c-.44 0-.8-.36-.8-.8s.36-.8.8-.8c.44 0 .8.36.8.8 0 .44-.36.8-.8.8&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"24px","--icon-bgcolor":"#f27d1680","--icon-color":"#ffffff","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"12px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#ffffff"}},"2":{"name":"map","text":"약도","img":{"default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;m25.4 6.85-5.54-2.08c-.1-.04-.2-.05-.3-.05h-.04c-.1 0-.2.02-.3.05l-5.21 1.96L8.8 4.77c-.1-.04-.2-.05-.3-.05h-.04c-.1 0-.2.02-.3.05L2.62 6.85c-.36.14-.6.48-.6.86v14.64a.917.917 0 0 0 1.25.86l5.21-1.96 5.21 1.96c.1.04.2.05.3.05h.04c.1 0 .2-.02.3-.05l5.21-1.96 5.21 1.96a.924.924 0 0 0 1.25-.86V7.72c0-.38-.24-.73-.6-.86ZM3.85 8.36l3.69-1.38v12.67l-3.69 1.38V8.36Zm5.53-1.39 3.69 1.38v12.67l-3.69-1.38V6.97Zm5.54 1.39 3.69-1.38v12.67l-3.69 1.38V8.36Zm9.23 12.67-3.69-1.38V6.97l3.69 1.38v12.67Z&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"24px","--icon-bgcolor":"#f27d1680","--icon-color":"#ffffff","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"12px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#ffffff"}},"quick_settings":{"--quick-roundedge-per":"0.5","--quick-size":"72px","--quick-space":"20px"}},"image":{"0":{"img":{"image":"&lt;svg class=&quot;quickmenu-noimage&quot; viewBox=&quot;0 0 20 20&quot;&gt;&lt;path d=&quot;M0 0v20h20V0H0zM19 1v11.3l-3-3 -4 4 -6-6 -5 5V1H19zM1 19v-5.3l5-5 6 6 4-4 3 3V19H1z&quot;\/&gt;&lt;circle cx=&quot;14.5&quot; cy=&quot;5.5&quot; r=&quot;1.5&quot;\/&gt;&lt;\/svg&gt;"}},"1":{"img":{"image":"&lt;svg class=&quot;quickmenu-noimage&quot; viewBox=&quot;0 0 20 20&quot;&gt;&lt;path d=&quot;M0 0v20h20V0H0zM19 1v11.3l-3-3 -4 4 -6-6 -5 5V1H19zM1 19v-5.3l5-5 6 6 4-4 3 3V19H1z&quot;\/&gt;&lt;circle cx=&quot;14.5&quot; cy=&quot;5.5&quot; r=&quot;1.5&quot;\/&gt;&lt;\/svg&gt;"}},"2":{"img":{"image":"&lt;svg class=&quot;quickmenu-noimage&quot; viewBox=&quot;0 0 20 20&quot;&gt;&lt;path d=&quot;M0 0v20h20V0H0zM19 1v11.3l-3-3 -4 4 -6-6 -5 5V1H19zM1 19v-5.3l5-5 6 6 4-4 3 3V19H1z&quot;\/&gt;&lt;circle cx=&quot;14.5&quot; cy=&quot;5.5&quot; r=&quot;1.5&quot;\/&gt;&lt;\/svg&gt;"}},"quick_settings":{"--quick-roundedge-per":"0.5","--quick-size":"72px","--quick-space":"20px"}}},"mobile":{"bottom_default":{"0":{"name":"call","text":"전화","img":{"bottom_default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;m3.77 3.84 4.54.4.37.03 1.57 4.77-1 .59a2.18 2.18 0 0 0-.83 2.88c.79 1.52 1.8 2.9 2.99 4.09 1.19 1.19 2.57 2.2 4.09 2.99.31.16.65.25 1 .25.77 0 1.49-.41 1.88-1.07l.59-1 4.77 1.57.03.37.4 4.54c-.33 0-.68-.01-1.02-.03-5.15-.26-9.93-2.34-13.47-5.88C6.14 14.8 4.06 10.02 3.8 4.87c-.02-.34-.03-.68-.03-1.02M3.01 2c-.54 0-.98.44-1 .99-.02.65-.01 1.31.02 1.96.27 5.4 2.39 10.62 6.4 14.63 4.01 4.01 9.23 6.13 14.63 6.4.41.02.82.03 1.23.03.24 0 .48 0 .73-.01.58-.02 1.03-.51.98-1.09l-.47-5.37-.08-.88c-.03-.4-.3-.74-.68-.86l-5.84-1.92a.99.99 0 0 0-1.17.44l-.9 1.53a.406.406 0 0 1-.53.16 15.07 15.07 0 0 1-3.65-2.67 14.81 14.81 0 0 1-2.67-3.65c-.1-.19-.03-.43.16-.53l1.53-.9a1 1 0 0 0 .44-1.17l-1.92-5.84a.978.978 0 0 0-.86-.68l-.88-.08-5.37-.47h-.09Z&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"16px","--icon-bgcolor":"#c7d1c5","--icon-color":"#171717","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"15px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#171717"}},"1":{"name":"blog","text":"블로그","img":{"bottom_default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;M21.64 2.09H6.36C3.95 2.09 2 4.04 2 6.45v15.09c0 2.41 1.95 4.36 4.36 4.36h15.28c2.41 0 4.36-1.95 4.36-4.36V6.45c0-2.41-1.95-4.36-4.36-4.36M24 14.93c0 1.78-1.44 3.22-3.22 3.23h-4.8l-1.64 2.67s-.03.06-.06.08c-.15.26-.49.35-.75.2a.636.636 0 0 1-.2-.2.218.218 0 0 1-.05-.08l-1.63-2.67h-4.8c-1.78 0-3.22-1.44-3.21-3.22V7.28a3.23 3.23 0 0 1 3.21-3.23h13.93C22.56 4.05 24 5.5 24 7.28v7.66Z&quot;\/&gt;&lt;path d=&quot;M8.16 9.66c-.4.03-.78.2-1.06.49V8.17H5.86v5.19h1.26v-.41c.23.35.63.55 1.05.54 1.01-.04 1.8-.9 1.76-1.92v-.02s-.06-1.9-1.76-1.9m-.28 2.74c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8M10.32 8.05v1.2s.57-.03.57 1.03v3.07h1.2V10s.05-1.95-1.77-1.95M15.03 9.67s-2.06 0-2.06 1.92c-.03 1.03.79 1.88 1.81 1.91h.25s2.11 0 2.11-1.9c.02-1.04-.8-1.91-1.85-1.93-.09 0-.17 0-.26.01m0 2.71c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8M20.57 9.79v.35a1.37 1.37 0 0 0-1.05-.48c-.95-.03-1.74.71-1.77 1.66v.25s-.02 1.85 1.71 1.85c.42 0 .82-.16 1.1-.48v.29s.09.91-.79.91h-.3v1.1h.49c1 0 1.81-.8 1.82-1.8V9.77h-1.21Zm-.74 2.6c-.44 0-.8-.36-.8-.8s.36-.8.8-.8c.44 0 .8.36.8.8 0 .44-.36.8-.8.8&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"16px","--icon-bgcolor":"#c7d1c5","--icon-color":"#171717","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"15px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#171717"}},"2":{"name":"map","text":"약도","img":{"bottom_default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;m25.4 6.85-5.54-2.08c-.1-.04-.2-.05-.3-.05h-.04c-.1 0-.2.02-.3.05l-5.21 1.96L8.8 4.77c-.1-.04-.2-.05-.3-.05h-.04c-.1 0-.2.02-.3.05L2.62 6.85c-.36.14-.6.48-.6.86v14.64a.917.917 0 0 0 1.25.86l5.21-1.96 5.21 1.96c.1.04.2.05.3.05h.04c.1 0 .2-.02.3-.05l5.21-1.96 5.21 1.96a.924.924 0 0 0 1.25-.86V7.72c0-.38-.24-.73-.6-.86ZM3.85 8.36l3.69-1.38v12.67l-3.69 1.38V8.36Zm5.53-1.39 3.69 1.38v12.67l-3.69-1.38V6.97Zm5.54 1.39 3.69-1.38v12.67l-3.69 1.38V8.36Zm9.23 12.67-3.69-1.38V6.97l3.69 1.38v12.67Z&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"16px","--icon-bgcolor":"#c7d1c5","--icon-color":"#171717","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"15px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#171717"}},"quick_settings":{"--quick-pdupdown":"15px"}},"right_default":{"0":{"name":"call","text":"전화","img":{"right_default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;m3.77 3.84 4.54.4.37.03 1.57 4.77-1 .59a2.18 2.18 0 0 0-.83 2.88c.79 1.52 1.8 2.9 2.99 4.09 1.19 1.19 2.57 2.2 4.09 2.99.31.16.65.25 1 .25.77 0 1.49-.41 1.88-1.07l.59-1 4.77 1.57.03.37.4 4.54c-.33 0-.68-.01-1.02-.03-5.15-.26-9.93-2.34-13.47-5.88C6.14 14.8 4.06 10.02 3.8 4.87c-.02-.34-.03-.68-.03-1.02M3.01 2c-.54 0-.98.44-1 .99-.02.65-.01 1.31.02 1.96.27 5.4 2.39 10.62 6.4 14.63 4.01 4.01 9.23 6.13 14.63 6.4.41.02.82.03 1.23.03.24 0 .48 0 .73-.01.58-.02 1.03-.51.98-1.09l-.47-5.37-.08-.88c-.03-.4-.3-.74-.68-.86l-5.84-1.92a.99.99 0 0 0-1.17.44l-.9 1.53a.406.406 0 0 1-.53.16 15.07 15.07 0 0 1-3.65-2.67 14.81 14.81 0 0 1-2.67-3.65c-.1-.19-.03-.43.16-.53l1.53-.9a1 1 0 0 0 .44-1.17l-1.92-5.84a.978.978 0 0 0-.86-.68l-.88-.08-5.37-.47h-.09Z&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"16px","--icon-bgcolor":"#171717","--icon-color":"#ffffff","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"13px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#ffffff"}},"1":{"name":"blog","text":"블로그","img":{"right_default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;M21.64 2.09H6.36C3.95 2.09 2 4.04 2 6.45v15.09c0 2.41 1.95 4.36 4.36 4.36h15.28c2.41 0 4.36-1.95 4.36-4.36V6.45c0-2.41-1.95-4.36-4.36-4.36M24 14.93c0 1.78-1.44 3.22-3.22 3.23h-4.8l-1.64 2.67s-.03.06-.06.08c-.15.26-.49.35-.75.2a.636.636 0 0 1-.2-.2.218.218 0 0 1-.05-.08l-1.63-2.67h-4.8c-1.78 0-3.22-1.44-3.21-3.22V7.28a3.23 3.23 0 0 1 3.21-3.23h13.93C22.56 4.05 24 5.5 24 7.28v7.66Z&quot;\/&gt;&lt;path d=&quot;M8.16 9.66c-.4.03-.78.2-1.06.49V8.17H5.86v5.19h1.26v-.41c.23.35.63.55 1.05.54 1.01-.04 1.8-.9 1.76-1.92v-.02s-.06-1.9-1.76-1.9m-.28 2.74c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8M10.32 8.05v1.2s.57-.03.57 1.03v3.07h1.2V10s.05-1.95-1.77-1.95M15.03 9.67s-2.06 0-2.06 1.92c-.03 1.03.79 1.88 1.81 1.91h.25s2.11 0 2.11-1.9c.02-1.04-.8-1.91-1.85-1.93-.09 0-.17 0-.26.01m0 2.71c-.44 0-.8-.36-.8-.8s.36-.8.8-.8.8.36.8.8-.36.8-.8.8M20.57 9.79v.35a1.37 1.37 0 0 0-1.05-.48c-.95-.03-1.74.71-1.77 1.66v.25s-.02 1.85 1.71 1.85c.42 0 .82-.16 1.1-.48v.29s.09.91-.79.91h-.3v1.1h.49c1 0 1.81-.8 1.82-1.8V9.77h-1.21Zm-.74 2.6c-.44 0-.8-.36-.8-.8s.36-.8.8-.8c.44 0 .8.36.8.8 0 .44-.36.8-.8.8&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"16px","--icon-bgcolor":"#171717","--icon-color":"#ffffff","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"13px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#ffffff"}},"2":{"name":"map","text":"약도","img":{"right_default":"&lt;svg xmlns=&quot;http:\/\/www.w3.org\/2000\/svg&quot; viewBox=&quot;0 0 28 28&quot;&gt;&lt;path d=&quot;m25.4 6.85-5.54-2.08c-.1-.04-.2-.05-.3-.05h-.04c-.1 0-.2.02-.3.05l-5.21 1.96L8.8 4.77c-.1-.04-.2-.05-.3-.05h-.04c-.1 0-.2.02-.3.05L2.62 6.85c-.36.14-.6.48-.6.86v14.64a.917.917 0 0 0 1.25.86l5.21-1.96 5.21 1.96c.1.04.2.05.3.05h.04c.1 0 .2-.02.3-.05l5.21-1.96 5.21 1.96a.924.924 0 0 0 1.25-.86V7.72c0-.38-.24-.73-.6-.86ZM3.85 8.36l3.69-1.38v12.67l-3.69 1.38V8.36Zm5.53-1.39 3.69 1.38v12.67l-3.69-1.38V6.97Zm5.54 1.39 3.69-1.38v12.67l-3.69 1.38V8.36Zm9.23 12.67-3.69-1.38V6.97l3.69 1.38v12.67Z&quot;\/&gt;&lt;\/svg&gt;"},"icon_settings":{"onoff":"true","--icon-size":"16px","--icon-bgcolor":"#171717","--icon-color":"#ffffff","--icon-bgblur":"3px"},"text_settings":{"onoff":"true","--text-fsize":"13px","--text-fname":"Noto Sans KR","--text-fweight":"400","--text-fcolor":"#ffffff"}},"quick_settings":{"--quick-roundedge-per":"0.5","--quick-size":"64px","--quick-space":"10px"}},"right_image":{"0":{"img":{"right_image":"&lt;svg class=&quot;quickmenu-noimage&quot; viewBox=&quot;0 0 20 20&quot;&gt;&lt;path d=&quot;M0 0v20h20V0H0zM19 1v11.3l-3-3 -4 4 -6-6 -5 5V1H19zM1 19v-5.3l5-5 6 6 4-4 3 3V19H1z&quot;\/&gt;&lt;circle cx=&quot;14.5&quot; cy=&quot;5.5&quot; r=&quot;1.5&quot;\/&gt;&lt;\/svg&gt;"}},"1":{"img":{"right_image":"&lt;svg class=&quot;quickmenu-noimage&quot; viewBox=&quot;0 0 20 20&quot;&gt;&lt;path d=&quot;M0 0v20h20V0H0zM19 1v11.3l-3-3 -4 4 -6-6 -5 5V1H19zM1 19v-5.3l5-5 6 6 4-4 3 3V19H1z&quot;\/&gt;&lt;circle cx=&quot;14.5&quot; cy=&quot;5.5&quot; r=&quot;1.5&quot;\/&gt;&lt;\/svg&gt;"}},"2":{"img":{"right_image":"&lt;svg class=&quot;quickmenu-noimage&quot; viewBox=&quot;0 0 20 20&quot;&gt;&lt;path d=&quot;M0 0v20h20V0H0zM19 1v11.3l-3-3 -4 4 -6-6 -5 5V1H19zM1 19v-5.3l5-5 6 6 4-4 3 3V19H1z&quot;\/&gt;&lt;circle cx=&quot;14.5&quot; cy=&quot;5.5&quot; r=&quot;1.5&quot;\/&gt;&lt;\/svg&gt;"}},"quick_settings":{"--quick-roundedge-per":"0.5","--quick-size":"64px","--quick-space":"10px"}}}},"img_type":{"pc":"default","mobile":"bottom_default"},"img_type_mode":{"pc":"single","mobile":"single"},"total":[],"visible":[],"total_count":0,"visible_count":0},
+}
+
+function getProductNpayButtonSetting(parent) {
+	var gsettings = (parent && parent.gsettings) ? parent.gsettings : {};
+	if(typeof gsettings == 'string') {
+		try {
+			gsettings = JSON.parse(gsettings || '{}');
+		} catch(e) {
+			gsettings = {};
+		}
+	}
+	return (gsettings && gsettings.npay_button == 'N') ? 'N' : 'Y';
+}
+
+function applyProductNpayButtonVisibility() {
+	var hideNpayButton = (typeof property != 'undefined' && getProductNpayButtonSetting(property.PARENT) == 'N'),
+		styleId = 'npay-button-hidden-style',
+		style = document.getElementById(styleId);
+
+	if(hideNpayButton) {
+		if(!style) {
+			style = document.createElement('style');
+			style.id = styleId;
+			style.appendChild(document.createTextNode('#naverpay-buy,.naverpay-buy-btn{display:none!important;}'));
+			document.head.appendChild(style);
+		}
+		$('.naverpay-buy-btn').remove();
+	} else if(style) {
+		style.parentNode.removeChild(style);
+	}
+}
+
+applyProductNpayButtonVisibility();
+
+$(function() {
+		RENDER.init(property);
+	$.products.init();
+	applyProductNpayButtonVisibility();
+	setTimeout(applyProductNpayButtonVisibility, 300);
+	setTimeout(applyProductNpayButtonVisibility, 1000);
+	$(document).ajaxComplete(function() {
+		setTimeout(applyProductNpayButtonVisibility, 0);
+	});
+});
+
+$(function() {
+    const userlangUrl = `${property.RPATH}${property.SID}_userlang.js`;
+
+    $.getScript(userlangUrl)
+        .done(function() {
+            if (typeof window.applyUserLangTranslation === 'function') {
+                window.applyUserLangTranslation();
+                console.log("Userlang applied.");
+            }
+        })
+        .fail(function() {
+        });
+});
+</script>
+<a href="javascript:;" class="config-image-view" data-toggle="tooltip" data-placement="top" title="원본 보기" target="_blank"><i class="fa fa-search-plus"></i></a>
+<!-- start tail code -->
+
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"> </script> 
+<script type="text/javascript"> 
+if (!wcs_add) var wcs_add={};
+wcs_add["wa"] = "67e62935088f18";
+if (!_nasa) var _nasa={};
+wcs.inflow();
+wcs_do(_nasa);
+</script>
+
+<div style="position: fixed; bottom: 0; left: 0; overflow: auto; max-height: 80%; ">
+</div>
+ 
+<script>
+setLanguage(LANG);
+var keepalive_timer = null;
+var isUserLoggedIn = "";
+function runKeepalive() {
+    if (keepalive_timer) clearTimeout(keepalive_timer);
+    var current_cookie = document.cookie;
+    var has_kisession = current_cookie.indexOf('kisession=') !== -1;
+    
+    console.log("🍪 [Cookie Check] kisession 존재여부: " + (has_kisession ? "O" : "X"));
+    if (!has_kisession) {
+        console.error("🔥 [CRITICAL] 요청 보내기 전인데 쿠키가 사라졌음! 브라우저가 삭제함.");
+    }
+	if (isUserLoggedIn) {
+		$.ajax({
+			url: '/template/keepalive',
+			cache: false, // 브라우저 캐싱 방지
+			headers: {'X-Requested-With': 'XMLHttpRequest'}, // 서버 방어 로직용 헤더
+			xhrFields: {
+				withCredentials: true
+			},		
+			success: function(data) {
+				console.log('Keepalive OK', data); 
+			},
+			error: function(xhr, status, error) {
+				console.error('Keepalive Failed:', error);
+			},
+			complete: function() {
+				keepalive_timer = setTimeout(runKeepalive, 60 * 5 * 1000);
+			}
+		});
+	}
+}
+
+$(function() {
+	keepalive_timer = setTimeout(runKeepalive, 60 * 5 * 1000);
+	$("#no-fouc").delay(100).animate({"opacity": "1"}, 0, function() { $(this).css('opacity','1'); });
+	$('body').tooltip({
+    	selector: '[data-toggle=tooltip]'
+	});
+
+	$.ajaxSetup({ 
+		async: false,
+		cache: false,
+		beforeSend: function() {},
+		complete: function() {}
+	});
+
+	setTimeout(function(){
+		var nonAos = '';
+		// if(typeof isAosBlock !='undefined' && isAosBlock && (nonAos!='false')) {
+		// 	$.modalON();
+		// }
+			// $('.ModalPlugin').css('background','rgb(255, 255, 255,0.75)');
+			if(typeof AOS != 'undefined') {
+				AOS.init({
+					disableMutationObserver: true,
+					easing: 'easeInOutQuint',
+					offset : (jQuery(window).height() * .001)
+				});
+			}
+			if(typeof pageLoad !='undefined' && pageLoad) {
+				pageLoad = false;
+			}
+		// }
+	},0);
+
+	setTimeout(function(){
+		if($('.dsgn-body').hasClass('modoo') || $('body').hasClass('modoo')) {
+			var  SwipersTemplate;    
+			initSwiper();
+		}
+	}, 700);
+});
+
+function initSwiper() {
+	SwipersTemplate = new Swiper('._mainSwiperArea .swiper-container', {
+		speed: 500,
+		loop: true,
+		observer: true,
+		observeParents: true,
+		autoplay: {
+			delay:1500,
+			disableOnInteraction: false
+		},
+		autoplayDisableOnInteraction: false,
+		pagination: { //페이징 사용자 설정
+			el: ".swiper-pagination", //페이징 태그 클래스 설정 
+			type: "bullets",
+			clickable: true
+		},
+		paginationClickable: true,
+		resizeObserver: true
+	});
+}
+
+
+
+	log_analytics('1153404','G-29HGSEP6S5','new');	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+{
+ "klimo": {
+  "home": "200 http://www.klimousine.com text/html\n<script>document.location.replace('https://www.klimousine.com/')</script>",
+  "robots": "200 http://www.klimousine.com/robots.txt text/plain\nUser-agent: * \nDisallow: /member/\nDisallow: /adm/\n\n#DaumWebMasterTool:85fe4aa4007c4cb18729418801851e732291158d7aa73810e5a73867b149fa43:jzd8PL9/FfMCvn6Nu38D6g==",
+  "links": []
+ },
+ "kal": {
+  "home": "ERR URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: EE certificate key too weak (_ssl.c:1010)'))",
+  "robots": "ERR URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: EE certificate key too weak (_ssl.c:1010)'))",
+  "links": []
+ },
+ "kal2": {
+  "home": "ERR URLError(gaierror(-2, 'Name or service not known'))",
+  "robots": "ERR URLError(gaierror(-2, 'Name or service not known'))",
+  "links": []
+ },
+ "ggab": {
+  "home": "200 http://www.ggairportbus.co.kr text/html\n<html><body><script type=\"text/javascript\" src=\"/cupid.js\" ></script><script>function toNumbers(d){var e=[];d.replac",
+  "robots": "200 http://www.ggairportbus.co.kr/robots.txt text/html\n<html><body><script type=\"text/javascript\" src=\"/cupid.js\" ></script><script>function toNumbers(d){var e=[];d.replace(/(..)/g,function(d){e.push(parseInt(d,16))});return e}function toHex(){for(var d=[],d=1==arguments.length&&arguments[0].constructor==Array?arguments[0]:arguments,e=\"\",f=0;f<d.length;f++)e+=(16>d[f]?\"0\":\"\")+d[f].toString(16);return e.toLowerCase()}var a=toNumbers(\"bd7c5e28da3b1fe5d3f5e81d4e8f0bdb\"),b=toNumbers(\"089e6bc57f3dd48e997402296393168b\"),c=toNumbers(\"ce10d6e4e0db1713f80cd463f0344639\");var now=new Date(),time=now.getT",
+  "links": []
+ },
+ "ggab2": {
+  "home": "ERR URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1010)'))",
+  "robots": "ERR URLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1010)'))",
+  "links": []
+ },
+ "sunjin": {
+  "home": "200 https://www.sunjinexpress.com text/html; charset=UTF-8\n<!DOCTYPE html>\n<html lang=\"ko\" id=\"no-fouc\">\n<head>\n<title>선진고속 주식회사</title>\n\n<!-- creatorlink-gabia",
+  "robots": "200 https://www.sunjinexpress.com/robots.txt text/plain;charset=UTF-8\nUser-agent: *\r\nDisallow: /_forgot/id\r\nDisallow: /_register\r\nDisallow: /_login\r\nDisallow: /_cart\r\nDisallow: /member/login\r\nDisallow: /member/join\r\nDisallow: /terms\r\nDisallow: /notice\r\nDisallow: /support\r\nDisallow: /lang\r\nDisallow: /contact\r\nDisallow: /privacy\r\nDisallow: /abuse\r\nSitemap: https://sunjinexpress.com/user-sitemap\r\n",
+  "links": [
+   "/%EC%9A%B4%EC%86%A1%EC%95%BD%EA%B4%80 운송약관",
+   "/%EC%9A%B4%ED%96%89%EC%8B%9C%EA%B0%84 운행시간",
+   "/%EC%9A%B4%ED%96%89%EC%9A%94%EA%B8%88 운행요금",
+   "/css/bootstrap-datetimepicker.css ",
+   "@2069447 운행 정보"
+  ]
+ },
+ "buspia": {
+  "home": "200 https://www.buspia.co.kr// text/html; charset=utf-8\n<!DOCTYPE html>\r\n\r\n<html>\r\n<head>\r\n<title>버스피아</title>\r\n<meta http-equiv=\"Content-Type\" content=\"text/ht",
+  "robots": "HTTP 404 http://www.buspia.co.kr/robots.txt",
+  "links": [
+   "/subpage/bus/in_info.php 운행 안내",
+   "/subpage/cus/notice.php 노선 신설 및 변경"
+  ]
+ },
+ "knbus": {
+  "home": "200 http://www.knbus.co.kr text/html\n<html>\n<head>\n<meta http-equiv='Content-Type' content='text/html; charset=euc-kr'>\n\n\n            <script type=\"text/javascr",
+  "robots": "HTTP 404 http://www.knbus.co.kr/robots.txt",
+  "links": []
+ },
+ "kgbus": {
+  "home": "200 http://www.kgbus.co.kr text/html\n<html>\n<head>\n<meta http-equiv=\"content-type\" content=\"text/html; charset=euc-kr\">\n<META name=\"description\" content=\"�߰����",
+  "robots": "200 http://www.kgbus.co.kr/robots.txt text/plain\nUser-agent: *\r\n Allow:/ ",
+  "links": []
+ },
+ "kgbus2": {
+  "home": "ERR URLError(gaierror(-2, 'Name or service not known'))",
+  "robots": "ERR URLError(gaierror(-2, 'Name or service not known'))",
+  "links": []
+ },
+ "daewon": {
+  "home": "ERR URLError(gaierror(-2, 'Name or service not known'))",
+  "robots": "ERR URLError(gaierror(-2, 'Name or service not known'))",
+  "links": []
+ },
+ "ichbis": {
+  "home": "200 https://bus.incheon.go.kr text/html; charset=utf-8\n\n<script>\n\twindow.location = \"/bis/main.view\";\n</script>",
+  "robots": "200 https://bus.incheon.go.kr/robots.txt text/plain\nUser-agent: *\r\nDisallow: /",
+  "links": []
+ },
+ "api_exp_term": "HTTP 400 http://apis.data.go.kr/1613000/ExpBusInfoService/getExpBusTrminlList?terminalNm=&serviceKey=***&_type=json&numOfRows=200",
+ "api_sub_term": "HTTP 400 http://apis.data.go.kr/1613000/SuburbsBusInfoService/getSuberbsBusTrminlList?terminalNm=&serviceKey=***&_type=json&numOfRows=200",
+ "api_sub_term_air": "HTTP 400 http://apis.data.go.kr/1613000/SuburbsBusInfoService/getSuberbsBusTrminlList?terminalNm=%EC%9D%B8%EC%B2%9C%EA%B3%B5%ED%95%AD&serviceKey=***&_type=json&numOfRows=200",
+ "api_sub_term_gn": "HTTP 400 http://apis.data.go.kr/1613000/SuburbsBusInfoService/getSuberbsBusTrminlList?terminalNm=%EA%B0%95%EB%A6%89&serviceKey=***&_type=json&numOfRows=200",
+ "api_exp_term_air": "HTTP 400 http://apis.data.go.kr/1613000/ExpBusInfoService/getExpBusTrminlList?terminalNm=%EC%9D%B8%EC%B2%9C%EA%B3%B5%ED%95%AD&serviceKey=***&_type=json&numOfRows=200",
+ "sched_err": "IndexError('list index out of range')"
+}

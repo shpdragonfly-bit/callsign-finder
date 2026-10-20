@@ -1,0 +1,2 @@
+200 http://www.klimousine.com text/html
+<script>document.location.replace('https://www.klimousine.com/')</script>
