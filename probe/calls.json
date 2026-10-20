@@ -1,16 +1,10 @@
 [
- {"name": "molit_route_11_small", "url": "https://apis.data.go.kr/1613000/BusRoute/getBusRoute",
-  "params": {"pageNo": "1", "numOfRows": "5", "opr_ymd": "20261019", "ctpv_cd": "11", "dataType": "JSON"}},
- {"name": "molit_route_11_big", "url": "https://apis.data.go.kr/1613000/BusRoute/getBusRoute",
-  "params": {"pageNo": "1", "numOfRows": "1000", "opr_ymd": "20261019", "ctpv_cd": "11", "dataType": "JSON"}},
- {"name": "molit_route_28_small", "url": "https://apis.data.go.kr/1613000/BusRoute/getBusRoute",
-  "params": {"pageNo": "1", "numOfRows": "5", "opr_ymd": "20261019", "ctpv_cd": "28", "dataType": "JSON"}},
- {"name": "molit_route_41_small", "url": "https://apis.data.go.kr/1613000/BusRoute/getBusRoute",
-  "params": {"pageNo": "1", "numOfRows": "5", "opr_ymd": "20261019", "ctpv_cd": "41", "dataType": "JSON"}},
- {"name": "molit_sttn_11_small", "url": "https://apis.data.go.kr/1613000/BusSttn/getBusSttn",
-  "params": {"pageNo": "1", "numOfRows": "5", "opr_ymd": "20261019", "ctpv_cd": "11", "dataType": "JSON"}},
- {"name": "seoul_routeinfo_6300", "url": "http://ws.bus.go.kr/api/rest/busRouteInfo/getRouteInfo",
-  "params": {"busRouteId": "100100508", "resultType": "json"}},
- {"name": "seoul_stations_6300", "url": "http://ws.bus.go.kr/api/rest/busRouteInfo/getStaionByRoute",
-  "params": {"busRouteId": "100100508", "resultType": "json"}}
+ {"name": "molit_route_sample", "url": "https://apis.data.go.kr/1613000/BusRoute/getBusRoute",
+  "params": {"pageNo": "1", "numOfRows": "5", "opr_ymd": "20250801", "ctpv_cd": "29", "dataType": "JSON"}},
+ {"name": "molit_route_11_2025", "url": "https://apis.data.go.kr/1613000/BusRoute/getBusRoute",
+  "params": {"pageNo": "1", "numOfRows": "5", "opr_ymd": "20250801", "ctpv_cd": "11", "dataType": "JSON"}},
+ {"name": "molit_route_11_sep", "url": "https://apis.data.go.kr/1613000/BusRoute/getBusRoute",
+  "params": {"pageNo": "1", "numOfRows": "5", "opr_ymd": "20260901", "ctpv_cd": "11", "dataType": "JSON"}},
+ {"name": "molit_route_29_now", "url": "https://apis.data.go.kr/1613000/BusRoute/getBusRoute",
+  "params": {"pageNo": "1", "numOfRows": "5", "opr_ymd": "20261019", "ctpv_cd": "29", "dataType": "JSON"}}
 ]
