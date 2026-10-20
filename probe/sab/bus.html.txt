@@ -1,0 +1,624 @@
+200 text/html; charset=UTF-8
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>서울공항리무진 | 노선안내</title>
+
+      <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+      <link rel="icon" type="image/png" href="/images/favicon/favicon-32x32.png" sizes="32x32">
+      <link rel="icon" type="image/png" href="/images/favicon/favicon-16x16.png" sizes="16x16">
+      <link rel="canonical" href="http://www.seoulairbus.com/bus">
+
+      <meta name="author" content="서울공항리무진">
+      <meta name="description" content="서울 주요지역과 인천국제공항을 연결 리무진버스 운영하고 있습니다. 노선, 정류장, 운행 시간표를 제공합니다.">
+      <meta name="keywords" lang="ko" content="서울공항리무진, 서울공항버스, 공항버스 노선, 공항버스 시간표, 공항버스 요금, 공항리무진, 리무진공항, 공항버스, 서울리무진 노선, 인천리무진 노선, 서울인천, 서울인천 공항버스, 강남서울 리무진, 강남리무진">
+      <meta name="keywords" lang="en" content="airbus, airport remousin, seoul remousin, gangname airport remousin, seoul airport remousin">
+      <meta name="google-site-verification" content="CRBX3YubuROka70BZlabBbVI9oe2v2XWGGXgnNQW5z4" />
+
+      <meta property="og:type" content="website">
+      <meta property="og:url" content=http://www.seoulairbus.com/bus />
+      <meta property="og:title" content="서울 공항 리무진" />
+      <meta property="og:description" content="서울 주요지역과 인천국제공항을 연결 리무진버스 운영하고 있습니다. 노선, 정류장, 운행 시간표를 제공합니다." />
+      <meta property="og:image" content=http://www.seoulairbus.com/images/bg/1.jpg />
+      <meta property="og:locale" content="ko_KR">
+
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/style.css?v=190408">
+
+      <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.5.0/dist/svg-pan-zoom.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mobile-detect@1.4.3/mobile-detect.min.js"></script>
+      <script src="/js/front.js"></script>
+      <script src="/js/event.js"></script>
+
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134175716-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-134175716-1');
+      </script>
+    </head>
+
+    <body>
+
+      <div class="wrap">
+
+      <div class="gnb">
+        <h1><a href="/"><img src="/images/logo.png" alt="서울공항리무진"></a></h1>
+        <ul class="menu">
+          <li><a href="/bus" class="selected">노선안내</a></li>
+          <li><a href="/guide" class="">이용안내</a></li>
+          <li><a href="/company" class="">회사소개</a></li>
+          <li><a href="/cs" class="">고객센터</a></li>
+        </ul><!-- /menu -->
+
+        <a href="#" class="navToggle"><span></span></a>
+
+        <nav class="sidebar">
+          <ul>
+            <li class="groupHeading">노선 안내</li>
+            <li class="selected">
+              <a href="/bus">노선 안내</a>
+            </li>
+          </ul>
+          <ul>
+            <li class="groupHeading">이용 안내</li>
+            <li class="">
+              <a href="/guide">운행 요금</a>
+            </li>
+            <li class="">
+              <a href="/guide/ticket">승차권 매표 안내 (인천공항)</a>
+            </li>
+            <li class="">
+              <a href="/guide/term">운송약관</a>
+            </li>
+            <li class="">
+              <a href="/guide/convenience">공항리무진의 편의성</a>
+            </li>
+            <li class="">
+              <a href="/guide/privacy">개인정보 처리방침</a>
+            </li>
+          </ul>
+          <ul>
+            <li class="groupHeading">회사 소개</li>
+            <li class="">
+              <a href="/company">회사 소개</a>
+            </li>
+            <li class="">
+              <a href="/company/history">회사 연혁</a>
+            </li>
+            <li class="">
+              <a href="/company/place">찾아 오시는 길</a>
+            </li>
+          </ul>
+          <ul>
+            <li class="groupHeading">고객센터</li>
+            <li class="">
+              <a href="/cs">공지사항</a>
+            </li>
+            <li class="">
+              <a href="/cs/faq">자주묻는질문 (FAQ)</a>
+            </li>
+            <li class="">
+              <a href="/cs/lost">분실물 공고</a>
+            </li>
+            <li class="">
+              <a href="/cs/suggest">고객 제안</a>
+            </li>
+          </ul>
+        </nav>
+      </div><!-- /.gnb -->
+      <div id="app">
+          <div>
+                <div class="pageHeader header_routeInfo">
+    <div class="container-fluid">
+    <h2>노선안내</h2>
+    </div>
+  </div><!-- pageHeaeder -->
+
+  <div class="container-fluid ">
+    <div class="content">
+
+      <div class="selectBusNo">
+        <ul class="row">
+                    <li class="col">
+          <a href="http://www.seoulairbus.com/bus/6006" class="">
+              <strong class="busNoF">6006</strong>
+              <small>(압구정, 잠실새내역)</small>
+            </a>
+          </li>
+                    <li class="col">
+          <a href="http://www.seoulairbus.com/bus/6009" class="selected">
+              <strong class="busNoF">6009</strong>
+              <small>(대치동)</small>
+            </a>
+          </li>
+                    <li class="col">
+          <a href="http://www.seoulairbus.com/bus/6020" class="">
+              <strong class="busNoF">6020</strong>
+              <small>(반포, 강남역)</small>
+            </a>
+          </li>
+                    <li class="col">
+          <a href="http://www.seoulairbus.com/bus/6200" class="">
+              <strong class="busNoF">6200</strong>
+              <small>(황산, 잠실역)</small>
+            </a>
+          </li>
+                    <li class="col">
+          <a href="http://www.seoulairbus.com/bus/6300" class="">
+              <strong class="busNoF">6300</strong>
+              <small>(강동구, 고덕)</small>
+            </a>
+          </li>
+                    <li class="col">
+          <a href="http://www.seoulairbus.com/bus/6500" class="">
+              <strong class="busNoF">6500</strong>
+              <small>(개포동)</small>
+            </a>
+          </li>
+                    <li class="col">
+          <a href="http://www.seoulairbus.com/bus/6600" class="">
+              <strong class="busNoF">6600</strong>
+              <small>(위례신도시)</small>
+            </a>
+          </li>
+                  </ul>
+
+        <div class="form-group busNoSelectWrap">
+          <select class="form-control" onchange="goBus(event);">
+            <optgroup label="노선을 선택하세요.">
+                              <option value="6006" >6006 (압구정, 잠실새내역)</option>
+                              <option value="6009" selected>6009 (대치동)</option>
+                              <option value="6020" >6020 (반포, 강남역)</option>
+                              <option value="6200" >6200 (황산, 잠실역)</option>
+                              <option value="6300" >6300 (강동구, 고덕)</option>
+                              <option value="6500" >6500 (개포동)</option>
+                              <option value="6600" >6600 (위례신도시)</option>
+                          </optgroup>
+          </select>
+        </div>
+
+      </div><!-- /.selectBusNo -->
+
+
+
+
+      <div class="row busRouteInfoBox">
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 busRouteInfoBoxHeading">
+          <div class="busInfoPanel">
+            <div class="bus">
+              <span class="busTypeTag">공항</span>
+              <h3 class="busNoF">6009</h3>
+              <span class="routeSummary">
+                <strong>가락1동주민센터.헬리오시티</strong><i><img src="/images/dot_line.svg" alt=""></i>
+                <strong>인천국제공항 T1, T2</strong>
+              </span>
+            </div><!-- /.bus -->
+
+            
+            <div class="item firstItem">
+              <h4>배차간격</h4>
+              <p>
+                <span>13 ~ 45분</span> <span>(일 57회)</span>
+              </p>
+            </div>
+
+            <div class="item">
+              <h4>요금</h4>
+              <p><span>17,000원</span> <span>(어린이 11,000원)</span></p>
+            </div>
+
+            <div class="item stationPoint">
+              <h4>인천공항승차장</h4>
+              <p>
+                <span><b>T1</b> <em>4A, 4B</em></span>
+                <span><b>T2</b> <em>지하1층 14,15,16</em></span>
+              </p>
+            </div>
+
+            <div class="item lastItem">
+              <h4>첫차, 막차</h4>
+              <table class="first_last_timeTable">
+                <thead>
+                  <tr class="dr">
+                    <th class="n"></th>
+                    <th colspan="2">시내 - 인천공항</th>
+                    <th colspan="4">인천공항 - 시내</th>
+                  </tr>
+                  <tr>
+                    <th class="n"></th>
+                    <th rowspan="2">평일</th>
+                    <th rowspan="2" style="border-right: 1px solid #eee;">휴일</th>
+                    <th colspan="2">2터미널</th>
+                    <th colspan="2">1터미널</th>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <th>평일</th>
+                    <th>휴일</th>
+                    <th>평일</th>
+                    <th>휴일</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>첫차</td>
+                    <td>3:55</td>
+                    <td style="border-right: 1px solid #eee;">3:55</td>
+                    <td>5:20</td>
+                    <td>5:20</td>
+                    <td>5:40</td>
+                    <td>5:40</td>
+                  </tr>
+                  <tr>
+                    <td>막차</td>
+                    <td>20:10</td>
+                    <td style="border-right: 1px solid #eee;">20:10</td>
+                    <td>22:52</td>
+                    <td>22:52</td>
+                    <td>23:12</td>
+                    <td>23:12</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+            <div class="item routeUtilBtns">
+              <h4>전체 운행 시간표</h4>
+
+                            <div style="overflow: hidden;">
+                <a href="#" class="btn_showAllTimeTable" onclick="showTimeTableAll(event,'2', '0');">
+                  <i><img src="/images/ic_watch.svg" alt=""></i> 평일 운행
+                </a>
+                <a href="#" class="btn_showAllTimeTable weekend" onclick="showTimeTableAll(event,'2', '1');">
+                  <i><img src="/images/ic_watch.svg" alt=""></i> 휴일 운행
+                </a>
+              </div>
+                            <a href="https://naver.me/5XPzZG2f" class="btn_showMap" target="_blank">
+                <i><img src="/images/ic_map.svg" alt=""></i>
+                지도에서 보기
+              </a>
+
+              <!-- 전체 시간표 모달 -->
+              <div class="modal fade wholeTimeTabel_modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-xlg">
+                  <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <img src="/images/ic_close.svg" alt="">
+                    </button>
+                    <div class="modal-body">
+                      <iframe src="/timetableAll/2/0" class="wholeTimeTableDoc"></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- /.modal.wholeTimeTabel_modal_weekend -->
+
+                            <div class="modal fade wholeTimeTabel_modal_weekend" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-xlg">
+                  <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <img src="/images/ic_close.svg" alt="">
+                    </button>
+                    <div class="modal-body">
+                      <iframe src="/timetableAll/2/1" class="wholeTimeTableDoc"></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- /.modal.wholeTimeTabel_modal_weekend -->
+                          </div><!-- /.routeUtilBtns -->
+
+
+
+          </div><!-- /.busInfoPanel -->
+
+        </div><!-- /.col -->
+
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4">
+          <div class="stations">
+            <h4>정류장별 운행 시간표</h4>
+            <ul>
+
+                            <li class="station startStation">
+                <a href="/timetable/2/24390" onclick="get_timetable(event, this, '2', '24390')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>24390</em>
+                  <strong>가락1동주민센터.헬리오시티</strong>
+                  <small>Garak market, Heliocity</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/23387" onclick="get_timetable(event, this, '2', '23387')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>23387</em>
+                  <strong>삼성서울병원</strong>
+                  <small>Samsung Seoul hospital main gate opposite</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/23382" onclick="get_timetable(event, this, '2', '23382')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>23382</em>
+                  <strong>푸른마을아파트앞</strong>
+                  <small>Pureun Maeul Apt.</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/23362" onclick="get_timetable(event, this, '2', '23362')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>23362</em>
+                  <strong>일원초등학교</strong>
+                  <small>Irwonelementary school</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/23838" onclick="get_timetable(event, this, '2', '23838')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>23838</em>
+                  <strong>학여울역</strong>
+                  <small>Hangnyeoul station</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/23839" onclick="get_timetable(event, this, '2', '23839')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>23839</em>
+                  <strong>대치동</strong>
+                  <small>Daechi-dong</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/23219" onclick="get_timetable(event, this, '2', '23219')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>23219</em>
+                  <strong>도곡역2번출구.동부센트레빌</strong>
+                  <small>Dogok Station Exit 2, Dongbu Centreville</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/23840" onclick="get_timetable(event, this, '2', '23840')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>23840</em>
+                  <strong>타워팰리스</strong>
+                  <small>Tower Palace</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/23316" onclick="get_timetable(event, this, '2', '23316')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>23316</em>
+                  <strong>매봉삼성아파트SK리더스뷰</strong>
+                  <small>Maebong Samsung Apt. SK Leader&#039;s View</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/23841" onclick="get_timetable(event, this, '2', '23841')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>23841</em>
+                  <strong>양재역</strong>
+                  <small>Yangjae station</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/22006" onclick="get_timetable(event, this, '2', '22006')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>22006</em>
+                  <strong>뱅뱅사거리, 호텔페이토강남</strong>
+                  <small>Baengbaeng Sageori,  Hotel peyto Gangnam</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/22008" onclick="get_timetable(event, this, '2', '22008')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>22008</em>
+                  <strong>래미안아파트.파이낸셜뉴스</strong>
+                  <small>Raemian Apt, Financial News</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/22010" onclick="get_timetable(event, this, '2', '22010')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>22010</em>
+                  <strong>신분당선강남역</strong>
+                  <small>Sinbundang Line Gangnam station</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/22012" onclick="get_timetable(event, this, '2', '22012')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>22012</em>
+                  <strong>지하철2호선강남역, 신논현역</strong>
+                  <small>Line 2 Gangnam station, Sinnonhyeon Station</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/22014" onclick="get_timetable(event, this, '2', '22014')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>22014</em>
+                  <strong>논현역</strong>
+                  <small>Nonhyeon station</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/22016" onclick="get_timetable(event, this, '2', '22016')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>22016</em>
+                  <strong>신사역</strong>
+                  <small>Sinsa station</small>
+                </a>
+              </li>
+                            <li class="station ">
+                <a href="/timetable/2/23842" onclick="get_timetable(event, this, '2', '23842')"> <!-- class="selected" -->
+                  <i><img src="/images/tiny_down_chev.svg"></i>
+                  <em>23842</em>
+                  <strong>신사동</strong>
+                  <small>Sinsa-dong</small>
+                </a>
+              </li>
+              
+              <li class="airport">
+                <img class="downArrow" src="/images/down_arrow.svg" alt="">
+                <img class="ic_airport" onkeypress="" src="/images/airport.svg" alt="">
+                <span>인천국제공항</span>
+              </li>
+            </ul>
+          </div><!-- /.stations -->
+        </div><!-- /.col -->
+
+
+
+
+
+
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-4">
+          <div class="routeMap">
+            <object id="map" type="image/svg+xml" data="/storage/map_web/6009_station_200309_1583738142.svg" style="width: 100%; height: 100%;">Your browser does not support SVG</object>
+            <div class="frameWrap" style="display: none;">
+              <a href="#" class="closePanel"><img src="/images/ic_close.svg" alt=""></a>
+              <iframe src="" class="stationTimeTableDoc" id="stationTimeSchedule"></iframe>
+            </div>
+          </div><!-- /.routeMap -->
+
+          <div class="magnetRouteMapBox">
+            <img class="magnetRouteMap" src="/storage/map_mobile/station_route_6009_200309_1583738142.svg" alt="6009 노선도">
+          </div>
+
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.content -->
+  </div><!-- /.container-fluid -->
+<script>
+$(document).ready(function(){
+  /*
+  $('.stationText').click(function(){
+    alert('클릭되네!');
+  });
+  */
+
+  $('.closePanel').click(function(e){
+    $(this).parent().hide('fast');
+    $('li.station a').removeClass('selected');
+    e.preventDefault();
+  });
+
+  $('.footer .container').removeClass('container').addClass('container-fluid');
+
+  /*
+  $('.station a').click(function(e){
+    $('li.station a').removeClass('selected');
+    $(this).addClass('selected');
+    $('.frameWrap').fadeOut('fast').fadeIn('fast');
+
+    e.preventDefault();
+  });
+  */
+
+  document.getElementById('map').addEventListener('load', function(){
+    var panzoombusmap = svgPanZoom('#map', {
+      panEnabled: true,
+      zoomEnabled: true,
+      //controlIconsEnabled: true,
+      fit: true,
+      center: true,
+      minZoom: 1,
+      maxZoom: 5,
+      zoomScaleSensitivity: 0.3
+    })
+
+    // svg 포지션 
+    var nurl = window.location.pathname.substring(5, 9);
+
+    if (nurl == '6006') {
+      panzoombusmap.zoomAtPoint(2, {x: 600, y: 800});
+    } else if (nurl == '6009') {
+      panzoombusmap.zoomAtPoint(2, {x: 300, y: 1000});
+    } else if (nurl == '6020') {
+      panzoombusmap.zoomAtPoint(2, {x: 50, y: 800});
+    } else if (nurl == '6200') {
+      panzoombusmap.zoomAtPoint(2, {x: 930, y: 400});
+    } else if (nurl == '6300') {
+      panzoombusmap.zoomAtPoint(2, {x: 930, y: 600});
+    } else if (nurl == '6500') {
+      panzoombusmap.zoomAtPoint(2, {x: 50, y: 750});
+    } else if (nurl == '6600') {
+      panzoombusmap.zoomAtPoint(2, {x: 850, y: 800});
+    } else {
+      panzoombusmap.zoomAtPoint(2, {x: 600, y: 800});
+    }
+    
+  })
+
+});
+
+function get_timetable(_event, _this, line, station) {
+  var url = '/timetable/' + line + '/' + station;
+  if (md.mobile()) {
+    window.location.href = url;
+  } else {
+    $('li.station a').removeClass('selected');
+    $(_this).addClass('selected');
+
+    $('#stationTimeSchedule').attr('src', url).hide();
+
+    $('#stationTimeSchedule').on("load", function() {
+      $(this).fadeIn('fast');
+      $('.frameWrap').fadeIn('fast');
+    });
+
+    _event.preventDefault();
+  }
+}
+
+function goBus(_event) {
+  var overlay_loading = '<div class="overlay_loading"></div>';
+  $('.wrap').after(overlay_loading);
+  window.location.href = '/bus/' + _event.target.value;
+}
+
+function showTimeTableAll(_event,_id, _type) {
+  if (md.mobile()) {
+    // mobile
+    window.location.href = "/timetableAll/" + _id + "/" + _type
+  } else {
+    //web
+    if (_type === "0") {
+      $('.wholeTimeTabel_modal').modal("show");
+      _event.preventDefault();
+    } else {
+      $('.wholeTimeTabel_modal_weekend').modal('show');
+      _event.preventDefault();
+    }
+  }
+}
+
+</script>
+          </div>
+      </div><!-- #app -->
+
+      <div class="footer">
+        <div class="container">
+          <img class="logoAlt" src="/images/logo.png" alt="">
+          <p>
+            <span>&copy; 2020 seoulairbus.com</span><br>
+            <span>서울공항리무진(주)</span><span>대표이사 박재영</span><span>사업자번호 215-87-87819</span><span>서울시 송파구 충민로 6길61-29 (장지동 862)</span><span><a href="/guide/privacy" style="color: #A7A9AC;">개인정보처리방침</a></span>
+          </p>
+          <p class="telInfo">
+            <b><span>고객센터&nbsp;&nbsp;02-577-1343</span><span>FAX&nbsp;&nbsp;02-402-1684</span></b>
+          </p>
+        </div>
+      </div><!-- /.footer -->
+
+
+      </div>
+    </body>
+</html>
