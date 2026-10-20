@@ -2932,19 +2932,22 @@ window.FPREP = (() => {
   const verTxt = (d) => [fixDate(d.date_label || d.eff_date || ""), d.version ? "v" + fixVer(d.version) : ""].filter(Boolean).join(" ");
 
   // ---------- 서버 ----------
-  async function call(q, ms = 15000) {
+  // 서버(Apps Script)는 한동안 안 쓰면 잠들어 첫 응답이 15초 넘게 걸리기도 함 → 30초 기다리고, 실패하면 한 번 더
+  async function call(q, ms = 30000, retry = 1) {
     if (!navigator.onLine) return { ok: false, err: "offline" };
     const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), ms);
+    let res;
     try {
       const r = await fetch(SRV + "?" + new URLSearchParams(q), { cache: "no-store", signal: ctl.signal });
-      if (!r.ok) return { ok: false, err: "server" };
-      return await r.json();
-    } catch (e) { return { ok: false, err: navigator.onLine ? "server" : "offline" }; }
+      res = r.ok ? await r.json() : { ok: false, err: "server" };
+    } catch (e) { res = { ok: false, err: navigator.onLine ? "server" : "offline" }; }
     finally { clearTimeout(t); }
+    if (!res.ok && res.err === "server" && retry > 0 && navigator.onLine) return call(q, ms, retry - 1);
+    return res;
   }
   let LIST = J(LK, null);                                 // 자료가 있는 공항 코드 목록 (내용 없음)
-  async function loadList() {
-    if (LIST && Date.now() - LIST.t < 3600e3) return LIST;
+  async function loadList(fresh) {                        // fresh: 이 시간(ms)보다 오래된 목록이면 새로 받음
+    if (LIST && Date.now() - LIST.t < (fresh || 3600e3)) return LIST;
     const r = await call({ a: "list" });
     if (r.ok && Array.isArray(r.airports)) { LIST = { t: Date.now(), airports: r.airports }; ls.set(LK, JSON.stringify(LIST)); }
     return LIST;
@@ -3055,11 +3058,19 @@ window.FPREP = (() => {
       const v = $(inp).value.trim().toUpperCase(), a = resolve(v), H = $(hint), bad = v.length >= 3 && !a;
       A[k] = a; $(inp).classList.toggle("bad", bad);
       H.className = "fp-hint" + (bad ? " no" : ""); H.textContent = a ? label(a) : bad ? "자료 없음" : "";
+      // 방금 서버에 올라온 공항일 수 있음: 목록이 1분보다 오래됐으면 새로 받아 다시 확인
+      if (bad && v.length >= 3 && (!LIST || Date.now() - LIST.t > 60e3) && navigator.onLine) {
+        H.textContent = "확인 중…";
+        const t = LIST && LIST.t; await loadList(60e3);
+        if (my === seq && LIST && LIST.t !== t) { fillList(); return paint(); }
+        if (my === seq) H.textContent = "자료 없음";
+      }
     }
     ls.set("csf-fp-dep", A.dep ? A.dep.icao : ""); ls.set("csf-fp-arr", A.arr ? A.arr.icao : "");
     if (!A.dep && !A.arr) { out.innerHTML = `<div class="card fp-empty">공항 코드를 입력하세요. ICAO 4자리(RJTT) 또는 IATA 3자리(HND)</div>`; return; }
     if (A.dep && A.arr) { const key = `${A.dep.icao}|${A.arr.icao}`; ls.set(RK, JSON.stringify([key, ...recent().filter((r) => r !== key)].slice(0, 6))); paintRecent(); }
     out.innerHTML = `<div class="card fp-empty">받는 중…</div>`;
+    const slow = setTimeout(() => { if (my === seq && /받는 중/.test(out.textContent)) out.innerHTML = `<div class="card fp-empty">받는 중… 서버가 잠에서 깨는 중이라 처음 조회는 30초쯤 걸릴 수 있습니다.</div>`; }, 6000);
     const last = J(LAST, {}), html = [];
     for (const [role, a, ttl] of [["dep", A.dep, "이륙 시 유의사항"], ["arr", A.arr, "착륙 시 유의사항"]]) {
       if (!a) continue;
@@ -3078,6 +3089,7 @@ window.FPREP = (() => {
         ((d.changes || []).length ? `<details class="fp-chg"><summary>이전 버전과 달라진 점 ${d.changes.length}건</summary><ul>${d.changes.map((c) => `<li><b>${esc(c.type || "")}</b> ${esc(c.text)}</li>`).join("")}</ul></details>` : "") + `</div>`);
     }
     if (my !== seq) return;
+    clearTimeout(slow);
     out.innerHTML = html.join("");
     showLeft();
   }
@@ -3203,7 +3215,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v61", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v62", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
