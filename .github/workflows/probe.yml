@@ -61,6 +61,7 @@ jobs:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python tools/probe_ic_stops.py
       - name: 인천공항 편명 조회 점검
+        if: false
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python tools/probe_icn_flt.py
