@@ -1009,6 +1009,13 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
 .gr-mem { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
 .gr-chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 99px; border: 1px solid var(--line); background: var(--panel); font-size: 13px; font-weight: 700; }
 .gr-chip small { font: 600 11px var(--mono); color: var(--muted); } .gr-chip.me { border-color: var(--accent); } .gr-chip.pend { border-style: dashed; color: var(--muted); }
+.nk-card { margin-top: 12px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+.nk-l { display: block; font-weight: 700; font-size: 14px; } .nk-l small { display: block; font-weight: 500; color: var(--muted); font-size: 12px; margin-top: 2px; }
+.nk-row { display: flex; gap: 8px; margin-top: 8px; } .nk-row input { flex: 1; min-width: 0; }
+.nk-card input { font-size: 16px; padding: 7px 9px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel-2); color: var(--text); font-family: inherit; }
+.nk-al { display: grid; grid-template-columns: 4.6em 1fr; gap: 2px 8px; align-items: center; margin-top: 8px; } .nk-al small { grid-column: 2; color: var(--muted); font-size: 12px; }
+.gr-nm { align-self: center; } .gr-own { margin-top: 6px; font-size: 13px; } .gr-own summary { cursor: pointer; color: var(--muted); } .gr-own label { display: flex; gap: 8px; align-items: center; margin-top: 6px; }
+.gr-own input { font-size: 15px; padding: 5px 7px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--text); width: 7.5em; } .gr-own small { color: var(--muted); }
 .gr-chip button { border: 0; background: none; color: var(--muted); font-size: 12px; padding: 0 2px; cursor: pointer; }
 .gr-row { display: flex; flex-wrap: wrap; gap: 8px 12px; font-size: 13px; } .gr-row input, .gr-row select { font-size: 15px; padding: 5px 7px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--text); } .gr-row input { width: 7.5em; }
 .gr-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; } .gr-btns .b { padding: 8px 12px; font-size: 14px; }
@@ -1208,6 +1215,7 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
       <div class="sh-hd"><h2 id="mnTitle">메뉴</h2><button type="button" class="sh-x" data-mclose>닫기</button></div>
       <div class="mn-list">
         <button type="button" class="mn-item" id="mnCal"><span class="ic">📅</span><span>내 스케줄<small>저장된 근무표를 월별로 보기</small></span><span class="go">›</span></button>
+        <button type="button" class="mn-item" data-mv="mnNick"><span class="ic">🪪</span><span>내 닉네임<small>공유 그룹에 보일 이름 · 아이디 보내기 · 내가 부르는 이름</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" id="mnFx"><span class="ic">💱</span><span>환율 계산기<small>외화 ↔ 원 · 오프라인에서도 마지막 환율로</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnGm"><span class="ic">🤖</span><span>Gemini AI 연결<small>FLT Package 분석 · 사진 읽기용 키 등록</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnGuide"><span class="ic">🗓️</span><span>근무표 → 캘린더 안내<small>근무표 등록 방법 · 앱/구글 캘린더</small></span><span class="go">›</span></button>
@@ -1407,6 +1415,11 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
       </div>
     </div>
 
+    </div>
+    <div id="mnNick" hidden>
+      <div class="sh-hd"><button type="button" class="mn-back" data-mv="mnMain">‹ 메뉴</button><button type="button" class="sh-x" data-mclose>닫기</button></div>
+      <h2 style="margin-top:8px">내 닉네임</h2>
+      <div id="nkBody"></div>
     </div>
     <div id="mnNotice" hidden>
       <div class="sh-hd"><button type="button" class="mn-back" data-mv="mnMain">‹ 메뉴</button><button type="button" class="sh-x" data-mclose>닫기</button></div>
@@ -1998,6 +2011,16 @@ window.ROSTER = (() => {
   let R = load();
   let syncSoon = () => {}, syncPull = () => {};            // 내 기기 동기화 (아래에서 채움)
   let groupSoon = () => {}, groupPull = () => {}, grpSync = { list: () => [], merge: () => {} }, grpView = null, gView = "";   // 공유 그룹 (아래에서 채움)
+  // 내 닉네임 · 내가 부르는 이름(상대 아이디 → 이름). 기기에 저장, 내 기기 동기화로 다른 내 기기에도 (서버에는 암호문 안에만)
+  const PK = "csf-prof";
+  const PROF = window.PROF = {
+    get() { const id = window.UID ? window.UID.id() : ""; try { const o = JSON.parse(ls.get(PK) || "null"); if (o && o.id === id) return Object.assign({ nick: "", al: {} }, o); } catch (e) {} return { id, nick: "", al: {} }; },
+    put(p, fromSync) { p = Object.assign({}, p, { id: window.UID ? window.UID.id() : "" }); p.nick = String(p.nick || "").trim().slice(0, 6); p.al = p.al || {};
+      ls.set(PK, JSON.stringify(p)); if (!fromSync) save(); document.dispatchEvent(new Event("csf-prof")); },
+    nick() { return this.get().nick; },
+    alias(id) { return (this.get().al || {})[id] || ""; },
+    setAlias(id, v) { const p = this.get(); v = String(v || "").trim().slice(0, 8); if (v) p.al[id] = v; else delete p.al[id]; this.put(p); },
+  };
   // 동기화·공유 서버 호출. 동시에 나간 근무표 받기(get)와 그룹 받기(gget)는 한 번(pull)으로 합침 (옛 서버면 따로)
   async function srvRaw(body) {
     if (!SYNC_SERVER) throw { err: "nosrv" };
@@ -2647,7 +2670,7 @@ window.ROSTER = (() => {
     async function push() {
       const [f, t] = win(), ts = R.updated || new Date().toISOString();
       const ev = R.events.filter((e) => (e.d2 || e.ed || e.d) >= f && e.d <= t).map((e) => { const o = Object.assign({}, e); delete o.on; return o; });
-      await call({ a: "put", ts, blob: await seal({ v: 1, f, t, u: ts, e: ev, g: grpSync.list() }) });
+      await call({ a: "put", ts, blob: await seal({ v: 1, f, t, u: ts, e: ev, g: grpSync.list(), p: PROF.get() }) });
       ls.set(STS, ts);
     }
     // 서버 것이 새로우면 받아서 그 기간만 바꿈, 이 기기 것이 새로우면 보냄 (나중에 고친 쪽이 이김)
@@ -2658,7 +2681,7 @@ window.ROSTER = (() => {
       if (r.same || r.ts === mine || (mine > r.ts && R.events.length)) { if (mine > r.ts) { await push(); return "sent"; } ls.set(STS, r.ts); return "same"; }
       const o = await unseal(r.blob);
       R.events = sortEv([...R.events.filter((e) => e.d < o.f || e.d > o.t), ...(o.e || [])]); R.updated = o.u || r.ts;
-      save(true); ls.set(STS, r.ts); grpSync.merge(o.g);
+      save(true); ls.set(STS, r.ts); grpSync.merge(o.g); if (o.p) PROF.put(o.p, true);
       if (!$("rcSheet").hidden) paintMonth();
       return "got";
     }
@@ -2729,11 +2752,14 @@ window.ROSTER = (() => {
     const msg = (h, bad) => { $("rsGrMsg").innerHTML = h ? `<span style="color:var(${bad ? "--warn" : "--ok"})${bad ? ";font-weight:700" : ""}">${h}</span>` : ""; };
     const win = () => { const t = new Date(); return [ymd(new Date(t.getFullYear(), t.getMonth() - 1, 1)), ymd(new Date(t.getFullYear(), t.getMonth() + 3, 0))]; };
     const me = () => U().id();
-    const nickOf = (g, id) => id === me() ? (g.nick || "나") : ((((C[g.gid] || {}).sh || {})[id] || {}).data || {}).nick || id;
+    // 내 이름 = 이 그룹에서만 다른 이름(g.own) 또는 메뉴의 내 닉네임. 상대 = 내가 부르는 이름 → 상대 닉네임 → 아이디
+    const myNick = (g) => (g.own && g.nick) || PROF.nick() || g.nick || "";
+    const theirNick = (g, id) => ((((C[g.gid] || {}).sh || {})[id] || {}).data || {}).nick || "";
+    const nickOf = (g, id) => id === me() ? (myNick(g) || "나") : PROF.alias(id) || theirNick(g, id) || id;
     const hash = (s) => String([...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) | 0, 7));
     // 내 공유본: 근무/휴무만(날짜별 근무 1 · 휴무 0) 또는 상세(메모·설명 뺀 일정)
     function myData(g) {
-      const [f, t] = win(), o = { v: 1, nick: g.nick || "", scope: g.scope, f, t };
+      const [f, t] = win(), o = { v: 1, nick: myNick(g), scope: g.scope, f, t };
       if (g.owner === me()) o.gname = g.name;
       if (g.scope === "detail") o.e = R.events.filter((e) => (e.d2 || e.ed || e.d) >= f && e.d <= t).map((e) => { const x = {}; for (const k of ["d", "d2", "ed", "kind", "flt", "dep", "arr", "st", "et", "label"]) if (e[k]) x[k] = e[k]; return x; });
       else { o.w = {}; for (let d = f; d <= t; d = nextD(d)) { const ev = onDay(d); if (ev.length) o.w[d] = ev.some((e) => !/^(OFF|LV)$/.test(e.kind)) ? 1 : 0; } }
@@ -2777,14 +2803,14 @@ window.ROSTER = (() => {
     groupSoon = () => { if (!L.length) return; clearTimeout(timer); timer = setTimeout(() => run(() => pushAll()), 2000); };
     groupPull = (force) => { if (L.length && (force || Date.now() - last > 180000)) run(async () => { await pushAll(); await fetchAll(); }); };
     // 다른 내 기기와 그룹 목록(비밀키 포함) 맞추기 (내 기기 동기화 안에서 암호화됨)
-    grpSync = { list: () => L.map((g) => ({ gid: g.gid, k: g.k, name: g.name, nick: g.nick, scope: g.scope })), merge: (arr) => { let n = 0; for (const g of arr || []) if (!L.some((x) => x.gid === g.gid)) { L.push(Object.assign({ members: [], pend: [] }, g)); n++; } if (n) { saveL(); paint(); groupPull(true); } } };
+    grpSync = { list: () => L.map((g) => ({ gid: g.gid, k: g.k, name: g.name, nick: g.nick, own: g.own, scope: g.scope })), merge: (arr) => { let n = 0; for (const g of arr || []) if (!L.some((x) => x.gid === g.gid)) { L.push(Object.assign({ members: [], pend: [] }, g)); n++; } if (n) { saveL(); paint(); groupPull(true); } } };
     // 월 화면에서 쓰는 그룹 자료
     grpView = {
       list: () => L,
       rows(gid) {     // [{id, nick, me, scope, evs | w}]
         const g = L.find((x) => x.gid === gid); if (!g) return [];
         const ids = (g.members && g.members.length ? g.members : [me()]).slice().sort((a, b) => (a === me() ? -1 : b === me() ? 1 : 0));
-        const rows = ids.map((id) => { if (id === me()) return { id, nick: g.nick || "나", me: true, scope: "detail", evs: R.events };
+        const rows = ids.map((id) => { if (id === me()) return { id, nick: myNick(g) || "나", me: true, scope: "detail", evs: R.events };
           const d = ((C[gid] || {}).sh || {})[id]; return { id, nick: nickOf(g, id), scope: d && d.data.scope, evs: d && d.data.e, w: d && d.data.w, none: !d, bad: d && d.data.bad }; });
         // 짧은 이름: 첫 글자가 겹치면 두 글자. 멤버마다 색
         const COL = ["#E8590C", "#2F9E44", "#7048E8", "#C2255C"];
@@ -2805,22 +2831,25 @@ window.ROSTER = (() => {
         h = `<div class="rs-act"><button type="button" class="b primary rs-go" data-g="reg"${SYNC_SERVER ? "" : " disabled"}>공유 시작</button>
           <div class="rs-last">내 아이디 <b>${esc(me())}</b>를 공유 서버에 등록. 등록해야 다른 사람이 초대 가능.</div></div>`;
       } else {
-        h = `<p class="gr-me">내 아이디 <b>${esc(me())}</b> <small>초대받을 때 상대에게 알려 주세요</small></p>`;
+        h = `<p class="gr-me">내 아이디 <b>${esc(me())}</b> <small>초대받을 때 상대에게 알려 주세요 · ☰ 메뉴 → 내 닉네임 → ‘아이디 보내기’로 닉네임과 함께 보낼 수 있습니다</small></p>`;
         for (const g of L) {
           const own = g.owner === me(), mem = g.members && g.members.length ? g.members : [me()], pend = g.pend || [];
           h += `<div class="gr-it"><div class="gr-hd"><b>${esc(g.name || "그룹")}</b><small>${mem.length}/4명${own ? " · 관리자" : ""}</small><button type="button" class="b" data-g="view" data-id="${g.gid}">달력 보기</button></div>
-            <div class="gr-mem">${mem.map((id) => `<span class="gr-chip${id === me() ? " me" : ""}">${esc(nickOf(g, id))}<small>${esc(id)}</small>${own && id !== me() ? `<button type="button" data-g="kick" data-id="${g.gid}" data-t="${id}" aria-label="내보내기">✕</button>` : ""}</span>`).join("")}
-              ${pend.map((id) => `<span class="gr-chip pend">초대 중<small>${esc(id)}</small>${own ? `<button type="button" data-g="cancel" data-id="${g.gid}" data-t="${id}" aria-label="초대 취소">✕</button>` : ""}</span>`).join("")}</div>
-            <div class="gr-row"><label>내 표시 이름 <input data-g="nick" data-id="${g.gid}" maxlength="6" value="${esc(g.nick || "")}" placeholder="예: 박기장"></label>
+            <div class="gr-mem">${mem.map((id) => { const tn = id !== me() && theirNick(g, id), al = id !== me() && PROF.alias(id);
+                return `<span class="gr-chip${id === me() ? " me" : ""}"${al && tn && al !== tn ? ` title="닉네임: ${esc(tn)}"` : ""}>${esc(nickOf(g, id))}${id === me() ? " (나)" : ""}<small>${esc(id)}</small>${id !== me() ? `<button type="button" data-g="ali" data-id="${g.gid}" data-t="${id}" aria-label="내가 부르는 이름">✎</button>` : ""}${own && id !== me() ? `<button type="button" data-g="kick" data-id="${g.gid}" data-t="${id}" aria-label="내보내기">✕</button>` : ""}</span>`; }).join("")}
+              ${pend.map((id) => `<span class="gr-chip pend">${PROF.alias(id) ? `${esc(PROF.alias(id))} · ` : ""}초대 중<small>${esc(id)}</small><button type="button" data-g="ali" data-id="${g.gid}" data-t="${id}" aria-label="내가 부르는 이름">✎</button>${own ? `<button type="button" data-g="cancel" data-id="${g.gid}" data-t="${id}" aria-label="초대 취소">✕</button>` : ""}</span>`).join("")}</div>
+            ${form.startsWith("ali:" + g.gid + ":") ? (() => { const t = form.split(":")[2], tn = theirNick(g, t); return `<div class="gr-form"><label>${esc(t)}을(를) 내 앱에서 부를 이름 <small>상대에게는 보이지 않습니다${tn ? ` · 상대 닉네임: ${esc(tn)}` : ""}</small><input id="grAli" maxlength="8" value="${esc(PROF.alias(t))}" placeholder="${esc(tn || "예: 김부기장")}"></label><div class="gr-btns"><button type="button" class="b primary" data-g="aligo" data-t="${t}">저장</button><button type="button" class="b" data-g="close">취소</button></div></div>`; })() : ""}
+            <div class="gr-row"><span class="gr-nm">내 이름 <b>${esc(myNick(g) || "(없음)")}</b>${g.own && g.nick ? " <small>이 그룹에서만</small>" : ""}</span>
               <label>공개 <select data-g="scope" data-id="${g.gid}"><option value="basic"${g.scope !== "detail" ? " selected" : ""}>근무/휴무만</option><option value="detail"${g.scope === "detail" ? " selected" : ""}>상세(편명·시각)</option></select></label></div>
+            <details class="gr-own"${g.own && g.nick ? " open" : ""}><summary>이 그룹에서만 다른 이름 쓰기</summary><label>이 그룹 이름 <input data-g="nick" data-id="${g.gid}" maxlength="6" value="${esc(g.own ? g.nick || "" : "")}" placeholder="${esc(PROF.nick() || "예: 아빠")}"></label><small>비우면 메뉴의 ‘내 닉네임’을 씁니다.</small></details>
             <div class="gr-btns">${own && mem.length + pend.length < 4 ? `<button type="button" class="b" data-g="inv" data-id="${g.gid}">초대하기</button>` : ""}<button type="button" class="b" data-g="out" data-id="${g.gid}">나가기</button></div>
-            ${form === "inv:" + g.gid ? `<div class="gr-form"><label>초대할 사람의 아이디 (6자리) <input id="grInvId" maxlength="6" autocapitalize="characters" autocomplete="off" placeholder="예: GN4VVZ"></label><button type="button" class="b primary" data-g="invgo" data-id="${g.gid}">초대 코드 만들기</button>
+            ${form === "inv:" + g.gid ? `<div class="gr-form"><label>초대할 사람의 아이디 <small>상대가 보낸 ‘아이디 보내기’ 메시지를 그대로 붙여 넣어도 됩니다</small><textarea id="grInvId" rows="2" maxlength="300" autocapitalize="characters" autocomplete="off" placeholder="예: GN4VVZ"></textarea></label><label>이름 (내 앱에서 부를 이름, 선택) <input id="grInvNm" maxlength="8" placeholder="예: 김부기장"></label><button type="button" class="b primary" data-g="invgo" data-id="${g.gid}">초대 코드 만들기</button>
               ${lastCode && lastCode.gid === g.gid ? `<div class="gr-code"><textarea readonly rows="4">${esc(lastCode.text)}</textarea><div class="gr-btns"><button type="button" class="b primary" data-g="share">보내기</button><button type="button" class="b" data-g="copy">복사</button></div><small>${esc(lastCode.target)} 아이디만 참가할 수 있고 24시간 뒤 만료됩니다. 카카오톡 등으로 보내 주세요.</small></div>` : ""}</div>` : ""}
             ${form === "out:" + g.gid ? `<div class="gr-form warn">${own && mem.length > 1 ? "관리자가 나가면 다음 멤버가 관리자가 됩니다. " : ""}내 공유본은 서버에서 바로 지워집니다. <button type="button" class="b primary" data-g="outgo" data-id="${g.gid}">나가기 확인</button> <button type="button" class="b" data-g="close">취소</button></div>` : ""}
           </div>`;
         }
         h += `<div class="gr-btns gr-main">${L.length < 5 ? `<button type="button" class="b" data-g="new">새 그룹 만들기</button>` : ""}${L.length < 5 ? `<button type="button" class="b" data-g="join">초대 코드로 참가</button>` : ""}${L.length ? `<button type="button" class="b" data-g="refresh">새로 받기</button>` : ""}</div>`;
-        const opts = `<label>내 표시 이름 <input id="grNick" maxlength="6" placeholder="예: 박기장"></label><label>공개 범위 <select id="grScope"><option value="basic">근무/휴무만</option><option value="detail">상세(편명·시각)</option></select></label>`;
+        const opts = `${PROF.nick() ? `<p class="gr-me">내 이름 <b>${esc(PROF.nick())}</b> <small>☰ 메뉴 → 내 닉네임에서 바꿀 수 있습니다</small></p>` : `<label>내 닉네임 (다른 멤버에게 보이는 이름, 6자) <input id="grNick" maxlength="6" placeholder="예: 박기장"></label>`}<label>공개 범위 <select id="grScope"><option value="basic">근무/휴무만</option><option value="detail">상세(편명·시각)</option></select></label>`;
         if (form === "new") h += `<div class="gr-form"><label>그룹 이름 <input id="grName" maxlength="12" placeholder="예: 우리 가족"></label>${opts}<button type="button" class="b primary" data-g="newgo">만들기</button> <button type="button" class="b" data-g="close">취소</button></div>`;
         if (form === "join") h += `<div class="gr-form"><label>받은 초대 코드 (메시지 전체를 붙여 넣어도 됩니다) <textarea id="grCode" rows="3" placeholder="FLTG-…"></textarea></label>${opts}<button type="button" class="b primary" data-g="joingo">참가하기</button> <button type="button" class="b" data-g="close">취소</button></div>`;
       }
@@ -2829,9 +2858,16 @@ window.ROSTER = (() => {
       for (const [id, v] of Object.entries(keep)) if ($(id) && !$(id).readOnly) $(id).value = v;
     }
     const nickOk = (v) => String(v || "").trim().slice(0, 6);
+    // '아이디 보내기' 메시지 또는 아이디만 → {id, nick}
+    const parseIdMsg = (v) => {
+      v = String(v || ""); const u = v.toUpperCase();
+      const id = (u.match(/아이디\s*([A-HJKMNP-Z2-9]{6})(?![A-Z0-9])/) || u.match(/(?:^|[^A-Z0-9])([A-HJKMNP-Z2-9]{6})(?![A-Z0-9])/) || [])[1] || "";
+      const nick = ((v.match(/닉네임\s*([^\s\n·]{1,8})/) || [])[1] || "").trim();
+      return { id, nick };
+    };
     $("rsGrBody").addEventListener("change", (e) => {
       const t = e.target, g = L.find((x) => x.gid === t.dataset.id); if (!g) return;
-      if (t.dataset.g === "nick") { g.nick = nickOk(t.value); saveL(); groupSoon(); }
+      if (t.dataset.g === "nick") { g.nick = nickOk(t.value); g.own = !!g.nick; saveL(); paint(); groupSoon(); }
       if (t.dataset.g === "scope") { g.scope = t.value === "detail" ? "detail" : "basic"; saveL(); run(() => pushAll(), false, `공개 범위를 ‘${g.scope === "detail" ? "상세" : "근무/휴무만"}’으로 바꿨습니다.`); }
     });
     $("rsGrBody").addEventListener("click", async (e) => {
@@ -2840,22 +2876,25 @@ window.ROSTER = (() => {
       if (k === "reg") { if (await run(() => call({ a: "reg" }), true, "공유를 시작했습니다. 내 아이디를 알려 주면 상대가 초대할 수 있습니다.")) { ls.set(GR, me()); paint(); } return; }
       if (k === "new" || k === "join") { form = form === k ? "" : k; paint(); return; }
       if (k === "close") { form = ""; paint(); return; }
+      if (k === "ali") { const f = "ali:" + gid + ":" + b.dataset.t; form = form === f ? "" : f; paint(); setTimeout(() => $("grAli") && $("grAli").focus(), 0); return; }
+      if (k === "aligo") { PROF.setAlias(b.dataset.t, $("grAli").value); form = ""; paint(); if (!$("rcSheet").hidden) paintMonth(); msg("내 앱에서 부를 이름을 저장했습니다."); return; }
       if (k === "inv") { form = form === "inv:" + gid ? "" : "inv:" + gid; lastCode = null; paint(); return; }
       if (k === "out") { form = "out:" + gid; paint(); return; }
       if (k === "refresh") { groupPull(true); msg("받는 중…"); return; }
       if (k === "view") { gView = gid; window.ROSTER.open(); return; }
       if (k === "newgo") {
-        const name = String($("grName").value || "").trim().slice(0, 12) || "우리 그룹", nick = nickOk($("grNick").value), scope = $("grScope").value;
-        if (!nick) { msg("내 표시 이름을 넣어 주세요(다른 멤버에게 보이는 이름).", true); return; }
+        const name = String($("grName").value || "").trim().slice(0, 12) || "우리 그룹", nick = PROF.nick() || nickOk($("grNick") && $("grNick").value), scope = $("grScope").value;
+        if (!nick) { msg("내 닉네임을 넣어 주세요(다른 멤버에게 보이는 이름).", true); return; }
+        if (!PROF.nick()) PROF.put(Object.assign(PROF.get(), { nick }));
         await run(async () => { const r = await call({ a: "gcreate" }); L.push({ gid: r.gid, k: rs(26), name, nick, scope, owner: me(), members: [me()], pend: [] }); saveL(); form = ""; save(); await pushAll(true); }, true, `‘${esc(name)}’ 그룹을 만들었습니다. ‘초대하기’로 멤버를 초대하세요.`);
         return;
       }
       if (k === "invgo" && g) {
-        const t = String($("grInvId").value || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
-        if (!/^[A-Z2-9]{6}$/.test(t)) { msg("아이디 6자리를 정확히 넣어 주세요.", true); return; }
+        const pi = parseIdMsg($("grInvId").value), t = pi.id, memo = String($("grInvNm").value || "").trim() || pi.nick;
+        if (!t) { msg("아이디 6자리를 정확히 넣어 주세요.", true); return; }
         if (t === me()) { msg("내 아이디입니다. 초대할 사람의 아이디를 넣어 주세요.", true); return; }
         const tok = rs(12);
-        await run(async () => { await call({ a: "ginvite", gid, target: t, tok }); g.pend = [...new Set([...(g.pend || []), t])]; saveL();
+        await run(async () => { await call({ a: "ginvite", gid, target: t, tok }); g.pend = [...new Set([...(g.pend || []), t])]; saveL(); if (memo && !PROF.alias(t)) PROF.setAlias(t, memo);
           lastCode = { gid, target: t, text: `[FLT Assist 근무표 공유 초대]\n그룹: ${g.name || "그룹"}\n앱 → 개발중 → 근무표 등록 → 공유 그룹 → ‘초대 코드로 참가’에 이 메시지를 붙여 넣으세요. (${t} 전용 · 24시간)\nFLTG-${gid}-${tok}-${g.k}` }; }, true, "초대 코드를 만들었습니다.");
         return;
       }
@@ -2866,10 +2905,11 @@ window.ROSTER = (() => {
         return;
       }
       if (k === "joingo") {
-        const m = String($("grCode").value || "").toUpperCase().match(/FLTG-([A-Z2-9]{12})-([A-Z2-9]{10,40})-([A-Z2-9]{26})/), nick = nickOk($("grNick").value), scope = $("grScope").value;
+        const m = String($("grCode").value || "").toUpperCase().match(/FLTG-([A-Z2-9]{12})-([A-Z2-9]{10,40})-([A-Z2-9]{26})/), nick = PROF.nick() || nickOk($("grNick") && $("grNick").value), scope = $("grScope").value;
         if (!m) { msg("초대 코드를 찾지 못했습니다. ‘FLTG-’로 시작하는 줄이 들어 있는지 확인해 주세요.", true); return; }
-        if (!nick) { msg("내 표시 이름을 넣어 주세요(다른 멤버에게 보이는 이름).", true); return; }
+        if (!nick) { msg("내 닉네임을 넣어 주세요(다른 멤버에게 보이는 이름).", true); return; }
         if (L.some((x) => x.gid === m[1])) { msg("이미 참가한 그룹입니다.", true); return; }
+        if (!PROF.nick()) PROF.put(Object.assign(PROF.get(), { nick }));
         await run(async () => { const r = await call({ a: "gjoin", gid: m[1], tok: m[2] }); ls.set(GR, me());
           L.push({ gid: m[1], k: m[3], name: "그룹", nick, scope, owner: r.owner, members: r.members, pend: [] }); saveL(); form = ""; save(); await pushAll(true); await fetchAll(); }, true, "그룹에 참가했습니다. ‘달력 보기’로 함께 볼 수 있습니다.");
         return;
@@ -2882,7 +2922,43 @@ window.ROSTER = (() => {
         await run(async () => { try { await call({ a: "gleave", gid }); } catch (x) { if (!x || !/notmember|nogroup/.test(x.err)) throw x; } L = L.filter((x) => x.gid !== gid); delete C[gid]; saveL(); saveC(); form = ""; if (gView === gid) gView = ""; save(); }, true, "그룹에서 나왔습니다. 내 공유본은 서버에서 지웠습니다.");
       }
     });
-    const start = () => { L = loadL(); paint(); setTimeout(() => groupPull(), 2500); };     // 근무표 동기화 받기와 같은 때 → 한 번 요청으로 합쳐짐
+    // ---------- 내 닉네임 · 아이디 보내기 · 내가 부르는 이름 (☰ 메뉴 → 내 닉네임) ----------
+    const idMsg = () => `[FLT Assist] 내 아이디 ${me()}${PROF.nick() ? ` · 닉네임 ${PROF.nick()}` : ""}\n근무표 공유 그룹에 초대할 때 ‘초대하기’ 칸에 이 메시지를 그대로 붙여 넣으면 됩니다.`;
+    window.NICKUI = {
+      paint(box) {
+        if (!box) return;
+        const P = PROF.get(), reg = ls.get(GR) === me(), known = new Map();
+        for (const g of L) for (const id of [...(g.members || []), ...(g.pend || [])]) if (id !== me() && !known.has(id)) known.set(id, theirNick(g, id));
+        for (const id of Object.keys(P.al || {})) if (!known.has(id)) known.set(id, "");
+        box.innerHTML = `<div class="nk-card"><label class="nk-l">내 닉네임 <small>공유 그룹 멤버에게 보이는 이름 (6자)</small></label>
+            <div class="nk-row"><input id="nkNick" maxlength="6" value="${esc(P.nick)}" placeholder="예: 박기장"><button type="button" class="b primary" data-nk="save">저장</button></div>
+            <p class="mn-note">바꾸면 내가 속한 모든 그룹에 반영됩니다. 그룹마다 다른 이름은 근무표 등록 → 공유 그룹의 그룹 카드에서 정할 수 있습니다.</p></div>
+          <div class="nk-card"><label class="nk-l">내 아이디 <b class="mono">${esc(me())}</b></label>
+            <div class="nk-row"><button type="button" class="b primary" data-nk="send">아이디 보내기</button><button type="button" class="b" data-nk="copy">복사</button></div>
+            <p class="mn-note">아이디와 닉네임을 함께 보냅니다. 받은 사람은 초대할 때 이 메시지를 그대로 붙여 넣으면 됩니다.${reg ? "" : " <b>초대받으려면 먼저 근무표 등록 → 공유 그룹에서 ‘공유 시작’을 눌러 주세요.</b>"}</p></div>
+          <div class="nk-card"><label class="nk-l">내가 부르는 이름 <small>내 앱에서만 보이는 이름 · 상대에게는 보이지 않음</small></label>
+            ${known.size ? [...known].map(([id, tn]) => `<div class="nk-al"><span class="mono">${esc(id)}</span><input data-nka="${esc(id)}" maxlength="8" value="${esc(PROF.alias(id))}" placeholder="${esc(tn || "이름")}">${tn ? `<small>닉네임 ${esc(tn)}</small>` : ""}</div>`).join("")
+              : `<p class="mn-note">공유 그룹 멤버가 생기면 여기서 이름을 붙일 수 있습니다.</p>`}</div>
+          <div class="mn-note" id="nkMsg"></div>`;
+      },
+    };
+    const nkMsg = (t) => { const m = $("nkMsg"); if (m) m.textContent = t; };
+    document.addEventListener("click", async (e) => {
+      const b = e.target.closest("[data-nk]"); if (!b) return;
+      if (b.dataset.nk === "save") { const v = nickOk($("nkNick").value); if (!v) { nkMsg("닉네임을 넣어 주세요."); return; } PROF.put(Object.assign(PROF.get(), { nick: v })); nkMsg("저장했습니다. 그룹에 곧 반영됩니다."); return; }
+      const text = idMsg();
+      if (b.dataset.nk === "send" && navigator.share) { try { await navigator.share({ text }); return; } catch (x) { if (x && x.name === "AbortError") return; } }
+      try { await navigator.clipboard.writeText(text); nkMsg("복사했습니다. 메신저에 붙여 넣어 보내 주세요."); } catch (x) { nkMsg(text); }
+    });
+    document.addEventListener("change", (e) => { const t = e.target.closest("[data-nka]"); if (!t) return; PROF.setAlias(t.dataset.nka, t.value); nkMsg("저장했습니다."); });
+    document.addEventListener("csf-prof", () => { paint(); if (!$("rcSheet").hidden) paintMonth(); groupSoon(); });
+    // 예전 그룹별 표시 이름 → 메뉴의 내 닉네임으로 (한 번)
+    const migrate = () => {
+      if (PROF.nick() || !L.some((g) => g.nick)) return;
+      const n = (L.find((g) => g.nick) || {}).nick; L.forEach((g) => { if (g.nick && g.nick !== n) g.own = true; }); saveL();
+      PROF.put(Object.assign(PROF.get(), { nick: n }), true);
+    };
+    const start = () => { L = loadL(); migrate(); paint(); setTimeout(() => groupPull(), 2500); };     // 근무표 동기화 받기와 같은 때 → 한 번 요청으로 합쳐짐
     if (window.UID) start(); else addEventListener("DOMContentLoaded", start);
     document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") groupPull(); });
   })();
@@ -3153,7 +3229,8 @@ window.FPREP = (() => {
     badge();
   }
   function view(id) {
-    ["mnMain", "mnNotice", "mnReq", "mnFaq", "mnGm", "mnGuide", "mnGc", "mnUse"].forEach((v) => { $(v).hidden = v !== id; });
+    ["mnMain", "mnNick", "mnNotice", "mnReq", "mnFaq", "mnGm", "mnGuide", "mnGc", "mnUse"].forEach((v) => { $(v).hidden = v !== id; });
+    if (id === "mnNick") window.NICKUI ? window.NICKUI.paint($("nkBody")) : ($("nkBody").innerHTML = `<p class="mn-note">잠시 후 다시 열어 주세요.</p>`);
     if (id === "mnNotice") showNotice();
     if (id === "mnFaq") $("mnFaqList").innerHTML = FAQ && FAQ.items && FAQ.items.length
       ? FAQ.items.map((x) => `<details><summary>${esc(x.q)}</summary><p>${esc(x.a)}</p></details>`).join("")
@@ -3215,7 +3292,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v62", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v63", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
