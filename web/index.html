@@ -3308,7 +3308,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v70", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v71", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -3804,7 +3804,7 @@ window.csfStat = (() => {
       // 아래 줄 = 인천 쪽 정보(터미널 · 게이트가 인천 것이므로). 해외 공항은 검색으로 이미 알고 있어 생략.
       // 위 시각이 해외 공항이면 인천 시각을 함께, 위 시각이 인천이면 시각은 반복하지 않음
       const io2 = `ICN${i[2] === "A" ? "도착" : "출발"}`;
-      const leg = ext ? `${io2} ${fdl(t, 540)} ${khm(t)} kst` : io2;
+      const leg = io2;   // 시각은 위 줄 하나에만 (반대쪽 시각은 '출발 | 도착' 버튼으로)
       // 실제 이륙(AeroDataBox runwayTime, 6시간마다 확인) · 변경 출발 예정. 출발 공항 현지 시각
       let tk = "";
       const dq = i[2] === "A" && depOf(cs, i[0]);
