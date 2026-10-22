@@ -36,7 +36,7 @@ jobs:
           path: data/adb_icn.json
           key: adb-${{ github.run_id }}
           restore-keys: adb-
-      - name: 인천 도착편 출발지 출발시각 (AeroDataBox, 3일마다 · 키 있을 때만)
+      - name: 인천 도착편 출발지 출발시각 (AeroDataBox, 7일치 6.5일마다 + 가까운 12시간 6시간마다 · 키 있을 때만)
         env:
           ADB_KEY: ${{ secrets.ADB_KEY }}
           ADB_HOST: ${{ secrets.ADB_HOST }}
