@@ -11,7 +11,8 @@
 - 키: 환경변수 ADB_KEY (GitHub Secret). 없으면 아무것도 안 함. ADB_HOST 기본 aerodatabox.p.rapidapi.com
 - 무료(Basic) 요금제: 월 400 units(초과 시 차단), FIDS 1회 = 2 units
   · 예정 출발시각: 6.5일마다 앞으로 7일치(12시간 창 14번 = 28 units), 월 4~5번 = 약 120~140 units
-  · 실제 이륙시각(departure.runwayTime): 6시간마다 앞으로 12시간 도착편 1번(2 units), 월 약 248 units
+  · 실제 이륙·착륙(runwayTime): 6시간마다 '6시간 전~6시간 뒤' 도착+출발편 1번(direction=Both, 2 units — 2026-10-22 시험으로 확인), 월 약 248 units
+    → 지난 1주 운항 기록(이륙·착륙·게이트 출발/도착·비행시간)도 여기서 쌓임 (보관 7일과 같은 기간)
   · 합계 약 370~390 units. 응답의 남은 units 가 40 아래면 실제 이륙시각 받기는 쉼
 - 이용 조건
   · 출처 표시 필수 → 앱 화면에 'AeroDataBox' 표시
@@ -70,10 +71,12 @@ def load():
 
 def purge(db):
     """받은 지 7일 지난 기록 삭제 (이용 조건)"""
-    for fn in list(db["f"]):
-        db["f"][fn] = {k: v for k, v in db["f"][fn].items() if len(v) > 3 and ts(v[3]) and (NOW - ts(v[3])).total_seconds() < KEEP_H * 3600}
-        if not db["f"][fn]:
-            del db["f"][fn]
+    for t in ("f", "d"):
+        m = db.setdefault(t, {})
+        for fn in list(m):
+            m[fn] = {k: v for k, v in m[fn].items() if len(v) > 3 and ts(v[3]) and (NOW - ts(v[3])).total_seconds() < KEEP_H * 3600}
+            if not m[fn]:
+                del m[fn]
 
 
 def tm(s):
@@ -87,9 +90,9 @@ def tm(s):
     return (t - dt.timedelta(minutes=off)).strftime("%Y%m%d%H%M"), off
 
 
-def call(frm, to):
+def call(frm, to, direction="Arrival"):
     url = "https://%s/flights/airports/iata/ICN/%s/%s?%s" % (HOST, frm, to, urllib.parse.urlencode({
-        "withLeg": "true", "direction": "Arrival", "withCancelled": "true", "withCodeshared": "false",
+        "withLeg": "true", "direction": direction, "withCancelled": "true", "withCodeshared": "false",
         "withCargo": "true", "withPrivate": "false", "withLocation": "false"}))
     h = {"Accept": "application/json", "User-Agent": "callsign-finder/1.0", "X-RapidAPI-Key": KEY, "X-RapidAPI-Host": HOST}
     with urllib.request.urlopen(urllib.request.Request(url, headers=h), timeout=60) as r:
@@ -109,39 +112,67 @@ def units_left():
     return None
 
 
-def fetch(db, days=DAYS, sample=None):
-    now = dt.datetime.now(KST).replace(second=0, microsecond=0)
+def keep(old, i, new):
+    return new or (old[i] if len(old) > i else "")
+
+
+def take(db, res):
+    """응답 → db. 도착편 db['f'][편][인천도착예정UTC], 출발편 db['d'][편][인천출발예정UTC]"""
+    got = 0
+    for x in res.get("arrivals") or []:
+        fn = re.sub(r"\s+", "", x.get("number") or "").upper()
+        dep, arr = x.get("departure") or {}, x.get("arrival") or {}
+        st = dep.get("scheduledTime") or {}
+        std, _ = tm(st.get("utc") or "")
+        _, off = tm(st.get("local") or "")
+        sta, _ = tm((arr.get("scheduledTime") or {}).get("utc") or "")
+        if not (fn and std and sta):
+            continue
+        u = lambda o, k: tm((o.get(k) or {}).get("utc") or "")[0] or ""
+        old = db["f"].get(fn, {}).get(sta) or []
+        # [출발예정, 출발지시차, 출발지, 받은때, 실제이륙, 변경·실제출발(게이트), 인천착륙, 인천도착(게이트), 도착함]
+        db["f"].setdefault(fn, {})[sta] = [std, off or 0, ((dep.get("airport") or {}).get("iata") or "").upper(), STAMP,
+                                           keep(old, 4, u(dep, "runwayTime")), keep(old, 5, u(dep, "revisedTime")),
+                                           keep(old, 6, u(arr, "runwayTime")), keep(old, 7, u(arr, "revisedTime") if x.get("status") == "Arrived" else ""),
+                                           1 if x.get("status") == "Arrived" else (old[8] if len(old) > 8 else 0)]
+        got += 1
+    for x in res.get("departures") or []:
+        fn = re.sub(r"\s+", "", x.get("number") or "").upper()
+        dep, arr = x.get("departure") or {}, x.get("arrival") or {}
+        std, _ = tm((dep.get("scheduledTime") or {}).get("utc") or "")
+        at = arr.get("scheduledTime") or {}
+        sta, _ = tm(at.get("utc") or "")
+        _, aoff = tm(at.get("local") or "")
+        if not (fn and std):
+            continue
+        u = lambda o, k: tm((o.get(k) or {}).get("utc") or "")[0] or ""
+        old = db.setdefault("d", {}).get(fn, {}).get(std) or []
+        dn = x.get("status") in ("Departed", "EnRoute", "Approaching", "Arrived", "Diverted")
+        # [목적지, 도착예정, 목적지시차, 받은때, 인천이륙, 인천출발(게이트), 목적지착륙, 목적지도착(게이트)]
+        db["d"].setdefault(fn, {})[std] = [((arr.get("airport") or {}).get("iata") or "").upper(), sta or "", aoff or 0, STAMP,
+                                           keep(old, 4, u(dep, "runwayTime")), keep(old, 5, u(dep, "revisedTime") if dn else ""),
+                                           keep(old, 6, u(arr, "runwayTime")), keep(old, 7, u(arr, "revisedTime") if x.get("status") == "Arrived" else "")]
+        got += 1
+    return got
+
+
+def fetch(db, days=DAYS, sample=None, back=0, direction="Arrival"):
+    now = dt.datetime.now(KST).replace(second=0, microsecond=0) - dt.timedelta(hours=back)
     got = calls = 0
     for k in range(max(1, days * 2)):                           # 12시간 창 (API 한 번에 최대 12시간)
         a = now + dt.timedelta(hours=12 * k)
         b = a + dt.timedelta(hours=12, minutes=-1)
         try:
-            res = call(a.strftime("%Y-%m-%dT%H:%M"), b.strftime("%Y-%m-%dT%H:%M"))
+            res = call(a.strftime("%Y-%m-%dT%H:%M"), b.strftime("%Y-%m-%dT%H:%M"), direction)
             calls += 1
         except Exception as e:
             print("AeroDataBox 실패: %s" % (getattr(e, "code", "") or type(e).__name__))   # 키가 로그에 남지 않게 주소는 출력하지 않음
             if getattr(e, "code", 0) in (401, 403, 429):
                 break
             continue
-        if sample is not None and k == 0:
-            sample.update(res)
-        for x in res.get("arrivals") or []:
-            fn = re.sub(r"\s+", "", x.get("number") or "").upper()
-            dep, arr = x.get("departure") or {}, x.get("arrival") or {}
-            st = dep.get("scheduledTime") or {}
-            std, _ = tm(st.get("utc") or "")
-            _, off = tm(st.get("local") or "")
-            sta, _ = tm((arr.get("scheduledTime") or {}).get("utc") or "")
-            if not (fn and std and sta):
-                continue
-            rwy, _ = tm((dep.get("runwayTime") or {}).get("utc") or "")          # 실제 이륙 (이미 뜬 편만)
-            rev, _ = tm((dep.get("revisedTime") or {}).get("utc") or "")         # 변경 출발 예정
-            old = db["f"].get(fn, {}).get(sta) or []
-            db["f"].setdefault(fn, {})[sta] = [std, off or 0, ((dep.get("airport") or {}).get("iata") or "").upper(), STAMP,
-                                               rwy or (old[4] if len(old) > 4 else ""), rev or (old[5] if len(old) > 5 else "")]
-            got += 1
+        got += take(db, res)
         time.sleep(1)
-    print("AeroDataBox: 호출 %d회(약 %d units), 출발시각 %d편" % (calls, calls * 2, got))
+    print("AeroDataBox(%s): 호출 %d회(약 %d units), %d편" % (direction, calls, calls * 2, got))
     if LIMIT:
         print("  남은 사용량: %s" % ", ".join("%s=%s" % kv for kv in sorted(LIMIT.items())))
     return calls
@@ -197,9 +228,33 @@ def export():
                 k = same[-1]; v = recs[k]
                 dd = dt.datetime.strptime(sta, "%Y%m%d%H%M") - dt.timedelta(minutes=mins(k, v[0]))
                 out.setdefault(cs, {})[sta] = [dd.strftime("%Y%m%d%H%M"), v[1], "d"]
-    oldest = min((v[3] for recs in db["f"].values() for v in recs.values()), default=STAMP)
-    json.dump({"generated": STAMP, "fetched": oldest, "near": db.get("near", ""), "src": "AeroDataBox", "f": out}, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
-    print("dep.json: 콜사인 %d개, %d편" % (len(out), sum(len(v) for v in out.values())))
+    # 지난 1주 운항 기록: 콜사인 → [[방향, 출발예정UTC, 출발지, 도착지, 출발지시차, 도착지시차, 이륙, 착륙, 게이트출발, 게이트도착(분, 출발예정 기준)]]
+    def cs_of(fn):
+        m = re.match(r"^([A-Z0-9]{2})0*(\d+[A-Z]?)$", fn)
+        return m and m.group(1) in iata and iata[m.group(1)] + m.group(2)
+
+    def rel(t, base):
+        return mins(t, base) if t else None
+    hist, cut = {}, (NOW - dt.timedelta(days=7)).strftime("%Y%m%d%H%M")
+    now_k = NOW.strftime("%Y%m%d%H%M")
+    for fn, recs in db["f"].items():
+        cs = cs_of(fn)
+        for sta, v in (recs.items() if cs else ()):
+            v = v + [""] * (9 - len(v))
+            if v[0] < cut or v[0] > now_k or not (v[4] or v[6]):
+                continue
+            hist.setdefault(cs, []).append(["A", v[0], v[2], "ICN", v[1], 540, rel(v[4], v[0]), rel(v[6], v[0]), rel(v[5], v[0]) if v[4] else None, rel(v[7], v[0]), rel(sta, v[0])])
+    for fn, recs in (db.get("d") or {}).items():
+        cs = cs_of(fn)
+        for std, v in (recs.items() if cs else ()):
+            if std < cut or std > now_k or not (v[4] or v[6]):
+                continue
+            hist.setdefault(cs, []).append(["D", std, "ICN", v[0], 540, v[2], rel(v[4], std), rel(v[6], std), rel(v[5], std), rel(v[7], std), rel(v[1], std)])
+    for cs in hist:
+        hist[cs].sort(key=lambda r: r[1], reverse=True)
+    oldest = min((v[3] for t in ("f", "d") for recs in (db.get(t) or {}).values() for v in recs.values()), default=STAMP)
+    json.dump({"generated": STAMP, "fetched": oldest, "near": db.get("near", ""), "src": "AeroDataBox", "f": out, "h": hist}, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    print("dep.json: 콜사인 %d개, %d편 · 지난 기록 %d개 %d편" % (len(out), sum(len(v) for v in out.values()), len(hist), sum(len(v) for v in hist.values())))
     return 0
 
 
@@ -210,6 +265,26 @@ def main():
         print("AeroDataBox: 키(ADB_KEY) 없음 → 건너뜀")
         return 0
     db = load(); purge(db)
+    if "--probe" in sys.argv:                                  # 시험: 도착만 vs 도착+출발 요금 비교, 필드 이름·개수만 (자료는 저장하지 않음)
+        now = dt.datetime.now(KST).replace(second=0, microsecond=0)
+        a, b = (now - dt.timedelta(hours=6)).strftime("%Y-%m-%dT%H:%M"), (now + dt.timedelta(hours=5, minutes=59)).strftime("%Y-%m-%dT%H:%M")
+        out = []
+        for d in ("Arrival", "Both"):
+            LIMIT.clear(); res = call(a, b, d); time.sleep(2)
+            out.append("[%s] 남은 사용량: %s" % (d, ", ".join("%s=%s" % kv for kv in sorted(LIMIT.items()))))
+            for side in ("arrivals", "departures"):
+                xs = res.get(side) or []
+                c = lambda f: sum(1 for x in xs if f(x))
+                g = lambda x, s1, s2: ((x.get(s1) or {}).get(s2) or {}).get("utc")
+                out.append("  %s %d건 · 출발필드 %s · 도착필드 %s" % (side, len(xs), sorted({k for x in xs for k in (x.get("departure") or {})}), sorted({k for x in xs for k in (x.get("arrival") or {})})))
+                out.append("    dep.runway %d · dep.revised %d · arr.runway %d · arr.revised %d · arr.predicted %d · status %s" % (
+                    c(lambda x: g(x, "departure", "runwayTime")), c(lambda x: g(x, "departure", "revisedTime")),
+                    c(lambda x: g(x, "arrival", "runwayTime")), c(lambda x: g(x, "arrival", "revisedTime")), c(lambda x: g(x, "arrival", "predictedTime")),
+                    sorted({x.get("status") for x in xs})))
+        print("\n".join(out))
+        os.makedirs(os.path.join(ROOT, "probe", "adb"), exist_ok=True)
+        open(os.path.join(ROOT, "probe", "adb", "probe.txt"), "w", encoding="utf-8").write("\n".join(out) + "\n")
+        return 0
     if "--sample" in sys.argv:                                 # 시험: 12시간 창 1번만 받고 응답 앞부분 저장 (키는 저장하지 않음)
         now = dt.datetime.now(KST).replace(second=0, microsecond=0)
         res = call(now.strftime("%Y-%m-%dT%H:%M"), (now + dt.timedelta(hours=11, minutes=59)).strftime("%Y-%m-%dT%H:%M"))
@@ -228,7 +303,7 @@ def main():
         left = db.get("units_left")
         if left is not None and left < UNITS_FLOOR:
             print("AeroDataBox: 남은 units %s → 실제 이륙시각 받기 쉼" % left)
-        elif fetch(db, days=0):                                  # 앞으로 12시간 도착편 1번
+        elif fetch(db, days=0, back=6, direction="Both"):         # 6시간 전 ~ 6시간 뒤 도착·출발편 1번 (지난 1주 기록 · 실제 이륙)
             db["near"] = STAMP
     else:
         print("AeroDataBox: 예정 %.1f시간 전 · 실제 이륙 %.1f시간 전에 받음 → 건너뜀" % ((NOW - last).total_seconds() / 3600, (NOW - near).total_seconds() / 3600))

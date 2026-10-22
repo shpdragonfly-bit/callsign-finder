@@ -1,0 +1,10 @@
+[Arrival] 남은 사용량: x-ratelimit-api-units-limit=400, x-ratelimit-api-units-remaining=368, x-ratelimit-api-units-reset=2663279, x-ratelimit-rapid-free-plans-hard-limit-limit=500000, x-ratelimit-rapid-free-plans-hard-limit-remaining=499984, x-ratelimit-rapid-free-plans-hard-limit-reset=2663279, x-ratelimit-requests-limit=1600, x-ratelimit-requests-remaining=1584, x-ratelimit-requests-reset=2663279
+  arrivals 259건 · 출발필드 ['airport', 'checkInDesk', 'gate', 'quality', 'revisedTime', 'runway', 'runwayTime', 'scheduledTime', 'terminal'] · 도착필드 ['baggageBelt', 'gate', 'quality', 'revisedTime', 'runwayTime', 'scheduledTime', 'terminal']
+    dep.runway 129 · dep.revised 177 · arr.runway 203 · arr.revised 256 · arr.predicted 0 · status ['Arrived', 'Expected', 'Unknown']
+  departures 0건 · 출발필드 [] · 도착필드 []
+    dep.runway 0 · dep.revised 0 · arr.runway 0 · arr.revised 0 · arr.predicted 0 · status []
+[Both] 남은 사용량: x-ratelimit-api-units-limit=400, x-ratelimit-api-units-remaining=366, x-ratelimit-api-units-reset=2663276, x-ratelimit-rapid-free-plans-hard-limit-limit=500000, x-ratelimit-rapid-free-plans-hard-limit-remaining=499983, x-ratelimit-rapid-free-plans-hard-limit-reset=2663276, x-ratelimit-requests-limit=1600, x-ratelimit-requests-remaining=1583, x-ratelimit-requests-reset=2663276
+  arrivals 259건 · 출발필드 ['airport', 'checkInDesk', 'gate', 'quality', 'revisedTime', 'runway', 'runwayTime', 'scheduledTime', 'terminal'] · 도착필드 ['baggageBelt', 'gate', 'quality', 'revisedTime', 'runwayTime', 'scheduledTime', 'terminal']
+    dep.runway 129 · dep.revised 177 · arr.runway 203 · arr.revised 256 · arr.predicted 0 · status ['Arrived', 'Expected', 'Unknown']
+  departures 249건 · 출발필드 ['checkInDesk', 'gate', 'quality', 'revisedTime', 'runwayTime', 'scheduledTime', 'terminal'] · 도착필드 ['airport', 'baggageBelt', 'gate', 'quality', 'revisedTime', 'runway', 'runwayTime', 'scheduledTime', 'terminal']
+    dep.runway 171 · dep.revised 249 · arr.runway 37 · arr.revised 132 · arr.predicted 0 · status ['Boarding', 'CheckIn', 'Departed', 'Expected']

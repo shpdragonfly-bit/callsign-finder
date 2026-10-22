@@ -105,6 +105,12 @@ jobs:
           ADB_KEY: ${{ secrets.ADB_KEY }}
           ADB_HOST: ${{ secrets.ADB_HOST }}
         run: python updater/adb.py --sample
+      - name: AeroDataBox 도착만 vs 도착+출발 요금 비교 (2번 호출, 개수·필드 이름만 저장)
+        if: false
+        env:
+          ADB_KEY: ${{ secrets.ADB_KEY }}
+          ADB_HOST: ${{ secrets.ADB_HOST }}
+        run: python updater/adb.py --probe
       - name: API 호출 샘플 수집
         if: hashFiles('probe/calls.json') != ''
         env:
