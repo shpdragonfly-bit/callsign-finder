@@ -266,7 +266,8 @@ body[data-tab="ft"] .cs-only, body[data-tab="pk"] .cs-only, body[data-tab="cm"] 
 .apx-c span { color: var(--muted); }
 .apx-c b { font: 700 13px var(--mono); white-space: nowrap; }
 .apx-c b small { font-weight: 500; color: var(--muted); }
-.apx-k { font: 700 14px var(--mono); color: var(--accent); margin-bottom: 2px; }
+.apx-k { font: 700 14px var(--mono); color: var(--accent); margin-bottom: 2px; } .apx-k small { font: 500 11.5px var(--mono); color: var(--muted); margin-left: 4px; }
+.apx-c b sup { font-size: 9px; color: var(--muted); font-weight: 500; } .apx-c b i { font-style: normal; color: var(--muted); font-weight: 500; margin-right: 1px; } .apx-moon { font-weight: 500; color: var(--muted); margin-left: 4px; font-size: 12px; }
 .apx-fx { display: flex; align-items: center; gap: 6px; width: 100%; margin: 0 0 10px; padding: 7px 12px 7px 10px; border: 1.5px solid var(--accent); border-radius: 12px;
   background: color-mix(in srgb, var(--accent) 10%, transparent); font: 600 13px inherit; font-family: inherit; color: var(--text); cursor: pointer; text-align: left; white-space: nowrap; overflow: hidden; }
 .apx-fx:active { background: color-mix(in srgb, var(--accent) 20%, transparent); }
@@ -3307,7 +3308,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v68", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v69", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -3748,7 +3749,7 @@ window.csfStat = (() => {
       const dd = mode === "arr" ? fdl(ld || at(r[10]) || sd, r[5]) : fdl(sd, r[4]);
       const air = r[6] != null && r[7] == null && (r[10] != null ? Date.now() < at(r[10]).getTime() + 2 * 3600e3 : Date.now() - tk < 16 * 3600e3);   // 도착 예정 2시간 뒤까지만 '비행 중' (그 뒤는 착륙 자료 대기 —)
       const same = wdN && (mode === "arr" ? wdl(ld || at(r[10]) || sd, r[5]) : wdl(sd, r[4])) === wdN;
-      body += `<div class="ph-r${same ? " ph-same" : ""}"><span>${dd}${same ? `<small class="ph-sw">같은 요일</small>` : ""}</span><span>${fz(sd)}</span><span>${tk ? fz(tk) : "—"}</span><span>${ld ? fz(ld) : air ? `<small>비행 중</small>` : "—"}</span><span>${f != null ? hm(f) : "—"}</span></div>`;
+      body += `<div class="ph-r${same ? " ph-same" : ""}"><span>${dd}</span><span>${fz(sd)}</span><span>${tk ? fz(tk) : "—"}</span><span>${ld ? fz(ld) : air ? `<small>비행 중</small>` : "—"}</span><span>${f != null ? hm(f) : "—"}</span></div>`;
     }
 
     let sum = [];
@@ -3800,8 +3801,8 @@ window.csfStat = (() => {
       const head = !ext ? `<small>${fdl(bt, 540)}</small> <b class="si-o">${fz(bt)}</b> <small>${fhl(bt, 540)} KST</small>`
         : `<small>${fdl(bt, bo)}</small> <b class="si-o">${fz(bt)}</b> <small>${esc(b[2])} ${fhl(bt, bo)} 현지${b[4] ? "" : " · 같은 편 시간표"}</small>`;
       // 아래 줄: 반대쪽(인천) 시각과 구간
-      const leg = !ext ? (b[3] ? what : `${what} <span class="muted">(${mode === "dep" ? "출발" : "도착"}시각 자료 없음)</span>`)
-        : i[2] === "A" ? `${esc(i[3])} 출발 → ICN 도착 ${fdl(t, 540)} ${khm(t)} KST` : `ICN 출발 ${fdl(t, 540)} ${khm(t)} KST → ${esc(i[3])} 도착`;
+      const leg = !ext ? (b[3] ? what : `${i[2] === "D" ? `ICN→${esc(i[3])}` : `${esc(i[3])}→ICN`} <span class="muted">(${mode === "dep" ? "출발" : "도착"}시각 없음)</span>`)
+        : `ICN${i[2] === "A" ? "도착" : "출발"} ${fdl(t, 540)} ${khm(t)} kst`;
       // 실제 이륙(AeroDataBox runwayTime, 6시간마다 확인) · 변경 출발 예정. 출발 공항 현지 시각
       let tk = "";
       const dq = i[2] === "A" && depOf(cs, i[0]);
@@ -3809,13 +3810,13 @@ window.csfStat = (() => {
         const sd = utcOf(dq[0]), o = +dq[1] || 0, ago = DEP.near ? Math.max(0, Math.round((Date.now() - Date.parse(DEP.near)) / 3600e3)) : null;
         const when = ago == null ? "" : ago < 1 ? " · 방금 확인" : ` · ${ago}시간 전 확인`;
         if (dq[3]) { const r = utcOf(dq[3]), dd = Math.round((r - sd) / 60e3);
-          tk = `<div class="si-tk"><span class="si-tko">이륙</span> <b>${fz(r)}</b> ${esc(i[3])} ${fhl(r, o)} 현지 <small>${dd > 0 ? `예정보다 ${dd}분 늦게` : dd < 0 ? `예정보다 ${-dd}분 일찍` : "예정 시각"}${when}</small></div>`; }
+          tk = `<div class="si-tk"><span class="si-tko">이륙</span> <b>${fz(r)}</b> ${esc(i[3])} ${fhl(r, o)} 현지</div>`; }
         else { const r = utcOf(dq[4]), dd = Math.round((r - sd) / 60e3);
-          if (Math.abs(dd) >= 5) tk = `<div class="si-tk"><span class="si-tkr">출발 변경</span> <b>${fz(r)}</b> ${esc(i[3])} ${fhl(r, o)} 현지 <small>예정보다 ${dd > 0 ? `${dd}분 늦게` : `${-dd}분 일찍`}${when}</small></div>`; }
+          if (Math.abs(dd) >= 5) tk = `<div class="si-tk"><span class="si-tkr">출발 변경</span> <b>${fz(r)}</b> ${esc(i[3])} ${fhl(r, o)} 현지</div>`; }
         if (tk) usedDep = true;
       }
       h += `<div class="si${cx ? " si-cx" : ""}"><div class="si-t">${head}</div>${tk}
-        ${tag ? `<div class="si-chg"><span class="si-x">${tag}</span>${moved && !cx ? ` ${fz(e)} ${fkst(e)}` : ""}</div>` : ""}
+        ${tag ? `<div class="si-chg"><span class="si-x">${tag}</span>${moved && !cx ? ` ${fz(e)} ${fkst(e).replace("KST", "kst")}` : ""}</div>` : ""}
         <div class="si-m">${leg}${i[4] ? ` · <b>${esc(i[4])}</b>` : ""}${i[5] ? ` ${esc(i[5])}` : ""}${i[8] ? ` · ${esc(TERM[i[8]] || i[8])}` : ""}${i[6] ? ` · 게이트 ${esc(i[6])}` : ""}</div>${i === nearI && cs ? rotLine(cs, i) : ""}</div>`;
     }
     if (!up.length && (sc.inst || []).length) h += `<div class="si-m muted">앞으로 6일 안에 인천공항 운항 예정이 없습니다.</div>`;
@@ -3890,15 +3891,66 @@ window.csfStat = (() => {
     const p = (n) => String(n).padStart(2, "0");
     return `<small>${v.getUTCMonth() + 1}/${v.getUTCDate()}</small> ${p(v.getUTCHours())}${p(v.getUTCMinutes())}Z`;
   };
+  // ---------- 달: 월출·월몰 · 월광(밝은 면 비율) (오프라인 계산, 오차 수 분) ----------
+  const MR = Math.PI / 180, EPS = MR * 23.4397;
+  const jd2k = (t) => t / 86400e3 - 0.5 + 2440588 - 2451545;
+  const raOf = (l, b) => Math.atan2(Math.sin(l) * Math.cos(EPS) - Math.tan(b) * Math.sin(EPS), Math.cos(l));
+  const decOf = (l, b) => Math.asin(Math.sin(b) * Math.cos(EPS) + Math.cos(b) * Math.sin(EPS) * Math.sin(l));
+  function moonEq(d) {
+    const L = MR * (218.316 + 13.176396 * d), M = MR * (134.963 + 13.064993 * d), F = MR * (93.272 + 13.229350 * d);
+    const l = L + MR * 6.289 * Math.sin(M), b = MR * 5.128 * Math.sin(F);
+    return { ra: raOf(l, b), dec: decOf(l, b), dist: 385001 - 20905 * Math.cos(M) };
+  }
+  function moonAlt(t, lat, lon) {
+    const d = jd2k(t), c = moonEq(d), H = MR * (280.16 + 360.9856235 * d) + MR * lon - c.ra, ph = MR * lat;
+    const h = Math.asin(Math.sin(ph) * Math.sin(c.dec) + Math.cos(ph) * Math.cos(c.dec) * Math.cos(H));
+    return h - Math.asin(6378.14 / c.dist) + 0.0002967 / Math.tan(h + 0.00312536 / (h + 0.08901179)) - 0.133 * MR + 0.0098;   // 시차·굴절·반지름
+  }
+  function moonTimes(lat, lon, dayOffset) {             // 공항 현지 날짜(경도 기준) 하루 동안 뜨고 지는 시각
+    const local = new Date(Date.now() + (lon / 15) * 3600e3 + dayOffset * 86400e3);
+    const t0 = Date.UTC(local.getUTCFullYear(), local.getUTCMonth(), local.getUTCDate()) - (lon / 15) * 3600e3;
+    let rise = null, set = null, a0 = moonAlt(t0, lat, lon);
+    for (let k = 1; k <= 96 && !(rise && set); k++) {     // 15분 간격 → 선형 보간
+      const t = t0 + k * 900e3, a1 = moonAlt(t, lat, lon);
+      if (a0 < 0 && a1 >= 0 && !rise) rise = new Date(t - 900e3 + 900e3 * (-a0 / (a1 - a0)));
+      if (a0 >= 0 && a1 < 0 && !set) set = new Date(t - 900e3 + 900e3 * (a0 / (a0 - a1)));
+      a0 = a1;
+    }
+    return { rise, set, date: `${local.getUTCMonth() + 1}/${local.getUTCDate()}` };
+  }
+  function moonLight(t) {                               // 밝은 면 비율(0~1) · 위상(0 삭 → 0.5 망 → 1)
+    const d = jd2k(t), m = moonEq(d);
+    const M = MR * (357.5291 + 0.98560028 * d), C = MR * (1.9148 * Math.sin(M) + 0.02 * Math.sin(2 * M) + 0.0003 * Math.sin(3 * M));
+    const Ls = M + C + MR * 102.9372 + Math.PI, s = { ra: raOf(Ls, 0), dec: decOf(Ls, 0) }, sd = 149598000;
+    const phi = Math.acos(Math.sin(s.dec) * Math.sin(m.dec) + Math.cos(s.dec) * Math.cos(m.dec) * Math.cos(s.ra - m.ra));
+    const inc = Math.atan2(sd * Math.sin(phi), m.dist - sd * Math.cos(phi));
+    const ang = Math.atan2(Math.cos(s.dec) * Math.sin(s.ra - m.ra), Math.sin(s.dec) * Math.cos(m.dec) - Math.cos(s.dec) * Math.sin(m.dec) * Math.cos(s.ra - m.ra));
+    return { f: (1 + Math.cos(inc)) / 2, ph: 0.5 + 0.5 * inc * (ang < 0 ? -1 : 1) / Math.PI };
+  }
+  function moonHead() {
+    const m = moonLight(Date.now() + sunDay * 86400e3), i = Math.round(m.ph * 8) % 8;
+    const nm = ["삭", "초승", "상현", "차가는 달", "보름", "기우는 달", "하현", "그믐"][i];
+    return `<span class="apx-moon" title="월광: 달의 밝은 면 비율 · ${nm}">${["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"][i]} ${Math.round(m.f * 100)}%</span>`;
+  }
+  // 시각(Zulu). Zulu 날짜가 공항 현지 날짜보다 하루 앞/뒤면 작은 −1/+1
+  const zT = (v, day) => {
+    if (v === "polarNight") return "극야"; if (v === "midnightSun") return "백야"; if (!v) return "—";
+    const [mo, dd] = day.split("/").map(Number), ref = Date.UTC(v.getUTCFullYear() + (mo === 12 && v.getUTCMonth() === 0 ? -1 : mo === 1 && v.getUTCMonth() === 11 ? 1 : 0), mo - 1, dd);
+    const k = Math.round((Date.UTC(v.getUTCFullYear(), v.getUTCMonth(), v.getUTCDate()) - ref) / 864e5);
+    return `${p2(v.getUTCHours())}${p2(v.getUTCMinutes())}Z${k ? `<sup>${k > 0 ? "+" : "−"}${Math.abs(k)}</sup>` : ""}`;
+  };
   function apInfo(code, cls) {
     const a = ap(code);
-    let h = `<div class="apx-c ${cls}"><div class="apx-k">${esc(a.iata || code)}</div>`;
-    h += `<div><span>표고</span><b>${a.elev != null ? Number(a.elev).toLocaleString("en-US") + " ft" : "—"}</b></div>`;
+    let h = `<div class="apx-c ${cls}"><div class="apx-k">${esc(a.iata || code)}${a.elev != null ? ` <small>(F.E ${Number(a.elev).toLocaleString("en-US")}ft)</small>` : ""}</div>`;
     if (a.lat != null && a.lon != null) {
-      const s = sunTimes(a.lat, a.lon, sunDay);
-      h += `<div><span>일출</span><b>${zDate(s.rise)}</b></div><div><span>일몰</span><b>${zDate(s.set)}</b></div>`;
+      const s = sunTimes(a.lat, a.lon, sunDay), m = moonTimes(a.lat, a.lon, sunDay);
+      // ↑ 뜸 · ↓ 짐, 시간 순서
+      const two = (r, t, day) => [[r, "↑"], [t, "↓"]].sort((x, y) => (x[0] instanceof Date ? x[0] : Infinity) - (y[0] instanceof Date ? y[0] : Infinity))
+        .map(([v, k]) => `<i>${k}</i>${zT(v, day)}`).join(" ");
+      h += `<div title="일출 ↑ · 일몰 ↓ (Zulu)"><span>☀</span><b>${two(s.rise, s.set, s.date)}</b></div>`;
+      h += `<div title="월출 ↑ · 월몰 ↓ (Zulu)"><span>☾</span><b>${two(m.rise, m.set, m.date)}</b></div>`;
     } else {
-      h += `<div><span>일출·일몰</span><b>—</b></div>`;
+      h += `<div><span>☀ ☾</span><b>—</b></div>`;
     }
     return h + `</div>`;
   }
@@ -4202,7 +4254,7 @@ window.csfStat = (() => {
     }
     h += renderSched(f.sch, cs);
     if (r) {
-      h += `<div class="apx">${fxRow([r[0], r[r.length - 1]])}<div class="apx-hd"><span>일출·일몰</span>
+      h += `<div class="apx">${fxRow([r[0], r[r.length - 1]])}<div class="apx-hd"><span>일출·일몰 · 달 ${moonHead()}</span>
         <span class="apx-day"><button data-sunday="0" aria-pressed="${sunDay === 0}">오늘</button><button data-sunday="1" aria-pressed="${sunDay === 1}">내일</button></span></div>
         <div class="apx-g">${apInfo(r[0], "org")}${apInfo(r[r.length - 1], "dst")}</div>${fcBlock([r[0], r[r.length - 1]])}</div>`;
       h += renderWx(cs, f, r);
@@ -4287,7 +4339,7 @@ window.csfStat = (() => {
     const e = { dep: e0.dep.filter(ofAL), arr: e0.arr.filter(ofAL), via: e0.via.filter(ofAL) };   // 선택한 항공사만
     let h = `<div class="card"><div class="card-hd"><div class="cs">${esc(a.iata || code)}<small>${esc(code)}</small>${utcLabel(code) ? `<small class="utz">${utcLabel(code)}</small>` : ""}</div></div>
       <div class="apt-name">${esc(a.name)}<span>${esc([a.city, a.cc].filter(Boolean).join(", "))}</span></div>
-      <div class="apx">${fxRow([code])}<div class="apx-hd"><span>일출·일몰</span>
+      <div class="apx">${fxRow([code])}<div class="apx-hd"><span>일출·일몰 · 달 ${moonHead()}</span>
         <span class="apx-day"><button data-sunday="0" aria-pressed="${sunDay === 0}">오늘</button><button data-sunday="1" aria-pressed="${sunDay === 1}">내일</button></span></div>
         <div class="apx-g">${apInfo(code, "org")}<div></div></div>${fcBlock([code])}</div></div>`;
     const sec = (title, list, io) => list.length
