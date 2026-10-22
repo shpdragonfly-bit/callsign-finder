@@ -3308,7 +3308,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v69", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v70", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -3798,11 +3798,13 @@ window.csfStat = (() => {
       // 아래 줄(빨강): [ICN 출발지연 +25분] 0555Z 14:55 KST · [ICN 조기도착 −10분] … · [결항] · [회항]
       const tag = cx ? "결항" : /회항/.test(st) ? "회항" : moved ? (dm > 0 ? `ICN ${io}지연 +${dt}` : `ICN 조기${io} −${dt}`) : /지연/.test(st) ? `ICN ${io}지연` : "";
       const b = basisOf(sc, i, mode, cs), bt = b[0], bo = b[1], ext = b[2] !== "ICN"; if (b[5]) usedDep = true;
-      const head = !ext ? `<small>${fdl(bt, 540)}</small> <b class="si-o">${fz(bt)}</b> <small>${fhl(bt, 540)} KST</small>`
+      const head = !ext ? `<small>${fdl(bt, 540)}</small> <b class="si-o">${fz(bt)}</b> <small>${fhl(bt, 540)} kst</small>`
         : `<small>${fdl(bt, bo)}</small> <b class="si-o">${fz(bt)}</b> <small>${esc(b[2])} ${fhl(bt, bo)} 현지${b[4] ? "" : " · 같은 편 시간표"}</small>`;
       // 아래 줄: 반대쪽(인천) 시각과 구간
-      const leg = !ext ? (b[3] ? what : `${i[2] === "D" ? `ICN→${esc(i[3])}` : `${esc(i[3])}→ICN`} <span class="muted">(${mode === "dep" ? "출발" : "도착"}시각 없음)</span>`)
-        : `ICN${i[2] === "A" ? "도착" : "출발"} ${fdl(t, 540)} ${khm(t)} kst`;
+      // 아래 줄 = 인천 쪽 정보(터미널 · 게이트가 인천 것이므로). 해외 공항은 검색으로 이미 알고 있어 생략.
+      // 위 시각이 해외 공항이면 인천 시각을 함께, 위 시각이 인천이면 시각은 반복하지 않음
+      const io2 = `ICN${i[2] === "A" ? "도착" : "출발"}`;
+      const leg = ext ? `${io2} ${fdl(t, 540)} ${khm(t)} kst` : io2;
       // 실제 이륙(AeroDataBox runwayTime, 6시간마다 확인) · 변경 출발 예정. 출발 공항 현지 시각
       let tk = "";
       const dq = i[2] === "A" && depOf(cs, i[0]);
