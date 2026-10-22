@@ -3300,7 +3300,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v64", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v65", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -3740,8 +3740,11 @@ window.csfStat = (() => {
       h += `<div class="wd">${[1, 2, 3, 4, 5, 6, 7].map((d) => `<span class="${wd.includes(d) ? "on" : ""}">${WD[d]}</span>`).join("")}
         <b>${wd.length === 7 ? "매일" : "주 " + wd.length + "회"}</b></div>`;
     }
-    const now = Date.now() - 6 * 3600e3;
-    const up = schRows(sc, id).filter((i) => utcOf(i[0]) >= now).slice(0, 4);
+    // 지난 편은 6시간 뒤 내림. 인천 출발편은 목적지 도착(시즌 운항표 · 실제 출발 반영) 뒤 1시간까지 남김 — 비행 중인 편이 빠지지 않게
+    const now = Date.now() - 6 * 3600e3, keep = (i) => { const t = utcOf(i[0]); if (t >= now) return true;
+      if (i[2] !== "D") return false; const a = arrOf(sc, i); if (!a) return false;
+      const e = utcOf(i[1]), sl = e && e > t ? e - t : 0; return a[0].getTime() + sl + 3600e3 >= Date.now(); };
+    const up = schRows(sc, id).filter(keep).slice(0, 4);
     const near = nextOf(up), nearI = near && near.i;
     let usedDep = false;
     for (const i of up) {
