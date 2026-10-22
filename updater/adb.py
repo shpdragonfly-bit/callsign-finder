@@ -235,21 +235,23 @@ def export():
 
     def rel(t, base):
         return mins(t, base) if t else None
-    hist, cut = {}, (NOW - dt.timedelta(days=7)).strftime("%Y%m%d%H%M")
+    # 기간은 날짜가 아니라 '마지막으로 받은 때 + 7일'(이용 조건). 착륙 뒤 몇 시간 안에 마지막으로 받으므로
+    # 지난주 같은 요일 편이 이번 주 같은 편 출발 무렵까지 남음. 앱도 행마다 받은 때(맨 끝)로 7일을 다시 확인
+    hist = {}
     now_k = NOW.strftime("%Y%m%d%H%M")
     for fn, recs in db["f"].items():
         cs = cs_of(fn)
         for sta, v in (recs.items() if cs else ()):
             v = v + [""] * (9 - len(v))
-            if v[0] < cut or v[0] > now_k or not (v[4] or v[6]):
+            if v[0] > now_k or not (v[4] or v[6]):
                 continue
-            hist.setdefault(cs, []).append(["A", v[0], v[2], "ICN", v[1], 540, rel(v[4], v[0]), rel(v[6], v[0]), rel(v[5], v[0]) if v[4] else None, rel(v[7], v[0]), rel(sta, v[0])])
+            hist.setdefault(cs, []).append(["A", v[0], v[2], "ICN", v[1], 540, rel(v[4], v[0]), rel(v[6], v[0]), rel(v[5], v[0]) if v[4] else None, rel(v[7], v[0]), rel(sta, v[0]), v[3]])
     for fn, recs in (db.get("d") or {}).items():
         cs = cs_of(fn)
         for std, v in (recs.items() if cs else ()):
-            if std < cut or std > now_k or not (v[4] or v[6]):
+            if std > now_k or not (v[4] or v[6]):
                 continue
-            hist.setdefault(cs, []).append(["D", std, "ICN", v[0], 540, v[2], rel(v[4], std), rel(v[6], std), rel(v[5], std), rel(v[7], std), rel(v[1], std)])
+            hist.setdefault(cs, []).append(["D", std, "ICN", v[0], 540, v[2], rel(v[4], std), rel(v[6], std), rel(v[5], std), rel(v[7], std), rel(v[1], std), v[3]])
     for cs in hist:
         hist[cs].sort(key=lambda r: r[1], reverse=True)
     oldest = min((v[3] for t in ("f", "d") for recs in (db.get(t) or {}).values() for v in recs.values()), default=STAMP)

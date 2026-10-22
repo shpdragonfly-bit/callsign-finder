@@ -236,8 +236,9 @@ body[data-tab="ft"] .cs-only, body[data-tab="pk"] .cs-only, body[data-tab="cm"] 
 .si-tko, .si-tkr { display: inline-block; padding: 0 5px; border-radius: 5px; font-size: 11px; font-weight: 700; color: #fff; background: var(--ok, #2F9E44); } .si-tkr { background: var(--warn, #E8590C); }
 .ph { margin-top: 8px; border-top: 1px dashed var(--line, #333); padding-top: 6px; }
 .ph summary { cursor: pointer; font-weight: 700; font-size: 13.5px; } .ph summary small { font-weight: 400; color: var(--muted); margin-left: 4px; }
-.ph-r { display: grid; grid-template-columns: 1.25fr 0.9fr 1.25fr 0.9fr 0.8fr; gap: 4px; font-size: 12.5px; padding: 4px 0 1px; font-variant-numeric: tabular-nums; border-top: 1px solid var(--line, #2a2a2a); }
+.ph-r { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr 0.8fr; gap: 4px; font-size: 12.5px; padding: 4px 0 1px; font-variant-numeric: tabular-nums; border-top: 1px solid var(--line, #2a2a2a); }
 .ph-r small { color: var(--muted); font-size: 11px; } .ph-h { color: var(--muted); font-size: 11px; border-top: 0; }
+.ph-same { background: color-mix(in srgb, var(--accent, #3B82F6) 14%, transparent); border-radius: 6px; } .ph-sw { display: block; color: var(--accent, #3B82F6) !important; font-weight: 700; }
 .ph-x { font-size: 11px; color: var(--muted); padding-bottom: 2px; }
 .ph-s { font-size: 12.5px; margin-top: 6px; line-height: 1.6; }
 .si-src { font-size: 11px; color: var(--muted); margin-top: 4px; }
@@ -3306,7 +3307,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v67", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v68", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -3724,12 +3725,13 @@ window.csfStat = (() => {
     document.querySelectorAll(".sch[data-cs]").forEach((el) => { const c = el.dataset.cs, sc = schOf[icnId(c)] || (DB.flights[c] || {}).sch; if (sc) el.outerHTML = renderSched(sc, c); });
   });
   // ---------- 지난 1주 운항 (AeroDataBox 실제 이륙·착륙, 보관 7일) ----------
-  // DEP.h[cs] = [[A|D, 출발예정UTC, 출발지, 도착지, 출발지시차, 도착지시차, 이륙, 착륙, 게이트출발, 게이트도착, 도착예정] (분, 출발예정 기준)]
+  // DEP.h[cs] = [[A|D, 출발예정UTC, 출발지, 도착지, 출발지시차, 도착지시차, 이륙, 착륙, 게이트출발, 게이트도착, 도착예정 (분, 출발예정 기준), 받은때]]
+  // 보관: 행마다 받은 때부터 7일(이용 조건). 지난주 같은 요일 편은 이번 주 같은 편 출발 무렵까지 남음 → 같은 요일 표시
   let phOpen = false;
   document.addEventListener("toggle", (e) => { if (e.target.classList && e.target.classList.contains("ph")) phOpen = e.target.open; }, true);
-  function pastWeek(cs, mode) {
+  function pastWeek(cs, mode, wdN) {
     if (!cs || !DEP || !DEP.h || Date.now() - Date.parse(DEP.fetched || 0) > 7 * 864e5) return "";
-    const rows = (DEP.h[cs] || []).filter((r) => utcOf(r[1]) >= Date.now() - 7 * 864e5);
+    const rows = (DEP.h[cs] || []).filter((r) => r[11] ? Date.now() - Date.parse(r[11]) < 7 * 864e5 : utcOf(r[1]) >= Date.now() - 7 * 864e5);
     if (!rows.length) return "";
     const hm = (m) => `${Math.floor(m / 60)}:${p2(m % 60)}`, sg = (m) => (m > 0 ? "+" : m < 0 ? "−" : "±") + Math.abs(m);
     const avg = (a) => Math.round(a.reduce((x, y) => x + y, 0) / a.length);
@@ -3744,20 +3746,17 @@ window.csfStat = (() => {
       if (f != null) ft.push(f); if (r[6] != null) dl.push(r[6]); if (xo != null) to.push(xo); if (xi != null) ti.push(xi);
       // 날짜: 출발 기준 = 출발 공항 현지(출발 예정), 도착 기준 = 도착 공항 현지(착륙, 없으면 도착 예정)
       const dd = mode === "arr" ? fdl(ld || at(r[10]) || sd, r[5]) : fdl(sd, r[4]);
-      const air = r[6] != null && r[7] == null && Date.now() - tk < 20 * 3600e3;
-      body += `<div class="ph-r"><span>${dd}</span><span>${fz(sd)}</span><span>${tk ? `${fz(tk)} <small>${sg(r[6])}</small>` : "—"}</span><span>${ld ? fz(ld) : air ? `<small>비행 중</small>` : "—"}</span><span>${f != null ? hm(f) : "—"}</span></div>`
-        + (xo != null || xi != null ? `<div class="ph-x">${xo != null ? `택시아웃 ${xo}분 (${esc(r[2])})` : ""}${xo != null && xi != null ? " · " : ""}${xi != null ? `택시인 ${xi}분 (${esc(r[3])})` : ""}</div>` : "");
+      const air = r[6] != null && r[7] == null && (r[10] != null ? Date.now() < at(r[10]).getTime() + 2 * 3600e3 : Date.now() - tk < 16 * 3600e3);   // 도착 예정 2시간 뒤까지만 '비행 중' (그 뒤는 착륙 자료 대기 —)
+      const same = wdN && (mode === "arr" ? wdl(ld || at(r[10]) || sd, r[5]) : wdl(sd, r[4])) === wdN;
+      body += `<div class="ph-r${same ? " ph-same" : ""}"><span>${dd}${same ? `<small class="ph-sw">같은 요일</small>` : ""}</span><span>${fz(sd)}</span><span>${tk ? fz(tk) : "—"}</span><span>${ld ? fz(ld) : air ? `<small>비행 중</small>` : "—"}</span><span>${f != null ? hm(f) : "—"}</span></div>`;
     }
-    const r0 = rows[0];
+
     let sum = [];
-    if (ft.length) sum.push(`평균 비행 <b>${hm(avg(ft))}</b>${ft.length > 1 ? ` (최소 ${hm(Math.min(...ft))} · 최대 ${hm(Math.max(...ft))})` : ""}`);
-    if (dl.length) sum.push(`STD→이륙 평균 <b>${avg(dl)}분</b> · 30분 이내 ${dl.filter((x) => x <= 30).length}/${dl.length}`);
-    if (to.length) sum.push(`택시아웃 평균 ${avg(to)}분 (${esc(r0[2])})`);
-    if (ti.length) sum.push(`택시인 평균 ${avg(ti)}분 (${esc(r0[3])})`);
+    if (dl.length) sum.push(`STD/ATD 평균 <b>${avg(dl)}분</b>`);
     return `<details class="ph"${phOpen ? " open" : ""}><summary>지난 1주 운항 <small>${rows.length}편${ft.length ? ` · 평균 비행 ${hm(avg(ft))}` : ""}</small></summary>
       <div class="ph-r ph-h"><span>${mode === "arr" ? "도착일" : "출발일"}<small>(현지)</small></span><span>STD</span><span>이륙</span><span>착륙</span><span>비행</span></div>${body}
       ${sum.length ? `<div class="ph-s">${sum.join("<br>")}</div>` : ""}
-      <div class="si-src">Zulu · 이륙/착륙 = 활주로 시각, 비행 = 이륙~착륙, 이륙 옆 숫자 = STD 대비 분 · 실제 이륙·착륙: AeroDataBox (6시간마다 확인, 7일 보관)</div></details>`;
+</details>`;
   }
   function renderSched(sc, cs) {
     if (!sc || !((sc.inst || []).length || (sc.season || []).length || (sc.next || []).length || sc.wd || (sc.kf || []).length)) return "";
@@ -3820,8 +3819,8 @@ window.csfStat = (() => {
         <div class="si-m">${leg}${i[4] ? ` · <b>${esc(i[4])}</b>` : ""}${i[5] ? ` ${esc(i[5])}` : ""}${i[8] ? ` · ${esc(TERM[i[8]] || i[8])}` : ""}${i[6] ? ` · 게이트 ${esc(i[6])}` : ""}</div>${i === nearI && cs ? rotLine(cs, i) : ""}</div>`;
     }
     if (!up.length && (sc.inst || []).length) h += `<div class="si-m muted">앞으로 6일 안에 인천공항 운항 예정이 없습니다.</div>`;
-    if (usedDep) h += `<div class="si-src">출발 공항 출발 예정·실제 이륙 시각: AeroDataBox</div>`;
-    h += pastWeek(cs, mode);
+    // 지난 1주 운항 · AeroDataBox 출처는 맨 아래(환율 바로 위)
+    const past = pastWeek(cs, mode, up.length ? (() => { const b = basisOf(sc, up[0], mode, cs); return wdl(b[0], b[1]); })() : 0);
     const seasonRows = (list) => { for (const x of list) {
       const per = `${+x.from.slice(4, 6)}/${+x.from.slice(6)}–${+x.to.slice(4, 6)}/${+x.to.slice(6)}`;
       if (x.kind === "dom") {
@@ -3852,6 +3851,8 @@ window.csfStat = (() => {
     } else if (ns && (sc.season || []).length) {
       h += `<div class="si-ns end">다음 시즌(${+ns.slice(4, 6)}/${+ns.slice(6)}~) 운항표에 없음</div>`;
     }
+    h += past;
+    if (usedDep || past) h += `<div class="si-src">출발 공항 출발 예정 · 실제 이륙/착륙 시각: AeroDataBox</div>`;
     return h + `</div>`;
   }
 
