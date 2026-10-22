@@ -5,6 +5,9 @@ __pycache__/
 web/wx.json
 web/fx.json
 web/fcst.json
+# AeroDataBox 자료: 이용 조건(보관 7일) 때문에 저장소에 넣지 않음 (Actions 캐시 · 배포 파일만)
+web/dep.json
+data/adb_icn.json
 
 # 이 PC 전용 키 설정 (절대 올리지 않음)
 config/local.env

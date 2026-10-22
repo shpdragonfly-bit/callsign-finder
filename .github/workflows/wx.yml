@@ -31,6 +31,14 @@ jobs:
         run: python updater/fx.py || true
       - name: 공항 도시 7일 날씨 (Open-Meteo, 6시간마다 새로 받음)
         run: python updater/fcst.py || true
+      - name: AeroDataBox 받은 자료 복원 (읽기만)
+        uses: actions/cache/restore@v4
+        with:
+          path: data/adb_icn.json
+          key: adb-none
+          restore-keys: adb-
+      - name: 출발지 출발시각 배포 파일 (web/dep.json)
+        run: python updater/adb.py --export || true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web

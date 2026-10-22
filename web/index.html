@@ -226,7 +226,15 @@ body[data-tab="ft"] .cs-only, body[data-tab="pk"] .cs-only, body[data-tab="cm"] 
 .wd { display: flex; align-items: center; gap: 4px; margin-bottom: 8px; }
 .wd span { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 7px; font-size: 12px; font-weight: 700; background: var(--panel-2); color: var(--muted); opacity: .55; }
 .wd span.on { background: var(--accent); color: var(--accent-ink); opacity: 1; }
-.wd b { margin-left: 6px; font-size: 13px; }
+.wd b { margin-left: 6px; font-size: 13px; } .wd .wd-n { margin-left: 6px; font-size: 11px; color: var(--muted); }
+.sch-m { display: inline-flex; margin-left: 8px; vertical-align: middle; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.sch-m button { border: 0; background: var(--panel); color: var(--muted); font: 700 11.5px var(--sans, inherit); padding: 3px 8px; cursor: pointer; }
+.sch-m button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.sch-m button:disabled { opacity: .35; cursor: default; }
+.sch-mt { margin-left: 5px; font-size: 12px; font-weight: 600; color: var(--muted); }
+.si-tk { font-size: 12.5px; margin-top: 2px; } .si-tk small { color: var(--muted); margin-left: 4px; }
+.si-tko, .si-tkr { display: inline-block; padding: 0 5px; border-radius: 5px; font-size: 11px; font-weight: 700; color: #fff; background: var(--ok, #2F9E44); } .si-tkr { background: var(--warn, #E8590C); }
+.si-src { font-size: 11px; color: var(--muted); margin-top: 4px; }
 .si { padding: 6px 0; border-top: 1px dashed var(--line); }
 .si-t { font: 600 13px var(--mono); display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 6px; }
 .si-t b { font-size: 15px; }
@@ -3292,7 +3300,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v63", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v64", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -3670,12 +3678,64 @@ window.csfStat = (() => {
     const mv = Math.abs(dm) >= 5, cx = /결항/.test(x[7] || "");   // 시각이 바뀌었으면 바뀐 시각을 빨갛게
     return `<div class="si-rot">${r.prev ? "이전편" : "다음편"} <b>${esc(fl)}</b> ${leg} <span class="${mv || cx ? "si-rl" : ""}">${kd(when).getUTCMonth() + 1}/${kd(when).getUTCDate()} ${fz(when)}${cx ? " 결항" : " " + khm(when)}</span></div>`;
   }
+  // 운항 스케줄 보기 기준: dep = 출발(출발 공항 현지 날짜·시각, 기본) / arr = 도착(도착 공항 현지 날짜·시각)
+  const schPref = () => { try { return localStorage.getItem("csf-schm") === "arr" ? "arr" : "dep"; } catch (e) { return "dep"; } };
+  const loc = (d, off) => new Date(d.getTime() + off * 60e3);          // UTC Date → 현지 시각을 UTC 필드로
+  const fdl = (d, off) => { const k = loc(d, off); return `${k.getUTCMonth() + 1}/${k.getUTCDate()}(${WD[k.getUTCDay() || 7]})`; };
+  const fhl = (d, off) => { const k = loc(d, off); return `${p2(k.getUTCHours())}:${p2(k.getUTCMinutes())}`; };
+  const wdl = (d, off) => loc(d, off).getUTCDay() || 7;
+  // 인천 출발편의 도착지 도착 예정: 한국공항공사 운항표(도착 공항 현지 도착 시각)로, 출발 뒤 처음 오는 그 시각
+  function arrOf(sc, i) {
+    const x = (sc.season || []).find((s) => s.kind === "int" && s.io === "IN" && s.a === i[3] && /^\d{4}$/.test(s.time || ""));
+    const tz = x && tzOfCode(i[3]); if (!tz) return null;
+    const t = utcOf(i[0]), a = nextLocal(x.time, tz, t.getTime() + 30 * 60e3, null, 1);
+    return a && a - t < 20 * 3600e3 ? [a, tzOff(a.getTime(), tz)] : null;
+  }
+  // 편 하나의 기준 시각: [Date, 시차(분), 공항, 그 기준 자료가 있나, 정확(그날 자료)?]
+  // 인천 도착편 출발지 출발 예정시각 (AeroDataBox · 서버가 web/dep.json 으로). 이용 조건: 받은 지 7일 안의 것만
+  let DEP = (() => { try { return JSON.parse(localStorage.getItem("csf-dep") || "null"); } catch (e) { return null; } })();
+  function loadDep() {
+    fetch("dep.json", { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).then((j) => {
+      if (!j || !j.f) return; DEP = j; try { localStorage.setItem("csf-dep", JSON.stringify(j)); } catch (e) {}
+    }).catch(() => {});
+  }
+  const depOf = (cs, sta) => (!DEP || !DEP.f || !cs || Date.now() - Date.parse(DEP.fetched || 0) > 7 * 864e5) ? null : (DEP.f[cs] || {})[sta] || null;
+  function basisOf(sc, i, mode, cs) {
+    const t = utcOf(i[0]);
+    if (mode === "dep") {
+      if (i[2] === "D") return [t, 540, "ICN", true, true];
+      const dp = depOf(cs, i[0]); if (dp) return [utcOf(dp[0]), +dp[1] || 0, i[3], true, dp[2] !== "d", 1];
+      return [t, 540, "ICN", false, true];
+    }
+    if (i[2] === "A") return [t, 540, "ICN", true, true];
+    const a = arrOf(sc, i); if (a) return [a[0], a[1], i[3], true, true];
+    return [t, 540, "ICN", false, true];
+  }
+  const canMode = (sc, mode, cs) => (sc.inst || []).some((i) => basisOf(sc, i, mode, cs)[3]) || (!(sc.inst || []).length && (sc.kf || []).length > 0);
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-schm]"); if (!b) return;
+    try { localStorage.setItem("csf-schm", b.dataset.schm); } catch (x) {}
+    document.querySelectorAll(".sch[data-cs]").forEach((el) => { const c = el.dataset.cs, sc = schOf[icnId(c)] || (DB.flights[c] || {}).sch; if (sc) el.outerHTML = renderSched(sc, c); });
+  });
   function renderSched(sc, cs) {
-    if (!sc || !((sc.inst || []).length || (sc.season || []).length || (sc.next || []).length || sc.wd)) return "";
+    if (!sc || !((sc.inst || []).length || (sc.season || []).length || (sc.next || []).length || sc.wd || (sc.kf || []).length)) return "";
     const id = cs ? icnId(cs) : "";
     if (id) schOf[id] = sc;
-    const wd = sc.wd || "";
-    let h = `<div class="sch"${id ? ` data-sch="${esc(id)}"` : ""}><div class="apx-hd"><span>운항 스케줄</span><span class="sch-src">${sc.cargo ? "화물 · " : ""}${id && liveFlt[id] && liveFlt[id].hm ? `<b class="sch-live">실시간 ${liveFlt[id].hm}</b>` : `${genAt()} 자료`}</span></div>`;
+    const inst = sc.inst || [], okD = canMode(sc, "dep", cs), okA = canMode(sc, "arr", cs);
+    const pref = schPref(), mode = pref === "dep" ? (okD || !okA ? "dep" : "arr") : (okA || !okD ? "arr" : "dep");
+    // 요일: 출발 기준이면 편마다 출발 공항 현지 날짜, 도착 기준이면 도착 공항 현지 날짜
+    let wd = sc.wd || "", wdNote = "";
+    if (inst.length) {
+      const set = new Set(); let miss = 0;
+      for (const i of inst) { const b = basisOf(sc, i, mode, cs); set.add(wdl(b[0], b[1])); if (!b[3]) miss++; }
+      wd = [...set].sort().join("");
+      wdNote = (mode === "dep" ? "출발 공항 현지 날짜 기준" : "도착 공항 현지 날짜 기준") + (miss ? ` · ${miss}편은 ${mode === "dep" ? "인천 도착" : "인천 출발"} 기준` : "");
+    } else if ((sc.kf || []).length) {
+      wd = [...new Set(sc.kf.map((x) => x.wd).join(""))].sort().join(""); wdNote = "출발 공항 현지 날짜 기준";
+    } else if (wd) wdNote = "한국 공항 기준";
+    const btn = (m, t, ok) => `<button type="button" data-schm="${m}" aria-pressed="${mode === m}"${ok ? "" : ` disabled title="${t} 시각 자료가 없습니다"`}>${t}</button>`;
+    const tg = `<span class="sch-m" role="group" aria-label="보기 기준">${btn("dep", "출발", okD)}${btn("arr", "도착", okA)}</span><span class="sch-mt">기준</span>`;
+    let h = `<div class="sch"${id ? ` data-sch="${esc(id)}"` : ""}${cs ? ` data-cs="${esc(cs)}"` : ""}><div class="apx-hd"><span>운항 스케줄 ${tg}</span><span class="sch-src">${sc.cargo ? "화물 · " : ""}${id && liveFlt[id] && liveFlt[id].hm ? `<b class="sch-live">실시간 ${liveFlt[id].hm}</b>` : `${genAt()} 자료`}</span></div>`;
     if (wd) {
       h += `<div class="wd">${[1, 2, 3, 4, 5, 6, 7].map((d) => `<span class="${wd.includes(d) ? "on" : ""}">${WD[d]}</span>`).join("")}
         <b>${wd.length === 7 ? "매일" : "주 " + wd.length + "회"}</b></div>`;
@@ -3683,6 +3743,7 @@ window.csfStat = (() => {
     const now = Date.now() - 6 * 3600e3;
     const up = schRows(sc, id).filter((i) => utcOf(i[0]) >= now).slice(0, 4);
     const near = nextOf(up), nearI = near && near.i;
+    let usedDep = false;
     for (const i of up) {
       const t = utcOf(i[0]), e = utcOf(i[1]);
       const dm = e ? Math.round((e - t) / 60e3) : 0, moved = Math.abs(dm) >= 5;
@@ -3691,11 +3752,30 @@ window.csfStat = (() => {
       const ad = Math.abs(dm), dt = ad >= 60 ? `${Math.floor(ad / 60)}시간 ${ad % 60}분` : ad + "분";
       // 아래 줄(빨강): [출발지연 +25분] 0555Z 14:55 KST · [조기도착 −10분] … · [결항] · [회항]
       const tag = cx ? "결항" : /회항/.test(st) ? "회항" : moved ? (dm > 0 ? `${io}지연 +${dt}` : `조기${io} −${dt}`) : /지연/.test(st) ? `${io}지연` : "";
-      h += `<div class="si${cx ? " si-cx" : ""}"><div class="si-t"><small>${fdate(t)}</small> <b class="si-o">${fz(t)}</b> <small>${fkst(t)}</small></div>
+      const b = basisOf(sc, i, mode, cs), bt = b[0], bo = b[1], ext = b[2] !== "ICN"; if (b[5]) usedDep = true;
+      const head = !ext ? `<small>${fdl(bt, 540)}</small> <b class="si-o">${fz(bt)}</b> <small>${fhl(bt, 540)} KST</small>`
+        : `<small>${fdl(bt, bo)}</small> <b class="si-o">${fz(bt)}</b> <small>${esc(b[2])} ${fhl(bt, bo)} 현지${b[4] ? "" : " · 같은 편 시간표"}</small>`;
+      // 아래 줄: 반대쪽(인천) 시각과 구간
+      const leg = !ext ? (b[3] ? what : `${what} <span class="muted">(${mode === "dep" ? "출발" : "도착"}시각 자료 없음)</span>`)
+        : i[2] === "A" ? `${esc(i[3])} 출발 → ICN 도착 ${fdl(t, 540)} ${khm(t)} KST` : `ICN 출발 ${fdl(t, 540)} ${khm(t)} KST → ${esc(i[3])} 도착`;
+      // 실제 이륙(AeroDataBox runwayTime, 6시간마다 확인) · 변경 출발 예정. 출발 공항 현지 시각
+      let tk = "";
+      const dq = i[2] === "A" && depOf(cs, i[0]);
+      if (dq && (dq[3] || dq[4])) {
+        const sd = utcOf(dq[0]), o = +dq[1] || 0, ago = DEP.near ? Math.max(0, Math.round((Date.now() - Date.parse(DEP.near)) / 3600e3)) : null;
+        const when = ago == null ? "" : ago < 1 ? " · 방금 확인" : ` · ${ago}시간 전 확인`;
+        if (dq[3]) { const r = utcOf(dq[3]), dd = Math.round((r - sd) / 60e3);
+          tk = `<div class="si-tk"><span class="si-tko">이륙</span> <b>${fz(r)}</b> ${esc(i[3])} ${fhl(r, o)} 현지 <small>${dd > 0 ? `예정보다 ${dd}분 늦게` : dd < 0 ? `예정보다 ${-dd}분 일찍` : "예정 시각"}${when}</small></div>`; }
+        else { const r = utcOf(dq[4]), dd = Math.round((r - sd) / 60e3);
+          if (Math.abs(dd) >= 5) tk = `<div class="si-tk"><span class="si-tkr">출발 변경</span> <b>${fz(r)}</b> ${esc(i[3])} ${fhl(r, o)} 현지 <small>예정보다 ${dd > 0 ? `${dd}분 늦게` : `${-dd}분 일찍`}${when}</small></div>`; }
+        if (tk) usedDep = true;
+      }
+      h += `<div class="si${cx ? " si-cx" : ""}"><div class="si-t">${head}</div>${tk}
         ${tag ? `<div class="si-chg"><span class="si-x">${tag}</span>${moved && !cx ? ` ${fz(e)} ${fkst(e)}` : ""}</div>` : ""}
-        <div class="si-m">${what}${i[4] ? ` · <b>${esc(i[4])}</b>` : ""}${i[5] ? ` ${esc(i[5])}` : ""}${i[8] ? ` · ${esc(TERM[i[8]] || i[8])}` : ""}${i[6] ? ` · 게이트 ${esc(i[6])}` : ""}</div>${i === nearI && cs ? rotLine(cs, i) : ""}</div>`;
+        <div class="si-m">${leg}${i[4] ? ` · <b>${esc(i[4])}</b>` : ""}${i[5] ? ` ${esc(i[5])}` : ""}${i[8] ? ` · ${esc(TERM[i[8]] || i[8])}` : ""}${i[6] ? ` · 게이트 ${esc(i[6])}` : ""}</div>${i === nearI && cs ? rotLine(cs, i) : ""}</div>`;
     }
     if (!up.length && (sc.inst || []).length) h += `<div class="si-m muted">앞으로 6일 안에 인천공항 운항 예정이 없습니다.</div>`;
+    if (usedDep) h += `<div class="si-src">출발 공항 출발 예정·실제 이륙 시각: AeroDataBox</div>`;
     const seasonRows = (list) => { for (const x of list) {
       const per = `${+x.from.slice(4, 6)}/${+x.from.slice(6)}–${+x.to.slice(4, 6)}/${+x.to.slice(6)}`;
       if (x.kind === "dom") {
@@ -3710,7 +3790,14 @@ window.csfStat = (() => {
           <div class="si-m">${KR.has(apt) ? "한국시각" : esc(apt) + " 현지시각"}${z} · ${[...x.wd].map((d) => WD[d]).join("")} · ${per}</div></div>`;
       }
     } };
-    seasonRows(sc.season || []);
+    const kf = sc.kf || [];
+    if (kf.length) {                      // 한국공항공사 공항 국제선: 출발지 현지 출발 · 도착지 현지 도착 (요일 = 출발지 현지)
+      for (const x of kf) {
+        const per = `${+x.from.slice(4, 6)}/${+x.from.slice(6)}–${+x.to.slice(4, 6)}/${+x.to.slice(6)}`, hm = (v) => /^\d{4}$/.test(v || "") ? `${v.slice(0, 2)}:${v.slice(2)}` : "";
+        h += `<div class="si"><div class="si-t"><b>${esc(x.dep)} ${hm(x.std)} → ${esc(x.arr)} ${hm(x.sta)}</b></div>
+          <div class="si-m">각 공항 현지시각 · ${[...x.wd].map((d) => WD[d]).join("")} (출발 기준) · ${per}</div></div>`;
+      }
+    } else seasonRows(sc.season || []);
     // 다음 시즌 운항표 (시즌 시작 45일 전부터 받음)
     const ns = DB.next_season || "";
     if ((sc.next || []).length) {
@@ -4538,7 +4625,7 @@ window.csfStat = (() => {
       const r = await fetch("data.json?t=" + Date.now(), { cache: "no-store" });
       if (!r.ok) throw new Error("HTTP " + r.status);
       const d = await r.json();
-      loadWx(); loadFx(); loadFc();
+      loadWx(); loadFx(); loadFc(); loadDep();
       if (DB && d.generated === DB.generated) msg(`이미 최신입니다 (${fmtDate(d.generated)}).`, "ok");
       else useData(d, "서버");
       if (navigator.serviceWorker && navigator.serviceWorker.controller) navigator.serviceWorker.controller.postMessage("refresh");
@@ -5519,7 +5606,7 @@ window.csfStat = (() => {
   search();
   showTab(["ft", "pk", "oz", "cm"].includes(store.get(TABKEY)) ? store.get(TABKEY) : (isSep(AL) ? "oz" : "cs"));
 
-  if (navigator.onLine) { loadWx(); loadFx(); loadFc(); }
+  if (navigator.onLine) { loadWx(); loadFx(); loadFc(); loadDep(); }
   // 온라인이면 조용히 최신 데이터 확인 (오프라인/파일 모드에서는 생략)
   if (navigator.onLine && location.protocol.startsWith("http")) {
     fetch("data.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null)

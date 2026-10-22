@@ -185,7 +185,8 @@ def fetch_kac(key, iata_map, today):
     return out
 
 
-HIST_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "type_history.json")
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+HIST_FILE = os.path.join(ROOT_DIR, "data", "type_history.json")
 HIST_KEEP_DAYS = 120
 
 
@@ -248,6 +249,7 @@ def collect(airlines, cache_path, now):
         return cache
     iata_map = {a["iata"]: a["icao"] for a in airlines if a.get("iata")}
     today_kst = now.astimezone(KST).date()
+    cache["iata_map"] = iata_map
     try:
         cache["icn"] = fetch_icn(key, iata_map)
         cache["icn_at"] = now.strftime("%Y-%m-%dT%H:%MZ")
@@ -283,9 +285,29 @@ def collect(airlines, cache_path, now):
     return cache
 
 
+def _kac_file(iata_map, today):
+    """data/kac_intl.json → {callsign: [{dep, arr, std, sta, wd, from, to}]} (오늘 이후 유효한 것)"""
+    try:
+        rows = json.load(open(os.path.join(ROOT_DIR, "data", "kac_intl.json"), encoding="utf-8")).get("rows", [])
+    except Exception:
+        return {}
+    out = {}
+    for r in rows:
+        cs = flight_to_callsign(r.get("fn"), iata_map)
+        if not cs or (r.get("to") or "") < today:
+            continue
+        x = {k: r.get(k, "") for k in ("dep", "arr", "std", "sta", "wd", "from", "to")}
+        if x not in out.setdefault(cs, []):
+            out[cs].append(x)
+    for cs in out:
+        out[cs] = sorted(out[cs], key=lambda x: (x["from"], x["std"]))[:6]
+    return out
+
+
 def build(cache, now):
     """data.json 에 넣을 편별 스케줄 {callsign: {...}}"""
     out = {}
+    iata_map = cache.get("iata_map") or {}
     cutoff = (now - dt.timedelta(hours=24)).strftime("%Y%m%d%H%M")   # 하루 전 이후 편만
     for cs, inst in (cache.get("icn") or {}).items():
         days = set()
@@ -316,6 +338,8 @@ def build(cache, now):
                     uniq.append(x)
             out.setdefault(cs, {})["next"] = uniq[:4]
         out["_next_start"] = ns
+    for cs, rows in _kac_file(iata_map, now.astimezone(KST).strftime("%Y%m%d")).items():   # 한국공항공사 공항 국제선: 출발지 현지 출발·도착 시각
+        out.setdefault(cs, {})["kf"] = rows
     for cs, seasons in (cache.get("kac") or {}).items():
         e = out.setdefault(cs, {})
         uniq = []

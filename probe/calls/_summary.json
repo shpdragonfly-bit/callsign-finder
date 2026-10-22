@@ -1,22 +1,22 @@
 {
- "molit_route_sample": {
+ "icn_allflt_arr_oz201": {
   "status": 200,
-  "length": 1123,
-  "head": "{\"Response\":{\"header\":{\"resultCode\":\"200\",\"resultMsg\":\"SUCCESS\"},\"body\":{\"items\":{\"item\":[{\"opr_ymd\":\"20250801\",\"ctpv_cd\":\"29\",\"sgg_cd\":\"29000\",\"rte_id\":\"00000112\",\"rte_no\":\"순환01(운천저수지)\",\"rte_nm\":\"순환01(운천저수지)\",\"dptre_sttn_id\":null,\"dptre_sttn_nm\":null,\"arvl_sttn_id\":null,\"arvl_sttn_nm\":null},{\"opr_y"
+  "length": 586,
+  "head": "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"numOfRows\":20,\"pageNo\":1,\"totalCount\":1,\"items\":[{\"fid\":\"2026101600000007880839\",\"codeshare\":\"Master\",\"masterFlightId\":null,\"flightId\":\"OZ201\",\"airline\":\"아시아나항공\",\"airport\":\"로스앤젤레스\",\"airportCode\":\"LAX\",\"passengerOrCargo\""
  },
- "molit_route_11_2025": {
+ "icn_allflt_arr_ke018": {
   "status": 200,
-  "length": 1265,
-  "head": "{\"Response\":{\"header\":{\"resultCode\":\"200\",\"resultMsg\":\"SUCCESS\"},\"body\":{\"items\":{\"item\":[{\"opr_ymd\":\"20250801\",\"ctpv_cd\":\"11\",\"sgg_cd\":\"11000\",\"rte_id\":\"11110897\",\"rte_no\":\"0017\",\"rte_nm\":\"0017번(용산차고지신용산역3번출구)\",\"dptre_sttn_id\":\"8503228\",\"dptre_sttn_nm\":\"용산차고지(가상)\",\"arvl_sttn_id\":\"8502895\",\"arvl_stt"
+  "length": 583,
+  "head": "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"numOfRows\":20,\"pageNo\":1,\"totalCount\":1,\"items\":[{\"fid\":\"2026101600000007880757\",\"codeshare\":\"Master\",\"masterFlightId\":null,\"flightId\":\"KE018\",\"airline\":\"대한항공\",\"airport\":\"로스앤젤레스\",\"airportCode\":\"LAX\",\"passengerOrCargo\":\""
  },
- "molit_route_11_sep": {
-  "status": 200,
-  "length": 1252,
-  "head": "{\"Response\":{\"header\":{\"resultCode\":\"200\",\"resultMsg\":\"SUCCESS\"},\"body\":{\"items\":{\"item\":[{\"opr_ymd\":\"20260901\",\"ctpv_cd\":\"11\",\"sgg_cd\":\"11000\",\"rte_id\":\"11110897\",\"rte_no\":\"0017\",\"rte_nm\":\"0017번(용산차고지신용산역3번출구)\",\"dptre_sttn_id\":\"8503228\",\"dptre_sttn_nm\":\"용산차고지(가상)\",\"arvl_sttn_id\":\"8502895\",\"arvl_stt"
+ "icn_trip_arr_oz201": {
+  "status": 403,
+  "length": 192,
+  "head": "{\n  \"OpenAPI_ServiceResponse\": {\n    \"cmmMsgHeader\": {\n      \"errMsg\": \"SERVICE_KEY_IS_NOT_REGISTERED_ERROR\",\n      \"returnAuthMsg\": \"등록되지 않은 서비스키\",\n      \"returnReasonCode\": \"30\"\n    }\n  }\n}\n"
  },
- "molit_route_29_now": {
-  "status": 200,
-  "length": 49,
-  "head": "{\"Error\":{\"code\":\"50\",\"message\":\"NO_DATA_FOUND\"}}"
+ "icn_duty_arr_oz201": {
+  "status": 403,
+  "length": 192,
+  "head": "{\n  \"OpenAPI_ServiceResponse\": {\n    \"cmmMsgHeader\": {\n      \"errMsg\": \"SERVICE_KEY_IS_NOT_REGISTERED_ERROR\",\n      \"returnAuthMsg\": \"등록되지 않은 서비스키\",\n      \"returnReasonCode\": \"30\"\n    }\n  }\n}\n"
  }
 }

@@ -96,6 +96,15 @@ jobs:
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: cp web/busgo.json probe/kd/busgo.json && python updater/busgo.py probe/kd/busgo.json --force 2>&1 | tee probe/kd/log.txt
+      - name: 한국공항공사 국제선 스케줄 파일 시험
+        if: false
+        run: python updater/kac_file.py --force && mkdir -p probe/kac && python -c "import json;d=json.load(open('data/kac_intl.json'));print(len(d['rows']));json.dump(d['rows'][:50],open('probe/kac/sample.json','w'),ensure_ascii=False,indent=0)" | tee probe/kac/log.txt
+      - name: AeroDataBox 시험 호출 (12시간 창 1번 = 2 units)
+        if: false
+        env:
+          ADB_KEY: ${{ secrets.ADB_KEY }}
+          ADB_HOST: ${{ secrets.ADB_HOST }}
+        run: python updater/adb.py --sample
       - name: API 호출 샘플 수집
         if: hashFiles('probe/calls.json') != ''
         env:
