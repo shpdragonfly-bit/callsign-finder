@@ -99,7 +99,7 @@ function get_(p) {
   return {
     ok: true, icao: r.icao, iata: r.iata, company: r.company, role: role,
     date_label: plain_(r.date_label), eff_date: plain_(r.eff_date), version: plain_(r.version),
-    items: JSON.parse(r[role] || "[]"), changes: JSON.parse(r["chg_" + role] || "[]"),
+    items: asArr(JSON.parse(r[role] || "[]")), changes: asArr(JSON.parse(r["chg_" + role] || "[]")),
     left: left, at: new Date().toISOString()
   };
 }
@@ -141,3 +141,6 @@ function cleanup_() {
   var props = PropertiesService.getScriptProperties(), all = props.getProperties(), day = kstDay_();
   Object.keys(all).forEach(function (k) { if (/^[ug]\d{8}/.test(k) && k.slice(1, 9) !== day) props.deleteProperty(k); });
 }
+
+// 항목이 1개면 업로드 쪽에서 배열이 풀려 객체로 저장된 경우가 있음 → 늘 배열로
+function asArr(x) { return Array.isArray(x) ? x : (x == null || (typeof x === "object" && !Object.keys(x).length)) ? [] : [x]; }

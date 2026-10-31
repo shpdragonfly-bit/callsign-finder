@@ -65,7 +65,7 @@ foreach ($a in @($idx.airports)) {
   $pick = { param($role) @(@($d.items) | Where-Object { $_.role -eq $role -and [int]$_.priority -eq 1 } | Sort-Object { [int]$_.order } | ForEach-Object { [ordered]@{ text = (NoRef ([string]$_.text)); aircraft = @(@($_.aircraft) | Where-Object { $_ }); order = [int]$_.order; hazard = [bool]$_.hazard } }) }
   $chg = { param($role) @(@($d.changes) | Where-Object { $_ -and ($_.role -eq $role -or $_.role -eq "general" -or -not $_.role) } | ForEach-Object { [ordered]@{ type = [string]$_.type; text = (NoRef ([string]$_.text)) } }) }
   $send += [ordered]@{ company = [string]$d.company; icao = [string]$d.icao; iata = [string]$d.iata; eff_date = [string]$d.eff_date; date_label = [string]$d.date_label; version = [string]$d.version
-    dep = (& $pick "dep"); arr = (& $pick "arr"); chg_dep = (& $chg "dep"); chg_arr = (& $chg "arr") }
+    dep = @(& $pick "dep"); arr = @(& $pick "arr"); chg_dep = @(& $chg "dep"); chg_arr = @(& $chg "arr") }   # @(): 항목 1개여도 배열로 (PowerShell 은 1개면 배열을 풀어 버림)
 }
 $remove = @($state.Keys | Where-Object { -not $now.ContainsKey($_) } | ForEach-Object { $x = $_.Split("|"); [ordered]@{ company = $x[0]; icao = $x[1] } })
 if (-not $send.Count -and -not $remove.Count) { Log "변경 없음 (공항 $($now.Count)곳)"; exit 0 }

@@ -432,6 +432,12 @@ button.b:disabled { opacity: .5; }
 @media (max-width: 420px) { .ho-klt { font-size: 24px; } .ho-who { margin-left: 0; width: 100%; font-size: 12px; } }
 .utc small { font-weight: 500; color: var(--muted); }
 .tt .b { padding: 6px 10px; font-size: 13px; white-space: nowrap; flex: none; }
+.lbl-row { display: flex; align-items: center; justify-content: space-between; }
+.tclr { font: 600 12px inherit; letter-spacing: 0; color: var(--muted); background: none; border: 1px solid var(--line, #333); border-radius: 8px; padding: 3px 10px; cursor: pointer; }
+.tclr:disabled { opacity: .4; cursor: default; }
+.tundo { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; padding: 6px 10px; border-radius: 8px; font-size: 13px; background: color-mix(in srgb, var(--accent, #3B82F6) 14%, transparent); }
+.tundo[hidden] { display: none; }
+.tundo button { font: 700 13px inherit; color: var(--accent, #3B82F6); background: none; border: 0; cursor: pointer; padding: 2px 4px; }
 .times { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 .tm { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px 10px; box-shadow: var(--shadow); min-width: 0; }
 .tm:focus-within { border-color: var(--accent); }
@@ -1503,13 +1509,14 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
         <span class="tsum" id="ftSum"></span>
       </div>
       <p class="ft-hint">시간 칸에 <b>1230</b> 또는 <b>12+30</b> 처럼 입력해도 됩니다.</p>
-      <div class="lbl">운항 시각 (UTC)</div>
+      <div class="lbl lbl-row"><span>운항 시각 (UTC)</span><button type="button" class="tclr" id="tClr">지우기</button></div>
       <div class="times" id="ftTimes">
         <div class="tm"><label for="tRO">R/O<small>Ramp out</small></label><div class="tmin"><input id="tRO" data-k="ro" inputmode="tel" autocomplete="off" placeholder="0000" maxlength="5"><span>Z</span></div><button type="button" class="now" data-k="ro">지금</button></div>
         <div class="tm"><label for="tTO">T/O<small>Take off</small></label><div class="tmin"><input id="tTO" data-k="to" inputmode="tel" autocomplete="off" placeholder="0000" maxlength="5"><span>Z</span></div><button type="button" class="now" data-k="to">지금</button></div>
         <div class="tm"><label for="tLD">L/D<small>Landing</small></label><div class="tmin"><input id="tLD" data-k="ld" inputmode="tel" autocomplete="off" placeholder="0000" maxlength="5"><span>Z</span></div><button type="button" class="now" data-k="ld">지금</button></div>
         <div class="tm"><label for="tRI">R/I<small>Ramp in</small></label><div class="tmin"><input id="tRI" data-k="ri" inputmode="tel" autocomplete="off" placeholder="0000" maxlength="5"><span>Z</span></div><button type="button" class="now" data-k="ri">지금</button></div>
       </div>
+      <div class="tundo" id="tUndo" hidden><span>운항 시각을 지웠습니다</span><button type="button" id="tUndoB">되돌리기</button></div>
       <div class="tres">
         <div><span>FLT Time</span><b id="rFLT">—</b><small>L/D − T/O</small></div>
         <div><span>Block Time</span><b id="rBLK">—</b><small>R/I − R/O</small></div>
@@ -3015,6 +3022,8 @@ window.FPREP = (() => {
   const LK = "csf-fp-list", LAST = "csf-fp-last", RK = "csf-fp-recent";
   const dev = (() => { let d = ls.get("csf-fp-dev"); if (!d || !/^[\w-]{16,64}$/.test(d)) { const a = new Uint8Array(18); crypto.getRandomValues(a); d = btoa(String.fromCharCode(...a)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); ls.set("csf-fp-dev", d); } return d; })();
   const J = (k, def) => { try { return JSON.parse(ls.get(k) || "null") || def; } catch (e) { return def; } };
+  // 서버 자료가 항목 1개일 때 배열이 아니라 객체 하나로 올 수 있음(PC 업로드 스크립트 PowerShell 특성) → 늘 배열로
+  const arr = (x) => Array.isArray(x) ? x : x == null || x === "" || (typeof x === "object" && !Object.keys(x).length) ? [] : [x];
   const md = (iso) => { const t = new Date(iso); return isNaN(t) ? "" : `${t.getMonth() + 1}/${t.getDate()} ${String(t.getHours()).padStart(2, "0")}:${String(t.getMinutes()).padStart(2, "0")}`; };
   const label = (a) => `${a.icao}${a.iata ? " " + a.iata : ""}`;
   // 서버 스프레드시트가 날짜·버전을 바꿔 저장한 경우(2026-09-10T15:00:00.000Z, 2)도 원래 모양(11 SEP 26, v2.0)으로
@@ -3048,7 +3057,7 @@ window.FPREP = (() => {
   async function fetchOne(icao, role, company) {
     const q = { a: "get", icao, role, d: dev }; if (company) q.co = company;
     const r = await call(q);
-    if (r.ok) r.got = new Date().toISOString();
+    if (r.ok) { r.got = new Date().toISOString(); r.items = arr(r.items); r.changes = arr(r.changes); }
     return r;
   }
   function errMsg(err, had) {
@@ -3070,8 +3079,8 @@ window.FPREP = (() => {
   const sortIt = (a) => (a || []).slice().sort((x, y) => (x.order || 0) - (y.order || 0)).map((x) => Object.assign({}, x, { text: noRef(x.text) }));
   function forType(items, type) {
     const f = type ? fam(type) : "";
-    return (items || []).map((it) => {
-      const ac = (it.aircraft || []).filter(Boolean);
+    return arr(items).map((it) => {
+      const ac = arr(it.aircraft).filter(Boolean);
       if (!ac.length) return it;
       if (!f) return Object.assign({}, it, { tag: ac.join(", ") });
       const hit = ac.filter((v) => fam(v) === f);
@@ -3178,7 +3187,7 @@ window.FPREP = (() => {
       }
       html.push(`<div class="card fp-ap"><h3>${esc(label(d))} ${ttl}<small>${esc(verTxt(d))}</small></h3>` +
         (note ? `<p class="fp-warn">${esc(note)}</p>` : "") + itemsHtml(sortIt(forType(d.items, ""))) +
-        ((d.changes || []).length ? `<details class="fp-chg"><summary>이전 버전과 달라진 점 ${d.changes.length}건</summary><ul>${d.changes.map((c) => `<li><b>${esc(c.type || "")}</b> ${esc(c.text)}</li>`).join("")}</ul></details>` : "") + `</div>`);
+        (arr(d.changes).length ? `<details class="fp-chg"><summary>이전 버전과 달라진 점 ${arr(d.changes).length}건</summary><ul>${arr(d.changes).map((c) => `<li><b>${esc(c.type || "")}</b> ${esc(c.text)}</li>`).join("")}</ul></details>` : "") + `</div>`);
     }
     if (my !== seq) return;
     clearTimeout(slow);
@@ -3308,7 +3317,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v71", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v72", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -6688,6 +6697,7 @@ window.UID = (() => {
   const tval = (k) => parseUtc(st.times[k] || "");
   const span = (a, b) => (a == null || b == null ? null : (b - a + 1440) % 1440);   // 자정 넘김 처리
   function renderTimes() {
+    $("tClr").disabled = !TK.some((k) => st.times[k]);
     const flt = span(tval("to"), tval("ld")), blk = span(tval("ro"), tval("ri"));
     $("rFLT").textContent = flt == null ? "—" : fmt(flt);
     $("rBLK").textContent = blk == null ? "—" : fmt(blk);
@@ -6705,6 +6715,22 @@ window.UID = (() => {
     setTime(inp.dataset.k, v);
   });
   $("ftTimes").addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.matches("input")) e.target.blur(); });
+  // 칸을 누르면 기존 값 전체 선택 → 바로 새로 입력하면 덮어씀 (iOS 는 포커스 직후 선택이 풀려 한 박자 뒤에)
+  $("ftTimes").addEventListener("focusin", (e) => { const i = e.target.closest("input[data-k]"); if (i && i.value) setTimeout(() => { try { i.setSelectionRange(0, i.value.length); } catch (x) { i.select(); } }, 0); });
+  // 지우기 → 5초 동안 되돌리기
+  let undoT = null, undoV = null;
+  $("tClr").addEventListener("click", () => {
+    undoV = Object.assign({}, st.times);
+    for (const k of TK) { $("t" + k.toUpperCase()).value = ""; st.times[k] = ""; }
+    st.utc = null; save(); render(); renderTimes();
+    $("tUndo").hidden = false; clearTimeout(undoT); undoT = setTimeout(() => { $("tUndo").hidden = true; undoV = null; }, 5000);
+  });
+  $("tUndoB").addEventListener("click", () => {
+    if (!undoV) return;
+    for (const k of TK) { st.times[k] = undoV[k] || ""; $("t" + k.toUpperCase()).value = st.times[k]; }
+    st.utc = tval("to"); save(); render(); renderTimes();
+    clearTimeout(undoT); $("tUndo").hidden = true; undoV = null;
+  });
   $("ftTimes").addEventListener("click", (e) => {
     const b = e.target.closest("button.now");
     if (!b) return;
