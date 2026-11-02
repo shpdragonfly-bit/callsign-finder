@@ -1,0 +1,10 @@
+https://api.adsb.lol/v2/type/B77W 200 78985 ac 138 [('N723AN', 'a9aebe', 'AAL135'), ('TC-LJA', '4bb141', 'THY10'), ('HB-JNA', '4b1916', 'SWR39'), ('F-GSQL', '394a0b', 'AFR025'), ('N2250U', 'a1f5ff', 'UAL2238'), ('HB-JNC', '4b1918', 'SWR41G')] {}
+https://api.adsb.lol/v2/hex/71ba04,71c217,71ba05 200 1869 ac 3 [('HL7204', '71ba04', 'KAL086'), ('HL8217', '71c217', 'KAL437'), ('HL7205', '71ba05', 'KAL034')] {}
+https://api.adsb.lol/v2/reg/HL7204,HL8217,HL7205 200 1872 ac 3 [('HL7204', '71ba04', 'KAL086'), ('HL8217', '71c217', 'KAL437'), ('HL7205', '71ba05', 'KAL034')] {}
+https://api.adsb.lol/v2/registration/HL7204,HL8217,HL7205 200 1873 ac 3 [('HL7204', '71ba04', 'KAL086'), ('HL8217', '71c217', 'KAL437'), ('HL7205', '71ba05', 'KAL034')] {}
+https://api.adsb.lol/v2/callsign/KAL017 200 101 ac 0 [] {}
+https://api.adsb.lol/v2/icao/71ba04,71c217,71ba05 200 1870 ac 3 [('HL7204', '71ba04', 'KAL086'), ('HL8217', '71c217', 'KAL437'), ('HL7205', '71ba05', 'KAL034')] {}
+https://api.adsb.lol/v2/type/B789 200 107595 ac 170 [('JA870J', '86e75e', 'JAL47'), ('JA872A', '86e79a', 'ANA1905'), ('ZK-NZI', 'c82347', 'ANZ23'), ('C-FVLZ', 'c038ac', 'ACA549'), ('VH-ZNC', '7c8066', 'QFA74'), ('N29971', 'a31a50', 'UAL1227')] {}
+https://api.adsb.lol/v2/type/A359 200 89056 ac 151 [('N515DN', 'a6745a', 'DAL281'), ('9V-SJF', '76cd46', 'SIA35'), ('9V-SGA', '76cce1', 'SIA33'), ('B-58503', '8991e6', 'B58503'), ('N528DN', 'a6a6fe', 'DAL11'), ('F-HUVP', '39d2af', 'AFR027')] {}
+https://api.adsb.lol/v2/type/B788 200 44632 ac 71 [('N805AN', 'aaf47d', 'AAL74'), ('G-ZBJA', '40688e', 'BAW26V'), ('C-GHQQ', 'c058d5', 'ACA159'), ('C-GHPY', 'c058c3', 'ACA122'), ('N873BB', 'ac0196', 'AA0013'), ('JY-BAH', '740828', 'RJA292')] {}
+https://api.adsb.lol/v2/type/B772 200 23005 ac 39 [('N774UA', 'aa79a6', 'UAL1947'), ('N789AN', 'aab202', 'AAL117'), ('N770AN', 'aa6914', 'AAL912'), ('N229UA', 'a20433', 'UAL846'), ('N768AA', 'aa5f41', 'AAL734'), ('CS-TSX', '495278', 'LOT5N')] {}

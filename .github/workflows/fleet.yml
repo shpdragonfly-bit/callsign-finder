@@ -1,0 +1,33 @@
+name: fleet-track
+# 기번별 운항 기록 (대한항공·아시아나 B777·777F·B747·B787·A350): 15분마다 ADS-B 한 번 조회 → fleet 브랜치 reg/{기번}.json (2개월 보관)
+# fleet 브랜치는 커밋 1개만 유지(덮어쓰기)해 저장소 기록이 불어나지 않게 함
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: fleet
+  cancel-in-progress: false
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: fleet 브랜치 가져오기
+        run: |
+          url="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          if git ls-remote --exit-code --heads origin fleet >/dev/null 2>&1; then git clone -q --depth 1 -b fleet "$url" _fleet
+          else mkdir _fleet && cd _fleet && git init -q -b fleet && git remote add origin "$url"; fi
+      - name: ADS-B 조회 · 구간 만들기
+        run: python3 updater/fleet.py _fleet
+      - name: 저장 (커밋 1개로 덮어쓰기)
+        run: |
+          cd _fleet
+          git config user.name "fleet-bot"; git config user.email "fleet-bot@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "변경 없음"; exit 0; fi
+          if git rev-parse -q --verify HEAD >/dev/null; then git commit -q --amend -m "fleet $(date -u +%FT%H:%MZ)"; else git commit -q -m "fleet $(date -u +%FT%H:%MZ)"; fi
+          git push -q -f origin fleet

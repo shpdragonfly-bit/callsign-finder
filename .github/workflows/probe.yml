@@ -111,6 +111,14 @@ jobs:
           ADB_KEY: ${{ secrets.ADB_KEY }}
           ADB_HOST: ${{ secrets.ADB_HOST }}
         run: python updater/adb.py --probe
+      - name: 기번별 운항 기록 시험 (2번 조회, 개수만 저장)
+        if: false
+        run: |
+          mkdir -p probe/fleet
+          python3 updater/fleet.py /tmp/fl 2>&1 | tee probe/fleet/log.txt
+          sleep 120
+          python3 updater/fleet.py /tmp/fl 2>&1 | tee -a probe/fleet/log.txt
+          python3 -c "import json,collections;i=json.load(open('/tmp/fl/index.json'));c=collections.Counter(v['ty'] for v in i['regs'].values());print(len(i['regs']),dict(c));s=json.load(open('/tmp/fl/state.json'));print('진행 중',len(s['cur']),[(k,v['cs'],v['p1'][2]) for k,v in list(s['cur'].items())[:10]])" | tee -a probe/fleet/log.txt
       - name: API 호출 샘플 수집
         if: hashFiles('probe/calls.json') != ''
         env:
