@@ -9,7 +9,7 @@
   - 그 밖의 구간(화물기 해외 간 등): adsb.lol 공개 ADS-B (키 없음 · 한도 유동 → 호출 사이 3초 이상)
     · airplanes.live 는 GitHub 실행 서버에서 403(사전 연락 필요)이라 쓰지 않음 (2026-11-02 시험)
     · 15분마다 기번 목록(약 110대)을 한 번에 조회(/v2/reg/a,b,c…) → 그 순간 날고 있는 우리 항공기만 받음
-    · 기번 목록은 인천공항 자료(기종·기번) + 6시간마다 기종별 조회로 새 기체 추가
+    · 기번 목록은 인천공항 자료(기종·기번) + 실행마다 기종 1개씩 돌아가며 조회해 새 기체 추가 (11종 ≈ 3시간)
   - 위치 기록은 남기지 않고 구간(콜사인 · 출발/도착 공항 · 이륙/착륙 추정 시각)만 저장. 2개월(61일) 보관
 상태(기번 목록 · 진행 중 구간)는 같은 브랜치의 state.json (공개 ADS-B 위치 몇 개뿐)
 """
@@ -30,7 +30,6 @@ DATA = os.path.join(ROOT, "web", "data.json")
 TYPES = ["B772", "B773", "B77W", "B77L", "B744", "B748", "B788", "B789", "B78X", "A359", "A35K"]
 AL = ("KAL", "AAR")
 KEEP_DAYS = 61
-DISC_H = 6                      # 새 기체 찾기 (기종별 조회) 주기
 GAP_H = 16                      # 같은 콜사인이 이 시간 안에 다시 보이면 같은 구간 (대양 위 수신 공백)
 LAND_MIN = 40                   # 낮은 고도에서 마지막으로 본 뒤 이만큼 안 보이면 착륙으로 봄
 LOW_FT = 8000                   # 이보다 낮으면 공항 근처(이륙 직후 · 착륙 직전)로 봄
@@ -106,24 +105,26 @@ def seed_from_icn(st):
 
 
 def discover(st):
-    last = st.get("disc")
-    if last and (NOW - P(last)).total_seconds() < DISC_H * 3600:
-        return
+    """새 기체 찾기: 실행마다 기종 1개씩 돌아가며 조회 (11종 한 바퀴 ≈ 3시간). 한 번에 몰아 부르면 adsb.lol 이 429"""
+    i = int(st.get("disc_i", 0)) % len(TYPES)
+    t = TYPES[i]
+    st["disc_i"] = i + 1
+    try:
+        res = get("https://api.adsb.lol/v2/type/" + t)
+    except Exception as e:
+        log("  기종 조회 실패 %s (%s)" % (t, getattr(e, "code", "") or type(e).__name__)); return
     found = 0
-    for t in TYPES:
-        try:
-            res = get("https://api.adsb.lol/v2/type/" + t)
-        except Exception as e:
-            log("  기종 조회 실패 %s (%s)" % (t, getattr(e, "code", "") or type(e).__name__)); time.sleep(5); continue
-        for ac in res.get("ac") or []:
-            cs, reg = normalize_callsign(ac.get("flight")), (ac.get("r") or "").upper()
-            if reg.startswith("HL") and cs.startswith(AL):
-                x = st["regs"].setdefault(reg, {"ty": t, "al": cs[:3]})
-                x["hex"] = ac.get("hex") or x.get("hex", "")
-                found += 1
-        time.sleep(3.5)
+    for ac in res.get("ac") or []:
+        cs, reg = normalize_callsign(ac.get("flight")), (ac.get("r") or "").upper()
+        if reg.startswith("HL") and cs.startswith(AL):
+            new = reg not in st["regs"]
+            x = st["regs"].setdefault(reg, {"ty": t, "al": cs[:3]})
+            x["hex"] = ac.get("hex") or x.get("hex", "")
+            found += new
     st["disc"] = K(NOW)
-    log("기번 찾기: 비행 중 %d대 확인, 목록 %d대" % (found, len(st["regs"])))
+    if found:
+        log("새 기번 %d대 (%s)" % (found, t))
+    time.sleep(6)
 
 
 # ---------- ADS-B 한 번 조회 → 구간 ----------
@@ -140,7 +141,7 @@ def poll(regs):
                 log("  adsb.lol 실패 (%s)" % (getattr(e, "code", "") or type(e).__name__))
                 if k:
                     return None
-                time.sleep(8)
+                time.sleep(20)
         time.sleep(3.5)
     return out
 
