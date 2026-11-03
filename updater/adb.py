@@ -323,7 +323,7 @@ def _export():
             v = v + [""] * (9 - len(v))
             if v[0] > now_k or not (v[4] or v[6]):
                 continue
-            hist.setdefault(cs, []).append(["A", v[0], v[2], "ICN", v[1], 540, rel(v[4], v[0]), rel(v[6], v[0]), rel(v[5], v[0]) if v[4] else None, rel(v[7], v[0]), rel(sta, v[0]), v[3]])
+            hist.setdefault(cs, []).append(["A", v[0], v[2], "ICN", v[1], 540, rel(v[4], v[0]), rel(v[6], v[0]), rel(v[5], v[0]) if (v[4] or v[8]) else None, rel(v[7], v[0]), rel(sta, v[0]), v[3]])
     for fn, recs in (db.get("d") or {}).items():
         cs = cs_of(fn)
         for std, v in (recs.items() if cs else ()):

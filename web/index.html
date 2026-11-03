@@ -239,6 +239,7 @@ body[data-tab="ft"] .cs-only, body[data-tab="pk"] .cs-only, body[data-tab="cm"] 
 .ph-r { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr 0.8fr; gap: 4px; font-size: 12.5px; padding: 4px 0 1px; font-variant-numeric: tabular-nums; border-top: 1px solid var(--line, #2a2a2a); }
 .ph-r small { color: var(--muted); font-size: 11px; } .ph-h { color: var(--muted); font-size: 11px; border-top: 0; }
 .ph-same { background: color-mix(in srgb, var(--accent, #3B82F6) 14%, transparent); border-radius: 6px; } .ph-sw { display: block; color: var(--accent, #3B82F6) !important; font-weight: 700; }
+.ph-g { font-size: 9px; font-weight: 700; color: var(--muted); margin-left: 1px; vertical-align: super; }
 .ph-e { font-style: normal; color: var(--muted); margin-right: 1px; } .ph-rt { display: block; font-size: 10.5px; color: var(--muted); }
 .ph-x { font-size: 11px; color: var(--muted); padding-bottom: 2px; }
 .ph-s { font-size: 12.5px; margin-top: 6px; line-height: 1.6; }
@@ -3834,23 +3835,26 @@ window.csfStat = (() => {
     let body = "";
     for (const r of rows) {
       const sd = utcOf(r[1]), at = (m) => m == null ? null : new Date(sd.getTime() + m * 60e3);
-      const tk = at(r[6]), ld = at(r[7]);
+      // 이륙(활주로) 시각이 없고 실제 게이트 출발(ATD)만 있으면 그것을 이륙 칸에 G 표시로 (중국 등 이륙 자료가 없는 공항)
+      const gOnly = r[6] == null && r[8] != null && r[0] !== "X";
+      const tk = at(r[6] != null ? r[6] : gOnly ? r[8] : null), ld = at(r[7]);
       const f = r[6] != null && r[7] != null && r[7] > r[6] ? r[7] - r[6] : null;
       const xo = r[8] != null && r[6] != null && r[6] >= r[8] && r[6] - r[8] < 120 ? r[6] - r[8] : null;
       const xi = r[9] != null && r[7] != null && r[9] >= r[7] && r[9] - r[7] < 90 ? r[9] - r[7] : null;
       // r[12]: ADS-B(15분 간격) 추정으로 채운 칸 t=이륙 l=착륙, s=STD 없음(인천 밖 구간 X). 추정값은 ~ 표시, 평균에서는 뺌
       const fl = r[12] || "", et = fl.includes("t"), el = fl.includes("l"), x = r[0] === "X";
-      if (f != null && !et && !el) ft.push(f); if (r[6] != null && !et && !x) dl.push(r[6]); if (xo != null) to.push(xo); if (xi != null) ti.push(xi);
+      if (f != null && !et && !el) ft.push(f); if (r[6] != null && !et && !x) dl.push(r[6]); else if (gOnly) dl.push(r[8]); if (xo != null) to.push(xo); if (xi != null) ti.push(xi);
       // 날짜: 출발 기준 = 출발 공항 현지(출발 예정), 도착 기준 = 도착 공항 현지(착륙, 없으면 도착 예정)
       const dd = mode === "arr" ? fdl(ld || at(r[10]) || sd, r[5]) : fdl(sd, r[4]);
       const air = r[6] != null && r[7] == null && (r[10] != null ? Date.now() < at(r[10]).getTime() + 2 * 3600e3 : Date.now() - tk < 16 * 3600e3);   // 도착 예정 2시간 뒤까지만 '비행 중' (그 뒤는 착륙 자료 대기 —)
       const same = wdN && (mode === "arr" ? wdl(ld || at(r[10]) || sd, r[5]) : wdl(sd, r[4])) === wdN;
       const sq = (b, v) => b ? `<i class="ph-e">~</i>${v}` : v;
-      body += `<div class="ph-r${same ? " ph-same" : ""}"><span>${dd}${x ? `<small class="ph-rt">${esc(r[2])}→${esc(r[3])}</small>` : ""}</span><span>${x ? "—" : fz(sd)}</span><span>${tk ? sq(et, fz(tk)) : "—"}</span><span>${ld ? sq(el, fz(ld)) : air ? `<small>비행 중</small>` : "—"}</span><span>${f != null ? sq(et || el, hm(f)) : "—"}</span></div>`;
+      body += `<div class="ph-r${same ? " ph-same" : ""}"><span>${dd}${x ? `<small class="ph-rt">${esc(r[2])}→${esc(r[3])}</small>` : ""}</span><span>${x ? "—" : fz(sd)}</span><span>${tk ? (gOnly ? `${fz(tk)}<small class="ph-g">G</small>` : sq(et, fz(tk))) : "—"}</span><span>${ld ? sq(el, fz(ld)) : air ? `<small>비행 중</small>` : "—"}</span><span>${f != null ? sq(et || el, hm(f)) : "—"}</span></div>`;
     }
 
     let sum = [];
     if (dl.length) sum.push(`STD/ATD 평균 <b>${avg(dl)}분</b>`);
+    if (rows.some((r) => r[6] == null && r[8] != null && r[0] !== "X")) sum.push(`<small class="muted">G 이륙 시각이 없어 게이트 출발(ATD)</small>`);
     if (rows.some((r) => (r[12] || "").match(/[tl]/))) sum.push(`<small class="muted">~ ADS-B 추정(±15분) · 평균에서 제외</small>`);
     return `<details class="ph"${phOpen ? " open" : ""}><summary>지난 1주 운항 <small>${rows.length}편${ft.length ? ` · 평균 비행 ${hm(avg(ft))}` : ""}</small></summary>
       <div class="ph-r ph-h"><span>${mode === "arr" ? "도착일" : "출발일"}<small>(현지)</small></span><span>STD</span><span>이륙</span><span>착륙</span><span>비행</span></div>${body}
