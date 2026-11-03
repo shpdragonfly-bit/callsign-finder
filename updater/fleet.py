@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-기번별 운항 기록 (대한항공 · 아시아나 B777 · 777F · B747 · B787 · A350) → fleet 브랜치 reg/{기번}.json
+기번별 운항 기록 (앱의 항공사 전체: 대한항공 · 아시아나 · 진에어 · 제주항공 · 트리니티 · 이스타, 전 기종) → fleet 브랜치 reg/{기번}.json
+  + recent.json: 최근 8일 구간(콜사인별) — adb.py --export 가 '지난 1주 운항'의 빈 이착륙 시각을 채울 때 씀
 
   python3 updater/fleet.py OUTDIR      15분마다: 기번 목록으로 ADS-B 한 번 조회 → 구간 만들기 + 인천공항 실제 시각 합치기
 
@@ -8,8 +9,8 @@
   - 인천 출발·도착 구간: 인천공항 공공데이터 (data/public_cache.json, update.yml 이 6시간마다 갱신) — 계획·실제(게이트) 시각
   - 그 밖의 구간(화물기 해외 간 등): adsb.lol 공개 ADS-B (키 없음 · 한도 유동 → 호출 사이 3초 이상)
     · airplanes.live 는 GitHub 실행 서버에서 403(사전 연락 필요)이라 쓰지 않음 (2026-11-02 시험)
-    · 15분마다 기번 목록(약 110대)을 한 번에 조회(/v2/reg/a,b,c…) → 그 순간 날고 있는 우리 항공기만 받음
-    · 기번 목록은 인천공항 자료(기종·기번) + 실행마다 기종 1개씩 돌아가며 조회해 새 기체 추가 (11종 ≈ 3시간)
+    · 15분마다 기번 목록(약 300대)을 100대씩 묶어 조회(/v2/reg/a,b,c…) → 그 순간 날고 있는 우리 항공기만 받음
+    · 기번 목록은 인천공항 자료 · ADS-B 기종 관측(observations.json)의 기번 + 실행마다 기종 1개씩 돌아가며 조회해 새 기체 추가
   - 위치 기록은 남기지 않고 구간(콜사인 · 출발/도착 공항 · 이륙/착륙 추정 시각)만 저장. 2개월(61일) 보관
 상태(기번 목록 · 진행 중 구간)는 같은 브랜치의 state.json (공개 ADS-B 위치 몇 개뿐)
 """
@@ -27,8 +28,14 @@ from update import normalize_callsign  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ICN = os.path.join(ROOT, "data", "public_cache.json")
 DATA = os.path.join(ROOT, "web", "data.json")
-TYPES = ["B772", "B773", "B77W", "B77L", "B744", "B748", "B788", "B789", "B78X", "A359", "A35K"]
-AL = ("KAL", "AAR")
+TYPES = ["B772", "B773", "B77W", "B77L", "B744", "B748", "B788", "B789", "B78X", "A359", "A35K",
+         "A321", "A21N", "A320", "A20N", "A332", "A333", "A339", "A388", "B737", "B738", "B739", "B38M", "BCS3"]
+OBS = os.path.join(ROOT, "data", "observations.json")
+try:
+    AL = tuple(a["icao"] for a in json.load(open(os.path.join(ROOT, "config", "airlines.json"), encoding="utf-8"))["airlines"] if a.get("enabled", True))
+except Exception:
+    AL = ("KAL", "AAR", "JNA", "JJA", "TWB", "ESR")
+RECENT_D = 8
 KEEP_DAYS = 61
 GAP_H = 16                      # 같은 콜사인이 이 시간 안에 다시 보이면 같은 구간 (대양 위 수신 공백)
 LAND_MIN = 40                   # 낮은 고도에서 마지막으로 본 뒤 이만큼 안 보이면 착륙으로 봄
@@ -97,17 +104,25 @@ def seed_from_icn(st):
             continue
         for r in rows:
             reg, ty = (r.get("reg") or "").upper(), (r.get("ty") or "").upper()
-            if reg.startswith("HL") and ty in TYPES:
+            if reg.startswith("HL") and ty:
                 x = st["regs"].setdefault(reg, {"ty": ty, "al": cs[:3]})
                 x["ty"], x["al"] = ty, cs[:3]
                 n += 1
+    for cs, tys in (load(OBS, {}) or {}).items():                      # ADS-B 기종 관측에 남은 기번
+        if not cs.startswith(AL):
+            continue
+        for ty, r in (tys or {}).items():
+            reg = (r.get("reg") or "").upper() if isinstance(r, dict) else ""
+            if reg.startswith("HL") and reg not in st["regs"]:
+                st["regs"][reg] = {"ty": ty, "al": cs[:3]}
     return icn
 
 
 def discover(st):
     """새 기체 찾기: 실행마다 기종 1개씩 돌아가며 조회 (11종 한 바퀴 ≈ 3시간). 한 번에 몰아 부르면 adsb.lol 이 429"""
-    i = int(st.get("disc_i", 0)) % len(TYPES)
-    t = TYPES[i]
+    tl = sorted(set(TYPES) | {x.get("ty", "") for x in st["regs"].values()} - {""})
+    i = int(st.get("disc_i", 0)) % len(tl)
+    t = tl[i]
     st["disc_i"] = i + 1
     try:
         res = get("https://api.adsb.lol/v2/type/" + t)
@@ -226,12 +241,20 @@ def save(outdir, st, new, icn):
                 if (r.get("reg") or "").upper() == reg and r.get("st") in ("출발", "도착", "착륙") and r.get("t", "") <= K(NOW):
                     ic[(cs, r["t"])] = {"c": cs, "io": r.get("io"), "ap": r.get("ap"), "t": r["t"], "e": r.get("e") or "", "st": r.get("st")}
         f["icn"] = sorted(ic.values(), key=lambda x: x["t"])
-        f["legs"].sort(key=lambda x: x["o"])
+        f["legs"] = sorted({(x["c"], x["o"]): x for x in f["legs"]}.values(), key=lambda x: x["o"])    # 같은 구간 중복 제거
         if json.dumps(f, sort_keys=True) != before:
             json.dump(f, open(p, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":")); changed += 1
         allt = [x["o"] for x in f["legs"]] + [x["t"] for x in f["icn"]]
         idx[reg] = {"ty": f["ty"], "al": f["al"], "n": len(f["legs"]) + len(f["icn"]), "last": max(allt) if allt else ""}
-    json.dump({"updated": K(NOW), "keep_days": KEEP_DAYS, "types": TYPES,
+    # 최근 8일 구간 (콜사인별): [기번, 출발, 도착, 이륙(추정), 착륙(추정), q]
+    rc, cut8 = {}, K(NOW - dt.timedelta(days=RECENT_D))
+    for reg in st["regs"]:
+        f = load(os.path.join(outdir, "reg", reg + ".json"), {})
+        for x in f.get("legs", []):
+            if x.get("n", "") >= cut8 and x.get("c"):
+                rc.setdefault(x["c"], []).append([reg, x["d"], x["a"], x["o"], x["n"], x.get("q", "")])
+    json.dump({"updated": K(NOW), "days": RECENT_D, "f": rc}, open(os.path.join(outdir, "recent.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    json.dump({"updated": K(NOW), "keep_days": KEEP_DAYS, "types": TYPES, "airlines": AL,
                "src": ["인천공항 공공데이터", "airplanes.live / adsb.lol (ADS-B)"], "regs": idx},
               open(os.path.join(outdir, "index.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     return changed

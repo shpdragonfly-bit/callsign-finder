@@ -178,7 +178,85 @@ def fetch(db, days=DAYS, sample=None, back=0, direction="Arrival"):
     return calls
 
 
+FLEET = "https://raw.githubusercontent.com/shpdragonfly-bit/callsign-finder/fleet/recent.json"
+
+
 def export():
+    r = _export()
+    try:
+        merge_adsb()
+    except Exception as e:
+        print("ADS-B 합치기 실패: %s" % type(e).__name__)
+    return r
+
+
+def merge_adsb():
+    """'지난 1주 운항'(h)의 빈 이륙·착륙을 fleet 브랜치 ADS-B 구간(15분 간격 추정)으로 채우고, 인천을 거치지 않는 구간은 X 줄로 추가.
+    채운 칸은 행 끝 표시(13번째)에 t(이륙)·l(착륙), X 줄은 s(STD 없음). 추정값이라 앱에서 ~ 표시"""
+    if not os.path.exists(OUT):
+        return
+    dj = json.load(open(OUT, encoding="utf-8"))
+    try:
+        with urllib.request.urlopen(FLEET + "?t=%d" % int(time.time()), timeout=30) as r:
+            rc = json.loads(r.read().decode("utf-8")).get("f") or {}
+    except Exception as e:
+        print("ADS-B 구간 못 받음: %s" % type(e).__name__); return
+    d = json.load(open(DATA, encoding="utf-8"))
+    tzs = {}
+    for k, v in (d.get("airports") or {}).items():
+        if isinstance(v, list) and len(v) > 7 and v[0]:
+            tzs[v[0]] = v[7]
+    try:
+        from zoneinfo import ZoneInfo
+    except Exception:
+        ZoneInfo = None
+
+    def off(ap, k):
+        if ap == "ICN" or not ZoneInfo or ap not in tzs:
+            return 540
+        try:
+            t = dt.datetime.strptime(k, "%Y%m%d%H%M").replace(tzinfo=dt.timezone.utc)
+            return int(t.astimezone(ZoneInfo(tzs[ap])).utcoffset().total_seconds() // 60)
+        except Exception:
+            return 540
+
+    def mins(a, b):
+        return int((dt.datetime.strptime(a, "%Y%m%d%H%M") - dt.datetime.strptime(b, "%Y%m%d%H%M")).total_seconds() // 60)
+    H = dj.setdefault("h", {})
+    for cs in list(H):                                           # 이전에 넣은 X 줄은 다시 만듦
+        H[cs] = [r for r in H[cs] if r[0] != "X"]
+    fill = add = 0
+    now_k = NOW.strftime("%Y%m%d%H%M")
+    for cs, legs in rc.items():
+        rows = H.get(cs, [])
+        for reg, dep, arr, o, n, q in legs:
+            if o > now_k:
+                continue
+            hit = next((r for r in rows if r[0] in ("A", "D") and -90 <= mins(o, r[1]) <= 6 * 60), None)
+            if hit:
+                while len(hit) < 13:
+                    hit.append(None if len(hit) < 12 else "")
+                fl = hit[12] or ""
+                if hit[6] is None and "o" not in q:
+                    hit[6] = mins(o, hit[1]); fl += "t"
+                if hit[7] is None and "n" not in q:
+                    hit[7] = mins(n, hit[1]); fl += "l"
+                if fl != (hit[12] or ""):
+                    hit[12] = fl; fill += 1
+                continue
+            if "o" in q and "n" in q:
+                continue                                         # 이륙·착륙 모두 못 본 구간은 넣지 않음
+            row = ["X", o, dep, arr, off(dep, o), off(arr, n), None if "o" in q else 0, None if "n" in q else mins(n, o), None, None, None,
+                   dt.datetime.strptime(n, "%Y%m%d%H%M").strftime("%Y-%m-%dT%H:%M:00Z"), "s" + ("" if "o" in q else "t") + ("" if "n" in q else "l")]
+            H.setdefault(cs, []).append(row); add += 1
+    for cs in H:
+        H[cs].sort(key=lambda r: r[1], reverse=True)
+    dj["adsb"] = "adsb.lol"
+    json.dump(dj, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    print("dep.json: ADS-B 로 채운 편 %d · 인천 밖 구간 %d" % (fill, add))
+
+
+def _export():
     """web/data.json 의 인천 도착편(콜사인 · 인천 도착 예정 UTC)에 출발 예정시각을 붙여 web/dep.json"""
     db = load(); purge(db)
     if not db["f"]:                                             # 캐시가 없으면 지금 배포된 것을 그대로 (이용 기간 안일 때만)
