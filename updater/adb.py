@@ -299,13 +299,14 @@ def _export():
             sta, ap = i[0], i[3]
             r = recs.get(sta) or next((recs[k] for k in recs if abs(mins(k, sta)) <= 180 and (not recs[k][2] or recs[k][2] == ap)), None)
             if r:
-                out.setdefault(cs, {})[sta] = [r[0], r[1], "x"] + ([r[4] if len(r) > 4 else "", r[5] if len(r) > 5 else ""] if len(r) > 4 and (r[4] or r[5]) else [])
+                # [출발예정, 시차, x, 실제이륙, 변경출발, 받은때] — 받은때: 앱이 편마다 보관 7일을 확인 (파일 전체가 아니라)
+                out.setdefault(cs, {})[sta] = [r[0], r[1], "x", r[4] if len(r) > 4 else "", r[5] if len(r) > 5 else "", r[3]]
                 continue
             same = sorted(k for k, v in recs.items() if (not ap or not v[2] or v[2] == ap) and kst(k) == kst(sta))
             if same:
                 k = same[-1]; v = recs[k]
                 dd = dt.datetime.strptime(sta, "%Y%m%d%H%M") - dt.timedelta(minutes=mins(k, v[0]))
-                out.setdefault(cs, {})[sta] = [dd.strftime("%Y%m%d%H%M"), v[1], "d"]
+                out.setdefault(cs, {})[sta] = [dd.strftime("%Y%m%d%H%M"), v[1], "d", "", "", v[3]]
     # 지난 1주 운항 기록: 콜사인 → [[방향, 출발예정UTC, 출발지, 도착지, 출발지시차, 도착지시차, 이륙, 착륙, 게이트출발, 게이트도착(분, 출발예정 기준)]]
     def cs_of(fn):
         m = re.match(r"^([A-Z0-9]{2})0*(\d+[A-Z]?)$", fn)

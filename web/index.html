@@ -3403,7 +3403,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v76", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v77", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -3802,7 +3802,8 @@ window.csfStat = (() => {
       if (!j || !j.f) return; DEP = j; try { localStorage.setItem("csf-dep", JSON.stringify(j)); } catch (e) {}
     }).catch(() => {});
   }
-  const depOf = (cs, sta) => (!DEP || !DEP.f || !cs || Date.now() - Date.parse(DEP.fetched || 0) > 7 * 864e5) ? null : (DEP.f[cs] || {})[sta] || null;
+  // 이용 조건 보관 7일: 편마다 받은 때(6번째)로 확인. 예전 형식(받은 때 없음)은 파일의 가장 오래된 받은 때로
+  const depOf = (cs, sta) => { if (!DEP || !DEP.f || !cs) return null; const e = (DEP.f[cs] || {})[sta]; return e && Date.now() - Date.parse(e[5] || DEP.fetched || 0) < 7 * 864e5 ? e : null; };
   function basisOf(sc, i, mode, cs) {
     const t = utcOf(i[0]);
     if (mode === "dep") {
@@ -3826,7 +3827,7 @@ window.csfStat = (() => {
   let phOpen = false;
   document.addEventListener("toggle", (e) => { if (e.target.classList && e.target.classList.contains("ph")) phOpen = e.target.open; }, true);
   function pastWeek(cs, mode, wdN) {
-    if (!cs || !DEP || !DEP.h || Date.now() - Date.parse(DEP.fetched || 0) > 7 * 864e5) return "";
+    if (!cs || !DEP || !DEP.h) return "";              // 보관 7일은 줄마다(받은 때) 확인
     const rows = (DEP.h[cs] || []).filter((r) => r[11] ? Date.now() - Date.parse(r[11]) < 7 * 864e5 : utcOf(r[1]) >= Date.now() - 7 * 864e5);
     if (!rows.length) return "";
     const hm = (m) => `${Math.floor(m / 60)}:${p2(m % 60)}`, sg = (m) => (m > 0 ? "+" : m < 0 ? "−" : "±") + Math.abs(m);
