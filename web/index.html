@@ -435,6 +435,46 @@ button.b:disabled { opacity: .5; }
 .utc small { font-weight: 500; color: var(--muted); }
 .tt .b { padding: 6px 10px; font-size: 13px; white-space: nowrap; flex: none; }
 .lbl-row { display: flex; align-items: center; justify-content: space-between; }
+.lbl-act { display: flex; gap: 6px; } .tclr.lb-add { color: var(--accent); border-color: var(--accent); font-weight: 700; }
+.lb-mlink { display: flex; justify-content: space-between; width: 100%; margin-top: 10px; padding: 10px 14px; font: 600 14px inherit; font-family: inherit; color: var(--text); background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px; cursor: pointer; }
+.lb-mlink span { color: var(--muted); }
+/* ---------- 로그북 ---------- */
+.lb-bg { z-index: 56; }
+.lb-f { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 10px; margin-top: 12px; }
+.lb-f > label, .lb-f > div { display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 700; color: var(--muted); min-width: 0; }
+.lb-f .full { grid-column: 1 / -1; }
+.lb-f input, .lb-f select { font-family: inherit; font-size: 16px; font-weight: 600; color: var(--text); background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 10px; width: 100%; min-width: 0; }
+.lb-f input:focus, .lb-f select:focus { outline: none; border-color: var(--accent); }
+.lb-fn { display: flex; align-items: center; gap: 6px; } .lb-fn b { font: 700 16px var(--mono); color: var(--text); }
+.lb-rt { display: flex; align-items: center; gap: 6px; } .lb-rt input { text-transform: uppercase; text-align: center; }
+.lb-seg { display: flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.lb-seg button { flex: 1; font: 600 13px inherit; font-family: inherit; padding: 9px 2px; border: 0; background: var(--panel-2); color: var(--text); cursor: pointer; }
+.lb-seg button + button { border-left: 1px solid var(--line); }
+.lb-seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.lb-tm { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; } .lb-tm label { display: flex; flex-direction: column; gap: 3px; font-size: 11px; }
+.lb-tm input { font: 700 15px var(--mono); text-align: center; padding: 8px 2px; }
+.lb-sum { display: block !important; font-family: inherit; font-size: 13px; font-weight: 600; color: var(--text); background: var(--panel-2); border-radius: 10px; padding: 8px 10px; }
+.lb-chk { flex-direction: row !important; align-items: center; gap: 14px !important; } .lb-chk label { display: flex; align-items: center; gap: 6px; font-size: 15px; color: var(--text); }
+.lb-chk input { width: 20px; height: 20px; }
+.lb-bar { display: flex; gap: 8px; margin-top: 14px; } .lb-bar .b { flex: 1; font-size: 16px; padding: 12px; } .lb-bar .b.del { flex: 0 0 auto; color: var(--warn); }
+.lb-msg { min-height: 1.3em; font-size: 14px; margin-top: 8px; } .lb-msg.bad { color: var(--warn); font-weight: 700; } .lb-msg.ok { color: var(--ok); font-weight: 700; }
+.lbmv { max-width: 980px; }
+.lbm-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 10px 0; } .lbm-nav b { font-size: 18px; min-width: 90px; text-align: center; }
+.lbm-nav button { font: 700 18px inherit; font-family: inherit; border: 1px solid var(--line); background: var(--panel-2); color: var(--text); border-radius: 10px; width: 40px; height: 36px; cursor: pointer; }
+.lbm-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--line); border-radius: 10px; }
+.lbm-t { border-collapse: collapse; font-size: 12px; white-space: nowrap; width: 100%; font-variant-numeric: tabular-nums; }
+.lbm-t th, .lbm-t td { padding: 6px 7px; border-bottom: 1px solid var(--line); text-align: center; }
+.lbm-t th { background: var(--panel-2); color: var(--muted); font-weight: 700; position: sticky; top: 0; }
+.lbm-t tr.r { cursor: pointer; } .lbm-t tr.r:hover td { background: var(--panel-2); }
+.lbm-t td.l { text-align: left; } .lbm-t .y { color: var(--accent); font-weight: 800; } .lbm-t .n { color: var(--muted); }
+.lbm-t tfoot td { font-weight: 800; background: var(--panel-2); }
+.lbm-s { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin-top: 12px; }
+.lbm-s div { background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; font-size: 12px; color: var(--muted); }
+.lbm-s b { display: block; font: 800 18px var(--mono); color: var(--text); margin-top: 2px; } .lbm-s small { display: block; margin-top: 2px; }
+.lbm-s .soon b { font-family: inherit; font-size: 13px; font-weight: 600; color: var(--muted); }
+.lb-sec { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 12px; } .lb-sec h3 { font-size: 15px; margin: 0 0 4px; }
+.lb-prev { font-size: 13px; margin: 6px 0; display: flex; justify-content: space-between; gap: 8px; align-items: center; background: var(--panel-2); border-radius: 10px; padding: 8px 10px; }
+.lb-prev button { font: 600 12px inherit; font-family: inherit; color: var(--warn); background: none; border: 1px solid var(--line); border-radius: 8px; padding: 3px 8px; cursor: pointer; }
 .tclr { font: 600 12px inherit; letter-spacing: 0; color: var(--muted); background: none; border: 1px solid var(--line, #333); border-radius: 8px; padding: 3px 10px; cursor: pointer; }
 .tclr:disabled { opacity: .4; cursor: default; }
 .tundo { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; padding: 6px 10px; border-radius: 8px; font-size: 13px; background: color-mix(in srgb, var(--accent, #3B82F6) 14%, transparent); }
@@ -1240,6 +1280,18 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
     </div>
   </div>
 </div>
+<div class="sheet-bg lb-bg" id="lbSheet" hidden>
+  <div class="sheet lbv" role="dialog" aria-modal="true" aria-labelledby="lbTitle">
+    <div class="sh-hd"><h2 id="lbTitle">로그북 등록</h2><button type="button" class="sh-x" data-lbclose>닫기</button></div>
+    <div id="lbForm"></div>
+  </div>
+</div>
+<div class="sheet-bg lb-bg" id="lbmSheet" hidden>
+  <div class="sheet lbmv" role="dialog" aria-modal="true" aria-labelledby="lbmTitle">
+    <div class="sh-hd"><h2 id="lbmTitle">월 비행시간</h2><button type="button" class="sh-x" data-lbmclose>닫기</button></div>
+    <div id="lbmBody"></div>
+  </div>
+</div>
 <div class="sheet-bg" id="menuSheet" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mnTitle">
     <div id="mnMain">
@@ -1247,6 +1299,7 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
       <div class="mn-list">
         <button type="button" class="mn-item" id="mnCal"><span class="ic">📅</span><span>내 스케줄<small>저장된 근무표를 월별로 보기</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnNick"><span class="ic">🪪</span><span>내 닉네임<small>공유 그룹에 보일 이름 · 아이디 보내기 · 내가 부르는 이름</small></span><span class="go">›</span></button>
+        <button type="button" class="mn-item" data-mv="mnLb"><span class="ic">📒</span><span>로그북 기본정보<small>항공사 · 기종 · 직책 · 단가 · 이전 자료 · 엑셀 출력 · 월 비행시간</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" id="mnFx"><span class="ic">💱</span><span>환율 계산기<small>외화 ↔ 원 · 오프라인에서도 마지막 환율로</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnGm"><span class="ic">🤖</span><span>Gemini AI 연결<small>FLT Package 분석 · 사진 읽기용 키 등록</small></span><span class="go">›</span></button>
         <button type="button" class="mn-item" data-mv="mnGuide"><span class="ic">🗓️</span><span>근무표 → 캘린더 안내<small>근무표 등록 방법 · 앱/구글 캘린더</small></span><span class="go">›</span></button>
@@ -1452,6 +1505,11 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
       <h2 style="margin-top:8px">내 닉네임</h2>
       <div id="nkBody"></div>
     </div>
+    <div id="mnLb" hidden>
+      <div class="sh-hd"><button type="button" class="mn-back" data-mv="mnMain">‹ 메뉴</button><button type="button" class="sh-x" data-mclose>닫기</button></div>
+      <h2 style="margin-top:8px">로그북 기본정보</h2>
+      <div id="lbBody"></div>
+    </div>
     <div id="mnNotice" hidden>
       <div class="sh-hd"><button type="button" class="mn-back" data-mv="mnMain">‹ 메뉴</button><button type="button" class="sh-x" data-mclose>닫기</button></div>
       <h2 style="margin-top:8px">공지사항</h2>
@@ -1518,7 +1576,7 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
         <span class="tsum" id="ftSum"></span>
       </div>
       <p class="ft-hint">시간 칸에 <b>1230</b> 또는 <b>12+30</b> 처럼 입력해도 됩니다.</p>
-      <div class="lbl lbl-row"><span>운항 시각 (UTC)</span><button type="button" class="tclr" id="tClr">지우기</button></div>
+      <div class="lbl lbl-row"><span>운항 시각 (UTC)</span><span class="lbl-act"><button type="button" class="tclr lb-add" id="lbAdd">로그북 등록</button><button type="button" class="tclr" id="tClr">지우기</button></span></div>
       <div class="times" id="ftTimes">
         <div class="tm"><label for="tRO">R/O<small>Ramp out</small></label><div class="tmin"><input id="tRO" data-k="ro" inputmode="tel" autocomplete="off" placeholder="0000" maxlength="5"><span>Z</span></div><button type="button" class="now" data-k="ro">지금</button></div>
         <div class="tm"><label for="tTO">T/O<small>Take off</small></label><div class="tmin"><input id="tTO" data-k="to" inputmode="tel" autocomplete="off" placeholder="0000" maxlength="5"><span>Z</span></div><button type="button" class="now" data-k="to">지금</button></div>
@@ -1530,6 +1588,7 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
         <div><span>FLT Time</span><b id="rFLT">—</b><small>L/D − T/O</small></div>
         <div><span>Block Time</span><b id="rBLK">—</b><small>R/I − R/O</small></div>
       </div>
+      <button type="button" class="lb-mlink" id="lbMonBtn">📒 월 비행시간 <span>›</span></button>
       <div id="ftOut"></div>
     </div>
     <div id="ft-other" hidden>
@@ -2703,22 +2762,39 @@ window.ROSTER = (() => {
       codeTip();
       $("rsSyLast").textContent = on ? (ls.get(STS) ? `마지막으로 맞춘 때 ${when(ls.get(STS))} · 아이디 ${U().id()}` : `아이디 ${U().id()}`) : !SYNC_SERVER ? "동기화 서버를 준비하고 있습니다." : "";
     }
+    // 로그북도 같은 사본에 함께 (편마다 고친 때로 합침). 서버 시각 = 근무표·로그북 중 늦은 쪽, 사본 안 u = 근무표 고친 때
+    const LBk = () => window.LOGBOOK;
+    const stamp = () => [R.updated || "", LBk() ? LBk().u() : ""].sort().pop() || new Date().toISOString();
+    const hasAny = () => R.events.length > 0 || !!(LBk() && LBk().has());
+    function absorb(o, ts) {                            // 받은 사본 반영: 근무표는 더 새로우면 그 기간만 바꿈, 로그북은 합침. 이쪽에만 있는 로그북이 있으면 true
+      if ((o.u || ts || "") > (R.updated || "")) { R.events = sortEv([...R.events.filter((e) => e.d < o.f || e.d > o.t), ...(o.e || [])]); R.updated = o.u || ts; save(true); }
+      grpSync.merge(o.g); if (o.p) PROF.put(o.p, true);
+      const ex = LBk() ? LBk().merge(o.lb).extra : false;
+      if (!$("rcSheet").hidden) paintMonth();
+      return ex;
+    }
     async function push() {
-      const [f, t] = win(), ts = R.updated || new Date().toISOString();
+      const s0 = ls.get(STS) || "";
+      if (s0) {                                         // 다른 기기가 그 사이 보낸 것이 있으면 먼저 합침 (로그북이 덮어써지지 않게)
+        const r = await call({ a: "get", since: s0 });
+        if (r && r.blob && !r.same && !r.none && r.ts !== s0) absorb(await unseal(r.blob), r.ts);
+      }
+      const [f, t] = win(), ts = stamp();
       const ev = R.events.filter((e) => (e.d2 || e.ed || e.d) >= f && e.d <= t).map((e) => { const o = Object.assign({}, e); delete o.on; return o; });
-      await call({ a: "put", ts, blob: await seal({ v: 1, f, t, u: ts, e: ev, g: grpSync.list(), p: PROF.get() }) });
+      const body = { v: 1, f, t, u: R.updated || ts, e: ev, g: grpSync.list(), p: PROF.get() };
+      if (LBk() && LBk().has()) body.lb = LBk().dump();
+      await call({ a: "put", ts, blob: await seal(body) });
       ls.set(STS, ts);
     }
     // 서버 것이 새로우면 받아서 그 기간만 바꿈, 이 기기 것이 새로우면 보냄 (나중에 고친 쪽이 이김)
     async function pull(first) {
       const r = await call({ a: "get", since: first ? "" : ls.get(STS) || "" });
-      const mine = R.updated || "";
-      if (r.none) { if (R.events.length) { await push(); return "sent"; } return "empty"; }
-      if (r.same || r.ts === mine || (mine > r.ts && R.events.length)) { if (mine > r.ts) { await push(); return "sent"; } ls.set(STS, r.ts); return "same"; }
-      const o = await unseal(r.blob);
-      R.events = sortEv([...R.events.filter((e) => e.d < o.f || e.d > o.t), ...(o.e || [])]); R.updated = o.u || r.ts;
-      save(true); ls.set(STS, r.ts); grpSync.merge(o.g); if (o.p) PROF.put(o.p, true);
-      if (!$("rcSheet").hidden) paintMonth();
+      const mine = stamp();
+      if (r.none) { if (hasAny()) { await push(); return "sent"; } return "empty"; }
+      if (r.same || r.ts === mine || (mine > r.ts && hasAny())) { if (mine > r.ts) { await push(); return "sent"; } ls.set(STS, r.ts); return "same"; }
+      const ex = absorb(await unseal(r.blob), r.ts);
+      ls.set(STS, r.ts);
+      if (ex) await push();                             // 이 기기에만 있는 로그북도 보냄
       return "got";
     }
     let busy = false, again = false, timer = null, last = 0;
@@ -2735,6 +2811,7 @@ window.ROSTER = (() => {
       if (again) { again = false; run(push); }
     }
     syncSoon = () => { if (!isOn()) return; clearTimeout(timer); timer = setTimeout(() => run(push), 1500); };
+    document.addEventListener("csf-lb", () => syncSoon());          // 로그북을 고치면 같이 보냄
     syncPull = () => { if (isOn() && Date.now() - last > 180000) run(() => pull(false)); };
     $("rsSyOn").addEventListener("click", () => {
       if (!SYNC_SERVER) return;
@@ -3340,7 +3417,8 @@ window.FPREP = (() => {
     badge();
   }
   function view(id) {
-    ["mnMain", "mnNick", "mnNotice", "mnReq", "mnFaq", "mnGm", "mnGuide", "mnGc", "mnUse"].forEach((v) => { $(v).hidden = v !== id; });
+    ["mnMain", "mnNick", "mnLb", "mnNotice", "mnReq", "mnFaq", "mnGm", "mnGuide", "mnGc", "mnUse"].forEach((v) => { $(v).hidden = v !== id; });
+    if (id === "mnLb") window.LOGBOOK ? window.LOGBOOK.paintBase($("lbBody")) : ($("lbBody").innerHTML = `<p class="mn-note">잠시 후 다시 열어 주세요.</p>`);
     if (id === "mnNick") window.NICKUI ? window.NICKUI.paint($("nkBody")) : ($("nkBody").innerHTML = `<p class="mn-note">잠시 후 다시 열어 주세요.</p>`);
     if (id === "mnNotice") showNotice();
     if (id === "mnFaq") $("mnFaqList").innerHTML = FAQ && FAQ.items && FAQ.items.length
@@ -3403,7 +3481,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v77", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v78", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -6845,6 +6923,390 @@ window.UID = (() => {
   st.utc = tval("to");
   renderTimes();
   showMode();
+  // 로그북 등록 창에서 쓰는 지금 입력값 (분, UTC) · 편성
+  window.FTT = { get: () => ({ ro: tval("ro"), to: tval("to"), ld: tval("ld"), ri: tval("ri"), mode: st.mode }), parseUtc, parseDur };
+})();
+</script>
+<script>
+// ===================== 로그북 =====================
+// 기기에만 저장(csf-lb). '내 기기 동기화'를 켜면 근무표와 함께 연결 코드로 암호화돼 같은 아이디 기기끼리 맞춰짐(서버는 못 읽음).
+// 편마다 고친 때(u)를 두어 두 기기에서 따로 넣어도 합쳐짐. 지운 편은 표시(del)만 남겨 다른 기기에도 지워지게 함.
+window.LOGBOOK = (() => {
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const ls = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  const K = "csf-lb", p2 = (n) => String(n).padStart(2, "0");
+  const CREW = { "1S": ["1 Set", 1], "3P": ["3 Pilot", 2 / 3], "2S": ["2 Set", 1 / 2], "5P": ["5 Pilot", 3 / 5] };
+  const ROLE = { PIC: ["PIC", "r"], CRZ: ["CRZ Captain", "s"], FO: ["F/O", "t"] };
+  const now = () => new Date().toISOString();
+  function load() { try { const o = JSON.parse(ls.get(K) || "null"); if (o && o.f) return o; } catch (e) {} return { u: "", base: { al: "AAR", ac: "", pos: "CAP", fr: "", qt: "", wr: "", u: "" }, prev: [], pu: "", f: {} }; }
+  let L = load();
+  const save = (fromSync) => { ls.set(K, JSON.stringify(L)); if (!fromSync) { document.dispatchEvent(new Event("csf-lb")); } };
+  const touch = () => { L.u = now(); save(); };
+  const D = () => window.CALLSIGN_DATA || {};
+  const alIata = (al) => ((D().airlines || {})[al] || {}).iata || al;
+  const apIata = (icao) => ((D().airports || {})[icao] || [])[0] || icao;
+  const hm = (m) => m == null || isNaN(m) ? "—" : `${Math.floor(Math.round(m) / 60)}:${p2(Math.round(m) % 60)}`;
+  const zt = (em) => { const d = new Date(em * 60000); return p2(d.getUTCHours()) + p2(d.getUTCMinutes()); };
+  const list = () => Object.entries(L.f).filter(([, x]) => !x.del).map(([id, x]) => Object.assign({ id }, x));
+  const share = (x) => Math.round((x.blk || 0) * ((CREW[x.crew] || CREW["1S"])[1]));      // PIC/US · SIC · Copilot 시간 = Duty × 편성 비율
+
+  // ---------- 동기화용 ----------
+  function merge(o) {                                  // 다른 기기 것과 합치기. extra: 이쪽에만 있거나 더 새로운 것이 있음
+    let got = 0, extra = false;
+    if (!o || !o.f) return { got, extra: Object.keys(L.f).length > 0 };
+    for (const [id, x] of Object.entries(o.f)) { const m = L.f[id]; if (!m || (x.u || "") > (m.u || "")) { L.f[id] = x; got++; } }
+    for (const [id, x] of Object.entries(L.f)) { const t = o.f[id]; if (!t || (x.u || "") > (t.u || "")) extra = true; }
+    if (o.base && (o.base.u || "") > (L.base.u || "")) { L.base = o.base; got++; } else if ((L.base.u || "") > ((o.base || {}).u || "")) extra = true;
+    if ((o.pu || "") > (L.pu || "")) { L.prev = o.prev || []; L.pu = o.pu; got++; } else if ((L.pu || "") > (o.pu || "")) extra = true;
+    L.u = [L.u || "", o.u || ""].sort().pop();
+    save(true);
+    if (got) document.dispatchEvent(new Event("csf-lb-in"));
+    return { got, extra };
+  }
+  // 지운 표시는 1년 지나면 정리
+  function dump() { const cut = new Date(Date.now() - 365 * 864e5).toISOString(); for (const [id, x] of Object.entries(L.f)) if (x.del && (x.u || "") < cut) delete L.f[id]; return L; }
+
+  // ---------- 등부호 · 노선 찾기 ----------
+  let BYF = null;
+  async function loadByf() {
+    if (BYF || !navigator.onLine) return BYF;
+    try { const r = await fetch("https://raw.githubusercontent.com/shpdragonfly-bit/callsign-finder/fleet/byflt.json", { cache: "no-cache" }); if (r.ok) BYF = (await r.json()).f || {}; } catch (e) {}
+    return BYF;
+  }
+  const utcK = (s) => Date.UTC(+s.slice(0, 4), +s.slice(4, 6) - 1, +s.slice(6, 8), +s.slice(8, 10), +s.slice(10, 12)) / 60000;
+  async function lookup(al, no, toEm) {              // 날짜(이륙)·편명 → 등록부호, 노선
+    const cs = al + String(no).replace(/^0+/, ""), F = (D().flights || {})[cs] || {};
+    let reg = "", dep = "", arr = "", best = 1e9;
+    for (const i of ((F.sch || {}).inst || [])) {
+      const dt = Math.abs(utcK(i[0]) - toEm); if (dt < 20 * 60 && dt < best) { best = dt; reg = i[5] || ""; dep = i[2] === "D" ? "ICN" : i[3]; arr = i[2] === "D" ? i[3] : "ICN"; }
+    }
+    if (!dep && F.r && F.r.length >= 2) { dep = apIata(F.r[0]); arr = apIata(F.r[F.r.length - 1]); }
+    if (!reg) { const B = await loadByf(); let bd = 1e9; for (const [t, r, a, b] of ((B || {})[cs] || [])) { const dt = Math.abs(utcK(t) - toEm); if (dt < 20 * 60 && dt < bd) { bd = dt; reg = r; if (!dep && a && a !== "?" && b !== "?") { dep = a; arr = b; } } } }
+    return { cs, reg, dep, arr };
+  }
+
+  // ---------- 등록 창 ----------
+  let E = null;                                      // 고치는 중인 편 (null = 새로)
+  function defDate(to) {                              // 이륙(UTC) 날짜: 지금보다 늦은 시각이면 어제
+    const n = new Date(), nm = n.getUTCHours() * 60 + n.getUTCMinutes(), d = new Date(Date.UTC(n.getUTCFullYear(), n.getUTCMonth(), n.getUTCDate()));
+    if (to != null && to > nm + 60) d.setUTCDate(d.getUTCDate() - 1);
+    return d.toISOString().slice(0, 10);
+  }
+  function form(x) {
+    const b = L.base, al = x.al || b.al || "AAR", iat = alIata(al);
+    const seg = (name, cur, opts) => `<div class="lb-seg" data-seg="${name}">${opts.map(([k, t]) => `<button type="button" data-v="${k}" aria-pressed="${k === cur}">${t}</button>`).join("")}</div>`;
+    const t = (k) => x[k] != null ? zt(x[k]) : "";
+    $("lbForm").innerHTML = `<div class="lb-f">
+      <label>날짜 (이륙 UTC)<input type="date" id="lbD" value="${esc(x.d)}"></label>
+      <label>기종<input id="lbAc" value="${esc(x.ac || b.ac || "")}" autocomplete="off" style="text-transform:uppercase" placeholder="예: A350"></label>
+      <div>편명<span class="lb-fn"><b>${esc(iat)}</b><input id="lbNo" inputmode="numeric" autocomplete="off" value="${esc(x.no || "")}" placeholder="숫자"></span></div>
+      <div>노선 (IATA)<span class="lb-rt"><input id="lbDep" maxlength="3" value="${esc(x.dep || "")}" placeholder="ICN"><span>–</span><input id="lbArr" maxlength="3" value="${esc(x.arr || "")}" placeholder="LAX"></span></div>
+      <label>등록부호<input id="lbReg" value="${esc(x.reg || "")}" autocomplete="off" style="text-transform:uppercase" placeholder="HL0000"></label>
+      <div>직책${seg("role", x.role || (b.pos === "FO" ? "FO" : "PIC"), Object.entries(ROLE).map(([k, v]) => [k, v[0].replace(" Captain", "")]))}</div>
+      <div class="full">편성${seg("crew", x.crew || "3P", Object.entries(CREW).map(([k, v]) => [k, v[0]]))}</div>
+      <div class="full">운항 시각 (UTC)<div class="lb-tm">${["ro", "to", "ld", "ri"].map((k) => `<label>${k.toUpperCase().replace(/(.)(.)/, "$1/$2")}<input data-t="${k}" inputmode="tel" maxlength="5" value="${t(k)}" placeholder="0000"></label>`).join("")}</div></div>
+      <div class="full lb-sum" id="lbSum"></div>
+      <label>Night Time (N/T)<input id="lbNt" inputmode="tel" value="${x.nt ? hm(x.nt) : ""}" placeholder="0:00"></label>
+      <label>Instrument (I/T)<input id="lbIt" inputmode="tel" value="${x.it ? hm(x.it) : ""}" placeholder="0:00"></label>
+      <div class="full lb-chk"><label><input type="checkbox" id="lbTk" ${x.tk ? "checked" : ""}>이륙 (T/O)</label><label><input type="checkbox" id="lbLg" ${x.lg ? "checked" : ""}>착륙 (L/D)</label></div>
+    </div>
+    <div class="lb-msg" id="lbMsg" role="status"></div>
+    <div class="lb-bar">${E ? `<button type="button" class="b del" id="lbDel">삭제</button>` : ""}<button type="button" class="b primary" id="lbSave">${E ? "고친 내용 저장" : "로그북에 저장"}</button></div>`;
+    $("lbForm").dataset.al = al;
+    calc();
+  }
+  const pick = (name) => (($("lbForm").querySelector(`[data-seg="${name}"] [aria-pressed="true"]`) || {}).dataset || {}).v;
+  function times() {                                  // 날짜 + HHMM 4개 → 이륙 기준으로 이어지는 실제 시각(분, epoch)
+    const P = window.FTT ? window.FTT.parseUtc : () => null, v = {};
+    for (const k of ["ro", "to", "ld", "ri"]) v[k] = P(($("lbForm").querySelector(`[data-t="${k}"]`) || {}).value || "");
+    const d = $("lbD").value; if (!d || v.to == null) return null;
+    const base = Date.UTC(+d.slice(0, 4), +d.slice(5, 7) - 1, +d.slice(8, 10)) / 60000, to = base + v.to;
+    const sp = (a, b) => (b - a + 1440) % 1440;
+    const o = { to };
+    if (v.ro != null) o.ro = to - sp(v.ro, v.to);
+    if (v.ld != null) o.ld = to + sp(v.to, v.ld);
+    if (v.ri != null && v.ld != null) o.ri = o.ld + sp(v.ld, v.ri);
+    else if (v.ri != null) o.ri = to + sp(v.to, v.ri);
+    return o;
+  }
+  function calc() {
+    const o = times(), cr = CREW[pick("crew")] || CREW["1S"], rl = ROLE[pick("role")] || ROLE.PIC;
+    if (!o) { $("lbSum").textContent = "날짜와 T/O 시각을 넣어 주세요."; return; }
+    const blk = o.ro != null && o.ri != null ? o.ri - o.ro : null, flt = o.ld != null ? o.ld - o.to : null;
+    $("lbSum").innerHTML = `Duty(Block) <b>${hm(blk)}</b> · T/S(Flight) <b>${hm(flt)}</b> · ${rl[1] === "r" ? "PIC/US" : rl[1] === "s" ? "SIC" : "Copilot"} <b>${hm(blk == null ? null : Math.round(blk * cr[1]))}</b> <small>(${cr[0]})</small>`;
+  }
+  async function auto() {
+    const no = $("lbNo").value.replace(/\D/g, ""), o = times(); if (!no || !o) return;
+    const r = await lookup($("lbForm").dataset.al, no, o.to);
+    if (r.dep && !$("lbDep").dataset.ed) $("lbDep").value = r.dep;
+    if (r.arr && !$("lbArr").dataset.ed) $("lbArr").value = r.arr;
+    if (r.reg && !$("lbReg").dataset.ed) $("lbReg").value = r.reg;
+  }
+  function open(x) {
+    E = x && x.id ? x.id : null;
+    if (!x) {
+      const T = window.FTT ? window.FTT.get() : {}, d = defDate(T.to);
+      const base = Date.UTC(+d.slice(0, 4), +d.slice(5, 7) - 1, +d.slice(8, 10)) / 60000;
+      x = { d, crew: { "3P": "3P", "2S": "2S", "5P": "5P" }[T.mode] || "3P" };
+      if (T.to != null) { x.to = base + T.to; const sp = (a, b) => (b - a + 1440) % 1440;
+        if (T.ro != null) x.ro = x.to - sp(T.ro, T.to); if (T.ld != null) x.ld = x.to + sp(T.to, T.ld); if (T.ri != null) x.ri = (x.ld != null ? x.ld + sp(T.ld, T.ri) : x.to + sp(T.to, T.ri)); }
+    }
+    $("lbTitle").textContent = E ? "로그북 고치기" : "로그북 등록";
+    form(x); $("lbSheet").hidden = false;
+    if (!E) auto();
+  }
+  function store() {
+    const o = times(), msg = (t, c) => { $("lbMsg").className = "lb-msg " + c; $("lbMsg").textContent = t; };
+    const no = $("lbNo").value.replace(/\D/g, ""), ac = $("lbAc").value.trim().toUpperCase();
+    if (!o || o.ro == null || o.ld == null || o.ri == null) return msg("날짜와 R/O · T/O · L/D · R/I 네 시각을 모두 넣어 주세요.", "bad");
+    if (!no) return msg("편명 숫자를 넣어 주세요.", "bad");
+    if (!ac) return msg("기종을 넣어 주세요.", "bad");
+    const P = window.FTT ? window.FTT.parseDur : () => null, dur = (v) => v.trim() ? P(v) : 0;
+    const nt = dur($("lbNt").value), it = dur($("lbIt").value), flt = o.ld - o.to, blk = o.ri - o.ro;
+    if (nt == null || it == null) return msg("Night · Instrument 시간은 1:30 처럼 넣어 주세요.", "bad");
+    if (blk <= 0 || blk > 24 * 60 || flt <= 0 || flt > blk) return msg("시각을 확인해 주세요 (Block Time이 Flight Time보다 짧거나 24시간을 넘음).", "bad");
+    if (nt > flt || it > flt) return msg("Night · Instrument 시간이 Flight Time보다 깁니다.", "bad");
+    const al = $("lbForm").dataset.al, id = E || (Date.now().toString(36) + Math.random().toString(36).slice(2, 6));
+    L.f[id] = { d: $("lbD").value, al, no, ac, dep: $("lbDep").value.trim().toUpperCase(), arr: $("lbArr").value.trim().toUpperCase(), reg: $("lbReg").value.trim().toUpperCase(),
+      role: pick("role") || "PIC", crew: pick("crew") || "3P", ro: o.ro, to: o.to, ld: o.ld, ri: o.ri, blk, flt, nt, it, tk: $("lbTk").checked ? 1 : 0, lg: $("lbLg").checked ? 1 : 0, u: now() };
+    touch();
+    msg(E ? "고친 내용을 저장했습니다." : `저장했습니다 · ${alIata(al)}${no} ${hm(blk)}`, "ok");
+    E = id; $("lbTitle").textContent = "로그북 고치기";
+    if (!$("lbmSheet").hidden) paintMonth();
+    setTimeout(() => { $("lbSheet").hidden = true; }, 900);
+  }
+  $("lbSheet").addEventListener("click", (e) => {
+    if (e.target === $("lbSheet") || e.target.closest("[data-lbclose]")) { $("lbSheet").hidden = true; return; }
+    const sb = e.target.closest("[data-seg] button"); if (sb) { sb.parentNode.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b === sb)); calc(); return; }
+    if (e.target.id === "lbSave") store();
+    if (e.target.id === "lbDel" && E) { if (!confirm("이 편을 로그북에서 지울까요?")) return; L.f[E] = { del: 1, u: now() }; touch(); $("lbSheet").hidden = true; if (!$("lbmSheet").hidden) paintMonth(); }
+  });
+  $("lbSheet").addEventListener("input", (e) => {
+    if (["lbDep", "lbArr", "lbReg"].includes(e.target.id)) e.target.dataset.ed = "1";
+    if (e.target.matches("[data-t], #lbD")) calc();
+  });
+  $("lbSheet").addEventListener("change", (e) => { if (["lbNo", "lbD"].includes(e.target.id) || e.target.matches('[data-t="to"]')) auto(); });
+  $("lbSheet").addEventListener("focusin", (e) => { const i = e.target.closest("input[data-t], #lbNt, #lbIt"); if (i && i.value) setTimeout(() => { try { i.setSelectionRange(0, i.value.length); } catch (x) {} }, 0); });
+
+  // ---------- 월 비행시간 ----------
+  let MON = new Date().toISOString().slice(0, 7);
+  function stays(rows) {                               // 인천·김포 출발편 기준: 도착 공항 R/I ~ 그 공항 출발편 R/O
+    const out = [], all = list().sort((a, b) => a.ro - b.ro);
+    for (const x of rows) {
+      if (!["ICN", "GMP"].includes(x.dep) || !x.arr) continue;
+      const nx = all.find((y) => y.ro > x.ri && y.dep === x.arr);
+      if (nx && nx.ro - x.ri < 14 * 1440) out.push({ x, nx, m: nx.ro - x.ri });
+    }
+    return out;
+  }
+  function paintMonth() {
+    const rows = list().filter((x) => (x.d || "").slice(0, 7) === MON).sort((a, b) => a.to - b.to);
+    const S = (k) => rows.reduce((a, x) => a + (x[k] || 0), 0);
+    const st = stays(rows), stM = st.reduce((a, s) => a + s.m, 0), qt = st.filter((s) => s.m <= 8 * 60).length;
+    const [y, m] = MON.split("-");
+    let h = `<div class="lbm-nav"><button type="button" data-mon="-1" aria-label="이전 달">‹</button><b>${y}.${m}</b><button type="button" data-mon="1" aria-label="다음 달">›</button></div>`;
+    if (!rows.length) h += `<p class="mn-note" style="text-align:center">이 달에 등록한 비행이 없습니다. 비행시간 탭에서 운항 시각을 넣고 '로그북 등록'을 누르세요.</p>`;
+    else {
+      h += `<div class="lbm-wrap"><table class="lbm-t"><thead><tr><th>일자</th><th>A/C</th><th>FLT No</th><th>구간</th><th>R/O</th><th>R/I</th><th>Duty<br><small>Block</small></th><th>T/S<br><small>Flight</small></th><th>N/T</th><th>I/T</th><th>T/O</th><th>L/D</th></tr></thead><tbody>`;
+      for (const x of rows) h += `<tr class="r" data-id="${esc(x.id)}"><td>${+x.d.slice(5, 7)}/${+x.d.slice(8)}</td><td>${esc(x.ac)}</td><td>${esc(alIata(x.al) + x.no)}</td><td>${esc(x.dep || "?")}-${esc(x.arr || "?")}</td><td>${zt(x.ro)}</td><td>${zt(x.ri)}</td><td>${hm(x.blk)}</td><td>${hm(x.flt)}</td><td>${x.nt ? hm(x.nt) : "—"}</td><td>${x.it ? hm(x.it) : "—"}</td><td class="${x.tk ? "y" : "n"}">${x.tk ? "●" : "·"}</td><td class="${x.lg ? "y" : "n"}">${x.lg ? "●" : "·"}</td></tr>`;
+      h += `</tbody><tfoot><tr><td colspan="6">합계 ${rows.length}편</td><td>${hm(S("blk"))}</td><td>${hm(S("flt"))}</td><td>${hm(S("nt"))}</td><td>${hm(S("it"))}</td><td>${rows.filter((x) => x.tk).length}</td><td>${rows.filter((x) => x.lg).length}</td></tr></tfoot></table></div>`;
+      h += `<div class="lbm-s">
+        <div>월 비행시간 (Flight)<b>${hm(S("flt"))}</b><small>Block ${hm(S("blk"))}</small></div>
+        <div>해외 스테이<b>${hm(stM)}</b><small>${st.length}회${qt ? ` · 8시간 이내(Q/T) ${qt}회` : ""}</small></div>
+        <div class="soon">비행수당 시간 · 비행수당<b>계산 규칙 정리 후 추가</b></div>
+        <div class="soon">야간수당 · 퍼듐 · Q/T 수당<b>계산 규칙 정리 후 추가</b></div>
+      </div>`;
+      if (st.length) h += `<p class="mn-note">스테이: ${st.map((s) => `${esc(s.x.arr)} ${+s.x.d.slice(5, 7)}/${+s.x.d.slice(8)} ${hm(s.m)}`).join(" · ")}</p>`;
+      h += `<p class="mn-note">줄을 누르면 고치거나 지울 수 있습니다. 시각은 모두 UTC입니다.</p>`;
+    }
+    $("lbmBody").innerHTML = h;
+  }
+  function openMonth() { paintMonth(); $("lbmSheet").hidden = false; }
+  $("lbmSheet").addEventListener("click", (e) => {
+    if (e.target === $("lbmSheet") || e.target.closest("[data-lbmclose]")) { $("lbmSheet").hidden = true; return; }
+    const b = e.target.closest("[data-mon]");
+    if (b) { const d = new Date(MON + "-01T00:00:00Z"); d.setUTCMonth(d.getUTCMonth() + +b.dataset.mon); MON = d.toISOString().slice(0, 7); paintMonth(); return; }
+    const r = e.target.closest("tr[data-id]"); if (r) { const x = L.f[r.dataset.id]; if (x) open(Object.assign({ id: r.dataset.id }, x)); }
+  });
+
+  // ---------- 엑셀 (xlsx) 직접 만들기 · 읽기 ----------
+  const COLS = [["ac", "기종(A/C)"], ["n", "비행편수(횟수)"], ["duty", "Duty Time(I)"], ["ts", "T/S(J)"], ["nt", "N/T(K)"], ["it", "I/T(L)"], ["tft", "TFT(P)"], ["r", "PIC/US(R)"], ["s", "SIC(S)"], ["t", "Copilot(T)"], ["night", "Night(U)"], ["inst", "Inst(V)"]];
+  const crcT = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+  const crc32 = (u) => { let c = 0xffffffff; for (let i = 0; i < u.length; i++) c = crcT[(c ^ u[i]) & 255] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; };
+  function zip(files) {                               // 압축 없이(store) 묶기
+    const te = new TextEncoder(), parts = [], cen = []; let off = 0;
+    for (const [name, txt] of files) {
+      const nm = te.encode(name), data = te.encode(txt), c = crc32(data);
+      const h = new DataView(new ArrayBuffer(30)); h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true); h.setUint32(14, c, true); h.setUint32(18, data.length, true); h.setUint32(22, data.length, true); h.setUint16(26, nm.length, true);
+      parts.push(new Uint8Array(h.buffer), nm, data);
+      const C = new DataView(new ArrayBuffer(46)); C.setUint32(0, 0x02014b50, true); C.setUint16(4, 20, true); C.setUint16(6, 20, true); C.setUint16(8, 0x0800, true); C.setUint32(16, c, true); C.setUint32(20, data.length, true); C.setUint32(24, data.length, true); C.setUint16(28, nm.length, true); C.setUint32(42, off, true);
+      cen.push(new Uint8Array(C.buffer), nm); off += 30 + nm.length + data.length;
+    }
+    const cl = cen.reduce((a, x) => a + x.length, 0), Z = new DataView(new ArrayBuffer(22));
+    Z.setUint32(0, 0x06054b50, true); Z.setUint16(8, files.length, true); Z.setUint16(10, files.length, true); Z.setUint32(12, cl, true); Z.setUint32(16, off, true);
+    return new Blob([...parts, ...cen, new Uint8Array(Z.buffer)], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+  }
+  const xe = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const colL = (i) => (i >= 26 ? String.fromCharCode(64 + Math.floor(i / 26)) : "") + String.fromCharCode(65 + (i % 26));
+  // 칸: 글자 · 숫자 · {m: 분, b: 굵게} (시간은 [h]:mm 형식 숫자)
+  function sheetXml(rows, widths) {
+    const cell = (v, r, c) => { const ref = colL(c) + (r + 1);
+      if (v == null || v === "") return "";
+      if (typeof v === "object") return `<c r="${ref}" s="${v.b ? 4 : 2}"><v>${(v.m || 0) / 1440}</v></c>`;
+      if (typeof v === "number") return `<c r="${ref}"${r === 0 ? ' s="1"' : ""}><v>${v}</v></c>`;
+      return `<c r="${ref}" t="inlineStr"${r === 0 ? ' s="1"' : String(v).startsWith("\u0001") ? ' s="3"' : ""}><is><t>${xe(String(v).replace("\u0001", ""))}</t></is></c>`; };
+    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><cols>${widths.map((w, i) => `<col min="${i + 1}" max="${i + 1}" width="${w}" customWidth="1"/>`).join("")}</cols><sheetData>${rows.map((row, r) => `<row r="${r + 1}">${row.map((v, c) => cell(v, r, c)).join("")}</row>`).join("")}</sheetData></worksheet>`;
+  }
+  function xlsx(sheets) {
+    const wb = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${sheets.map((s, i) => `<sheet name="${xe(s.name)}" sheetId="${i + 1}" r:id="rId${i + 1}"/>`).join("")}</sheets></workbook>`;
+    const rels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${sheets.map((s, i) => `<Relationship Id="rId${i + 1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i + 1}.xml"/>`).join("")}<Relationship Id="rIdS" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`;
+    const styles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="[h]:mm"/></numFmts><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFE8EEF6"/></patternFill></fill></fills><borders count="1"><border/></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="5"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="164" fontId="1" fillId="0" borderId="0" xfId="0" applyNumberFormat="1" applyFont="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+    const ct = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>${sheets.map((s, i) => `<Override PartName="/xl/worksheets/sheet${i + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join("")}</Types>`;
+    const root = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`;
+    return zip([["[Content_Types].xml", ct], ["_rels/.rels", root], ["xl/workbook.xml", wb], ["xl/_rels/workbook.xml.rels", rels], ["xl/styles.xml", styles], ...sheets.map((s, i) => [`xl/worksheets/sheet${i + 1}.xml`, sheetXml(s.rows, s.widths)])]);
+  }
+  async function unzip(buf) {                          // 이름 → 글자
+    const u = new Uint8Array(buf), dv = new DataView(buf), out = {};
+    let e = u.length - 22; while (e >= 0 && dv.getUint32(e, true) !== 0x06054b50) e--;
+    if (e < 0) throw new Error("엑셀(xlsx) 파일이 아닙니다");
+    let p = dv.getUint32(e + 16, true); const n = dv.getUint16(e + 10, true), td = new TextDecoder();
+    for (let i = 0; i < n; i++) {
+      const meth = dv.getUint16(p + 10, true), csz = dv.getUint32(p + 20, true), nl = dv.getUint16(p + 28, true), xl = dv.getUint16(p + 30, true), cl = dv.getUint16(p + 32, true), lo = dv.getUint32(p + 42, true);
+      const name = td.decode(u.subarray(p + 46, p + 46 + nl)); p += 46 + nl + xl + cl;
+      if (!/^xl\/(worksheets\/sheet1|sharedStrings|styles|workbook)\.xml$/.test(name)) continue;
+      const s = lo + 30 + dv.getUint16(lo + 26, true) + dv.getUint16(lo + 28, true), raw = u.subarray(s, s + csz);
+      if (meth === 0) out[name] = td.decode(raw);
+      else if (meth === 8) { if (!window.DecompressionStream) throw new Error("이 브라우저는 엑셀 읽기를 지원하지 않습니다. 기기 소프트웨어를 업데이트해 주세요.");
+        out[name] = td.decode(await new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream("deflate-raw"))).arrayBuffer()); }
+    }
+    return out;
+  }
+  async function readXlsx(file) {                      // 첫 시트 → 칸 [[값,시간형식여부]]
+    const z = await unzip(await file.arrayBuffer()), P = new DOMParser();
+    const ss = z["xl/sharedStrings.xml"] ? [...P.parseFromString(z["xl/sharedStrings.xml"], "application/xml").getElementsByTagName("si")].map((si) => [...si.getElementsByTagName("t")].map((t) => t.textContent).join("")) : [];
+    const tf = new Set();                              // 시간 형식 스타일 번호
+    if (z["xl/styles.xml"]) { const sd = P.parseFromString(z["xl/styles.xml"], "application/xml"), cust = {};
+      for (const f of sd.getElementsByTagName("numFmt")) cust[f.getAttribute("numFmtId")] = f.getAttribute("formatCode") || "";
+      const xfs = sd.getElementsByTagName("cellXfs")[0]; if (xfs) [...xfs.getElementsByTagName("xf")].forEach((x, i) => { const id = x.getAttribute("numFmtId") || "0"; if (["18", "19", "20", "21", "45", "46", "47"].includes(id) || /h/i.test(cust[id] || "")) tf.add(String(i)); }); }
+    const sh = P.parseFromString(z["xl/worksheets/sheet1.xml"] || "", "application/xml"), grid = [];
+    for (const r of sh.getElementsByTagName("row")) { const row = [];
+      for (const c of r.getElementsByTagName("c")) { const ref = c.getAttribute("r") || "", ci = ref.replace(/\d+/g, "").split("").reduce((a, ch) => a * 26 + ch.charCodeAt(0) - 64, 0) - 1, t = c.getAttribute("t");
+        const v = (c.getElementsByTagName("v")[0] || {}).textContent, is = c.getElementsByTagName("is")[0];
+        row[ci] = [t === "s" ? ss[+v] : t === "inlineStr" ? (is ? is.textContent : "") : t === "str" || t === "b" ? v : v == null ? "" : +v, tf.has(c.getAttribute("s") || "0")]; }
+      grid.push(row); }
+    return grid;
+  }
+  function parsePrev(grid) {                           // 머리줄(기종/A/C) 찾고 칸 이름으로 맞춤. 합계 줄은 건너뜀
+    const KEYS = [["n", /편수|횟수/], ["duty", /duty/i], ["tft", /tft/i], ["ts", /t\s*\/\s*s/i], ["nt", /n\s*\/\s*t/i], ["it", /i\s*\/\s*t/i], ["r", /pic/i], ["s", /sic/i], ["t", /co-?\s*pilot/i], ["night", /night/i], ["inst", /inst/i], ["ac", /기종|a\s*\/\s*c|type/i]];
+    const hi = grid.findIndex((r) => r && r.some((c) => c && typeof c[0] === "string" && /기종|a\s*\/\s*c/i.test(c[0])));
+    if (hi < 0) throw new Error("머리줄(기종 · A/C)을 찾지 못했습니다");
+    const map = {};
+    grid[hi].forEach((c, i) => { const t = c && String(c[0] || ""); if (!t) return; const k = (KEYS.find(([key, re]) => !(key in map) && re.test(t)) || [])[0]; if (k) map[k] = i; });
+    if (!("ac" in map)) throw new Error("기종 칸을 찾지 못했습니다");
+    const val = (c, cnt) => { if (!c || c[0] === "" || c[0] == null) return 0; const [v, isT] = c;
+      if (typeof v === "number") return cnt ? Math.round(v) : isT ? Math.round(v * 1440) : Math.round(v * 60);
+      const s = String(v).trim(), m = s.match(/^(\d+)\s*[:+]\s*(\d{1,2})$/); if (m) return cnt ? +m[1] : +m[1] * 60 + +m[2];
+      const n = parseFloat(s.replace(/,/g, "")); return isNaN(n) ? 0 : cnt ? Math.round(n) : Math.round(n * 60); };
+    const rows = [];
+    for (const r of grid.slice(hi + 1)) { const ac = r && r[map.ac] ? String(r[map.ac][0] || "").trim() : "";
+      if (!ac || /합계|total|계$/i.test(ac)) continue;
+      const o = { ac: ac.toUpperCase() }; for (const [k] of COLS.slice(1)) o[k] = k in map ? val(r[map[k]], k === "n") : 0;
+      if (!o.tft && o.ts) o.tft = o.ts; if (!o.ts && o.tft) o.ts = o.tft; if (!o.night && o.nt) o.night = o.nt; if (!o.nt && o.night) o.nt = o.night; if (!o.inst && o.it) o.inst = o.it; if (!o.it && o.inst) o.it = o.inst;
+      rows.push(o); }
+    if (!rows.length) throw new Error("기종별 줄이 없습니다");
+    return rows;
+  }
+  function aggregate(flights, prevRows) {             // 기종별 합 + 전체합계
+    const by = {}, add = (ac, o) => { const t = by[ac] = by[ac] || { ac, n: 0, duty: 0, ts: 0, nt: 0, it: 0, tft: 0, r: 0, s: 0, t: 0, night: 0, inst: 0 }; for (const k in o) if (k !== "ac") t[k] += o[k] || 0; };
+    for (const x of flights) { const sh = share(x), col = (ROLE[x.role] || ROLE.PIC)[1];
+      add(x.ac, { n: 1, duty: x.blk, ts: x.flt, nt: x.nt, it: x.it, tft: x.flt, r: col === "r" ? sh : 0, s: col === "s" ? sh : 0, t: col === "t" ? sh : 0, night: x.nt, inst: x.it }); }
+    for (const p of prevRows || []) add(p.ac, p);
+    const rows = Object.values(by).sort((a, b) => a.ac.localeCompare(b.ac)), tot = { ac: "전체합계" };
+    for (const [k] of COLS.slice(1)) tot[k] = rows.reduce((a, r) => a + r[k], 0);
+    return { rows, tot };
+  }
+  function download(blob, name) {
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+  }
+  function exportX(o) {
+    const fl = list().filter((x) => (!o.from || x.d >= o.from) && (!o.to || x.d <= o.to) && (!o.role || x.role === o.role) && (!o.ac || x.ac === o.ac)).sort((a, b) => a.to - b.to);
+    const pv = o.prev ? L.prev.flatMap((p) => p.rows).filter((r) => !o.ac || r.ac === o.ac) : [];
+    const { rows, tot } = aggregate(fl, pv);
+    const sum = [COLS.map((c) => c[1])].concat(rows.map((r) => COLS.map(([k]) => k === "ac" ? r.ac : k === "n" ? r.n : { m: r[k] })), [COLS.map(([k]) => k === "ac" ? "\u0001전체합계" : k === "n" ? tot.n : { m: tot[k], b: 1 })]);
+    const det = [["날짜", "A/C", "FLT No", "구간", "등록부호", "직책", "편성", "R/O(Z)", "T/O(Z)", "L/D(Z)", "R/I(Z)", "Duty Time", "T/S", "N/T", "I/T", "PIC/US", "SIC", "Copilot", "T/O", "L/D"]].concat(fl.map((x) => { const sh = share(x), c = (ROLE[x.role] || ROLE.PIC)[1];
+      return [x.d, x.ac, alIata(x.al) + x.no, `${x.dep}-${x.arr}`, x.reg || "", (ROLE[x.role] || ROLE.PIC)[0], (CREW[x.crew] || CREW["1S"])[0], zt(x.ro), zt(x.to), zt(x.ld), zt(x.ri), { m: x.blk }, { m: x.flt }, { m: x.nt }, { m: x.it }, { m: c === "r" ? sh : 0 }, { m: c === "s" ? sh : 0 }, { m: c === "t" ? sh : 0 }, x.tk ? 1 : 0, x.lg ? 1 : 0]; }));
+    const name = `logbook_${o.from || "처음"}_${o.to || "현재"}${o.role ? "_" + o.role : ""}${o.ac ? "_" + o.ac : ""}.xlsx`;
+    download(xlsx([{ name: "요약", rows: sum, widths: [14, 14, 13, 11, 11, 11, 11, 12, 11, 11, 11, 11] }, { name: "비행 목록", rows: det, widths: [11, 8, 9, 9, 9, 11, 8, 8, 8, 8, 8, 10, 8, 8, 8, 9, 8, 8, 5, 5] }]), name);
+    return { n: fl.length, prev: pv.length };
+  }
+
+  // ---------- 기본정보 (메뉴) ----------
+  function paintBase(box) {
+    const b = L.base, A = D().airlines || {};
+    const acs = [...new Set(list().map((x) => x.ac).concat(L.prev.flatMap((p) => p.rows.map((r) => r.ac))).filter(Boolean))].sort();
+    const y0 = new Date().getUTCFullYear();
+    box.innerHTML = `<div class="lb-f">
+      <label>항공사<select id="lbbAl">${Object.entries(A).map(([k, v]) => `<option value="${esc(k)}"${k === b.al ? " selected" : ""}>${esc(v.name)} (${esc(v.iata)})</option>`).join("")}</select></label>
+      <label>기종<input id="lbbAc" value="${esc(b.ac)}" placeholder="예: A350" style="text-transform:uppercase"></label>
+      <div class="full">직책<div class="lb-seg" data-seg="pos"><button type="button" data-v="CAP" aria-pressed="${b.pos !== "FO"}">Captain</button><button type="button" data-v="FO" aria-pressed="${b.pos === "FO"}">First Officer</button></div></div>
+      <label>비행수당 단가 (원/시간)<input id="lbbFr" inputmode="numeric" value="${esc(b.fr)}" placeholder="0"></label>
+      <label>Q/T 수당 단가 (원/회)<input id="lbbQt" inputmode="numeric" value="${esc(b.qt)}" placeholder="0"></label>
+      <label>통상임금 단가 (원/시간)<input id="lbbWr" inputmode="numeric" value="${esc(b.wr)}" placeholder="0"></label>
+    </div>
+    <div class="lb-bar"><button type="button" class="b primary" id="lbbSave">기본정보 저장</button><button type="button" class="b" id="lbbMon">📒 월 비행시간</button></div>
+    <div class="lb-msg" id="lbbMsg" role="status"></div>
+    <div class="lb-sec"><h3>이전 자료 등록 (엑셀)</h3>
+      <p class="mn-note">가로: 기종(A/C) · 비행편수 · Duty Time(I) · T/S(J) · N/T(K) · I/T(L) · TFT(P) · PIC/US(R) · SIC(S) · Copilot(T) · Night(U) · Inst(V), 세로: 기종별 한 줄(전체합계 줄은 건너뜀). 시간은 123:45 또는 엑셀 시간 형식.</p>
+      ${L.prev.map((p, i) => `<div class="lb-prev"><span><b>${esc(p.label)}</b> · ${p.rows.length}개 기종 · ${p.rows.reduce((a, r) => a + r.n, 0)}편 · Duty ${hm(p.rows.reduce((a, r) => a + r.duty, 0))}</span><button type="button" data-pdel="${i}">삭제</button></div>`).join("")}
+      <div class="lb-bar"><button type="button" class="b" id="lbbImp">엑셀 파일 불러오기</button><button type="button" class="b" id="lbbTpl">빈 양식 받기</button></div>
+      <input type="file" id="lbbFile" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden>
+      <div class="lb-msg" id="lbbImsg" role="status"></div></div>
+    <div class="lb-sec"><h3>엑셀로 출력</h3>
+      <div class="lb-f">
+        <label>시작일<input type="date" id="lbxF" value="${y0}-01-01"></label><label>종료일<input type="date" id="lbxT" value="${new Date().toISOString().slice(0, 10)}"></label>
+        <label>직책<select id="lbxR"><option value="">전체</option>${Object.entries(ROLE).map(([k, v]) => `<option value="${k}">${v[0]}</option>`).join("")}</select></label>
+        <label>기종<select id="lbxA"><option value="">전체</option>${acs.map((a) => `<option>${esc(a)}</option>`).join("")}</select></label>
+        <div class="full lb-chk"><label><input type="checkbox" id="lbxP" ${L.prev.length ? "checked" : "disabled"}>이전 자료(엑셀로 등록한 누계) 포함</label></div>
+      </div>
+      <div class="lb-bar"><button type="button" class="b primary" id="lbxGo">엑셀 파일 만들기</button></div>
+      <div class="lb-msg" id="lbxMsg" role="status"></div>
+      <p class="mn-note">요약(기종별 + 전체합계)과 비행 목록 두 시트로 만듭니다. PIC/US · SIC · Copilot = Duty Time × 편성 비율(1 Set 1, 3 Pilot 2/3, 2 Set 1/2, 5 Pilot 3/5), 직책 PIC → PIC/US, CRZ Captain → SIC, F/O → Copilot. 이전 자료는 날짜가 없어 기간·직책과 관계없이 더해집니다.</p></div>
+    <p class="mn-note">로그북은 이 기기에만 저장됩니다. 근무표 '내 기기 동기화'를 켜 두면 같은 아이디의 다른 기기와 자동으로 맞춰집니다(연결 코드로 암호화되어 서버·제작자는 볼 수 없음). 기기를 바꾸기 전에는 엑셀로도 한 번 받아 두세요.</p>`;
+    const m = (id, t, c) => { $(id).className = "lb-msg " + (c || ""); $(id).textContent = t; };
+    box.querySelector('[data-seg="pos"]').addEventListener("click", (e) => { const sb = e.target.closest("button"); if (sb) sb.parentNode.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === sb)); });
+    $("lbbSave").addEventListener("click", () => {
+      const num = (id) => $(id).value.replace(/[^\d.]/g, "");
+      L.base = { al: $("lbbAl").value, ac: $("lbbAc").value.trim().toUpperCase(), pos: (box.querySelector('[data-seg="pos"] [aria-pressed="true"]') || {}).dataset.v || "CAP", fr: num("lbbFr"), qt: num("lbbQt"), wr: num("lbbWr"), u: now() };
+      touch(); m("lbbMsg", "저장했습니다.", "ok");
+    });
+    $("lbbMon").addEventListener("click", () => { window.MENU && document.getElementById("menuSheet") && (document.getElementById("menuSheet").hidden = true); openMonth(); });
+    $("lbbImp").addEventListener("click", () => $("lbbFile").click());
+    $("lbbTpl").addEventListener("click", () => download(xlsx([{ name: "이전 자료", rows: [COLS.map((c) => c[1]), ["A350", 0, { m: 0 }, { m: 0 }, { m: 0 }, { m: 0 }, { m: 0 }, { m: 0 }, { m: 0 }, { m: 0 }, { m: 0 }, { m: 0 }]], widths: [14, 14, 13, 11, 11, 11, 11, 12, 11, 11, 11, 11] }]), "logbook_이전자료_양식.xlsx"));
+    $("lbbFile").addEventListener("change", async () => {
+      const f = $("lbbFile").files[0]; if (!f) return; m("lbbImsg", "읽는 중…");
+      try {
+        const rows = parsePrev(await readXlsx(f));
+        const n = rows.reduce((a, r) => a + r.n, 0), d = rows.reduce((a, r) => a + r.duty, 0);
+        if (!confirm(`${f.name}\n${rows.length}개 기종 · ${n}편 · Duty ${hm(d)}\n(${rows.map((r) => r.ac).join(", ")})\n\n이전 자료로 등록할까요?`)) { m("lbbImsg", ""); return; }
+        L.prev.push({ label: f.name.replace(/\.xlsx$/i, ""), at: now(), rows }); L.pu = now(); touch(); paintBase(box);
+        m("lbbImsg", `등록했습니다: ${rows.length}개 기종 · ${n}편`, "ok");
+      } catch (e) { m("lbbImsg", "불러오지 못했습니다: " + (e.message || e), "bad"); }
+      $("lbbFile").value = "";
+    });
+    box.querySelectorAll("[data-pdel]").forEach((b2) => b2.addEventListener("click", () => { const p = L.prev[+b2.dataset.pdel]; if (!p || !confirm(`'${p.label}' 이전 자료를 지울까요?`)) return; L.prev.splice(+b2.dataset.pdel, 1); L.pu = now(); touch(); paintBase(box); }));
+    $("lbxGo").addEventListener("click", () => {
+      const r = exportX({ from: $("lbxF").value, to: $("lbxT").value, role: $("lbxR").value, ac: $("lbxA").value, prev: $("lbxP").checked });
+      m("lbxMsg", `만들었습니다: 비행 ${r.n}편${r.prev ? ` + 이전 자료 ${r.prev}줄` : ""}`, "ok");
+    });
+  }
+
+  $("lbAdd").addEventListener("click", () => open(null));
+  $("lbMonBtn").addEventListener("click", openMonth);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") { if (!$("lbSheet").hidden) $("lbSheet").hidden = true; else if (!$("lbmSheet").hidden) $("lbmSheet").hidden = true; } });
+  document.addEventListener("csf-lb-in", () => { if (!$("lbmSheet").hidden) paintMonth(); });
+  return { open, openMonth, paintBase, merge, dump, has: () => Object.keys(L.f).length > 0 || L.prev.length > 0 || !!L.base.u, u: () => L.u || "", _xlsx: xlsx, _read: readXlsx, _parse: parsePrev, _agg: aggregate };
 })();
 </script>
 </body>

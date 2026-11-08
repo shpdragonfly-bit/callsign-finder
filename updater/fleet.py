@@ -253,6 +253,17 @@ def save(outdir, st, new, icn):
         for x in f.get("legs", []):
             if x.get("n", "") >= cut8 and x.get("c"):
                 rc.setdefault(x["c"], []).append([reg, x["d"], x["a"], x["o"], x["n"], x.get("q", "")])
+    # 편명·날짜 → 등록부호 (앱 로그북 등록 창이 자동으로 채움): 최근 15일, [시각(UTC), 기번, 출발, 도착]
+    bf, cut15 = {}, K(NOW - dt.timedelta(days=15))
+    for reg in st["regs"]:
+        f = load(os.path.join(outdir, "reg", reg + ".json"), {})
+        for x in f.get("icn", []):
+            if x.get("t", "") >= cut15:
+                bf.setdefault(x["c"], []).append([x["t"], reg, "ICN" if x.get("io") == "D" else x.get("ap", ""), x.get("ap", "") if x.get("io") == "D" else "ICN"])
+        for x in f.get("legs", []):
+            if x.get("o", "") >= cut15 and x.get("c"):
+                bf.setdefault(x["c"], []).append([x["o"], reg, x.get("d", ""), x.get("a", "")])
+    json.dump({"updated": K(NOW), "f": bf}, open(os.path.join(outdir, "byflt.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     json.dump({"updated": K(NOW), "days": RECENT_D, "f": rc}, open(os.path.join(outdir, "recent.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     json.dump({"updated": K(NOW), "keep_days": KEEP_DAYS, "types": TYPES, "airlines": AL,
                "src": ["인천공항 공공데이터", "airplanes.live / adsb.lol (ADS-B)"], "regs": idx},
