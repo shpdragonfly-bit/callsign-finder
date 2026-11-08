@@ -21,9 +21,19 @@ jobs:
           url="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
           if git ls-remote --exit-code --heads origin fleet >/dev/null 2>&1; then git clone -q --depth 1 -b fleet "$url" _fleet
           else mkdir _fleet && cd _fleet && git init -q -b fleet && git remote add origin "$url"; fi
+      - name: PC 가 돌고 있으면 건너뜀
+        id: pc
+        run: |
+          # PC 개발 서버(tools/fleet_pc.py)가 15분마다 올리고 있으면(마지막 커밋이 'PC' 이고 1시간 안) 여기서는 수집하지 않음
+          if [ -d _fleet/.git ] && git -C _fleet rev-parse -q --verify HEAD >/dev/null; then
+            s=$(git -C _fleet log -1 --format=%s); t=$(git -C _fleet log -1 --format=%ct); age=$(( $(date +%s) - t ))
+            if echo "$s" | grep -q "(PC)" && [ $age -lt 3600 ]; then echo "PC 수집 중 (${age}초 전) → 건너뜀"; echo "skip=1" >> $GITHUB_OUTPUT; fi
+          fi
       - name: ADS-B 조회 · 구간 만들기
+        if: steps.pc.outputs.skip != '1'
         run: python3 updater/fleet.py _fleet
       - name: 저장 (커밋 1개로 덮어쓰기)
+        if: steps.pc.outputs.skip != '1'
         run: |
           cd _fleet
           git config user.name "fleet-bot"; git config user.email "fleet-bot@users.noreply.github.com"

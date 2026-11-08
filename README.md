@@ -311,3 +311,17 @@
   - 주간 메일: 통계 Apps Script 에 `tools/stats_apps_script.gs` 최신 코드를 붙여넣고 `setupWeekly` 를 한 번 실행 → 매주 월요일 09시쯤 지난 7일 의견을 메일로 받음(없으면 안 보냄). 끄기 `stopWeekly`.
 - 주/야간: 기본 자동(기기 시각 06~19시 주간). 아래 버튼은 다음 전환 시각까지만, 메뉴에서 항상 주간/야간 고정.
 
+
+
+## 기번 수집을 PC에서 15분마다 (선택)
+
+GitHub 예약 실행은 몇 시간씩 밀려서, 24시간 켜 둔 PC 개발 서버에서 15분마다 ADS-B를 조회해 `fleet` 브랜치에 올립니다. PC가 1시간 안에 올렸으면 GitHub 쪽 수집은 자동으로 건너뜁니다.
+
+1. GitHub → Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Generate new token
+   - Repository access: **Only select repositories** → `callsign-finder`
+   - Permissions → Repository permissions → **Contents: Read and write** (나머지는 그대로)
+   - Expiration: 1년 정도. 만료되면 같은 방법으로 새로 만들어 바꿔 넣기
+2. PC의 `config\local.env` 에 한 줄 추가: `GH_FLEET_TOKEN=github_pat_…` (이 파일은 저장소에 올라가지 않음. 토큰을 채팅·메일에 붙여 넣지 말 것)
+3. `기번수집_PC설정.bat` 실행 → 토큰 확인, 첫 수집, 작업 스케줄러 "FLT Assist 기번 수집"(15분마다) 등록
+   - 기록: `private\fleet_pc.log` · 작업 폴더: `private\fleet\`
+   - 끄기: 작업 스케줄러에서 "FLT Assist 기번 수집" 사용 안 함

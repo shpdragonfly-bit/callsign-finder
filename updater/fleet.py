@@ -26,11 +26,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from update import normalize_callsign  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ICN = os.path.join(ROOT, "data", "public_cache.json")
-DATA = os.path.join(ROOT, "web", "data.json")
+ICN = os.environ.get("FLEET_ICN") or os.path.join(ROOT, "data", "public_cache.json")     # PC 실행 때는 main 의 최신본 경로
+DATA = os.environ.get("FLEET_DATA") or os.path.join(ROOT, "web", "data.json")
 TYPES = ["B772", "B773", "B77W", "B77L", "B744", "B748", "B788", "B789", "B78X", "A359", "A35K",
          "A321", "A21N", "A320", "A20N", "A332", "A333", "A339", "A388", "B737", "B738", "B739", "B38M", "BCS3"]
-OBS = os.path.join(ROOT, "data", "observations.json")
+OBS = os.environ.get("FLEET_OBS") or os.path.join(ROOT, "data", "observations.json")
 try:
     AL = tuple(a["icao"] for a in json.load(open(os.path.join(ROOT, "config", "airlines.json"), encoding="utf-8"))["airlines"] if a.get("enabled", True))
 except Exception:
