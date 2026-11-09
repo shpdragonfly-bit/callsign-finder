@@ -1725,21 +1725,21 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
 
     <div class="card gm rs-sy" id="rsSy">
       <div class="gm-hd">
-        <div><h2>내 기기 동기화 <span class="pa-beta">시험판</span></h2><p>같은 <b>내 아이디</b>를 쓰는 휴대폰·태블릿끼리 근무표를 동기화.</p></div>
+        <div><h2>내 기기 동기화 <span class="pa-beta">시험판</span></h2><p>같은 <b>내 아이디</b>를 쓰는 휴대폰·태블릿끼리 근무표/로그북을 동기화.</p></div>
         <span class="gm-st" id="rsSySt">꺼짐</span>
       </div>
       <details class="gm-ac">
         <summary><span class="n">?</span>어떻게 보관되나요? (켜기 전에 읽어 주세요)</summary>
         <div class="gm-body">
           <ul class="gm-safe">
-            <li>근무표는 이 기기에서 <b>내 아이디의 연결 코드로 암호화</b>한 뒤 서버에 보냅니다. 서버와 앱 제작자는 내용을 볼 수 없습니다.</li>
+            <li>근무표와 로그북은 이 기기에서 <b>내 아이디의 연결 코드로 암호화</b>한 뒤 서버에 보냅니다. 서버와 앱 제작자는 내용을 볼 수 없습니다.</li>
             <li>연결 코드는 서버로 보내지 않습니다. 연결 코드를 잃어버리면 서버 사본은 아무도 열 수 없습니다.</li>
-            <li><b>지난달부터 다음 두 달까지(4개월)</b>만 보내고, 120일 동안 쓰지 않으면 자동으로 지워집니다.</li>
-            <li>근무표를 저장하거나 지우면 자동으로 보내고, 앱을 열 때 다른 기기에서 고친 것을 받아 옵니다. 두 기기에서 고쳤으면 <b>나중에 고친 쪽</b>으로 맞춥니다.</li>
-            <li>끄면 서버 사본을 바로 지웁니다. 이 기기의 근무표는 그대로 남습니다.</li>
+            <li>근무표는 <b>지난달부터 다음 두 달까지(4개월)</b>만, 로그북은 전체를 보냅니다. 120일 동안 쓰지 않으면 서버 사본은 자동으로 지워집니다.</li>
+            <li>근무표나 로그북을 저장하거나 지우면 자동으로 보내고, 앱을 열 때 다른 기기에서 고친 것을 받아 옵니다. 근무표는 두 기기에서 고쳤으면 <b>나중에 고친 쪽</b>으로, 로그북은 <b>편마다 합쳐서</b> 맞춥니다.</li>
+            <li>끄면 서버 사본을 바로 지웁니다. 이 기기의 근무표와 로그북은 그대로 남습니다.</li>
           </ul>
-          <p class="gm-tip"><b>다른 기기에서 쓰려면</b>: 그 기기에서 왼쪽 위 아이디 → ‘다른 기기에서 쓰던 아이디로 바꾸기’에 같은 연결 코드를 넣고, 이 화면에서 동기화를 켜면 근무표를 받아 옵니다.</p>
-          <p class="gm-tip"><b>켜지 않으면</b>: 기기마다 근무표를 따로 넣어야 합니다. 구글 캘린더에 연결했다면 휴대폰 캘린더에서는 어느 기기든 보입니다. 나중에 언제든 켤 수 있습니다.</p>
+          <p class="gm-tip"><b>다른 기기에서 쓰려면</b>: 그 기기에서 왼쪽 위 아이디 → ‘다른 기기에서 쓰던 아이디로 바꾸기’에 같은 연결 코드를 넣고, 이 화면에서 동기화를 켜면 근무표와 로그북을 받아 옵니다.</p>
+          <p class="gm-tip"><b>켜지 않으면</b>: 기기마다 근무표와 로그북을 따로 넣어야 합니다. 구글 캘린더에 연결했다면 휴대폰 캘린더에서는 어느 기기든 보입니다. 나중에 언제든 켤 수 있습니다.</p>
         </div>
       </details>
       <div class="rs-act">
@@ -2752,7 +2752,7 @@ window.ROSTER = (() => {
       key: "서버 사본을 이 기기의 연결 코드로 열 수 없습니다. 같은 아이디라면 연결 코드가 맞는지 확인해 주세요.",
       gz: "이 기기의 브라우저가 오래되어 서버 사본을 풀 수 없습니다. 기기 소프트웨어를 업데이트해 주세요.",
       limit: "잠시 동안 동기화를 너무 많이 했습니다. 몇 시간 뒤 자동으로 다시 맞춥니다.",
-      size: "근무표가 너무 커서 보내지 못했습니다.", busy: "동기화 서버가 가득 찼습니다. 관리자에게 알려 주세요.",
+      size: "근무표/로그북이 너무 커서 보내지 못했습니다.", busy: "동기화 서버가 가득 찼습니다. 관리자에게 알려 주세요.",
     }[e && e.err] || "동기화하지 못했습니다" + (e && e.err ? ` (${e.err})` : ""));
     const msg = (h, bad) => { $("rsSyMsg").innerHTML = h ? `<span style="color:var(${bad ? "--warn" : "--ok"})${bad ? ";font-weight:700" : ""}">${h}</span>` : ""; };
     function paint() {
@@ -2805,7 +2805,7 @@ window.ROSTER = (() => {
       try {
         const r = await fn(); last = Date.now();
         if (!loud && r !== "got") msg("");
-        else msg(r === "got" ? `다른 기기의 근무표를 받았습니다 (${when(R.updated)} 저장본).` : r === "sent" ? "이 기기의 근무표를 보냈습니다." : r === "empty" ? "아직 저장된 근무표가 없습니다. 근무표를 넣으면 자동으로 보냅니다." : "이미 맞춰져 있습니다.");
+        else msg(r === "got" ? `다른 기기의 근무표/로그북을 받았습니다 (${when(R.updated)} 저장본).` : r === "sent" ? "이 기기의 근무표/로그북을 보냈습니다." : r === "empty" ? "아직 저장된 근무표/로그북이 없습니다. 넣으면 자동으로 보냅니다." : "이미 맞춰져 있습니다.");
       } catch (e) { msg(errTxt(e), true); }
       busy = false; paint();
       if (again) { again = false; run(push); }
@@ -3481,7 +3481,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v78", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v79", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
