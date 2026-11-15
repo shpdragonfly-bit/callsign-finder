@@ -71,8 +71,14 @@ def km(a, b):
 
 
 def alt_of(ac):
+    """고도(ft). 모르면 None — 0 으로 보면 순항 중인데 '낮은 고도'로 잘못 보고 구간을 끊음"""
     a = ac.get("alt_baro")
-    return 0 if a == "ground" else (a if isinstance(a, (int, float)) else ac.get("alt_geom") or 0)
+    if a == "ground":
+        return 0
+    if isinstance(a, (int, float)):
+        return a
+    g = ac.get("alt_geom")
+    return g if isinstance(g, (int, float)) else None
 
 
 # ---------- 공항 · 노선 ----------
@@ -198,11 +204,14 @@ def track(st, acs):
         if lat is None or lon is None:
             continue
         seen.add(reg)
-        alt, gs = alt_of(ac), ac.get("gs") or 0
+        alt, gs = alt_of(ac), ac.get("gs")
         t = K(NOW - dt.timedelta(seconds=float(ac.get("seen_pos") or 0)))
-        pos = [round(lat, 3), round(lon, 3), int(alt)]
         c = cur.get(reg)
-        if ac.get("alt_baro") == "ground" or gs < 60:                  # 지상: 진행 중 구간이 있으면 착륙
+        if alt is None:                                                # 고도를 모르면 직전 고도 유지 (없으면 순항으로 봄)
+            alt = c["p1"][2] if c else 30000
+        pos = [round(lat, 3), round(lon, 3), int(alt)]
+        # 지상: 'ground' 표시이거나, 속도를 알고 느리면서 낮은 고도일 때만 (속도 정보가 없는 MLAT 등은 지상으로 보지 않음)
+        if ac.get("alt_baro") == "ground" or (isinstance(gs, (int, float)) and gs < 60 and alt < 1500):
             if c:
                 c["p1"] = pos; close(reg, c, True, out); cur.pop(reg, None)
             continue

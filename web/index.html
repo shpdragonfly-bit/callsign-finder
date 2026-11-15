@@ -140,6 +140,19 @@ body { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
 .tyl-o { font-size: 12px; color: var(--muted); margin-top: 4px; }
 .tyl-tm { display: flex; gap: 12px; align-items: baseline; margin-top: 5px; font-size: 12.5px; color: var(--muted); } .tyl-tm b { font: 700 14px var(--mono); color: var(--text); margin-left: 2px; } .tyl-tm small { font-size: 10.5px; }
 .tyl-s { margin-top: 5px; display: flex; gap: 4px; flex-wrap: wrap; } .tyl-s span { font-size: 10.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 5px; padding: 0 5px; }
+.intro { padding: 14px 16px; } .intro-h { display: flex; justify-content: space-between; align-items: center; font-size: 16px; }
+.intro-h .x { font-family: inherit; font-size: 12px; color: var(--muted); background: none; border: 1px solid var(--line); border-radius: 8px; padding: 3px 10px; cursor: pointer; }
+.intro p { font-size: 13px; color: var(--muted); margin: 8px 0 6px; } .intro ul { font-size: 13.5px; margin: 10px 0 0; padding-left: 18px; line-height: 1.7; }
+.intro-q { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.intro-q button { text-align: left; font-family: inherit; background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; color: var(--text); cursor: pointer; }
+.intro-q b { display: block; font: 800 15px var(--mono); color: var(--accent); } .intro-q small { font-size: 11.5px; color: var(--muted); }
+.intro .intro-i { color: var(--text); background: var(--panel-2); border-radius: 10px; padding: 8px 10px; margin-top: 10px; } .intro .b { width: 100%; margin-top: 10px; }
+.reg { padding: 12px 14px; } .reg-hd { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; margin-bottom: 6px; } .reg-hd b { font: 800 20px var(--mono); color: var(--accent); } .reg-hd span { color: var(--muted); font-size: 13px; }
+.reg-r { border-top: 1px solid var(--line); padding: 7px 0; } .reg-r .l1 { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 14px; }
+.reg-r .d { font-weight: 700; min-width: 64px; font-variant-numeric: tabular-nums; } .reg-r .fl { font: 700 14px var(--mono); color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; } .reg-r .rt { font-weight: 600; }
+.reg-r .src { font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 5px; background: var(--panel-2); color: var(--muted); border: 1px solid var(--line); } .reg-r .src.a { color: var(--accent); }
+.reg-r .l2 { font-size: 12.5px; color: var(--muted); margin-top: 2px; font-variant-numeric: tabular-nums; }
+.reg-ft { border-top: 1px solid var(--line); padding-top: 8px; margin-top: 2px; font-size: 11.5px; color: var(--muted); line-height: 1.5; }
 .tyl-none { font-size: 12.5px; color: var(--muted); padding: 12px 14px; }
 .cs-w { display: flex; align-items: center; gap: 7px; min-width: 0; }
 .cs-bell { flex: none; width: 34px; height: 34px; border-radius: 9px; border: 1.5px solid var(--line); background: var(--panel); font-size: 16px; line-height: 1; padding: 0; cursor: pointer; filter: grayscale(1); opacity: .75; }
@@ -1545,7 +1558,7 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
     <div class="seg al-tabs" id="alTabs" role="tablist" aria-label="항공사"></div>
     <div class="search">
       <input id="q" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false"
-             placeholder="KE17 / 17 / LAX / B789" aria-label="Call Sign · 공항 · 기종 입력">
+             placeholder="KE17 / LAX / B789 / HL7204" aria-label="Call Sign · 공항 · 기종 · 기번 입력">
       <button class="clear" id="clear" aria-label="지우기">×</button>
     </div>
     <div class="hnav" id="hnav" hidden>
@@ -3481,7 +3494,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v79", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v80", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -4836,6 +4849,69 @@ window.csfStat = (() => {
     const f = e.target.closest("[data-tyf]"); if (f) { tyFilter = f.dataset.tyf; search(); return; }
     const b = e.target.closest("[data-tycs]"); if (b) { $("q").value = b.dataset.tycs; store.set(QKEY, b.dataset.tycs); search(); window.scrollTo(0, 0); }
   });
+  // ---------- 기번(등록부호) 검색: HL0000 → 최근 1주 운항 (fleet 브랜치 reg/{기번}.json · 인천공항 실제 시각 + ADS-B 추정) ----------
+  const regQuery = (raw) => { const m = String(raw).trim().toUpperCase().replace(/[\s-]/g, "").match(/^HL(\d{4})$/); return m ? "HL" + m[1] : null; };
+  const REGC = "csf-reg-cache";
+  let regSeq = 0;
+  async function renderReg(reg) {
+    const my = ++regSeq;
+    let cache = {}; try { cache = JSON.parse(store.get(REGC) || "{}"); } catch (e) {}
+    let F = cache[reg] && cache[reg].d, at = cache[reg] && cache[reg].t, err = "";
+    if (navigator.onLine && (!F || Date.now() - at > 10 * 60e3)) {
+      if (!F) $("result").innerHTML = `<div class="card none">${esc(reg)} 운항 기록 받는 중…</div>`;
+      try {
+        const r = await fetch(`https://raw.githubusercontent.com/shpdragonfly-bit/callsign-finder/fleet/reg/${reg}.json`, { cache: "no-cache" });
+        if (r.ok) { F = await r.json(); at = Date.now(); cache[reg] = { t: at, d: F };
+          const ks = Object.keys(cache).sort((a, b) => cache[b].t - cache[a].t).slice(0, 12); const c2 = {}; ks.forEach((k) => (c2[k] = cache[k]));
+          store.set(REGC, JSON.stringify(c2)); }
+        else if (r.status === 404) { F = null; err = "nf"; } else err = "net";
+      } catch (e) { err = "net"; }
+    }
+    if (my !== regSeq) return;
+    if (!F) { $("result").innerHTML = `<div class="card none"><b>${esc(reg)}</b> ${err === "nf" ? "은 수집 대상(대한항공 · 아시아나 · 진에어 · 제주항공 · 트리니티 · 이스타)에 없거나 아직 운항 기록이 없습니다." : "운항 기록을 받으려면 인터넷 연결이 필요합니다."}</div>`; return; }
+    $("result").innerHTML = regHtml(reg, F, at, err);
+  }
+  function regHtml(reg, F, at, err) {
+    const cut = Date.now() - 7 * 864e5, mn = (k) => k ? utcOf(k).getTime() : null;
+    const icn = (F.icn || []).filter((x) => mn(x.t) >= cut - 864e5), legs = [];
+    // 수신이 끊겨 한 비행이 둘로 나뉜 것(같은 콜사인, 4시간 안에 다시 보임)은 하나로 합침
+    for (const x of (F.legs || []).filter((x) => mn(x.o) >= cut - 864e5).sort((a, b) => (a.o < b.o ? -1 : 1))) {
+      const p = legs[legs.length - 1];
+      if (p && p.c === x.c && mn(x.o) - mn(p.n) <= 4 * 3600e3 && mn(x.o) >= mn(p.n)) { p.n = x.n; p.a = x.a; p.q = ((p.q || "").replace(/[an]/g, "") + (x.q || "").replace(/[do]/g, "")); }
+      else legs.push(Object.assign({}, x));
+    }
+    const used = new Set(), rows = [];
+    for (const x of icn) {                             // 인천 기록에 같은 편 ADS-B 구간을 붙임
+      const ref = mn(x.e || x.t);
+      let bi = -1, bd = 3 * 3600e3;
+      legs.forEach((l, i) => { if (used.has(i) || l.c !== x.c) return; const d = Math.abs((x.io === "D" ? mn(l.o) : mn(l.n)) - ref); if (d < bd) { bd = d; bi = i; } });
+      if (bi >= 0) used.add(bi);
+      rows.push({ c: x.c, i: x, l: bi >= 0 ? legs[bi] : null, k: x.io === "D" ? ref : (bi >= 0 ? mn(legs[bi].o) : ref - 3600e3) });
+    }
+    legs.forEach((l, i) => { if (!used.has(i)) rows.push({ c: l.c, i: null, l, k: mn(l.o) }); });
+    const R = rows.filter((r) => r.k >= cut).sort((a, b) => b.k - a.k);
+    const fn = (c) => { const al = DB && DB.airlines[c.slice(0, 3)]; return al && al.iata ? al.iata + c.slice(3) : c; };
+    const zz = (k) => k ? fz(utcOf(k)) : "—";
+    const dur = (a, b) => { const m = Math.round((mn(b) - mn(a)) / 60e3); return m > 0 && m < 24 * 60 ? `${Math.floor(m / 60)}:${p2(m % 60)}` : ""; };
+    let tot = 0;
+    let h = `<div class="card reg"><div class="reg-hd"><b>${esc(reg)}</b><span>${esc(F.ty || "")}</span><span>${esc(((DB && DB.airlines[F.al]) || {}).name || F.al || "")}</span></div>`;
+    if (!R.length) h += `<div class="tyl-none">최근 7일 운항 기록이 없습니다.</div>`;
+    for (const r of R) {
+      const x = r.i, l = r.l, d = new Date(r.k);
+      const dep = x ? (x.io === "D" ? "ICN" : x.ap) : l.d, arr = x ? (x.io === "D" ? x.ap : "ICN") : l.a;
+      const parts = [];
+      if (x && x.io === "D") parts.push(`STD ${zz(x.t)}`, x.e ? `ATD ${zz(x.e)}` : "");
+      if (l) { parts.push(`이륙 ${(l.q || "").includes("o") ? "~" : "≈"}${zz(l.o)}`, `착륙 ${(l.q || "").includes("n") ? "~" : "≈"}${zz(l.n)}`);
+        if (!(l.q || "").match(/[on]/)) { const f = dur(l.o, l.n); if (f) { parts.push(`비행 ≈${f}`); const [hh, mm] = f.split(":"); tot += +hh * 60 + +mm; } } }
+      if (x && x.io === "A") parts.push(`STA ${zz(x.t)}`, x.e ? `ATA ${zz(x.e)}` : "");
+      h += `<div class="reg-r"><div class="l1"><span class="d">${d.getUTCMonth() + 1}/${d.getUTCDate()}(${WD[d.getUTCDay() || 7]})</span><button type="button" class="fl" data-regcs="${esc(r.c)}">${esc(fn(r.c))}</button><span class="rt">${esc(dep || "?")}→${esc(arr || "?")}</span>${x ? `<span class="src">ICN</span>` : ""}${l ? `<span class="src a">ADS-B</span>` : ""}</div>
+        <div class="l2">${parts.filter(Boolean).join(" · ")}</div></div>`;
+    }
+    h += `<div class="reg-ft">최근 7일 ${R.length}구간${tot ? ` · ADS-B 비행 합 ≈${Math.floor(tot / 60)}:${p2(tot % 60)}` : ""} · 시각 UTC(Z)<br>STD/ATD · STA/ATA: 인천공항 공공데이터(게이트 기준) · 이륙/착륙: ADS-B(adsb.lol) 15분 간격 추정(≈), ~는 처음/마지막으로 본 시각${at ? ` · ${new Date(at).getHours()}:${p2(new Date(at).getMinutes())} 받음${err ? " (새로 받기 실패)" : ""}` : ""}</div></div>`;
+    return h;
+  }
+  document.addEventListener("click", (e) => { const b = e.target.closest("[data-regcs]"); if (b && DB && DB.flights[b.dataset.regcs]) { $("q").value = b.dataset.regcs; search(); window.scrollTo(0, 0); } });
+
   function search() {
     const raw = $("q").value;
     $("clear").style.display = raw ? "block" : "none";
@@ -4843,6 +4919,8 @@ window.csfStat = (() => {
     if (!DB) { $("result").innerHTML = `<div class="card none"><b>데이터가 없습니다.</b> 인터넷 연결 상태에서 "최신 데이터 받기"를 누르세요.</div>`; return; }
     if (!raw.trim()) { H?.seen(null); renderRecent(); return; }
     $("recent").innerHTML = "";
+    const rg = regQuery(raw);
+    if (rg) { H?.seen(null); renderReg(rg); clearTimeout(aptTimer); aptTimer = setTimeout(() => csfStat("기번검색", AL), 1500); return; }
     const apt = airportCode(raw);
     if (apt) { $("result").innerHTML = renderAirport(apt); H?.seen(ap(apt).iata || apt); clearTimeout(aptTimer); aptTimer = setTimeout(() => csfStat("공항검색", AL), 1500); return; }
     const tq = typeQuery(raw);
@@ -4878,8 +4956,29 @@ window.csfStat = (() => {
   function renderRecent() {
     let r = []; try { r = JSON.parse(store.get(RKEY) || "[]"); } catch (e) {}
     r = r.filter((cs) => DB && DB.flights[cs] && ofAL(cs));
-    $("recent").innerHTML = r.length ? `<h2>최근 조회</h2>` + rowsHtml(r) : "";
+    $("recent").innerHTML = (store.get("csf-intro") ? "" : introHtml()) + (r.length ? `<h2>최근 조회</h2>` + rowsHtml(r) : "");
   }
+  // ---------- 처음 쓰는 사람 안내 (닫으면 다시 안 나옴 · ☰ 메뉴 도움말에 같은 내용) ----------
+  function introHtml() {
+    const al = (DB && DB.airlines[AL]) || {}, iata = al.iata || "KE";
+    const ex = DB ? (Object.keys(DB.flights).filter((k) => ofAL(k) && DB.flights[k].r && DB.flights[k].r.length >= 2 && DB.flights[k].sch).sort((a, b) => flNum(a) - flNum(b))[0] || "") : "";
+    const exq = ex ? iata + flNum(ex) : iata + "17";
+    const ua = navigator.userAgent, ios = /iPhone|iPod|iPad/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1), app = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+    const inst = app ? "" : window.__bip ? `<button type="button" class="b primary" data-intro="install">홈 화면에 설치</button>` : ios ? `<p class="intro-i">📲 <b>홈 화면에 추가</b>해서 쓰세요: Safari 아래 <b>공유</b> 버튼 → <b>홈 화면에 추가</b>. 앱처럼 열리고 비행 중에도 됩니다.</p>` : `<p class="intro-i">📲 브라우저 메뉴(⋮) → <b>앱 설치</b> 또는 <b>홈 화면에 추가</b>로 앱처럼 쓸 수 있습니다.</p>`;
+    const t = (q, d) => `<button type="button" data-introq="${esc(q)}"><b>${esc(q)}</b><small>${d}</small></button>`;
+    return `<div class="card intro"><div class="intro-h"><b>운항 도우미로 할 수 있는 것</b><button type="button" class="x" data-intro="close" aria-label="안내 닫기">닫기</button></div>
+      <p>위 검색칸에 넣어 보세요 (눌러도 됩니다)</p>
+      <div class="intro-q">${t(exq, "편명 · 콜사인 → 기종 · 노선 · 1주 스케줄")}${t("LAX", "공항 → 그 공항 노선 · 날씨 · 일출")}${t("B789", "기종 → 운항 노선")}${t("HL7204", "기번 → 최근 1주 운항")}</div>
+      <ul><li><b>비행시간</b> 탭: 교대 시각 · Flight/Block Time · 로그북</li><li><b>출퇴근</b> 탭: 공항버스 · 열차 시간</li><li><b>개발중</b> 탭: 근무표 · 비행준비(유의사항 · ATIS)</li></ul>
+      <p class="intro-i">✈ 인터넷 될 때 한 번 열어 두면 <b>비행 중(오프라인)</b>에도 그대로 볼 수 있습니다.</p>${inst}</div>`;
+  }
+  window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); window.__bip = e; if (!$("q").value.trim()) renderRecent(); });
+  document.addEventListener("click", async (e) => {
+    const q = e.target.closest("[data-introq]"); if (q) { $("q").value = q.dataset.introq; search(); window.scrollTo(0, 0); return; }
+    const b = e.target.closest("[data-intro]"); if (!b) return;
+    if (b.dataset.intro === "close") { store.set("csf-intro", "1"); renderRecent(); csfStat("안내닫기", AL); }
+    if (b.dataset.intro === "install" && window.__bip) { window.__bip.prompt(); try { const r = await window.__bip.userChoice; csfStat("설치", r && r.outcome || ""); } catch (x) {} window.__bip = null; renderRecent(); }
+  });
 
   function renderStat() {
     if (!DB) { $("stat").textContent = "데이터 없음"; return; }
