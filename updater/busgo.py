@@ -434,11 +434,12 @@ def main():
         for k, v in j["routes"].items():
             routes[k] = {"src": "kd", "stops": v["stops"], "wd": v["rows"], "we": v["rows"], "arr": ["T1", "T2"]}
         stamp = j.get("fetched", "") + "T00:00:00Z"
-        if src.get("kd") != stamp:
+        renewed = src.get("kd") != stamp                       # 사람이 새로 옮겨 넣음 → 바로 다시 확인해 '재확인 중'을 풂
+        if renewed:
             changed = True
         src["kd"] = stamp
         stale = (old.get("stale") or {}).get("kd") or []
-        if FORCE or age_days(src.get("kd_check", "")) >= 7:   # 7일마다 이미지가 바뀌었는지만 확인 (내용은 사람이 옮김)
+        if FORCE or renewed or age_days(src.get("kd_check", "")) >= 7:   # 7일마다 이미지가 바뀌었는지만 확인 (내용은 사람이 옮김)
             try:
                 stale = kd_check(j)
                 src["kd_check"] = tstamp(NOW)
