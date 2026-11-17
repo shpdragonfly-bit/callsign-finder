@@ -447,6 +447,7 @@ button.b:disabled { opacity: .5; }
 @media (max-width: 420px) { .ho-klt { font-size: 24px; } .ho-who { margin-left: 0; width: 100%; font-size: 12px; } }
 .utc small { font-weight: 500; color: var(--muted); }
 .tt .b { padding: 6px 10px; font-size: 13px; white-space: nowrap; flex: none; }
+.ft-crew[hidden], .ft-one[hidden] { display: none !important; }
 .lbl-row { display: flex; align-items: center; justify-content: space-between; }
 .lbl-act { display: flex; gap: 6px; } .tclr.lb-add { color: var(--accent); border-color: var(--accent); font-weight: 700; }
 .lb-mlink { display: flex; justify-content: space-between; width: 100%; margin-top: 10px; padding: 10px 14px; font: 600 14px inherit; font-family: inherit; color: var(--text); background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px; cursor: pointer; }
@@ -1574,21 +1575,23 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
 
   <section class="panel" id="panel-ft" role="tabpanel" aria-labelledby="tab-ft" hidden>
     <div class="seg" role="group" aria-label="편조 구성">
+      <button data-mode="1S" aria-pressed="false">1 Set</button>
       <button data-mode="3P" aria-pressed="true">3 Pilot</button>
       <button data-mode="2S" aria-pressed="false">2 Set</button>
       <button data-mode="5P" aria-pressed="false">5 Pilot</button>
     </div>
 
     <div id="ft-main">
-      <div class="lbl">구간 방식</div>
-      <div class="seg" role="group" aria-label="구간 방식" id="ftSub"></div>
-      <div class="lbl">전체 비행시간</div>
-      <div class="tt">
+      <div class="lbl ft-crew">구간 방식</div>
+      <div class="seg ft-crew" role="group" aria-label="구간 방식" id="ftSub"></div>
+      <div class="lbl ft-crew">전체 비행시간</div>
+      <div class="tt ft-crew">
         <input id="ftH" inputmode="tel" autocomplete="off" placeholder="00" maxlength="5" aria-label="시간 (12+30 형식 입력 가능)"><span>시간</span>
         <input id="ftM" inputmode="numeric" autocomplete="off" placeholder="00" maxlength="2" aria-label="분"><span>분</span>
         <span class="tsum" id="ftSum"></span>
       </div>
-      <p class="ft-hint">시간 칸에 <b>1230</b> 또는 <b>12+30</b> 처럼 입력해도 됩니다.</p>
+      <p class="ft-hint ft-crew">시간 칸에 <b>1230</b> 또는 <b>12+30</b> 처럼 입력해도 됩니다.</p>
+      <p class="ft-hint ft-one" hidden>1 Set은 교대가 없어 구간 · 근무교대 계산 없이 운항 시각으로 Flight · Block Time 계산과 로그북 등록만 합니다.</p>
       <div class="lbl lbl-row"><span>운항 시각 (UTC)</span><span class="lbl-act"><button type="button" class="tclr lb-add" id="lbAdd">로그북 등록</button><button type="button" class="tclr" id="tClr">지우기</button></span></div>
       <div class="times" id="ftTimes">
         <div class="tm"><label for="tRO">R/O<small>Ramp out</small></label><div class="tmin"><input id="tRO" data-k="ro" inputmode="tel" autocomplete="off" placeholder="0000" maxlength="5"><span>Z</span></div><button type="button" class="now" data-k="ro">지금</button></div>
@@ -1602,7 +1605,7 @@ i.gm { font-style: normal; display: inline-block; min-width: 1em; padding: 0 2px
         <div><span>Block Time</span><b id="rBLK">—</b><small>R/I − R/O</small></div>
       </div>
       <button type="button" class="lb-mlink" id="lbMonBtn">📒 월 비행시간 <span>›</span></button>
-      <div id="ftOut"></div>
+      <div id="ftOut" class="ft-crew"></div>
     </div>
     <div id="ft-other" hidden>
       <div class="card soon"><div class="ico">◷</div><h2 id="ftOtherTitle"></h2><p>준비 중입니다. 계산 규칙을 알려주시면 추가합니다.</p></div>
@@ -3494,7 +3497,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v80", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v81", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -6832,6 +6835,7 @@ window.UID = (() => {
 
   let rendering = false;
   function render() {
+    if (st.mode === "1S") { $("ftOut").innerHTML = ""; return; }
     if (rendering) return;                            // 다시 그리는 중 발생한 blur/change 무시
     rendering = true;
     try { renderInner(); } finally { rendering = false; }
@@ -6960,7 +6964,9 @@ window.UID = (() => {
   document.querySelectorAll(".seg button[data-mode]").forEach((b) => b.addEventListener("click", () => { st.mode = b.dataset.mode; save(); showMode(); }));
   function showMode() {
     document.querySelectorAll(".seg button[data-mode]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.mode === st.mode));
-    const ready = !!CREW[st.mode];
+    const one = st.mode === "1S", ready = one || !!CREW[st.mode];     // 1 Set: 교대 없음 → 운항 시각 · 로그북만
+    document.querySelectorAll("#ft-main .ft-crew").forEach((el) => (el.hidden = one));
+    document.querySelectorAll("#ft-main .ft-one").forEach((el) => (el.hidden = !one));
     $("ft-main").hidden = !ready;
     $("ft-other").hidden = ready;
     $("ftOtherTitle").textContent = st.mode === "5P" ? "5 Pilot" : st.mode;
@@ -7147,7 +7153,7 @@ window.LOGBOOK = (() => {
     if (!x) {
       const T = window.FTT ? window.FTT.get() : {}, d = defDate(T.to);
       const base = Date.UTC(+d.slice(0, 4), +d.slice(5, 7) - 1, +d.slice(8, 10)) / 60000;
-      x = { d, crew: { "3P": "3P", "2S": "2S", "5P": "5P" }[T.mode] || "3P" };
+      x = { d, crew: { "1S": "1S", "3P": "3P", "2S": "2S", "5P": "5P" }[T.mode] || "3P" };
       if (T.to != null) { x.to = base + T.to; const sp = (a, b) => (b - a + 1440) % 1440;
         if (T.ro != null) x.ro = x.to - sp(T.ro, T.to); if (T.ld != null) x.ld = x.to + sp(T.to, T.ld); if (T.ri != null) x.ri = (x.ld != null ? x.ld + sp(T.ld, T.ri) : x.to + sp(T.to, T.ri)); }
     }
