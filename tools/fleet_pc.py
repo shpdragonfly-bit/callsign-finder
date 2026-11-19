@@ -99,6 +99,68 @@ def refresh_src():
             log("  %s 받기 실패 (%s) — 이전 것 사용" % (rel, type(e).__name__))
 
 
+def _merge_reg(docs):
+    """같은 기번 파일 여러 판 합치기: 구간은 (콜사인, 이륙) 같으면 하나(착륙을 더 늦게까지 본 쪽), 인천 기록은 (콜사인, 예정시각) 같으면 실제 시각 있는 쪽"""
+    out = {"reg": docs[0].get("reg")}
+    legs, icn = {}, {}
+    for d in docs:
+        for x in d.get("legs", []):
+            k = (x.get("c"), x.get("o"))
+            if k not in legs or x.get("n", "") > legs[k].get("n", ""):
+                legs[k] = x
+        for x in d.get("icn", []):
+            k = (x.get("c"), x.get("t"))
+            o = icn.get(k)
+            if not o or (x.get("e") and not o.get("e")) or (x.get("st") and not o.get("st")):
+                icn[k] = x
+        for f in ("ty", "al"):
+            if d.get(f):
+                out[f] = d[f]
+    out["legs"] = sorted(legs.values(), key=lambda x: x.get("o", ""))
+    out["icn"] = sorted(icn.values(), key=lambda x: x.get("t", ""))
+    return out
+
+
+def cleanup_conflicts():
+    """클라우드 동기화(Nextcloud 등) 충돌 사본 정리: 기번 파일은 원래 파일에 합치고, 사본은 모두 private\\_to_delete\\ 로 옮김"""
+    import re, shutil
+    priv = os.path.join(ROOT, "private")
+    trash = os.path.join(priv, "_to_delete")
+    pat = re.compile(r"^(.*?) \((?:conflicted copy|충돌)[^)]*\)(\.[A-Za-z0-9]+)$")
+    found = []
+    for dp, dns, fs in os.walk(priv):
+        if os.path.abspath(dp).startswith(os.path.abspath(trash)):
+            continue
+        for f in fs:
+            m = pat.match(f)
+            if m:
+                found.append((dp, f, m.group(1) + m.group(2)))
+    if not found:
+        return
+    merged = moved = added = 0
+    for dp, f, orig in found:
+        full, ofull = os.path.join(dp, f), os.path.join(dp, orig)
+        if os.path.normpath(dp) == os.path.normpath(os.path.join(OUT, "reg")) and orig.endswith(".json"):
+            try:
+                c = json.load(open(full, encoding="utf-8"))
+                o = json.load(open(ofull, encoding="utf-8")) if os.path.exists(ofull) else {"reg": c.get("reg"), "legs": [], "icn": []}
+                n0 = len(o.get("legs", [])) + len(o.get("icn", []))
+                m = _merge_reg([o, c])
+                added += len(m["legs"]) + len(m["icn"]) - n0
+                json.dump(m, open(ofull, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+                merged += 1
+            except Exception as e:
+                log("  합치기 실패 %s (%s) — 사본은 그대로 둠" % (f, type(e).__name__))
+                continue
+        dst = os.path.join(trash, os.path.relpath(full, priv))
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        try:
+            shutil.move(full, dst); moved += 1
+        except Exception as e:
+            log("  옮기기 실패 %s (%s)" % (f, type(e).__name__))
+    log("충돌 사본 정리: 기번 파일 %d개 합침(기록 %d건 되살림), 사본 %d개 → private\\_to_delete" % (merged, added, moved))
+
+
 def blob_sha(b):
     return hashlib.sha1(b"blob %d\0" % len(b) + b).hexdigest()
 
@@ -111,7 +173,7 @@ def push(tok):
         for f in fs:
             full = os.path.join(dp, f)
             rel = os.path.relpath(full, OUT).replace(os.sep, "/")
-            if rel.startswith(".git"):
+            if rel.startswith(".git") or "(conflicted copy" in rel or "(충돌" in rel:   # 클라우드 동기화 충돌 사본은 올리지 않음
                 continue
             b = open(full, "rb").read()
             cur[rel] = blob_sha(b)
@@ -128,6 +190,14 @@ def push(tok):
             raise
         base = None
     ents = [{"path": rel, "mode": "100644", "type": "blob", "content": b.decode("utf-8")} for rel, b in changed]
+    if base:                                           # 브랜치에 올라간 충돌 사본 등 PC 에 없는 파일은 지움
+        try:
+            have = {t["path"] for t in http(api + "trees/" + base + "?recursive=1", tok=tok, timeout=120).get("tree", []) if t.get("type") == "blob"}
+            ents += [{"path": pth, "mode": "100644", "type": "blob", "sha": None} for pth in sorted(have - set(cur)) if "(conflicted copy" in pth or "(충돌" in pth]
+        except Exception:
+            pass
+    if not ents:
+        return 0
     tree = http(api + "trees", {"base_tree": base, "tree": ents} if base else {"tree": ents}, tok=tok, timeout=180)["sha"]
     com = http(api + "commits", {"message": "fleet %s (PC)" % dt.datetime.utcnow().strftime("%Y-%m-%dT%H:%MZ"), "tree": tree, "parents": []}, tok=tok)["sha"]
     try:
@@ -154,6 +224,7 @@ def main():
         except urllib.error.HTTPError as e:
             log("토큰 확인 실패: HTTP %s (토큰 값 · 저장소 선택 · 만료 확인)" % e.code)
             return 3
+    cleanup_conflicts()
     bootstrap()
     refresh_src()
     env = dict(os.environ, FLEET_ICN=os.path.join(SRC, "public_cache.json"), FLEET_DATA=os.path.join(SRC, "data.json"), FLEET_OBS=os.path.join(SRC, "observations.json"), PYTHONIOENCODING="utf-8")
