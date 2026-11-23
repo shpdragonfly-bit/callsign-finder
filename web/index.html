@@ -28,6 +28,7 @@
 :root[data-al="TWB"] { --bg: #FDF5F6; --panel-2: #FAE9EB; --line: #EFD3D7; --accent: #C41E32; --accent-soft: #FCE8EA; --bar-1: #EC4359; --bar-2: #B91A2E; }
 :root[data-al="AAR"] { --bg: #F7F5F2; --panel-2: #EFEBE5; --line: #DED7CD; --accent: #8A5F2E; --accent-soft: #F4ECE1; --bar-1: #8F877E; --bar-2: #605850; }
 :root[data-al="ESR"] { --bg: #F9F3F4; --panel-2: #F1E2E5; --line: #E0C6CC; --accent: #7E0B22; --accent-soft: #F3E1E5; --bar-1: #8E1530; --bar-2: #5A0616; }
+:root[data-al="APZ"] { --bg: #F5F4FB; --panel-2: #EBE9F7; --line: #D6D2EE; --accent: #4A3DA6; --accent-soft: #ECE9FA; --bar-1: #5C4FC7; --bar-2: #2E2680; }
 :root[data-theme="dark"] {
   --bg: #06101D; --panel: #0D1B2E; --panel-2: #132640; --line: #1E3555;
   --text: #E4EEF8; --muted: #8AA2BF; --accent: #4CC2F2; --accent-soft: #0F2C47; --accent-ink: #04121F;
@@ -553,12 +554,14 @@ button.b:disabled { opacity: .5; }
 :root[data-theme="dark"][data-al="TWB"] { --accent: #FF7C8C; --accent-soft: #3A1820; --bar-1: #2A0E15; --bar-2: #2A0E15; --line: #4A2830; }
 :root[data-theme="dark"][data-al="AAR"] { --accent: #E0BC8A; --accent-soft: #2E2418; --bar-1: #1F1B17; --bar-2: #1F1B17; --line: #3D352C; }
 :root[data-theme="dark"][data-al="ESR"] { --accent: #D9939F; --accent-soft: #331019; --bar-1: #22060C; --bar-2: #22060C; --line: #47202A; }
+:root[data-theme="dark"][data-al="APZ"] { --accent: #ABA2FF; --accent-soft: #221E40; --bar-1: #15122E; --bar-2: #15122E; --line: #342F58; }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"])[data-al="JNA"] { --accent: #A9DC5F; --accent-soft: #22301A; --bar-1: #16210C; --bar-2: #16210C; --line: #34452A; }
   :root:not([data-theme="light"])[data-al="JJA"] { --accent: #FF9B5C; --accent-soft: #3A2414; --bar-1: #2A1609; --bar-2: #2A1609; --line: #4A3222; }
   :root:not([data-theme="light"])[data-al="TWB"] { --accent: #FF7C8C; --accent-soft: #3A1820; --bar-1: #2A0E15; --bar-2: #2A0E15; --line: #4A2830; }
   :root:not([data-theme="light"])[data-al="AAR"] { --accent: #E0BC8A; --accent-soft: #2E2418; --bar-1: #1F1B17; --bar-2: #1F1B17; --line: #3D352C; }
   :root:not([data-theme="light"])[data-al="ESR"] { --accent: #D9939F; --accent-soft: #331019; --bar-1: #22060C; --bar-2: #22060C; --line: #47202A; }
+  :root:not([data-theme="light"])[data-al="APZ"] { --accent: #ABA2FF; --accent-soft: #221E40; --bar-1: #15122E; --bar-2: #15122E; --line: #342F58; }
 }
 
 /* 기상 (METAR / TAF) */
@@ -3497,7 +3500,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v82", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v83", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -3611,7 +3614,7 @@ window.csfStat = (() => {
     $("alTabs").innerHTML = Object.entries(al).filter(([k]) => !isSep(k)).map(([k, a]) =>
       `<button role="tab" data-al="${esc(k)}" aria-pressed="${k === AL}" aria-selected="${k === AL}">${esc(SHORT[k] || a.name)}</button>`).join("");
     const a = al[AL] || {};
-    $("q").placeholder = `${a.iata || ""}17 / 17 / LAX / ${{ KAL: "B789", AAR: "A359", JNA: "B738", JJA: "B738", TWB: "A333", ESR: "B38M" }[AL] || "B738"}`;   // 편명 / 숫자 / 공항 / 기종
+    $("q").placeholder = `${a.iata || ""}17 / 17 / LAX / ${{ KAL: "B789", AAR: "A359", JNA: "B738", JJA: "B738", TWB: "A333", ESR: "B38M", APZ: "B789" }[AL] || "B738"}`;   // 편명 / 숫자 / 공항 / 기종
     /* 안내 문구는 검색창 회색 예시(placeholder)로 대신함 */
   }
   function setAirline(k, keepQuery) {
