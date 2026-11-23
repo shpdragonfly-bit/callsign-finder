@@ -3497,7 +3497,7 @@ window.FPREP = (() => {
 window.csfStat = (() => {
   const URL = "https://script.google.com/macros/s/AKfycbxpGH2YmVEU-CAiY-NTD7F1z94H63G3m3gJC5EssXrtgWjDwKipnEVTb-Ivz0oPQiNI/exec";
   const APP_VER = "1.00";                  // 화면에 보이는 버전 (사용자용). 아래 VER 은 내부 배포 번호(캐시·통계용, sw.js CACHE 와 같게)
-  const VER = "v81", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
+  const VER = "v82", QK = "csf-stq", DK = "csf-dev", MAXQ = 300;
   window.csfVer = VER;
   const ls = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -3586,7 +3586,7 @@ window.csfStat = (() => {
   // ---------- 항공사 선택 (내부 탭) ----------
   const ALKEY = "csf-airline";
   let AL = store.get(ALKEY) || "KAL";
-  const SHORT = { KAL: "대한항공", JNA: "진에어", JJA: "제주항공", TWB: "트리니티", ESR: "이스타", AAR: "아시아나" };
+  const SHORT = { KAL: "대한항공", JNA: "진에어", JJA: "제주항공", TWB: "트리니티", ESR: "이스타", APZ: "프레미아", AAR: "아시아나" };
   // 별도 상단 탭으로 보여 주는 항공사 (config 의 tab 값, 지금은 아시아나항공). 데이터에 없으면 탭도 숨김
   const MAINKEY = "csf-al-main";
   const isSep = (k) => !!(DB && DB.airlines && DB.airlines[k] && DB.airlines[k].tab);
@@ -4871,7 +4871,7 @@ window.csfStat = (() => {
       } catch (e) { err = "net"; }
     }
     if (my !== regSeq) return;
-    if (!F) { $("result").innerHTML = `<div class="card none"><b>${esc(reg)}</b> ${err === "nf" ? "은 수집 대상(대한항공 · 아시아나 · 진에어 · 제주항공 · 트리니티 · 이스타)에 없거나 아직 운항 기록이 없습니다." : "운항 기록을 받으려면 인터넷 연결이 필요합니다."}</div>`; return; }
+    if (!F) { $("result").innerHTML = `<div class="card none"><b>${esc(reg)}</b> ${err === "nf" ? "은 수집 대상(대한항공 · 아시아나 · 진에어 · 제주항공 · 트리니티 · 이스타 · 에어프레미아)에 없거나 아직 운항 기록이 없습니다." : "운항 기록을 받으려면 인터넷 연결이 필요합니다."}</div>`; return; }
     $("result").innerHTML = regHtml(reg, F, at, err);
   }
   function regHtml(reg, F, at, err) {
@@ -6652,7 +6652,7 @@ window.UID = (() => {
       // 5명 조종석 근무 균등 → C1·F1 = 2T/5 (이륙+착륙), B·C·D 각 T/5
       title: "5 Pilot",
       pilots: [{ id: "C1", role: "ZC", cls: "A" }, { id: "F1", role: "VF", cls: "A" }, { id: "C2", role: "VC", cls: "B" },
-               { id: "C3", role: "VC", cls: "C" }, { id: "F2", role: "VF", cls: "D" }],
+               { id: "C3", role: "QC", cls: "C" }, { id: "F2", role: "VF", cls: "D" }],
       duty: { A: ["C1", "F1"], B: ["C2", "F2"], C: ["C2", "C3"], D: ["C3", "F2"] },
       perPilot: true,
       subs: [

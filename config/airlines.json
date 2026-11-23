@@ -42,6 +42,14 @@
       "enabled": true
     },
     {
+      "icao": "APZ",
+      "iata": "YP",
+      "name": "에어프레미아",
+      "name_en": "Air Premia",
+      "telephony": "AIR PREMIA",
+      "enabled": true
+    },
+    {
       "icao": "AAR",
       "iata": "OZ",
       "name": "아시아나항공",
